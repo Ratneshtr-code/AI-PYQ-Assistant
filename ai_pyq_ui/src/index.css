@@ -1,3 +1,36 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom styles */
+body {
+    @apply bg-baseLight text-baseText font-sans text-[15px] leading-relaxed;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    @apply text-gray-900 font-semibold;
+}
+
+a {
+    @apply text-accentBlue hover:text-accentBlue/80 underline-offset-2;
+}
+
+.app-card {
+    @apply bg-baseCard border border-baseBorder rounded-2xl shadow-soft p-6 transition-all hover:shadow-lift;
+}
+
+.option-btn {
+    @apply flex items-center justify-between p-3 border border-baseBorder rounded-xl text-[15px] bg-gray-50 hover:bg-gray-100 cursor-pointer transition;
+}
+
+.option-btn-correct {
+    @apply bg-green-50 border-green-400 text-green-800 font-semibold;
+}
+
+.option-btn-incorrect {
+    @apply hover:border-amber-400;
+}
+
+.info-box {
+    @apply bg-amber-50 border-l-4 border-amber-400 rounded-lg p-3 text-sm text-gray-700;
+}
