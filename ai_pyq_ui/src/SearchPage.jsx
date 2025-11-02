@@ -12,7 +12,7 @@ export default function SearchPage() {
 
     const [query, setQuery] = useState("");
     const [exam, setExam] = useState("");
-    const [examsList, setExamsList] = useState([]); // dynamic exams from backend
+    const [examsList, setExamsList] = useState([]);
     const [allResults, setAllResults] = useState([]);
     const location = useLocation();
 
@@ -27,7 +27,7 @@ export default function SearchPage() {
         doSearch,
     } = useSearchAPI(apiUrl);
 
-    // 🟦 Fetch available exams for dropdown
+    // Fetch exams
     useEffect(() => {
         const fetchExams = async () => {
             try {
@@ -41,7 +41,7 @@ export default function SearchPage() {
         fetchExams();
     }, []);
 
-    // 🟩 Auto-detect ?query= param (used by “View Similar PYQ” links)
+    // Handle ?query= param
     useEffect(() => {
         const params = new URLSearchParams(location.search);
         const initialQuery = params.get("query");
@@ -51,12 +51,12 @@ export default function SearchPage() {
         }
     }, [location.search]);
 
-    // 🟧 Trigger search
+    // Handle search
     const handleSearch = async () => {
         if (!query.trim()) return;
         await doSearch(query, 1, { exam });
 
-        // If "All Exams" selected → gather results from all pages for chart
+        // If "All Exams" → fetch all pages for chart
         if (exam === "") {
             const allFetched = [];
             let currentPage = 1;
@@ -70,12 +70,9 @@ export default function SearchPage() {
                 });
                 const data = await response.json();
                 allFetched.push(...(data.results || []));
-
                 if (data.results.length < (data.page_size || 10)) {
                     morePages = false;
-                } else {
-                    currentPage++;
-                }
+                } else currentPage++;
             }
             setAllResults(allFetched);
         } else {
@@ -83,81 +80,78 @@ export default function SearchPage() {
         }
     };
 
-    // 🔢 Pagination
     const handlePageChange = (p) => doSearch(query, p, { exam });
 
     return (
-        <div className="min-h-screen bg-gray-50 p-6">
-            <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
-                AI PYQ Search
-            </h1>
+        <div className="min-h-screen bg-gray-50 py-8">
+            <div className="max-w-3xl mx-auto px-4 space-y-6">
+                <h1 className="text-3xl font-bold text-center text-gray-800">
+                    AI PYQ Search
+                </h1>
 
-            {/* 🔍 Search bar */}
-            <div className="max-w-2xl mx-auto flex gap-2 mb-4">
-                <input
-                    type="text"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    placeholder="Type your question or topic (e.g. 'Article 15')"
-                    className="flex-1 border border-gray-300 rounded-lg p-3"
-                    onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                />
-                <button
-                    onClick={handleSearch}
-                    className={`px-4 py-2 rounded-lg text-white ${loading ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"}`}
-                    disabled={loading}
-                >
-                    {loading ? "Searching..." : "Search"}
-                </button>
-            </div>
-
-            {/* 🎯 Dynamic Exam Filter */}
-            <div className="max-w-2xl mx-auto flex flex-wrap gap-3 mb-6">
-                <select
-                    value={exam}
-                    onChange={(e) => setExam(e.target.value)}
-                    className="border border-gray-300 rounded-lg p-3 flex-1"
-                >
-                    <option value="">All Exams</option>
-                    {examsList.map((ex, idx) => (
-                        <option key={idx} value={ex}>
-                            {ex}
-                        </option>
-                    ))}
-                </select>
-            </div>
-
-            {/* ⚠️ Error Message */}
-            {error && <p className="text-red-600 text-center mb-4">{error}</p>}
-
-            {/* 🧭 Conditional Rendering */}
-            {!hasSearched ? (
-                <p className="text-gray-500 text-center mt-10">
-                    Type a topic or question to begin searching.
-                </p>
-            ) : results.length === 0 ? (
-                <p className="text-gray-500 text-center mt-10">
-                    No results found. Try refining your query or filters.
-                </p>
-            ) : (
-                <>
-                    {/* 📊 Chart (only on 1st page + All Exams) */}
-                    {exam === "" && page === 1 && allResults.length > 0 && (
-                        <ResultsChart results={allResults} />
-                    )}
-
-                    {/* 🧾 Results */}
-                    <ResultsList results={results} />
-
-                    {/* 🔢 Pagination */}
-                    <Pagination
-                        page={page}
-                        totalMatches={totalMatches}
-                        pageSize={pageSize}
-                        onPageChange={handlePageChange}
+                {/* 🔍 Search + Filter Row */}
+                <div className="flex flex-col sm:flex-row gap-3">
+                    <input
+                        type="text"
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
+                        placeholder="Type your question or topic (e.g. 'Article 15')"
+                        className="flex-1 border border-gray-300 rounded-lg p-3"
+                        onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                     />
-                </>
-            )}
+                    <select
+                        value={exam}
+                        onChange={(e) => setExam(e.target.value)}
+                        className="border border-gray-300 rounded-lg p-3 sm:w-40"
+                    >
+                        <option value="">All Exams</option>
+                        {examsList.map((ex, idx) => (
+                            <option key={idx} value={ex}>
+                                {ex}
+                            </option>
+                        ))}
+                    </select>
+                    <button
+                        onClick={handleSearch}
+                        className={`px-5 py-2 rounded-lg text-white ${loading ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"}`}
+                        disabled={loading}
+                    >
+                        {loading ? "Searching..." : "Search"}
+                    </button>
+                </div>
+
+                {/* ⚠️ Error */}
+                {error && <p className="text-red-600 text-center">{error}</p>}
+
+                {/* 🧭 Conditional Rendering */}
+                {!hasSearched ? (
+                    <p className="text-gray-500 text-center mt-10">
+                        Type a topic or question to begin searching.
+                    </p>
+                ) : results.length === 0 ? (
+                    <p className="text-gray-500 text-center mt-10">
+                        No results found. Try refining your query or filters.
+                    </p>
+                ) : (
+                    <>
+                        {/* 📊 Chart */}
+                        {exam === "" && page === 1 && allResults.length > 0 && (
+                            <ResultsChart results={allResults} />
+                        )}
+
+                        {/* 🧾 Results */}
+                        <ResultsList results={results} />
+
+                        {/* 🔢 Pagination */}
+                        <Pagination
+                            page={page}
+                            totalMatches={totalMatches}
+                            pageSize={pageSize}
+                            onPageChange={handlePageChange}
+                        />
+                    </>
+                )}
+            </div>
         </div>
     );
 }

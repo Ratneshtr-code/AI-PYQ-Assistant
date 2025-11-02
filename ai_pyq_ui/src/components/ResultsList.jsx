@@ -53,7 +53,7 @@ export default function ResultsList({ results }) {
             return;
         }
 
-        // Close all other incorrect options for this question
+        // Allow only one open insight per question
         setOptionInsights((p) => ({
             ...p,
             [id]: {},
@@ -216,7 +216,13 @@ export default function ResultsList({ results }) {
                                                                         optKey
                                                                     )
                                                                 }
-                                                                className="text-amber-700 font-semibold text-sm hover:underline focus:outline-none"
+                                                                    className={`px-3 py-1 rounded-full text-sm font-medium transition-all duration-150 shadow-sm border border-amber-200
+                                                                    ${showSimilarPYQs[
+                                                                        `${id}-${optKey}`
+                                                                    ]
+                                                                        ? "bg-amber-100 text-amber-800 hover:bg-amber-200"
+                                                                        : "bg-amber-50 text-amber-700 hover:bg-amber-100"
+                                                                    }`}
                                                             >
                                                                 {isPYQVisible
                                                                     ? "▲ Hide Similar PYQs"
@@ -224,7 +230,7 @@ export default function ResultsList({ results }) {
                                                             </button>
 
                                                             {isPYQVisible && (
-                                                                <div className="max-h-40 overflow-y-auto mt-2 bg-amber-100/60 border border-amber-200 rounded-lg p-2">
+                                                                <div className="max-h-40 overflow-y-auto mt-3 bg-amber-100/60 border border-amber-200 rounded-lg p-2 scrollbar-thin scrollbar-thumb-amber-400 scrollbar-track-amber-100">
                                                                     <ul className="list-disc list-inside text-gray-700 space-y-1">
                                                                         {insight.similar_pyqs.map(
                                                                             (
