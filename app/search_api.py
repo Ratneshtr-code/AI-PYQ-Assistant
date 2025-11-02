@@ -1,9 +1,12 @@
+# app/search_api.py
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from pathlib import Path
 import uvicorn
 import sys, os
+from random import choice
+import urllib.parse
 
 # add utils path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -12,7 +15,6 @@ from utils.config_loader import load_config
 # embeddings + FAISS
 from langchain_community.vectorstores import FAISS
 from langchain_community.embeddings import HuggingFaceEmbeddings
-
 
 app = FastAPI(title="AI PYQ Assistant - Search API")
 
@@ -68,26 +70,22 @@ def search(req: SearchRequest):
     # Retrieve candidates
     docs_and_scores = vector_store.similarity_search_with_score(query, k=retrieval_k)
 
-    # 🧠 Fix: Clean up question_text (remove embedded "Options:" etc.)
+    # Clean and collect
     filtered = []
     for d, score in docs_and_scores:
         if score < min_score:
             continue
-
         meta = d.metadata or {}
         q_text = meta.get("question_text") or d.page_content
-
-        # 🔹 Remove "Options:" section if it exists inside text
         if "Options:" in q_text:
             q_text = q_text.split("Options:")[0].strip()
-
         filtered.append({
             **meta,
             "question_text": q_text,
             "score": float(score),
         })
 
-    # 🧩 Apply filters (Exam, Year, Subject)
+    # Apply filters
     if req.exam:
         filtered = [r for r in filtered if r.get("exam", "").lower() == req.exam.lower()]
     if req.year:
@@ -140,8 +138,6 @@ def get_filters():
     return {"exams": exams}
 
 
-from random import choice
-
 @app.post("/explain")
 def explain_question(data: dict):
     """
@@ -163,6 +159,75 @@ def explain_question(data: dict):
         "correct_option": correct_option,
         "explanation": choice(examples)
     }
+
+
+@app.post("/explain_option")
+def explain_option(data: dict):
+    """
+    Explain why a selected (incorrect) option is wrong and return similar PYQs found via FAISS.
+    """
+    import urllib.parse
+    from random import choice
+
+    selected_option = data.get("selected_option", "")
+    question_text = data.get("question_text", "")
+
+    if not selected_option:
+        return {"error": "selected_option is required."}
+
+    mock_reasons = [
+        f"'{selected_option}' is incorrect because it represents a related but distinct concept from the question context.",
+        f"This choice is commonly confused with the correct answer but applies to a different principle or topic.",
+        f"'{selected_option}' addresses a similar idea, but not the one specifically asked here.",
+    ]
+    topics = [
+        "Indian Polity - Fundamental Rights",
+        "Economy - Fiscal Policy",
+        "History - National Movement",
+        "Geography - Climate and Vegetation",
+        "Science - Laws of Motion",
+    ]
+
+    similar_pyqs = []
+    try:
+        k = cfg["backend"].get("explain_option_k", 5)
+        min_score = cfg["backend"].get("min_score", 0.35)
+
+        # 🔍 Search by the incorrect option text itself
+        docs_and_scores = vector_store.similarity_search_with_score(selected_option, k=k)
+
+        for d, score in docs_and_scores:
+            if score < min_score:
+                continue  # skip weak matches
+
+            meta = d.metadata or {}
+            q_text = meta.get("question_text") or d.page_content
+            if "Options:" in q_text:
+                q_text = q_text.split("Options:")[0].strip()
+
+            # 🧭 Encode the found question as the query param (so frontend loads that question)
+            query_param = urllib.parse.quote_plus(q_text)
+            ui_link = f"http://localhost:5173/?query={query_param}"
+
+            similar_pyqs.append({
+                "question_id": meta.get("question_id"),
+                "question_text": q_text,
+                "score": round(float(score), 3),
+                "link": ui_link
+            })
+    except Exception as e:
+        print("⚠️ explain_option: FAISS search failed:", e)
+        similar_pyqs = []
+
+    return {
+        "question_text": question_text,
+        "selected_option": selected_option,
+        "reason": choice(mock_reasons),
+        "topic": choice(topics),
+        "similar_pyqs": similar_pyqs,
+    }
+
+
 
 
 if __name__ == "__main__":

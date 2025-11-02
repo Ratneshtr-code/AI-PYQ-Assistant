@@ -1,5 +1,6 @@
 // src/SearchPage.jsx
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { useSearchAPI } from "./hooks/useSearchAPI";
 import ResultsList from "./components/ResultsList";
 import Pagination from "./components/Pagination";
@@ -11,8 +12,9 @@ export default function SearchPage() {
 
     const [query, setQuery] = useState("");
     const [exam, setExam] = useState("");
-    const [examsList, setExamsList] = useState([]); // ✅ dynamic exams from backend
+    const [examsList, setExamsList] = useState([]); // dynamic exams from backend
     const [allResults, setAllResults] = useState([]);
+    const location = useLocation();
 
     const {
         results,
@@ -39,11 +41,22 @@ export default function SearchPage() {
         fetchExams();
     }, []);
 
-    // 🟦 Trigger search normally
+    // 🟩 Auto-detect ?query= param (used by “View Similar PYQ” links)
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const initialQuery = params.get("query");
+        if (initialQuery) {
+            setQuery(initialQuery);
+            doSearch(initialQuery, 1, { exam: "" });
+        }
+    }, [location.search]);
+
+    // 🟧 Trigger search
     const handleSearch = async () => {
+        if (!query.trim()) return;
         await doSearch(query, 1, { exam });
 
-        // ✅ If All Exams selected → build chart data from ALL pages
+        // If "All Exams" selected → gather results from all pages for chart
         if (exam === "") {
             const allFetched = [];
             let currentPage = 1;
@@ -70,7 +83,7 @@ export default function SearchPage() {
         }
     };
 
-    // 🟧 Pagination
+    // 🔢 Pagination
     const handlePageChange = (p) => doSearch(query, p, { exam });
 
     return (
@@ -91,7 +104,7 @@ export default function SearchPage() {
                 />
                 <button
                     onClick={handleSearch}
-                    className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+                    className={`px-4 py-2 rounded-lg text-white ${loading ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"}`}
                     disabled={loading}
                 >
                     {loading ? "Searching..." : "Search"}
