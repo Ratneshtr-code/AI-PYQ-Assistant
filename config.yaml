@@ -1,0 +1,20 @@
+project_name: "AI PYQ Assistant"
+description: "AI-based platform for semantic search and trend analysis of previous year exam questions"
+
+paths:
+  faiss_index: "./embeddings/faiss_index.bin"
+  data_csv: "./data/questions.csv"
+  model_cache: "./models"
+
+model:
+  name: "sentence-transformers/all-MiniLM-L6-v2"
+
+backend:
+  host: "127.0.0.1"
+  port: 8000
+  retrieval_k: 100    # how many vectors to retrieve from FAISS
+  min_score: 0.35     # filter threshold
+  default_page_size: 3
+
+ui:
+  port: 8501
