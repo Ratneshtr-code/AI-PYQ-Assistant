@@ -18,3 +18,7 @@ backend:
 
 ui:
   port: 8501
+  # Control UI mode switching
+  # If allow_mode_switching is false, users cannot toggle between User/Admin mode from UI
+  # Admin mode can only be enabled via localStorage directly (for developers)
+  allow_mode_switching: false  # Set to true to allow users to toggle mode from UI

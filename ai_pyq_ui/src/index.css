@@ -1,8 +1,8 @@
-@tailwind base;
+﻿@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Custom styles */
+/* ===== Base Styles ===== */
 body {
     @apply bg-baseLight text-baseText font-sans text-[15px] leading-relaxed;
 }
@@ -15,71 +15,74 @@ a {
     @apply text-accentBlue hover:text-accentBlue/80 underline-offset-2;
 }
 
-.app-card {
-    @apply bg-baseCard border border-baseBorder rounded-2xl shadow-soft p-6 transition-all hover:shadow-lift;
-}
-
-.option-btn {
-    @apply flex items-center justify-between p-3 border border-baseBorder rounded-xl text-[15px] bg-gray-50 hover:bg-gray-100 cursor-pointer transition;
-}
-
-.option-btn-correct {
-    @apply bg-green-50 border-green-400 text-green-800 font-semibold;
-}
-
-.option-btn-incorrect {
-    @apply hover:border-amber-400;
-}
-
-.info-box {
-    @apply bg-amber-50 border-l-4 border-amber-400 rounded-lg p-3 text-sm text-gray-700;
-}
-
 html {
-    font-size: 14.5px; /* between 14 and 15px looks perfect */
+    font-size: 14.5px;
 }
 
-/* Compact layout adjustments for question cards */
-.card-compact {
-    @apply p-4 mb-4 rounded-2xl shadow-sm bg-white border border-gray-200;
-}
-
-.card-compact h3 {
-    @apply text-[15px] font-semibold mb-2 leading-snug;
-}
-
-.card-compact .meta {
-    @apply text-[13px] text-gray-500 mb-3 flex gap-3;
-}
-
-.card-compact .options {
-    @apply space-y-1 mb-3;
-}
-
-.card-compact .option {
-    @apply p-2 text-[14px] leading-tight;
-}
-
-.card-compact .explanation {
-    @apply text-[15px] leading-normal text-gray-700 mt-2;
-}
-
-/* ===== Question Card Compact Styling ===== */
+/* ===== Card Styles ===== */
+.app-card,
 .question-card {
     @apply bg-white border border-gray-200 rounded-2xl shadow-soft p-4 mb-5 hover:shadow-lift transition-all duration-200;
 }
 
-.question-text {
-    @apply text-[15px] sm:text-base font-semibold text-gray-900 leading-snug mb-2;
+.results-container {
+    @apply max-w-3xl mx-auto space-y-6 font-sans text-gray-800 leading-relaxed;
 }
 
+/* ===== Question Text Formatting ===== */
+.question-text {
+    font-size: 15px;
+    font-weight: 500;
+    color: #111827;
+    line-height: 1.45;
+    margin-bottom: 0.5rem;
+    white-space: normal; /* ✅ Allow <br/> rendering */
+    background: transparent;
+}
+
+    .question-text br {
+        display: block;
+        margin-bottom: 3px;
+    }
+
+    .question-text strong {
+        color: #111827;
+        font-weight: 600;
+    }
+
+    /* ===== Tables (for Table-type Questions) ===== */
+    .question-text table {
+        border-collapse: collapse;
+        width: 100%;
+        background: transparent; /* ✅ consistent with all questions */
+        font-size: 14px;
+        margin: 0.5rem 0;
+    }
+
+        .question-text table td {
+            border: 1px solid #d1d5db; /* gray-300 */
+            padding: 6px 10px;
+            text-align: left;
+        }
+
+/* ===== Monospaced Look (Match/Assertion) ===== */
+.question-mono {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    background: transparent; /* ✅ No gray box */
+    padding: 0.25rem 0;
+    display: block;
+    white-space: pre-wrap;
+    line-height: 1.4;
+}
+
+/* ===== Meta Info (Exam + Year) ===== */
 .question-meta {
     @apply text-[13px] text-gray-500 mb-3 flex gap-3 items-center;
 }
 
 /* ===== Options Styling ===== */
 .option-list {
-    @apply space-y-1 mb-3;
+    @apply flex flex-col gap-1 mb-3;
 }
 
 .option-item {
@@ -94,7 +97,7 @@ html {
     @apply hover:border-amber-400;
 }
 
-/* ===== Explanation & Insight Sections ===== */
+/* ===== Explanation Boxes ===== */
 .explanation-box {
     @apply mt-2 bg-purple-50 border-l-4 border-purple-400 rounded-lg p-3 text-sm leading-normal text-gray-800;
 }
@@ -103,7 +106,7 @@ html {
     @apply mt-2 bg-amber-50 border-l-4 border-amber-400 rounded-lg p-3 text-sm text-gray-700 leading-snug;
 }
 
-/* ===== Buttons (Answer / Explanation) ===== */
+/* ===== Buttons ===== */
 .btn-action {
     @apply px-4 py-2 rounded-lg text-sm font-medium transition;
 }
@@ -120,7 +123,20 @@ html {
     @apply bg-purple-100 text-purple-400;
 }
 
-/* ===== Card Container Spacing ===== */
-.results-container {
-    @apply max-w-3xl mx-auto space-y-6 font-sans text-gray-800 leading-relaxed;
+/* ===== Compact Spacing ===== */
+.option-list {
+    margin-top: 0.4rem;
+    margin-bottom: 0.8rem;
 }
+
+.question-card {
+    margin-bottom: 1rem;
+    padding: 1rem;
+}
+
+    /* ===== Extra (optional aesthetic tweaks) ===== */
+    .question-card:hover {
+        transform: translateY(-1px);
+        transition: transform 0.2s ease;
+    }
+

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { uiFeatures, getUIMode } from "../config/uiConfig";
 
 export default function ResultsList({ results }) {
     const [visibleAnswers, setVisibleAnswers] = useState({});
@@ -6,12 +7,33 @@ export default function ResultsList({ results }) {
     const [loadingExplain, setLoadingExplain] = useState({});
     const [optionInsights, setOptionInsights] = useState({});
     const [showSimilarPYQs, setShowSimilarPYQs] = useState({});
+    const [isAdmin, setIsAdmin] = useState(uiFeatures.showDebugId());
+
+    // Listen for mode changes to update admin mode without reload
+    useEffect(() => {
+        const handleModeChange = () => {
+            setIsAdmin(uiFeatures.showDebugId());
+        };
+        
+        // Check mode on mount
+        setIsAdmin(uiFeatures.showDebugId());
+        
+        // Listen for custom event from Sidebar
+        window.addEventListener('uiModeChanged', handleModeChange);
+        // Also listen for storage changes (for cross-tab updates)
+        window.addEventListener('storage', handleModeChange);
+
+        return () => {
+            window.removeEventListener('uiModeChanged', handleModeChange);
+            window.removeEventListener('storage', handleModeChange);
+        };
+    }, []);
 
     const toggleAnswer = (id) =>
         setVisibleAnswers((prev) => ({ ...prev, [id]: !prev[id] }));
 
     const handleShowExplanation = async (item) => {
-        const id = item.question_id;
+        const id = item.id || item.json_question_id || item.question_id;
         if (explanations[id]) {
             setExplanations((prev) => ({ ...prev, [id]: null }));
             return;
@@ -42,7 +64,7 @@ export default function ResultsList({ results }) {
     };
 
     const handleIncorrectClick = async (item, optKey) => {
-        const id = item.question_id;
+        const id = item.id || item.json_question_id || item.question_id;
         const selectedOption = item[optKey];
 
         if (optionInsights[id]?.[optKey]) {
@@ -53,7 +75,6 @@ export default function ResultsList({ results }) {
             return;
         }
 
-        // Allow only one open insight per question
         setOptionInsights((p) => ({
             ...p,
             [id]: {},
@@ -101,18 +122,75 @@ export default function ResultsList({ results }) {
         }));
     };
 
+    // --- Question text renderer ---
+    const renderQuestionText = (item) => {
+        const raw = item.question_text || "";
+        const format = item.question_format?.toLowerCase?.() || "auto";
+
+        // Escape HTML and convert newlines
+        let html = raw
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/\n/g, "<br/>")
+            .replace(/\|/g, "&nbsp;&nbsp;|&nbsp;&nbsp;");
+
+        // 🎯 Improved Table Handling
+        if (format === "table" && raw.includes("|")) {
+            const lines = raw.split("\n").filter((l) => l.trim() !== "");
+            const headerLines = [];
+            const tableLines = [];
+            const questionLines = [];
+
+            // Smartly group lines
+            lines.forEach((line, idx) => {
+                if (line.includes("|")) tableLines.push(line);
+                else if (tableLines.length === 0) headerLines.push(line);
+                else questionLines.push(line);
+            });
+
+            // Build table HTML
+            const rows = tableLines
+                .map((line) => {
+                    const cells = line.split("|").map((c) => c.trim());
+                    return `<tr>${cells
+                        .map((cell) => `<td class='border border-gray-300 px-3 py-1'>${cell}</td>`)
+                        .join("")}</tr>`;
+                })
+                .join("");
+
+            html = `
+            <div class='question-text'>
+                ${headerLines.join("<br/>")}
+                <table class='border border-gray-300 text-sm w-full my-2'>
+                    <tbody>${rows}</tbody>
+                </table>
+                ${questionLines.join("<br/>")}
+            </div>
+        `;
+        }
+
+        return (
+            <div
+                className="question-text"
+                dangerouslySetInnerHTML={{ __html: html }}
+            />
+        );
+    };
+
+
     if (!results?.length) return null;
 
     return (
         <div className="results-container">
             {results.map((item) => {
-                const id = item.question_id;
+                // Use id (CSV auto-increment) or json_question_id (original JSON ID) or question_id (legacy)
+                const id = item.id || item.json_question_id || item.question_id || `q-${Math.random()}`;
                 const showAns = !!visibleAnswers[id];
 
                 return (
                     <div key={id} className="question-card">
                         {/* Question */}
-                        <h3 className="question-text">{item.question_text}</h3>
+                        {renderQuestionText(item)}
 
                         {/* Meta Info */}
                         <div className="question-meta">
@@ -125,6 +203,16 @@ export default function ResultsList({ results }) {
                             {item.year && (
                                 <span className="flex items-center gap-1">
                                     📅 {item.year}
+                                </span>
+                            )}
+                            {/* Developer/Admin: Question ID for debugging - only visible in admin mode */}
+                            {isAdmin && item.id && (
+                                <span 
+                                    className="flex items-center gap-1 text-[11px] text-gray-400 font-mono cursor-help opacity-70 hover:opacity-100 transition-opacity" 
+                                    title={`Question ID (Admin Mode)\nCSV ID: ${item.id}`}
+                                >
+                                    <span className="text-gray-500">🔍</span>
+                                    <span>ID: {item.id}</span>
                                 </span>
                             )}
                         </div>
@@ -153,7 +241,10 @@ export default function ResultsList({ results }) {
                                         >
                                             <div className="flex items-center gap-2">
                                                 <span className="font-medium">
-                                                    {optKey.replace("option_", "").toUpperCase()}.
+                                                    {optKey
+                                                        .replace("option_", "")
+                                                        .toUpperCase()}
+                                                    .
                                                 </span>
                                                 <span>{text}</span>
                                             </div>
@@ -168,7 +259,8 @@ export default function ResultsList({ results }) {
                                                     {insight.reason}
                                                 </p>
                                                 <p className="mb-2">
-                                                    <strong>Topic:</strong> {insight.topic}
+                                                    <strong>Topic:</strong>{" "}
+                                                    {insight.topic}
                                                 </p>
 
                                                 {/* Collapsible Similar PYQs */}
@@ -178,7 +270,9 @@ export default function ResultsList({ results }) {
                                                             onClick={() =>
                                                                 toggleSimilarPYQ(id, optKey)
                                                             }
-                                                            className={`btn-action ${showSimilarPYQs[`${id}-${optKey}`]
+                                                            className={`btn-action ${showSimilarPYQs[
+                                                                    `${id}-${optKey}`
+                                                                ]
                                                                     ? "btn-purple"
                                                                     : "btn-blue"
                                                                 }`}
@@ -193,7 +287,10 @@ export default function ResultsList({ results }) {
                                                                 <ul className="list-disc list-inside text-gray-700 space-y-1">
                                                                     {insight.similar_pyqs.map(
                                                                         (pyq, idx) => (
-                                                                            <li key={idx} className="text-sm">
+                                                                            <li
+                                                                                key={idx}
+                                                                                className="text-sm"
+                                                                            >
                                                                                 <a
                                                                                     href={pyq.link}
                                                                                     target="_blank"
@@ -203,7 +300,11 @@ export default function ResultsList({ results }) {
                                                                                     {pyq.question_text}
                                                                                 </a>
                                                                                 <span className="text-gray-400 text-xs ml-1">
-                                                                                    ({pyq.score?.toFixed(2)})
+                                                                                    (
+                                                                                    {pyq.score?.toFixed(
+                                                                                        2
+                                                                                    )}
+                                                                                    )
                                                                                 </span>
                                                                             </li>
                                                                         )

@@ -38,7 +38,7 @@ class SearchRequest(BaseModel):
     page_size: int = 10
     exam: str | None = None
     year: int | None = None
-    subject: str | None = None  # placeholder for future
+    subject: str | None = None  # Filter by subject
 
 
 @app.on_event("startup")
@@ -138,6 +138,17 @@ def get_filters():
     return {"exams": exams}
 
 
+@app.get("/ui-config")
+def get_ui_config():
+    """Return UI configuration settings"""
+    cfg = load_config()
+    ui_config = cfg.get("ui", {})
+    
+    return {
+        "allow_mode_switching": ui_config.get("allow_mode_switching", False)
+    }
+
+
 @app.post("/explain")
 def explain_question(data: dict):
     """
@@ -226,8 +237,6 @@ def explain_option(data: dict):
         "topic": choice(topics),
         "similar_pyqs": similar_pyqs,
     }
-
-
 
 
 if __name__ == "__main__":
