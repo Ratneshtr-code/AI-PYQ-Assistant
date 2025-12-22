@@ -22,3 +22,9 @@ ui:
   # If allow_mode_switching is false, users cannot toggle between User/Admin mode from UI
   # Admin mode can only be enabled via localStorage directly (for developers)
   allow_mode_switching: false  # Set to true to allow users to toggle mode from UI
+  # Maximum number of exams that can be compared in Cross-Exam Insights
+  max_exam_comparison: 3  # Default: 3, can be adjusted based on UI/UX requirements
+  # Admin login credentials (for accessing admin mode when allow_mode_switching is false)
+  admin:
+    username: "admin"  # Change this to your desired admin username
+    password: "123"  # Change this to your desired admin password

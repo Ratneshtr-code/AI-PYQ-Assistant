@@ -126,48 +126,160 @@ export default function ResultsList({ results }) {
     const renderQuestionText = (item) => {
         const raw = item.question_text || "";
         const format = item.question_format?.toLowerCase?.() || "auto";
+        const hasPipes = raw.includes("|");
+        const hasDashes = raw.includes("–") || raw.includes("—");
 
-        // Escape HTML and convert newlines
-        let html = raw
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/\n/g, "<br/>")
-            .replace(/\|/g, "&nbsp;&nbsp;|&nbsp;&nbsp;");
+        // Escape HTML helper
+        const escapeHtml = (text) => {
+            return String(text)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        };
 
-        // 🎯 Improved Table Handling
-        if (format === "table" && raw.includes("|")) {
+        // 🎯 Table Handling - with "|" separators
+        if ((format === "table" || hasPipes) && hasPipes) {
             const lines = raw.split("\n").filter((l) => l.trim() !== "");
             const headerLines = [];
             const tableLines = [];
             const questionLines = [];
 
             // Smartly group lines
-            lines.forEach((line, idx) => {
-                if (line.includes("|")) tableLines.push(line);
-                else if (tableLines.length === 0) headerLines.push(line);
-                else questionLines.push(line);
+            lines.forEach((line) => {
+                if (line.includes("|")) {
+                    tableLines.push(line);
+                } else if (tableLines.length === 0) {
+                    headerLines.push(line);
+                } else {
+                    questionLines.push(line);
+                }
             });
 
-            // Build table HTML
+            // Build table HTML with proper escaping
             const rows = tableLines
                 .map((line) => {
-                    const cells = line.split("|").map((c) => c.trim());
+                    const cells = line.split("|").map((c) => escapeHtml(c.trim()));
                     return `<tr>${cells
-                        .map((cell) => `<td class='border border-gray-300 px-3 py-1'>${cell}</td>`)
+                        .map((cell) => `<td class='border border-gray-300 px-3 py-1.5 text-sm'>${cell || "&nbsp;"}</td>`)
                         .join("")}</tr>`;
                 })
                 .join("");
 
-            html = `
-            <div class='question-text'>
-                ${headerLines.join("<br/>")}
-                <table class='border border-gray-300 text-sm w-full my-2'>
-                    <tbody>${rows}</tbody>
-                </table>
-                ${questionLines.join("<br/>")}
-            </div>
-        `;
+            const html = `
+                <div class='question-text'>
+                    ${headerLines.map(h => escapeHtml(h)).join("<br/>")}
+                    ${headerLines.length > 0 ? "<br/>" : ""}
+                    <table class='border-collapse border border-gray-400 text-sm w-full my-3 bg-white'>
+                        <tbody>${rows}</tbody>
+                    </table>
+                    ${questionLines.length > 0 ? "<br/>" : ""}
+                    ${questionLines.map(q => escapeHtml(q)).join("<br/>")}
+                </div>
+            `;
+
+            return (
+                <div
+                    className="question-text"
+                    dangerouslySetInnerHTML={{ __html: html }}
+                />
+            );
         }
+
+        // 🎯 Match Format Handling - with "–" separators or structured pairs
+        if (format === "match") {
+            const lines = raw.split("\n").filter((l) => l.trim() !== "");
+            const headerLines = [];
+            const dataLines = [];
+            const questionLines = [];
+
+            // Check if it has dash-separated structured data (table-like but flattened)
+            if (hasDashes) {
+                lines.forEach((line) => {
+                    if (line.includes("–") || line.includes("—")) {
+                        dataLines.push(line);
+                    } else if (dataLines.length === 0) {
+                        headerLines.push(line);
+                    } else {
+                        questionLines.push(line);
+                    }
+                });
+
+                // Render as structured list with dashes
+                if (dataLines.length >= 2) {
+                    const structuredRows = dataLines.map((line) => {
+                        const parts = line.split(/[–—]/).map(p => escapeHtml(p.trim()));
+                        return `<tr>${parts
+                            .map((part) => `<td class='border border-gray-300 px-3 py-1.5 text-sm'>${part || "&nbsp;"}</td>`)
+                            .join("")}</tr>`;
+                    }).join("");
+
+                    const html = `
+                        <div class='question-text'>
+                            ${headerLines.map(h => escapeHtml(h)).join("<br/>")}
+                            ${headerLines.length > 0 ? "<br/>" : ""}
+                            <table class='border-collapse border border-gray-400 text-sm w-full my-3 bg-white'>
+                                <tbody>${structuredRows}</tbody>
+                            </table>
+                            ${questionLines.length > 0 ? "<br/>" : ""}
+                            ${questionLines.map(q => escapeHtml(q)).join("<br/>")}
+                        </div>
+                    `;
+
+                    return (
+                        <div
+                            className="question-text"
+                            dangerouslySetInnerHTML={{ __html: html }}
+                        />
+                    );
+                }
+            }
+
+            // Handle match pairs (I. X : Y format) with proper line breaks
+            const pairPattern = /^(I|II|III|IV|V|VI|VII|VIII|IX|X|1|2|3|4|5|6|7|8|9|10)\.\s+/i;
+            lines.forEach((line) => {
+                if (pairPattern.test(line.trim())) {
+                    dataLines.push(line);
+                } else if (dataLines.length === 0) {
+                    headerLines.push(line);
+                } else {
+                    questionLines.push(line);
+                }
+            });
+
+            if (dataLines.length >= 2) {
+                const html = `
+                    <div class='question-text'>
+                        ${headerLines.map(h => escapeHtml(h)).join("<br/>")}
+                        ${headerLines.length > 0 ? "<br/>" : ""}
+                        <div class='match-pairs my-3 space-y-1 pl-4 border-l-2 border-blue-200'>
+                            ${dataLines.map(pair => {
+                                const formatted = escapeHtml(pair)
+                                    .replace(/\s+/g, " ")
+                                    .replace(/([:\-–—])/g, "$1 ");
+                                return `<div class='text-sm py-1'>${formatted}</div>`;
+                            }).join("")}
+                        </div>
+                        ${questionLines.length > 0 ? "<br/>" : ""}
+                        ${questionLines.map(q => escapeHtml(q)).join("<br/>")}
+                    </div>
+                `;
+
+                return (
+                    <div
+                        className="question-text"
+                        dangerouslySetInnerHTML={{ __html: html }}
+                    />
+                );
+            }
+        }
+
+        // 🎯 Default: Standard text with line breaks
+        const html = raw
+            .split("\n")
+            .map(line => escapeHtml(line))
+            .join("<br/>");
 
         return (
             <div
@@ -221,7 +333,12 @@ export default function ResultsList({ results }) {
                         <div className="option-list">
                             {["option_a", "option_b", "option_c", "option_d"].map((optKey) => {
                                 const text = item[optKey];
-                                const isCorrect = text === item.correct_option;
+                                // Normalize text - handle null, undefined, empty string
+                                // For "None" string, display it as-is (not as "(No option provided)")
+                                const displayText = (text != null && String(text).trim() !== "") 
+                                    ? String(text).trim() 
+                                    : "(No option provided)";
+                                const isCorrect = text === item.correct_option || displayText === item.correct_option;
                                 const insight = optionInsights[id]?.[optKey];
                                 const correctVisible = isCorrect && showAns;
                                 const isPYQVisible = showSimilarPYQs[`${id}-${optKey}`];
@@ -246,7 +363,7 @@ export default function ResultsList({ results }) {
                                                         .toUpperCase()}
                                                     .
                                                 </span>
-                                                <span>{text}</span>
+                                                <span>{displayText}</span>
                                             </div>
                                             {correctVisible && <span>✅</span>}
                                         </div>

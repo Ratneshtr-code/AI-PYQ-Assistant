@@ -26,12 +26,13 @@ except Exception as e:
 def safe_read_csv(path: Path) -> pd.DataFrame:
     """Safely read CSV with fallbacks for quotes, encoding, and field count."""
     try:
-        df = pd.read_csv(path, quotechar='"', escapechar='\\', encoding="utf-8", quoting=csv.QUOTE_MINIMAL)
+        # Use keep_default_na=False to preserve "None" string, then manually handle actual NaN
+        df = pd.read_csv(path, quotechar='"', escapechar='\\', encoding="utf-8", quoting=csv.QUOTE_MINIMAL, keep_default_na=False)
         return df
     except pd.errors.ParserError as e:
         print("⚠️ Standard CSV parse failed, retrying with flexible quoting...")
         try:
-            df = pd.read_csv(path, quotechar='"', escapechar='\\', quoting=csv.QUOTE_NONE, engine="python")
+            df = pd.read_csv(path, quotechar='"', escapechar='\\', quoting=csv.QUOTE_NONE, engine="python", keep_default_na=False)
             return df
         except Exception as e2:
             raise RuntimeError(f"❌ Failed to parse {path}: {e2}")

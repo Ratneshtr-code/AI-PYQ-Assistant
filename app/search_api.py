@@ -1,5 +1,5 @@
 # app/search_api.py
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from pathlib import Path
@@ -7,6 +7,8 @@ import uvicorn
 import sys, os
 from random import choice
 import urllib.parse
+import pandas as pd
+from typing import Optional
 
 # add utils path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -120,22 +122,690 @@ def search(req: SearchRequest):
     }
 
 
+def load_dataframe():
+    """Load and return the CSV dataframe, with caching for performance"""
+    cfg = load_config()
+    data_csv = cfg["paths"]["data_csv"]
+    
+    if not os.path.exists(data_csv):
+        return None
+    
+    try:
+        df = pd.read_csv(data_csv, keep_default_na=False)
+        # Replace empty strings with NaN for proper filtering
+        df = df.replace('', pd.NA)
+        return df
+    except Exception as e:
+        print(f"Error loading CSV: {e}")
+        return None
+
+
 @app.get("/filters")
 def get_filters():
     """Return available exams (and later subjects, years)"""
-    import pandas as pd
-    from utils.config_loader import load_config
-
-    cfg = load_config()
-    data_csv = cfg["paths"]["data_csv"]
-
-    if not os.path.exists(data_csv):
+    df = load_dataframe()
+    if df is None:
         return {"exams": []}
 
-    df = pd.read_csv(data_csv)
     exams = sorted(df["exam"].dropna().unique().tolist())
-
     return {"exams": exams}
+
+
+# ==================== DASHBOARD ENDPOINTS ====================
+
+@app.get("/dashboard/subject-weightage")
+def get_subject_weightage(
+    exam: Optional[str] = Query(None, description="Filter by exam name"),
+    year_from: Optional[int] = Query(None, description="Filter from year"),
+    year_to: Optional[int] = Query(None, description="Filter to year")
+):
+    """Get subject weightage distribution for an exam"""
+    df = load_dataframe()
+    if df is None:
+        return {"subjects": [], "total_questions": 0}
+    
+    # Filter by exam if provided
+    filtered_df = df.copy()
+    if exam:
+        filtered_df = filtered_df[filtered_df["exam"].str.lower() == exam.lower()]
+    
+    # Filter by year range if provided
+    if year_from is not None:
+        filtered_df = filtered_df[filtered_df["year"] >= year_from]
+    if year_to is not None:
+        filtered_df = filtered_df[filtered_df["year"] <= year_to]
+    
+    if len(filtered_df) == 0:
+        return {"subjects": [], "total_questions": 0}
+    
+    # Count by subject
+    subject_counts = filtered_df["subject"].value_counts()
+    total = len(filtered_df)
+    
+    subjects = []
+    for subject, count in subject_counts.items():
+        if pd.notna(subject) and str(subject).strip():
+            percentage = round((count / total) * 100, 2)
+            subjects.append({
+                "name": str(subject),
+                "count": int(count),
+                "percentage": percentage
+            })
+    
+    # Sort by percentage descending
+    subjects.sort(key=lambda x: x["percentage"], reverse=True)
+    
+    return {
+        "subjects": subjects,
+        "total_questions": total
+    }
+
+
+@app.get("/dashboard/topic-weightage")
+def get_topic_weightage(
+    exam: Optional[str] = Query(None, description="Filter by exam name"),
+    subject: Optional[str] = Query(None, description="Filter by subject name"),
+    year_from: Optional[int] = Query(None, description="Filter from year"),
+    year_to: Optional[int] = Query(None, description="Filter to year")
+):
+    """Get topic weightage distribution for an exam and subject"""
+    df = load_dataframe()
+    if df is None:
+        return {"topics": [], "total_questions": 0}
+    
+    filtered_df = df.copy()
+    
+    # Filter by exam if provided
+    if exam:
+        filtered_df = filtered_df[filtered_df["exam"].str.lower() == exam.lower()]
+    
+    # Filter by subject if provided
+    if subject:
+        filtered_df = filtered_df[filtered_df["subject"].str.lower() == subject.lower()]
+    
+    # Filter by year range if provided
+    if year_from is not None:
+        filtered_df = filtered_df[filtered_df["year"] >= year_from]
+    if year_to is not None:
+        filtered_df = filtered_df[filtered_df["year"] <= year_to]
+    
+    if len(filtered_df) == 0:
+        return {"topics": [], "total_questions": 0}
+    
+    # Count by topic
+    topic_counts = filtered_df["topic"].value_counts()
+    total = len(filtered_df)
+    
+    topics = []
+    for topic, count in topic_counts.items():
+        if pd.notna(topic) and str(topic).strip():
+            percentage = round((count / total) * 100, 2)
+            topics.append({
+                "name": str(topic),
+                "count": int(count),
+                "percentage": percentage
+            })
+    
+    # Sort by percentage descending
+    topics.sort(key=lambda x: x["percentage"], reverse=True)
+    
+    return {
+        "topics": topics,
+        "total_questions": total
+    }
+
+
+@app.get("/dashboard/hot-topics")
+def get_hot_topics(
+    exam: Optional[str] = Query(None, description="Filter by exam name"),
+    min_years: int = Query(1, description="Minimum number of years topic should appear"),
+    year_from: Optional[int] = Query(None, description="Filter from year"),
+    year_to: Optional[int] = Query(None, description="Filter to year"),
+    subject: Optional[str] = Query(None, description="Filter by subject name")
+):
+    """Get hot topics that appear consistently across years"""
+    df = load_dataframe()
+    if df is None:
+        return {"topics": []}
+    
+    filtered_df = df.copy()
+    
+    # Filter by exam if provided
+    if exam:
+        filtered_df = filtered_df[filtered_df["exam"].str.lower() == exam.lower()]
+    
+    # Filter by subject if provided
+    if subject:
+        filtered_df = filtered_df[filtered_df["subject"].str.lower() == subject.lower()]
+    
+    # Filter by year range if provided
+    if year_from is not None:
+        filtered_df = filtered_df[filtered_df["year"] >= year_from]
+    if year_to is not None:
+        filtered_df = filtered_df[filtered_df["year"] <= year_to]
+    
+    if len(filtered_df) == 0:
+        return {"topics": []}
+    
+    # Get unique years for this exam
+    available_years = sorted(filtered_df["year"].dropna().unique().tolist())
+    total_years = len(available_years)
+    
+    if total_years == 0:
+        return {"topics": []}
+    
+    # Group by topic and year to count appearances
+    topic_year_counts = {}
+    topic_total_counts = {}
+    
+    for _, row in filtered_df.iterrows():
+        topic = row.get("topic")
+        year = row.get("year")
+        
+        if pd.notna(topic) and pd.notna(year) and str(topic).strip():
+            topic_str = str(topic)
+            year_int = int(year) if pd.notna(year) else None
+            
+            if topic_str not in topic_year_counts:
+                topic_year_counts[topic_str] = set()
+                topic_total_counts[topic_str] = 0
+            
+            if year_int is not None:
+                topic_year_counts[topic_str].add(year_int)
+            topic_total_counts[topic_str] += 1
+    
+    # Calculate consistency
+    hot_topics = []
+    for topic, years_set in topic_year_counts.items():
+        years_appeared = len(years_set)
+        
+        if years_appeared >= min_years:
+            consistency = round((years_appeared / total_years) * 100, 2)
+            hot_topics.append({
+                "name": topic,
+                "years_appeared": years_appeared,
+                "total_years": total_years,
+                "consistency_percentage": consistency,
+                "total_count": topic_total_counts[topic]
+            })
+    
+    # Sort by consistency percentage descending
+    hot_topics.sort(key=lambda x: x["consistency_percentage"], reverse=True)
+    
+    return {"topics": hot_topics}
+
+
+@app.get("/dashboard/topic-trend")
+def get_topic_trend(
+    exam: Optional[str] = Query(None, description="Filter by exam name"),
+    subject: Optional[str] = Query(None, description="Filter by subject name"),
+    topic: Optional[str] = Query(None, description="Filter by topic name"),
+    year_from: Optional[int] = Query(None, description="Filter from year"),
+    year_to: Optional[int] = Query(None, description="Filter to year")
+):
+    """Get year-by-year trend for a topic or subject"""
+    df = load_dataframe()
+    if df is None:
+        return {"trend": [], "summary": {}}
+    
+    filtered_df = df.copy()
+    
+    # Filter by exam if provided
+    if exam:
+        filtered_df = filtered_df[filtered_df["exam"].str.lower() == exam.lower()]
+    
+    # Filter by subject if provided
+    if subject:
+        filtered_df = filtered_df[filtered_df["subject"].str.lower() == subject.lower()]
+    
+    # Filter by topic if provided
+    if topic:
+        filtered_df = filtered_df[filtered_df["topic"].str.lower() == topic.lower()]
+    
+    # Filter by year range if provided
+    if year_from is not None:
+        filtered_df = filtered_df[filtered_df["year"] >= year_from]
+    if year_to is not None:
+        filtered_df = filtered_df[filtered_df["year"] <= year_to]
+    
+    if len(filtered_df) == 0:
+        return {"trend": [], "summary": {}}
+    
+    # Group by year
+    year_counts = filtered_df["year"].value_counts().sort_index()
+    total = len(filtered_df)
+    
+    trend = []
+    for year, count in year_counts.items():
+        if pd.notna(year):
+            percentage = round((count / total) * 100, 2) if total > 0 else 0
+            trend.append({
+                "year": int(year),
+                "count": int(count),
+                "percentage": percentage
+            })
+    
+    # Calculate summary
+    if trend:
+        peak_year = max(trend, key=lambda x: x["count"])
+        peak_year_value = peak_year["year"]
+        
+        # Determine trend direction (compare first half vs second half)
+        sorted_trend = sorted(trend, key=lambda x: x["year"])
+        mid_point = len(sorted_trend) // 2
+        first_half_avg = sum(x["count"] for x in sorted_trend[:mid_point]) / max(mid_point, 1)
+        second_half_avg = sum(x["count"] for x in sorted_trend[mid_point:]) / max(len(sorted_trend) - mid_point, 1)
+        
+        if second_half_avg > first_half_avg * 1.1:
+            trend_direction = "increasing"
+        elif first_half_avg > second_half_avg * 1.1:
+            trend_direction = "decreasing"
+        else:
+            trend_direction = "stable"
+        
+        avg_frequency = sum(x["count"] for x in trend) / len(trend)
+        
+        summary = {
+            "peak_year": peak_year_value,
+            "trend_direction": trend_direction,
+            "average_frequency": round(avg_frequency, 2)
+        }
+    else:
+        summary = {}
+    
+    return {
+        "trend": trend,
+        "summary": summary
+    }
+
+
+@app.get("/dashboard/filters")
+def get_dashboard_filters(exam: Optional[str] = Query(None, description="Filter by exam name")):
+    """Get available filters (subjects, topics, years) for dashboard"""
+    df = load_dataframe()
+    if df is None:
+        return {"subjects": [], "topics": [], "years": []}
+    
+    filtered_df = df.copy()
+    
+    # Filter by exam if provided
+    if exam:
+        filtered_df = filtered_df[filtered_df["exam"].str.lower() == exam.lower()]
+    
+    subjects = sorted(filtered_df["subject"].dropna().unique().tolist())
+    topics = sorted(filtered_df["topic"].dropna().unique().tolist())
+    years = sorted(filtered_df["year"].dropna().unique().tolist())
+    
+    return {
+        "subjects": subjects,
+        "topics": topics,
+        "years": [int(y) for y in years if pd.notna(y)]
+    }
+
+
+@app.get("/dashboard/stable-volatile")
+def get_stable_volatile(
+    exam: Optional[str] = Query(None, description="Filter by exam name"),
+    subject: Optional[str] = Query(None, description="Filter by subject name"),
+    year_from: Optional[int] = Query(None, description="Filter from year"),
+    year_to: Optional[int] = Query(None, description="Filter to year"),
+    coverage_threshold: float = Query(0.7, description="Minimum coverage ratio for stable"),
+    variation_threshold: float = Query(2.0, description="Maximum variation for stable")
+):
+    """Calculate stable vs volatile topics based on coverage and variation"""
+    df = load_dataframe()
+    if df is None:
+        return {"stable_topics": [], "volatile_topics": [], "summary": ""}
+    
+    filtered_df = df.copy()
+    
+    # Filter by exam if provided
+    if exam:
+        filtered_df = filtered_df[filtered_df["exam"].str.lower() == exam.lower()]
+    
+    # Filter by subject if provided
+    if subject:
+        filtered_df = filtered_df[filtered_df["subject"].str.lower() == subject.lower()]
+    
+    # Filter by year range if provided
+    if year_from is not None:
+        filtered_df = filtered_df[filtered_df["year"] >= year_from]
+    if year_to is not None:
+        filtered_df = filtered_df[filtered_df["year"] <= year_to]
+    
+    if len(filtered_df) == 0:
+        return {"stable_topics": [], "volatile_topics": [], "summary": ""}
+    
+    # Get unique years in filtered data
+    available_years = sorted(filtered_df["year"].dropna().unique().tolist())
+    total_years = len(available_years)
+    
+    if total_years == 0:
+        return {"stable_topics": [], "volatile_topics": [], "summary": ""}
+    
+    # Group by topic and year
+    topic_year_data = {}
+    for _, row in filtered_df.iterrows():
+        topic = row.get("topic")
+        year = row.get("year")
+        
+        if pd.notna(topic) and pd.notna(year) and str(topic).strip():
+            topic_str = str(topic)
+            year_int = int(year)
+            
+            if topic_str not in topic_year_data:
+                topic_year_data[topic_str] = {}
+            if year_int not in topic_year_data[topic_str]:
+                topic_year_data[topic_str][year_int] = 0
+            topic_year_data[topic_str][year_int] += 1
+    
+    stable_topics = []
+    volatile_topics = []
+    
+    for topic, year_counts in topic_year_data.items():
+        years_with_questions = len(year_counts)
+        coverage_ratio = years_with_questions / total_years if total_years > 0 else 0
+        
+        # Calculate variation (average absolute difference between consecutive years)
+        sorted_years = sorted(year_counts.keys())
+        variations = []
+        for i in range(1, len(sorted_years)):
+            prev_year = sorted_years[i-1]
+            curr_year = sorted_years[i]
+            if prev_year + 1 == curr_year:  # Consecutive years
+                diff = abs(year_counts[curr_year] - year_counts[prev_year])
+                variations.append(diff)
+        
+        avg_variation = sum(variations) / len(variations) if variations else 0
+        
+        topic_info = {
+            "name": topic,
+            "coverage_ratio": round(coverage_ratio, 2),
+            "years_appeared": years_with_questions,
+            "total_years": total_years,
+            "avg_variation": round(avg_variation, 2),
+            "total_count": sum(year_counts.values())
+        }
+        
+        if coverage_ratio >= coverage_threshold and avg_variation < variation_threshold:
+            stable_topics.append(topic_info)
+        else:
+            volatile_topics.append(topic_info)
+    
+    # Sort stable topics by coverage ratio descending
+    stable_topics.sort(key=lambda x: x["coverage_ratio"], reverse=True)
+    # Sort volatile topics by total count descending
+    volatile_topics.sort(key=lambda x: x["total_count"], reverse=True)
+    
+    # Generate summary
+    exam_name = exam or "All Exams"
+    subject_name = subject or "All Subjects"
+    summary = f"Analysis for {exam_name} - {subject_name}: {len(stable_topics)} stable topics (high ROI), {len(volatile_topics)} volatile topics (high risk)."
+    
+    return {
+        "stable_topics": stable_topics,
+        "volatile_topics": volatile_topics,
+        "summary": summary
+    }
+
+
+@app.get("/dashboard/coverage")
+def get_coverage(
+    exam: Optional[str] = Query(None, description="Filter by exam name"),
+    subject: Optional[str] = Query(None, description="Filter by subject name"),
+    year_from: Optional[int] = Query(None, description="Filter from year"),
+    year_to: Optional[int] = Query(None, description="Filter to year"),
+    top_n: int = Query(10, description="Number of top topics to consider")
+):
+    """Calculate coverage percentage for top N topics"""
+    df = load_dataframe()
+    if df is None:
+        return {"coverage_percentage": 0, "top_topics": [], "total_questions": 0}
+    
+    filtered_df = df.copy()
+    
+    # Filter by exam if provided
+    if exam:
+        filtered_df = filtered_df[filtered_df["exam"].str.lower() == exam.lower()]
+    
+    # Filter by subject if provided
+    if subject:
+        filtered_df = filtered_df[filtered_df["subject"].str.lower() == subject.lower()]
+    
+    # Filter by year range if provided
+    if year_from is not None:
+        filtered_df = filtered_df[filtered_df["year"] >= year_from]
+    if year_to is not None:
+        filtered_df = filtered_df[filtered_df["year"] <= year_to]
+    
+    if len(filtered_df) == 0:
+        return {"coverage_percentage": 0, "top_topics": [], "total_questions": 0}
+    
+    total_questions = len(filtered_df)
+    
+    # Count by topic
+    topic_counts = filtered_df["topic"].value_counts()
+    
+    # Get top N topics
+    top_topics_list = []
+    top_topics_count = 0
+    
+    for topic, count in topic_counts.head(top_n).items():
+        if pd.notna(topic) and str(topic).strip():
+            top_topics_list.append({
+                "name": str(topic),
+                "count": int(count)
+            })
+            top_topics_count += int(count)
+    
+    coverage_percentage = round((top_topics_count / total_questions) * 100, 2) if total_questions > 0 else 0
+    
+    return {
+        "coverage_percentage": coverage_percentage,
+        "top_topics": top_topics_list,
+        "total_questions": total_questions,
+        "top_n": top_n
+    }
+
+
+@app.get("/dashboard/cross-exam/subject-distribution")
+def get_cross_exam_subject_distribution(
+    exams: str = Query(..., description="Comma-separated list of exam names"),
+    year_from: Optional[int] = Query(None, description="Filter from year"),
+    year_to: Optional[int] = Query(None, description="Filter to year")
+):
+    """Get subject distribution across multiple exams"""
+    df = load_dataframe()
+    if df is None:
+        return {"exams": {}}
+    
+    exam_list = [e.strip() for e in exams.split(",") if e.strip()]
+    if not exam_list:
+        return {"exams": {}}
+    
+    filtered_df = df.copy()
+    
+    # Filter by exams
+    filtered_df = filtered_df[filtered_df["exam"].str.lower().isin([e.lower() for e in exam_list])]
+    
+    # Filter by year range if provided
+    if year_from is not None:
+        filtered_df = filtered_df[filtered_df["year"] >= year_from]
+    if year_to is not None:
+        filtered_df = filtered_df[filtered_df["year"] <= year_to]
+    
+    result = {}
+    
+    for exam_name in exam_list:
+        exam_df = filtered_df[filtered_df["exam"].str.lower() == exam_name.lower()]
+        if len(exam_df) == 0:
+            result[exam_name] = {"subjects": [], "total_questions": 0}
+            continue
+        
+        subject_counts = exam_df["subject"].value_counts()
+        total = len(exam_df)
+        
+        subjects = []
+        for subject, count in subject_counts.items():
+            if pd.notna(subject) and str(subject).strip():
+                percentage = round((count / total) * 100, 2)
+                subjects.append({
+                    "name": str(subject),
+                    "count": int(count),
+                    "percentage": percentage
+                })
+        
+        subjects.sort(key=lambda x: x["percentage"], reverse=True)
+        
+        result[exam_name] = {
+            "subjects": subjects,
+            "total_questions": total
+        }
+    
+    return {"exams": result}
+
+
+@app.get("/dashboard/cross-exam/topic-distribution")
+def get_cross_exam_topic_distribution(
+    exams: str = Query(..., description="Comma-separated list of exam names"),
+    subject: str = Query(..., description="Subject name"),
+    year_from: Optional[int] = Query(None, description="Filter from year"),
+    year_to: Optional[int] = Query(None, description="Filter to year")
+):
+    """Get topic distribution for a subject across multiple exams"""
+    df = load_dataframe()
+    if df is None:
+        return {"exams": {}}
+    
+    exam_list = [e.strip() for e in exams.split(",") if e.strip()]
+    if not exam_list:
+        return {"exams": {}}
+    
+    filtered_df = df.copy()
+    
+    # Filter by exams
+    filtered_df = filtered_df[filtered_df["exam"].str.lower().isin([e.lower() for e in exam_list])]
+    
+    # Filter by subject
+    filtered_df = filtered_df[filtered_df["subject"].str.lower() == subject.lower()]
+    
+    # Filter by year range if provided
+    if year_from is not None:
+        filtered_df = filtered_df[filtered_df["year"] >= year_from]
+    if year_to is not None:
+        filtered_df = filtered_df[filtered_df["year"] <= year_to]
+    
+    result = {}
+    
+    for exam_name in exam_list:
+        exam_df = filtered_df[filtered_df["exam"].str.lower() == exam_name.lower()]
+        if len(exam_df) == 0:
+            result[exam_name] = {"topics": [], "total_questions": 0}
+            continue
+        
+        topic_counts = exam_df["topic"].value_counts()
+        total = len(exam_df)
+        
+        topics = []
+        for topic, count in topic_counts.items():
+            if pd.notna(topic) and str(topic).strip():
+                percentage = round((count / total) * 100, 2)
+                topics.append({
+                    "name": str(topic),
+                    "count": int(count),
+                    "percentage": percentage
+                })
+        
+        topics.sort(key=lambda x: x["percentage"], reverse=True)
+        
+        result[exam_name] = {
+            "topics": topics,
+            "total_questions": total
+        }
+    
+    return {"exams": result, "subject": subject}
+
+
+@app.get("/dashboard/cross-exam/hot-topics")
+def get_cross_exam_hot_topics(
+    exams: str = Query(..., description="Comma-separated list of exam names"),
+    year_from: Optional[int] = Query(None, description="Filter from year"),
+    year_to: Optional[int] = Query(None, description="Filter to year"),
+    min_years: int = Query(1, description="Minimum number of years topic should appear")
+):
+    """Get hot topics across multiple exams"""
+    df = load_dataframe()
+    if df is None:
+        return {"exams": {}}
+    
+    exam_list = [e.strip() for e in exams.split(",") if e.strip()]
+    if not exam_list:
+        return {"exams": {}}
+    
+    filtered_df = df.copy()
+    
+    # Filter by exams
+    filtered_df = filtered_df[filtered_df["exam"].str.lower().isin([e.lower() for e in exam_list])]
+    
+    # Filter by year range if provided
+    if year_from is not None:
+        filtered_df = filtered_df[filtered_df["year"] >= year_from]
+    if year_to is not None:
+        filtered_df = filtered_df[filtered_df["year"] <= year_to]
+    
+    result = {}
+    
+    for exam_name in exam_list:
+        exam_df = filtered_df[filtered_df["exam"].str.lower() == exam_name.lower()]
+        if len(exam_df) == 0:
+            result[exam_name] = {"topics": []}
+            continue
+        
+        available_years = sorted(exam_df["year"].dropna().unique().tolist())
+        total_years = len(available_years)
+        
+        if total_years == 0:
+            result[exam_name] = {"topics": []}
+            continue
+        
+        topic_year_counts = {}
+        topic_total_counts = {}
+        
+        for _, row in exam_df.iterrows():
+            topic = row.get("topic")
+            year = row.get("year")
+            
+            if pd.notna(topic) and pd.notna(year) and str(topic).strip():
+                topic_str = str(topic)
+                year_int = int(year) if pd.notna(year) else None
+                
+                if topic_str not in topic_year_counts:
+                    topic_year_counts[topic_str] = set()
+                    topic_total_counts[topic_str] = 0
+                
+                if year_int is not None:
+                    topic_year_counts[topic_str].add(year_int)
+                topic_total_counts[topic_str] += 1
+        
+        hot_topics = []
+        for topic, years_set in topic_year_counts.items():
+            years_appeared = len(years_set)
+            
+            if years_appeared >= min_years:
+                consistency = round((years_appeared / total_years) * 100, 2)
+                hot_topics.append({
+                    "name": topic,
+                    "years_appeared": years_appeared,
+                    "total_years": total_years,
+                    "consistency_percentage": consistency,
+                    "total_count": topic_total_counts[topic]
+                })
+        
+        hot_topics.sort(key=lambda x: x["consistency_percentage"], reverse=True)
+        
+        result[exam_name] = {"topics": hot_topics}
+    
+    return {"exams": result}
 
 
 @app.get("/ui-config")
@@ -145,8 +815,39 @@ def get_ui_config():
     ui_config = cfg.get("ui", {})
     
     return {
-        "allow_mode_switching": ui_config.get("allow_mode_switching", False)
+        "allow_mode_switching": ui_config.get("allow_mode_switching", False),
+        "max_exam_comparison": ui_config.get("max_exam_comparison", 3)
     }
+
+
+@app.post("/admin/login")
+def admin_login(data: dict):
+    """Verify admin credentials from config.yaml"""
+    try:
+        cfg = load_config()
+        ui_config = cfg.get("ui", {})
+        admin_config = ui_config.get("admin", {})
+        
+        username = data.get("username", "")
+        password = data.get("password", "")
+        
+        expected_username = admin_config.get("username", "admin")
+        expected_password = admin_config.get("password", "admin123")
+        
+        # Debug logging (remove in production)
+        print(f"Admin login attempt: username='{username}', expected='{expected_username}'")
+        print(f"Password check: provided='{password}', expected='{expected_password}'")
+        
+        if username == expected_username and password == expected_password:
+            return {"success": True, "message": "Admin login successful"}
+        else:
+            return {
+                "success": False, 
+                "message": f"Invalid credentials. Expected username: '{expected_username}'"
+            }
+    except Exception as e:
+        print(f"Error in admin_login: {e}")
+        return {"success": False, "message": f"Server error: {str(e)}"}
 
 
 @app.post("/explain")
