@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { uiFeatures, getUIMode } from "../config/uiConfig";
+import { getUserData } from "../utils/auth";
 
 export default function ResultsList({ results }) {
     const [visibleAnswers, setVisibleAnswers] = useState({});
@@ -7,25 +7,31 @@ export default function ResultsList({ results }) {
     const [loadingExplain, setLoadingExplain] = useState({});
     const [optionInsights, setOptionInsights] = useState({});
     const [showSimilarPYQs, setShowSimilarPYQs] = useState({});
-    const [isAdmin, setIsAdmin] = useState(uiFeatures.showDebugId());
+    const [isAdmin, setIsAdmin] = useState(false);
 
-    // Listen for mode changes to update admin mode without reload
+    // Check if user is admin (database admin only)
     useEffect(() => {
-        const handleModeChange = () => {
-            setIsAdmin(uiFeatures.showDebugId());
+        const checkAdmin = () => {
+            const userData = getUserData();
+            setIsAdmin(userData?.is_admin || false);
         };
         
-        // Check mode on mount
-        setIsAdmin(uiFeatures.showDebugId());
+        // Check on mount
+        checkAdmin();
         
-        // Listen for custom event from Sidebar
-        window.addEventListener('uiModeChanged', handleModeChange);
-        // Also listen for storage changes (for cross-tab updates)
-        window.addEventListener('storage', handleModeChange);
+        // Listen for user login/logout events
+        const handleUserChange = () => {
+            checkAdmin();
+        };
+        
+        window.addEventListener('userLoggedIn', handleUserChange);
+        window.addEventListener('userLoggedOut', handleUserChange);
+        window.addEventListener('premiumStatusChanged', handleUserChange);
 
         return () => {
-            window.removeEventListener('uiModeChanged', handleModeChange);
-            window.removeEventListener('storage', handleModeChange);
+            window.removeEventListener('userLoggedIn', handleUserChange);
+            window.removeEventListener('userLoggedOut', handleUserChange);
+            window.removeEventListener('premiumStatusChanged', handleUserChange);
         };
     }, []);
 
@@ -317,11 +323,11 @@ export default function ResultsList({ results }) {
                                     📅 {item.year}
                                 </span>
                             )}
-                            {/* Developer/Admin: Question ID for debugging - only visible in admin mode */}
+                            {/* Developer/Admin: Question ID for debugging - only visible for admin users */}
                             {isAdmin && item.id && (
                                 <span 
                                     className="flex items-center gap-1 text-[11px] text-gray-400 font-mono cursor-help opacity-70 hover:opacity-100 transition-opacity" 
-                                    title={`Question ID (Admin Mode)\nCSV ID: ${item.id}`}
+                                    title={`Question ID (Admin)\nCSV ID: ${item.id}`}
                                 >
                                     <span className="text-gray-500">🔍</span>
                                     <span>ID: {item.id}</span>

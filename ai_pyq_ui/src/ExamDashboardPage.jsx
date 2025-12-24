@@ -6,7 +6,8 @@ import SecondarySidebar from "./components/SecondarySidebar";
 import FilterBar from "./components/FilterBar";
 import ExamAnalysis from "./components/ExamAnalysis";
 import SubjectAnalysis from "./components/SubjectAnalysis";
-import HotTopicsFocus from "./components/HotTopicsFocus";
+import HottestTopicsByExam from "./components/HottestTopicsByExam";
+import HottestTopicsBySubject from "./components/HottestTopicsBySubject";
 
 export default function ExamDashboardPage() {
     const [exam, setExam] = useState("");
@@ -53,25 +54,48 @@ export default function ExamDashboardPage() {
         fetchYears();
     }, []);
 
-    // Fetch subjects when exam changes
+    // Fetch subjects when exam changes (for Exam Analysis) or all subjects (for Subject Analysis)
     useEffect(() => {
-        if (!exam) {
-            setSubjectsList([]);
-            setSubject("");
-            return;
-        }
+        // For Subject Analysis, fetch all subjects from all exams
+        if (activeSubPage === "subject-analysis") {
+            if (examsList.length === 0) {
+                setSubjectsList([]);
+                return;
+            }
 
-        fetch(`http://127.0.0.1:8000/dashboard/filters?exam=${encodeURIComponent(exam)}`)
-            .then((res) => res.json())
-            .then((result) => {
-                if (result.subjects) {
-                    setSubjectsList(result.subjects);
-                }
-            })
-            .catch((err) => {
-                console.error("Error fetching subjects:", err);
+            // Fetch subjects from all exams and combine them
+            const subjectPromises = examsList.map((examName) =>
+                fetch(`http://127.0.0.1:8000/dashboard/filters?exam=${encodeURIComponent(examName)}`)
+                    .then((res) => res.json())
+                    .then((result) => result.subjects || [])
+                    .catch(() => [])
+            );
+
+            Promise.all(subjectPromises).then((results) => {
+                // Combine all subjects and remove duplicates
+                const allSubjects = [...new Set(results.flat())];
+                setSubjectsList(allSubjects.sort());
             });
-    }, [exam]);
+        } else {
+            // For Exam Analysis, Hottest Topics by Exam, and Hottest Topics by Subject, fetch subjects for the selected exam
+            if (!exam) {
+                setSubjectsList([]);
+                setSubject("");
+                return;
+            }
+
+            fetch(`http://127.0.0.1:8000/dashboard/filters?exam=${encodeURIComponent(exam)}`)
+                .then((res) => res.json())
+                .then((result) => {
+                    if (result.subjects) {
+                        setSubjectsList(result.subjects);
+                    }
+                })
+                .catch((err) => {
+                    console.error("Error fetching subjects:", err);
+                });
+        }
+    }, [exam, examsList, activeSubPage]);
 
     const renderContent = () => {
         switch (activeSubPage) {
@@ -86,8 +110,17 @@ export default function ExamDashboardPage() {
                         examsList={examsList}
                     />
                 );
-            case "hot-topics":
-                return <HotTopicsFocus exam={exam} yearFrom={yearFrom} yearTo={yearTo} />;
+            case "hottest-topics-by-exam":
+                return <HottestTopicsByExam exam={exam} yearFrom={yearFrom} yearTo={yearTo} />;
+            case "hottest-topics-by-subject":
+                return (
+                    <HottestTopicsBySubject
+                        exam={exam}
+                        subject={subject}
+                        yearFrom={yearFrom}
+                        yearTo={yearTo}
+                    />
+                );
             default:
                 return <ExamAnalysis exam={exam} yearFrom={yearFrom} yearTo={yearTo} />;
         }
@@ -100,7 +133,7 @@ export default function ExamDashboardPage() {
                 exam={exam} 
                 setExam={setExam} 
                 examsList={examsList}
-                onOpenSecondarySidebar={() => setSecondarySidebarOpen(true)}
+                onOpenSecondarySidebar={() => setSecondarySidebarOpen(!secondarySidebarOpen)}
             />
 
             {/* Secondary Sidebar */}
@@ -115,7 +148,7 @@ export default function ExamDashboardPage() {
             {/* Main Content */}
             <main
                 className={`flex-1 flex flex-col transition-all duration-300 min-h-screen ${
-                    secondarySidebarOpen ? "ml-64 lg:ml-[536px]" : "ml-64"
+                    secondarySidebarOpen ? "ml-64 lg:ml-[496px]" : "ml-64"
                 }`}
             >
                 {/* Filter Bar - Now part of page content, not sticky */}
@@ -132,8 +165,8 @@ export default function ExamDashboardPage() {
                         yearTo={yearTo}
                         setYearTo={setYearTo}
                         availableYears={availableYears}
-                        showSubject={activeSubPage === "subject-analysis"}
-                        showExam={activeSubPage !== "subject-analysis"}
+                        showSubject={activeSubPage === "subject-analysis" || activeSubPage === "hottest-topics-by-subject"}
+                        showExam={activeSubPage === "exam-analysis" || activeSubPage === "hottest-topics-by-exam" || activeSubPage === "hottest-topics-by-subject"}
                     />
                 </div>
 
@@ -142,12 +175,40 @@ export default function ExamDashboardPage() {
                     {/* Header */}
                     <div className="mb-6 flex items-start justify-between">
                         <div>
-                            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-                                📊 Exam Dashboard
-                            </h1>
-                            <p className="text-sm md:text-base text-gray-600">
-                                Data-driven insights to help you prioritize your study based on PYQ patterns
-                            </p>
+                            {(() => {
+                                const pageInfo = {
+                                    "exam-analysis": {
+                                        title: "📊 Exam Analysis",
+                                        description: "Analyze subject and topic distribution patterns for a selected exam to identify high-priority study areas"
+                                    },
+                                    "subject-analysis": {
+                                        title: "📚 Subject Analysis",
+                                        description: "Explore how a subject is distributed across different exams to understand cross-exam relevance"
+                                    },
+                                    "hottest-topics-by-exam": {
+                                        title: "🔥 Hottest Topic by Exam",
+                                        description: "Discover the most frequently asked topics for a selected exam to focus your preparation effectively"
+                                    },
+                                    "hottest-topics-by-subject": {
+                                        title: "🔥 Hottest Topic by Subject",
+                                        description: "Identify the most important topics within a specific subject and exam combination for targeted learning"
+                                    }
+                                };
+                                const info = pageInfo[activeSubPage] || {
+                                    title: "📊 Exam Dashboard",
+                                    description: "Data-driven insights to help you prioritize your study based on PYQ patterns"
+                                };
+                                return (
+                                    <>
+                                        <h1 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
+                                            {info.title}
+                                        </h1>
+                                        <p className="text-xs md:text-sm text-gray-600">
+                                            {info.description}
+                                        </p>
+                                    </>
+                                );
+                            })()}
                         </div>
                         {!secondarySidebarOpen && (
                             <button
@@ -168,7 +229,7 @@ export default function ExamDashboardPage() {
                                         d="M9 5l7 7-7 7"
                                     />
                                 </svg>
-                                <span className="text-sm font-medium">Show Navigation</span>
+                                <span className="text-sm font-medium">Menu</span>
                             </button>
                         )}
                     </div>
@@ -184,10 +245,28 @@ export default function ExamDashboardPage() {
                     </motion.div>
 
                     {/* Info Section */}
-                    {!exam && activeSubPage === "exam-analysis" && (
+                    {!exam && (activeSubPage === "exam-analysis" || activeSubPage === "hottest-topics-by-exam") && (
                         <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
                             <p className="text-blue-800">
                                 👆 Select an exam from the filter bar to view analytics and insights
+                            </p>
+                        </div>
+                    )}
+                    {!subject && activeSubPage === "subject-analysis" && (
+                        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
+                            <p className="text-blue-800">
+                                👆 Select a subject from the filter bar to view analytics and insights
+                            </p>
+                        </div>
+                    )}
+                    {(!exam || !subject) && activeSubPage === "hottest-topics-by-subject" && (
+                        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
+                            <p className="text-blue-800">
+                                {!exam && !subject
+                                    ? "👆 Select an exam and a subject from the filter bar to view hot topics"
+                                    : !exam
+                                    ? "👆 Select an exam from the filter bar to view hot topics"
+                                    : "👆 Select a subject from the filter bar to view hot topics"}
                             </p>
                         </div>
                     )}

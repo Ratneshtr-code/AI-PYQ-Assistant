@@ -18,8 +18,13 @@ export default function SecondarySidebar({ isOpen, onClose, type, activeSubPage,
             icon: "📚",
         },
         {
-            id: "hot-topics",
-            title: "Hot Topics Focus",
+            id: "hottest-topics-by-exam",
+            title: "Hottest Topic by Exam",
+            icon: "🔥",
+        },
+        {
+            id: "hottest-topics-by-subject",
+            title: "Hottest Topic by Subject",
             icon: "🔥",
         },
     ];
@@ -28,12 +33,12 @@ export default function SecondarySidebar({ isOpen, onClose, type, activeSubPage,
     const crossExamSubPages = [
         {
             id: "subject-cards",
-            title: "Subject Snapshot Cards",
+            title: "Subject Comparison",
             icon: "📋",
         },
         {
             id: "subject-analysis",
-            title: "Subject/Topic Analysis",
+            title: "Subject & Topic Analysis",
             icon: "📊",
         },
         {
@@ -71,12 +76,12 @@ export default function SecondarySidebar({ isOpen, onClose, type, activeSubPage,
 
                     {/* Secondary Sidebar */}
                     <motion.aside
-                        initial={{ x: -280 }}
-                        animate={{ x: isOpen ? 0 : -280 }}
-                        exit={{ x: -280 }}
+                        initial={{ x: -240 }}
+                        animate={{ x: isOpen ? 0 : -240 }}
+                        exit={{ x: -240 }}
                         transition={{ type: "spring", damping: 25, stiffness: 200 }}
                         className="fixed top-0 left-64 z-30 h-screen bg-white shadow-xl border-r border-gray-200 flex flex-col"
-                        style={{ width: "280px" }}
+                        style={{ width: "240px" }}
                     >
                         {/* Header with Collapse Button */}
                         <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50 sticky top-0 z-50 bg-white shadow-sm">
@@ -116,9 +121,9 @@ export default function SecondarySidebar({ isOpen, onClose, type, activeSubPage,
                                                 : "text-gray-700 hover:bg-gray-100"
                                         }`}
                                     >
-                                        <div className="flex items-center gap-3">
-                                            <span className="text-xl">{page.icon}</span>
-                                            <span className="text-sm font-medium">{page.title}</span>
+                                        <div className="flex items-center gap-2">
+                                            <span className="text-lg flex-shrink-0">{page.icon}</span>
+                                            <span className="text-sm font-medium whitespace-nowrap">{page.title}</span>
                                         </div>
                                     </button>
                                 ))}

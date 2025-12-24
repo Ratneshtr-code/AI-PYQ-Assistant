@@ -126,7 +126,7 @@ export default function CrossExamInsightsPage() {
                 exam={""} 
                 setExam={() => {}} 
                 examsList={examsList}
-                onOpenSecondarySidebar={() => setSecondarySidebarOpen(true)}
+                onOpenSecondarySidebar={() => setSecondarySidebarOpen(!secondarySidebarOpen)}
             />
 
             {/* Secondary Sidebar */}
@@ -141,7 +141,7 @@ export default function CrossExamInsightsPage() {
             {/* Main Content */}
             <main
                 className={`flex-1 flex flex-col transition-all duration-300 min-h-screen ${
-                    secondarySidebarOpen ? "ml-64 lg:ml-[536px]" : "ml-64"
+                    secondarySidebarOpen ? "ml-64 lg:ml-[496px]" : "ml-64"
                 }`}
             >
                 {/* Filter Bar - Now part of page content, not sticky */}
@@ -254,12 +254,36 @@ export default function CrossExamInsightsPage() {
                     {/* Header */}
                     <div className="mb-6 flex items-start justify-between">
                         <div>
-                            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-                                🔍 Cross-Exam Insights
-                            </h1>
-                            <p className="text-sm md:text-base text-gray-600">
-                                Compare subjects and topics across different exams
-                            </p>
+                            {(() => {
+                                const pageInfo = {
+                                    "subject-cards": {
+                                        title: "📋 Subject Comparison",
+                                        description: "Compare subject distribution and performance across multiple exams with visual comparison cards"
+                                    },
+                                    "subject-analysis": {
+                                        title: "📊 Subject & Topic Analysis",
+                                        description: "Compare detailed subject and topic distribution patterns across selected exams for comprehensive insights"
+                                    },
+                                    "hot-topics": {
+                                        title: "🔥 Hot Topics Across Exams",
+                                        description: "Identify trending and frequently asked topics across multiple exams to prioritize your study focus"
+                                    }
+                                };
+                                const info = pageInfo[activeSubPage] || {
+                                    title: "🔍 Cross-Exam Insights",
+                                    description: "Compare subjects and topics across different exams"
+                                };
+                                return (
+                                    <>
+                                        <h1 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
+                                            {info.title}
+                                        </h1>
+                                        <p className="text-xs md:text-sm text-gray-600">
+                                            {info.description}
+                                        </p>
+                                    </>
+                                );
+                            })()}
                         </div>
                         {!secondarySidebarOpen && (
                             <button
@@ -280,7 +304,7 @@ export default function CrossExamInsightsPage() {
                                         d="M9 5l7 7-7 7"
                                     />
                                 </svg>
-                                <span className="text-sm font-medium">Show Navigation</span>
+                                <span className="text-sm font-medium">Menu</span>
                             </button>
                         )}
                     </div>

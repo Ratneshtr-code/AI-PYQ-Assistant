@@ -1,6 +1,6 @@
 // src/components/HotTopicsFocus.jsx
 import { useState, useEffect } from "react";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, LabelList } from "recharts";
 import { motion } from "framer-motion";
 
 export default function HotTopicsFocus({ exam, yearFrom, yearTo }) {
@@ -187,6 +187,13 @@ export default function HotTopicsFocus({ exam, yearFrom, yearTo }) {
         );
     }
 
+    // Calculate dynamic height based on actual data length (per chart)
+    // Exam Hot Topics: more spacing for clarity
+    const examHotTopicsHeight = Math.max(300, examHotTopics.length * 45);
+    // Subject Hot Topics: tighter spacing for compact, premium look
+    // Ensure minimum height even for 1 item to prevent centering
+    const subjectHotTopicsHeight = subjectHotTopics.length > 0 ? Math.max(200, subjectHotTopics.length * 35) : 300;
+
     return (
         <div className="space-y-6">
             {/* Windows 1 & 2 Side by Side */}
@@ -196,40 +203,45 @@ export default function HotTopicsFocus({ exam, yearFrom, yearTo }) {
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="bg-white rounded-2xl shadow-lg p-6 border border-gray-200"
+                    style={{ minHeight: `${examHotTopicsHeight + 120}px` }}
                 >
                     <div className="mb-4">
-                        <h3 className="text-xl font-semibold text-gray-800 mb-1">Hottest Topics ({exam})</h3>
-                        <p className="text-sm text-gray-500">Top 10 most frequently asked topics</p>
+                        <h3 className="text-lg font-semibold text-gray-800 mb-1">Hottest Topics ({exam})</h3>
+                        <p className="text-xs text-gray-500 mb-1">Top 10 most frequently asked topics</p>
+                        <p className="text-xs text-gray-400">Based on number of PYQs {yearFrom && yearTo ? `(${yearFrom}–${yearTo})` : ''}</p>
                     </div>
 
                     {examHotTopics.length > 0 ? (
-                        <ResponsiveContainer width="100%" height={Math.max(300, examHotTopics.length * 50)}>
+                        <ResponsiveContainer width="100%" height={examHotTopicsHeight}>
                             <BarChart
                                 data={examHotTopics}
                                 layout="vertical"
-                                margin={{ top: 5, right: 30, left: 0, bottom: 5 }}
+                                margin={{ top: 10, right: 60, left: 0, bottom: 10 }}
                             >
                                 <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
                                 <XAxis 
                                     type="number" 
                                     domain={[0, "dataMax"]}
                                     tick={{ fontSize: 12 }}
+                                    hide={true}
                                 />
                                 <YAxis
                                     type="category"
                                     dataKey="name"
-                                    width={180}
+                                    width={160}
                                     tick={{ fontSize: 12 }}
                                     interval={0}
                                     axisLine={false}
                                     tickLine={false}
+                                    domain={[0, 'dataMax']}
+                                    padding={{ top: 0, bottom: 0 }}
                                 />
                                 <Tooltip
                                     formatter={(value, name) => {
                                         if (name === "total_count") {
-                                            return [value, "Questions"];
+                                            return `${value} PYQs`;
                                         }
-                                        return [value, name];
+                                        return value;
                                     }}
                                     contentStyle={{
                                         backgroundColor: "rgba(255, 255, 255, 0.95)",
@@ -237,10 +249,27 @@ export default function HotTopicsFocus({ exam, yearFrom, yearTo }) {
                                         borderRadius: "8px",
                                     }}
                                 />
-                                <Bar dataKey="total_count" radius={[0, 8, 8, 0]}>
+                                <Bar dataKey="total_count" radius={[0, 8, 8, 0]} barSize={28}>
                                     {examHotTopics.map((entry, index) => (
                                         <Cell key={`cell-${index}`} fill={getHotTopicColor(index)} />
                                     ))}
+                                    <LabelList
+                                        content={(props) => {
+                                            const { x, y, width, payload } = props;
+                                            if (!payload || !width) return null;
+                                            return (
+                                                <text
+                                                    x={x + width + 8}
+                                                    y={y + 14}
+                                                    fill="#6b7280"
+                                                    fontSize={11}
+                                                    textAnchor="start"
+                                                >
+                                                    {payload.total_count}
+                                                </text>
+                                            );
+                                        }}
+                                    />
                                 </Bar>
                             </BarChart>
                         </ResponsiveContainer>
@@ -254,10 +283,11 @@ export default function HotTopicsFocus({ exam, yearFrom, yearTo }) {
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="bg-white rounded-2xl shadow-lg p-6 border border-gray-200"
+                    style={{ minHeight: `${examHotTopicsHeight + 120}px` }}
                 >
                     <div className="mb-4">
-                        <h3 className="text-xl font-semibold text-gray-800 mb-1">Coverage Insight</h3>
-                        <p className="text-sm text-gray-500">How much do top topics cover?</p>
+                        <h3 className="text-lg font-semibold text-gray-800 mb-1">Coverage Insight</h3>
+                        <p className="text-xs text-gray-400">How much do top topics cover?</p>
                     </div>
 
                     {examCoverage ? (
@@ -306,9 +336,11 @@ export default function HotTopicsFocus({ exam, yearFrom, yearTo }) {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="bg-white rounded-2xl shadow-lg p-6 border border-gray-200"
+                    style={{ minHeight: `${subjectHotTopicsHeight + 120}px` }}
                 >
                     <div className="mb-4">
-                        <h3 className="text-xl font-semibold text-gray-800 mb-1">Hottest Topics by Subject</h3>
+                        <h3 className="text-lg font-semibold text-gray-800 mb-1">Hottest Topics by Subject</h3>
+                        <p className="text-xs text-gray-400 mb-2">Top topics within selected subject</p>
                         <div className="mb-3">
                             <label className="block text-sm font-medium text-gray-700 mb-2">Select Subject:</label>
                             <select
@@ -327,33 +359,36 @@ export default function HotTopicsFocus({ exam, yearFrom, yearTo }) {
                     </div>
 
                     {selectedSubject && subjectHotTopics.length > 0 ? (
-                        <ResponsiveContainer width="100%" height={Math.max(300, subjectHotTopics.length * 50)}>
+                        <ResponsiveContainer width="100%" height={subjectHotTopicsHeight}>
                             <BarChart
                                 data={subjectHotTopics}
                                 layout="vertical"
-                                margin={{ top: 5, right: 30, left: 0, bottom: 5 }}
+                                margin={{ top: 10, right: 60, left: 0, bottom: 10 }}
                             >
                                 <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
                                 <XAxis 
                                     type="number" 
                                     domain={[0, "dataMax"]}
                                     tick={{ fontSize: 12 }}
+                                    hide={true}
                                 />
                                 <YAxis
                                     type="category"
                                     dataKey="name"
-                                    width={180}
+                                    width={160}
                                     tick={{ fontSize: 12 }}
                                     interval={0}
                                     axisLine={false}
                                     tickLine={false}
+                                    reversed={false}
+                                    padding={{ top: 0, bottom: 0 }}
                                 />
                                 <Tooltip
                                     formatter={(value, name) => {
                                         if (name === "total_count") {
-                                            return [value, "Questions"];
+                                            return `${value} PYQs`;
                                         }
-                                        return [value, name];
+                                        return value;
                                     }}
                                     contentStyle={{
                                         backgroundColor: "rgba(255, 255, 255, 0.95)",
@@ -361,10 +396,27 @@ export default function HotTopicsFocus({ exam, yearFrom, yearTo }) {
                                         borderRadius: "8px",
                                     }}
                                 />
-                                <Bar dataKey="total_count" radius={[0, 8, 8, 0]}>
+                                <Bar dataKey="total_count" radius={[0, 8, 8, 0]} barSize={22}>
                                     {subjectHotTopics.map((entry, index) => (
                                         <Cell key={`cell-${index}`} fill={getHotTopicColor(index)} />
                                     ))}
+                                    <LabelList
+                                        content={(props) => {
+                                            const { x, y, width, payload } = props;
+                                            if (!payload || !width) return null;
+                                            return (
+                                                <text
+                                                    x={x + width + 8}
+                                                    y={y + 14}
+                                                    fill="#6b7280"
+                                                    fontSize={11}
+                                                    textAnchor="start"
+                                                >
+                                                    {payload.total_count}
+                                                </text>
+                                            );
+                                        }}
+                                    />
                                 </Bar>
                             </BarChart>
                         </ResponsiveContainer>
@@ -380,10 +432,11 @@ export default function HotTopicsFocus({ exam, yearFrom, yearTo }) {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="bg-white rounded-2xl shadow-lg p-6 border border-gray-200"
+                    style={{ minHeight: `${subjectHotTopicsHeight + 120}px` }}
                 >
                     <div className="mb-4">
-                        <h3 className="text-xl font-semibold text-gray-800 mb-1">Subject Coverage Insight</h3>
-                        <p className="text-sm text-gray-500">
+                        <h3 className="text-lg font-semibold text-gray-800 mb-1">Subject Coverage Insight</h3>
+                        <p className="text-xs text-gray-400">
                             {selectedSubject ? `Coverage for ${selectedSubject}` : "Select a subject"}
                         </p>
                     </div>

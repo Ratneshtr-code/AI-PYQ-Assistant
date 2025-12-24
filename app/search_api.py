@@ -18,7 +18,16 @@ from utils.config_loader import load_config
 from langchain_community.vectorstores import FAISS
 from langchain_community.embeddings import HuggingFaceEmbeddings
 
+# Authentication
+from app.database import init_db
+from app.auth_api import router as auth_router
+from app.admin_api import router as admin_router
+
 app = FastAPI(title="AI PYQ Assistant - Search API")
+
+# Include routers
+app.include_router(auth_router)
+app.include_router(admin_router)
 
 origins = [
     "http://localhost:5173",
@@ -44,7 +53,11 @@ class SearchRequest(BaseModel):
 
 
 @app.on_event("startup")
-def load_index():
+def startup_event():
+    # Initialize database
+    init_db()
+    
+    # Load FAISS index
     global vector_store, cfg, default_top_k
     cfg = load_config()
     model_name = cfg["model"]["name"]
@@ -815,39 +828,8 @@ def get_ui_config():
     ui_config = cfg.get("ui", {})
     
     return {
-        "allow_mode_switching": ui_config.get("allow_mode_switching", False),
         "max_exam_comparison": ui_config.get("max_exam_comparison", 3)
     }
-
-
-@app.post("/admin/login")
-def admin_login(data: dict):
-    """Verify admin credentials from config.yaml"""
-    try:
-        cfg = load_config()
-        ui_config = cfg.get("ui", {})
-        admin_config = ui_config.get("admin", {})
-        
-        username = data.get("username", "")
-        password = data.get("password", "")
-        
-        expected_username = admin_config.get("username", "admin")
-        expected_password = admin_config.get("password", "admin123")
-        
-        # Debug logging (remove in production)
-        print(f"Admin login attempt: username='{username}', expected='{expected_username}'")
-        print(f"Password check: provided='{password}', expected='{expected_password}'")
-        
-        if username == expected_username and password == expected_password:
-            return {"success": True, "message": "Admin login successful"}
-        else:
-            return {
-                "success": False, 
-                "message": f"Invalid credentials. Expected username: '{expected_username}'"
-            }
-    except Exception as e:
-        print(f"Error in admin_login: {e}")
-        return {"success": False, "message": f"Server error: {str(e)}"}
 
 
 @app.post("/explain")

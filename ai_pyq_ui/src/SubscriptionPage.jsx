@@ -3,21 +3,28 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Sidebar from "./components/Sidebar";
+import { authenticatedFetch, setUserData, getUserData } from "./utils/auth";
+
+const API_BASE_URL = ""; // Use Vite proxy
 
 export default function SubscriptionPage() {
     const navigate = useNavigate();
     const [examsList, setExamsList] = useState([]);
     const [hasPremium, setHasPremium] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
 
     useEffect(() => {
-        // Check premium status
-        const premium = localStorage.getItem("hasPremium") === "true";
+        // Check premium status from userData
+        const userData = getUserData();
+        const premium = userData?.subscription_plan === "premium" || localStorage.getItem("hasPremium") === "true";
         setHasPremium(premium);
 
         // Fetch exams list for sidebar
         const fetchExams = async () => {
             try {
-                const res = await fetch("http://127.0.0.1:8000/filters");
+                const res = await fetch("/filters");
                 const data = await res.json();
                 setExamsList(data.exams || []);
             } catch (err) {
@@ -27,12 +34,37 @@ export default function SubscriptionPage() {
         fetchExams();
     }, []);
 
-    const handleUpgrade = () => {
-        // Mock upgrade - set premium status
-        localStorage.setItem("hasPremium", "true");
-        localStorage.setItem("isLoggedIn", "true");
-        setHasPremium(true);
-        window.dispatchEvent(new Event("premiumStatusChanged"));
+    const handleUpgrade = async () => {
+        setLoading(true);
+        setError("");
+        setSuccess("");
+        
+        try {
+            const response = await authenticatedFetch(`${API_BASE_URL}/auth/subscription`, {
+                method: "PUT",
+                body: JSON.stringify({ plan: "premium", months: 1 }),
+            });
+            
+            if (response.ok) {
+                const updatedUser = await response.json();
+                setUserData(updatedUser); // Update localStorage
+                setHasPremium(true);
+                setSuccess("Successfully upgraded to Premium!");
+                // Dispatch events to update Sidebar
+                window.dispatchEvent(new Event("premiumStatusChanged"));
+                window.dispatchEvent(new Event("userLoggedIn"));
+                window.dispatchEvent(new Event("userProfileUpdated"));
+                setTimeout(() => setSuccess(""), 3000);
+            } else {
+                const errorData = await response.json();
+                setError(errorData.detail || "Failed to upgrade subscription");
+            }
+        } catch (err) {
+            setError("Failed to upgrade subscription. Please try again.");
+            console.error("Upgrade error:", err);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -45,12 +77,35 @@ export default function SubscriptionPage() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                     >
+                        {/* Back Button */}
+                        <button
+                            onClick={() => navigate(-1)}
+                            className="mb-4 flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+                        >
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                            </svg>
+                            <span>Back</span>
+                        </button>
+                        
                         <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
                             💎 Subscription Plans
                         </h1>
                         <p className="text-gray-600 mb-8">
                             Choose the plan that's right for you
                         </p>
+                        
+                        {success && (
+                            <div className="mb-6 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg">
+                                {success}
+                            </div>
+                        )}
+                        
+                        {error && (
+                            <div className="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+                                {error}
+                            </div>
+                        )}
 
                         <div className="grid md:grid-cols-2 gap-6 mb-8">
                             {/* Free Plan */}
@@ -140,9 +195,10 @@ export default function SubscriptionPage() {
                                 ) : (
                                     <button
                                         onClick={handleUpgrade}
-                                        className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold"
+                                        disabled={loading}
+                                        className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
-                                        Upgrade to Premium
+                                        {loading ? "Upgrading..." : "Upgrade to Premium"}
                                     </button>
                                 )}
                             </div>

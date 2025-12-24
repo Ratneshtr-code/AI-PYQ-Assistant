@@ -1,66 +1,114 @@
 // src/components/Sidebar.jsx
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getUIMode, setUIMode, UI_MODES, isAdminMode } from "../config/uiConfig";
 
 export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySidebar }) {
     const navigate = useNavigate();
     const location = useLocation();
-    const [uiMode, setUiModeState] = useState(getUIMode());
-    const [allowModeSwitching, setAllowModeSwitching] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [userName, setUserName] = useState("Ratnesh");
-    const [userInitials, setUserInitials] = useState("RT");
-    const [subscriptionPlan, setSubscriptionPlan] = useState("Premium"); // "Free" or "Premium"
+    
+    // Initialize state from localStorage immediately to prevent flash of wrong state
+    const initialUserData = (() => {
+        try {
+            const data = localStorage.getItem("userData");
+            return data ? JSON.parse(data) : null;
+        } catch {
+            return null;
+        }
+    })();
+    
+    const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn") === "true");
+    const [userName, setUserName] = useState(
+        initialUserData?.full_name || initialUserData?.username || localStorage.getItem("userName") || "User"
+    );
+    const [userInitials, setUserInitials] = useState(() => {
+        const name = initialUserData?.full_name || initialUserData?.username || localStorage.getItem("userName") || "User";
+        const names = name.split(" ");
+        return names.length > 1 
+            ? (names[0][0] + names[1][0]).toUpperCase()
+            : name.substring(0, 2).toUpperCase();
+    });
+    const [subscriptionPlan, setSubscriptionPlan] = useState(
+        initialUserData?.subscription_plan === "premium" ? "Premium" : "Free"
+    );
 
     const isDashboard = location.pathname.includes("exam-dashboard");
     const isCrossExam = location.pathname.includes("cross-exam-insights");
     const isSearchPage =
         location.pathname.includes("search") || (location.pathname === "/" && !isDashboard && !isCrossExam);
 
-    // Fetch UI config from backend
+        // Check login status and subscription
     useEffect(() => {
-        const fetchUIConfig = async () => {
-            try {
-                const res = await fetch("http://127.0.0.1:8000/ui-config");
-                const data = await res.json();
-                setAllowModeSwitching(data.allow_mode_switching || false);
-            } catch (err) {
-                console.error("Failed to fetch UI config:", err);
-                // Default to false (secure by default)
-                setAllowModeSwitching(false);
-            }
-        };
-        fetchUIConfig();
-    }, []);
-
-    // Check login status and subscription (mock implementation)
-    useEffect(() => {
-        const updateUserState = () => {
-            // Check if admin mode is active - if so, treat as logged in
-            const adminActive = isAdminMode();
-            // Mock: Check localStorage for user session
-            const loggedIn = localStorage.getItem("isLoggedIn") === "true" || adminActive;
-            const premium = localStorage.getItem("hasPremium") === "true";
+        const updateUserState = async () => {
+            // Check login status from localStorage (session cookie is checked by backend)
+            const isLoggedInLocal = localStorage.getItem("isLoggedIn") === "true";
+            setIsLoggedIn(isLoggedInLocal);
             
-            setIsLoggedIn(loggedIn);
-            
-            if (loggedIn) {
-                setSubscriptionPlan(premium ? "Premium" : "Free");
-                // Get user name from localStorage or use default
-                // If admin mode, use "Admin" as name
-                const savedName = adminActive 
-                    ? (localStorage.getItem("userName") || "Admin")
-                    : (localStorage.getItem("userName") || "Ratnesh");
-                setUserName(savedName);
-                // Generate initials
-                const names = savedName.split(" ");
-                const initials = names.length > 1 
-                    ? (names[0][0] + names[1][0]).toUpperCase()
-                    : savedName.substring(0, 2).toUpperCase();
-                setUserInitials(initials);
-            } else {
+            // If not logged in, clear state and exit early
+            if (!isLoggedInLocal) {
                 setSubscriptionPlan("Free");
+                setUserName("User");
+                setUserInitials("U");
+                return;
+            }
+            
+            // Token exists - user is logged in, proceed with loading user data
+            // First, try to use cached user data for immediate UI update
+            const userDataStr = localStorage.getItem("userData");
+            if (userDataStr) {
+                try {
+                    const cachedUserData = JSON.parse(userDataStr);
+                    setSubscriptionPlan(cachedUserData.subscription_plan === "premium" ? "Premium" : "Free");
+                    const savedName = cachedUserData.full_name || cachedUserData.username || "User";
+                    setUserName(savedName);
+                    const names = savedName.split(" ");
+                    const initials = names.length > 1 
+                        ? (names[0][0] + names[1][0]).toUpperCase()
+                        : savedName.substring(0, 2).toUpperCase();
+                    setUserInitials(initials);
+                } catch (parseErr) {
+                    console.error("Error parsing cached user data:", parseErr);
+                }
+            }
+            
+            // OPTIONAL: Try to fetch fresh user data from backend
+            // Cookies are sent automatically - no token needed!
+            if (isLoggedInLocal) {
+                // Make API call in background - don't wait for it or clear state on failure
+                fetch("/auth/me", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    credentials: "include", // Include cookies
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    // If 401 or other error, just ignore - keep using cached data
+                    return null;
+                })
+                .then(userData => {
+                    if (userData) {
+                        // Update with fresh data
+                        const normalizedUserData = {
+                            ...userData,
+                            is_admin: userData.is_admin === true || userData.is_admin === "true" || userData.is_admin === 1
+                        };
+                        localStorage.setItem("userData", JSON.stringify(normalizedUserData));
+                        setSubscriptionPlan(normalizedUserData.subscription_plan === "premium" ? "Premium" : "Free");
+                        const savedName = normalizedUserData.full_name || normalizedUserData.username || "User";
+                        setUserName(savedName);
+                        const names = savedName.split(" ");
+                        const initials = names.length > 1 
+                            ? (names[0][0] + names[1][0]).toUpperCase()
+                            : savedName.substring(0, 2).toUpperCase();
+                        setUserInitials(initials);
+                    }
+                })
+                .catch(() => {
+                    // Network error - ignore, keep using cached data
+                });
             }
         };
 
@@ -69,7 +117,7 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
 
         // Listen for storage changes (when user logs in/out or upgrades)
         const handleStorageChange = (e) => {
-            if (e.key === "isLoggedIn" || e.key === "hasPremium" || e.key === "userName") {
+            if (e.key === "isLoggedIn" || e.key === "hasPremium" || e.key === "userName" || e.key === "authToken" || e.key === "userData") {
                 updateUserState();
             }
         };
@@ -77,35 +125,31 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
         window.addEventListener("storage", handleStorageChange);
         
         // Also listen for custom events (for same-tab updates)
-        const handleCustomStorage = () => {
+        const handleCustomEvent = () => {
+            // Force immediate update when login/logout events fire
             updateUserState();
         };
-        window.addEventListener("premiumStatusChanged", handleCustomStorage);
+        window.addEventListener("premiumStatusChanged", handleCustomEvent);
+        window.addEventListener("userLoggedIn", handleCustomEvent);
+        window.addEventListener("userLoggedOut", handleCustomEvent);
+        window.addEventListener("userProfileUpdated", handleCustomEvent); // Listen for profile updates
         
-        // Listen for UI mode changes (admin mode toggle)
-        const handleModeChange = () => {
+        // Also listen for focus events (when user returns to tab after login)
+        const handleFocus = () => {
             updateUserState();
         };
-        window.addEventListener("uiModeChanged", handleModeChange);
-
+        window.addEventListener("focus", handleFocus);
+        
         return () => {
             window.removeEventListener("storage", handleStorageChange);
-            window.removeEventListener("premiumStatusChanged", handleCustomStorage);
-            window.removeEventListener("uiModeChanged", handleModeChange);
+            window.removeEventListener("premiumStatusChanged", handleCustomEvent);
+            window.removeEventListener("userLoggedIn", handleCustomEvent);
+            window.removeEventListener("userLoggedOut", handleCustomEvent);
+            window.removeEventListener("userProfileUpdated", handleCustomEvent);
+            window.removeEventListener("focus", handleFocus);
         };
-    }, []);
+    }, []); // Run once on mount, then rely on events and polling
 
-    // Toggle admin mode (only if allowed by backend config)
-    const toggleAdminMode = () => {
-        if (!allowModeSwitching) {
-            return; // Do nothing if mode switching is disabled
-        }
-        const newMode = uiMode === UI_MODES.ADMIN ? UI_MODES.USER : UI_MODES.ADMIN;
-        setUIMode(newMode);
-        setUiModeState(newMode);
-        // Dispatch custom event to notify other components
-        window.dispatchEvent(new Event('uiModeChanged'));
-    };
 
     const handleSignIn = () => {
         navigate("/login");
@@ -115,12 +159,37 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
         navigate("/signup");
     };
 
-    const handleSignOut = () => {
+    const handleSignOut = async () => {
+        // Clear all auth-related localStorage
         localStorage.removeItem("isLoggedIn");
         localStorage.removeItem("userName");
+        localStorage.removeItem("userEmail");
+        localStorage.removeItem("hasPremium");
+        localStorage.removeItem("userData");
+        localStorage.removeItem("ui_mode");
+        
+        // Immediately update state
         setIsLoggedIn(false);
+        setUserName("User");
+        setUserInitials("U");
         setSubscriptionPlan("Free");
-        // Optionally navigate to home
+        
+        // Dispatch logout events to update other components
+        window.dispatchEvent(new Event("premiumStatusChanged"));
+        window.dispatchEvent(new Event("userLoggedOut"));
+        
+        // Call logout API to delete session cookie
+        fetch("/auth/logout", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            credentials: "include", // Include cookies
+        }).catch(() => {
+            // Ignore API errors - logout is already complete locally
+        });
+        
+        // Navigate to home
         navigate("/");
     };
 
@@ -131,36 +200,15 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
         >
             {/* Main Navigation Section */}
             <div className="flex-1 overflow-y-auto px-4 py-6">
-                <h2 className="text-xl font-semibold text-gray-800 mb-6">
+                <h2 className="text-lg font-semibold text-gray-800 mb-6">
                     {isDashboard ? "Exam Dashboard" : isCrossExam ? "Cross-Exam Insights" : "PYQ Assistant"}
                 </h2>
-
-                {/* Filter (only show on Search Page or Dashboard) */}
-                {(isSearchPage || isDashboard) && (
-                    <div className="mb-6">
-                        <label className="block text-sm text-gray-500 mb-1">
-                            Filter by Exam
-                        </label>
-                        <select
-                            value={exam}
-                            onChange={(e) => setExam(e.target.value)}
-                            className="w-full border border-gray-300 rounded-lg p-2 text-gray-700 focus:ring-2 focus:ring-blue-400"
-                        >
-                            <option value="">All Exams</option>
-                            {examsList.map((ex, idx) => (
-                                <option key={idx} value={ex}>
-                                    {ex}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                )}
 
                 {/* Navigation Buttons */}
                 <div className="space-y-1">
                     <button
                         onClick={() => navigate("/")}
-                        className={`w-full text-left py-2.5 px-3 rounded-lg transition ${
+                        className={`w-full text-left py-2 px-3 rounded-lg transition text-sm ${
                             isSearchPage
                                 ? "bg-blue-50 text-blue-700 font-medium"
                                 : "text-gray-700 hover:bg-gray-50"
@@ -176,7 +224,7 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                                 setTimeout(() => onOpenSecondarySidebar(), 100);
                             }
                         }}
-                        className={`w-full text-left py-2.5 px-3 rounded-lg transition ${
+                        className={`w-full text-left py-2 px-3 rounded-lg transition text-sm ${
                             isDashboard
                                 ? "bg-blue-50 text-blue-700 font-medium"
                                 : "text-gray-700 hover:bg-gray-50"
@@ -192,7 +240,7 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                                 setTimeout(() => onOpenSecondarySidebar(), 100);
                             }
                         }}
-                        className={`w-full text-left py-2.5 px-3 rounded-lg transition ${
+                        className={`w-full text-left py-2 px-3 rounded-lg transition text-sm ${
                             location.pathname.includes("cross-exam-insights")
                                 ? "bg-blue-50 text-blue-700 font-medium"
                                 : "text-gray-700 hover:bg-gray-50"
@@ -203,7 +251,7 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
 
                     <button
                         onClick={() => {}}
-                        className="w-full text-left py-2.5 px-3 rounded-lg transition text-gray-500 hover:bg-gray-50 opacity-60 cursor-not-allowed"
+                        className="w-full text-left py-2 px-3 rounded-lg transition text-sm text-gray-500 hover:bg-gray-50 opacity-60 cursor-not-allowed"
                         disabled
                     >
                         📑 Topic-wise PYQ
@@ -211,7 +259,7 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
 
                     <button
                         onClick={() => {}}
-                        className="w-full text-left py-2.5 px-3 rounded-lg transition text-gray-500 hover:bg-gray-50 opacity-60 cursor-not-allowed"
+                        className="w-full text-left py-2 px-3 rounded-lg transition text-sm text-gray-500 hover:bg-gray-50 opacity-60 cursor-not-allowed"
                         disabled
                     >
                         🕸️ Concept Graph Explorer
@@ -224,7 +272,8 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
 
             {/* Account Card Section (Sticky Bottom) */}
             <div className="px-4 pb-4 border-t border-gray-100 bg-gray-50/50">
-                {isLoggedIn ? (
+                {/* Check login status from localStorage */}
+                {localStorage.getItem("isLoggedIn") === "true" || isLoggedIn ? (
                     /* Logged In State */
                     <div className="mt-4 p-3 bg-white rounded-lg border border-gray-200 shadow-sm">
                         <div className="flex items-center gap-3 mb-2">
@@ -234,15 +283,22 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                             </div>
                             <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-2">
-                                    <p className="text-sm font-medium text-gray-900 truncate">
+                                    <p className="text-xs font-medium text-gray-900 truncate">
                                         {userName}
                                     </p>
-                                    {/* Admin Badge */}
-                                    {isAdminMode() && (
-                                        <span className="px-1.5 py-0.5 text-[10px] font-medium bg-purple-100 text-purple-700 rounded">
-                                            Admin
-                                        </span>
-                                    )}
+                                    {/* Admin Badge - Only show if user is database admin */}
+                                    {(() => {
+                                        try {
+                                            const userData = JSON.parse(localStorage.getItem("userData") || "{}");
+                                            return userData.is_admin ? (
+                                                <span className="px-1.5 py-0.5 text-[10px] font-medium bg-purple-100 text-purple-700 rounded">
+                                                    Admin
+                                                </span>
+                                            ) : null;
+                                        } catch {
+                                            return null;
+                                        }
+                                    })()}
                                 </div>
                                 <div className="flex items-center gap-1.5 mt-0.5">
                                     {subscriptionPlan === "Premium" ? (
@@ -261,8 +317,14 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                         {/* Upgrade CTA for Free users */}
                         {subscriptionPlan === "Free" && (
                             <button
-                                onClick={() => navigate("/subscription")}
-                                className="w-full mt-2 py-1.5 px-3 text-xs font-medium text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-md transition-colors"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    console.log("Navigating to /subscription");
+                                    navigate("/subscription");
+                                }}
+                                className="w-full mt-2 py-1.5 px-3 text-xs font-medium text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-md transition-colors cursor-pointer"
+                                type="button"
                             >
                                 Upgrade to Premium
                             </button>
@@ -270,8 +332,14 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                         {/* View Subscription for Premium users */}
                         {subscriptionPlan === "Premium" && (
                             <button
-                                onClick={() => navigate("/subscription")}
-                                className="w-full mt-2 py-1.5 px-3 text-xs font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 rounded-md transition-colors"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    console.log("Navigating to /subscription");
+                                    navigate("/subscription");
+                                }}
+                                className="w-full mt-2 py-1.5 px-3 text-xs font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 rounded-md transition-colors cursor-pointer"
+                                type="button"
                             >
                                 Manage Subscription
                             </button>
@@ -303,20 +371,25 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                 {/* Footer Utilities (Icon-first, more visible) */}
                 <div className="mt-3 pt-3 border-t border-gray-100 space-y-1.5">
                     <button
-                        onClick={() => navigate("/settings")}
-                        className="w-full flex items-center gap-2 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition py-2 px-3 rounded-lg font-medium"
-                        title="Settings"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            console.log("Navigating to /account, isLoggedIn:", localStorage.getItem("isLoggedIn"));
+                            navigate("/account");
+                        }}
+                        className="w-full flex items-center gap-2 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition py-2 px-3 rounded-lg font-medium cursor-pointer"
+                        title="My Account"
+                        type="button"
                     >
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
-                        <span>Settings</span>
+                        <span>My Account</span>
                     </button>
-                    {isLoggedIn && (
+                    {(localStorage.getItem("isLoggedIn") === "true" || isLoggedIn) && (
                         <button
                             onClick={handleSignOut}
-                            className="w-full flex items-center gap-2 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition py-2 px-3 rounded-lg font-medium"
+                            className="w-full flex items-center gap-2 text-sm text-red-600 hover:text-red-700 hover:bg-red-50 transition py-2 px-3 rounded-lg font-medium"
                             title="Sign Out"
                         >
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

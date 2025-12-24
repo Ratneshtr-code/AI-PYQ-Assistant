@@ -7,6 +7,7 @@ export default function CrossExamHotTopics({ exams, yearFrom, yearTo }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [allTopics, setAllTopics] = useState([]);
+    const [topN, setTopN] = useState(10); // Default to Top 10
 
     useEffect(() => {
         if (!exams || exams.length === 0) {
@@ -33,14 +34,26 @@ export default function CrossExamHotTopics({ exams, yearFrom, yearTo }) {
             .then((result) => {
                 if (result.exams) {
                     setData(result.exams);
-                    // Collect all unique topics
-                    const topicsSet = new Set();
+                    // Collect all unique topics with their totals
+                    const topicMap = new Map();
                     Object.values(result.exams).forEach((examData) => {
                         examData.topics?.forEach((topic) => {
-                            topicsSet.add(topic.name);
+                            const existing = topicMap.get(topic.name);
+                            if (existing) {
+                                existing.total_count += topic.total_count || 0;
+                            } else {
+                                topicMap.set(topic.name, {
+                                    name: topic.name,
+                                    total_count: topic.total_count || 0,
+                                });
+                            }
                         });
                     });
-                    setAllTopics(Array.from(topicsSet).sort());
+                    // Sort by total_count descending
+                    const sortedTopics = Array.from(topicMap.values())
+                        .sort((a, b) => b.total_count - a.total_count)
+                        .map(t => t.name);
+                    setAllTopics(sortedTopics);
                 } else {
                     setData({});
                     setAllTopics([]);
@@ -100,13 +113,30 @@ export default function CrossExamHotTopics({ exams, yearFrom, yearTo }) {
         );
     }
 
+    // Filter topics based on topN selection
+    const filteredTopics = allTopics.slice(0, topN);
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="bg-white rounded-2xl shadow-lg p-6 border border-gray-200"
         >
-            <h3 className="text-xl font-semibold text-gray-800 mb-4">Section C: Hot Topics Across Exams</h3>
+            <div className="mb-4 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                    <label className="text-sm font-medium text-gray-700">Show:</label>
+                    <select
+                        value={topN}
+                        onChange={(e) => setTopN(parseInt(e.target.value))}
+                        className="border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-700 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                    >
+                        <option value={5}>Top 5 Hottest Topics</option>
+                        <option value={10}>Top 10 Hottest Topics</option>
+                        <option value={20}>Top 20 Hottest Topics</option>
+                        <option value={50}>Top 50 Hottest Topics</option>
+                    </select>
+                </div>
+            </div>
             <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                     <thead>
@@ -125,7 +155,7 @@ export default function CrossExamHotTopics({ exams, yearFrom, yearTo }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {allTopics.slice(0, 50).map((topic, idx) => {
+                        {filteredTopics.map((topic, idx) => {
                             const topicData = getTopicData(topic);
                             const totalCount = exams.reduce(
                                 (sum, exam) => sum + (topicData[exam]?.total_count || 0),
@@ -153,12 +183,7 @@ export default function CrossExamHotTopics({ exams, yearFrom, yearTo }) {
                                         return (
                                             <td key={exam} className="py-3 px-4 text-center">
                                                 {topicInfo ? (
-                                                    <div className="flex flex-col items-center">
-                                                        <span className="font-medium">{topicInfo.total_count}</span>
-                                                        <span className="text-xs text-gray-500">
-                                                            {topicInfo.consistency_percentage}%
-                                                        </span>
-                                                    </div>
+                                                    <span className="font-medium">{topicInfo.total_count}</span>
                                                 ) : (
                                                     <span className="text-gray-300">-</span>
                                                 )}

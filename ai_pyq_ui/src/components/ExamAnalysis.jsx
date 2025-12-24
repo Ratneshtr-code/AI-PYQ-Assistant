@@ -1,6 +1,6 @@
 // src/components/ExamAnalysis.jsx
 import { useState, useEffect } from "react";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, LabelList } from "recharts";
 import { motion } from "framer-motion";
 import InsightsWindow from "./InsightsWindow";
 
@@ -148,6 +148,13 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
         );
     }
 
+    // Calculate dynamic height based on actual data length (per chart)
+    // Subject Distribution: more spacing for clarity
+    const subjectHeight = Math.max(300, subjectData.length * 45);
+    // Topic Distribution: consistent spacing (40px per item) for better readability
+    // Ensure minimum height even for 1 item to prevent centering, but start from top
+    const topicHeight = topicData.length > 0 ? Math.max(150, topicData.length * 40) : 300;
+
     return (
         <div className="space-y-6">
             {/* Windows 1 & 2 Side by Side */}
@@ -157,40 +164,47 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     className="bg-white rounded-2xl shadow-lg p-6 border border-gray-200"
+                    style={{ minHeight: `${subjectHeight + 120}px` }}
                 >
                     <div className="mb-4">
-                        <h3 className="text-xl font-semibold text-gray-800 mb-1">Subject Distribution</h3>
-                        <p className="text-sm text-gray-500">Click a subject to view its topics</p>
+                        <h3 className="text-lg font-semibold text-gray-800 mb-1">Subject Distribution</h3>
+                        <p className="text-xs text-gray-500 mb-1">Click a subject to view its topics</p>
+                        <p className="text-xs text-gray-400">Based on number of PYQs {yearFrom && yearTo ? `(${yearFrom}–${yearTo})` : ''}</p>
                     </div>
 
                     {subjectData.length > 0 ? (
-                        <ResponsiveContainer width="100%" height={Math.max(300, subjectData.length * 50)}>
+                        <ResponsiveContainer width="100%" height={subjectHeight}>
                             <BarChart
                                 data={subjectData}
                                 layout="vertical"
-                                margin={{ top: 5, right: 30, left: 0, bottom: 5 }}
+                                margin={{ top: 10, right: 60, left: 0, bottom: 10 }}
                             >
                                 <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
                                 <XAxis 
                                     type="number" 
                                     domain={[0, "dataMax"]}
                                     tick={{ fontSize: 12 }}
+                                    hide={true}
                                 />
                                 <YAxis
                                     type="category"
                                     dataKey="name"
-                                    width={180}
+                                    width={160}
                                     tick={{ fontSize: 12 }}
                                     interval={0}
                                     axisLine={false}
                                     tickLine={false}
+                                    domain={[0, 'dataMax']}
+                                    padding={{ top: 0, bottom: 0 }}
                                 />
                                 <Tooltip
-                                    formatter={(value, name) => {
+                                    formatter={(value, name, props) => {
                                         if (name === "percentage") {
-                                            return [`${value}%`, "Percentage"];
+                                            // Show count if available, otherwise calculate from percentage
+                                            const count = props.payload.count || Math.round((value / 100) * (props.payload.total || 100));
+                                            return `${count} PYQs`;
                                         }
-                                        return [value, "Count"];
+                                        return value;
                                     }}
                                     contentStyle={{
                                         backgroundColor: "rgba(255, 255, 255, 0.95)",
@@ -203,6 +217,7 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
                                     radius={[0, 8, 8, 0]}
                                     cursor="pointer"
                                     onClick={(entry) => handleSubjectClick(entry)}
+                                    barSize={28}
                                 >
                                     {subjectData.map((entry, index) => {
                                         const isSelected = selectedSubject === entry.name;
@@ -218,6 +233,24 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
                                             />
                                         );
                                     })}
+                                    <LabelList
+                                        content={(props) => {
+                                            const { x, y, width, payload } = props;
+                                            if (!payload || !width) return null;
+                                            const count = payload.count || Math.round((payload.percentage / 100) * (payload.total || 100));
+                                            return (
+                                                <text
+                                                    x={x + width + 8}
+                                                    y={y + 14}
+                                                    fill="#6b7280"
+                                                    fontSize={11}
+                                                    textAnchor="start"
+                                                >
+                                                    {count}
+                                                </text>
+                                            );
+                                        }}
+                                    />
                                 </Bar>
                             </BarChart>
                         </ResponsiveContainer>
@@ -231,10 +264,12 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     className="bg-white rounded-2xl shadow-lg p-6 border border-gray-200"
+                    style={{ minHeight: `${topicHeight + 120}px` }}
                 >
                     <div className="mb-4">
-                        <h3 className="text-xl font-semibold text-gray-800 mb-1">Topic Distribution</h3>
-                        <div className="mb-3">
+                        <h3 className="text-lg font-semibold text-gray-800 mb-1">Topic Distribution</h3>
+                        <p className="text-xs text-gray-400 mb-2">Top topics within selected subject</p>
+                        <div className="mb-2">
                             <label className="block text-sm font-medium text-gray-700 mb-2">
                                 Select Subject:
                             </label>
@@ -254,17 +289,18 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
                     </div>
 
                     {selectedSubject && topicData.length > 0 ? (
-                        <ResponsiveContainer width="100%" height={Math.max(300, topicData.length * 50)}>
+                        <ResponsiveContainer width="100%" height={topicHeight}>
                             <BarChart
                                 data={topicData}
                                 layout="vertical"
-                                margin={{ top: 5, right: 30, left: 0, bottom: 5 }}
+                                margin={{ top: 10, right: 60, left: 0, bottom: 10 }}
                             >
                                 <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
                                 <XAxis 
                                     type="number" 
                                     domain={[0, "dataMax"]}
                                     tick={{ fontSize: 12 }}
+                                    hide={true}
                                 />
                                 <YAxis
                                     type="category"
@@ -274,13 +310,17 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
                                     interval={0}
                                     axisLine={false}
                                     tickLine={false}
+                                    reversed={false}
+                                    padding={{ top: 5, bottom: 5 }}
                                 />
                                 <Tooltip
-                                    formatter={(value, name) => {
+                                    formatter={(value, name, props) => {
                                         if (name === "percentage") {
-                                            return [`${value}%`, "Percentage"];
+                                            // Show count if available, otherwise calculate from percentage
+                                            const count = props.payload.count || Math.round((value / 100) * (props.payload.total || 100));
+                                            return `${count} PYQs`;
                                         }
-                                        return [value, "Count"];
+                                        return value;
                                     }}
                                     contentStyle={{
                                         backgroundColor: "rgba(255, 255, 255, 0.95)",
@@ -288,13 +328,31 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
                                         borderRadius: "8px",
                                     }}
                                 />
-                                <Bar dataKey="percentage" radius={[0, 8, 8, 0]}>
+                                <Bar dataKey="percentage" radius={[0, 8, 8, 0]} barSize={28}>
                                     {topicData.map((entry, index) => (
                                         <Cell
                                             key={`cell-${index}`}
                                             fill={getTopicColor(entry.percentage)}
                                         />
                                     ))}
+                                    <LabelList
+                                        content={(props) => {
+                                            const { x, y, width, payload } = props;
+                                            if (!payload || !width) return null;
+                                            const count = payload.count || Math.round((payload.percentage / 100) * (payload.total || 100));
+                                            return (
+                                                <text
+                                                    x={x + width + 8}
+                                                    y={y + 14}
+                                                    fill="#6b7280"
+                                                    fontSize={11}
+                                                    textAnchor="start"
+                                                >
+                                                    {count}
+                                                </text>
+                                            );
+                                        }}
+                                    />
                                 </Bar>
                             </BarChart>
                         </ResponsiveContainer>

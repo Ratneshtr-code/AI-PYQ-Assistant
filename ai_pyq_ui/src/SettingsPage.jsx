@@ -3,28 +3,18 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Sidebar from "./components/Sidebar";
-import { getUIMode, setUIMode, UI_MODES, isAdminMode } from "./config/uiConfig";
+import { getCurrentUser, isAuthenticated, getUserData } from "./utils/auth";
 
 export default function SettingsPage() {
     const navigate = useNavigate();
     const [examsList, setExamsList] = useState([]);
-    const [uiMode, setUiModeState] = useState(getUIMode());
-    const [allowModeSwitching, setAllowModeSwitching] = useState(false);
-    const [adminCredentials, setAdminCredentials] = useState({ username: "", password: "" });
+    const [userIsAdmin, setUserIsAdmin] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Fetch UI config
-        const fetchUIConfig = async () => {
-            try {
-                const res = await fetch("http://127.0.0.1:8000/ui-config");
-                const data = await res.json();
-                setAllowModeSwitching(data.allow_mode_switching || false);
-            } catch (err) {
-                console.error("Failed to fetch UI config:", err);
-            }
-        };
-        fetchUIConfig();
-
+        // Note: ProtectedRoute already handles authentication check and redirect
+        // We can safely assume user is authenticated when this component renders
+        
         // Fetch exams list for sidebar
         const fetchExams = async () => {
             try {
@@ -36,53 +26,57 @@ export default function SettingsPage() {
             }
         };
         fetchExams();
+
+        // Check if current user is admin - always fetch fresh data
+        const checkAdmin = async () => {
+            try {
+                // First, try to use cached user data for immediate UI update
+                const cachedUserData = getUserData();
+                if (cachedUserData) {
+                    setUserIsAdmin(cachedUserData.is_admin === true);
+                    setLoading(false); // Show UI immediately with cached data
+                }
+                
+                // Then fetch fresh data from backend (don't block UI)
+                try {
+                    const user = await getCurrentUser();
+                    if (user) {
+                        // Admin status comes from database, not from any "mode"
+                        setUserIsAdmin(user.is_admin === true);
+                    } else {
+                        // If getCurrentUser returns null, keep using cached data
+                        // Don't clear admin status - token might be temporarily invalid
+                        console.warn("getCurrentUser returned null, using cached data");
+                    }
+                } catch (apiError) {
+                    // API call failed - keep using cached data
+                    console.warn("Failed to fetch fresh user data, using cached:", apiError);
+                    // Don't clear admin status on API errors
+                }
+            } catch (err) {
+                console.error("Failed to check admin status:", err);
+                // On error, try to use cached data
+                const cachedData = getUserData();
+                setUserIsAdmin(cachedData?.is_admin === true || false);
+            } finally {
+                setLoading(false);
+            }
+        };
+        checkAdmin();
+        
+        // Re-check admin status when user logs in/out
+        const handleUserChange = () => {
+            checkAdmin();
+        };
+        window.addEventListener("userLoggedIn", handleUserChange);
+        window.addEventListener("userLoggedOut", handleUserChange);
+        
+        return () => {
+            window.removeEventListener("userLoggedIn", handleUserChange);
+            window.removeEventListener("userLoggedOut", handleUserChange);
+        };
     }, []);
 
-    const handleModeToggle = () => {
-        if (!allowModeSwitching) {
-            // Validate inputs
-            if (!adminCredentials.username || !adminCredentials.password) {
-                alert("Please enter both username and password");
-                return;
-            }
-
-            // Try admin login
-            fetch("http://127.0.0.1:8000/admin/login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(adminCredentials),
-            })
-                .then((res) => {
-                    if (!res.ok) {
-                        throw new Error(`HTTP error! status: ${res.status}`);
-                    }
-                    return res.json();
-                })
-                .then((data) => {
-                    console.log("Admin login response:", data);
-                    if (data.success) {
-                        // Switch to admin mode
-                        setUIMode(UI_MODES.ADMIN);
-                        setUiModeState(UI_MODES.ADMIN);
-                        window.dispatchEvent(new Event("uiModeChanged"));
-                        alert("Admin mode activated successfully!");
-                        // Clear credentials for security
-                        setAdminCredentials({ username: "", password: "" });
-                    } else {
-                        alert(`Login failed: ${data.message || "Invalid credentials"}`);
-                    }
-                })
-                .catch((error) => {
-                    console.error("Admin login error:", error);
-                    alert(`Admin login failed: ${error.message}. Make sure the backend server is running and config.yaml has been updated.`);
-                });
-        } else {
-            const newMode = uiMode === UI_MODES.ADMIN ? UI_MODES.USER : UI_MODES.ADMIN;
-            setUIMode(newMode);
-            setUiModeState(newMode);
-            window.dispatchEvent(new Event("uiModeChanged"));
-        }
-    };
 
     return (
         <div className="flex min-h-screen bg-gray-50">
@@ -102,117 +96,39 @@ export default function SettingsPage() {
                         </p>
 
                         <div className="space-y-6">
-                            {/* Admin Mode Section */}
-                            <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-                                <h2 className="text-xl font-semibold text-gray-900 mb-4">Admin Mode</h2>
-                                
-                                {allowModeSwitching ? (
-                                    <div className="space-y-4">
+                            {/* Admin Status Section */}
+                            {loading ? (
+                                <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                                    <p className="text-sm text-gray-600">Loading...</p>
+                                </div>
+                            ) : userIsAdmin ? (
+                                <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                                    <h2 className="text-xl font-semibold text-gray-900 mb-4">Admin Status</h2>
+                                    <div className="flex items-center gap-3 mb-4">
+                                        <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-lg text-sm font-medium">
+                                            🔧 Admin Account
+                                        </span>
                                         <p className="text-sm text-gray-600">
-                                            Mode switching is enabled. You can toggle between User and Admin mode.
+                                            You have full admin access to manage users, subscriptions, and system settings.
                                         </p>
-                                        <div className="flex items-center justify-between">
-                                            <span className="text-gray-700">Current Mode:</span>
-                                            <button
-                                                onClick={handleModeToggle}
-                                                className={`px-4 py-2 rounded-lg font-medium transition ${
-                                                    isAdminMode()
-                                                        ? "bg-purple-100 text-purple-700 hover:bg-purple-200"
-                                                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                                                }`}
-                                            >
-                                                {isAdminMode() ? "🔧 Admin" : "👤 User"}
-                                            </button>
-                                        </div>
                                     </div>
-                                ) : (
-                                    <div className="space-y-4">
-                                        <div className="flex items-center justify-between">
-                                            <p className="text-sm text-gray-600">
-                                                Mode switching is disabled. Use admin credentials to access Admin mode.
-                                            </p>
-                                            {isAdminMode() && (
-                                                <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-lg text-sm font-medium">
-                                                    🔧 Admin Mode Active
-                                                </span>
-                                            )}
-                                        </div>
-                                        {!isAdminMode() ? (
-                                            <div className="space-y-3">
-                                                <div>
-                                                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                                                        Admin Username
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        value={adminCredentials.username}
-                                                        onChange={(e) =>
-                                                            setAdminCredentials({
-                                                                ...adminCredentials,
-                                                                username: e.target.value,
-                                                            })
-                                                        }
-                                                        placeholder="Enter admin username (default: admin)"
-                                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                                                    />
-                                                </div>
-                                                <div>
-                                                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                                                        Admin Password
-                                                    </label>
-                                                    <input
-                                                        type="password"
-                                                        value={adminCredentials.password}
-                                                        onChange={(e) =>
-                                                            setAdminCredentials({
-                                                                ...adminCredentials,
-                                                                password: e.target.value,
-                                                            })
-                                                        }
-                                                        placeholder="Enter admin password"
-                                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                                                        onKeyPress={(e) => {
-                                                            if (e.key === "Enter") {
-                                                                handleModeToggle();
-                                                            }
-                                                        }}
-                                                    />
-                                                </div>
-                                                <button
-                                                    onClick={handleModeToggle}
-                                                    className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
-                                                >
-                                                    Login as Admin
-                                                </button>
-                                            </div>
-                                        ) : (
-                                            <div className="p-4 bg-purple-50 border border-purple-200 rounded-lg">
-                                                <p className="text-sm text-purple-800 mb-3">
-                                                    You are currently in Admin mode. Debug features are enabled.
-                                                </p>
-                                                <button
-                                                    onClick={() => {
-                                                        setUIMode(UI_MODES.USER);
-                                                        setUiModeState(UI_MODES.USER);
-                                                        window.dispatchEvent(new Event("uiModeChanged"));
-                                                    }}
-                                                    className="px-4 py-2 bg-white border border-purple-300 text-purple-700 rounded-lg hover:bg-purple-50 transition-colors"
-                                                >
-                                                    Switch to User Mode
-                                                </button>
-                                            </div>
-                                        )}
-                                        <div className="mt-2 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
-                                            <p className="text-xs text-yellow-800">
-                                                <strong>Note:</strong> After changing config.yaml, you must restart the backend server for changes to take effect.
-                                            </p>
-                                            <p className="text-xs text-gray-600 mt-1">
-                                                Current config: username="admin", password="123" (from config.yaml)
-                                            </p>
-                                        </div>
+                                </div>
+                            ) : (
+                                <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                                    <h2 className="text-xl font-semibold text-gray-900 mb-4">Admin Access</h2>
+                                    <p className="text-sm text-gray-600 mb-4">
+                                        You are currently logged in as a regular user. Admin access is granted to users with admin privileges in the database.
+                                    </p>
+                                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                                        <p className="text-sm font-medium text-gray-900 mb-2">To get admin access:</p>
+                                        <ol className="text-sm text-gray-700 list-decimal list-inside space-y-1">
+                                            <li>Run: <code className="bg-white px-2 py-1 rounded">python app/create_admin.py</code></li>
+                                            <li>Enter your email to promote your account to admin</li>
+                                            <li>Refresh this page after promotion</li>
+                                        </ol>
                                     </div>
-                                )}
-                            </div>
+                                </div>
+                            )}
 
                             {/* Account Section */}
                             <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
@@ -265,6 +181,43 @@ export default function SettingsPage() {
                                     </button>
                                 </div>
                             </div>
+
+                            {/* Admin Panel Section */}
+                            {userIsAdmin ? (
+                                <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                                    <h2 className="text-xl font-semibold text-gray-900 mb-4">Admin Tools</h2>
+                                    <p className="text-sm text-gray-600 mb-4">
+                                        Access the admin panel to manage users, subscriptions, and system settings.
+                                    </p>
+                                    <button
+                                        onClick={() => navigate("/admin")}
+                                        className="w-full px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+                                    >
+                                        Open Admin Panel
+                                    </button>
+                                </div>
+                            ) : (
+                                <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 shadow-sm">
+                                    <h2 className="text-xl font-semibold text-gray-900 mb-4">Admin Access</h2>
+                                    <p className="text-sm text-gray-600 mb-4">
+                                        To access the admin panel, you need to be logged in as an admin user. 
+                                        Admin users are created through the database.
+                                    </p>
+                                    <div className="bg-white rounded-lg p-4 border border-blue-200 mb-4">
+                                        <p className="text-sm font-medium text-gray-900 mb-2">Quick Setup:</p>
+                                        <ol className="text-sm text-gray-700 list-decimal list-inside space-y-1">
+                                            <li>Run: <code className="bg-gray-100 px-2 py-1 rounded">python app/create_admin.py</code></li>
+                                            <li>Follow the prompts to create your first admin user</li>
+                                            <li>Login with the admin credentials</li>
+                                            <li>Access admin panel from here or navigate to <code className="bg-gray-100 px-2 py-1 rounded">/admin</code></li>
+                                        </ol>
+                                    </div>
+                                    <p className="text-xs text-gray-500">
+                                        <strong>Note:</strong> Admin panel requires a database admin user. 
+                                        Use the script above to create your first admin account.
+                                    </p>
+                                </div>
+                            )}
                         </div>
                     </motion.div>
                 </div>

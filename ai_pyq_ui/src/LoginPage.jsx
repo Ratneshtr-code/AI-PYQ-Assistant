@@ -1,32 +1,155 @@
 // src/LoginPage.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { setUserData, isAuthenticated } from "./utils/auth";
+
+// Use empty string for Vite proxy (same-origin), or "http://127.0.0.1:8000" for direct access
+const API_BASE_URL = "";
 
 export default function LoginPage() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    // Redirect if already authenticated
+    useEffect(() => {
+        if (isAuthenticated()) {
+            navigate("/", { replace: true });
+        }
+    }, [navigate]);
 
     const handleLogin = async (e) => {
         e.preventDefault();
         setError("");
+        setLoading(true);
 
-        // Mock login - for demo purposes
-        if (email && password) {
-            // Set login state
-            localStorage.setItem("isLoggedIn", "true");
-            localStorage.setItem("userName", email.split("@")[0] || "User");
-            localStorage.setItem("userEmail", email);
+        // Client-side validation
+        const trimmedEmail = email.trim();
+        if (!trimmedEmail) {
+            setError("Email is required");
+            setLoading(false);
+            return;
+        }
+        
+        if (!trimmedEmail.includes("@")) {
+            setError("Please enter a valid email address");
+            setLoading(false);
+            return;
+        }
+        
+        if (!password || password.length === 0) {
+            setError("Password is required");
+            setLoading(false);
+            return;
+        }
+
+        try {
+            // Add timeout to prevent hanging
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
             
-            // Dispatch event to update sidebar
+            const response = await fetch(`${API_BASE_URL}/auth/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include", // Important: include cookies
+                signal: controller.signal,
+                body: JSON.stringify({
+                    email: trimmedEmail,
+                    password: password,
+                }),
+            });
+            
+            clearTimeout(timeoutId);
+
+            // Check response status BEFORE parsing JSON
+            if (!response.ok) {
+                let errorMessage = "Login failed. Please check your credentials.";
+                
+                try {
+                    const errorData = await response.json();
+                    // Use the error detail from backend if available
+                    if (errorData.detail) {
+                        errorMessage = errorData.detail;
+                    } else if (response.status === 401) {
+                        errorMessage = "Incorrect email or password. Please try again.";
+                    } else if (response.status === 403) {
+                        errorMessage = "Account is inactive. Please contact support.";
+                    } else if (response.status === 400) {
+                        errorMessage = errorData.detail || "Invalid request. Please check your input.";
+                    }
+                } catch (parseError) {
+                    // If JSON parsing fails, use status-based messages
+                    if (response.status === 401) {
+                        errorMessage = "Incorrect email or password. Please try again.";
+                    } else if (response.status === 403) {
+                        errorMessage = "Account is inactive. Please contact support.";
+                    } else if (response.status === 400) {
+                        errorMessage = "Invalid request. Please check your input.";
+                    } else if (response.status >= 500) {
+                        errorMessage = "Server error. Please try again later.";
+                    }
+                }
+                
+                throw new Error(errorMessage);
+            }
+
+            const data = await response.json();
+
+            // Validate response has required fields
+            if (!data.user) {
+                throw new Error("Invalid response from server. Please try again.");
+            }
+            
+            // Debug: Check if cookie was set
+            console.log("Login successful, checking cookies...");
+            const setCookieHeader = response.headers.get("set-cookie");
+            console.log("Set-Cookie header:", setCookieHeader ? "✅ PRESENT" : "❌ MISSING");
+            if (setCookieHeader) {
+                console.log("Cookie details:", setCookieHeader.substring(0, 100) + "...");
+            } else {
+                console.error("⚠️ CRITICAL: Set-Cookie header not found! Cookie was NOT set by backend.");
+            }
+
+            // Verify user data includes is_admin
+            if (typeof data.user.is_admin !== "boolean") {
+                console.warn("User data missing is_admin field, defaulting to false");
+                data.user.is_admin = false;
+            }
+
+            // Store user data - session cookie is automatically set by backend!
+            setUserData(data.user);
+
+            // Dispatch events
             window.dispatchEvent(new Event("premiumStatusChanged"));
+            window.dispatchEvent(new Event("userLoggedIn"));
+
+            // Navigate to home page (don't go back to signup/login pages)
+            navigate("/", { replace: true });
+        } catch (err) {
+            // Clear any partial auth data on error
+            localStorage.removeItem("authToken");
+            localStorage.removeItem("refreshToken");
+            localStorage.removeItem("userData");
             
-            // Navigate back to previous page or home
-            navigate(-1);
-        } else {
-            setError("Please enter email and password");
+            // Handle different error types
+            if (err.name === 'AbortError') {
+                setError("Request timed out. Please check your connection and try again.");
+            } else if (err.message && err.message.includes("Failed to fetch")) {
+                setError("Cannot connect to server. Please make sure the backend server is running on http://127.0.0.1:8000");
+            } else if (err.message) {
+                setError(err.message);
+            } else {
+                setError("Failed to login. Please check your credentials and try again.");
+            }
+            
+            console.error("Login error:", err);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -79,9 +202,10 @@ export default function LoginPage() {
 
                     <button
                         type="submit"
-                        className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                        disabled={loading}
+                        className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                        Sign In
+                        {loading ? "Signing in..." : "Sign In"}
                     </button>
                 </form>
 
@@ -94,12 +218,6 @@ export default function LoginPage() {
                         >
                             Sign Up
                         </button>
-                    </p>
-                </div>
-
-                <div className="mt-6 pt-6 border-t border-gray-200">
-                    <p className="text-xs text-gray-500 text-center">
-                        Demo Mode: Any email and password will work
                     </p>
                 </div>
             </motion.div>

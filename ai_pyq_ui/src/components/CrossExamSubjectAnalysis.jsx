@@ -8,6 +8,8 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
     const [topicData, setTopicData] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [visibleExams, setVisibleExams] = useState(new Set(exams)); // Track which exams to show
+    const [viewMode, setViewMode] = useState("count"); // "count" or "percentage"
 
     // Fetch subject distribution
     useEffect(() => {
@@ -77,9 +79,27 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
             });
     }, [exams, selectedSubject, yearFrom, yearTo]);
 
-    const getExamColor = (index) => {
+    // Update visible exams when exams prop changes
+    useEffect(() => {
+        setVisibleExams(new Set(exams));
+    }, [exams]);
+
+    const getExamColor = (examName) => {
+        const examIndex = exams.indexOf(examName);
         const colors = ["#3b82f6", "#10b981", "#f59e0b", "#ef4444"];
-        return colors[index % colors.length];
+        return colors[examIndex % colors.length];
+    };
+
+    const toggleExamVisibility = (exam) => {
+        setVisibleExams((prev) => {
+            const newSet = new Set(prev);
+            if (newSet.has(exam)) {
+                newSet.delete(exam);
+            } else {
+                newSet.add(exam);
+            }
+            return newSet;
+        });
     };
 
     // Prepare data for Section A: Subject Distribution
@@ -93,19 +113,34 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
 
         const chartData = Array.from(allSubjects).map((subject) => {
             const dataPoint = { name: subject };
-            exams.forEach((exam, idx) => {
+            let total = 0;
+            exams.forEach((exam) => {
                 const examData = subjectData[exam];
                 const subj = examData?.subjects?.find((s) => s.name === subject);
-                dataPoint[exam] = subj?.count || 0;
+                const count = subj?.count || 0;
+                dataPoint[exam] = count;
+                total += count;
             });
+            dataPoint.total = total;
             return dataPoint;
         });
 
-        return chartData.sort((a, b) => {
-            const totalA = exams.reduce((sum, exam) => sum + (a[exam] || 0), 0);
-            const totalB = exams.reduce((sum, exam) => sum + (b[exam] || 0), 0);
-            return totalB - totalA;
-        });
+        const sorted = chartData.sort((a, b) => b.total - a.total);
+
+        // Convert to percentage if needed
+        if (viewMode === "percentage") {
+            return sorted.map((item) => {
+                const newItem = { ...item };
+                exams.forEach((exam) => {
+                    const examData = subjectData[exam];
+                    const examTotal = examData?.subjects?.reduce((sum, s) => sum + (s.count || 0), 0) || 1;
+                    newItem[exam] = examTotal > 0 ? Math.round((item[exam] / examTotal) * 10000) / 100 : 0;
+                });
+                return newItem;
+            });
+        }
+
+        return sorted;
     };
 
     // Prepare data for Section B: Topic Distribution
@@ -119,19 +154,34 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
 
         const chartData = Array.from(allTopics).map((topic) => {
             const dataPoint = { name: topic };
+            let total = 0;
             exams.forEach((exam) => {
                 const examData = topicData[exam];
                 const top = examData?.topics?.find((t) => t.name === topic);
-                dataPoint[exam] = top?.count || 0;
+                const count = top?.count || 0;
+                dataPoint[exam] = count;
+                total += count;
             });
+            dataPoint.total = total;
             return dataPoint;
         });
 
-        return chartData.sort((a, b) => {
-            const totalA = exams.reduce((sum, exam) => sum + (a[exam] || 0), 0);
-            const totalB = exams.reduce((sum, exam) => sum + (b[exam] || 0), 0);
-            return totalB - totalA;
-        });
+        const sorted = chartData.sort((a, b) => b.total - a.total);
+
+        // Convert to percentage if needed
+        if (viewMode === "percentage") {
+            return sorted.map((item) => {
+                const newItem = { ...item };
+                exams.forEach((exam) => {
+                    const examData = topicData[exam];
+                    const examTotal = examData?.topics?.reduce((sum, t) => sum + (t.count || 0), 0) || 1;
+                    newItem[exam] = examTotal > 0 ? Math.round((item[exam] / examTotal) * 10000) / 100 : 0;
+                });
+                return newItem;
+            });
+        }
+
+        return sorted;
     };
 
     if (loading) {
@@ -171,24 +221,86 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
                 >
                     <div className="mb-4">
                         <h3 className="text-xl font-semibold text-gray-800 mb-1">Section A: Subject Distribution</h3>
-                        <p className="text-sm text-gray-500">Click a subject to view its topics</p>
+                        <p className="text-sm text-gray-500 mb-3">Click a subject to view its topics</p>
+                        
+                        {/* Controls */}
+                        <div className="flex flex-wrap items-center gap-3 mb-3">
+                            {/* View Mode Toggle */}
+                            <div className="flex items-center gap-2 bg-gray-100 rounded-lg p-1">
+                                <button
+                                    onClick={() => setViewMode("count")}
+                                    className={`px-3 py-1 text-xs font-medium rounded transition-colors ${
+                                        viewMode === "count"
+                                            ? "bg-white text-gray-900 shadow-sm"
+                                            : "text-gray-600 hover:text-gray-900"
+                                    }`}
+                                >
+                                    Count
+                                </button>
+                                <button
+                                    onClick={() => setViewMode("percentage")}
+                                    className={`px-3 py-1 text-xs font-medium rounded transition-colors ${
+                                        viewMode === "percentage"
+                                            ? "bg-white text-gray-900 shadow-sm"
+                                            : "text-gray-600 hover:text-gray-900"
+                                    }`}
+                                >
+                                    %
+                                </button>
+                            </div>
+                            
+                            {/* Exam Visibility Toggles */}
+                            <div className="flex items-center gap-2 flex-wrap">
+                                {exams.map((exam) => (
+                                    <label
+                                        key={exam}
+                                        className="flex items-center gap-1.5 cursor-pointer"
+                                    >
+                                        <input
+                                            type="checkbox"
+                                            checked={visibleExams.has(exam)}
+                                            onChange={() => toggleExamVisibility(exam)}
+                                            className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                        />
+                                        <span
+                                            className="text-xs font-medium"
+                                            style={{ color: visibleExams.has(exam) ? getExamColor(exam) : "#9ca3af" }}
+                                        >
+                                            {exam}
+                                        </span>
+                                    </label>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                     {subjectChartData.length > 0 ? (
-                        <ResponsiveContainer width="100%" height={Math.max(400, subjectChartData.length * 40)}>
+                        <ResponsiveContainer width="100%" height={Math.max(400, subjectChartData.length * 50)}>
                             <BarChart
                                 data={subjectChartData}
-                                margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
+                                layout="vertical"
+                                margin={{ top: 10, right: 80, left: 0, bottom: 10 }}
                             >
-                                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" horizontal={true} vertical={false} />
                                 <XAxis
-                                    dataKey="name"
-                                    angle={-45}
-                                    textAnchor="end"
-                                    height={100}
+                                    type="number"
+                                    domain={[0, "dataMax"]}
                                     tick={{ fontSize: 11 }}
+                                    label={viewMode === "percentage" ? { value: "Percentage (%)", position: "insideBottom", offset: -5 } : { value: "Count", position: "insideBottom", offset: -5 }}
                                 />
-                                <YAxis />
+                                <YAxis
+                                    type="category"
+                                    dataKey="name"
+                                    width={140}
+                                    tick={{ fontSize: 11 }}
+                                    interval={0}
+                                />
                                 <Tooltip
+                                    formatter={(value, name) => {
+                                        if (viewMode === "percentage") {
+                                            return [`${value}%`, name];
+                                        }
+                                        return [value, name];
+                                    }}
                                     contentStyle={{
                                         backgroundColor: "rgba(255, 255, 255, 0.95)",
                                         border: "1px solid #e5e7eb",
@@ -196,20 +308,22 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
                                     }}
                                 />
                                 <Legend />
-                                {exams.map((exam, idx) => (
-                                    <Bar
-                                        key={exam}
-                                        dataKey={exam}
-                                        fill={getExamColor(idx)}
-                                        radius={[4, 4, 0, 0]}
-                                        onClick={(entry) => {
-                                            if (onSubjectSelect) {
-                                                onSubjectSelect(entry.name);
-                                            }
-                                        }}
-                                        style={{ cursor: "pointer" }}
-                                    />
-                                ))}
+                                {exams
+                                    .filter((exam) => visibleExams.has(exam))
+                                    .map((exam) => (
+                                        <Bar
+                                            key={exam}
+                                            dataKey={exam}
+                                            fill={getExamColor(exam)}
+                                            radius={[0, 4, 4, 0]}
+                                            onClick={(entry) => {
+                                                if (onSubjectSelect) {
+                                                    onSubjectSelect(entry.name);
+                                                }
+                                            }}
+                                            style={{ cursor: "pointer" }}
+                                        />
+                                    ))}
                             </BarChart>
                         </ResponsiveContainer>
                     ) : (
@@ -234,27 +348,91 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
                         <h3 className="text-xl font-semibold text-gray-800 mb-1">
                             Section B: Topic Distribution
                         </h3>
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm text-gray-500 mb-3">
                             {selectedSubject ? `Topics for ${selectedSubject}` : "Select a subject from the left chart"}
                         </p>
+                        
+                        {/* Controls - only show if subject is selected */}
+                        {selectedSubject && (
+                            <div className="flex flex-wrap items-center gap-3 mb-3">
+                                {/* View Mode Toggle */}
+                                <div className="flex items-center gap-2 bg-gray-100 rounded-lg p-1">
+                                    <button
+                                        onClick={() => setViewMode("count")}
+                                        className={`px-3 py-1 text-xs font-medium rounded transition-colors ${
+                                            viewMode === "count"
+                                                ? "bg-white text-gray-900 shadow-sm"
+                                                : "text-gray-600 hover:text-gray-900"
+                                        }`}
+                                    >
+                                        Count
+                                    </button>
+                                    <button
+                                        onClick={() => setViewMode("percentage")}
+                                        className={`px-3 py-1 text-xs font-medium rounded transition-colors ${
+                                            viewMode === "percentage"
+                                                ? "bg-white text-gray-900 shadow-sm"
+                                                : "text-gray-600 hover:text-gray-900"
+                                        }`}
+                                    >
+                                        %
+                                    </button>
+                                </div>
+                                
+                                {/* Exam Visibility Toggles */}
+                                <div className="flex items-center gap-2 flex-wrap">
+                                    {exams.map((exam) => (
+                                        <label
+                                            key={exam}
+                                            className="flex items-center gap-1.5 cursor-pointer"
+                                        >
+                                            <input
+                                                type="checkbox"
+                                                checked={visibleExams.has(exam)}
+                                                onChange={() => toggleExamVisibility(exam)}
+                                                className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                            />
+                                            <span
+                                                className="text-xs font-medium"
+                                                style={{ color: visibleExams.has(exam) ? getExamColor(exam) : "#9ca3af" }}
+                                            >
+                                                {exam}
+                                            </span>
+                                        </label>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
                     </div>
                     {selectedSubject ? (
                         topicChartData.length > 0 ? (
-                            <ResponsiveContainer width="100%" height={Math.max(400, topicChartData.length * 40)}>
+                            <ResponsiveContainer width="100%" height={Math.max(400, topicChartData.length * 50)}>
                                 <BarChart
                                     data={topicChartData}
-                                    margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
+                                    layout="vertical"
+                                    margin={{ top: 10, right: 80, left: 0, bottom: 10 }}
                                 >
-                                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" horizontal={true} vertical={false} />
                                     <XAxis
-                                        dataKey="name"
-                                        angle={-45}
-                                        textAnchor="end"
-                                        height={100}
+                                        type="number"
+                                        domain={[0, "dataMax"]}
                                         tick={{ fontSize: 11 }}
+                                        label={viewMode === "percentage" ? { value: "Percentage (%)", position: "insideBottom", offset: -5 } : { value: "Count", position: "insideBottom", offset: -5 }}
                                     />
-                                    <YAxis />
+                                    <YAxis
+                                        type="category"
+                                        dataKey="name"
+                                        width={140}
+                                        tick={{ fontSize: 11 }}
+                                        interval={0}
+                                    />
                                     <Tooltip
+                                        formatter={(value, name) => {
+                                            if (viewMode === "percentage") {
+                                                return [`${value}%`, name];
+                                            }
+                                            return [value, name];
+                                        }}
                                         contentStyle={{
                                             backgroundColor: "rgba(255, 255, 255, 0.95)",
                                             border: "1px solid #e5e7eb",
@@ -262,14 +440,16 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
                                         }}
                                     />
                                     <Legend />
-                                    {exams.map((exam, idx) => (
-                                        <Bar
-                                            key={exam}
-                                            dataKey={exam}
-                                            fill={getExamColor(idx)}
-                                            radius={[4, 4, 0, 0]}
-                                        />
-                                    ))}
+                                    {exams
+                                        .filter((exam) => visibleExams.has(exam))
+                                        .map((exam) => (
+                                            <Bar
+                                                key={exam}
+                                                dataKey={exam}
+                                                fill={getExamColor(exam)}
+                                                radius={[0, 4, 4, 0]}
+                                            />
+                                        ))}
                                 </BarChart>
                             </ResponsiveContainer>
                         ) : (
