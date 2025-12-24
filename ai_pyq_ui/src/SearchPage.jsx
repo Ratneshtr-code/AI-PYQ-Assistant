@@ -50,6 +50,14 @@ export default function SearchPage() {
         }
     }, [location.search]);
 
+    // Auto-search when exam changes if query exists
+    useEffect(() => {
+        if (query.trim() && hasSearched) {
+            handleSearch();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [exam]);
+
     const handleSearch = async () => {
         if (!query.trim()) return;
         await doSearch(query, 1, { exam });
@@ -83,28 +91,43 @@ export default function SearchPage() {
             <Sidebar exam={exam} setExam={setExam} examsList={examsList} onOpenSecondarySidebar={() => {}} />
 
             {/* 📚 Main Content Area */}
-            <main className="flex-1 flex flex-col items-center justify-start p-8 pl-64 transition-all duration-300">
-                <div className="max-w-3xl w-full space-y-6 mx-0 md:mx-auto px-4 md:px-0">
-                    <h1 className="text-3xl font-bold text-center">AI PYQ Search</h1>
+            <main className="flex-1 flex flex-col items-center justify-start p-8 pl-64 transition-all duration-300 relative">
+                {/* Exam Filter - Fixed/Sticky Position */}
+                <div className="fixed left-64 top-8 z-30 flex flex-col gap-1.5 pl-4 bg-gray-50 py-2 pr-4 rounded-r-lg shadow-sm">
+                    <label className="text-sm font-medium text-gray-700 whitespace-nowrap text-center">
+                        Exam
+                    </label>
+                    <select
+                        value={exam}
+                        onChange={(e) => setExam(e.target.value)}
+                        className="border border-gray-300 rounded-lg px-3 py-1.5 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all w-[140px] shadow-sm"
+                    >
+                        <option value="">All Exams</option>
+                        {examsList.map((ex, idx) => (
+                            <option key={idx} value={ex}>
+                                {ex}
+                            </option>
+                        ))}
+                    </select>
+                </div>
 
-                    {/* Exam Filter */}
-                    <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-4">
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Filter by Exam
-                        </label>
-                        <select
-                            value={exam}
-                            onChange={(e) => setExam(e.target.value)}
-                            className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-                        >
-                            <option value="">All Exams</option>
-                            {examsList.map((ex, idx) => (
-                                <option key={idx} value={ex}>
-                                    {ex}
-                                </option>
-                            ))}
-                        </select>
+                <div className="w-full space-y-6 px-4 md:px-0">
+                    {/* Header with Heading Centered */}
+                    <div className="flex items-center justify-between gap-4 mb-4 relative w-full">
+                        {/* Spacer for Exam filter on left */}
+                        <div className="w-[156px]"></div>
+                        
+                        {/* Heading - Centered */}
+                        <h1 className="text-3xl font-bold absolute left-1/2 transform -translate-x-1/2">
+                            AI PYQ Search
+                        </h1>
+                        
+                        {/* Spacer for balance (same width as filter + padding) */}
+                        <div className="w-[156px]"></div>
                     </div>
+                    
+                    {/* Content Container */}
+                    <div className="max-w-3xl w-full mx-auto space-y-6">
 
                     {/* Search Bar */}
                     <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -151,6 +174,7 @@ export default function SearchPage() {
                             />
                         </>
                     )}
+                    </div>
                 </div>
             </main>
         </div>
