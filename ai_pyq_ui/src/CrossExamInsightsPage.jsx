@@ -251,62 +251,62 @@ export default function CrossExamInsightsPage() {
 
                 {/* Content Area */}
                 <div className="w-full max-w-7xl mx-auto px-4 md:px-8 py-6 md:py-8 space-y-4 relative z-0">
+                    {/* Menu Button - Top Left Corner */}
+                    {!secondarySidebarOpen && (
+                        <button
+                            onClick={() => setSecondarySidebarOpen(true)}
+                            className="absolute -left-12 top-6 p-2 bg-gray-100 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-200 hover:border-gray-400 shadow-sm transition-colors flex items-center justify-center z-10"
+                            title="Show sub-pages navigation"
+                        >
+                            <svg
+                                className="w-5 h-5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M4 6h16M4 12h16M4 18h16"
+                                />
+                            </svg>
+                        </button>
+                    )}
                     {/* Header */}
                     <div className="mb-6 flex items-start justify-between">
                         <div>
-                            {(() => {
-                                const pageInfo = {
-                                    "subject-cards": {
-                                        title: "📋 Subject Comparison",
-                                        description: "Compare subject distribution and performance across multiple exams with visual comparison cards"
-                                    },
-                                    "subject-analysis": {
-                                        title: "📊 Subject & Topic Analysis",
-                                        description: "Compare detailed subject and topic distribution patterns across selected exams for comprehensive insights"
-                                    },
-                                    "hot-topics": {
-                                        title: "🔥 Hot Topics Across Exams",
-                                        description: "Identify trending and frequently asked topics across multiple exams to prioritize your study focus"
-                                    }
-                                };
-                                const info = pageInfo[activeSubPage] || {
-                                    title: "🔍 Cross-Exam Insights",
-                                    description: "Compare subjects and topics across different exams"
-                                };
-                                return (
-                                    <>
-                                        <h1 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
-                                            {info.title}
-                                        </h1>
-                                        <p className="text-xs md:text-sm text-gray-600">
-                                            {info.description}
-                                        </p>
-                                    </>
-                                );
-                            })()}
+                                {(() => {
+                                    const pageInfo = {
+                                        "subject-cards": {
+                                            title: "📋 Subject Comparison",
+                                            description: "Compare subject distribution and performance across multiple exams with visual comparison cards"
+                                        },
+                                        "subject-analysis": {
+                                            title: "📊 Subject & Topic Analysis",
+                                            description: "Compare detailed subject and topic distribution patterns across selected exams for comprehensive insights"
+                                        },
+                                        "hot-topics": {
+                                            title: "🔥 Hot Topics Across Exams",
+                                            description: "Identify trending and frequently asked topics across multiple exams to prioritize your study focus"
+                                        }
+                                    };
+                                    const info = pageInfo[activeSubPage] || {
+                                        title: "🔍 Cross-Exam Insights",
+                                        description: "Compare subjects and topics across different exams"
+                                    };
+                                    return (
+                                        <>
+                                            <h1 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
+                                                {info.title}
+                                            </h1>
+                                            <p className="text-xs md:text-sm text-gray-600">
+                                                {info.description}
+                                            </p>
+                                        </>
+                                    );
+                                })()}
                         </div>
-                        {!secondarySidebarOpen && (
-                            <button
-                                onClick={() => setSecondarySidebarOpen(true)}
-                                className="ml-4 p-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-colors flex items-center gap-2"
-                                title="Show sub-pages navigation"
-                            >
-                                <svg
-                                    className="w-5 h-5"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M9 5l7 7-7 7"
-                                    />
-                                </svg>
-                                <span className="text-sm font-medium">Menu</span>
-                            </button>
-                        )}
                     </div>
 
                     {/* Content based on active sub-page */}

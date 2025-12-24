@@ -119,13 +119,6 @@ export default function FilterBar({
                                 </select>
                             </div>
                         )}
-
-                        {/* Premium Badge */}
-                        <div className="ml-auto flex items-center gap-2">
-                            <span className="bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-xs font-bold shadow-md">
-                                ⭐ Premium
-                            </span>
-                        </div>
                     </div>
                 </div>
             </div>

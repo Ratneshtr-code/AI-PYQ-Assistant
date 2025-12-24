@@ -220,19 +220,19 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
                     className="bg-white rounded-2xl shadow-lg p-6 border border-gray-200"
                 >
                     <div className="mb-4">
-                        <h3 className="text-xl font-semibold text-gray-800 mb-1">Section A: Subject Distribution</h3>
+                        <h3 className="text-xl font-semibold text-gray-800 mb-1">Subject Distribution</h3>
                         <p className="text-sm text-gray-500 mb-3">Click a subject to view its topics</p>
                         
                         {/* Controls */}
                         <div className="flex flex-wrap items-center gap-3 mb-3">
                             {/* View Mode Toggle */}
-                            <div className="flex items-center gap-2 bg-gray-100 rounded-lg p-1">
+                            <div className="flex items-center gap-2 bg-gray-50 rounded-lg p-1 border border-gray-200">
                                 <button
                                     onClick={() => setViewMode("count")}
                                     className={`px-3 py-1 text-xs font-medium rounded transition-colors ${
                                         viewMode === "count"
                                             ? "bg-white text-gray-900 shadow-sm"
-                                            : "text-gray-600 hover:text-gray-900"
+                                            : "text-gray-500 hover:text-gray-700"
                                     }`}
                                 >
                                     Count
@@ -242,7 +242,7 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
                                     className={`px-3 py-1 text-xs font-medium rounded transition-colors ${
                                         viewMode === "percentage"
                                             ? "bg-white text-gray-900 shadow-sm"
-                                            : "text-gray-600 hover:text-gray-900"
+                                            : "text-gray-500 hover:text-gray-700"
                                     }`}
                                 >
                                     %
@@ -285,7 +285,6 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
                                     type="number"
                                     domain={[0, "dataMax"]}
                                     tick={{ fontSize: 11 }}
-                                    label={viewMode === "percentage" ? { value: "Percentage (%)", position: "insideBottom", offset: -5 } : { value: "Count", position: "insideBottom", offset: -5 }}
                                 />
                                 <YAxis
                                     type="category"
@@ -346,7 +345,7 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
                 >
                     <div className="mb-4">
                         <h3 className="text-xl font-semibold text-gray-800 mb-1">
-                            Section B: Topic Distribution
+                            Topic Distribution
                         </h3>
                         <p className="text-sm text-gray-500 mb-3">
                             {selectedSubject ? `Topics for ${selectedSubject}` : "Select a subject from the left chart"}
@@ -356,13 +355,13 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
                         {selectedSubject && (
                             <div className="flex flex-wrap items-center gap-3 mb-3">
                                 {/* View Mode Toggle */}
-                                <div className="flex items-center gap-2 bg-gray-100 rounded-lg p-1">
+                                <div className="flex items-center gap-2 bg-gray-50 rounded-lg p-1 border border-gray-200">
                                     <button
                                         onClick={() => setViewMode("count")}
                                         className={`px-3 py-1 text-xs font-medium rounded transition-colors ${
                                             viewMode === "count"
                                                 ? "bg-white text-gray-900 shadow-sm"
-                                                : "text-gray-600 hover:text-gray-900"
+                                                : "text-gray-500 hover:text-gray-700"
                                         }`}
                                     >
                                         Count
@@ -372,7 +371,7 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
                                         className={`px-3 py-1 text-xs font-medium rounded transition-colors ${
                                             viewMode === "percentage"
                                                 ? "bg-white text-gray-900 shadow-sm"
-                                                : "text-gray-600 hover:text-gray-900"
+                                                : "text-gray-500 hover:text-gray-700"
                                         }`}
                                     >
                                         %
@@ -417,7 +416,6 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
                                         type="number"
                                         domain={[0, "dataMax"]}
                                         tick={{ fontSize: 11 }}
-                                        label={viewMode === "percentage" ? { value: "Percentage (%)", position: "insideBottom", offset: -5 } : { value: "Count", position: "insideBottom", offset: -5 }}
                                     />
                                     <YAxis
                                         type="category"

@@ -116,19 +116,31 @@ export default function SubjectAnalysis({ subject, yearFrom, yearTo, examsList }
             });
     }, [subject, selectedExam, yearFrom, yearTo]);
 
-    const getExamColor = (percentage) => {
-        if (percentage >= 30) return "#1e40af";
-        if (percentage >= 20) return "#3b82f6";
-        if (percentage >= 10) return "#60a5fa";
-        return "#93c5fd";
+    // Categorical color palette for charts
+    // Using a professional color scheme with good contrast and accessibility
+    const colorPalette = [
+        "#3b82f6", // Blue
+        "#10b981", // Green
+        "#f59e0b", // Amber
+        "#ef4444", // Red
+        "#8b5cf6", // Purple
+        "#06b6d4", // Cyan
+        "#f97316", // Orange
+        "#ec4899", // Pink
+        "#14b8a6", // Teal
+        "#6366f1", // Indigo
+        "#84cc16", // Lime
+        "#f43f5e", // Rose
+    ];
+
+    const getExamColor = (index) => {
+        // Cycle through the color palette for distinct exam colors
+        return colorPalette[index % colorPalette.length];
     };
 
-    const getTopicColor = (percentage) => {
-        // Desaturated green colors for Topic Distribution
-        if (percentage >= 15) return "#4ade80"; // Lighter, less saturated
-        if (percentage >= 10) return "#6ee7b7"; // Lighter, less saturated
-        if (percentage >= 5) return "#86efac"; // Lighter, less saturated
-        return "#bbf7d0"; // Lighter, less saturated
+    const getTopicColor = (index) => {
+        // Cycle through the color palette for distinct topic colors
+        return colorPalette[index % colorPalette.length];
     };
 
     if (!subject) {
@@ -238,7 +250,7 @@ export default function SubjectAnalysis({ subject, yearFrom, yearTo, examsList }
                                         return (
                                             <Cell
                                                 key={`cell-${index}`}
-                                                fill={getExamColor(entry.percentage)}
+                                                fill={getExamColor(index)}
                                                 style={{
                                                     stroke: isSelected ? "#f59e0b" : "none",
                                                     strokeWidth: isSelected ? 3 : 0,
@@ -343,7 +355,7 @@ export default function SubjectAnalysis({ subject, yearFrom, yearTo, examsList }
                                     {topicData.map((entry, index) => (
                                         <Cell
                                             key={`cell-${index}`}
-                                            fill={getTopicColor(entry.percentage)}
+                                            fill={getTopicColor(index)}
                                         />
                                     ))}
                                     <LabelList
