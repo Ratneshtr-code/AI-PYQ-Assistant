@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Sidebar from "./components/Sidebar";
 import SecondarySidebar from "./components/SecondarySidebar";
+import FilterBar from "./components/FilterBar";
 import SubjectCards from "./components/SubjectCards";
 import CrossExamSubjectAnalysis from "./components/CrossExamSubjectAnalysis";
 import CrossExamHotTopics from "./components/CrossExamHotTopics";
@@ -16,6 +17,7 @@ export default function CrossExamInsightsPage() {
     const [selectedSubject, setSelectedSubject] = useState(null);
     const [activeSubPage, setActiveSubPage] = useState("subject-cards");
     const [secondarySidebarOpen, setSecondarySidebarOpen] = useState(true);
+    const [primarySidebarCollapsed, setPrimarySidebarCollapsed] = useState(false);
     const [maxExams, setMaxExams] = useState(3); // Default to 3, will be updated from config
 
     useEffect(() => {
@@ -127,6 +129,13 @@ export default function CrossExamInsightsPage() {
                 setExam={() => {}} 
                 examsList={examsList}
                 onOpenSecondarySidebar={() => setSecondarySidebarOpen(!secondarySidebarOpen)}
+                onCollapseChange={(isCollapsed) => {
+                    setPrimarySidebarCollapsed(isCollapsed);
+                    // When Primary Sidebar collapses, also close Secondary Sidebar
+                    if (isCollapsed) {
+                        setSecondarySidebarOpen(false);
+                    }
+                }}
             />
 
             {/* Secondary Sidebar */}
@@ -141,138 +150,54 @@ export default function CrossExamInsightsPage() {
             {/* Main Content */}
             <main
                 className={`flex-1 flex flex-col transition-all duration-300 min-h-screen ${
-                    secondarySidebarOpen ? "ml-64 lg:ml-[496px]" : "ml-64"
+                    primarySidebarCollapsed ? "ml-16" : secondarySidebarOpen ? "ml-64 lg:ml-[496px]" : "ml-64"
                 }`}
             >
                 {/* Filter Bar - Now part of page content, not sticky */}
                 <div className="w-full relative z-10">
-                    <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 shadow-lg border-b border-indigo-400">
-                        <div className="px-4 md:px-8 py-4">
-                            <div className="max-w-7xl mx-auto">
-                                <div className="flex flex-wrap items-center gap-4">
-                                    {/* Year Range */}
-                                    <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2">
-                                        <span className="text-white text-sm font-medium whitespace-nowrap">
-                                            Year Range:
-                                        </span>
-                                        <select
-                                            value={yearFrom || ""}
-                                            onChange={(e) =>
-                                                setYearFrom(e.target.value ? parseInt(e.target.value) : null)
-                                            }
-                                            className="bg-white/20 text-white border border-white/30 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-white/50"
-                                        >
-                                            <option value="" className="text-gray-800">
-                                                From
-                                            </option>
-                                            {availableYears.map((year) => (
-                                                <option key={year} value={year} className="text-gray-800">
-                                                    {year}
-                                                </option>
-                                            ))}
-                                        </select>
-                                        <span className="text-white/80">to</span>
-                                        <select
-                                            value={yearTo || ""}
-                                            onChange={(e) =>
-                                                setYearTo(e.target.value ? parseInt(e.target.value) : null)
-                                            }
-                                            className="bg-white/20 text-white border border-white/30 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-white/50"
-                                        >
-                                            <option value="" className="text-gray-800">
-                                                To
-                                            </option>
-                                            {availableYears.map((year) => (
-                                                <option key={year} value={year} className="text-gray-800">
-                                                    {year}
-                                                </option>
-                                            ))}
-                                        </select>
-                                    </div>
-
-                                    {/* Exam Selector */}
-                                    <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2">
-                                        <span className="text-white text-sm font-medium whitespace-nowrap">
-                                            Exams:
-                                        </span>
-                                        <select
-                                            value=""
-                                            onChange={(e) => {
-                                                if (e.target.value) {
-                                                    handleAddExam(e.target.value);
-                                                    e.target.value = "";
-                                                }
-                                            }}
-                                            className="bg-white/20 text-white border border-white/30 rounded px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-white/50 min-w-[150px]"
-                                        >
-                                            <option value="" className="text-gray-800">
-                                                + Add Exam
-                                            </option>
-                                            {examsList
-                                                .filter((ex) => !exams.includes(ex))
-                                                .map((ex, idx) => (
-                                                    <option key={idx} value={ex} className="text-gray-800">
-                                                        {ex}
-                                                    </option>
-                                                ))}
-                                        </select>
-                                    </div>
-
-                                    {/* Selected Exams */}
-                                    {exams.length > 0 && (
-                                        <div className="flex flex-wrap items-center gap-2">
-                                            {exams.map((exam) => (
-                                                <div
-                                                    key={exam}
-                                                    className="bg-white/20 text-white px-3 py-1 rounded-full text-sm flex items-center gap-2"
-                                                >
-                                                    <span>{exam}</span>
-                                                    <button
-                                                        onClick={() => handleRemoveExam(exam)}
-                                                        className="hover:bg-white/30 rounded-full w-5 h-5 flex items-center justify-center"
-                                                    >
-                                                        ×
-                                                    </button>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    )}
-
-                                    {exams.length > maxExams && (
-                                        <div className="ml-auto text-yellow-300 text-xs font-medium">
-                                            Max {maxExams} exams
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
+                    {/* Hamburger Button - Positioned in the middle between Primary Sidebar and Filter Pane */}
+                    {!primarySidebarCollapsed && !secondarySidebarOpen && (
+                        <div className="w-full max-w-7xl mx-auto px-4 md:px-8 relative">
+                            <button
+                                onClick={() => setSecondarySidebarOpen(true)}
+                                className="absolute -left-6 md:-left-8 top-4 p-2 bg-gray-100 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-200 hover:border-gray-400 shadow-sm transition-colors flex items-center justify-center z-10"
+                                title="Open sub-pages navigation"
+                            >
+                                <svg
+                                    className="w-5 h-5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M4 6h16M4 12h16M4 18h16"
+                                    />
+                                </svg>
+                            </button>
                         </div>
-                    </div>
+                    )}
+                    <FilterBar
+                        exams={exams}
+                        onAddExam={handleAddExam}
+                        onRemoveExam={handleRemoveExam}
+                        maxExams={maxExams}
+                        examsList={examsList}
+                        yearFrom={yearFrom}
+                        setYearFrom={setYearFrom}
+                        yearTo={yearTo}
+                        setYearTo={setYearTo}
+                        availableYears={availableYears}
+                        showSubject={false}
+                        showExam={true}
+                        multipleExamsMode={true}
+                    />
                 </div>
 
                 {/* Content Area */}
                 <div className="w-full max-w-7xl mx-auto px-4 md:px-8 py-6 md:py-8 space-y-4 relative z-0">
-                    {/* Menu Button - Top Left Corner */}
-                    {!secondarySidebarOpen && (
-                        <button
-                            onClick={() => setSecondarySidebarOpen(true)}
-                            className="absolute -left-12 top-6 p-2 bg-gray-100 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-200 hover:border-gray-400 shadow-sm transition-colors flex items-center justify-center z-10"
-                            title="Show sub-pages navigation"
-                        >
-                            <svg
-                                className="w-5 h-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M4 6h16M4 12h16M4 18h16"
-                                />
-                            </svg>
-                        </button>
-                    )}
                     {/* Header */}
                     <div className="mb-6 flex items-start justify-between">
                         <div>

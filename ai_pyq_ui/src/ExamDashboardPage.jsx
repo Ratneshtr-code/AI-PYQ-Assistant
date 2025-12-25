@@ -19,6 +19,7 @@ export default function ExamDashboardPage() {
     const [availableYears, setAvailableYears] = useState([]);
     const [activeSubPage, setActiveSubPage] = useState("exam-analysis");
     const [secondarySidebarOpen, setSecondarySidebarOpen] = useState(true);
+    const [primarySidebarCollapsed, setPrimarySidebarCollapsed] = useState(false);
 
     useEffect(() => {
         // Fetch exam filters
@@ -134,6 +135,13 @@ export default function ExamDashboardPage() {
                 setExam={setExam} 
                 examsList={examsList}
                 onOpenSecondarySidebar={() => setSecondarySidebarOpen(!secondarySidebarOpen)}
+                onCollapseChange={(isCollapsed) => {
+                    setPrimarySidebarCollapsed(isCollapsed);
+                    // When Primary Sidebar collapses, also close Secondary Sidebar
+                    if (isCollapsed) {
+                        setSecondarySidebarOpen(false);
+                    }
+                }}
             />
 
             {/* Secondary Sidebar */}
@@ -148,11 +156,35 @@ export default function ExamDashboardPage() {
             {/* Main Content */}
             <main
                 className={`flex-1 flex flex-col transition-all duration-300 min-h-screen ${
-                    secondarySidebarOpen ? "ml-64 lg:ml-[496px]" : "ml-64"
+                    primarySidebarCollapsed ? "ml-16" : secondarySidebarOpen ? "ml-64 lg:ml-[496px]" : "ml-64"
                 }`}
             >
                 {/* Filter Bar - Now part of page content, not sticky */}
                 <div className="w-full relative z-10">
+                    {/* Hamburger Button - Positioned in the middle between Primary Sidebar and Filter Pane */}
+                    {!primarySidebarCollapsed && !secondarySidebarOpen && (
+                        <div className="w-full max-w-7xl mx-auto px-4 md:px-8 relative">
+                            <button
+                                onClick={() => setSecondarySidebarOpen(true)}
+                                className="absolute -left-6 md:-left-8 top-4 p-2 bg-gray-100 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-200 hover:border-gray-400 shadow-sm transition-colors flex items-center justify-center z-10"
+                                title="Open sub-pages navigation"
+                            >
+                                <svg
+                                    className="w-5 h-5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M4 6h16M4 12h16M4 18h16"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    )}
                     <FilterBar
                         exam={exam}
                         setExam={setExam}
@@ -172,28 +204,6 @@ export default function ExamDashboardPage() {
 
                 {/* Content Area */}
                 <div className="w-full max-w-7xl mx-auto px-4 md:px-8 py-6 md:py-8 space-y-4 relative z-0">
-                    {/* Menu Button - Top Left Corner */}
-                    {!secondarySidebarOpen && (
-                        <button
-                            onClick={() => setSecondarySidebarOpen(true)}
-                            className="absolute -left-12 top-6 p-2 bg-gray-100 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-200 hover:border-gray-400 shadow-sm transition-colors flex items-center justify-center z-10"
-                            title="Show sub-pages navigation"
-                        >
-                            <svg
-                                className="w-5 h-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M4 6h16M4 12h16M4 18h16"
-                                />
-                            </svg>
-                        </button>
-                    )}
                     {/* Header */}
                     <div className="mb-6 flex items-start justify-between">
                         <div>

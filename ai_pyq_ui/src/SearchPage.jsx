@@ -14,6 +14,7 @@ export default function SearchPage() {
     const [query, setQuery] = useState("");
     const [exam, setExam] = useState("");
     const [examsList, setExamsList] = useState([]);
+    const [language, setLanguage] = useState("english");
     const [allResults, setAllResults] = useState([]);
     const [explanationWindowOpen, setExplanationWindowOpen] = useState(false);
     const [explanationWindowMinimized, setExplanationWindowMinimized] = useState(false);
@@ -94,6 +95,21 @@ export default function SearchPage() {
 
             {/* 📚 Main Content Area */}
             <main className="flex-1 flex flex-col items-center justify-start p-8 pl-64 transition-all duration-300 relative">
+                {/* Language Toggle - Fixed at top right corner */}
+                <div className="fixed top-4 right-4 z-50">
+                    <button
+                        onClick={() => setLanguage(language === "english" ? "hindi" : "english")}
+                        className="px-2.5 py-1.5 rounded border border-gray-300 bg-white hover:bg-gray-50 transition-colors shadow-sm flex items-center justify-center"
+                        title={language === "english" ? "Switch to Hindi" : "Switch to English"}
+                    >
+                        {language === "english" ? (
+                            <span className="text-sm font-semibold text-gray-700">EN</span>
+                        ) : (
+                            <span className="text-sm font-semibold text-gray-700">हि</span>
+                        )}
+                    </button>
+                </div>
+
                 {/* Exam Filter - Fixed/Sticky Position */}
                 <div className="fixed left-64 top-8 z-30 flex flex-col gap-1.5 pl-3 bg-gray-50 py-2 pr-2 rounded-r-lg shadow-sm exam-filter-compact" style={{ width: '140px' }}>
                     <label className="text-base font-medium text-gray-700 whitespace-nowrap text-center">
@@ -114,25 +130,17 @@ export default function SearchPage() {
                 </div>
 
                 <div className="w-full space-y-6 px-4 md:px-0">
-                    {/* Header with Heading Centered */}
-                    <div className="flex items-center justify-between gap-4 mb-4 relative w-full">
-                        {/* Spacer for Exam filter on left */}
-                        <div className="w-[156px]"></div>
-                        
-                        {/* Heading - Centered */}
-                        <h1 className="text-3xl font-bold absolute left-1/2 transform -translate-x-1/2">
-                            AI PYQ Search
-                        </h1>
-                        
-                        {/* Spacer for balance (same width as filter + padding) */}
-                        <div className="w-[156px]"></div>
-                    </div>
-                    
                     {/* Content Container */}
                     <div className="max-w-3xl w-full mx-auto space-y-6 results-parent-container">
+                        {/* Header with Heading Centered - Shifts with explanation window */}
+                        <div className={`flex items-center justify-center relative w-full ${explanationWindowOpen && !explanationWindowMinimized ? 'results-container-shifted mb-8' : 'mb-8'}`} style={{ maxWidth: explanationWindowOpen && !explanationWindowMinimized ? '48rem' : '100%', width: '100%', marginLeft: 'auto', marginRight: explanationWindowOpen && !explanationWindowMinimized ? '440px' : 'auto' }}>
+                            <h1 className="text-3xl font-bold">
+                                AI PYQ Search
+                            </h1>
+                        </div>
 
-                    {/* Search Bar */}
-                    <div className={`flex flex-col sm:flex-row gap-3 justify-center ${explanationWindowOpen && !explanationWindowMinimized ? 'results-container-shifted' : ''}`} style={{ maxWidth: explanationWindowOpen && !explanationWindowMinimized ? '48rem' : '100%', width: '100%', marginLeft: 'auto', marginRight: explanationWindowOpen && !explanationWindowMinimized ? '440px' : 'auto' }}>
+                        {/* Search Bar */}
+                        <div className={`flex flex-col sm:flex-row gap-3 justify-center ${explanationWindowOpen && !explanationWindowMinimized ? 'results-container-shifted' : ''}`} style={{ maxWidth: explanationWindowOpen && !explanationWindowMinimized ? '48rem' : '100%', width: '100%', marginLeft: 'auto', marginRight: explanationWindowOpen && !explanationWindowMinimized ? '440px' : 'auto' }}>
                         <input
                             type="text"
                             value={query}

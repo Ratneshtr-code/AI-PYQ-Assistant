@@ -83,8 +83,8 @@ export default function SecondarySidebar({ isOpen, onClose, type, activeSubPage,
                         className="fixed top-0 left-64 z-30 h-screen bg-white shadow-xl border-r border-gray-200 flex flex-col"
                         style={{ width: "240px" }}
                     >
-                        {/* Header with Collapse Button */}
-                        <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50 sticky top-0 z-50 bg-white shadow-sm">
+                        {/* Header with Collapse Button - Matches FilterBar styling */}
+                        <div className="flex items-center justify-between p-4 border-b border-blue-200/60 bg-gradient-to-r from-blue-50 to-indigo-50 sticky top-0 z-50 shadow-sm">
                             <h3 className="text-lg font-semibold text-gray-800 truncate pr-2 flex-1 min-w-0">{panelTitle}</h3>
                             <button
                                 onClick={onClose}

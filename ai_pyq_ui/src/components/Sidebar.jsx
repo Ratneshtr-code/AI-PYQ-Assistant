@@ -2,9 +2,17 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySidebar }) {
+export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySidebar, onCollapseChange }) {
+    const [isCollapsed, setIsCollapsed] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
+
+    // Notify parent when collapse state changes
+    useEffect(() => {
+        if (onCollapseChange) {
+            onCollapseChange(isCollapsed);
+        }
+    }, [isCollapsed, onCollapseChange]);
     
     // Initialize state from localStorage immediately to prevent flash of wrong state
     const initialUserData = (() => {
@@ -196,25 +204,82 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
 
     return (
         <aside
-            className="fixed top-0 left-0 z-40 h-screen w-64 bg-white shadow-md border-r border-gray-200 flex flex-col"
+            className={`fixed top-0 left-0 z-40 h-screen bg-white shadow-md border-r border-gray-200 flex flex-col transition-all duration-300 ${
+                isCollapsed ? "w-16" : "w-64"
+            }`}
         >
+            {/* Header with Logo and Collapse Button */}
+            <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50">
+                {!isCollapsed && (
+                    <div className="flex items-center gap-2 flex-1 min-w-0">
+                        {/* Product Logo/Icon - Placeholder */}
+                        <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span className="text-white font-bold text-sm">AI</span>
+                        </div>
+                        <span className="text-lg font-semibold text-gray-800 truncate">AI PYQ</span>
+                    </div>
+                )}
+                {isCollapsed && (
+                    <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center mx-auto">
+                        <span className="text-white font-bold text-xs">AI</span>
+                    </div>
+                )}
+                <button
+                    onClick={() => {
+                        const newCollapsedState = !isCollapsed;
+                        setIsCollapsed(newCollapsedState);
+                        // If collapsing Primary Sidebar, also close Secondary Sidebar
+                        if (newCollapsedState && onOpenSecondarySidebar) {
+                            // Close Secondary Sidebar when Primary Sidebar collapses
+                            // This will be handled by the parent component
+                        }
+                    }}
+                    className="p-1.5 hover:bg-gray-200 rounded-lg transition-colors text-gray-500 hover:text-gray-700 flex-shrink-0 ml-2"
+                    title={isCollapsed ? "Open sidebar" : "Close sidebar"}
+                    aria-label={isCollapsed ? "Open sidebar" : "Close sidebar"}
+                >
+                    <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        {/* Chevron icon - Standard expand/collapse */}
+                        {isCollapsed ? (
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M9 5l7 7-7 7"
+                            />
+                        ) : (
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M15 19l-7-7 7-7"
+                            />
+                        )}
+                    </svg>
+                </button>
+            </div>
+
             {/* Main Navigation Section */}
             <div className="flex-1 overflow-y-auto px-4 py-6">
-                <h2 className="text-lg font-semibold text-gray-800 mb-6">
-                    {isDashboard ? "Exam Dashboard" : isCrossExam ? "Cross-Exam Insights" : "PYQ Assistant"}
-                </h2>
 
                 {/* Navigation Buttons */}
                 <div className="space-y-1">
                     <button
                         onClick={() => navigate("/")}
-                        className={`w-full text-left py-2 px-3 rounded-lg transition text-sm ${
+                        className={`w-full text-left py-2 px-3 rounded-lg transition text-sm flex items-center gap-2 ${
                             isSearchPage
                                 ? "bg-blue-50 text-blue-700 font-medium"
                                 : "text-gray-700 hover:bg-gray-50 font-normal"
                         }`}
+                        title="AI PYQ Search"
                     >
-                        🧠 PYQ Assistant
+                        <span className="text-lg flex-shrink-0">🧠</span>
+                        {!isCollapsed && <span>AI PYQ Search</span>}
                     </button>
 
                     <button
@@ -224,13 +289,15 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                                 setTimeout(() => onOpenSecondarySidebar(), 100);
                             }
                         }}
-                        className={`w-full text-left py-2 px-3 rounded-lg transition text-sm ${
+                        className={`w-full text-left py-2 px-3 rounded-lg transition text-sm flex items-center gap-2 ${
                             isDashboard
                                 ? "bg-blue-50 text-blue-700 font-medium"
                                 : "text-gray-700 hover:bg-gray-50 font-normal"
                         }`}
+                        title="Exam Dashboard"
                     >
-                        📊 Exam Dashboard
+                        <span className="text-lg flex-shrink-0">📊</span>
+                        {!isCollapsed && <span>Exam Dashboard</span>}
                     </button>
 
                     <button
@@ -240,32 +307,38 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                                 setTimeout(() => onOpenSecondarySidebar(), 100);
                             }
                         }}
-                        className={`w-full text-left py-2 px-3 rounded-lg transition text-sm ${
+                        className={`w-full text-left py-2 px-3 rounded-lg transition text-sm flex items-center gap-2 ${
                             location.pathname.includes("cross-exam-insights")
                                 ? "bg-blue-50 text-blue-700 font-medium"
                                 : "text-gray-700 hover:bg-gray-50 font-normal"
                         }`}
+                        title="Cross-Exam Insights"
                     >
-                        🔍 Cross-Exam Insights
+                        <span className="text-lg flex-shrink-0">🔍</span>
+                        {!isCollapsed && <span>Cross-Exam Insights</span>}
                     </button>
 
                     <button
                         onClick={() => navigate("/topic-wise-pyq")}
-                        className={`w-full text-left py-2 px-3 rounded-lg transition text-sm ${
+                        className={`w-full text-left py-2 px-3 rounded-lg transition text-sm flex items-center gap-2 ${
                             location.pathname.includes("topic-wise-pyq")
                                 ? "bg-blue-50 text-blue-700 font-medium"
                                 : "text-gray-700 hover:bg-gray-50 font-normal"
                         }`}
+                        title="Topic-wise PYQ"
                     >
-                        📑 Topic-wise PYQ
+                        <span className="text-lg flex-shrink-0">📑</span>
+                        {!isCollapsed && <span>Topic-wise PYQ</span>}
                     </button>
 
                     <button
                         onClick={() => {}}
-                        className="w-full text-left py-2 px-3 rounded-lg transition text-sm text-gray-500 hover:bg-gray-50 opacity-60 cursor-not-allowed"
+                        className="w-full text-left py-2 px-3 rounded-lg transition text-sm text-gray-500 hover:bg-gray-50 opacity-60 cursor-not-allowed flex items-center gap-2"
                         disabled
+                        title="Concept Graph Explorer"
                     >
-                        🕸️ Concept Graph Explorer
+                        <span className="text-lg flex-shrink-0">🕸️</span>
+                        {!isCollapsed && <span>Concept Graph Explorer</span>}
                     </button>
                 </div>
             </div>
@@ -278,96 +351,120 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                 {/* Check login status from localStorage */}
                 {localStorage.getItem("isLoggedIn") === "true" || isLoggedIn ? (
                     /* Logged In State */
-                    <div className="mt-4 p-3 bg-white rounded-lg border border-gray-200 shadow-sm">
-                        <div className="flex items-center gap-3 mb-2">
-                            {/* Avatar */}
-                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-white font-semibold text-sm flex-shrink-0">
+                    <div className={`mt-4 p-3 bg-white rounded-lg border border-gray-200 shadow-sm ${isCollapsed ? "p-2" : ""}`}>
+                        {isCollapsed ? (
+                            /* Collapsed: Show only avatar */
+                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-white font-semibold text-sm mx-auto">
                                 {userInitials}
                             </div>
-                            <div className="flex-1 min-w-0">
-                                <div className="flex items-center gap-2">
-                                    <p className="text-xs font-normal text-gray-900 truncate">
-                                        {userName}
-                                    </p>
-                                    {/* Admin Badge - Only show if user is database admin */}
-                                    {(() => {
-                                        try {
-                                            const userData = JSON.parse(localStorage.getItem("userData") || "{}");
-                                            return userData.is_admin ? (
-                                                <span className="px-1.5 py-0.5 text-[10px] font-medium bg-purple-100 text-purple-700 rounded">
-                                                    Admin
-                                                </span>
-                                            ) : null;
-                                        } catch {
-                                            return null;
-                                        }
-                                    })()}
+                        ) : (
+                            <>
+                                <div className="flex items-center gap-3 mb-2">
+                                    {/* Avatar */}
+                                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-white font-semibold text-sm flex-shrink-0">
+                                        {userInitials}
+                                    </div>
+                                    <div className="flex-1 min-w-0">
+                                        <div className="flex items-center gap-2">
+                                            <p className="text-xs font-normal text-gray-900 truncate">
+                                                {userName}
+                                            </p>
+                                            {/* Admin Badge - Only show if user is database admin */}
+                                            {(() => {
+                                                try {
+                                                    const userData = JSON.parse(localStorage.getItem("userData") || "{}");
+                                                    return userData.is_admin ? (
+                                                        <span className="px-1.5 py-0.5 text-[10px] font-medium bg-purple-100 text-purple-700 rounded">
+                                                            Admin
+                                                        </span>
+                                                    ) : null;
+                                                } catch {
+                                                    return null;
+                                                }
+                                            })()}
+                                        </div>
+                                        <div className="flex items-center gap-1.5 mt-0.5">
+                                            {subscriptionPlan === "Premium" ? (
+                                                <>
+                                                    <span className="text-xs font-medium text-emerald-700">Premium</span>
+                                                    <span className="text-emerald-600">✓</span>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <span className="text-xs text-gray-500">Free Plan</span>
+                                                </>
+                                            )}
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="flex items-center gap-1.5 mt-0.5">
-                                    {subscriptionPlan === "Premium" ? (
-                                        <>
-                                            <span className="text-xs font-medium text-emerald-700">Premium</span>
-                                            <span className="text-emerald-600">✓</span>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <span className="text-xs text-gray-500">Free Plan</span>
-                                        </>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                        {/* Upgrade CTA for Free users */}
-                        {subscriptionPlan === "Free" && (
-                            <button
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    console.log("Navigating to /subscription");
-                                    navigate("/subscription");
-                                }}
-                                className="w-full mt-2 py-1.5 px-3 text-xs font-medium text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-md transition-colors cursor-pointer"
-                                type="button"
-                            >
-                                Upgrade to Premium
-                            </button>
-                        )}
-                        {/* View Subscription for Premium users */}
-                        {subscriptionPlan === "Premium" && (
-                            <button
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    console.log("Navigating to /subscription");
-                                    navigate("/subscription");
-                                }}
-                                className="w-full mt-2 py-1.5 px-3 text-xs font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 rounded-md transition-colors cursor-pointer"
-                                type="button"
-                            >
-                                Manage Subscription
-                            </button>
+                                {/* Upgrade CTA for Free users */}
+                                {subscriptionPlan === "Free" && (
+                                    <button
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            e.stopPropagation();
+                                            console.log("Navigating to /subscription");
+                                            navigate("/subscription");
+                                        }}
+                                        className="w-full mt-2 py-1.5 px-3 text-xs font-medium text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-md transition-colors cursor-pointer"
+                                        type="button"
+                                    >
+                                        Upgrade to Premium
+                                    </button>
+                                )}
+                                {/* View Subscription for Premium users */}
+                                {subscriptionPlan === "Premium" && (
+                                    <button
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            e.stopPropagation();
+                                            console.log("Navigating to /subscription");
+                                            navigate("/subscription");
+                                        }}
+                                        className="w-full mt-2 py-1.5 px-3 text-xs font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 rounded-md transition-colors cursor-pointer"
+                                        type="button"
+                                    >
+                                        Manage Subscription
+                                    </button>
+                                )}
+                            </>
                         )}
                     </div>
                 ) : (
                     /* Logged Out State */
-                    <div className="mt-4 p-3 bg-white rounded-lg border border-gray-200 shadow-sm">
-                        <p className="text-xs text-gray-600 mb-3 text-center">
-                            Sign in to unlock insights
-                        </p>
-                        <div className="flex gap-2">
+                    <div className={`mt-4 p-3 bg-white rounded-lg border border-gray-200 shadow-sm ${isCollapsed ? "p-2" : ""}`}>
+                        {isCollapsed ? (
+                            /* Collapsed: Show only sign in icon */
                             <button
                                 onClick={handleSignIn}
-                                className="flex-1 py-2 px-3 text-xs font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors"
+                                className="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center mx-auto transition-colors"
+                                title="Sign In"
                             >
-                                Sign In
+                                <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
                             </button>
-                            <button
-                                onClick={handleSignUp}
-                                className="flex-1 py-2 px-3 text-xs font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-colors"
-                            >
-                                Sign Up
-                            </button>
-                        </div>
+                        ) : (
+                            <>
+                                <p className="text-xs text-gray-600 mb-3 text-center">
+                                    Sign in to unlock insights
+                                </p>
+                                <div className="flex gap-2">
+                                    <button
+                                        onClick={handleSignIn}
+                                        className="flex-1 py-2 px-3 text-xs font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors"
+                                    >
+                                        Sign In
+                                    </button>
+                                    <button
+                                        onClick={handleSignUp}
+                                        className="flex-1 py-2 px-3 text-xs font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-colors"
+                                    >
+                                        Sign Up
+                                    </button>
+                                </div>
+                            </>
+                        )}
                     </div>
                 )}
 
@@ -388,10 +485,10 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                         title="My Account"
                         type="button"
                     >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
-                        <span>My Account</span>
+                        {!isCollapsed && <span>My Account</span>}
                     </button>
                     {(localStorage.getItem("isLoggedIn") === "true" || isLoggedIn) && (
                         <button
@@ -399,10 +496,10 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                             className="w-full flex items-center gap-2 text-sm text-red-600 hover:text-red-700 hover:bg-red-50 transition py-2 px-3 rounded-lg font-normal hover:font-medium"
                             title="Sign Out"
                         >
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                             </svg>
-                            <span>Sign Out</span>
+                            {!isCollapsed && <span>Sign Out</span>}
                         </button>
                     )}
                 </div>
