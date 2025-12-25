@@ -50,6 +50,7 @@ class SearchRequest(BaseModel):
     exam: str | None = None
     year: int | None = None
     subject: str | None = None  # Filter by subject
+    topic: str | None = None  # Filter by topic_tag
 
 
 @app.on_event("startup")
@@ -80,6 +81,98 @@ def search(req: SearchRequest):
     retrieval_k = cfg["backend"].get("retrieval_k", 100)
     min_score = cfg["backend"].get("min_score", 0.35)
 
+    # If topic is provided, do direct filtering from dataframe (Topic-wise PYQ)
+    if req.topic:
+        print(f"🔍 Topic-wise search: Exam={req.exam}, Subject={req.subject}, Topic={req.topic}")
+        df = load_dataframe()
+        if df is None:
+            return {
+                "query": query,
+                "results": [],
+                "total_matches": 0,
+                "page": page,
+                "page_size": page_size,
+                "message": "Data not available."
+            }
+
+        # Filter dataframe directly
+        filtered_df = df.copy()
+
+        # Apply filters
+        if req.exam:
+            filtered_df = filtered_df[filtered_df["exam"].str.lower() == req.exam.lower()]
+        if req.subject:
+            filtered_df = filtered_df[filtered_df["subject"].str.lower() == req.subject.lower()]
+        if req.year:
+            filtered_df = filtered_df[filtered_df["year"] == req.year]
+        if req.topic:
+            # Filter by topic_tag - exact or partial match
+            if "topic_tag" in filtered_df.columns:
+                filtered_df = filtered_df[
+                    filtered_df["topic_tag"].astype(str).str.lower().str.contains(req.topic.lower(), na=False)
+                ]
+            else:
+                # Fallback: try other topic columns
+                topic_columns = [col for col in filtered_df.columns if "topic" in col.lower()]
+                if topic_columns:
+                    filtered_df = filtered_df[
+                        filtered_df[topic_columns[0]].astype(str).str.lower().str.contains(req.topic.lower(), na=False)
+                    ]
+                else:
+                    filtered_df = pd.DataFrame()  # No topic column found
+
+        total_matches = len(filtered_df)
+        if total_matches == 0:
+            return {
+                "query": query,
+                "results": [],
+                "total_matches": 0,
+                "page": page,
+                "page_size": page_size,
+                "message": "No questions found for the selected filters."
+            }
+
+        # Convert to results format
+        filtered = []
+        for _, row in filtered_df.iterrows():
+            result = {
+                "id": row.get("id", ""),
+                "question_id": row.get("question_id", ""),
+                "json_question_id": row.get("json_question_id", ""),
+                "question_text": row.get("question_text", ""),
+                "option_a": row.get("option_a", ""),
+                "option_b": row.get("option_b", ""),
+                "option_c": row.get("option_c", ""),
+                "option_d": row.get("option_d", ""),
+                "correct_option": row.get("correct_option", ""),
+                "exam": row.get("exam", ""),
+                "year": row.get("year", ""),
+                "subject": row.get("subject", ""),
+                "topic_tag": row.get("topic_tag", ""),
+                "score": 1.0,  # Direct match, so perfect score
+            }
+            filtered.append(result)
+
+        # Pagination
+        start = (page - 1) * page_size
+        end = start + page_size
+        paginated = filtered[start:end]
+
+        return {
+            "query": query,
+            "total_matches": total_matches,
+            "page": page,
+            "page_size": page_size,
+            "filters": {
+                "exam": req.exam,
+                "year": req.year,
+                "subject": req.subject,
+                "topic": req.topic
+            },
+            "results": paginated
+        }
+
+    # Regular vector search (PYQ Assistant)
     print(f"🔍 Searching for: '{query}' (retrieval_k={retrieval_k}) ...")
 
     # Retrieve candidates
@@ -129,7 +222,8 @@ def search(req: SearchRequest):
         "filters": {
             "exam": req.exam,
             "year": req.year,
-            "subject": req.subject
+            "subject": req.subject,
+            "topic": req.topic
         },
         "results": paginated
     }
@@ -162,6 +256,57 @@ def get_filters():
 
     exams = sorted(df["exam"].dropna().unique().tolist())
     return {"exams": exams}
+
+
+@app.get("/topic-wise/subjects")
+def get_subjects_by_exam(exam: str = Query(..., description="Exam name")):
+    """Return available subjects for a given exam"""
+    df = load_dataframe()
+    if df is None:
+        return {"subjects": []}
+
+    # Filter by exam
+    filtered_df = df[df["exam"].str.lower() == exam.lower()]
+    
+    # Get unique subjects
+    subjects = sorted(filtered_df["subject"].dropna().unique().tolist())
+    # Filter out empty strings
+    subjects = [s for s in subjects if str(s).strip()]
+    
+    return {"subjects": subjects}
+
+
+@app.get("/topic-wise/topics")
+def get_topics_by_exam_subject(
+    exam: str = Query(..., description="Exam name"),
+    subject: str = Query(..., description="Subject name")
+):
+    """Return available topics for a given exam and subject"""
+    df = load_dataframe()
+    if df is None:
+        return {"topics": []}
+
+    # Filter by exam and subject
+    filtered_df = df[
+        (df["exam"].str.lower() == exam.lower()) &
+        (df["subject"].str.lower() == subject.lower())
+    ]
+    
+    # Get unique topics from topic_tag column
+    if "topic_tag" in filtered_df.columns:
+        topics = filtered_df["topic_tag"].dropna().unique().tolist()
+    else:
+        # Fallback: try other possible column names
+        topic_columns = [col for col in filtered_df.columns if "topic" in col.lower()]
+        if topic_columns:
+            topics = filtered_df[topic_columns[0]].dropna().unique().tolist()
+        else:
+            topics = []
+    
+    # Filter out empty strings and sort
+    topics = sorted([str(t).strip() for t in topics if str(t).strip()])
+    
+    return {"topics": topics}
 
 
 # ==================== DASHBOARD ENDPOINTS ====================
@@ -919,6 +1064,40 @@ def explain_option(data: dict):
         "reason": choice(mock_reasons),
         "topic": choice(topics),
         "similar_pyqs": similar_pyqs,
+    }
+
+
+@app.post("/explain_concept")
+def explain_concept(data: dict):
+    """
+    Explain the question and related concepts.
+    Mock implementation - later will call LLM to generate concept-focused explanations.
+    """
+    from random import choice
+
+    question_text = data.get("question_text", "")
+    options = data.get("options", {})
+    correct_option = data.get("correct_option", "")
+
+    # Mock concept explanations
+    concept_examples = [
+        f"This question explores fundamental concepts related to **{correct_option}**. "
+        f"The question tests your understanding of core principles and their applications. "
+        f"Key concepts include the relationship between different options and how they relate to the main topic.",
+        
+        f"The question is designed to assess your knowledge of **{correct_option}** and related concepts. "
+        f"Understanding the underlying principles is crucial for answering similar questions. "
+        f"Each option represents a different aspect or interpretation of the concept.",
+        
+        f"This question covers important concepts in the domain. The correct answer **{correct_option}** "
+        f"represents the most accurate understanding of the topic. To master this area, focus on understanding "
+        f"the fundamental principles and how they apply in different contexts.",
+    ]
+
+    return {
+        "question_text": question_text,
+        "correct_option": correct_option,
+        "explanation": choice(concept_examples)
     }
 
 

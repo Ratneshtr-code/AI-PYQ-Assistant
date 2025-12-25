@@ -211,7 +211,7 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                         className={`w-full text-left py-2 px-3 rounded-lg transition text-sm ${
                             isSearchPage
                                 ? "bg-blue-50 text-blue-700 font-medium"
-                                : "text-gray-700 hover:bg-gray-50"
+                                : "text-gray-700 hover:bg-gray-50 font-normal"
                         }`}
                     >
                         🧠 PYQ Assistant
@@ -227,7 +227,7 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                         className={`w-full text-left py-2 px-3 rounded-lg transition text-sm ${
                             isDashboard
                                 ? "bg-blue-50 text-blue-700 font-medium"
-                                : "text-gray-700 hover:bg-gray-50"
+                                : "text-gray-700 hover:bg-gray-50 font-normal"
                         }`}
                     >
                         📊 Exam Dashboard
@@ -243,16 +243,19 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                         className={`w-full text-left py-2 px-3 rounded-lg transition text-sm ${
                             location.pathname.includes("cross-exam-insights")
                                 ? "bg-blue-50 text-blue-700 font-medium"
-                                : "text-gray-700 hover:bg-gray-50"
+                                : "text-gray-700 hover:bg-gray-50 font-normal"
                         }`}
                     >
                         🔍 Cross-Exam Insights
                     </button>
 
                     <button
-                        onClick={() => {}}
-                        className="w-full text-left py-2 px-3 rounded-lg transition text-sm text-gray-500 hover:bg-gray-50 opacity-60 cursor-not-allowed"
-                        disabled
+                        onClick={() => navigate("/topic-wise-pyq")}
+                        className={`w-full text-left py-2 px-3 rounded-lg transition text-sm ${
+                            location.pathname.includes("topic-wise-pyq")
+                                ? "bg-blue-50 text-blue-700 font-medium"
+                                : "text-gray-700 hover:bg-gray-50 font-normal"
+                        }`}
                     >
                         📑 Topic-wise PYQ
                     </button>
@@ -283,7 +286,7 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                             </div>
                             <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-2">
-                                    <p className="text-xs font-medium text-gray-900 truncate">
+                                    <p className="text-xs font-normal text-gray-900 truncate">
                                         {userName}
                                     </p>
                                     {/* Admin Badge - Only show if user is database admin */}
@@ -377,7 +380,11 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                             console.log("Navigating to /account, isLoggedIn:", localStorage.getItem("isLoggedIn"));
                             navigate("/account");
                         }}
-                        className="w-full flex items-center gap-2 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition py-2 px-3 rounded-lg font-medium cursor-pointer"
+                        className={`w-full flex items-center gap-2 text-sm transition py-2 px-3 rounded-lg cursor-pointer font-normal ${
+                            location.pathname === "/account"
+                                ? "text-blue-700 bg-blue-50 font-medium"
+                                : "text-gray-700 hover:text-gray-900 hover:bg-gray-100"
+                        }`}
                         title="My Account"
                         type="button"
                     >
@@ -389,7 +396,7 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                     {(localStorage.getItem("isLoggedIn") === "true" || isLoggedIn) && (
                         <button
                             onClick={handleSignOut}
-                            className="w-full flex items-center gap-2 text-sm text-red-600 hover:text-red-700 hover:bg-red-50 transition py-2 px-3 rounded-lg font-medium"
+                            className="w-full flex items-center gap-2 text-sm text-red-600 hover:text-red-700 hover:bg-red-50 transition py-2 px-3 rounded-lg font-normal hover:font-medium"
                             title="Sign Out"
                         >
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -1,13 +1,22 @@
 import { useState, useEffect } from "react";
 import { getUserData } from "../utils/auth";
+import ExplanationWindow from "./ExplanationWindow";
 
-export default function ResultsList({ results }) {
+export default function ResultsList({ results, onExplanationWindowChange, hideExploreTopicGraph = false }) {
     const [visibleAnswers, setVisibleAnswers] = useState({});
-    const [explanations, setExplanations] = useState({});
     const [loadingExplain, setLoadingExplain] = useState({});
-    const [optionInsights, setOptionInsights] = useState({});
-    const [showSimilarPYQs, setShowSimilarPYQs] = useState({});
     const [isAdmin, setIsAdmin] = useState(false);
+    
+    // Explanation Window State
+    const [explanationWindowOpen, setExplanationWindowOpen] = useState(false);
+    const [explanationWindowMinimized, setExplanationWindowMinimized] = useState(false);
+    const [selectedOptionForExplanation, setSelectedOptionForExplanation] = useState(null);
+    const [explanationType, setExplanationType] = useState(null); // "option" | "concept"
+    const [currentQuestionData, setCurrentQuestionData] = useState(null);
+    const [isOptionCorrect, setIsOptionCorrect] = useState(false);
+    
+    // Track clicked options for styling
+    const [clickedOptions, setClickedOptions] = useState({}); // { questionId: { optionKey: true/false } }
 
     // Check if user is admin (database admin only)
     useEffect(() => {
@@ -35,97 +44,173 @@ export default function ResultsList({ results }) {
         };
     }, []);
 
-    const toggleAnswer = (id) =>
-        setVisibleAnswers((prev) => ({ ...prev, [id]: !prev[id] }));
-
-    const handleShowExplanation = async (item) => {
-        const id = item.id || item.json_question_id || item.question_id;
-        if (explanations[id]) {
-            setExplanations((prev) => ({ ...prev, [id]: null }));
-            return;
-        }
-        try {
-            setLoadingExplain((p) => ({ ...p, [id]: true }));
-            const res = await fetch("http://127.0.0.1:8000/explain", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    question_text: item.question_text,
-                    correct_option: item.correct_option,
-                }),
+    const toggleAnswer = (id) => {
+        const newShowAns = !visibleAnswers[id];
+        setVisibleAnswers((prev) => ({ ...prev, [id]: newShowAns }));
+        
+        // When showing answer, automatically expand the correct option to show Explain button
+        if (newShowAns) {
+            const currentItem = results.find(r => {
+                const itemId = r.id || r.json_question_id || r.question_id;
+                return itemId === id;
             });
-            const data = await res.json();
-            setExplanations((p) => ({
-                ...p,
-                [id]: data.explanation || "Explanation not available.",
-            }));
-        } catch {
-            setExplanations((p) => ({
-                ...p,
-                [id]: "Failed to load explanation.",
-            }));
-        } finally {
-            setLoadingExplain((p) => ({ ...p, [id]: false }));
+            
+            if (currentItem) {
+                // Find the correct option key
+                const optionKeys = ["option_a", "option_b", "option_c", "option_d"];
+                
+                for (const optKey of optionKeys) {
+                    const text = currentItem[optKey];
+                    const displayText = (text != null && String(text).trim() !== "") 
+                        ? String(text).trim() 
+                        : "(No option provided)";
+                    
+                    if (checkIfOptionIsCorrect(currentItem, optKey, text, displayText)) {
+                        // Automatically expand the correct option
+                        setClickedOptions((prev) => {
+                            const newState = { ...prev };
+                            if (!newState[id]) {
+                                newState[id] = {};
+                            }
+                            // Collapse all options first
+                            newState[id] = {
+                                option_a: false,
+                                option_b: false,
+                                option_c: false,
+                                option_d: false,
+                            };
+                            // Then expand the correct one
+                            newState[id][optKey] = true;
+                            return newState;
+                        });
+                        break;
+                    }
+                }
+            }
+        } else {
+            // When hiding answer, collapse all options
+            setClickedOptions((prev) => {
+                const newState = { ...prev };
+                if (newState[id]) {
+                    newState[id] = {
+                        option_a: false,
+                        option_b: false,
+                        option_c: false,
+                        option_d: false,
+                    };
+                }
+                return newState;
+            });
         }
     };
 
-    const handleIncorrectClick = async (item, optKey) => {
-        const id = item.id || item.json_question_id || item.question_id;
-        const selectedOption = item[optKey];
-
-        if (optionInsights[id]?.[optKey]) {
-            setOptionInsights((p) => ({
-                ...p,
-                [id]: { ...p[id], [optKey]: null },
-            }));
-            return;
+    // Helper function to check if an option is correct
+    // Handles both cases: correct_option as letter (A, B, C, D) or as full text
+    const checkIfOptionIsCorrect = (item, optKey, optionText, displayText) => {
+        const correctOption = item.correct_option || "";
+        const correctOptionUpper = correctOption.toUpperCase().trim();
+        
+        // Check if correct_option is a letter (A, B, C, D)
+        const optionLetter = optKey.replace("option_", "").toUpperCase();
+        if (correctOptionUpper === optionLetter || correctOptionUpper === optionLetter + ".") {
+            return true;
         }
-
-        setOptionInsights((p) => ({
-            ...p,
-            [id]: {},
-        }));
-
-        try {
-            const res = await fetch("http://127.0.0.1:8000/explain_option", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    question_text: item.question_text,
-                    selected_option: selectedOption,
-                }),
-            });
-            const data = await res.json();
-            setOptionInsights((p) => ({
-                ...p,
-                [id]: {
-                    [optKey]: {
-                        reason: data.reason || "No explanation available.",
-                        topic: data.topic || "General Knowledge",
-                        similar_pyqs: data.similar_pyqs || [],
-                    },
-                },
-            }));
-        } catch {
-            setOptionInsights((p) => ({
-                ...p,
-                [id]: {
-                    [optKey]: {
-                        reason: "Failed to load explanation.",
-                        topic: "N/A",
-                        similar_pyqs: [],
-                    },
-                },
-            }));
-        }
+        
+        // Check if correct_option matches the text (various formats)
+        const normalizedCorrect = String(correctOption).trim();
+        const normalizedText = String(optionText || "").trim();
+        const normalizedDisplay = String(displayText || "").trim();
+        
+        return (
+            optionText === correctOption ||
+            displayText === correctOption ||
+            normalizedText === normalizedCorrect ||
+            normalizedDisplay === normalizedCorrect ||
+            String(optionText).trim() === String(correctOption).trim() ||
+            String(displayText).trim() === String(correctOption).trim()
+        );
     };
 
-    const toggleSimilarPYQ = (questionId, optionKey) => {
-        setShowSimilarPYQs((prev) => ({
-            ...prev,
-            [`${questionId}-${optionKey}`]:
-                !prev[`${questionId}-${optionKey}`],
-        }));
+    const handleOptionClick = (item, optKey) => {
+        const id = item.id || item.json_question_id || item.question_id;
+        const currentState = clickedOptions[id]?.[optKey];
+        
+        // Get the text and check if this option is correct
+        const text = item[optKey];
+        const displayText = (text != null && String(text).trim() !== "") 
+            ? String(text).trim() 
+            : "(No option provided)";
+        const isCorrect = checkIfOptionIsCorrect(item, optKey, text, displayText);
+        
+        // If clicking an incorrect option and "Show Answer" is currently visible,
+        // hide the answer to collapse the correct answer display
+        if (!isCorrect && visibleAnswers[id]) {
+            setVisibleAnswers((prev) => ({ ...prev, [id]: false }));
+        }
+        
+        // Toggle the clicked state and collapse other options
+        setClickedOptions((prev) => {
+            const newState = { ...prev };
+            if (!newState[id]) {
+                newState[id] = {};
+            }
+            
+            // If clicking the same option, toggle it
+            // If clicking a different option, collapse all and expand the new one
+            if (currentState) {
+                // Collapse this option
+                newState[id][optKey] = false;
+            } else {
+                // Collapse all options for this question first
+                newState[id] = {
+                    option_a: false,
+                    option_b: false,
+                    option_c: false,
+                    option_d: false,
+                };
+                // Then expand the clicked one
+                newState[id][optKey] = true;
+            }
+            
+            return newState;
+        });
+    };
+
+    const handleExplainOption = (item, optKey) => {
+        const id = item.id || item.json_question_id || item.question_id;
+        const text = item[optKey];
+        const displayText = (text != null && String(text).trim() !== "") 
+            ? String(text).trim() 
+            : "(No option provided)";
+        
+        // Use the same thorough comparison logic as in option rendering
+        const isCorrect = checkIfOptionIsCorrect(item, optKey, text, displayText);
+
+        setCurrentQuestionData(item);
+        setSelectedOptionForExplanation(displayText);
+        setIsOptionCorrect(isCorrect);
+        setExplanationType("option");
+        setExplanationWindowOpen(true);
+    };
+
+    const handleExplainConcept = (item) => {
+        setCurrentQuestionData(item);
+        setSelectedOptionForExplanation(null);
+        setExplanationType("concept");
+        setExplanationWindowOpen(true);
+    };
+
+    const handleCloseExplanationWindow = () => {
+        setExplanationWindowOpen(false);
+        setExplanationWindowMinimized(false);
+        setCurrentQuestionData(null);
+        setSelectedOptionForExplanation(null);
+        setExplanationType(null);
+        setIsOptionCorrect(false);
+    };
+
+    const handleMinimizeExplanationWindow = () => {
+        setExplanationWindowMinimized(!explanationWindowMinimized);
     };
 
     // --- Question text renderer ---
@@ -298,199 +383,173 @@ export default function ResultsList({ results }) {
 
     if (!results?.length) return null;
 
+    // Add class to body when explanation window is open and not minimized for CSS targeting
+    // Also notify parent component about state changes
+    useEffect(() => {
+        if (explanationWindowOpen && !explanationWindowMinimized) {
+            document.body.classList.add('explanation-window-open');
+        } else {
+            document.body.classList.remove('explanation-window-open');
+        }
+        
+        // Notify parent component
+        if (onExplanationWindowChange) {
+            onExplanationWindowChange(explanationWindowOpen, explanationWindowMinimized);
+        }
+        
+        return () => {
+            document.body.classList.remove('explanation-window-open');
+        };
+    }, [explanationWindowOpen, explanationWindowMinimized, onExplanationWindowChange]);
+
     return (
-        <div className="results-container">
-            {results.map((item) => {
-                // Use id (CSV auto-increment) or json_question_id (original JSON ID) or question_id (legacy)
-                const id = item.id || item.json_question_id || item.question_id || `q-${Math.random()}`;
-                const showAns = !!visibleAnswers[id];
+        <>
+            <div className={`results-container ${explanationWindowOpen && !explanationWindowMinimized ? 'results-container-shifted' : ''}`}>
+                {results.map((item) => {
+                    // Use id (CSV auto-increment) or json_question_id (original JSON ID) or question_id (legacy)
+                    const id = item.id || item.json_question_id || item.question_id || `q-${Math.random()}`;
+                    const showAns = !!visibleAnswers[id];
 
-                return (
-                    <div key={id} className="question-card">
-                        {/* Question */}
-                        {renderQuestionText(item)}
+                    return (
+                        <div key={id} className={`question-card ${explanationWindowOpen && !explanationWindowMinimized ? 'question-card-shifted' : ''}`}>
+                            {/* Question */}
+                            {renderQuestionText(item)}
 
-                        {/* Meta Info */}
-                        <div className="question-meta">
-                            {item.exam && (
-                                <span className="flex items-center gap-1">
-                                    <span className="w-2.5 h-2.5 bg-blue-500 rounded-full"></span>
-                                    {item.exam}
-                                </span>
-                            )}
-                            {item.year && (
-                                <span className="flex items-center gap-1">
-                                    📅 {item.year}
-                                </span>
-                            )}
-                            {/* Developer/Admin: Question ID for debugging - only visible for admin users */}
-                            {isAdmin && item.id && (
-                                <span 
-                                    className="flex items-center gap-1 text-[11px] text-gray-400 font-mono cursor-help opacity-70 hover:opacity-100 transition-opacity" 
-                                    title={`Question ID (Admin)\nCSV ID: ${item.id}`}
+                            {/* Meta Info */}
+                            <div className="question-meta">
+                                {item.exam && (
+                                    <span className="flex items-center gap-1">
+                                        <span className="w-2.5 h-2.5 bg-blue-500 rounded-full"></span>
+                                        {item.exam}
+                                    </span>
+                                )}
+                                {item.year && (
+                                    <span className="flex items-center gap-1">
+                                        📅 {item.year}
+                                    </span>
+                                )}
+                                {/* Developer/Admin: Question ID for debugging - only visible for admin users */}
+                                {isAdmin && item.id && (
+                                    <span 
+                                        className="flex items-center gap-1 text-[11px] text-gray-400 font-mono cursor-help opacity-70 hover:opacity-100 transition-opacity" 
+                                        title={`Question ID (Admin)\nCSV ID: ${item.id}`}
+                                    >
+                                        <span className="text-gray-500">🔍</span>
+                                        <span>ID: {item.id}</span>
+                                    </span>
+                                )}
+                                
+                                {/* Show/Hide Answer Button */}
+                                <button
+                                    onClick={() => toggleAnswer(id)}
+                                    className="info-layer-btn info-layer-btn-answer"
+                                    title={showAns ? "Hide the correct answer" : "Show the correct answer"}
                                 >
-                                    <span className="text-gray-500">🔍</span>
-                                    <span>ID: {item.id}</span>
-                                </span>
-                            )}
-                        </div>
+                                    <span className="info-layer-icon">{showAns ? "👁️" : "👁️‍🗨️"}</span>
+                                    <span>{showAns ? "Hide Answer" : "Show Answer"}</span>
+                                </button>
 
-                        {/* Options */}
-                        <div className="option-list">
-                            {["option_a", "option_b", "option_c", "option_d"].map((optKey) => {
-                                const text = item[optKey];
-                                // Normalize text - handle null, undefined, empty string
-                                // For "None" string, display it as-is (not as "(No option provided)")
-                                const displayText = (text != null && String(text).trim() !== "") 
-                                    ? String(text).trim() 
-                                    : "(No option provided)";
-                                const isCorrect = text === item.correct_option || displayText === item.correct_option;
-                                const insight = optionInsights[id]?.[optKey];
-                                const correctVisible = isCorrect && showAns;
-                                const isPYQVisible = showSimilarPYQs[`${id}-${optKey}`];
+                                {/* Explain Concept Button */}
+                                <button
+                                    onClick={() => handleExplainConcept(item)}
+                                    className="info-layer-btn info-layer-btn-active"
+                                    title="Get detailed explanation of the question and related concepts"
+                                >
+                                    <span className="info-layer-icon">💡</span>
+                                    <span>Explain Concept</span>
+                                </button>
+                                
+                                {/* Explore Topic Graph Button (Placeholder) - Hidden in Topic-wise PYQ page */}
+                                {!hideExploreTopicGraph && (
+                                    <button
+                                        disabled
+                                        className="info-layer-btn info-layer-btn-disabled"
+                                        title="Coming soon: Explore related topics in a graph view"
+                                    >
+                                        <span className="info-layer-icon">🗺️</span>
+                                        <span>Explore Topic Graph</span>
+                                    </button>
+                                )}
+                            </div>
 
-                                return (
-                                    <div key={optKey}>
-                                        <div
-                                            onClick={() =>
-                                                !isCorrect
-                                                    ? handleIncorrectClick(item, optKey)
-                                                    : null
-                                            }
-                                            className={`option-item ${correctVisible
-                                                    ? "option-correct"
-                                                    : "option-incorrect"
-                                                }`}
-                                        >
-                                            <div className="flex items-center gap-2">
-                                                <span className="font-medium">
-                                                    {optKey
-                                                        .replace("option_", "")
-                                                        .toUpperCase()}
-                                                    .
-                                                </span>
-                                                <span>{displayText}</span>
+                            {/* Options */}
+                            <div className="option-list">
+                                {["option_a", "option_b", "option_c", "option_d"].map((optKey) => {
+                                    const text = item[optKey];
+                                    // Normalize text - handle null, undefined, empty string
+                                    const displayText = (text != null && String(text).trim() !== "") 
+                                        ? String(text).trim() 
+                                        : "(No option provided)";
+                                    
+                                    // Use helper function to check if option is correct
+                                    const isCorrect = checkIfOptionIsCorrect(item, optKey, text, displayText);
+                                    
+                                    const isClicked = clickedOptions[id]?.[optKey] === true;
+                                    const correctVisible = isCorrect && showAns;
+
+                                    // Determine option styling
+                                    let optionClass = "option-item";
+                                    if (isClicked) {
+                                        // When clicked, show green for correct, light red for incorrect
+                                        optionClass += isCorrect 
+                                            ? " option-clicked-correct" 
+                                            : " option-clicked-incorrect";
+                                    } else if (correctVisible) {
+                                        // Show green when answer is visible and option is correct
+                                        optionClass += " option-correct";
+                                    }
+
+                                    return (
+                                        <div key={optKey} className="option-wrapper">
+                                            <div
+                                                onClick={() => handleOptionClick(item, optKey)}
+                                                className={optionClass}
+                                            >
+                                                <div className="flex items-center gap-2">
+                                                    <span className="font-medium">
+                                                        {optKey
+                                                            .replace("option_", "")
+                                                            .toUpperCase()}
+                                                        .
+                                                    </span>
+                                                    <span>{displayText}</span>
+                                                </div>
+                                                {(correctVisible || (isClicked && isCorrect)) && <span>✅</span>}
                                             </div>
-                                            {correctVisible && <span>✅</span>}
+
+                                            {/* Explain Button - appears when option is clicked or when correct answer is shown */}
+                                            {(isClicked || correctVisible) && (
+                                                <button
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        handleExplainOption(item, optKey);
+                                                    }}
+                                                    className="explain-button"
+                                                    title="Get explanation for this option"
+                                                >
+                                                    Explain
+                                                </button>
+                                            )}
                                         </div>
-
-                                        {/* Incorrect Option Insight */}
-                                        {insight && (
-                                            <div className="incorrect-insight">
-                                                <p className="mb-1">
-                                                    <strong>Why incorrect:</strong>{" "}
-                                                    {insight.reason}
-                                                </p>
-                                                <p className="mb-2">
-                                                    <strong>Topic:</strong>{" "}
-                                                    {insight.topic}
-                                                </p>
-
-                                                {/* Collapsible Similar PYQs */}
-                                                {insight.similar_pyqs?.length > 0 ? (
-                                                    <div className="border-t border-amber-300 mt-2 pt-2">
-                                                        <button
-                                                            onClick={() =>
-                                                                toggleSimilarPYQ(id, optKey)
-                                                            }
-                                                            className={`btn-action ${showSimilarPYQs[
-                                                                    `${id}-${optKey}`
-                                                                ]
-                                                                    ? "btn-purple"
-                                                                    : "btn-blue"
-                                                                }`}
-                                                        >
-                                                            {isPYQVisible
-                                                                ? "▲ Hide Similar PYQs"
-                                                                : "▼ View Similar PYQs"}
-                                                        </button>
-
-                                                        {isPYQVisible && (
-                                                            <div className="max-h-40 overflow-y-auto mt-3 bg-amber-100/60 border border-amber-200 rounded-lg p-2 scrollbar-thin scrollbar-thumb-amber-400 scrollbar-track-amber-100">
-                                                                <ul className="list-disc list-inside text-gray-700 space-y-1">
-                                                                    {insight.similar_pyqs.map(
-                                                                        (pyq, idx) => (
-                                                                            <li
-                                                                                key={idx}
-                                                                                className="text-sm"
-                                                                            >
-                                                                                <a
-                                                                                    href={pyq.link}
-                                                                                    target="_blank"
-                                                                                    rel="noopener noreferrer"
-                                                                                    className="text-blue-600 hover:underline"
-                                                                                >
-                                                                                    {pyq.question_text}
-                                                                                </a>
-                                                                                <span className="text-gray-400 text-xs ml-1">
-                                                                                    (
-                                                                                    {pyq.score?.toFixed(
-                                                                                        2
-                                                                                    )}
-                                                                                    )
-                                                                                </span>
-                                                                            </li>
-                                                                        )
-                                                                    )}
-                                                                </ul>
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                ) : (
-                                                    <p className="italic text-gray-400">
-                                                        🔗 Similar PYQs coming soon
-                                                    </p>
-                                                )}
-                                            </div>
-                                        )}
-                                    </div>
-                                );
-                            })}
-                        </div>
-
-                        {/* Buttons */}
-                        <div className="flex flex-wrap gap-3 text-sm font-medium mb-4">
-                            <button
-                                onClick={() => toggleAnswer(id)}
-                                className="btn-action btn-blue"
-                            >
-                                {showAns ? "Hide Answer" : "Show Answer"}
-                            </button>
-
-                            <button
-                                onClick={() => handleShowExplanation(item)}
-                                disabled={loadingExplain[id]}
-                                className={`btn-action ${loadingExplain[id]
-                                        ? "btn-disabled"
-                                        : "btn-purple"
-                                    }`}
-                            >
-                                {loadingExplain[id]
-                                    ? "Loading..."
-                                    : explanations[id]
-                                        ? "Hide Explanation"
-                                        : "Show Explanation"}
-                            </button>
-                        </div>
-
-                        {/* Correct Answer */}
-                        {showAns && (
-                            <div className="bg-green-50 border-l-4 border-green-500 rounded-lg p-3 text-sm text-green-800">
-                                <strong>Correct Answer:</strong>{" "}
-                                {item.correct_option} ✅
+                                    );
+                                })}
                             </div>
-                        )}
+                        </div>
+                    );
+                })}
+            </div>
 
-                        {/* Explanation */}
-                        {explanations[id] && (
-                            <div className="explanation-box">
-                                <strong>Explanation:</strong>{" "}
-                                {explanations[id]}
-                            </div>
-                        )}
-                    </div>
-                );
-            })}
-        </div>
+            {/* Explanation Window */}
+            <ExplanationWindow
+                isOpen={explanationWindowOpen}
+                onClose={handleCloseExplanationWindow}
+                onMinimize={handleMinimizeExplanationWindow}
+                isMinimized={explanationWindowMinimized}
+                questionData={currentQuestionData}
+                selectedOption={selectedOptionForExplanation}
+                explanationType={explanationType}
+                isCorrect={isOptionCorrect}
+            />
+        </>
     );
 }

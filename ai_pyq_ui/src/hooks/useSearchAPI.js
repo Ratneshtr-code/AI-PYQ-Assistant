@@ -23,6 +23,8 @@ export function useSearchAPI(apiUrl) {
 				query: query.trim(),
 				page: targetPage,
 				exam: filters.exam || "",
+				subject: filters.subject || null,
+				topic: filters.topic || null,
 			};
 
 			const res = await axios.post(apiUrl, payload, { timeout: 10000 });

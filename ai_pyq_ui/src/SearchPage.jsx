@@ -15,6 +15,8 @@ export default function SearchPage() {
     const [exam, setExam] = useState("");
     const [examsList, setExamsList] = useState([]);
     const [allResults, setAllResults] = useState([]);
+    const [explanationWindowOpen, setExplanationWindowOpen] = useState(false);
+    const [explanationWindowMinimized, setExplanationWindowMinimized] = useState(false);
     const location = useLocation();
 
     const {
@@ -93,14 +95,14 @@ export default function SearchPage() {
             {/* 📚 Main Content Area */}
             <main className="flex-1 flex flex-col items-center justify-start p-8 pl-64 transition-all duration-300 relative">
                 {/* Exam Filter - Fixed/Sticky Position */}
-                <div className="fixed left-64 top-8 z-30 flex flex-col gap-1.5 pl-4 bg-gray-50 py-2 pr-4 rounded-r-lg shadow-sm">
-                    <label className="text-sm font-medium text-gray-700 whitespace-nowrap text-center">
+                <div className="fixed left-64 top-8 z-30 flex flex-col gap-1.5 pl-3 bg-gray-50 py-2 pr-2 rounded-r-lg shadow-sm exam-filter-compact" style={{ width: '140px' }}>
+                    <label className="text-base font-medium text-gray-700 whitespace-nowrap text-center">
                         Exam
                     </label>
                     <select
                         value={exam}
                         onChange={(e) => setExam(e.target.value)}
-                        className="border border-gray-300 rounded-lg px-3 py-1.5 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all w-[140px] shadow-sm"
+                        className="border border-gray-300 rounded-lg px-2 py-1.5 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all w-full shadow-sm"
                     >
                         <option value="">All Exams</option>
                         {examsList.map((ex, idx) => (
@@ -127,10 +129,10 @@ export default function SearchPage() {
                     </div>
                     
                     {/* Content Container */}
-                    <div className="max-w-3xl w-full mx-auto space-y-6">
+                    <div className="max-w-3xl w-full mx-auto space-y-6 results-parent-container">
 
                     {/* Search Bar */}
-                    <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                    <div className={`flex flex-col sm:flex-row gap-3 justify-center ${explanationWindowOpen && !explanationWindowMinimized ? 'results-container-shifted' : ''}`} style={{ maxWidth: explanationWindowOpen && !explanationWindowMinimized ? '48rem' : '100%', width: '100%', marginLeft: 'auto', marginRight: explanationWindowOpen && !explanationWindowMinimized ? '440px' : 'auto' }}>
                         <input
                             type="text"
                             value={query}
@@ -163,15 +165,25 @@ export default function SearchPage() {
                     ) : (
                         <>
                             {exam === "" && page === 1 && allResults.length > 0 && (
-                                <ResultsChart results={allResults} />
+                                <div className={`mx-auto space-y-6 ${explanationWindowOpen && !explanationWindowMinimized ? 'results-container-shifted' : ''}`} style={{ maxWidth: '48rem', width: '100%' }}>
+                                    <ResultsChart results={allResults} />
+                                </div>
                             )}
-                            <ResultsList results={results} />
-                            <Pagination
-                                page={page}
-                                totalMatches={totalMatches}
-                                pageSize={pageSize}
-                                onPageChange={handlePageChange}
+                            <ResultsList 
+                                results={results} 
+                                onExplanationWindowChange={(isOpen, isMinimized) => {
+                                    setExplanationWindowOpen(isOpen);
+                                    setExplanationWindowMinimized(isMinimized);
+                                }}
                             />
+                            <div className={`${explanationWindowOpen && !explanationWindowMinimized ? 'results-container-shifted' : ''}`} style={{ maxWidth: explanationWindowOpen && !explanationWindowMinimized ? '48rem' : '100%', width: '100%', marginLeft: 'auto', marginRight: explanationWindowOpen && !explanationWindowMinimized ? '440px' : 'auto' }}>
+                                <Pagination
+                                    page={page}
+                                    totalMatches={totalMatches}
+                                    pageSize={pageSize}
+                                    onPageChange={handlePageChange}
+                                />
+                            </div>
                         </>
                     )}
                     </div>

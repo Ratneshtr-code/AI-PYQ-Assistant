@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SearchPage from "./SearchPage";
 import ExamDashboardPage from "./ExamDashboardPage";
 import CrossExamInsightsPage from "./CrossExamInsightsPage";
+import TopicWisePYQPage from "./TopicWisePYQPage";
 import LoginPage from "./LoginPage";
 import SignUpPage from "./SignUpPage";
 import SubscriptionPage from "./SubscriptionPage";
@@ -19,6 +20,7 @@ export default function App() {
                 <Route path="/" element={<SearchPage />} />
                 <Route path="/exam-dashboard" element={<ExamDashboardPage />} />
                 <Route path="/cross-exam-insights" element={<CrossExamInsightsPage />} />
+                <Route path="/topic-wise-pyq" element={<TopicWisePYQPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/signup" element={<SignUpPage />} />
                 <Route 

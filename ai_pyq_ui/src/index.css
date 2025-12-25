@@ -26,7 +26,43 @@ html {
 }
 
 .results-container {
-    @apply max-w-3xl mx-auto space-y-6 font-sans text-gray-800 leading-relaxed;
+    @apply mx-auto space-y-6 font-sans text-gray-800 leading-relaxed;
+    max-width: 48rem; /* 3xl equivalent */
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+    box-sizing: border-box;
+    padding-top: 0;
+    margin-top: 0;
+}
+
+.results-container-shifted {
+    max-width: 48rem !important; /* Keep same max-width - don't shrink */
+    width: 100% !important; /* Ensure full width up to max-width */
+    margin-right: 440px !important; /* Add right margin to shift left and make room for explanation window */
+    margin-left: auto !important; /* Keep it centered in available space */
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* Ensure pie chart wrapper matches question cards width exactly */
+.results-container-shifted > div {
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box;
+}
+
+/* Add minimal margin to first card when shifted - same as spacing between cards */
+.results-container-shifted .question-card:first-of-type {
+    margin-top: 1.5rem !important; /* Minimal space between chart/search and first card (same as space-y-6 = 1.5rem) */
+}
+
+/* Adjust parent container when explanation window is open */
+body.explanation-window-open .results-parent-container {
+    max-width: calc(100vw - 500px) !important;
+    transition: max-width 0.3s ease-in-out;
+    padding-top: 0 !important; /* Ensure no padding on parent */
 }
 
 /* ===== Question Text Formatting ===== */
@@ -90,7 +126,7 @@ html {
 }
 
 .option-correct {
-    @apply bg-green-50 border-green-400 text-green-800 font-semibold;
+    @apply bg-green-50 border-green-400 text-green-800 font-normal;
 }
 
 .option-incorrect {
@@ -115,12 +151,58 @@ html {
     @apply bg-blue-50 text-blue-700 hover:bg-blue-100;
 }
 
+.btn-answer {
+    @apply bg-orange-50/40 text-orange-500 hover:bg-orange-50/60;
+    font-weight: normal; /* Override font-medium from btn-action */
+}
+
 .btn-purple {
     @apply bg-purple-50 text-purple-700 hover:bg-purple-100;
 }
 
 .btn-disabled {
     @apply bg-purple-100 text-purple-400;
+}
+
+/* ===== Info Layer Buttons (Compact, Premium Style) ===== */
+.info-layer-btn {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-normal transition-all;
+    @apply border border-transparent;
+    @apply text-gray-600 hover:text-gray-800;
+    @apply bg-gray-100/80 hover:bg-gray-200/90;
+    @apply cursor-pointer;
+    line-height: 1.4;
+    backdrop-filter: blur(4px);
+}
+
+.info-layer-btn-active {
+    @apply text-blue-600 hover:text-blue-700;
+    @apply bg-blue-100/70 hover:bg-blue-200/85;
+    @apply hover:border-blue-200/50;
+}
+
+.info-layer-btn-active:hover {
+    @apply shadow-sm;
+}
+
+.info-layer-btn-disabled {
+    @apply text-gray-400 cursor-not-allowed;
+    @apply bg-gray-100/60 hover:bg-gray-100/60;
+    @apply hover:text-gray-400;
+    @apply opacity-70;
+}
+
+.info-layer-btn-answer {
+    @apply text-violet-500 hover:text-violet-600;
+    @apply bg-violet-50/40 hover:bg-violet-50/60;
+    @apply hover:border-violet-200/50;
+}
+
+.info-layer-icon {
+    @apply text-xs leading-none;
+    display: inline-block;
+    width: 13px;
+    text-align: center;
 }
 
 /* ===== Compact Spacing ===== */
@@ -132,6 +214,8 @@ html {
 .question-card {
     margin-bottom: 1rem;
     padding: 1rem;
+    scroll-margin-top: 120px; /* Space to prevent hiding behind fixed Exam Filter when scrolling (top-8 + filter height) */
+    position: relative;
 }
 
     /* ===== Extra (optional aesthetic tweaks) ===== */
@@ -139,4 +223,224 @@ html {
         transform: translateY(-1px);
         transition: transform 0.2s ease;
     }
+
+/* ===== Explanation Window Styles ===== */
+.explanation-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 40;
+    backdrop-filter: blur(2px);
+}
+
+.explanation-window {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 420px;
+    height: 100vh;
+    background: #fafafa;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
+    overflow: hidden;
+    border-left: 1px solid #e5e7eb;
+}
+
+.explanation-window-minimized {
+    width: 60px;
+    height: auto;
+    min-height: 60px;
+}
+
+.explanation-header {
+    @apply px-5 py-4 flex items-center justify-between;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    min-height: 60px;
+}
+
+.explanation-window-minimized .explanation-header {
+    @apply px-3 py-3;
+    justify-content: center;
+}
+
+.explanation-title {
+    @apply text-lg font-semibold text-white;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.explanation-window-minimized .explanation-title {
+    display: none;
+}
+
+.explanation-header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.explanation-minimize-btn,
+.explanation-close-btn {
+    @apply text-white transition-all p-1.5 rounded-lg;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.explanation-minimize-btn:hover,
+.explanation-close-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.explanation-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.75rem;
+    @apply text-gray-800;
+    background: white;
+    margin: 0.5rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.explanation-window-minimized .explanation-content {
+    display: none;
+}
+
+.explanation-loading {
+    @apply flex flex-col items-center justify-center h-full text-gray-500;
+}
+
+.loading-spinner {
+    border: 3px solid #f3f4f6;
+    border-top: 3px solid #3b82f6;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.explanation-error {
+    @apply text-center py-8;
+}
+
+.explanation-text {
+    @apply text-sm leading-relaxed;
+    line-height: 1.7;
+    color: #374151;
+}
+
+.explanation-text strong {
+    @apply font-semibold text-gray-900;
+}
+
+.explanation-text p {
+    @apply mb-3;
+}
+
+.explanation-text strong {
+    @apply font-semibold text-gray-900;
+}
+
+/* ===== Layout Shift Styles ===== */
+.question-card-shifted {
+    max-width: 100%;
+    width: 100%;
+}
+
+/* Default Exam Filter width - wider when explanation window is closed */
+.exam-filter-compact {
+    width: 140px;
+    transition: width 0.3s ease-in-out, top 0.3s ease-in-out, left 0.3s ease-in-out;
+}
+
+/* Adjust Exam Filter when explanation window is open - move it up and reduce width */
+body.explanation-window-open .exam-filter-compact {
+    width: 100px !important; /* Reduce width when explanation window is open */
+    top: 4px !important; /* Move up slightly to reduce overlap with question cards */
+    left: calc(256px - 10px) !important; /* Shift left slightly to reduce overlap (256px = left-64) */
+}
+
+/* ===== Option Clicked States ===== */
+.option-clicked-correct {
+    @apply bg-green-50 border-green-400 text-green-800 font-normal;
+}
+
+.option-clicked-incorrect {
+    @apply bg-red-50 border-red-200 text-red-600 font-normal;
+}
+
+.option-wrapper {
+    @apply relative;
+}
+
+.explain-button {
+    @apply mt-2.5 mb-1.5 px-2.5 py-1.5 text-xs font-normal rounded-md transition-all;
+    @apply bg-blue-100/60 text-blue-600 hover:bg-blue-100/80;
+    @apply border border-transparent hover:border-blue-200/40;
+    @apply shadow-sm hover:shadow-sm;
+    @apply inline-flex items-center;
+    display: inline-block;
+    cursor: pointer;
+    line-height: 1.4;
+    backdrop-filter: blur(4px);
+}
+
+/* ===== Mobile Responsive Styles ===== */
+@media (max-width: 768px) {
+    .explanation-window {
+        width: 90%;
+        max-width: 400px;
+        height: 85vh;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 12px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        border-left: none;
+    }
+
+    .results-container-shifted {
+        margin-right: 0 !important;
+        padding-top: 0 !important; /* No extra padding needed on mobile */
+    }
+
+    .question-card-shifted {
+        max-width: 100%;
+    }
+
+    body.explanation-window-open .results-parent-container {
+        max-width: 100% !important;
+    }
+
+    .explanation-content {
+        padding: 1rem;
+        margin: 0.25rem;
+    }
+}
+
+/* ===== Tablet Responsive Styles ===== */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .explanation-window {
+        width: 380px;
+    }
+
+    .results-container-shifted {
+        padding-right: 400px;
+    }
+}
 

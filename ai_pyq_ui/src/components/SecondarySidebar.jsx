@@ -115,15 +115,15 @@ export default function SecondarySidebar({ isOpen, onClose, type, activeSubPage,
                                     <button
                                         key={page.id}
                                         onClick={() => onSubPageChange(page.id)}
-                                        className={`w-full text-left py-3 px-4 rounded-lg transition-all ${
+                                        className={`w-full text-left py-2 px-3 rounded-lg transition-all text-sm ${
                                             activeSubPage === page.id
-                                                ? "bg-blue-100 text-blue-700 font-medium shadow-sm border-l-4 border-blue-600"
-                                                : "text-gray-700 hover:bg-gray-100"
+                                                ? "bg-blue-50 text-blue-700 font-medium"
+                                                : "text-gray-700 hover:bg-gray-50 font-normal"
                                         }`}
                                     >
                                         <div className="flex items-center gap-2">
                                             <span className="text-lg flex-shrink-0">{page.icon}</span>
-                                            <span className="text-sm font-medium whitespace-nowrap">{page.title}</span>
+                                            <span className="text-sm whitespace-nowrap">{page.title}</span>
                                         </div>
                                     </button>
                                 ))}
