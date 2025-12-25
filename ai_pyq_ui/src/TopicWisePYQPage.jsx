@@ -163,7 +163,7 @@ export default function TopicWisePYQPage() {
                 {/* Content Area */}
                 <div className="w-full max-w-7xl mx-auto px-4 md:px-8 py-6 md:py-8 space-y-4 relative z-0">
                     {/* Header - Centered and shifts with explanation window */}
-                    <div className={`flex items-center justify-center mb-6 ${explanationWindowOpen && !explanationWindowMinimized ? 'results-container-shifted' : ''}`} style={{ maxWidth: explanationWindowOpen && !explanationWindowMinimized ? '48rem' : '100%', width: '100%', marginLeft: 'auto', marginRight: explanationWindowOpen && !explanationWindowMinimized ? '440px' : 'auto' }}>
+                    <div className={`flex items-center justify-center mb-3 ${explanationWindowOpen && !explanationWindowMinimized ? 'results-container-shifted' : ''}`} style={{ maxWidth: explanationWindowOpen && !explanationWindowMinimized ? '48rem' : '100%', width: '100%', marginLeft: 'auto', marginRight: explanationWindowOpen && !explanationWindowMinimized ? '440px' : 'auto' }}>
                         <h1 className="text-3xl font-bold text-gray-900">
                             Topic-wise PYQ
                         </h1>
@@ -174,7 +174,7 @@ export default function TopicWisePYQPage() {
 
                         {/* Conditional Rendering */}
                         {!topic || !exam || !subject ? (
-                            <div className="text-center py-12">
+                            <div className="text-center py-4">
                                 <p className="text-gray-500 text-lg">
                                     Please select Exam, Subject, and Topic to view questions.
                                 </p>

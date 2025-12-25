@@ -118,7 +118,7 @@ export default function SearchPage() {
                     <select
                         value={exam}
                         onChange={(e) => setExam(e.target.value)}
-                        className="border border-gray-300 rounded-lg px-2 py-1.5 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all w-full shadow-sm"
+                        className="border border-gray-300 rounded-lg px-2 py-1.5 text-sm text-gray-700 bg-gradient-to-r from-blue-50 to-indigo-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all w-full shadow-sm"
                     >
                         <option value="">All Exams</option>
                         {examsList.map((ex, idx) => (
