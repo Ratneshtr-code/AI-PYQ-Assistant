@@ -1446,6 +1446,117 @@ def explain_concept(
         }
 
 
+# ==================== ROADMAP ENDPOINT ====================
+
+@app.get("/roadmap/generate")
+def generate_roadmap(
+    exam: str = Query(..., description="Exam name for roadmap generation")
+):
+    """Generate AI-powered preparation roadmap based on question weightage analysis"""
+    df = load_dataframe()
+    if df is None:
+        return {
+            "error": "Dataset not available",
+            "exam": exam,
+            "total_questions": 0,
+            "subjects": [],
+            "preparation_milestones": []
+        }
+    
+    # Filter by exam (case-insensitive)
+    filtered_df = df[df["exam"].str.lower() == exam.lower()].copy()
+    
+    if len(filtered_df) == 0:
+        return {
+            "error": f"No questions found for exam: {exam}",
+            "exam": exam,
+            "total_questions": 0,
+            "subjects": [],
+            "preparation_milestones": []
+        }
+    
+    total_questions = len(filtered_df)
+    
+    # Calculate subject distribution
+    subject_counts = filtered_df["subject"].value_counts()
+    
+    subjects_data = []
+    cumulative_weightage = 0.0
+    
+    for subject, count in subject_counts.items():
+        if pd.isna(subject) or not str(subject).strip():
+            continue
+        
+        subject_name = str(subject).strip()
+        subject_weightage = round((count / total_questions) * 100, 2)
+        
+        # Filter questions for this subject
+        subject_df = filtered_df[filtered_df["subject"].str.lower() == subject_name.lower()]
+        
+        # Calculate topic distribution within subject
+        topic_counts = subject_df["topic"].value_counts()
+        topics_data = []
+        topic_cumulative = 0.0
+        
+        for topic, topic_count in topic_counts.items():
+            if pd.isna(topic) or not str(topic).strip():
+                continue
+            
+            topic_name = str(topic).strip()
+            topic_weightage = round((topic_count / len(subject_df)) * 100, 2)
+            topic_cumulative += topic_weightage
+            
+            topics_data.append({
+                "name": topic_name,
+                "weightage": topic_weightage,
+                "question_count": int(topic_count),
+                "cumulative_weightage": round(topic_cumulative, 2)
+            })
+        
+        # Sort topics by weightage (descending)
+        topics_data.sort(key=lambda x: x["weightage"], reverse=True)
+        
+        # Recalculate cumulative weightage for topics (based on sorted order)
+        topic_cumulative = 0.0
+        for topic in topics_data:
+            topic_cumulative += topic["weightage"]
+            topic["cumulative_weightage"] = round(topic_cumulative, 2)
+        
+        cumulative_weightage += subject_weightage
+        
+        subjects_data.append({
+            "name": subject_name,
+            "weightage": subject_weightage,
+            "question_count": int(count),
+            "topics": topics_data,
+            "cumulative_weightage": round(cumulative_weightage, 2)
+        })
+    
+    # Sort subjects by weightage (descending)
+    subjects_data.sort(key=lambda x: x["weightage"], reverse=True)
+    
+    # Recalculate cumulative weightage for subjects (based on sorted order)
+    cumulative_weightage = 0.0
+    for subject in subjects_data:
+        cumulative_weightage += subject["weightage"]
+        subject["cumulative_weightage"] = round(cumulative_weightage, 2)
+    
+    # Generate preparation milestones
+    preparation_milestones = [
+        {"coverage": 25, "description": "Foundation Level", "label": "25% Coverage"},
+        {"coverage": 50, "description": "Intermediate Level", "label": "50% Coverage"},
+        {"coverage": 75, "description": "Advanced Level", "label": "75% Coverage"},
+        {"coverage": 100, "description": "Complete Preparation", "label": "100% Coverage"}
+    ]
+    
+    return {
+        "exam": exam,
+        "total_questions": total_questions,
+        "subjects": subjects_data,
+        "preparation_milestones": preparation_milestones
+    }
+
+
 if __name__ == "__main__":
     cfg = load_config()
     host = cfg["backend"]["host"]

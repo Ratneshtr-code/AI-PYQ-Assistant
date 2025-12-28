@@ -14,6 +14,7 @@ import SubscriptionManagementPage from "./SubscriptionManagementPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PremiumProtectedRoute from "./components/PremiumProtectedRoute";
 import MyNotesPage from "./pages/MyNotesPage";
+import AIRoadmapPage from "./AIRoadmapPage";
 import ToastContainer, { useToast } from "./components/ToastContainer";
 import "./index.css";
 
@@ -86,6 +87,14 @@ function AppContent() {
                     element={
                         <PremiumProtectedRoute>
                             <MyNotesPage />
+                        </PremiumProtectedRoute>
+                    } 
+                />
+                <Route 
+                    path="/ai-roadmap" 
+                    element={
+                        <PremiumProtectedRoute>
+                            <AIRoadmapPage />
                         </PremiumProtectedRoute>
                     } 
                 />

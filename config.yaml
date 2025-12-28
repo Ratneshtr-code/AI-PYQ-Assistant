@@ -53,11 +53,11 @@ llm:
   #   🧪 TESTING MODE: testing_cache.enabled: true, production_cache.enabled: false
   #   🚀 PRODUCTION MODE: testing_cache.enabled: false, production_cache.enabled: true
   testing_cache:
-    enabled: false  # Set to false when using production cache
+    enabled: true  # Set to false when using production cache
     cache_dir: "./data/testing_cache"  # Directory for testing cache JSON files
   
   production_cache:
-    enabled: true  # Set to true for production (disables testing cache automatically)
+    enabled: false  # Set to true for production (disables testing cache automatically)
     # When enabled, automatically disables testing_cache
   
   # ==================== PROMPT DUMPING (For Review) ====================

@@ -41,8 +41,9 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
 
     const isDashboard = location.pathname.includes("exam-dashboard");
     const isCrossExam = location.pathname.includes("cross-exam-insights");
+    const isAIRoadmap = location.pathname.includes("ai-roadmap");
     const isSearchPage =
-        location.pathname.includes("search") || (location.pathname === "/" && !isDashboard && !isCrossExam);
+        location.pathname.includes("search") || (location.pathname === "/" && !isDashboard && !isCrossExam && !isAIRoadmap);
 
         // Check login status and subscription
     useEffect(() => {
@@ -330,6 +331,22 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                         <span className="text-lg flex-shrink-0">📑</span>
                         {!isCollapsed && <span>Topic-wise PYQ</span>}
                     </button>
+
+                    {/* AI Roadmap - Only visible to logged-in users */}
+                    {(localStorage.getItem("isLoggedIn") === "true" || isLoggedIn) && (
+                        <button
+                            onClick={() => navigate("/ai-roadmap")}
+                            className={`w-full text-left py-2 px-3 rounded-lg transition text-sm flex items-center gap-2 ${
+                                location.pathname.includes("ai-roadmap")
+                                    ? "bg-blue-50 text-blue-700 font-medium"
+                                    : "text-gray-700 hover:bg-gray-50 font-normal"
+                            }`}
+                            title="AI Roadmap"
+                        >
+                            <span className="text-lg flex-shrink-0">🎯</span>
+                            {!isCollapsed && <span>AI Roadmap</span>}
+                        </button>
+                    )}
 
                     {/* My Notes - Only visible to logged-in users */}
                     {(localStorage.getItem("isLoggedIn") === "true" || isLoggedIn) && (
