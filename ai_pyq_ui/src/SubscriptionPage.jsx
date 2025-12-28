@@ -79,7 +79,14 @@ export default function SubscriptionPage() {
                     >
                         {/* Back Button */}
                         <button
-                            onClick={() => navigate(-1)}
+                            onClick={() => {
+                                // Check if there's history, otherwise go to home
+                                if (window.history.length > 1) {
+                                    navigate(-1);
+                                } else {
+                                    navigate("/");
+                                }
+                            }}
                             className="mb-4 flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
                         >
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

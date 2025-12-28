@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getUserData } from "../utils/auth";
 import ExplanationWindow from "./ExplanationWindow";
+import SaveNoteButton from "./SaveNoteButton";
 
 export default function ResultsList({ results, onExplanationWindowChange, hideExploreTopicGraph = false }) {
     const [visibleAnswers, setVisibleAnswers] = useState({});
@@ -458,6 +459,22 @@ export default function ResultsList({ results, onExplanationWindowChange, hideEx
                                     <span className="info-layer-icon">💡</span>
                                     <span>Explain Concept</span>
                                 </button>
+
+                                {/* Save Question Button */}
+                                <SaveNoteButton
+                                    noteType="question"
+                                    questionData={item}
+                                    size="small"
+                                    showLabel={true}
+                                    className="info-layer-btn"
+                                    onSaveSuccess={() => {
+                                        // Optional: Show toast notification
+                                        console.log("Question saved successfully");
+                                    }}
+                                    onSaveError={(error) => {
+                                        console.error("Failed to save question:", error);
+                                    }}
+                                />
                                 
                                 {/* Explore Topic Graph Button (Placeholder) - Hidden in Topic-wise PYQ page */}
                                 {!hideExploreTopicGraph && (

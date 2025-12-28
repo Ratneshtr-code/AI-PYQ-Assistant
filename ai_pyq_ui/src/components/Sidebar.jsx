@@ -331,6 +331,22 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                         {!isCollapsed && <span>Topic-wise PYQ</span>}
                     </button>
 
+                    {/* My Notes - Only visible to logged-in users */}
+                    {(localStorage.getItem("isLoggedIn") === "true" || isLoggedIn) && (
+                        <button
+                            onClick={() => navigate("/my-notes")}
+                            className={`w-full text-left py-2 px-3 rounded-lg transition text-sm flex items-center gap-2 ${
+                                location.pathname.includes("my-notes")
+                                    ? "bg-blue-50 text-blue-700 font-medium"
+                                    : "text-gray-700 hover:bg-gray-50 font-normal"
+                            }`}
+                            title="My Notes"
+                        >
+                            <span className="text-lg flex-shrink-0">📝</span>
+                            {!isCollapsed && <span>My Notes</span>}
+                        </button>
+                    )}
+
                     <button
                         onClick={() => {}}
                         className="w-full text-left py-2 px-3 rounded-lg transition text-sm text-gray-500 hover:bg-gray-50 opacity-60 cursor-not-allowed flex items-center gap-2"

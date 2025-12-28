@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Toast Animation */
+@keyframes slide-in {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.animate-slide-in {
+    animation: slide-in 0.3s ease-out;
+}
+
 /* ===== Base Styles ===== */
 body {
     @apply bg-baseLight text-baseText font-sans text-[15px] leading-relaxed;
@@ -296,6 +312,19 @@ body.explanation-window-open .results-parent-container {
     justify-content: center;
 }
 
+.explanation-save-btn-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.explanation-save-btn {
+    @apply transition-all p-1.5 rounded-lg;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .explanation-minimize-btn:hover,
 .explanation-close-btn:hover {
     background-color: rgba(255, 255, 255, 0.2);
@@ -353,8 +382,121 @@ body.explanation-window-open .results-parent-container {
     @apply mb-3;
 }
 
-.explanation-text strong {
-    @apply font-semibold text-gray-900;
+/* Premium Section Headers */
+.explanation-text .explanation-section-header {
+    padding: 12px 0;
+    margin: 20px 0 12px 0;
+    font-weight: 700;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: none;
+    text-align: left;
+    justify-content: flex-start;
+    transition: opacity 0.2s ease;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 8px;
+}
+
+.explanation-text .explanation-section-header:hover {
+    opacity: 0.9;
+}
+
+.explanation-text .explanation-section-header .section-icon {
+    font-size: 16px;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.explanation-text .explanation-section-header .section-title {
+    flex: 1;
+}
+
+/* Premium List Styling */
+.explanation-text .explanation-list {
+    margin: 12px 0 16px 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.explanation-text .explanation-nested-list {
+    margin: 6px 0 8px 0;
+    padding-left: 20px;
+    border-left: 2px solid #e5e7eb;
+}
+
+.explanation-text .explanation-list-item {
+    padding: 6px 0 6px 24px;
+    position: relative;
+    line-height: 1.65;
+    color: #4b5563;
+    margin-bottom: 3px;
+}
+
+.explanation-text .explanation-list-item::before {
+    content: "▸";
+    position: absolute;
+    left: 8px;
+    color: #6b7280;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+.explanation-text .explanation-list-item strong {
+    color: #111827;
+    font-weight: 600;
+    margin-right: 4px;
+}
+
+/* Nested list items have different styling */
+.explanation-text .explanation-nested-list .explanation-list-item {
+    padding-left: 20px;
+    font-size: 0.95em;
+}
+
+.explanation-text .explanation-nested-list .explanation-list-item::before {
+    content: "•";
+    left: 4px;
+    font-size: 10px;
+    color: #9ca3af;
+}
+
+/* Paragraph Styling */
+.explanation-text .explanation-paragraph {
+    margin-bottom: 12px;
+    line-height: 1.7;
+    color: #4b5563;
+}
+
+/* Headers */
+.explanation-text .explanation-h1,
+.explanation-text .explanation-h2,
+.explanation-text .explanation-h3 {
+    margin: 16px 0 12px 0;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.explanation-text .explanation-h1 {
+    font-size: 20px;
+    color: #1e40af;
+}
+
+.explanation-text .explanation-h2 {
+    font-size: 18px;
+    color: #2563eb;
+}
+
+.explanation-text .explanation-h3 {
+    font-size: 16px;
+    color: #3b82f6;
+}
+
+/* Bold text styling */
+.explanation-text .explanation-bold {
+    font-weight: 600;
+    color: #111827;
 }
 
 /* ===== Layout Shift Styles ===== */

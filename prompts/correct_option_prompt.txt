@@ -1,0 +1,33 @@
+Explain why option {{CORRECT_OPTION_LETTER}} is correct in topper notes style.
+
+{{CONTEXT_INFO}}
+
+**Question:**
+{{QUESTION_TEXT}}
+
+**Correct Answer:** {{CORRECT_OPTION_LETTER}}. {{CORRECT_OPTION_TEXT}}
+
+Start directly with why this option is correct. No introductions. Structure your response as:
+
+**Why Correct**
+- [Direct reason - 2-3 lines max]
+- [Key facts supporting this answer]
+
+[Then provide any relevant sections such as:]
+- **Key Facts:** [Essential facts about this answer - include as many as relevant]
+- **Important Points:** [Critical information supporting correctness]
+- **Legal/Constitutional Basis:** [If applicable - articles, acts, provisions]
+- **Context:** [If relevant - dates, events, amendments, background]
+- **Trick/Mnemonic:** [If helpful for remembering]
+- **Current Context:** [Only if there are recent updates or current relevance]
+
+**Requirements:**
+- Start directly - no "Here's...", "Let's...", "This option..." introductions
+- Use bullet points with bold keywords
+- Maximum 300-400 words total
+- Information-dense: more facts, less words
+- Topper notes style: concise, direct, packed with information
+- No bookish language, no roundabout explanations
+- Professional but direct tone
+- Include only sections that are relevant - don't force sections if they don't apply
+

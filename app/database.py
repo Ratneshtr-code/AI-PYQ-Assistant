@@ -2,12 +2,14 @@
 """
 Database models and setup for user authentication and subscriptions
 """
-from sqlalchemy import create_engine, Column, Integer, String, Boolean, DateTime, Enum as SQLEnum, Float
+from sqlalchemy import create_engine, Column, Integer, String, Boolean, DateTime, Enum as SQLEnum, Float, Text, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, relationship
 from datetime import datetime
 import enum
+import json
 from pathlib import Path
+from typing import Optional, Dict, Any
 
 # Database path
 DB_PATH = Path(__file__).parent.parent / "data" / "ai_pyq.db"
@@ -70,6 +72,75 @@ class SubscriptionPlanTemplate(Base):
     is_active = Column(Boolean, default=True)  # Whether this template is active
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+
+class NoteType(str, enum.Enum):
+    QUESTION = "question"
+    EXPLANATION = "explanation"
+
+
+class UserNote(Base):
+    """User saved notes - questions and explanations"""
+    __tablename__ = "user_notes"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
+    note_type = Column(SQLEnum(NoteType), nullable=False)
+    
+    # Question reference
+    question_id = Column(Integer, nullable=True, index=True)  # References question from CSV
+    
+    # Question data stored as JSON string
+    question_data = Column(Text, nullable=True)  # JSON string of full question data
+    
+    # Explanation data
+    explanation_text = Column(Text, nullable=True)  # Full explanation text
+    explanation_type = Column(String, nullable=True)  # "concept" | "option"
+    option_letter = Column(String, nullable=True)  # A, B, C, D
+    is_correct = Column(Boolean, nullable=True)
+    
+    # Metadata
+    exam = Column(String, nullable=True, index=True)
+    subject = Column(String, nullable=True, index=True)
+    topic = Column(String, nullable=True)
+    year = Column(Integer, nullable=True, index=True)
+    
+    # User customization
+    tags = Column(Text, nullable=True)  # JSON array of tags
+    custom_notes = Column(Text, nullable=True)  # User's personal notes
+    
+    # Timestamps
+    created_at = Column(DateTime, default=datetime.utcnow, index=True)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    
+    # Relationship
+    user = relationship("User", backref="notes")
+    
+    def get_question_data(self) -> Optional[Dict[str, Any]]:
+        """Parse and return question_data as dict"""
+        if not self.question_data:
+            return None
+        try:
+            return json.loads(self.question_data)
+        except (json.JSONDecodeError, TypeError):
+            return None
+    
+    def set_question_data(self, data: Dict[str, Any]):
+        """Store question_data as JSON string"""
+        self.question_data = json.dumps(data) if data else None
+    
+    def get_tags(self) -> list:
+        """Parse and return tags as list"""
+        if not self.tags:
+            return []
+        try:
+            return json.loads(self.tags)
+        except (json.JSONDecodeError, TypeError):
+            return []
+    
+    def set_tags(self, tags: list):
+        """Store tags as JSON array"""
+        self.tags = json.dumps(tags) if tags else None
 
 
 def init_db():

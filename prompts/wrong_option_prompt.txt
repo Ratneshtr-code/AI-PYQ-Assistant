@@ -1,0 +1,36 @@
+Explain why option {{WRONG_OPTION_LETTER}} is incorrect in topper notes style.
+
+{{CONTEXT_INFO}}
+
+**Question:**
+{{QUESTION_TEXT}}
+
+**Selected Option:** {{WRONG_OPTION_LETTER}}. {{WRONG_OPTION_TEXT}}
+**Correct Answer:** {{CORRECT_OPTION_LETTER}}. {{CORRECT_OPTION_TEXT}}
+
+Start directly with why this option is wrong. No introductions. Structure your response as:
+
+**Why Incorrect**
+- [Direct reason - 2-3 lines max]
+- [Key facts explaining the error]
+
+[Then provide any relevant sections such as:]
+- **What It Actually Represents:** [What this option refers to or means]
+- **Key Facts:** [Essential facts about this wrong option]
+- **Where It Would Be Correct:** [If applicable - context where this option fits]
+- **Difference from Correct Answer:** [How it differs from the correct option]
+- **Common Confusion:** [Typical mistakes or misconceptions]
+- **Important Points:** [Critical information to remember]
+- **Trick/Mnemonic:** [If helpful for avoiding this mistake]
+- **Current Context:** [Only if there are recent updates or current relevance]
+
+**Requirements:**
+- Start directly - no "Here's...", "Let's...", "This option..." introductions
+- Use bullet points with bold keywords
+- Maximum 300-400 words total
+- Information-dense: more facts, less words
+- Topper notes style: concise, direct, packed with information
+- No bookish language, no roundabout explanations
+- Professional but direct tone
+- Include only sections that are relevant - don't force sections if they don't apply
+

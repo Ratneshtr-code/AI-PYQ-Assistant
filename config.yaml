@@ -16,6 +16,54 @@ backend:
   min_score: 0.35     # filter threshold
   default_page_size: 3
 
+llm:
+  provider: "gemini"  # LLM provider: gemini, openai, etc.
+  
+  # ==================== MODEL SELECTION ====================
+  # Cost-optimized for production:
+  #   - gemini-2.0-flash-lite-001 (Lowest cost, requires billing) ✅ CURRENT
+  #   - gemini-2.0-flash-001 (Flash, slightly more expensive)
+  #   - gemini-2.5-flash (Newest Flash, similar to 1.5 Flash)
+  # Note: Flash-Lite models require billing enabled but are 20-30% cheaper
+  model: "gemini-2.0-flash-lite-001"  # Lowest cost model - requires billing enabled
+  api_key: ""  # Set via GEMINI_API_KEY environment variable or .env file
+  temperature: 0.7  # Creativity level (0.0-1.0)
+  max_tokens: 2000  # Maximum response length
+  
+  # ==================== TESTING CACHE (Development Only) ====================
+  # ⚠️ IMPORTANT: Testing cache is DIFFERENT from production cache!
+  # 
+  # TESTING CACHE (Current):
+  #   - Storage: JSON file (data/testing_cache/llm_responses.json)
+  #   - Purpose: Developer convenience during testing
+  #   - Scope: Local to developer machine
+  #   - Cache Key: Prompt + Model + Temperature (exact match)
+  #   - Use Case: Testing same questions repeatedly without burning tokens
+  #   - Management: python manage_testing_cache.py
+  #
+  # PRODUCTION CACHE (To be implemented):
+  #   - Storage: SQLite database table (llm_explanations)
+  #   - Purpose: Cost optimization for real users
+  #   - Scope: Shared across all users
+  #   - Cache Key: Question ID + Option + Type (question-based)
+  #   - Use Case: Reduce production costs by 80% through shared cache
+  #   - Management: Database queries
+  #
+  # QUICK SWITCH:
+  #   🧪 TESTING MODE: enabled: true  (saves developer tokens)
+  #   🚀 PRODUCTION MODE: enabled: false  (use production cache instead)
+  testing_cache:
+    enabled: true  # true = Testing mode, false = Production mode (use SQLite cache)
+    cache_dir: "./data/testing_cache"  # Directory for testing cache JSON files
+  
+  # ==================== PROMPT DUMPING (For Review) ====================
+  # Dumps actual prompts and responses sent to/received from LLM
+  # Useful for reviewing what instructions are given to LLM
+  # Files saved to: data/prompt_dumps/
+  prompt_dump:
+    enabled: true  # Set to false to disable prompt dumping
+    dump_dir: "./data/prompt_dumps"  # Directory for prompt/response dumps
+
 ui:
   port: 8501
   # Maximum number of exams that can be compared in Cross-Exam Insights

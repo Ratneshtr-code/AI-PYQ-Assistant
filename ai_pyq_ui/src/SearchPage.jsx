@@ -11,8 +11,27 @@ export default function SearchPage() {
     const apiUrl = "http://127.0.0.1:8000/search";
     const filtersUrl = "http://127.0.0.1:8000/filters";
 
-    const [query, setQuery] = useState("");
-    const [exam, setExam] = useState("");
+    // Load saved state from localStorage
+    const loadSavedState = () => {
+        try {
+            const saved = localStorage.getItem("searchPageState");
+            if (saved) {
+                const state = JSON.parse(saved);
+                return {
+                    query: state.query || "",
+                    exam: state.exam || "",
+                    page: state.page || 1,
+                };
+            }
+        } catch (e) {
+            console.error("Error loading saved state:", e);
+        }
+        return { query: "", exam: "", page: 1 };
+    };
+
+    const savedState = loadSavedState();
+    const [query, setQuery] = useState(savedState.query);
+    const [exam, setExam] = useState(savedState.exam);
     const [examsList, setExamsList] = useState([]);
     const [language, setLanguage] = useState("english");
     const [allResults, setAllResults] = useState([]);
@@ -44,14 +63,42 @@ export default function SearchPage() {
         fetchExams();
     }, []);
 
+    // Save state to localStorage whenever it changes
+    useEffect(() => {
+        const stateToSave = {
+            query,
+            exam,
+            page: page || 1,
+            timestamp: Date.now(),
+        };
+        localStorage.setItem("searchPageState", JSON.stringify(stateToSave));
+    }, [query, exam, page]);
+
     useEffect(() => {
         const params = new URLSearchParams(location.search);
         const initialQuery = params.get("query");
+        
+        // If URL has query param, use it (takes precedence)
         if (initialQuery) {
             setQuery(initialQuery);
             doSearch(initialQuery, 1, { exam: "" });
         }
+        // Note: We don't auto-restore saved state here to avoid unwanted searches
+        // User can manually search or use URL params
     }, [location.search]);
+
+    // Restore saved state on mount if no URL params
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const initialQuery = params.get("query");
+        
+        if (!initialQuery && savedState.query && !hasSearched) {
+            // Restore saved state only if no URL params and haven't searched yet
+            setQuery(savedState.query);
+            setExam(savedState.exam);
+            // Don't auto-search, let user see the query and search manually
+        }
+    }, []); // Only run on mount
 
     // Auto-search when exam changes if query exists
     useEffect(() => {

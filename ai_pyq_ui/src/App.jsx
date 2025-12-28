@@ -1,5 +1,6 @@
 ﻿// src/App.jsx
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
 import SearchPage from "./SearchPage";
 import ExamDashboardPage from "./ExamDashboardPage";
 import CrossExamInsightsPage from "./CrossExamInsightsPage";
@@ -11,11 +12,36 @@ import AccountPage from "./AccountPage";
 import AdminPanel from "./AdminPanel";
 import SubscriptionManagementPage from "./SubscriptionManagementPage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import PremiumProtectedRoute from "./components/PremiumProtectedRoute";
+import MyNotesPage from "./pages/MyNotesPage";
+import ToastContainer, { useToast } from "./components/ToastContainer";
 import "./index.css";
 
-export default function App() {
+// Global toast context
+let globalToast = null;
+
+export const setGlobalToast = (toastFn) => {
+    globalToast = toastFn;
+};
+
+export const showToast = (message, type = "success", duration = 3000) => {
+    if (globalToast) {
+        return globalToast(message, type, duration);
+    }
+    console.log(`[Toast] ${type}: ${message}`);
+};
+
+function AppContent() {
+    const { showToast, removeToast, toasts } = useToast();
+    
+    // Set global toast function
+    useEffect(() => {
+        setGlobalToast(showToast);
+        return () => setGlobalToast(null);
+    }, [showToast]);
+
     return (
-        <BrowserRouter>
+        <>
             <Routes>
                 <Route path="/" element={<SearchPage />} />
                 <Route path="/exam-dashboard" element={<ExamDashboardPage />} />
@@ -55,7 +81,24 @@ export default function App() {
                         </ProtectedRoute>
                     } 
                 />
+                <Route 
+                    path="/my-notes" 
+                    element={
+                        <PremiumProtectedRoute>
+                            <MyNotesPage />
+                        </PremiumProtectedRoute>
+                    } 
+                />
             </Routes>
+            <ToastContainer toasts={toasts} removeToast={removeToast} />
+        </>
+    );
+}
+
+export default function App() {
+    return (
+        <BrowserRouter>
+            <AppContent />
         </BrowserRouter>
     );
 }

@@ -22,12 +22,25 @@ from langchain_community.embeddings import HuggingFaceEmbeddings
 from app.database import init_db
 from app.auth_api import router as auth_router
 from app.admin_api import router as admin_router
+from app.notes_api import router as notes_router
+
+# LLM Service
+from app.llm_service import get_llm_service
+from app.prompt_loader import get_prompt_loader
 
 app = FastAPI(title="AI PYQ Assistant - Search API")
 
 # Include routers
 app.include_router(auth_router)
 app.include_router(admin_router)
+app.include_router(notes_router)
+
+# Log registered routes for debugging
+print("✅ Routers included:")
+print(f"   - Auth router: {len(auth_router.routes)} routes")
+print(f"   - Admin router: {len(admin_router.routes)} routes")
+print(f"   - Notes router: {len(notes_router.routes)} routes")
+print(f"   Notes routes: {[r.path for r in notes_router.routes]}")
 
 origins = [
     "http://localhost:5173",
@@ -55,6 +68,17 @@ class SearchRequest(BaseModel):
 
 @app.on_event("startup")
 def startup_event():
+    # Load environment variables from .env file
+    try:
+        from dotenv import load_dotenv
+        from pathlib import Path
+        env_path = Path(__file__).parent.parent / '.env'
+        if env_path.exists():
+            load_dotenv(env_path)
+            print(f"✅ Loaded .env file from {env_path}")
+    except ImportError:
+        pass  # python-dotenv not installed, use environment variables directly
+    
     # Initialize database
     init_db()
     
@@ -980,125 +1004,387 @@ def get_ui_config():
 @app.post("/explain")
 def explain_question(data: dict):
     """
-    Mock explanation endpoint.
-    Later, this will call OpenAI or any LLM to generate reasoning.
+    Explain why the correct option is correct using Gemini 1.5 Flash.
     """
-    question = data.get("question_text", "")
-    correct_option = data.get("correct_option", "")
+    try:
+        question_text = data.get("question_text", "")
+        correct_option = data.get("correct_option", "")
+        option_a = data.get("option_a", "")
+        option_b = data.get("option_b", "")
+        option_c = data.get("option_c", "")
+        option_d = data.get("option_d", "")
+        exam = data.get("exam", None)
+        subject = data.get("subject", None)
+        topic = data.get("topic", None)
+        year = data.get("year", None)
 
-    # Mock explanations for now
-    examples = [
-        f"The correct answer is **{correct_option}** because it directly addresses the core concept mentioned in the question.",
-        f"**{correct_option}** is right since it aligns with standard facts and principles related to the question topic.",
-        f"This question refers to a fundamental concept — the answer **{correct_option}** accurately represents that.",
-    ]
+        if not question_text or not correct_option:
+            return {
+                "error": "question_text and correct_option are required.",
+                "question": question_text,
+                "correct_option": correct_option,
+                "explanation": ""
+            }
 
-    return {
-        "question": question,
-        "correct_option": correct_option,
-        "explanation": choice(examples)
-    }
+        # Determine which option is correct
+        correct_option_upper = correct_option.upper().strip()
+        all_options = {
+            "option_a": option_a,
+            "option_b": option_b,
+            "option_c": option_c,
+            "option_d": option_d
+        }
+        
+        # Find correct option text
+        correct_option_text = ""
+        correct_option_letter = ""
+        if correct_option_upper == "A" or correct_option_upper == "A.":
+            correct_option_text = option_a
+            correct_option_letter = "A"
+        elif correct_option_upper == "B" or correct_option_upper == "B.":
+            correct_option_text = option_b
+            correct_option_letter = "B"
+        elif correct_option_upper == "C" or correct_option_upper == "C.":
+            correct_option_text = option_c
+            correct_option_letter = "C"
+        elif correct_option_upper == "D" or correct_option_upper == "D.":
+            correct_option_text = option_d
+            correct_option_letter = "D"
+        else:
+            # Try to match by text
+            for letter, opt_text in [("A", option_a), ("B", option_b), ("C", option_c), ("D", option_d)]:
+                if opt_text and correct_option.strip() in opt_text or opt_text in correct_option:
+                    correct_option_text = opt_text
+                    correct_option_letter = letter
+                    break
+        
+        if not correct_option_text:
+            correct_option_text = correct_option
+            correct_option_letter = correct_option_upper[0] if correct_option_upper else ""
+
+        # Create prompt using prompt loader (loads from files)
+        prompt_loader = get_prompt_loader()
+        system_instruction, prompt = prompt_loader.build_correct_option_prompt(
+            question_text=question_text,
+            correct_option_text=correct_option_text,
+            correct_option_letter=correct_option_letter,
+            all_options=all_options,
+            exam=exam,
+            subject=subject,
+            topic=topic,
+            year=year
+        )
+
+        # Extract question_id from data
+        question_id = data.get("question_id") or data.get("id") or data.get("json_question_id")
+        if question_id:
+            try:
+                question_id = int(question_id)
+            except (ValueError, TypeError):
+                question_id = None
+
+        # Generate explanation using Gemini
+        llm_service = get_llm_service()
+        result = llm_service.generate_explanation(
+            prompt=prompt,
+            system_instruction=system_instruction,
+            question_id=question_id,
+            explanation_type="correct_option",
+            option_letter=correct_option_letter,
+            is_correct=True,
+            exam=exam
+        )
+        
+        # Extract explanation and cache info
+        explanation = result.get("explanation", "")
+        from_cache = result.get("from_cache", False)
+        cache_key = result.get("cache_key", "")
+        source = result.get("source", "unknown")
+
+        return {
+            "question": question_text,
+            "correct_option": correct_option,
+            "explanation": explanation,
+            "from_cache": from_cache,
+            "cache_key": cache_key,
+            "source": source
+        }
+
+    except Exception as e:
+        error_msg = f"Error generating explanation: {str(e)}"
+        print(f"❌ {error_msg}")
+        return {
+            "error": error_msg,
+            "question": data.get("question_text", ""),
+            "correct_option": data.get("correct_option", ""),
+            "explanation": "Sorry, there was an error generating the explanation. Please try again."
+        }
 
 
 @app.post("/explain_option")
 def explain_option(data: dict):
     """
-    Explain why a selected (incorrect) option is wrong and return similar PYQs found via FAISS.
+    Explain why a selected (incorrect) option is wrong using Gemini 1.5 Flash.
+    Also returns similar PYQs found via FAISS.
     """
     import urllib.parse
-    from random import choice
 
-    selected_option = data.get("selected_option", "")
-    question_text = data.get("question_text", "")
-
-    if not selected_option:
-        return {"error": "selected_option is required."}
-
-    mock_reasons = [
-        f"'{selected_option}' is incorrect because it represents a related but distinct concept from the question context.",
-        f"This choice is commonly confused with the correct answer but applies to a different principle or topic.",
-        f"'{selected_option}' addresses a similar idea, but not the one specifically asked here.",
-    ]
-    topics = [
-        "Indian Polity - Fundamental Rights",
-        "Economy - Fiscal Policy",
-        "History - National Movement",
-        "Geography - Climate and Vegetation",
-        "Science - Laws of Motion",
-    ]
-
-    similar_pyqs = []
     try:
-        k = cfg["backend"].get("explain_option_k", 5)
-        min_score = cfg["backend"].get("min_score", 0.35)
+        selected_option = data.get("selected_option", "")
+        question_text = data.get("question_text", "")
+        correct_option = data.get("correct_option", "")
+        option_a = data.get("option_a", "")
+        option_b = data.get("option_b", "")
+        option_c = data.get("option_c", "")
+        option_d = data.get("option_d", "")
+        exam = data.get("exam", None)
+        subject = data.get("subject", None)
+        topic = data.get("topic", None)
+        year = data.get("year", None)
 
-        # 🔍 Search by the incorrect option text itself
-        docs_and_scores = vector_store.similarity_search_with_score(selected_option, k=k)
+        if not selected_option:
+            return {"error": "selected_option is required."}
 
-        for d, score in docs_and_scores:
-            if score < min_score:
-                continue  # skip weak matches
+        if not question_text:
+            return {"error": "question_text is required."}
 
-            meta = d.metadata or {}
-            q_text = meta.get("question_text") or d.page_content
-            if "Options:" in q_text:
-                q_text = q_text.split("Options:")[0].strip()
+        # Determine which option is selected and which is correct
+        all_options = {
+            "option_a": option_a,
+            "option_b": option_b,
+            "option_c": option_c,
+            "option_d": option_d
+        }
+        
+        # Find selected option letter
+        selected_option_letter = ""
+        for letter, opt_text in [("A", option_a), ("B", option_b), ("C", option_c), ("D", option_d)]:
+            if opt_text and (selected_option.strip() in opt_text or opt_text in selected_option.strip()):
+                selected_option_letter = letter
+                break
+        
+        if not selected_option_letter:
+            # Try to extract from selected_option text
+            if "A" in selected_option.upper() or option_a and option_a in selected_option:
+                selected_option_letter = "A"
+            elif "B" in selected_option.upper() or option_b and option_b in selected_option:
+                selected_option_letter = "B"
+            elif "C" in selected_option.upper() or option_c and option_c in selected_option:
+                selected_option_letter = "C"
+            elif "D" in selected_option.upper() or option_d and option_d in selected_option:
+                selected_option_letter = "D"
+        
+        # Find correct option
+        correct_option_upper = (correct_option or "").upper().strip()
+        correct_option_text = ""
+        correct_option_letter = ""
+        if correct_option_upper == "A" or correct_option_upper == "A.":
+            correct_option_text = option_a
+            correct_option_letter = "A"
+        elif correct_option_upper == "B" or correct_option_upper == "B.":
+            correct_option_text = option_b
+            correct_option_letter = "B"
+        elif correct_option_upper == "C" or correct_option_upper == "C.":
+            correct_option_text = option_c
+            correct_option_letter = "C"
+        elif correct_option_upper == "D" or correct_option_upper == "D.":
+            correct_option_text = option_d
+            correct_option_letter = "D"
+        else:
+            # Try to match by text
+            for letter, opt_text in [("A", option_a), ("B", option_b), ("C", option_c), ("D", option_d)]:
+                if opt_text and correct_option and (correct_option.strip() in opt_text or opt_text in correct_option):
+                    correct_option_text = opt_text
+                    correct_option_letter = letter
+                    break
 
-            # 🧭 Encode the found question as the query param (so frontend loads that question)
-            query_param = urllib.parse.quote_plus(q_text)
-            ui_link = f"http://localhost:5173/?query={query_param}"
+        if not correct_option_text:
+            correct_option_text = correct_option or "Not specified"
+            correct_option_letter = correct_option_upper[0] if correct_option_upper else ""
 
-            similar_pyqs.append({
-                "question_id": meta.get("question_id"),
-                "question_text": q_text,
-                "score": round(float(score), 3),
-                "link": ui_link
-            })
-    except Exception as e:
-        print("⚠️ explain_option: FAISS search failed:", e)
+        # Create prompt
+        # Create prompt using prompt loader (loads from files)
+        prompt_loader = get_prompt_loader()
+        system_instruction, prompt = prompt_loader.build_wrong_option_prompt(
+            question_text=question_text,
+            wrong_option_text=selected_option,
+            wrong_option_letter=selected_option_letter or "?",
+            correct_option_text=correct_option_text,
+            correct_option_letter=correct_option_letter or "?",
+            all_options=all_options,
+            exam=exam,
+            subject=subject,
+            topic=topic,
+            year=year
+        )
+
+        # Extract question_id from data
+        question_id = data.get("question_id") or data.get("id") or data.get("json_question_id")
+        if question_id:
+            try:
+                question_id = int(question_id)
+            except (ValueError, TypeError):
+                question_id = None
+        
+        # Generate explanation using Gemini
+        llm_service = get_llm_service()
+        result = llm_service.generate_explanation(
+            prompt=prompt,
+            system_instruction=system_instruction,
+            question_id=question_id,
+            explanation_type="wrong_option",
+            option_letter=selected_option_letter or "?",
+            is_correct=False,
+            exam=exam
+        )
+        
+        # Extract explanation and cache info
+        reason = result.get("explanation", "")
+        from_cache = result.get("from_cache", False)
+        cache_key = result.get("cache_key", "")
+        source = result.get("source", "unknown")
+
+        # Find similar PYQs using FAISS
         similar_pyqs = []
+        try:
+            k = cfg["backend"].get("explain_option_k", 5)
+            min_score = cfg["backend"].get("min_score", 0.35)
 
-    return {
-        "question_text": question_text,
-        "selected_option": selected_option,
-        "reason": choice(mock_reasons),
-        "topic": choice(topics),
-        "similar_pyqs": similar_pyqs,
-    }
+            # 🔍 Search by the incorrect option text itself
+            docs_and_scores = vector_store.similarity_search_with_score(selected_option, k=k)
+
+            for d, score in docs_and_scores:
+                if score < min_score:
+                    continue  # skip weak matches
+
+                meta = d.metadata or {}
+                q_text = meta.get("question_text") or d.page_content
+                if "Options:" in q_text:
+                    q_text = q_text.split("Options:")[0].strip()
+
+                # 🧭 Encode the found question as the query param
+                query_param = urllib.parse.quote_plus(q_text)
+                ui_link = f"http://localhost:5173/?query={query_param}"
+
+                similar_pyqs.append({
+                    "question_id": meta.get("question_id"),
+                    "question_text": q_text,
+                    "score": round(float(score), 3),
+                    "link": ui_link
+                })
+        except Exception as e:
+            print("⚠️ explain_option: FAISS search failed:", e)
+            similar_pyqs = []
+
+        return {
+            "question_text": question_text,
+            "selected_option": selected_option,
+            "reason": reason,
+            "similar_pyqs": similar_pyqs,
+            "from_cache": from_cache,
+            "cache_key": cache_key,
+            "source": source
+        }
+
+    except Exception as e:
+        error_msg = f"Error generating explanation: {str(e)}"
+        print(f"❌ {error_msg}")
+        return {
+            "error": error_msg,
+            "question_text": data.get("question_text", ""),
+            "selected_option": data.get("selected_option", ""),
+            "reason": "Sorry, there was an error generating the explanation. Please try again.",
+            "similar_pyqs": []
+        }
 
 
 @app.post("/explain_concept")
 def explain_concept(data: dict):
     """
-    Explain the question and related concepts.
-    Mock implementation - later will call LLM to generate concept-focused explanations.
+    Explain the question and related concepts using Gemini 1.5 Flash.
     """
-    from random import choice
+    try:
+        question_text = data.get("question_text", "")
+        options = data.get("options", {})
+        correct_option = data.get("correct_option", "")
+        exam = data.get("exam", None)
+        subject = data.get("subject", None)
+        topic = data.get("topic", None)
+        year = data.get("year", None)
 
-    question_text = data.get("question_text", "")
-    options = data.get("options", {})
-    correct_option = data.get("correct_option", "")
+        # Handle options - can be dict or individual fields
+        if not options or not isinstance(options, dict):
+            options = {
+                "option_a": data.get("option_a", ""),
+                "option_b": data.get("option_b", ""),
+                "option_c": data.get("option_c", ""),
+                "option_d": data.get("option_d", "")
+            }
 
-    # Mock concept explanations
-    concept_examples = [
-        f"This question explores fundamental concepts related to **{correct_option}**. "
-        f"The question tests your understanding of core principles and their applications. "
-        f"Key concepts include the relationship between different options and how they relate to the main topic.",
+        if not question_text:
+            return {
+                "error": "question_text is required.",
+                "question_text": "",
+                "correct_option": correct_option,
+                "explanation": ""
+            }
+
+        # Create prompt using prompt loader (loads from files)
+        prompt_loader = get_prompt_loader()
+        system_instruction, prompt = prompt_loader.build_concept_prompt(
+            question_text=question_text,
+            options=options,
+            correct_option=correct_option,
+            exam=exam,
+            subject=subject,
+            topic=topic,
+            year=year
+        )
+
+        # Extract question_id from data
+        question_id = data.get("question_id") or data.get("id") or data.get("json_question_id")
+        if question_id:
+            try:
+                question_id = int(question_id)
+            except (ValueError, TypeError):
+                question_id = None
         
-        f"The question is designed to assess your knowledge of **{correct_option}** and related concepts. "
-        f"Understanding the underlying principles is crucial for answering similar questions. "
-        f"Each option represents a different aspect or interpretation of the concept.",
+        # Generate explanation using Gemini
+        llm_service = get_llm_service()
+        result = llm_service.generate_explanation(
+            prompt=prompt,
+            system_instruction=system_instruction,
+            question_id=question_id,
+            explanation_type="concept",
+            option_letter=None,
+            is_correct=None,
+            exam=exam
+        )
         
-        f"This question covers important concepts in the domain. The correct answer **{correct_option}** "
-        f"represents the most accurate understanding of the topic. To master this area, focus on understanding "
-        f"the fundamental principles and how they apply in different contexts.",
-    ]
+        # Extract explanation and cache info
+        explanation = result.get("explanation", "")
+        from_cache = result.get("from_cache", False)
+        cache_key = result.get("cache_key", "")
+        source = result.get("source", "unknown")
 
-    return {
-        "question_text": question_text,
-        "correct_option": correct_option,
-        "explanation": choice(concept_examples)
-    }
+        return {
+            "question_text": question_text,
+            "correct_option": correct_option,
+            "explanation": explanation,
+            "from_cache": from_cache,
+            "cache_key": cache_key,
+            "source": source
+        }
+
+    except Exception as e:
+        error_msg = f"Error generating explanation: {str(e)}"
+        print(f"❌ {error_msg}")
+        return {
+            "error": error_msg,
+            "question_text": data.get("question_text", ""),
+            "correct_option": data.get("correct_option", ""),
+            "explanation": "Sorry, there was an error generating the explanation. Please try again."
+        }
 
 
 if __name__ == "__main__":
