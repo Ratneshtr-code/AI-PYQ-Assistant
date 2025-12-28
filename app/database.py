@@ -143,6 +143,76 @@ class UserNote(Base):
         self.tags = json.dumps(tags) if tags else None
 
 
+class LLMExplanation(Base):
+    """Production cache for LLM explanations - shared across all users"""
+    __tablename__ = "llm_explanations"
+
+    id = Column(Integer, primary_key=True, index=True)
+    cache_key = Column(String, unique=True, nullable=False, index=True)  # Unique cache key
+    question_id = Column(Integer, nullable=True, index=True)
+    explanation_type = Column(String, nullable=False)  # "concept", "correct_option", "wrong_option"
+    option_letter = Column(String, nullable=True)  # A, B, C, D
+    is_correct = Column(Boolean, nullable=True)
+    
+    # LLM response data
+    response_text = Column(Text, nullable=False)  # The actual explanation text
+    model_name = Column(String, nullable=True)  # Model used (e.g., "gemini-2.0-flash-lite-001")
+    
+    # Metadata
+    exam = Column(String, nullable=True, index=True)
+    subject = Column(String, nullable=True)
+    topic = Column(String, nullable=True)
+    year = Column(Integer, nullable=True)
+    
+    # Usage tracking
+    hit_count = Column(Integer, default=0)  # How many times this cache was used
+    tokens_saved = Column(Integer, default=0)  # Estimated tokens saved (input + output)
+    
+    # Timestamps
+    created_at = Column(DateTime, default=datetime.utcnow, index=True)
+    last_used_at = Column(DateTime, nullable=True, index=True)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+
+class LLMUsageLog(Base):
+    """Track LLM token usage per user for billing/limits"""
+    __tablename__ = "llm_usage_logs"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
+    
+    # Request details
+    question_id = Column(Integer, nullable=True, index=True)
+    explanation_type = Column(String, nullable=False)  # "concept", "correct_option", "wrong_option"
+    option_letter = Column(String, nullable=True)
+    is_correct = Column(Boolean, nullable=True)
+    
+    # Token usage
+    input_tokens = Column(Integer, default=0)  # Tokens in prompt
+    output_tokens = Column(Integer, default=0)  # Tokens in response
+    total_tokens = Column(Integer, default=0)  # input + output
+    
+    # Cost tracking (optional - can calculate from tokens)
+    estimated_cost = Column(Float, default=0.0)  # Estimated cost in USD/INR
+    
+    # Cache status
+    from_cache = Column(Boolean, default=False)  # Whether response came from cache
+    cache_key = Column(String, nullable=True)  # Cache key if from cache
+    
+    # Model info
+    model_name = Column(String, nullable=True)
+    
+    # Metadata
+    exam = Column(String, nullable=True)
+    subject = Column(String, nullable=True)
+    
+    # Timestamps
+    created_at = Column(DateTime, default=datetime.utcnow, index=True)
+    
+    # Relationship
+    user = relationship("User", backref="llm_usage_logs")
+
+
 def init_db():
     """Initialize database tables"""
     Base.metadata.create_all(bind=engine)

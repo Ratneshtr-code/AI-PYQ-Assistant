@@ -25,6 +25,8 @@ except ImportError:
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from utils.config_loader import load_config
 from app.testing_cache import get_testing_cache
+from app.production_cache import get_production_cache
+from app.database import LLMUsageLog, SessionLocal
 
 
 class LLMService:
@@ -118,10 +120,20 @@ class LLMService:
         self.max_tokens = llm_config.get("max_tokens", 2000)
         self.model_name = model_name  # Store for cache key
         
-        # Initialize testing cache (enabled/disabled from config.yaml)
+        # Initialize caches (mutually exclusive - production cache takes precedence)
+        production_cache_config = llm_config.get("production_cache", {})
+        production_cache_enabled = production_cache_config.get("enabled", False)
+        
         testing_cache_config = llm_config.get("testing_cache", {})
-        cache_enabled = testing_cache_config.get("enabled", True)
-        self.testing_cache = get_testing_cache(enabled=cache_enabled)
+        testing_cache_enabled = testing_cache_config.get("enabled", True)
+        
+        # If production cache is enabled, disable testing cache
+        if production_cache_enabled:
+            testing_cache_enabled = False
+            print("⚠️ Production cache enabled - disabling testing cache")
+        
+        self.production_cache = get_production_cache(enabled=production_cache_enabled)
+        self.testing_cache = get_testing_cache(enabled=testing_cache_enabled)
         
         # Prompt dumping configuration
         prompt_dump_config = llm_config.get("prompt_dump", {})
@@ -131,10 +143,12 @@ class LLMService:
         if self.prompt_dump_enabled:
             self.prompt_dump_dir.mkdir(parents=True, exist_ok=True)
         
-        if cache_enabled:
+        if production_cache_enabled:
+            print(f"✅ LLM Service initialized with {model_name} (Production cache: ENABLED)")
+        elif testing_cache_enabled:
             print(f"✅ LLM Service initialized with {model_name} (Testing cache: ENABLED)")
         else:
-            print(f"✅ LLM Service initialized with {model_name} (Testing cache: DISABLED)")
+            print(f"✅ LLM Service initialized with {model_name} (No cache)")
     
     def generate_explanation(
         self, 
@@ -144,7 +158,11 @@ class LLMService:
         explanation_type: str = "concept",
         option_letter: Optional[str] = None,
         is_correct: Optional[bool] = None,
-        exam: Optional[str] = None
+        exam: Optional[str] = None,
+        user_id: Optional[int] = None,
+        subject: Optional[str] = None,
+        topic: Optional[str] = None,
+        year: Optional[int] = None
     ) -> Dict[str, Any]:
         """
         Generate explanation using Gemini API with retry logic for rate limits
@@ -187,28 +205,58 @@ class LLMService:
             explanation_type=explanation_type
         )
         
-        # Check testing cache first (saves tokens during development/testing)
-        # Use question-based cache key (same as production cache format)
-        cached_response = self.testing_cache.get(
-            question_id=question_id,
-            explanation_type=explanation_type,
-            option_letter=option_letter,
-            is_correct=is_correct
-        )
-        
-        if cached_response:
-            # Generate cache key for tracking
-            cache_key = self.testing_cache.generate_cache_key(
+        # Check production cache first (if enabled)
+        cached_data = None
+        if self.production_cache.enabled:
+            cached_data = self.production_cache.get(
                 question_id=question_id,
                 explanation_type=explanation_type,
                 option_letter=option_letter,
                 is_correct=is_correct
             )
+        
+        # If not in production cache, check testing cache
+        if not cached_data and self.testing_cache.enabled:
+            cached_response = self.testing_cache.get(
+                question_id=question_id,
+                explanation_type=explanation_type,
+                option_letter=option_letter,
+                is_correct=is_correct
+            )
+            if cached_response:
+                cached_data = {
+                    'response': cached_response,
+                    'cache_key': self.testing_cache.generate_cache_key(
+                        question_id=question_id,
+                        explanation_type=explanation_type,
+                        option_letter=option_letter,
+                        is_correct=is_correct
+                    ),
+                    'source': 'testing_cache'
+                }
+        
+        if cached_data:
+            # Log usage (from cache - no tokens used)
+            self._log_usage(
+                user_id=user_id,
+                question_id=question_id,
+                explanation_type=explanation_type,
+                option_letter=option_letter,
+                is_correct=is_correct,
+                from_cache=True,
+                cache_key=cached_data.get('cache_key'),
+                exam=exam,
+                subject=subject,
+                model=self.model_name,
+                input_tokens=0,
+                output_tokens=0
+            )
+            
             return {
-                "explanation": cached_response,
+                "explanation": cached_data['response'],
                 "from_cache": True,
-                "cache_key": cache_key,
-                "source": "testing_cache"
+                "cache_key": cached_data.get('cache_key'),
+                "source": cached_data.get('source', 'cache')
             }
         
         # Retry logic for rate limits
@@ -226,8 +274,22 @@ class LLMService:
                 # Extract text from response
                 explanation = response.text.strip()
                 
+                # Extract token usage from response (if available)
+                input_tokens = 0
+                output_tokens = 0
+                if hasattr(response, 'usage_metadata'):
+                    if hasattr(response.usage_metadata, 'prompt_token_count'):
+                        input_tokens = response.usage_metadata.prompt_token_count
+                    if hasattr(response.usage_metadata, 'candidates_token_count'):
+                        output_tokens = response.usage_metadata.candidates_token_count
+                
                 # Generate cache key for tracking
-                cache_key = self.testing_cache.generate_cache_key(
+                cache_key = self.production_cache.generate_cache_key(
+                    question_id=question_id,
+                    explanation_type=explanation_type,
+                    option_letter=option_letter,
+                    is_correct=is_correct
+                ) if self.production_cache.enabled else self.testing_cache.generate_cache_key(
                     question_id=question_id,
                     explanation_type=explanation_type,
                     option_letter=option_letter,
@@ -242,23 +304,58 @@ class LLMService:
                     cache_key=cache_key
                 )
                 
-                # Save to testing cache (for future testing without burning tokens)
-                # Use question-based cache key (same as production cache format)
-                self.testing_cache.set(
+                # Save to production cache (if enabled)
+                if self.production_cache.enabled:
+                    self.production_cache.set(
+                        question_id=question_id,
+                        explanation_type=explanation_type,
+                        response=explanation,
+                        option_letter=option_letter,
+                        is_correct=is_correct,
+                        model=self.model_name,
+                        exam=exam,
+                        subject=subject,
+                        topic=topic,
+                        year=year,
+                        input_tokens=input_tokens,
+                        output_tokens=output_tokens
+                    )
+                
+                # Save to testing cache (if enabled and production cache is not)
+                if self.testing_cache.enabled and not self.production_cache.enabled:
+                    self.testing_cache.set(
+                        question_id=question_id,
+                        explanation_type=explanation_type,
+                        response=explanation,
+                        option_letter=option_letter,
+                        is_correct=is_correct,
+                        model=self.model_name,
+                        exam=exam
+                    )
+                
+                # Log usage (from API - tokens used)
+                self._log_usage(
+                    user_id=user_id,
                     question_id=question_id,
                     explanation_type=explanation_type,
-                    response=explanation,
                     option_letter=option_letter,
                     is_correct=is_correct,
+                    from_cache=False,
+                    cache_key=cache_key,
+                    exam=exam,
+                    subject=subject,
                     model=self.model_name,
-                    exam=exam
+                    input_tokens=input_tokens,
+                    output_tokens=output_tokens
                 )
                 
                 return {
                     "explanation": explanation,
                     "from_cache": False,
                     "cache_key": cache_key,
-                    "source": "llm_api"
+                    "source": "llm_api",
+                    "input_tokens": input_tokens,
+                    "output_tokens": output_tokens
                 }
                 
             except Exception as e:
@@ -393,6 +490,66 @@ class LLMService:
             print(f"📝 Response dumped to: {filepath}")
         except Exception as e:
             print(f"⚠️ Failed to dump response: {e}")
+    
+    def _log_usage(
+        self,
+        user_id: Optional[int],
+        question_id: Optional[int],
+        explanation_type: str,
+        option_letter: Optional[str],
+        is_correct: Optional[bool],
+        from_cache: bool,
+        cache_key: Optional[str],
+        exam: Optional[str],
+        subject: Optional[str],
+        model: Optional[str],
+        input_tokens: int,
+        output_tokens: int
+    ):
+        """
+        Log LLM usage to database for tracking and billing
+        
+        Args:
+            user_id: User ID (None for anonymous/unauthenticated)
+            question_id: Question ID
+            explanation_type: Type of explanation
+            option_letter: Option letter if applicable
+            is_correct: Whether option is correct
+            from_cache: Whether response came from cache
+            cache_key: Cache key used
+            exam: Exam name
+            subject: Subject name
+            model: Model name
+            input_tokens: Input token count
+            output_tokens: Output token count
+        """
+        # Log usage even for anonymous users (user_id=None)
+        # This allows tracking total API usage even without authentication
+        
+        db = SessionLocal()
+        try:
+            usage_log = LLMUsageLog(
+                user_id=user_id,
+                question_id=question_id,
+                explanation_type=explanation_type,
+                option_letter=option_letter,
+                is_correct=is_correct,
+                input_tokens=input_tokens,
+                output_tokens=output_tokens,
+                total_tokens=input_tokens + output_tokens,
+                from_cache=from_cache,
+                cache_key=cache_key,
+                model_name=model,
+                exam=exam,
+                subject=subject
+            )
+            db.add(usage_log)
+            db.commit()
+        except Exception as e:
+            print(f"⚠️ Failed to log usage: {e}")
+            db.rollback()
+        finally:
+            db.close()
 
 
 # Global instance

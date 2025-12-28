@@ -161,3 +161,18 @@ async def get_current_active_user(
 ) -> User:
     """Get current active user"""
     return current_user
+
+
+def get_user_id_from_session(session_id: Optional[str], db: Session) -> Optional[int]:
+    """
+    Get user ID from session if available (optional auth - doesn't raise error)
+    Returns None if not authenticated
+    """
+    if not session_id:
+        return None
+    
+    try:
+        user = get_session_user(session_id, db)
+        return user.id if user else None
+    except Exception:
+        return None

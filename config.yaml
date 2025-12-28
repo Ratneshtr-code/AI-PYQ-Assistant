@@ -30,18 +30,18 @@ llm:
   temperature: 0.7  # Creativity level (0.0-1.0)
   max_tokens: 2000  # Maximum response length
   
-  # ==================== TESTING CACHE (Development Only) ====================
-  # ⚠️ IMPORTANT: Testing cache is DIFFERENT from production cache!
+  # ==================== CACHING CONFIGURATION ====================
+  # ⚠️ IMPORTANT: Only ONE cache should be enabled at a time!
   # 
-  # TESTING CACHE (Current):
+  # TESTING CACHE (Development Only):
   #   - Storage: JSON file (data/testing_cache/llm_responses.json)
   #   - Purpose: Developer convenience during testing
   #   - Scope: Local to developer machine
-  #   - Cache Key: Prompt + Model + Temperature (exact match)
+  #   - Cache Key: Question ID + Option + Type (question-based)
   #   - Use Case: Testing same questions repeatedly without burning tokens
   #   - Management: python manage_testing_cache.py
   #
-  # PRODUCTION CACHE (To be implemented):
+  # PRODUCTION CACHE (Real Users):
   #   - Storage: SQLite database table (llm_explanations)
   #   - Purpose: Cost optimization for real users
   #   - Scope: Shared across all users
@@ -50,11 +50,15 @@ llm:
   #   - Management: Database queries
   #
   # QUICK SWITCH:
-  #   🧪 TESTING MODE: enabled: true  (saves developer tokens)
-  #   🚀 PRODUCTION MODE: enabled: false  (use production cache instead)
+  #   🧪 TESTING MODE: testing_cache.enabled: true, production_cache.enabled: false
+  #   🚀 PRODUCTION MODE: testing_cache.enabled: false, production_cache.enabled: true
   testing_cache:
-    enabled: true  # true = Testing mode, false = Production mode (use SQLite cache)
+    enabled: false  # Set to false when using production cache
     cache_dir: "./data/testing_cache"  # Directory for testing cache JSON files
+  
+  production_cache:
+    enabled: true  # Set to true for production (disables testing cache automatically)
+    # When enabled, automatically disables testing_cache
   
   # ==================== PROMPT DUMPING (For Review) ====================
   # Dumps actual prompts and responses sent to/received from LLM

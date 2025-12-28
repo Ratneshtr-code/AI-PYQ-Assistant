@@ -9,6 +9,8 @@ A single command-line tool to manage all aspects of the AI PYQ project:
 - Manage testing cache
 - Review prompts
 - Analyze dataset
+- Manage users and subscriptions
+- View LLM token usage
 - And more...
 
 Usage:
@@ -347,6 +349,168 @@ def list_gemini_models():
         return True
 
 
+def manage_users():
+    """Manage users and view subscription information"""
+    print_header("User Management")
+    
+    # Import user management functions
+    try:
+        from manage_users import list_users, view_user_details, search_users
+        from app.database import init_db
+        
+        # Initialize database
+        init_db()
+        
+        while True:
+            print(f"\n{Colors.BOLD}User Management Options:{Colors.ENDC}\n")
+            print(f"  {Colors.CYAN}1.{Colors.ENDC} List all users")
+            print(f"  {Colors.CYAN}2.{Colors.ENDC} View user details")
+            print(f"  {Colors.CYAN}3.{Colors.ENDC} Search users")
+            print(f"  {Colors.CYAN}0.{Colors.ENDC} Back to main menu")
+            print()
+            
+            choice = input(f"{Colors.BOLD}Enter choice (0-3):{Colors.ENDC} ").strip()
+            
+            if choice == "0":
+                break
+            elif choice == "1":
+                list_users()
+            elif choice == "2":
+                try:
+                    user_id = int(input("Enter user ID: ").strip())
+                    view_user_details(user_id)
+                except ValueError:
+                    print_error("Invalid user ID")
+            elif choice == "3":
+                query = input("Enter search query (username or email): ").strip()
+                if query:
+                    search_users(query)
+                else:
+                    print_error("Query cannot be empty")
+            else:
+                print_error(f"Invalid choice: {choice}")
+            
+            if choice != "0":
+                input(f"\n{Colors.YELLOW}Press Enter to continue...{Colors.ENDC}")
+        
+        return True
+    except ImportError as e:
+        print_error(f"Failed to import user management functions: {e}")
+        print_info("Make sure manage_users.py exists in the project root")
+        return False
+    except KeyboardInterrupt:
+        return True
+
+
+def manage_token_usage():
+    """Manage and view LLM token usage"""
+    print_header("Token Usage Management")
+    
+    # Import token usage functions
+    try:
+        from manage_token_usage import user_token_summary, user_detailed_usage, top_users_by_usage
+        from app.database import init_db
+        
+        # Initialize database
+        init_db()
+        
+        while True:
+            print(f"\n{Colors.BOLD}Token Usage Options:{Colors.ENDC}\n")
+            print(f"  {Colors.CYAN}1.{Colors.ENDC} Token usage summary (all users)")
+            print(f"  {Colors.CYAN}2.{Colors.ENDC} Token usage summary (last N days)")
+            print(f"  {Colors.CYAN}3.{Colors.ENDC} Detailed usage for a user")
+            print(f"  {Colors.CYAN}4.{Colors.ENDC} Top users by token usage")
+            print(f"  {Colors.CYAN}0.{Colors.ENDC} Back to main menu")
+            print()
+            
+            choice = input(f"{Colors.BOLD}Enter choice (0-4):{Colors.ENDC} ").strip()
+            
+            if choice == "0":
+                break
+            elif choice == "1":
+                user_token_summary()
+            elif choice == "2":
+                try:
+                    days = int(input("Enter number of days: ").strip())
+                    user_token_summary(days=days)
+                except ValueError:
+                    print_error("Invalid number of days")
+            elif choice == "3":
+                try:
+                    user_id = int(input("Enter user ID: ").strip())
+                    days_input = input("Enter number of days (default 30): ").strip()
+                    days = int(days_input) if days_input else 30
+                    user_detailed_usage(user_id, days)
+                except ValueError:
+                    print_error("Invalid user ID or days")
+            elif choice == "4":
+                try:
+                    limit_input = input("Enter number of users to show (default 10): ").strip()
+                    limit = int(limit_input) if limit_input else 10
+                    days_input = input("Enter number of days (leave empty for all time): ").strip()
+                    days = int(days_input) if days_input else None
+                    top_users_by_usage(limit, days)
+                except ValueError:
+                    print_error("Invalid number")
+            else:
+                print_error(f"Invalid choice: {choice}")
+            
+            if choice != "0":
+                input(f"\n{Colors.YELLOW}Press Enter to continue...{Colors.ENDC}")
+        
+        return True
+    except ImportError as e:
+        print_error(f"Failed to import token usage functions: {e}")
+        print_info("Make sure manage_token_usage.py exists in the project root")
+        return False
+    except KeyboardInterrupt:
+        return True
+
+
+def manage_production_cache():
+    """Manage production cache (similar to testing cache)"""
+    print_header("Production Cache Management")
+    
+    script_path = get_project_root() / "manage_production_cache.py"
+    if not script_path.exists():
+        print_error(f"Script not found: {script_path}")
+        return False
+    
+    print_info("Opening production cache manager...")
+    print()
+    
+    try:
+        run_python_script(script_path, check=True)
+        return True
+    except subprocess.CalledProcessError as e:
+        print_error(f"Failed to run production cache manager: {e}")
+        return False
+    except KeyboardInterrupt:
+        return True
+
+
+def show_overall_summary():
+    """Show overall system summary"""
+    print_header("Overall System Summary")
+    
+    script_path = get_project_root() / "overall_summary.py"
+    if not script_path.exists():
+        print_error(f"Script not found: {script_path}")
+        return False
+    
+    print_info("Generating overall summary...")
+    print()
+    
+    try:
+        run_python_script(script_path, check=True)
+        return True
+    except subprocess.CalledProcessError as e:
+        print_error(f"Failed to generate summary: {e}")
+        return False
+    except KeyboardInterrupt:
+        return True
+
+
 def show_project_status():
     """Show project status and configuration"""
     print_header("Project Status")
@@ -421,6 +585,10 @@ def show_main_menu():
         ("6", "Analyze Dataset", "Analyze dataset statistics"),
         ("7", "List Gemini Models", "List available Gemini models"),
         ("8", "Project Status", "Show project file/directory status"),
+        ("9", "Manage Users", "View users and subscription information"),
+        ("10", "Manage Token Usage", "View LLM token usage per user"),
+        ("11", "Manage Production Cache", "View/manage production cache entries"),
+        ("12", "Overall Summary", "Show overall system configuration and status"),
         ("0", "Exit", "Exit the manager"),
     ]
     
@@ -429,7 +597,7 @@ def show_main_menu():
         print(f"  {Colors.CYAN}{num}.{Colors.ENDC} {Colors.BOLD}{title}{Colors.ENDC}")
         print(f"     {Colors.YELLOW}→{Colors.ENDC} {desc}\n")
     
-    print(f"{Colors.BOLD}Enter your choice (0-8):{Colors.ENDC} ", end="")
+    print(f"{Colors.BOLD}Enter your choice (0-12):{Colors.ENDC} ", end="")
 
 
 def main():
@@ -458,13 +626,17 @@ def main():
             6: analyze_dataset,
             7: list_gemini_models,
             8: show_project_status,
+            9: manage_users,
+            10: manage_token_usage,
+            11: manage_production_cache,
+            12: show_overall_summary,
         }
         
         if args.direct in operations:
             operations[args.direct]()
         else:
             print_error(f"Invalid operation number: {args.direct}")
-            print_info("Valid numbers: 1-8")
+            print_info("Valid numbers: 1-12")
             sys.exit(1)
         return
     
@@ -493,9 +665,17 @@ def main():
                 list_gemini_models()
             elif choice == "8":
                 show_project_status()
+            elif choice == "9":
+                manage_users()
+            elif choice == "10":
+                manage_token_usage()
+            elif choice == "11":
+                manage_production_cache()
+            elif choice == "12":
+                show_overall_summary()
             else:
                 print_error(f"Invalid choice: {choice}")
-                print_info("Please enter a number between 0-8")
+                print_info("Please enter a number between 0-12")
             
             if choice != "0":
                 input(f"\n{Colors.YELLOW}Press Enter to continue...{Colors.ENDC}")

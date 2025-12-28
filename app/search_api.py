@@ -1,5 +1,5 @@
 # app/search_api.py
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, Query, Cookie, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from pathlib import Path
@@ -9,6 +9,7 @@ from random import choice
 import urllib.parse
 import pandas as pd
 from typing import Optional
+from sqlalchemy.orm import Session
 
 # add utils path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -19,7 +20,8 @@ from langchain_community.vectorstores import FAISS
 from langchain_community.embeddings import HuggingFaceEmbeddings
 
 # Authentication
-from app.database import init_db
+from app.database import init_db, get_db
+from app.auth import get_user_id_from_session
 from app.auth_api import router as auth_router
 from app.admin_api import router as admin_router
 from app.notes_api import router as notes_router
@@ -1002,7 +1004,11 @@ def get_ui_config():
 
 
 @app.post("/explain")
-def explain_question(data: dict):
+def explain_question(
+    data: dict,
+    session_id: Optional[str] = Cookie(None),
+    db: Session = Depends(get_db)
+):
     """
     Explain why the correct option is correct using Gemini 1.5 Flash.
     """
@@ -1092,7 +1098,11 @@ def explain_question(data: dict):
             explanation_type="correct_option",
             option_letter=correct_option_letter,
             is_correct=True,
-            exam=exam
+            exam=exam,
+            subject=subject,
+            topic=topic,
+            year=year,
+            user_id=get_user_id_from_session(session_id, db) if session_id else None
         )
         
         # Extract explanation and cache info
@@ -1100,6 +1110,17 @@ def explain_question(data: dict):
         from_cache = result.get("from_cache", False)
         cache_key = result.get("cache_key", "")
         source = result.get("source", "unknown")
+        
+        # Log cache source for debugging
+        if from_cache:
+            if source == "production_cache":
+                print(f"✅ Response from PRODUCTION cache (SQLite): {cache_key}")
+            elif source == "testing_cache":
+                print(f"✅ Response from TESTING cache (JSON file): {cache_key}")
+            else:
+                print(f"✅ Response from cache: {cache_key} (source: {source})")
+        else:
+            print(f"🔄 Fresh LLM API response (no cache)")
 
         return {
             "question": question_text,
@@ -1122,7 +1143,11 @@ def explain_question(data: dict):
 
 
 @app.post("/explain_option")
-def explain_option(data: dict):
+def explain_option(
+    data: dict,
+    session_id: Optional[str] = Cookie(None),
+    db: Session = Depends(get_db)
+):
     """
     Explain why a selected (incorrect) option is wrong using Gemini 1.5 Flash.
     Also returns similar PYQs found via FAISS.
@@ -1235,7 +1260,11 @@ def explain_option(data: dict):
             explanation_type="wrong_option",
             option_letter=selected_option_letter or "?",
             is_correct=False,
-            exam=exam
+            exam=exam,
+            subject=subject,
+            topic=topic,
+            year=year,
+            user_id=get_user_id_from_session(session_id, db) if session_id else None
         )
         
         # Extract explanation and cache info
@@ -1243,6 +1272,17 @@ def explain_option(data: dict):
         from_cache = result.get("from_cache", False)
         cache_key = result.get("cache_key", "")
         source = result.get("source", "unknown")
+        
+        # Log cache source for debugging
+        if from_cache:
+            if source == "production_cache":
+                print(f"✅ Response from PRODUCTION cache (SQLite): {cache_key}")
+            elif source == "testing_cache":
+                print(f"✅ Response from TESTING cache (JSON file): {cache_key}")
+            else:
+                print(f"✅ Response from cache: {cache_key} (source: {source})")
+        else:
+            print(f"🔄 Fresh LLM API response (no cache)")
 
         # Find similar PYQs using FAISS
         similar_pyqs = []
@@ -1299,7 +1339,11 @@ def explain_option(data: dict):
 
 
 @app.post("/explain_concept")
-def explain_concept(data: dict):
+def explain_concept(
+    data: dict,
+    session_id: Optional[str] = Cookie(None),
+    db: Session = Depends(get_db)
+):
     """
     Explain the question and related concepts using Gemini 1.5 Flash.
     """
@@ -1358,7 +1402,11 @@ def explain_concept(data: dict):
             explanation_type="concept",
             option_letter=None,
             is_correct=None,
-            exam=exam
+            exam=exam,
+            subject=subject,
+            topic=topic,
+            year=year,
+            user_id=get_user_id_from_session(session_id, db) if session_id else None
         )
         
         # Extract explanation and cache info
@@ -1366,6 +1414,17 @@ def explain_concept(data: dict):
         from_cache = result.get("from_cache", False)
         cache_key = result.get("cache_key", "")
         source = result.get("source", "unknown")
+        
+        # Log cache source for debugging
+        if from_cache:
+            if source == "production_cache":
+                print(f"✅ Response from PRODUCTION cache (SQLite): {cache_key}")
+            elif source == "testing_cache":
+                print(f"✅ Response from TESTING cache (JSON file): {cache_key}")
+            else:
+                print(f"✅ Response from cache: {cache_key} (source: {source})")
+        else:
+            print(f"🔄 Fresh LLM API response (no cache)")
 
         return {
             "question_text": question_text,
