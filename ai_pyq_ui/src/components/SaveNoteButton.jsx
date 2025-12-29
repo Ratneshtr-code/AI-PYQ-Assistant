@@ -1,7 +1,7 @@
 // src/components/SaveNoteButton.jsx
 import { useState, useEffect } from "react";
 import { saveNote, checkSaved } from "../utils/notesApi";
-import { isAuthenticated } from "../utils/auth";
+import { isAuthenticated, hasPremium } from "../utils/auth";
 import { showToast } from "../App";
 
 export default function SaveNoteButton({
@@ -21,15 +21,18 @@ export default function SaveNoteButton({
     const [isSaving, setIsSaving] = useState(false);
     const [isChecking, setIsChecking] = useState(true);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isPremium, setIsPremium] = useState(false);
 
-    // Check if user is logged in
+    // Check if user is logged in and has premium
     useEffect(() => {
-        setIsLoggedIn(isAuthenticated());
+        const loggedIn = isAuthenticated();
+        setIsLoggedIn(loggedIn);
+        setIsPremium(loggedIn && hasPremium());
     }, []);
 
-    // Check if already saved on mount
+    // Check if already saved on mount (only for premium users)
     useEffect(() => {
-        if (!isLoggedIn || !questionData) {
+        if (!isLoggedIn || !isPremium || !questionData) {
             setIsChecking(false);
             return;
         }
@@ -52,12 +55,24 @@ export default function SaveNoteButton({
         };
 
         checkIfSaved();
-    }, [isLoggedIn, questionData, explanationType, optionLetter]);
+    }, [isLoggedIn, isPremium, questionData, explanationType, optionLetter]);
 
     const handleSave = async () => {
         if (!isLoggedIn) {
-            // Redirect to login or show message
-            window.location.href = "/login";
+            // Redirect to login
+            showToast("Please log in to save notes", "info", 3000);
+            setTimeout(() => {
+                window.location.href = "/login";
+            }, 1000);
+            return;
+        }
+
+        if (!isPremium) {
+            // Show premium required message
+            showToast("Premium subscription required to save notes. Please upgrade to premium.", "info", 4000);
+            setTimeout(() => {
+                window.location.href = "/account";
+            }, 1500);
             return;
         }
 
@@ -118,10 +133,22 @@ export default function SaveNoteButton({
         }
     };
 
-    // Don't show button if user is not logged in
-    if (!isLoggedIn) {
-        return null;
-    }
+    // Determine if button should be disabled
+    const isDisabled = !isLoggedIn || !isPremium || isSaving || isChecking || isSaved;
+    
+    // Get tooltip text based on user status
+    const getTooltipText = () => {
+        if (!isLoggedIn) {
+            return "Please log in to save notes";
+        }
+        if (!isPremium) {
+            return "Premium subscription required to save notes. Click to upgrade.";
+        }
+        if (isSaved) {
+            return "Already saved to My Notes";
+        }
+        return "Save to My Notes";
+    };
 
     // Size classes
     const sizeClasses = {
@@ -139,28 +166,36 @@ export default function SaveNoteButton({
     // Check if className contains custom styling (like for explanation window)
     const hasCustomStyling = className.includes("!text-white") || className.includes("explanation-save-btn");
     
+    // Determine button styling based on state
+    const getButtonStyling = () => {
+        if (isSaved) {
+            return "bg-yellow-100 text-yellow-700 hover:bg-yellow-200 border border-yellow-300";
+        }
+        if (!isLoggedIn || !isPremium) {
+            return "bg-gray-200 text-gray-500 border border-gray-300 cursor-not-allowed opacity-60";
+        }
+        return "bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-300";
+    };
+    
     const buttonClass = hasCustomStyling
-        ? `${className} ${sizeClasses[size]} flex items-center gap-1.5 rounded-md font-medium transition-all duration-200 ${isSaving || isChecking ? "opacity-50 cursor-not-allowed" : "cursor-pointer"} disabled:opacity-50 disabled:cursor-not-allowed`
+        ? `${className} ${sizeClasses[size]} flex items-center gap-1.5 rounded-md font-medium transition-all duration-200 ${isDisabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"} disabled:opacity-50 disabled:cursor-not-allowed`
         : `
             ${className}
             ${sizeClasses[size]}
             flex items-center gap-1.5
             rounded-md font-medium
             transition-all duration-200
-            ${isSaved
-                ? "bg-yellow-100 text-yellow-700 hover:bg-yellow-200 border border-yellow-300"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-300"
-            }
-            ${isSaving || isChecking ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
+            ${getButtonStyling()}
+            ${isDisabled ? "cursor-not-allowed" : "cursor-pointer"}
             disabled:opacity-50 disabled:cursor-not-allowed
         `.trim().replace(/\s+/g, " ");
 
     return (
         <button
             onClick={handleSave}
-            disabled={isSaving || isChecking || isSaved}
+            disabled={isDisabled}
             className={buttonClass}
-            title={isSaved ? "Already saved to My Notes" : "Save to My Notes"}
+            title={getTooltipText()}
         >
             {isChecking ? (
                 <>

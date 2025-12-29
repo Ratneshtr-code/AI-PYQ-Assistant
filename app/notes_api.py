@@ -31,6 +31,8 @@ class NoteSaveRequest(BaseModel):
 class NoteUpdateRequest(BaseModel):
     tags: Optional[List[str]] = None
     custom_notes: Optional[str] = None
+    custom_heading: Optional[str] = None
+    comments: Optional[str] = None
 
 
 class NoteResponse(BaseModel):
@@ -48,6 +50,8 @@ class NoteResponse(BaseModel):
     year: Optional[int]
     tags: List[str]
     custom_notes: Optional[str]
+    custom_heading: Optional[str]
+    comments: Optional[str]
     created_at: datetime
     updated_at: datetime
 
@@ -85,8 +89,11 @@ async def save_note(
 ):
     """
     Save a question or explanation note.
-    Available to all authenticated users (free users can save but can't view).
+    Requires premium subscription.
     """
+    # Check premium access
+    check_premium_access(current_user)
+    
     print(f"📝 Save note request from user {current_user.id} ({current_user.email})")
     print(f"   Note type: {note_data.note_type}")
     try:
@@ -246,6 +253,8 @@ async def get_notes(
             year=note.year,
             tags=note.get_tags(),
             custom_notes=note.custom_notes,
+            custom_heading=note.custom_heading,
+            comments=note.comments,
             created_at=note.created_at,
             updated_at=note.updated_at
         ))
@@ -296,6 +305,8 @@ async def get_note(
         year=note.year,
         tags=note.get_tags(),
         custom_notes=note.custom_notes,
+        custom_heading=note.custom_heading,
+        comments=note.comments,
         created_at=note.created_at,
         updated_at=note.updated_at
     )
@@ -354,6 +365,10 @@ async def update_note(
         note.set_tags(note_update.tags)
     if note_update.custom_notes is not None:
         note.custom_notes = note_update.custom_notes
+    if note_update.custom_heading is not None:
+        note.custom_heading = note_update.custom_heading
+    if note_update.comments is not None:
+        note.comments = note_update.comments
     
     db.commit()
     db.refresh(note)
@@ -373,6 +388,8 @@ async def update_note(
         year=note.year,
         tags=note.get_tags(),
         custom_notes=note.custom_notes,
+        custom_heading=note.custom_heading,
+        comments=note.comments,
         created_at=note.created_at,
         updated_at=note.updated_at
     )

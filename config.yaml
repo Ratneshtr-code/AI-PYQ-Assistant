@@ -72,3 +72,5 @@ ui:
   port: 8501
   # Maximum number of exams that can be compared in Cross-Exam Insights
   max_exam_comparison: 3  # Default: 3, can be adjusted based on UI/UX requirements
+  # Default view mode for My Notes page: "compact" | "grid" | "list"
+  default_notes_view: "grid"  # Default: "grid"

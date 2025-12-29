@@ -30,14 +30,34 @@ export default function MyNotesPage() {
         sort_order: "desc",
     });
     
-    // View mode
-    const [viewMode, setViewMode] = useState("grid"); // "grid" | "list"
+    // View mode - Default: "grid" (can be changed in config.yaml: ui.default_notes_view)
+    const [viewMode, setViewMode] = useState("grid"); // "grid" | "list" | "compact"
     
     // Selection for bulk actions
     const [selectedNotes, setSelectedNotes] = useState(new Set());
     
     // Sidebar collapse state
     const [primarySidebarCollapsed, setPrimarySidebarCollapsed] = useState(false);
+
+    // Fetch UI config on mount to set default view mode
+    useEffect(() => {
+        const fetchUIConfig = async () => {
+            try {
+                const response = await fetch("/ui/config", {
+                    credentials: "include",
+                });
+                if (response.ok) {
+                    const config = await response.json();
+                    if (config.default_notes_view && ["grid", "list", "compact"].includes(config.default_notes_view)) {
+                        setViewMode(config.default_notes_view);
+                    }
+                }
+            } catch (error) {
+                console.log("Could not load UI config, using default view mode");
+            }
+        };
+        fetchUIConfig();
+    }, []);
 
     useEffect(() => {
         fetchNotes();
@@ -253,12 +273,26 @@ export default function MyNotesPage() {
                             {/* View Mode Toggle */}
                             <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
                                 <button
+                                    onClick={() => setViewMode("compact")}
+                                    className={`px-3 py-1 rounded text-sm transition-colors ${
+                                        viewMode === "compact"
+                                            ? "bg-white text-gray-900 shadow-sm"
+                                            : "text-gray-600 hover:text-gray-900"
+                                    }`}
+                                    title="Compact View"
+                                >
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                                    </svg>
+                                </button>
+                                <button
                                     onClick={() => setViewMode("grid")}
-                                    className={`px-3 py-1 rounded text-sm ${
+                                    className={`px-3 py-1 rounded text-sm transition-colors ${
                                         viewMode === "grid"
                                             ? "bg-white text-gray-900 shadow-sm"
                                             : "text-gray-600 hover:text-gray-900"
                                     }`}
+                                    title="Grid View"
                                 >
                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
@@ -266,14 +300,15 @@ export default function MyNotesPage() {
                                 </button>
                                 <button
                                     onClick={() => setViewMode("list")}
-                                    className={`px-3 py-1 rounded text-sm ${
+                                    className={`px-3 py-1 rounded text-sm transition-colors ${
                                         viewMode === "list"
                                             ? "bg-white text-gray-900 shadow-sm"
                                             : "text-gray-600 hover:text-gray-900"
                                     }`}
+                                    title="List View"
                                 >
                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                                     </svg>
                                 </button>
                             </div>
@@ -414,11 +449,13 @@ export default function MyNotesPage() {
                     </div>
                 ) : (
                     <>
-                        {/* Notes Grid/List */}
+                        {/* Notes Grid/List/Compact */}
                         <div
                             className={
-                                viewMode === "grid"
-                                    ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                                viewMode === "compact"
+                                    ? "space-y-2"
+                                    : viewMode === "grid"
+                                    ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
                                     : "space-y-4"
                             }
                         >
@@ -427,9 +464,11 @@ export default function MyNotesPage() {
                                     key={note.id}
                                     note={note}
                                     viewMode={viewMode}
+                                    compactMode={viewMode === "compact"}
                                     isSelected={selectedNotes.has(note.id)}
                                     onSelect={() => toggleNoteSelection(note.id)}
                                     onDelete={handleDelete}
+                                    onUpdate={fetchNotes}
                                 />
                             ))}
                         </div>

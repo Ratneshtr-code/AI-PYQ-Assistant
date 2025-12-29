@@ -108,6 +108,8 @@ class UserNote(Base):
     # User customization
     tags = Column(Text, nullable=True)  # JSON array of tags
     custom_notes = Column(Text, nullable=True)  # User's personal notes
+    custom_heading = Column(Text, nullable=True)  # User's custom heading/title for the note
+    comments = Column(Text, nullable=True)  # User's comments on the note
     
     # Timestamps
     created_at = Column(DateTime, default=datetime.utcnow, index=True)

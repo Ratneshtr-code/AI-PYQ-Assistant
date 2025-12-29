@@ -11,7 +11,7 @@ from sqlalchemy import func
 # Add project root to path
 sys.path.append(str(Path(__file__).parent))
 
-from app.database import SessionLocal, User, SubscriptionPlan, init_db
+from app.database import SessionLocal, User, SubscriptionPlan, UserNote, init_db
 
 
 def format_date(date):
@@ -34,9 +34,9 @@ def list_users():
             print("\n📭 No users found")
             return
         
-        print("\n" + "=" * 120)
-        print(f"{'ID':<6} {'Username':<20} {'Email':<30} {'Plan':<12} {'Status':<10} {'Created':<20}")
-        print("=" * 120)
+        print("\n" + "=" * 140)
+        print(f"{'ID':<6} {'Username':<20} {'Email':<30} {'Plan':<12} {'Saved Notes':<12} {'Status':<25} {'Created':<20}")
+        print("=" * 140)
         
         for user in users:
             plan = user.subscription_plan.value if user.subscription_plan else "N/A"
@@ -52,9 +52,12 @@ def list_users():
                         expiry = format_date(user.subscription_end_date)
                         status = f"Valid until {expiry}"
             
-            print(f"{user.id:<6} {user.username[:18]:<20} {user.email[:28]:<30} {plan:<12} {status:<10} {created:<20}")
+            # Count user's saved notes
+            notes_count = db.query(func.count(UserNote.id)).filter(UserNote.user_id == user.id).scalar() or 0
+            
+            print(f"{user.id:<6} {user.username[:18]:<20} {user.email[:28]:<30} {plan:<12} {notes_count:<12} {status[:24]:<25} {created:<20}")
         
-        print("=" * 120)
+        print("=" * 140)
         print(f"\nTotal users: {len(users)}")
         
         # Statistics

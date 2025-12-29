@@ -273,6 +273,23 @@ def load_dataframe():
         return None
 
 
+@app.get("/ui/config")
+async def get_ui_config():
+    """Get UI configuration from config.yaml"""
+    try:
+        cfg = load_config()
+        ui_config = cfg.get("ui", {})
+        return {
+            "default_notes_view": ui_config.get("default_notes_view", "grid"),
+            "max_exam_comparison": ui_config.get("max_exam_comparison", 3)
+        }
+    except Exception as e:
+        # Return defaults if config can't be loaded
+        return {
+            "default_notes_view": "grid",
+            "max_exam_comparison": 3
+        }
+
 @app.get("/filters")
 def get_filters():
     """Return available exams (and later subjects, years)"""

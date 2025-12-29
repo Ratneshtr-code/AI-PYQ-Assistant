@@ -53,6 +53,15 @@ export const isAuthenticated = () => {
 };
 
 /**
+ * Check if user has premium subscription
+ */
+export const hasPremium = () => {
+    const userData = getUserData();
+    if (!userData) return false;
+    return userData.subscription_plan === "premium" || localStorage.getItem("hasPremium") === "true";
+};
+
+/**
  * Make authenticated API request
  * SIMPLE: Just make the request - cookies are sent automatically!
  */
