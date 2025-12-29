@@ -49,6 +49,10 @@ class User(Base):
     google_id = Column(String, unique=True, nullable=True, index=True)
     profile_picture_url = Column(String, nullable=True)
     
+    # Email verification fields
+    email_verified = Column(Boolean, default=False, nullable=False)
+    email_verification_sent_at = Column(DateTime, nullable=True)
+    
     # Relationship to current subscription plan template
     current_subscription_plan_template = relationship("SubscriptionPlanTemplate", foreign_keys=[current_subscription_plan_template_id])
 
@@ -314,6 +318,42 @@ class PaymentTransaction(Base):
     def set_metadata(self, data: Dict[str, Any]):
         """Store metadata as JSON string"""
         self.transaction_metadata = json.dumps(data) if data else None
+
+
+def init_db():
+    """Initialize database tables"""
+    Base.metadata.create_all(bind=engine)
+
+
+class EmailVerification(Base):
+    """Email verification OTP codes"""
+    __tablename__ = "email_verifications"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
+    email = Column(String, nullable=False, index=True)
+    otp_code = Column(String, nullable=False)  # 6-digit OTP
+    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    expires_at = Column(DateTime, nullable=False)
+    verified_at = Column(DateTime, nullable=True)  # Set when OTP is verified
+    
+    # Relationship
+    user = relationship("User", backref="email_verifications")
+
+
+class PasswordResetToken(Base):
+    """Password reset tokens"""
+    __tablename__ = "password_reset_tokens"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
+    token = Column(String, unique=True, nullable=False, index=True)  # Secure random token
+    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    expires_at = Column(DateTime, nullable=False)
+    used_at = Column(DateTime, nullable=True)  # Set when token is used
+    
+    # Relationship
+    user = relationship("User", backref="password_reset_tokens")
 
 
 def init_db():

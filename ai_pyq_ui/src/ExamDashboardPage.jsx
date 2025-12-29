@@ -8,6 +8,7 @@ import ExamAnalysis from "./components/ExamAnalysis";
 import SubjectAnalysis from "./components/SubjectAnalysis";
 import HottestTopicsByExam from "./components/HottestTopicsByExam";
 import HottestTopicsBySubject from "./components/HottestTopicsBySubject";
+import { getCurrentUser, isAuthenticated } from "./utils/auth";
 
 export default function ExamDashboardPage() {
     const [exam, setExam] = useState("");
@@ -20,6 +21,27 @@ export default function ExamDashboardPage() {
     const [activeSubPage, setActiveSubPage] = useState("exam-analysis");
     const [secondarySidebarOpen, setSecondarySidebarOpen] = useState(true);
     const [primarySidebarCollapsed, setPrimarySidebarCollapsed] = useState(false);
+
+    // Check and sync user authentication state (important for Google OAuth)
+    useEffect(() => {
+        const syncAuthState = async () => {
+            // If localStorage says not logged in, but we have a session cookie, fetch user data
+            const isLoggedInLocal = isAuthenticated();
+            if (!isLoggedInLocal) {
+                // Try to fetch user data - if successful, we have a valid session
+                const userData = await getCurrentUser();
+                if (userData) {
+                    // User is logged in but localStorage wasn't set (e.g., Google OAuth)
+                    console.log("User authenticated via session, syncing localStorage");
+                    // getCurrentUser already calls setUserData, so we're good
+                    // Dispatch event to update sidebar
+                    window.dispatchEvent(new Event("userLoggedIn"));
+                    window.dispatchEvent(new Event("premiumStatusChanged"));
+                }
+            }
+        };
+        syncAuthState();
+    }, []);
 
     useEffect(() => {
         // Fetch exam filters

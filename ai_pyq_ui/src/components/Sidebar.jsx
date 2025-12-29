@@ -25,6 +25,7 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
     })();
     
     const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn") === "true");
+    const [isLoggingOut, setIsLoggingOut] = useState(false); // Flag to prevent re-authentication during logout
     const [userName, setUserName] = useState(
         initialUserData?.full_name || initialUserData?.username || localStorage.getItem("userName") || "User"
     );
@@ -47,8 +48,46 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
         // Check login status and subscription
     useEffect(() => {
         const updateUserState = async () => {
+            // Don't check session if we're in the process of logging out
+            if (isLoggingOut) {
+                return;
+            }
+            
             // Check login status from localStorage (session cookie is checked by backend)
-            const isLoggedInLocal = localStorage.getItem("isLoggedIn") === "true";
+            let isLoggedInLocal = localStorage.getItem("isLoggedIn") === "true";
+            
+            // If localStorage says not logged in, check if we have a session cookie
+            // This handles cases like Google OAuth where session is created but localStorage isn't set
+            if (!isLoggedInLocal && !isLoggingOut) {
+                try {
+                    const response = await fetch("/auth/me", {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        credentials: "include",
+                    });
+                    
+                    if (response.ok) {
+                        const userData = await response.json();
+                        // We have a valid session! User is logged in
+                        console.log("Sidebar: Found valid session, syncing localStorage");
+                        // Store user data in localStorage
+                        localStorage.setItem("userData", JSON.stringify(userData));
+                        localStorage.setItem("isLoggedIn", "true");
+                        localStorage.setItem("userName", userData.full_name || userData.username || "User");
+                        localStorage.setItem("userEmail", userData.email || "");
+                        localStorage.setItem("hasPremium", userData.subscription_plan === "premium" ? "true" : "false");
+                        isLoggedInLocal = true;
+                        // Dispatch event to notify other components
+                        window.dispatchEvent(new Event("userLoggedIn"));
+                        window.dispatchEvent(new Event("premiumStatusChanged"));
+                    }
+                } catch (error) {
+                    console.error("Sidebar: Error checking session:", error);
+                }
+            }
+            
             setIsLoggedIn(isLoggedInLocal);
             
             // If not logged in, clear state and exit early
@@ -134,8 +173,11 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
         
         // Also listen for custom events (for same-tab updates)
         const handleCustomEvent = () => {
-            // Force immediate update when login/logout events fire
-            updateUserState();
+            // Don't update if we're logging out
+            if (!isLoggingOut) {
+                // Force immediate update when login/logout events fire
+                updateUserState();
+            }
         };
         window.addEventListener("premiumStatusChanged", handleCustomEvent);
         window.addEventListener("userLoggedIn", handleCustomEvent);
@@ -156,7 +198,7 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
             window.removeEventListener("userProfileUpdated", handleCustomEvent);
             window.removeEventListener("focus", handleFocus);
         };
-    }, []); // Run once on mount, then rely on events and polling
+    }, [isLoggingOut]); // Re-run if isLoggingOut changes
 
 
     const handleSignIn = () => {
@@ -168,6 +210,23 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
     };
 
     const handleSignOut = async () => {
+        // Set logging out flag to prevent re-authentication
+        setIsLoggingOut(true);
+        
+        // Call logout API first to delete session cookie
+        try {
+            await fetch("/auth/logout", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include", // Include cookies
+            });
+        } catch (error) {
+            // Ignore API errors - continue with logout
+            console.error("Logout API error (continuing anyway):", error);
+        }
+        
         // Clear all auth-related localStorage
         localStorage.removeItem("isLoggedIn");
         localStorage.removeItem("userName");
@@ -186,19 +245,13 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
         window.dispatchEvent(new Event("premiumStatusChanged"));
         window.dispatchEvent(new Event("userLoggedOut"));
         
-        // Call logout API to delete session cookie
-        fetch("/auth/logout", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            credentials: "include", // Include cookies
-        }).catch(() => {
-            // Ignore API errors - logout is already complete locally
-        });
-        
         // Navigate to home
-        navigate("/");
+        navigate("/", { replace: true });
+        
+        // Reset logging out flag after a short delay (to ensure navigation completes)
+        setTimeout(() => {
+            setIsLoggingOut(false);
+        }, 1000);
     };
 
 

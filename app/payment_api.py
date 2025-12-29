@@ -106,6 +106,7 @@ async def create_order(
         
         # Get plan template if plan_id provided
         subscription_plan_id = None
+        new_plan_template = None
         if request.plan_id:
             plan_template = db.query(SubscriptionPlanTemplate).filter(
                 SubscriptionPlanTemplate.id == request.plan_id,
@@ -116,6 +117,7 @@ async def create_order(
                     status_code=status.HTTP_404_NOT_FOUND,
                     detail="Subscription plan not found"
                 )
+            new_plan_template = plan_template
             subscription_plan_id = plan_template.id
             # Use plan template amount if not specified
             if not request.amount or request.amount == 0:
@@ -124,10 +126,40 @@ async def create_order(
         # Check if user already has active premium subscription
         if current_user.subscription_plan == SubscriptionPlan.PREMIUM:
             if current_user.subscription_end_date and current_user.subscription_end_date > datetime.utcnow():
-                raise HTTPException(
-                    status_code=status.HTTP_400_BAD_REQUEST,
-                    detail="You already have an active premium subscription"
-                )
+                # User has active premium - check if they're trying to upgrade
+                if new_plan_template and current_user.current_subscription_plan_template_id:
+                    # Get current plan template
+                    current_plan_template = db.query(SubscriptionPlanTemplate).filter(
+                        SubscriptionPlanTemplate.id == current_user.current_subscription_plan_template_id
+                    ).first()
+                    
+                    if current_plan_template:
+                        # Allow upgrade if new plan price is higher than current plan price
+                        if new_plan_template.price > current_plan_template.price:
+                            # This is an upgrade - allow it
+                            logger.info(
+                                f"User {current_user.id} upgrading from plan {current_plan_template.id} "
+                                f"({current_plan_template.price}) to plan {new_plan_template.id} ({new_plan_template.price})"
+                            )
+                        else:
+                            # Same or lower price - block (user should wait for current subscription to expire or contact support)
+                            raise HTTPException(
+                                status_code=status.HTTP_400_BAD_REQUEST,
+                                detail=f"You already have an active premium subscription. "
+                                       f"To upgrade to a higher tier, please contact support or wait for your current subscription to expire."
+                            )
+                    else:
+                        # Current plan template not found - allow purchase (edge case)
+                        logger.warning(
+                            f"User {current_user.id} has active premium but current_plan_template_id "
+                            f"({current_user.current_subscription_plan_template_id}) not found. Allowing purchase."
+                        )
+                else:
+                    # No new plan template or no current plan template ID - block to be safe
+                    raise HTTPException(
+                        status_code=status.HTTP_400_BAD_REQUEST,
+                        detail="You already have an active premium subscription"
+                    )
         
         # Create payment order
         payment_order, error = create_payment_order(

@@ -9,6 +9,9 @@ import CrossExamInsightsPage from "./CrossExamInsightsPage";
 import TopicWisePYQPage from "./TopicWisePYQPage";
 import LoginPage from "./LoginPage";
 import SignUpPage from "./SignUpPage";
+import VerifyEmailPage from "./VerifyEmailPage";
+import ForgotPasswordPage from "./ForgotPasswordPage";
+import ResetPasswordPage from "./ResetPasswordPage";
 import SubscriptionPage from "./SubscriptionPage";
 import AccountPage from "./AccountPage";
 import AdminPanel from "./AdminPanel";
@@ -56,6 +59,9 @@ function AppContent() {
                 <Route path="/topic-wise-pyq" element={<TopicWisePYQPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/signup" element={<SignUpPage />} />
+                <Route path="/verify-email" element={<VerifyEmailPage />} />
+                <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+                <Route path="/reset-password" element={<ResetPasswordPage />} />
                 <Route 
                     path="/subscription" 
                     element={

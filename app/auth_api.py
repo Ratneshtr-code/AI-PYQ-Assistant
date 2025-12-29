@@ -2,15 +2,24 @@
 """
 Authentication API endpoints: login, signup, logout, Google OAuth
 """
-from fastapi import APIRouter, Depends, HTTPException, status, Cookie
+from fastapi import APIRouter, Depends, HTTPException, status, Cookie, Request
 from fastapi.security import OAuth2PasswordRequestForm
+from fastapi.responses import RedirectResponse, JSONResponse
 from sqlalchemy.orm import Session
 from pydantic import BaseModel, EmailStr
 from datetime import datetime, timedelta
 from typing import Optional
 import re
+import os
+import secrets
+from urllib.parse import urlencode
+import httpx
+from dotenv import load_dotenv
 
-from app.database import get_db, User, SubscriptionPlan, init_db, Session as SessionModel
+load_dotenv()
+
+from app.database import get_db, User, SubscriptionPlan, init_db, Session as SessionModel, EmailVerification, PasswordResetToken
+from app.email_service import send_otp_email, send_password_reset_email
 from app.auth import (
     verify_password,
     get_password_hash,
@@ -19,7 +28,6 @@ from app.auth import (
     get_current_user,
     get_current_active_user,
 )
-from fastapi.responses import JSONResponse
 
 router = APIRouter(prefix="/auth", tags=["authentication"])
 
@@ -52,6 +60,7 @@ class UserResponse(BaseModel):
     is_admin: bool
     profile_picture_url: Optional[str]
     current_subscription_plan_template_id: Optional[int] = None  # ID of the current active plan template
+    email_verified: bool = False
 
 
 class RefreshTokenRequest(BaseModel):
@@ -137,7 +146,9 @@ async def signup(user_data: UserSignUp, db: Session = Depends(get_db)):
         hashed_password=hashed_password,  # REQUIRED - users without this cannot login
         full_name=user_data.full_name or user_data.username,
         subscription_plan=SubscriptionPlan.FREE,
-        is_active=True
+        is_active=True,
+        email_verified=False,  # Email not verified yet
+        email_verification_sent_at=datetime.utcnow()
     )
     
     db.add(new_user)
@@ -152,49 +163,38 @@ async def signup(user_data: UserSignUp, db: Session = Depends(get_db)):
             detail="Failed to create user with password. Please try again."
         )
     
-    # Create session - SIMPLE!
-    session_id = create_session(new_user.id, db)
+    # Generate and send OTP
+    import random
+    otp_code = str(random.randint(100000, 999999))  # 6-digit OTP
     
-    # Create response
-    response_data = LoginResponse(
-        user={
-            "id": new_user.id,
-            "email": new_user.email,
-            "username": new_user.username,
-            "full_name": new_user.full_name,
-            "subscription_plan": new_user.subscription_plan.value,
-            "is_admin": new_user.is_admin,
-            "profile_picture_url": new_user.profile_picture_url,
-            "current_subscription_plan_template_id": new_user.current_subscription_plan_template_id,
-            "subscription_start_date": new_user.subscription_start_date.isoformat() if new_user.subscription_start_date else None,
-            "subscription_end_date": new_user.subscription_end_date.isoformat() if new_user.subscription_end_date else None
-        }
+    # Store OTP in database
+    expires_at = datetime.utcnow() + timedelta(minutes=15)
+    email_verification = EmailVerification(
+        user_id=new_user.id,
+        email=new_user.email,
+        otp_code=otp_code,
+        expires_at=expires_at
     )
+    db.add(email_verification)
+    db.commit()
     
-    # Set session cookie
-    response = JSONResponse(content=response_data.model_dump())
-    # Set cookie - for localhost/127.0.0.1 with different ports, we need SameSite=None
-    # But SameSite=None requires Secure=True (HTTPS), which we don't have in dev
-    # So we'll use SameSite="lax" and hope it works, or we'll need to use a different approach
-    # Actually, for localhost, browsers are more lenient - let's try without explicit domain
-    # With Vite proxy, requests are same-origin, so we can use SameSite="lax"
-    response.set_cookie(
-        key="session_id",
-        value=session_id,
-        httponly=True,
-        secure=False,  # Set to True in production with HTTPS
-        samesite="lax",  # Works for same-origin requests (via Vite proxy)
-        path="/",  # Make cookie available for all paths
-        max_age=60 * 60 * 24  # 24 hours
-        # Don't set domain - let browser handle it for localhost/127.0.0.1
-    )
-    
-    # Log cookie setting for debugging
+    # Send OTP email
     import logging
     logger = logging.getLogger(__name__)
-    logger.info(f"Setting session cookie for user {new_user.id}, session_id: {session_id[:10]}...")
+    email_sent = send_otp_email(new_user.email, otp_code, new_user.username)
+    if not email_sent:
+        logger.warning(f"Failed to send OTP email to {new_user.email}, but user was created")
     
-    return response
+    # Return response indicating email verification is required
+    return JSONResponse(
+        status_code=status.HTTP_201_CREATED,
+        content={
+            "message": "Account created successfully. Please verify your email address.",
+            "user_id": new_user.id,
+            "email": new_user.email,
+            "requires_verification": True
+        }
+    )
 
 
 @router.post("/login", response_model=LoginResponse)
@@ -237,6 +237,14 @@ async def login(credentials: UserLogin, db: Session = Depends(get_db)):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect email or password"
+        )
+    
+    # Check if email is verified (only for password-based accounts)
+    if user.hashed_password and not user.email_verified:
+        logger.warning(f"Login attempt with unverified email: {email[:20]}...")
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Please verify your email address before logging in. Check your inbox for the verification code."
         )
     
     # Log user found for debugging (without sensitive info)
@@ -329,7 +337,8 @@ async def login(credentials: UserLogin, db: Session = Depends(get_db)):
             "profile_picture_url": user.profile_picture_url,
             "current_subscription_plan_template_id": user.current_subscription_plan_template_id,
             "subscription_start_date": user.subscription_start_date.isoformat() if user.subscription_start_date else None,
-            "subscription_end_date": user.subscription_end_date.isoformat() if user.subscription_end_date else None
+            "subscription_end_date": user.subscription_end_date.isoformat() if user.subscription_end_date else None,
+            "email_verified": user.email_verified
         }
     )
     
@@ -381,7 +390,8 @@ async def get_current_user_info(
         profile_picture_url=current_user.profile_picture_url,
         current_subscription_plan_template_id=current_user.current_subscription_plan_template_id,
         subscription_start_date=current_user.subscription_start_date,
-        subscription_end_date=current_user.subscription_end_date
+        subscription_end_date=current_user.subscription_end_date,
+        email_verified=current_user.email_verified
     )
 
 
@@ -454,7 +464,8 @@ async def update_profile(
         subscription_plan=current_user.subscription_plan.value,
         is_admin=current_user.is_admin,
         profile_picture_url=current_user.profile_picture_url,
-        current_subscription_plan_template_id=current_user.current_subscription_plan_template_id
+        current_subscription_plan_template_id=current_user.current_subscription_plan_template_id,
+        email_verified=current_user.email_verified
     )
 
 
@@ -549,7 +560,8 @@ async def upgrade_subscription(
         profile_picture_url=current_user.profile_picture_url,
         current_subscription_plan_template_id=current_user.current_subscription_plan_template_id,
         subscription_start_date=current_user.subscription_start_date,
-        subscription_end_date=current_user.subscription_end_date
+        subscription_end_date=current_user.subscription_end_date,
+        email_verified=current_user.email_verified
     )
 
 
@@ -567,22 +579,484 @@ async def test_cookie(session_id: Optional[str] = Cookie(None, alias="session_id
     }
 
 
+# Email verification and password reset models
+class VerifyEmailRequest(BaseModel):
+    user_id: int
+    otp_code: str
+
+
+class ResendOTPRequest(BaseModel):
+    email: str
+
+
+class ForgotPasswordRequest(BaseModel):
+    email: str
+
+
+class ResetPasswordRequest(BaseModel):
+    token: str
+    new_password: str
+
+
+@router.post("/verify-email")
+async def verify_email(verify_data: VerifyEmailRequest, db: Session = Depends(get_db)):
+    """Verify email address with OTP code"""
+    import logging
+    logger = logging.getLogger(__name__)
+    
+    # Find user
+    user = db.query(User).filter(User.id == verify_data.user_id).first()
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User not found"
+        )
+    
+    if user.email_verified:
+        return JSONResponse(
+            content={"message": "Email already verified", "verified": True}
+        )
+    
+    # Find valid OTP
+    verification = db.query(EmailVerification).filter(
+        EmailVerification.user_id == verify_data.user_id,
+        EmailVerification.otp_code == verify_data.otp_code,
+        EmailVerification.expires_at > datetime.utcnow(),
+        EmailVerification.verified_at == None
+    ).first()
+    
+    if not verification:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid or expired OTP code"
+        )
+    
+    # Mark as verified
+    verification.verified_at = datetime.utcnow()
+    user.email_verified = True
+    db.commit()
+    
+    logger.info(f"Email verified for user {user.id}")
+    
+    # Create session now that email is verified
+    session_id = create_session(user.id, db)
+    
+    response_data = {
+        "message": "Email verified successfully",
+        "user": {
+            "id": user.id,
+            "email": user.email,
+            "username": user.username,
+            "full_name": user.full_name,
+            "subscription_plan": user.subscription_plan.value,
+            "is_admin": user.is_admin,
+            "profile_picture_url": user.profile_picture_url,
+            "current_subscription_plan_template_id": user.current_subscription_plan_template_id,
+            "subscription_start_date": user.subscription_start_date.isoformat() if user.subscription_start_date else None,
+            "subscription_end_date": user.subscription_end_date.isoformat() if user.subscription_end_date else None,
+            "email_verified": True
+        }
+    }
+    
+    response = JSONResponse(content=response_data)
+    response.set_cookie(
+        key="session_id",
+        value=session_id,
+        httponly=True,
+        secure=False,
+        samesite="lax",
+        path="/",
+        max_age=60 * 60 * 24
+    )
+    
+    return response
+
+
+@router.post("/resend-otp")
+async def resend_otp(resend_data: ResendOTPRequest, db: Session = Depends(get_db)):
+    """Resend OTP verification code"""
+    import logging
+    logger = logging.getLogger(__name__)
+    
+    # Find user by email
+    user = db.query(User).filter(User.email == resend_data.email).first()
+    if not user:
+        # Don't reveal if email exists
+        return JSONResponse(
+            status_code=status.HTTP_200_OK,
+            content={"message": "If the email exists, a new OTP has been sent."}
+        )
+    
+    if user.email_verified:
+        return JSONResponse(
+            content={"message": "Email already verified"}
+        )
+    
+    # Rate limiting: Check how many OTPs sent in last hour
+    one_hour_ago = datetime.utcnow() - timedelta(hours=1)
+    recent_otps = db.query(EmailVerification).filter(
+        EmailVerification.user_id == user.id,
+        EmailVerification.created_at > one_hour_ago
+    ).count()
+    
+    if recent_otps >= 3:
+        raise HTTPException(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+            detail="Too many OTP requests. Please wait before requesting another."
+        )
+    
+    # Generate new OTP
+    import random
+    otp_code = str(random.randint(100000, 999999))
+    
+    # Invalidate old OTPs
+    db.query(EmailVerification).filter(
+        EmailVerification.user_id == user.id,
+        EmailVerification.verified_at == None
+    ).update({"verified_at": datetime.utcnow()})  # Mark as used
+    
+    # Create new OTP
+    expires_at = datetime.utcnow() + timedelta(minutes=15)
+    email_verification = EmailVerification(
+        user_id=user.id,
+        email=user.email,
+        otp_code=otp_code,
+        expires_at=expires_at
+    )
+    db.add(email_verification)
+    user.email_verification_sent_at = datetime.utcnow()
+    db.commit()
+    
+    # Send OTP email
+    email_sent = send_otp_email(user.email, otp_code, user.username)
+    if not email_sent:
+        logger.warning(f"Failed to send OTP email to {user.email}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to send OTP email. Please try again later."
+        )
+    
+    return JSONResponse(
+        content={"message": "OTP code has been sent to your email address"}
+    )
+
+
+@router.post("/forgot-password")
+async def forgot_password(forgot_data: ForgotPasswordRequest, db: Session = Depends(get_db)):
+    """Request password reset"""
+    import logging
+    logger = logging.getLogger(__name__)
+    
+    # Find user by email
+    user = db.query(User).filter(User.email == forgot_data.email).first()
+    if not user:
+        # Don't reveal if email exists (security best practice)
+        return JSONResponse(
+            status_code=status.HTTP_200_OK,
+            content={"message": "If the email exists, a password reset link has been sent."}
+        )
+    
+    # Check if user has a password (not OAuth-only)
+    if not user.hashed_password:
+        # Don't reveal if email exists
+        return JSONResponse(
+            status_code=status.HTTP_200_OK,
+            content={"message": "If the email exists, a password reset link has been sent."}
+        )
+    
+    # Rate limiting: Check how many reset tokens created in last hour
+    one_hour_ago = datetime.utcnow() - timedelta(hours=1)
+    recent_tokens = db.query(PasswordResetToken).filter(
+        PasswordResetToken.user_id == user.id,
+        PasswordResetToken.created_at > one_hour_ago
+    ).count()
+    
+    if recent_tokens >= 3:
+        raise HTTPException(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+            detail="Too many password reset requests. Please wait before requesting another."
+        )
+    
+    # Generate secure reset token
+    reset_token = secrets.token_urlsafe(32)
+    
+    # Invalidate old unused tokens
+    db.query(PasswordResetToken).filter(
+        PasswordResetToken.user_id == user.id,
+        PasswordResetToken.used_at == None
+    ).update({"used_at": datetime.utcnow()})
+    
+    # Create new reset token
+    expires_at = datetime.utcnow() + timedelta(hours=1)
+    reset_token_obj = PasswordResetToken(
+        user_id=user.id,
+        token=reset_token,
+        expires_at=expires_at
+    )
+    db.add(reset_token_obj)
+    db.commit()
+    
+    # Send reset email
+    email_sent = send_password_reset_email(user.email, reset_token, user.username)
+    if not email_sent:
+        logger.warning(f"Failed to send password reset email to {user.email}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to send password reset email. Please try again later."
+        )
+    
+    return JSONResponse(
+        content={"message": "If the email exists, a password reset link has been sent."}
+    )
+
+
+@router.post("/reset-password")
+async def reset_password(reset_data: ResetPasswordRequest, db: Session = Depends(get_db)):
+    """Reset password with token"""
+    import logging
+    logger = logging.getLogger(__name__)
+    
+    # Find valid reset token
+    reset_token_obj = db.query(PasswordResetToken).filter(
+        PasswordResetToken.token == reset_data.token,
+        PasswordResetToken.expires_at > datetime.utcnow(),
+        PasswordResetToken.used_at == None
+    ).first()
+    
+    if not reset_token_obj:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid or expired reset token"
+        )
+    
+    # Get user
+    user = db.query(User).filter(User.id == reset_token_obj.user_id).first()
+    if not user or not user.is_active:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid reset token"
+        )
+    
+    # Validate new password
+    if not validate_password(reset_data.new_password):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Password must be at least 8 characters with uppercase, lowercase, and numbers"
+        )
+    
+    # Check that new password is different from current
+    if verify_password(reset_data.new_password, user.hashed_password):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="New password must be different from current password"
+        )
+    
+    # Update password
+    user.hashed_password = get_password_hash(reset_data.new_password)
+    user.updated_at = datetime.utcnow()
+    
+    # Mark token as used
+    reset_token_obj.used_at = datetime.utcnow()
+    
+    db.commit()
+    
+    logger.info(f"Password reset successful for user {user.id}")
+    
+    return JSONResponse(
+        content={"message": "Password reset successfully. You can now login with your new password."}
+    )
+
+
+# Google OAuth configuration
+GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
+GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
+GOOGLE_REDIRECT_URI = os.getenv("GOOGLE_REDIRECT_URI", "http://localhost:8000/auth/google/callback")
+FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173")
+
+GOOGLE_AUTH_URL = "https://accounts.google.com/o/oauth2/v2/auth"
+GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token"
+GOOGLE_USERINFO_URL = "https://www.googleapis.com/oauth2/v2/userinfo"
+
+
 @router.get("/google")
 async def google_auth():
     """Initiate Google OAuth flow"""
-    # TODO: Implement Google OAuth
-    raise HTTPException(
-        status_code=status.HTTP_501_NOT_IMPLEMENTED,
-        detail="Google OAuth not yet implemented"
+    if not GOOGLE_CLIENT_ID:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Google OAuth not configured. Please set GOOGLE_CLIENT_ID environment variable."
+        )
+    
+    # Generate state for CSRF protection
+    state = secrets.token_urlsafe(32)
+    
+    # Store state in session (in production, use Redis or similar)
+    # For now, we'll pass it in the redirect and verify it in callback
+    
+    # Build authorization URL
+    params = {
+        "client_id": GOOGLE_CLIENT_ID,
+        "redirect_uri": GOOGLE_REDIRECT_URI,
+        "response_type": "code",
+        "scope": "openid email profile",
+        "state": state,
+        "access_type": "online",
+        "prompt": "select_account"
+    }
+    
+    auth_url = f"{GOOGLE_AUTH_URL}?{urlencode(params)}"
+    
+    # Redirect to Google
+    response = RedirectResponse(url=auth_url)
+    # Store state in cookie for verification
+    response.set_cookie(
+        key="oauth_state",
+        value=state,
+        httponly=True,
+        secure=False,  # Set to True in production with HTTPS
+        samesite="lax",
+        max_age=600  # 10 minutes
     )
+    return response
 
 
 @router.get("/google/callback")
-async def google_callback():
+async def google_callback(
+    request: Request,
+    code: Optional[str] = None,
+    state: Optional[str] = None,
+    error: Optional[str] = None,
+    db: Session = Depends(get_db)
+):
     """Google OAuth callback"""
-    # TODO: Implement Google OAuth callback
-    raise HTTPException(
-        status_code=status.HTTP_501_NOT_IMPLEMENTED,
-        detail="Google OAuth not yet implemented"
-    )
+    import logging
+    logger = logging.getLogger(__name__)
+    
+    if error:
+        logger.error(f"Google OAuth error: {error}")
+        return RedirectResponse(url=f"{FRONTEND_URL}/login?error=oauth_error")
+    
+    if not code:
+        logger.error("No authorization code received from Google")
+        return RedirectResponse(url=f"{FRONTEND_URL}/login?error=no_code")
+    
+    # Verify state (CSRF protection)
+    oauth_state = request.cookies.get("oauth_state")
+    if not oauth_state or oauth_state != state:
+        logger.error("Invalid OAuth state - possible CSRF attack")
+        return RedirectResponse(url=f"{FRONTEND_URL}/login?error=invalid_state")
+    
+    if not GOOGLE_CLIENT_ID or not GOOGLE_CLIENT_SECRET:
+        logger.error("Google OAuth credentials not configured")
+        return RedirectResponse(url=f"{FRONTEND_URL}/login?error=config_error")
+    
+    try:
+        # Exchange authorization code for access token
+        token_data = {
+            "code": code,
+            "client_id": GOOGLE_CLIENT_ID,
+            "client_secret": GOOGLE_CLIENT_SECRET,
+            "redirect_uri": GOOGLE_REDIRECT_URI,
+            "grant_type": "authorization_code"
+        }
+        
+        async with httpx.AsyncClient() as client:
+            token_response = await client.post(GOOGLE_TOKEN_URL, data=token_data)
+            token_response.raise_for_status()
+            tokens = token_response.json()
+        
+        access_token = tokens.get("access_token")
+        if not access_token:
+            logger.error("No access token received from Google")
+            return RedirectResponse(url=f"{FRONTEND_URL}/login?error=no_token")
+        
+        # Get user info from Google
+        headers = {"Authorization": f"Bearer {access_token}"}
+        async with httpx.AsyncClient() as client:
+            userinfo_response = await client.get(GOOGLE_USERINFO_URL, headers=headers)
+            userinfo_response.raise_for_status()
+            userinfo = userinfo_response.json()
+        
+        google_id = userinfo.get("id")
+        email = userinfo.get("email")
+        name = userinfo.get("name", "")
+        picture = userinfo.get("picture")
+        
+        if not google_id or not email:
+            logger.error("Invalid user info from Google")
+            return RedirectResponse(url=f"{FRONTEND_URL}/login?error=invalid_userinfo")
+        
+        # Check if user exists with this Google ID
+        user = db.query(User).filter(User.google_id == google_id).first()
+        
+        if not user:
+            # Check if user exists with this email (account linking)
+            user = db.query(User).filter(User.email == email).first()
+            
+            if user:
+                # Link Google account to existing user
+                user.google_id = google_id
+                user.profile_picture_url = picture
+                if not user.full_name and name:
+                    user.full_name = name
+                db.commit()
+                logger.info(f"Linked Google account to existing user {user.id}")
+            else:
+                # Create new user
+                # Generate username from email
+                username_base = email.split("@")[0]
+                username = username_base
+                counter = 1
+                while db.query(User).filter(User.username == username).first():
+                    username = f"{username_base}{counter}"
+                    counter += 1
+                
+                user = User(
+                    email=email,
+                    username=username,
+                    full_name=name or username,
+                    google_id=google_id,
+                    profile_picture_url=picture,
+                    subscription_plan=SubscriptionPlan.FREE,
+                    is_active=True,
+                    email_verified=True,  # Google emails are pre-verified
+                    hashed_password=None  # OAuth-only user
+                )
+                db.add(user)
+                db.commit()
+                db.refresh(user)
+                logger.info(f"Created new user via Google OAuth: {user.id}")
+        
+        # Check if user is active
+        if not user.is_active:
+            logger.warning(f"Login attempt for inactive user: {user.id}")
+            return RedirectResponse(url=f"{FRONTEND_URL}/login?error=inactive_account")
+        
+        # Create session
+        session_id = create_session(user.id, db)
+        
+        # Redirect to frontend with success
+        response = RedirectResponse(url=f"{FRONTEND_URL}/exam-dashboard")
+        response.set_cookie(
+            key="session_id",
+            value=session_id,
+            httponly=True,
+            secure=False,  # Set to True in production with HTTPS
+            samesite="lax",
+            path="/",
+            max_age=60 * 60 * 24  # 24 hours
+        )
+        # Clear OAuth state cookie
+        response.delete_cookie(key="oauth_state", path="/")
+        
+        return response
+    
+    except httpx.HTTPStatusError as e:
+        logger.error(f"HTTP error during Google OAuth: {str(e)}")
+        return RedirectResponse(url=f"{FRONTEND_URL}/login?error=oauth_error")
+    except Exception as e:
+        logger.error(f"Error during Google OAuth callback: {str(e)}")
+        import traceback
+        logger.error(traceback.format_exc())
+        return RedirectResponse(url=f"{FRONTEND_URL}/login?error=oauth_error")
 

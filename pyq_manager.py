@@ -549,6 +549,53 @@ def migrate_plan_template_id():
         return False
 
 
+def migrate_auth_features():
+    """Migrate: Add authentication features (email verification, password reset)"""
+    print_header("Database Migration: Authentication Features")
+    
+    script_path = get_project_root() / "migrate_add_auth_features.py"
+    if not script_path.exists():
+        print_error(f"Migration script not found: {script_path}")
+        return False
+    
+    print_info("This migration adds authentication features:")
+    print_info("  • email_verified column to users table")
+    print_info("  • email_verification_sent_at column to users table")
+    print_info("  • email_verifications table (for OTP codes)")
+    print_info("  • password_reset_tokens table (for password reset)")
+    print()
+    print_warning("⚠️  This script is ONLY needed for EXISTING databases")
+    print_info("   For NEW databases, tables are created automatically!")
+    print()
+    print_info("Existing users will be marked as email_verified=True (grandfathering)")
+    print()
+    
+    confirm = input(f"{Colors.YELLOW}Do you want to proceed? (yes/no): {Colors.ENDC}").strip().lower()
+    if confirm not in ['yes', 'y']:
+        print_info("Migration cancelled.")
+        return False
+    
+    print()
+    print_info("Running migration...")
+    print()
+    
+    try:
+        run_python_script(script_path, check=True)
+        print_success("Migration completed!")
+        print()
+        print_info("Next steps:")
+        print_info("  1. Set up environment variables (see AUTHENTICATION_SETUP.md)")
+        print_info("  2. Configure Google OAuth credentials")
+        print_info("  3. Configure Gmail SMTP settings")
+        return True
+    except subprocess.CalledProcessError as e:
+        print_error(f"Migration failed: {e}")
+        return False
+    except KeyboardInterrupt:
+        print_warning("Migration cancelled by user.")
+        return False
+
+
 def show_project_status():
     """Show project status and configuration"""
     print_header("Project Status")
@@ -628,6 +675,7 @@ def show_main_menu():
         ("11", "Manage Production Cache", "View/manage production cache entries"),
         ("12", "Overall Summary", "Show overall system configuration and status"),
         ("13", "Migrate Plan Template ID", "Sync subscription plan template ID (payment_orders → users)"),
+        ("14", "Migrate Auth Features", "Add email verification and password reset tables/columns"),
         ("0", "Exit", "Exit the manager"),
     ]
     
@@ -636,7 +684,7 @@ def show_main_menu():
         print(f"  {Colors.CYAN}{num}.{Colors.ENDC} {Colors.BOLD}{title}{Colors.ENDC}")
         print(f"     {Colors.YELLOW}→{Colors.ENDC} {desc}\n")
     
-    print(f"{Colors.BOLD}Enter your choice (0-13):{Colors.ENDC} ", end="")
+    print(f"{Colors.BOLD}Enter your choice (0-14):{Colors.ENDC} ", end="")
 
 
 def main():
@@ -650,7 +698,7 @@ def main():
         "--direct",
         type=int,
         metavar="N",
-        help="Run operation directly by number (1-8) without menu"
+        help="Run operation directly by number (1-14) without menu"
     )
     args = parser.parse_args()
     
@@ -670,13 +718,14 @@ def main():
             11: manage_production_cache,
             12: show_overall_summary,
             13: migrate_plan_template_id,
+            14: migrate_auth_features,
         }
         
         if args.direct in operations:
             operations[args.direct]()
         else:
             print_error(f"Invalid operation number: {args.direct}")
-            print_info("Valid numbers: 1-13")
+            print_info("Valid numbers: 1-14")
             sys.exit(1)
         return
     
@@ -715,9 +764,11 @@ def main():
                 show_overall_summary()
             elif choice == "13":
                 migrate_plan_template_id()
+            elif choice == "14":
+                migrate_auth_features()
             else:
                 print_error(f"Invalid choice: {choice}")
-                print_info("Please enter a number between 0-13")
+                print_info("Please enter a number between 0-14")
             
             if choice != "0":
                 input(f"\n{Colors.YELLOW}Press Enter to continue...{Colors.ENDC}")
