@@ -223,6 +223,7 @@ async def verify_payment(
                 "subscription_plan": current_user.subscription_plan.value,
                 "is_admin": current_user.is_admin,
                 "profile_picture_url": current_user.profile_picture_url,
+                "current_subscription_plan_template_id": current_user.current_subscription_plan_template_id,
                 "subscription_start_date": current_user.subscription_start_date.isoformat() if current_user.subscription_start_date else None,
                 "subscription_end_date": current_user.subscription_end_date.isoformat() if current_user.subscription_end_date else None
             }
@@ -401,6 +402,7 @@ async def test_mode_upgrade(
                 "subscription_plan": current_user.subscription_plan.value,
                 "is_admin": current_user.is_admin,
                 "profile_picture_url": current_user.profile_picture_url,
+                "current_subscription_plan_template_id": current_user.current_subscription_plan_template_id,
                 "subscription_start_date": current_user.subscription_start_date.isoformat() if current_user.subscription_start_date else None,
                 "subscription_end_date": current_user.subscription_end_date.isoformat() if current_user.subscription_end_date else None
             }
@@ -464,5 +466,73 @@ async def get_order_status(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Failed to get order status"
+        )
+
+
+class ActiveSubscriptionResponse(BaseModel):
+    active_plan_template_id: Optional[int] = None
+    subscription_end_date: Optional[str] = None
+    is_active: bool = False
+
+
+@router.get("/active-subscription", response_model=ActiveSubscriptionResponse)
+async def get_active_subscription(
+    current_user: User = Depends(get_current_active_user),
+    db: Session = Depends(get_db)
+):
+    """Get user's currently active subscription plan template ID"""
+    try:
+        # Check if user has premium subscription
+        if current_user.subscription_plan != SubscriptionPlan.PREMIUM:
+            return ActiveSubscriptionResponse(
+                active_plan_template_id=None,
+                subscription_end_date=None,
+                is_active=False
+            )
+        
+        # Check if subscription is still valid (not expired)
+        if current_user.subscription_end_date:
+            if current_user.subscription_end_date < datetime.utcnow():
+                return ActiveSubscriptionResponse(
+                    active_plan_template_id=None,
+                    subscription_end_date=current_user.subscription_end_date.isoformat(),
+                    is_active=False
+                )
+        
+        # Use the plan template ID directly from users table (more efficient)
+        if current_user.current_subscription_plan_template_id:
+            return ActiveSubscriptionResponse(
+                active_plan_template_id=current_user.current_subscription_plan_template_id,
+                subscription_end_date=current_user.subscription_end_date.isoformat() if current_user.subscription_end_date else None,
+                is_active=True
+            )
+        
+        # Fallback: If no template ID in users table, try to get from payment orders (for backward compatibility)
+        payment_order = db.query(PaymentOrder).filter(
+            PaymentOrder.user_id == current_user.id,
+            PaymentOrder.status == PaymentOrderStatus.PAID
+        ).order_by(PaymentOrder.payment_date.desc()).first()
+        
+        if payment_order and payment_order.subscription_plan_id:
+            # Update users table with the plan template ID for future queries
+            current_user.current_subscription_plan_template_id = payment_order.subscription_plan_id
+            db.commit()
+            return ActiveSubscriptionResponse(
+                active_plan_template_id=payment_order.subscription_plan_id,
+                subscription_end_date=current_user.subscription_end_date.isoformat() if current_user.subscription_end_date else None,
+                is_active=True
+            )
+        
+        # If no payment order found but user has premium, return active but no template ID
+        return ActiveSubscriptionResponse(
+            active_plan_template_id=None,
+            subscription_end_date=current_user.subscription_end_date.isoformat() if current_user.subscription_end_date else None,
+            is_active=current_user.subscription_plan == SubscriptionPlan.PREMIUM
+        )
+    except Exception as e:
+        logger.error(f"Error getting active subscription: {e}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to get active subscription"
         )
 

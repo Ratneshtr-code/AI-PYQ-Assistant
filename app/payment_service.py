@@ -302,6 +302,8 @@ def process_payment_success(
             user.subscription_plan = payment_order.plan_type
             user.subscription_start_date = datetime.utcnow()
             user.subscription_end_date = datetime.utcnow() + timedelta(days=payment_order.duration_months * 30)
+            # Store the plan template ID so we can identify which specific plan (Quarterly, Half Yearly, etc.)
+            user.current_subscription_plan_template_id = payment_order.subscription_plan_id
             user.updated_at = datetime.utcnow()
         
         db.commit()

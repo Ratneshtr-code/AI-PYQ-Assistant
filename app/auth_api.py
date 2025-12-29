@@ -51,6 +51,7 @@ class UserResponse(BaseModel):
     subscription_plan: str
     is_admin: bool
     profile_picture_url: Optional[str]
+    current_subscription_plan_template_id: Optional[int] = None  # ID of the current active plan template
 
 
 class RefreshTokenRequest(BaseModel):
@@ -164,6 +165,7 @@ async def signup(user_data: UserSignUp, db: Session = Depends(get_db)):
             "subscription_plan": new_user.subscription_plan.value,
             "is_admin": new_user.is_admin,
             "profile_picture_url": new_user.profile_picture_url,
+            "current_subscription_plan_template_id": new_user.current_subscription_plan_template_id,
             "subscription_start_date": new_user.subscription_start_date.isoformat() if new_user.subscription_start_date else None,
             "subscription_end_date": new_user.subscription_end_date.isoformat() if new_user.subscription_end_date else None
         }
@@ -325,6 +327,7 @@ async def login(credentials: UserLogin, db: Session = Depends(get_db)):
             "subscription_plan": user.subscription_plan.value,
             "is_admin": user.is_admin,
             "profile_picture_url": user.profile_picture_url,
+            "current_subscription_plan_template_id": user.current_subscription_plan_template_id,
             "subscription_start_date": user.subscription_start_date.isoformat() if user.subscription_start_date else None,
             "subscription_end_date": user.subscription_end_date.isoformat() if user.subscription_end_date else None
         }
@@ -376,6 +379,7 @@ async def get_current_user_info(
         subscription_plan=current_user.subscription_plan.value,
         is_admin=current_user.is_admin,
         profile_picture_url=current_user.profile_picture_url,
+        current_subscription_plan_template_id=current_user.current_subscription_plan_template_id,
         subscription_start_date=current_user.subscription_start_date,
         subscription_end_date=current_user.subscription_end_date
     )
@@ -449,7 +453,8 @@ async def update_profile(
         full_name=current_user.full_name,
         subscription_plan=current_user.subscription_plan.value,
         is_admin=current_user.is_admin,
-        profile_picture_url=current_user.profile_picture_url
+        profile_picture_url=current_user.profile_picture_url,
+        current_subscription_plan_template_id=current_user.current_subscription_plan_template_id
     )
 
 
@@ -542,6 +547,7 @@ async def upgrade_subscription(
         subscription_plan=current_user.subscription_plan.value,
         is_admin=current_user.is_admin,
         profile_picture_url=current_user.profile_picture_url,
+        current_subscription_plan_template_id=current_user.current_subscription_plan_template_id,
         subscription_start_date=current_user.subscription_start_date,
         subscription_end_date=current_user.subscription_end_date
     )

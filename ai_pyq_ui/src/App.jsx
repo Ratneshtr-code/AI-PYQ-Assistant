@@ -48,13 +48,7 @@ function AppContent() {
             <Routes>
                 <Route 
                     path="/" 
-                    element={
-                        isAuthenticated() ? (
-                            <Navigate to="/exam-dashboard" replace />
-                        ) : (
-                            <LandingPage />
-                        )
-                    } 
+                    element={<LandingPage />}
                 />
                 <Route path="/search" element={<SearchPage />} />
                 <Route path="/exam-dashboard" element={<ExamDashboardPage />} />

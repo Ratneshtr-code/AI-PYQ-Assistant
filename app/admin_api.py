@@ -10,7 +10,10 @@ from pydantic import BaseModel, EmailStr
 from typing import Optional, List
 from datetime import datetime, timedelta
 
-from app.database import get_db, User, SubscriptionPlan, Session as SessionModel, SubscriptionPlanTemplate
+from app.database import (
+    get_db, User, SubscriptionPlan, Session as SessionModel, SubscriptionPlanTemplate,
+    UserNote, LLMUsageLog, PaymentOrder, PaymentTransaction
+)
 from app.auth import get_current_active_user
 
 router = APIRouter(prefix="/admin", tags=["admin"])
@@ -296,14 +299,38 @@ async def delete_user(
             detail="Cannot delete your own account"
         )
     
-    # Delete all user sessions first
-    db.query(SessionModel).filter(SessionModel.user_id == user_id).delete()
-    
-    # Hard delete - permanently remove from database
-    db.delete(user)
-    db.commit()
-    
-    return {"message": "User permanently deleted successfully"}
+    try:
+        # Delete all related records first (in order to avoid foreign key constraints)
+        
+        # 1. Delete payment transactions (they reference payment_orders)
+        payment_orders = db.query(PaymentOrder).filter(PaymentOrder.user_id == user_id).all()
+        payment_order_ids = [po.id for po in payment_orders]
+        if payment_order_ids:
+            db.query(PaymentTransaction).filter(PaymentTransaction.order_id.in_(payment_order_ids)).delete()
+        
+        # 2. Delete payment orders
+        db.query(PaymentOrder).filter(PaymentOrder.user_id == user_id).delete()
+        
+        # 3. Delete user notes
+        db.query(UserNote).filter(UserNote.user_id == user_id).delete()
+        
+        # 4. Delete LLM usage logs
+        db.query(LLMUsageLog).filter(LLMUsageLog.user_id == user_id).delete()
+        
+        # 5. Delete user sessions
+        db.query(SessionModel).filter(SessionModel.user_id == user_id).delete()
+        
+        # 6. Finally, delete the user
+        db.delete(user)
+        db.commit()
+        
+        return {"message": "User permanently deleted successfully"}
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to delete user: {str(e)}"
+        )
 
 
 @router.post("/users/{user_id}/subscription")

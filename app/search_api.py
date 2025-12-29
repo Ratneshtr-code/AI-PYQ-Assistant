@@ -304,6 +304,46 @@ def get_filters():
     return {"exams": exams}
 
 
+@app.get("/subscription-plans")
+def get_subscription_plans():
+    """Get active subscription plans for users (public endpoint)"""
+    from app.database import SubscriptionPlanTemplate, SessionLocal
+    import logging
+    logger = logging.getLogger(__name__)
+    
+    db = SessionLocal()
+    try:
+        # Get only active plans - use explicit True comparison
+        plans = db.query(SubscriptionPlanTemplate).filter(
+            SubscriptionPlanTemplate.is_active == True
+        ).order_by(SubscriptionPlanTemplate.price.asc()).all()
+        
+        # Log for debugging
+        print(f"[Subscription Plans API] Found {len(plans)} active plans")
+        for plan in plans:
+            print(f"  - Plan ID {plan.id}: {plan.name}, Price: ₹{plan.price}, Duration: {plan.duration_months} months, Active: {plan.is_active}")
+        
+        result = [
+            {
+                "id": plan.id,
+                "name": plan.name,
+                "plan_type": plan.plan_type.value,
+                "price": float(plan.price),  # Ensure it's a float
+                "duration_months": int(plan.duration_months)  # Ensure it's an int
+            }
+            for plan in plans
+        ]
+        
+        logger.info(f"Returning {len(result)} active subscription plans")
+        return result
+    except Exception as e:
+        logger.error(f"Error fetching subscription plans: {e}", exc_info=True)
+        print(f"[Subscription Plans API] Error: {e}")
+        return []
+    finally:
+        db.close()
+
+
 @app.get("/topic-wise/subjects")
 def get_subjects_by_exam(exam: str = Query(..., description="Exam name")):
     """Return available subjects for a given exam"""

@@ -25,6 +25,7 @@ def show_overall_summary():
     llm_config = cfg.get("llm", {})
     testing_cache_config = llm_config.get("testing_cache", {})
     production_cache_config = llm_config.get("production_cache", {})
+    payment_config = cfg.get("payment", {})
     
     # Model info
     model_name = llm_config.get("model", "N/A")
@@ -36,6 +37,16 @@ def show_overall_summary():
     testing_enabled = testing_cache_config.get("enabled", False)
     production_enabled = production_cache_config.get("enabled", False)
     
+    # Payment mode
+    payment_mode = payment_config.get("mode", "test").lower()
+    payment_mode_display = payment_mode.upper()
+    
+    # Check if payment gateway is configured
+    import os
+    razorpay_key_id = os.getenv("RAZORPAY_KEY_ID", "")
+    razorpay_key_secret = os.getenv("RAZORPAY_KEY_SECRET", "")
+    payment_configured = bool(razorpay_key_id and razorpay_key_secret)
+    
     print("\n📋 Configuration Status:")
     print("=" * 80)
     print(f"   LLM Provider:        {provider}")
@@ -45,6 +56,9 @@ def show_overall_summary():
     print()
     print(f"   Testing Cache:       {'✅ ENABLED' if testing_enabled else '❌ DISABLED'}")
     print(f"   Production Cache:    {'✅ ENABLED' if production_enabled else '❌ DISABLED'}")
+    print()
+    print(f"   Payment Mode:        {payment_mode_display}")
+    print(f"   Payment Gateway:     {'✅ CONFIGURED' if payment_configured else '❌ NOT CONFIGURED'}")
     
     if production_enabled and testing_enabled:
         print("\n⚠️  WARNING: Both caches are enabled! Production cache takes precedence.")
@@ -81,6 +95,20 @@ def show_overall_summary():
     print(f"   Retrieval K:       {backend_config.get('retrieval_k', 'N/A')}")
     print(f"   Min Score:         {backend_config.get('min_score', 'N/A')}")
     
+    # Payment Configuration
+    print("\n" + "=" * 80)
+    print("Payment Configuration:")
+    print("=" * 80)
+    print(f"   Payment Mode:        {payment_mode_display}")
+    if payment_mode == "test":
+        print(f"   Status:             🧪 Test Mode - No real payments processed")
+    else:
+        print(f"   Status:             🚀 Production Mode - Real payments enabled")
+    print(f"   Gateway Configured: {'✅ Yes' if payment_configured else '❌ No'}")
+    if not payment_configured and payment_mode == "production":
+        print(f"   ⚠️  WARNING: Production mode enabled but payment gateway not configured!")
+        print(f"   Set RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET in .env file")
+    
     # Database info
     print("\n" + "=" * 80)
     print("Database Status:")
@@ -99,6 +127,8 @@ def show_overall_summary():
     print("   - Use option 4 to manage Testing Cache")
     print("   - Use option 11 to manage Production Cache")
     print("   - Check backend console logs for cache source indicators")
+    if payment_mode == "test":
+        print("   - Payment mode is TEST - users can upgrade without payment")
     print("=" * 80)
 
 

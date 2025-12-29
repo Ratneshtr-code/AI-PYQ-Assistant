@@ -27,11 +27,23 @@ export default function LandingPage() {
     const [signUpLoading, setSignUpLoading] = useState(false);
     const [passwordStrength, setPasswordStrength] = useState("");
 
-    // Redirect if already authenticated
+    // Redirect if already authenticated (but not on logout)
     useEffect(() => {
-        if (isAuthenticated()) {
-            navigate("/exam-dashboard", { replace: true });
-        }
+        const checkAuth = () => {
+            if (isAuthenticated()) {
+                navigate("/exam-dashboard", { replace: true });
+            }
+        };
+        
+        // Initial check
+        checkAuth();
+        
+        // Listen for login events (but not logout - we want to stay on landing page after logout)
+        window.addEventListener("userLoggedIn", checkAuth);
+        
+        return () => {
+            window.removeEventListener("userLoggedIn", checkAuth);
+        };
     }, [navigate]);
 
     // Carousel auto-rotation

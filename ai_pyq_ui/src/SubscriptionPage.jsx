@@ -17,6 +17,8 @@ export default function SubscriptionPage() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
+    const [availablePlans, setAvailablePlans] = useState([]); // Plans from database
+    const [plansLoading, setPlansLoading] = useState(true);
     
     // Payment flow state
     const [paymentStep, setPaymentStep] = useState("plans"); // "plans", "payment-method", "checkout", "status"
@@ -25,12 +27,39 @@ export default function SubscriptionPage() {
     const [paymentStatus, setPaymentStatus] = useState(null); // "success", "failed", "pending"
     const [orderData, setOrderData] = useState(null);
     const [isTestMode, setIsTestMode] = useState(true); // Will be set based on API response
+    const [activePlanTemplateId, setActivePlanTemplateId] = useState(null); // ID of the active subscription plan template
 
     useEffect(() => {
         // Check premium status from userData
         const userData = getUserData();
         const premium = userData?.subscription_plan === "premium" || localStorage.getItem("hasPremium") === "true";
         setHasPremium(premium);
+        
+        // Fetch active subscription plan template ID
+        const fetchActiveSubscription = async () => {
+            try {
+                const res = await authenticatedFetch("/payment/active-subscription");
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.is_active && data.active_plan_template_id) {
+                        setActivePlanTemplateId(data.active_plan_template_id);
+                    } else {
+                        setActivePlanTemplateId(null);
+                    }
+                } else {
+                    setActivePlanTemplateId(null);
+                }
+            } catch (err) {
+                console.error("Failed to fetch active subscription:", err);
+                setActivePlanTemplateId(null);
+            }
+        };
+        
+        if (premium) {
+            fetchActiveSubscription();
+        } else {
+            setActivePlanTemplateId(null);
+        }
 
         // Fetch exams list for sidebar
         const fetchExams = async () => {
@@ -43,6 +72,35 @@ export default function SubscriptionPage() {
             }
         };
         fetchExams();
+
+        // Fetch subscription plans from database
+        const fetchPlans = async () => {
+            setPlansLoading(true);
+            try {
+                // Add cache-busting parameter to ensure fresh data
+                const res = await fetch(`/subscription-plans?t=${Date.now()}`, {
+                    cache: 'no-store', // Prevent browser caching
+                    headers: {
+                        'Cache-Control': 'no-cache'
+                    }
+                });
+                if (res.ok) {
+                    const plans = await res.json();
+                    console.log("Fetched subscription plans:", plans);
+                    setAvailablePlans(plans || []);
+                } else {
+                    const errorText = await res.text();
+                    console.warn("Failed to fetch subscription plans:", res.status, errorText);
+                    setAvailablePlans([]);
+                }
+            } catch (err) {
+                console.error("Failed to fetch subscription plans:", err);
+                setAvailablePlans([]);
+            } finally {
+                setPlansLoading(false);
+            }
+        };
+        fetchPlans();
 
         // Load Razorpay script
         const loadRazorpay = () => {
@@ -62,11 +120,11 @@ export default function SubscriptionPage() {
 
     const handleUpgradeClick = (plan) => {
         setSelectedPlan({
-            id: null, // Will be fetched from API if available
-            name: "Premium",
-            plan_type: "premium",
-            price: 499,
-            duration_months: 1
+            id: plan.id || null,
+            name: plan.name || "Premium",
+            plan_type: plan.plan_type || "premium",
+            price: plan.price || 499,
+            duration_months: plan.duration_months || 1
         });
         setPaymentStep("payment-method");
         setError("");
@@ -92,6 +150,24 @@ export default function SubscriptionPage() {
             window.dispatchEvent(new Event("userLoggedIn"));
             window.dispatchEvent(new Event("userProfileUpdated"));
         }
+        
+        // Fetch active subscription plan template ID to show correct "Active" badge
+        const fetchActiveSubscription = async () => {
+            try {
+                const res = await authenticatedFetch("/payment/active-subscription");
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.is_active && data.active_plan_template_id) {
+                        setActivePlanTemplateId(data.active_plan_template_id);
+                    } else {
+                        setActivePlanTemplateId(null);
+                    }
+                }
+            } catch (err) {
+                console.error("Failed to fetch active subscription after payment:", err);
+            }
+        };
+        fetchActiveSubscription();
     };
 
     const handlePaymentCancel = () => {
@@ -138,12 +214,49 @@ export default function SubscriptionPage() {
                             <span>Back</span>
                         </button>
                         
-                        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-                            💎 Subscription Plans
-                        </h1>
-                        <p className="text-gray-600 mb-8">
-                            Choose the plan that's right for you
-                        </p>
+                        <div className="flex items-center justify-between mb-8">
+                            <div>
+                                <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+                                    💎 Subscription Plans
+                                </h1>
+                                <p className="text-gray-600">
+                                    Choose the plan that's right for you
+                                </p>
+                            </div>
+                            <button
+                                onClick={() => {
+                                    const fetchPlans = async () => {
+                                        setPlansLoading(true);
+                                        try {
+                                            const res = await fetch(`/subscription-plans?t=${Date.now()}`, {
+                                                cache: 'no-store',
+                                                headers: {
+                                                    'Cache-Control': 'no-cache'
+                                                }
+                                            });
+                                            if (res.ok) {
+                                                const plans = await res.json();
+                                                console.log("Refreshed subscription plans:", plans);
+                                                setAvailablePlans(plans || []);
+                                            }
+                                        } catch (err) {
+                                            console.error("Failed to refresh plans:", err);
+                                        } finally {
+                                            setPlansLoading(false);
+                                        }
+                                    };
+                                    fetchPlans();
+                                }}
+                                disabled={plansLoading}
+                                className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors disabled:opacity-50 flex items-center gap-2"
+                                title="Refresh plans"
+                            >
+                                <svg className={`w-5 h-5 ${plansLoading ? 'animate-spin' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                </svg>
+                                {plansLoading ? "Loading..." : "Refresh"}
+                            </button>
+                        </div>
                         
                         {success && (
                             <div className="mb-6 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg">
@@ -218,7 +331,7 @@ export default function SubscriptionPage() {
                             </motion.div>
                         )}
 
-                        <div className="grid md:grid-cols-2 gap-6 mb-8">
+                        <div className={`grid gap-6 mb-8 ${availablePlans.filter(p => p.plan_type === "premium").length > 0 ? (availablePlans.filter(p => p.plan_type === "premium").length === 1 ? "md:grid-cols-2" : "md:grid-cols-3") : "md:grid-cols-2"}`}>
                             {/* Free Plan */}
                             <div className="bg-white rounded-xl border-2 border-gray-200 p-6 shadow-sm">
                                 <div className="mb-4">
@@ -260,59 +373,122 @@ export default function SubscriptionPage() {
                                 )}
                             </div>
 
-                            {/* Premium Plan */}
-                            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border-2 border-blue-500 p-6 shadow-lg relative">
-                                {hasPremium && (
-                                    <div className="absolute top-4 right-4 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">
-                                        Active
+                            {/* Premium Plans - Dynamic from database */}
+                            {availablePlans.filter(p => p.plan_type === "premium").length > 0 ? (
+                                availablePlans.filter(p => p.plan_type === "premium").map((plan) => {
+                                    const isActivePlan = activePlanTemplateId !== null && plan.id === activePlanTemplateId;
+                                    return (
+                                    <div key={plan.id} className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border-2 border-blue-500 p-6 shadow-lg relative">
+                                        {isActivePlan && (
+                                            <div className="absolute top-4 right-4 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                                                Active
+                                            </div>
+                                        )}
+                                        <div className="mb-4">
+                                            <h3 className="text-2xl font-bold text-gray-900 mb-2">{plan.name}</h3>
+                                            <div className="flex items-baseline">
+                                                <span className="text-4xl font-bold text-gray-900">₹{plan.price}</span>
+                                                <span className="text-gray-600 ml-2">
+                                                    /{plan.duration_months === 1 ? "month" : `${plan.duration_months} months`}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <ul className="space-y-3 mb-6">
+                                            <li className="flex items-start">
+                                                <span className="text-green-500 mr-2">✓</span>
+                                                <span className="text-gray-700">Everything in Free</span>
+                                            </li>
+                                            <li className="flex items-start">
+                                                <span className="text-green-500 mr-2">✓</span>
+                                                <span className="text-gray-700">Stable/Volatile topic insights</span>
+                                            </li>
+                                            <li className="flex items-start">
+                                                <span className="text-green-500 mr-2">✓</span>
+                                                <span className="text-gray-700">Advanced analytics & trends</span>
+                                            </li>
+                                            <li className="flex items-start">
+                                                <span className="text-green-500 mr-2">✓</span>
+                                                <span className="text-gray-700">Cross-exam comparisons</span>
+                                            </li>
+                                            <li className="flex items-start">
+                                                <span className="text-green-500 mr-2">✓</span>
+                                                <span className="text-gray-700">Priority support</span>
+                                            </li>
+                                        </ul>
+                                        {isActivePlan ? (
+                                            <button
+                                                disabled
+                                                className="w-full py-2 px-4 bg-green-500 text-white rounded-lg cursor-not-allowed"
+                                            >
+                                                Premium Active ✓
+                                            </button>
+                                        ) : (
+                                            <button
+                                                onClick={() => handleUpgradeClick(plan)}
+                                                disabled={loading || paymentStep !== "plans"}
+                                                className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                                            >
+                                                {loading ? "Upgrading..." : `Upgrade to ${plan.name}`}
+                                            </button>
+                                        )}
                                     </div>
-                                )}
-                                <div className="mb-4">
-                                    <h3 className="text-2xl font-bold text-gray-900 mb-2">Premium</h3>
-                                    <div className="flex items-baseline">
-                                        <span className="text-4xl font-bold text-gray-900">₹499</span>
-                                        <span className="text-gray-600 ml-2">/month</span>
+                                    );
+                                })
+                            ) : (
+                                // Fallback to default plan if no plans in database
+                                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border-2 border-blue-500 p-6 shadow-lg relative">
+                                    {hasPremium && (
+                                        <div className="absolute top-4 right-4 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                                            Active
+                                        </div>
+                                    )}
+                                    <div className="mb-4">
+                                        <h3 className="text-2xl font-bold text-gray-900 mb-2">Premium</h3>
+                                        <div className="flex items-baseline">
+                                            <span className="text-4xl font-bold text-gray-900">₹499</span>
+                                            <span className="text-gray-600 ml-2">/month</span>
+                                        </div>
                                     </div>
+                                    <ul className="space-y-3 mb-6">
+                                        <li className="flex items-start">
+                                            <span className="text-green-500 mr-2">✓</span>
+                                            <span className="text-gray-700">Everything in Free</span>
+                                        </li>
+                                        <li className="flex items-start">
+                                            <span className="text-green-500 mr-2">✓</span>
+                                            <span className="text-gray-700">Stable/Volatile topic insights</span>
+                                        </li>
+                                        <li className="flex items-start">
+                                            <span className="text-green-500 mr-2">✓</span>
+                                            <span className="text-gray-700">Advanced analytics & trends</span>
+                                        </li>
+                                        <li className="flex items-start">
+                                            <span className="text-green-500 mr-2">✓</span>
+                                            <span className="text-gray-700">Cross-exam comparisons</span>
+                                        </li>
+                                        <li className="flex items-start">
+                                            <span className="text-green-500 mr-2">✓</span>
+                                            <span className="text-gray-700">Priority support</span>
+                                        </li>
+                                    </ul>
+                                    {hasPremium ? (
+                                        <button
+                                            disabled
+                                            className="w-full py-2 px-4 bg-green-500 text-white rounded-lg cursor-not-allowed"
+                                        >
+                                            Premium Active ✓
+                                        </button>
+                                    ) : (
+                                        <button
+                                            onClick={() => handleUpgradeClick({ name: "Premium", price: 499, duration_months: 1 })}
+                                            disabled={loading || paymentStep !== "plans"}
+                                            className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                                        >
+                                            {loading ? "Upgrading..." : "Upgrade to Premium"}
+                                        </button>
+                                    )}
                                 </div>
-                                <ul className="space-y-3 mb-6">
-                                    <li className="flex items-start">
-                                        <span className="text-green-500 mr-2">✓</span>
-                                        <span className="text-gray-700">Everything in Free</span>
-                                    </li>
-                                    <li className="flex items-start">
-                                        <span className="text-green-500 mr-2">✓</span>
-                                        <span className="text-gray-700">Stable/Volatile topic insights</span>
-                                    </li>
-                                    <li className="flex items-start">
-                                        <span className="text-green-500 mr-2">✓</span>
-                                        <span className="text-gray-700">Advanced analytics & trends</span>
-                                    </li>
-                                    <li className="flex items-start">
-                                        <span className="text-green-500 mr-2">✓</span>
-                                        <span className="text-gray-700">Cross-exam comparisons</span>
-                                    </li>
-                                    <li className="flex items-start">
-                                        <span className="text-green-500 mr-2">✓</span>
-                                        <span className="text-gray-700">Priority support</span>
-                                    </li>
-                                </ul>
-                                {hasPremium ? (
-                                    <button
-                                        disabled
-                                        className="w-full py-2 px-4 bg-green-500 text-white rounded-lg cursor-not-allowed"
-                                    >
-                                        Premium Active ✓
-                                    </button>
-                                ) : (
-                                    <button
-                                        onClick={() => handleUpgradeClick({ name: "Premium", price: 499, duration_months: 1 })}
-                                        disabled={loading || paymentStep !== "plans"}
-                                        className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
-                                    >
-                                        {loading ? "Upgrading..." : "Upgrade to Premium"}
-                                    </button>
-                                )}
-                            </div>
+                            )}
                         </div>
 
                         {paymentStep === "plans" && (

@@ -26,6 +26,8 @@ def format_date(date):
 
 def list_users():
     """List all users with their subscription information"""
+    from app.database import PaymentOrder, PaymentOrderStatus
+    
     db = SessionLocal()
     try:
         users = db.query(User).order_by(User.created_at.desc()).all()
@@ -34,30 +36,48 @@ def list_users():
             print("\n📭 No users found")
             return
         
-        print("\n" + "=" * 140)
-        print(f"{'ID':<6} {'Username':<20} {'Email':<30} {'Plan':<12} {'Saved Notes':<12} {'Status':<25} {'Created':<20}")
-        print("=" * 140)
+        print("\n" + "=" * 130)
+        print(f"{'ID':<6} {'Username':<18} {'Email':<28} {'Admin':<8} {'Plan':<10} {'Saved Notes':<12} {'Active':<8} {'Days Remaining':<15} {'Amount':<10}")
+        print("=" * 130)
         
         for user in users:
             plan = user.subscription_plan.value if user.subscription_plan else "N/A"
-            status = "Active" if user.is_active else "Inactive"
-            created = format_date(user.created_at)
+            admin = "Yes" if user.is_admin else "No"
+            active = "Yes" if user.is_active else "No"
             
-            # Check subscription expiry
-            if user.subscription_plan == SubscriptionPlan.PREMIUM:
-                if user.subscription_end_date:
-                    if user.subscription_end_date < datetime.utcnow():
-                        status = "Expired"
-                    else:
-                        expiry = format_date(user.subscription_end_date)
-                        status = f"Valid until {expiry}"
+            # Calculate days remaining for premium users
+            days_remaining = "N/A"
+            if user.subscription_plan == SubscriptionPlan.PREMIUM and user.subscription_end_date:
+                if user.subscription_end_date < datetime.utcnow():
+                    days_remaining = "Expired"
+                else:
+                    days = (user.subscription_end_date - datetime.utcnow()).days
+                    days_remaining = str(days)
             
             # Count user's saved notes
             notes_count = db.query(func.count(UserNote.id)).filter(UserNote.user_id == user.id).scalar() or 0
             
-            print(f"{user.id:<6} {user.username[:18]:<20} {user.email[:28]:<30} {plan:<12} {notes_count:<12} {status[:24]:<25} {created:<20}")
+            # Get amount from most recent paid payment order
+            amount = "N/A"
+            if user.subscription_plan == SubscriptionPlan.PREMIUM:
+                payment_order = db.query(PaymentOrder).filter(
+                    PaymentOrder.user_id == user.id,
+                    PaymentOrder.status == PaymentOrderStatus.PAID
+                ).order_by(PaymentOrder.payment_date.desc()).first()
+                
+                if payment_order:
+                    amount = f"₹{payment_order.amount:.2f}"
+                else:
+                    # If no paid order, check for any order
+                    any_order = db.query(PaymentOrder).filter(
+                        PaymentOrder.user_id == user.id
+                    ).order_by(PaymentOrder.created_at.desc()).first()
+                    if any_order:
+                        amount = f"₹{any_order.amount:.2f}"
+            
+            print(f"{user.id:<6} {user.username[:16]:<18} {user.email[:26]:<28} {admin:<8} {plan:<10} {notes_count:<12} {active:<8} {days_remaining:<15} {amount:<10}")
         
-        print("=" * 140)
+        print("=" * 130)
         print(f"\nTotal users: {len(users)}")
         
         # Statistics
@@ -71,6 +91,8 @@ def list_users():
         
     except Exception as e:
         print(f"❌ Error listing users: {e}")
+        import traceback
+        traceback.print_exc()
     finally:
         db.close()
 

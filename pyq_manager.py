@@ -511,6 +511,44 @@ def show_overall_summary():
         return True
 
 
+def migrate_plan_template_id():
+    """Migrate: Sync subscription plan template ID from payment_orders to users table"""
+    print_header("Database Migration: Plan Template ID Sync")
+    
+    script_path = get_project_root() / "migrate_add_plan_template_id.py"
+    if not script_path.exists():
+        print_error(f"Migration script not found: {script_path}")
+        return False
+    
+    print_info("This migration syncs data between:")
+    print_info("  • payment_orders table (source: subscription_plan_id)")
+    print_info("  • users table (target: current_subscription_plan_template_id)")
+    print()
+    print_warning("⚠️  This script is ONLY needed for EXISTING databases")
+    print_info("   For NEW databases and NEW users, this happens automatically!")
+    print()
+    
+    confirm = input(f"{Colors.YELLOW}Do you want to proceed? (yes/no): {Colors.ENDC}").strip().lower()
+    if confirm not in ['yes', 'y']:
+        print_info("Migration cancelled.")
+        return False
+    
+    print()
+    print_info("Running migration...")
+    print()
+    
+    try:
+        run_python_script(script_path, check=True)
+        print_success("Migration completed!")
+        return True
+    except subprocess.CalledProcessError as e:
+        print_error(f"Migration failed: {e}")
+        return False
+    except KeyboardInterrupt:
+        print_warning("Migration cancelled by user.")
+        return False
+
+
 def show_project_status():
     """Show project status and configuration"""
     print_header("Project Status")
@@ -589,6 +627,7 @@ def show_main_menu():
         ("10", "Manage Token Usage", "View LLM token usage per user"),
         ("11", "Manage Production Cache", "View/manage production cache entries"),
         ("12", "Overall Summary", "Show overall system configuration and status"),
+        ("13", "Migrate Plan Template ID", "Sync subscription plan template ID (payment_orders → users)"),
         ("0", "Exit", "Exit the manager"),
     ]
     
@@ -597,7 +636,7 @@ def show_main_menu():
         print(f"  {Colors.CYAN}{num}.{Colors.ENDC} {Colors.BOLD}{title}{Colors.ENDC}")
         print(f"     {Colors.YELLOW}→{Colors.ENDC} {desc}\n")
     
-    print(f"{Colors.BOLD}Enter your choice (0-12):{Colors.ENDC} ", end="")
+    print(f"{Colors.BOLD}Enter your choice (0-13):{Colors.ENDC} ", end="")
 
 
 def main():
@@ -630,13 +669,14 @@ def main():
             10: manage_token_usage,
             11: manage_production_cache,
             12: show_overall_summary,
+            13: migrate_plan_template_id,
         }
         
         if args.direct in operations:
             operations[args.direct]()
         else:
             print_error(f"Invalid operation number: {args.direct}")
-            print_info("Valid numbers: 1-12")
+            print_info("Valid numbers: 1-13")
             sys.exit(1)
         return
     
@@ -673,9 +713,11 @@ def main():
                 manage_production_cache()
             elif choice == "12":
                 show_overall_summary()
+            elif choice == "13":
+                migrate_plan_template_id()
             else:
                 print_error(f"Invalid choice: {choice}")
-                print_info("Please enter a number between 0-12")
+                print_info("Please enter a number between 0-13")
             
             if choice != "0":
                 input(f"\n{Colors.YELLOW}Press Enter to continue...{Colors.ENDC}")

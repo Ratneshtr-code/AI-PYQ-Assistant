@@ -41,12 +41,16 @@ class User(Base):
     subscription_plan = Column(SQLEnum(SubscriptionPlan), default=SubscriptionPlan.FREE)
     subscription_start_date = Column(DateTime, nullable=True)
     subscription_end_date = Column(DateTime, nullable=True)
+    current_subscription_plan_template_id = Column(Integer, ForeignKey("subscription_plan_templates.id"), nullable=True)  # Current active plan template ID
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
     # OAuth fields
     google_id = Column(String, unique=True, nullable=True, index=True)
     profile_picture_url = Column(String, nullable=True)
+    
+    # Relationship to current subscription plan template
+    current_subscription_plan_template = relationship("SubscriptionPlanTemplate", foreign_keys=[current_subscription_plan_template_id])
 
 
 class Session(Base):
