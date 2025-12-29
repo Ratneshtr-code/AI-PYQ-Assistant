@@ -263,12 +263,12 @@ export default function LandingPage() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-indigo-950 to-purple-950 relative overflow-hidden">
-            {/* Animated background elements */}
+        <div className="min-h-screen bg-gray-50 relative overflow-hidden">
+            {/* Subtle background elements */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
-                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-                <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl"></div>
+                <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-100/30 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-100/30 rounded-full blur-3xl"></div>
+                <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-purple-100/20 rounded-full blur-3xl"></div>
             </div>
 
             {/* Top Section - Full Width: Branding (65%) + Auth (35%) */}
@@ -289,15 +289,15 @@ export default function LandingPage() {
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.8, delay: 0.2 }}
                             >
-                                <div className="w-20 h-20 bg-gradient-to-br from-blue-400 via-indigo-500 to-purple-600 rounded-3xl flex items-center justify-center shadow-2xl shadow-blue-500/50 ring-4 ring-white/10 backdrop-blur-sm">
+                                <div className="w-20 h-20 bg-gradient-to-br from-blue-500 via-indigo-600 to-purple-600 rounded-3xl flex items-center justify-center shadow-lg border-2 border-blue-200">
                                     <span className="text-white font-bold text-3xl">AI</span>
                                 </div>
-                                <h1 className="text-5xl lg:text-6xl xl:text-7xl font-extrabold bg-gradient-to-r from-white via-blue-100 to-purple-100 bg-clip-text text-transparent leading-tight">
+                                <h1 className="text-4xl lg:text-5xl xl:text-6xl font-extrabold bg-gradient-to-r from-gray-900 via-blue-800 to-indigo-900 bg-clip-text text-transparent leading-tight">
                                     AI PYQ Assistant
                                 </h1>
                             </motion.div>
                             <motion.p 
-                                className="text-2xl lg:text-3xl font-semibold text-white/95 mb-6 leading-relaxed"
+                                className="text-xl lg:text-2xl font-semibold text-gray-800 mb-6 leading-relaxed"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, delay: 0.3 }}
@@ -305,7 +305,7 @@ export default function LandingPage() {
                                 The First AI-Powered Platform for Previous Year Questions
                             </motion.p>
                             <motion.p 
-                                className="text-lg lg:text-xl text-white/80 leading-relaxed max-w-2xl"
+                                className="text-base lg:text-lg text-gray-700 leading-relaxed max-w-2xl"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, delay: 0.4 }}
@@ -321,7 +321,7 @@ export default function LandingPage() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.5 }}
                         >
-                            <div className="backdrop-blur-xl bg-white/10 rounded-3xl border border-white/20 shadow-2xl shadow-black/20 p-8 lg:p-10">
+                            <div className="bg-white rounded-3xl border border-gray-200 shadow-xl p-8 lg:p-10">
                                 <AnimatePresence mode="wait">
                                     {carouselIndex === 0 && (
                                         <motion.div
@@ -331,7 +331,7 @@ export default function LandingPage() {
                                             exit={{ opacity: 0, y: -20 }}
                                             transition={{ duration: 0.5, ease: "easeInOut" }}
                                         >
-                                            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-8 bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-transparent">
+                                            <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-8 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                                                 Why Choose AI PYQ Assistant?
                                             </h2>
                                             <div className="space-y-6">
@@ -340,12 +340,12 @@ export default function LandingPage() {
                                                     whileHover={{ x: 5 }}
                                                     transition={{ duration: 0.2 }}
                                                 >
-                                                    <div className="w-14 h-14 bg-gradient-to-br from-blue-400/20 to-blue-600/30 rounded-xl flex items-center justify-center flex-shrink-0 mt-1 backdrop-blur-sm border border-white/20 shadow-lg">
+                                                    <div className="w-14 h-14 bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl flex items-center justify-center flex-shrink-0 mt-1 border border-blue-200 shadow-md">
                                                         <span className="text-3xl">🧠</span>
                                                     </div>
                                                     <div>
-                                                        <h3 className="font-bold text-white text-lg mb-2">AI-Powered Semantic Search</h3>
-                                                        <p className="text-white/80 leading-relaxed">Search through thousands of PYQs using natural language. Find exactly what you need, not just keyword matches.</p>
+                                                        <h3 className="font-bold text-gray-900 text-base mb-2">AI-Powered Semantic Search</h3>
+                                                        <p className="text-gray-700 leading-relaxed text-sm">Search through thousands of PYQs using natural language. Find exactly what you need, not just keyword matches.</p>
                                                     </div>
                                                 </motion.div>
                                                 <motion.div 
@@ -353,12 +353,12 @@ export default function LandingPage() {
                                                     whileHover={{ x: 5 }}
                                                     transition={{ duration: 0.2 }}
                                                 >
-                                                    <div className="w-14 h-14 bg-gradient-to-br from-indigo-400/20 to-indigo-600/30 rounded-xl flex items-center justify-center flex-shrink-0 mt-1 backdrop-blur-sm border border-white/20 shadow-lg">
+                                                    <div className="w-14 h-14 bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-xl flex items-center justify-center flex-shrink-0 mt-1 border border-indigo-200 shadow-md">
                                                         <span className="text-3xl">🎯</span>
                                                     </div>
                                                     <div>
-                                                        <h3 className="font-bold text-white text-lg mb-2">Smart AI Roadmap</h3>
-                                                        <p className="text-white/80 leading-relaxed">Get personalized study roadmaps generated by AI. Quick help in creating your preparation strategy based on your goals.</p>
+                                                        <h3 className="font-bold text-gray-900 text-base mb-2">Smart AI Roadmap</h3>
+                                                        <p className="text-gray-700 leading-relaxed text-sm">Get personalized study roadmaps generated by AI. Quick help in creating your preparation strategy based on your goals.</p>
                                                     </div>
                                                 </motion.div>
                                                 <motion.div 
@@ -366,12 +366,12 @@ export default function LandingPage() {
                                                     whileHover={{ x: 5 }}
                                                     transition={{ duration: 0.2 }}
                                                 >
-                                                    <div className="w-14 h-14 bg-gradient-to-br from-purple-400/20 to-purple-600/30 rounded-xl flex items-center justify-center flex-shrink-0 mt-1 backdrop-blur-sm border border-white/20 shadow-lg">
+                                                    <div className="w-14 h-14 bg-gradient-to-br from-purple-100 to-purple-200 rounded-xl flex items-center justify-center flex-shrink-0 mt-1 border border-purple-200 shadow-md">
                                                         <span className="text-3xl">📑</span>
                                                     </div>
                                                     <div>
-                                                        <h3 className="font-bold text-white text-lg mb-2">Topic-wise Organization</h3>
-                                                        <p className="text-white/80 leading-relaxed">Access PYQs organized by topics for systematic preparation. Master each subject area efficiently.</p>
+                                                        <h3 className="font-bold text-gray-900 text-base mb-2">Topic-wise Organization</h3>
+                                                        <p className="text-gray-700 leading-relaxed text-sm">Access PYQs organized by topics for systematic preparation. Master each subject area efficiently.</p>
                                                     </div>
                                                 </motion.div>
                                                 <motion.div 
@@ -379,12 +379,12 @@ export default function LandingPage() {
                                                     whileHover={{ x: 5 }}
                                                     transition={{ duration: 0.2 }}
                                                 >
-                                                    <div className="w-14 h-14 bg-gradient-to-br from-teal-400/20 to-teal-600/30 rounded-xl flex items-center justify-center flex-shrink-0 mt-1 backdrop-blur-sm border border-white/20 shadow-lg">
+                                                    <div className="w-14 h-14 bg-gradient-to-br from-teal-100 to-teal-200 rounded-xl flex items-center justify-center flex-shrink-0 mt-1 border border-teal-200 shadow-md">
                                                         <span className="text-3xl">🔍</span>
                                                     </div>
                                                     <div>
-                                                        <h3 className="font-bold text-white text-lg mb-2">Cross-Exam Insights</h3>
-                                                        <p className="text-white/80 leading-relaxed">Compare patterns and trends across different competitive exams. Understand what's important.</p>
+                                                        <h3 className="font-bold text-gray-900 text-base mb-2">Cross-Exam Insights</h3>
+                                                        <p className="text-gray-700 leading-relaxed text-sm">Compare patterns and trends across different competitive exams. Understand what's important.</p>
                                                     </div>
                                                 </motion.div>
                                             </div>
@@ -398,10 +398,10 @@ export default function LandingPage() {
                                             exit={{ opacity: 0, y: -20 }}
                                             transition={{ duration: 0.5, ease: "easeInOut" }}
                                         >
-                                            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-8 bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-transparent">
+                                            <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-8 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                                                 Premium Features
                                             </h2>
-                                            <div className="bg-gradient-to-br from-blue-500/20 via-indigo-500/20 to-purple-500/20 rounded-2xl p-8 border border-white/30 backdrop-blur-sm shadow-xl">
+                                            <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 rounded-2xl p-8 border border-blue-200 shadow-lg">
                                                 <ul className="space-y-4">
                                                     <motion.li 
                                                         className="flex items-center gap-3"
@@ -409,8 +409,8 @@ export default function LandingPage() {
                                                         animate={{ opacity: 1, x: 0 }}
                                                         transition={{ delay: 0.1 }}
                                                     >
-                                                        <span className="text-green-400 font-bold text-2xl">✓</span>
-                                                        <span className="text-white text-lg font-medium">Advanced Analytics & Performance Tracking</span>
+                                                        <span className="text-green-600 font-bold text-xl">✓</span>
+                                                        <span className="text-gray-800 text-base font-medium">Advanced Analytics & Performance Tracking</span>
                                                     </motion.li>
                                                     <motion.li 
                                                         className="flex items-center gap-3"
@@ -418,8 +418,8 @@ export default function LandingPage() {
                                                         animate={{ opacity: 1, x: 0 }}
                                                         transition={{ delay: 0.2 }}
                                                     >
-                                                        <span className="text-green-400 font-bold text-2xl">✓</span>
-                                                        <span className="text-white text-lg font-medium">Personal Note-Taking & Organization</span>
+                                                        <span className="text-green-600 font-bold text-2xl">✓</span>
+                                                        <span className="text-gray-800 text-base font-medium">Personal Note-Taking & Organization</span>
                                                     </motion.li>
                                                     <motion.li 
                                                         className="flex items-center gap-3"
@@ -427,8 +427,8 @@ export default function LandingPage() {
                                                         animate={{ opacity: 1, x: 0 }}
                                                         transition={{ delay: 0.3 }}
                                                     >
-                                                        <span className="text-green-400 font-bold text-2xl">✓</span>
-                                                        <span className="text-white text-lg font-medium">Unlimited AI Roadmap Generation</span>
+                                                        <span className="text-green-600 font-bold text-2xl">✓</span>
+                                                        <span className="text-gray-800 text-base font-medium">Unlimited AI Roadmap Generation</span>
                                                     </motion.li>
                                                     <motion.li 
                                                         className="flex items-center gap-3"
@@ -436,8 +436,8 @@ export default function LandingPage() {
                                                         animate={{ opacity: 1, x: 0 }}
                                                         transition={{ delay: 0.4 }}
                                                     >
-                                                        <span className="text-green-400 font-bold text-2xl">✓</span>
-                                                        <span className="text-white text-lg font-medium">Priority Support & Updates</span>
+                                                        <span className="text-green-600 font-bold text-2xl">✓</span>
+                                                        <span className="text-gray-800 text-base font-medium">Priority Support & Updates</span>
                                                     </motion.li>
                                                     <motion.li 
                                                         className="flex items-center gap-3"
@@ -445,8 +445,8 @@ export default function LandingPage() {
                                                         animate={{ opacity: 1, x: 0 }}
                                                         transition={{ delay: 0.5 }}
                                                     >
-                                                        <span className="text-green-400 font-bold text-2xl">✓</span>
-                                                        <span className="text-white text-lg font-medium">Exclusive Access to New Features</span>
+                                                        <span className="text-green-600 font-bold text-2xl">✓</span>
+                                                        <span className="text-gray-800 text-base font-medium">Exclusive Access to New Features</span>
                                                     </motion.li>
                                                 </ul>
                                             </div>
@@ -460,18 +460,18 @@ export default function LandingPage() {
                                             exit={{ opacity: 0, y: -20 }}
                                             transition={{ duration: 0.5, ease: "easeInOut" }}
                                         >
-                                            <div className="bg-gradient-to-br from-yellow-500/20 via-orange-500/20 to-red-500/20 border-l-4 border-yellow-400 p-8 rounded-r-2xl shadow-2xl backdrop-blur-sm border-t border-r border-b border-white/20">
-                                                <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6 bg-gradient-to-r from-yellow-200 to-orange-200 bg-clip-text text-transparent">
+                                            <div className="bg-gradient-to-br from-yellow-50 via-orange-50 to-amber-50 border-l-4 border-yellow-400 p-8 rounded-r-2xl shadow-lg border-t border-r border-b border-yellow-200">
+                                                <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-6 bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">
                                                     First in Market
                                                 </h2>
-                                                <p className="text-lg lg:text-xl text-white/90 font-medium leading-relaxed mb-6">
+                                                <p className="text-base lg:text-lg text-gray-800 font-medium leading-relaxed mb-6">
                                                     The only AI-powered PYQ assistant designed specifically to boost your exam preparation. 
                                                     Experience the future of competitive exam preparation with cutting-edge AI technology 
                                                     that understands context, not just keywords.
                                                 </p>
                                                 <div className="flex items-center gap-3">
                                                     <span className="text-4xl">🚀</span>
-                                                    <span className="text-white font-bold text-xl">Revolutionary Learning Experience</span>
+                                                    <span className="text-gray-900 font-bold text-lg">Revolutionary Learning Experience</span>
                                                 </div>
                                             </div>
                                         </motion.div>
@@ -486,8 +486,8 @@ export default function LandingPage() {
                                             onClick={() => setCarouselIndex(index)}
                                             className={`h-2.5 rounded-full transition-all duration-300 ${
                                                 carouselIndex === index
-                                                    ? "w-10 bg-gradient-to-r from-blue-400 to-purple-400 shadow-lg shadow-blue-500/50"
-                                                    : "w-2.5 bg-white/30 hover:bg-white/50"
+                                                    ? "w-10 bg-gradient-to-r from-blue-500 to-indigo-600 shadow-md"
+                                                    : "w-2.5 bg-gray-300 hover:bg-gray-400"
                                             }`}
                                             aria-label={`Go to slide ${index + 1}`}
                                         />
@@ -508,7 +508,7 @@ export default function LandingPage() {
                         className="w-full max-w-md"
                     >
                         {/* Toggle between Sign In and Sign Up */}
-                        <div className="flex gap-2 mb-8 bg-white/10 backdrop-blur-xl p-1.5 rounded-xl border border-white/20 shadow-2xl">
+                        <div className="flex gap-2 mb-8 bg-white p-1.5 rounded-xl border border-gray-200 shadow-lg">
                             <button
                                 onClick={() => {
                                     setAuthMode("signin");
@@ -517,8 +517,8 @@ export default function LandingPage() {
                                 }}
                                 className={`flex-1 py-3 px-4 rounded-lg text-sm font-semibold transition-all duration-300 ${
                                     authMode === "signin"
-                                        ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg shadow-blue-500/50"
-                                        : "text-white/70 hover:text-white"
+                                        ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md"
+                                        : "text-gray-600 hover:text-gray-900"
                                 }`}
                             >
                                 Sign In
@@ -531,8 +531,8 @@ export default function LandingPage() {
                                 }}
                                 className={`flex-1 py-3 px-4 rounded-lg text-sm font-semibold transition-all duration-300 ${
                                     authMode === "signup"
-                                        ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg shadow-blue-500/50"
-                                        : "text-white/70 hover:text-white"
+                                        ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md"
+                                        : "text-gray-600 hover:text-gray-900"
                                 }`}
                             >
                                 Sign Up
@@ -545,16 +545,16 @@ export default function LandingPage() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.5 }}
-                                className="backdrop-blur-xl bg-white/10 rounded-3xl shadow-2xl border border-white/20 p-8"
+                                className="bg-white rounded-3xl shadow-xl border border-gray-200 p-8"
                             >
                                 <div className="text-center mb-8">
-                                    <h2 className="text-3xl font-bold text-white mb-2">Welcome Back</h2>
-                                    <p className="text-white/80">Sign in to continue to AI PYQ Assistant</p>
+                                    <h2 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back</h2>
+                                    <p className="text-gray-600">Sign in to continue to AI PYQ Assistant</p>
                                 </div>
 
                                 <form onSubmit={handleSignIn} className="space-y-6">
                                     <div>
-                                        <label className="block text-sm font-semibold text-white mb-2">
+                                        <label className="block text-sm font-semibold text-gray-700 mb-2">
                                             Email
                                         </label>
                                         <input
@@ -562,13 +562,13 @@ export default function LandingPage() {
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
                                             placeholder="your.email@example.com"
-                                            className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/30 rounded-xl text-white placeholder-white/50 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all outline-none"
+                                            className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none"
                                             required
                                         />
                                     </div>
 
                                     <div>
-                                        <label className="block text-sm font-semibold text-white mb-2">
+                                        <label className="block text-sm font-semibold text-gray-700 mb-2">
                                             Password
                                         </label>
                                         <input
@@ -576,7 +576,7 @@ export default function LandingPage() {
                                             value={password}
                                             onChange={(e) => setPassword(e.target.value)}
                                             placeholder="Enter your password"
-                                            className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/30 rounded-xl text-white placeholder-white/50 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all outline-none"
+                                            className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none"
                                             required
                                         />
                                     </div>
@@ -585,7 +585,7 @@ export default function LandingPage() {
                                         <motion.div 
                                             initial={{ opacity: 0, y: -10 }}
                                             animate={{ opacity: 1, y: 0 }}
-                                            className="bg-red-500/20 backdrop-blur-sm border border-red-400/50 text-red-100 px-4 py-3 rounded-xl text-sm"
+                                            className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm"
                                         >
                                             {signInError}
                                         </motion.div>
@@ -594,7 +594,7 @@ export default function LandingPage() {
                                     <button
                                         type="submit"
                                         disabled={signInLoading}
-                                        className="w-full bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-600 text-white py-3.5 rounded-xl font-bold shadow-lg shadow-blue-500/50 hover:shadow-xl hover:shadow-blue-500/60 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02] active:scale-[0.98]"
+                                        className="w-full bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-600 text-white py-3.5 rounded-xl font-bold shadow-md hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02] active:scale-[0.98]"
                                     >
                                         {signInLoading ? "Signing in..." : "Sign In"}
                                     </button>
@@ -608,67 +608,67 @@ export default function LandingPage() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.5 }}
-                                className="backdrop-blur-xl bg-white/10 rounded-3xl shadow-2xl border border-white/20 p-8"
+                                className="bg-white rounded-3xl shadow-xl border border-gray-200 p-8"
                             >
                                 <div className="text-center mb-8">
-                                    <h2 className="text-3xl font-bold text-white mb-2">Create Account</h2>
-                                    <p className="text-white/80">Sign up to get started with AI PYQ Assistant</p>
+                                    <h2 className="text-2xl font-bold text-gray-900 mb-2">Create Account</h2>
+                                    <p className="text-gray-600 text-sm">Sign up to get started with AI PYQ Assistant</p>
                                 </div>
 
                                 <form onSubmit={handleSignUp} className="space-y-6">
                                     <div>
-                                        <label className="block text-sm font-semibold text-white mb-2">
-                                            Username <span className="text-red-400">*</span>
+                                        <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                            Username <span className="text-red-500">*</span>
                                         </label>
                                         <input
                                             type="text"
                                             value={username}
                                             onChange={(e) => setUsername(e.target.value)}
                                             placeholder="johndoe"
-                                            className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/30 rounded-xl text-white placeholder-white/50 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all outline-none"
+                                            className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none"
                                             required
                                         />
-                                        <p className="text-xs text-white/60 mt-1">3-20 characters, letters, numbers, and underscores only</p>
+                                        <p className="text-xs text-gray-500 mt-1">3-20 characters, letters, numbers, and underscores only</p>
                                     </div>
 
                                     <div>
-                                        <label className="block text-sm font-semibold text-white mb-2">
-                                            Email <span className="text-red-400">*</span>
+                                        <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                            Email <span className="text-red-500">*</span>
                                         </label>
                                         <input
                                             type="email"
                                             value={signUpEmail}
                                             onChange={(e) => setSignUpEmail(e.target.value)}
                                             placeholder="your.email@example.com"
-                                            className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/30 rounded-xl text-white placeholder-white/50 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all outline-none"
+                                            className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none"
                                             required
                                         />
                                     </div>
 
                                     <div>
-                                        <label className="block text-sm font-semibold text-white mb-2">
-                                            Password <span className="text-red-400">*</span>
+                                        <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                            Password <span className="text-red-500">*</span>
                                         </label>
                                         <input
                                             type="password"
                                             value={signUpPassword}
                                             onChange={handlePasswordChange}
                                             placeholder="At least 8 characters with uppercase, lowercase, and number"
-                                            className={`w-full px-4 py-3 bg-white/10 backdrop-blur-sm border rounded-xl text-white placeholder-white/50 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all outline-none ${
-                                                passwordStrength ? "border-red-400/50" : "border-white/30"
+                                            className={`w-full px-4 py-3 bg-gray-50 border rounded-xl text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none ${
+                                                passwordStrength ? "border-red-400" : "border-gray-300"
                                             }`}
                                             required
                                         />
                                         {passwordStrength && (
-                                            <p className="text-xs text-red-300 mt-1">{passwordStrength}</p>
+                                            <p className="text-xs text-red-600 mt-1">{passwordStrength}</p>
                                         )}
                                         {signUpPassword && !passwordStrength && (
-                                            <p className="text-xs text-green-300 mt-1">✓ Password strength is good</p>
+                                            <p className="text-xs text-green-600 mt-1">✓ Password strength is good</p>
                                         )}
                                     </div>
 
                                     <div>
-                                        <label className="block text-sm font-semibold text-white mb-2">
+                                        <label className="block text-sm font-semibold text-gray-700 mb-2">
                                             Confirm Password
                                         </label>
                                         <input
@@ -676,16 +676,16 @@ export default function LandingPage() {
                                             value={confirmPassword}
                                             onChange={(e) => setConfirmPassword(e.target.value)}
                                             placeholder="Re-enter your password"
-                                            className={`w-full px-4 py-3 bg-white/10 backdrop-blur-sm border rounded-xl text-white placeholder-white/50 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all outline-none ${
-                                                confirmPassword && signUpPassword !== confirmPassword ? "border-red-400/50" : "border-white/30"
+                                            className={`w-full px-4 py-3 bg-gray-50 border rounded-xl text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none ${
+                                                confirmPassword && signUpPassword !== confirmPassword ? "border-red-400" : "border-gray-300"
                                             }`}
                                             required
                                         />
                                         {confirmPassword && signUpPassword !== confirmPassword && (
-                                            <p className="text-xs text-red-300 mt-1">Passwords do not match</p>
+                                            <p className="text-xs text-red-600 mt-1">Passwords do not match</p>
                                         )}
                                         {confirmPassword && signUpPassword === confirmPassword && signUpPassword && (
-                                            <p className="text-xs text-green-300 mt-1">✓ Passwords match</p>
+                                            <p className="text-xs text-green-600 mt-1">✓ Passwords match</p>
                                         )}
                                     </div>
 
@@ -693,7 +693,7 @@ export default function LandingPage() {
                                         <motion.div 
                                             initial={{ opacity: 0, y: -10 }}
                                             animate={{ opacity: 1, y: 0 }}
-                                            className="bg-red-500/20 backdrop-blur-sm border border-red-400/50 text-red-100 px-4 py-3 rounded-xl text-sm"
+                                            className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm"
                                         >
                                             {signUpError}
                                         </motion.div>
@@ -702,7 +702,7 @@ export default function LandingPage() {
                                     <button
                                         type="submit"
                                         disabled={signUpLoading || !!passwordStrength}
-                                        className="w-full bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-600 text-white py-3.5 rounded-xl font-bold shadow-lg shadow-blue-500/50 hover:shadow-xl hover:shadow-blue-500/60 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02] active:scale-[0.98]"
+                                        className="w-full bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-600 text-white py-3.5 rounded-xl font-bold shadow-md hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02] active:scale-[0.98]"
                                     >
                                         {signUpLoading ? "Creating account..." : "Sign Up"}
                                     </button>
@@ -724,7 +724,7 @@ export default function LandingPage() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6 }}
-                                className="text-4xl lg:text-5xl font-extrabold text-white mb-10 lg:mb-12 text-center bg-gradient-to-r from-blue-200 via-indigo-200 to-purple-200 bg-clip-text text-transparent"
+                                className="text-3xl lg:text-4xl font-extrabold text-gray-900 mb-10 lg:mb-12 text-center bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent"
                             >
                                 Powerful Analytics & Features
                             </motion.h2>
@@ -735,15 +735,15 @@ export default function LandingPage() {
                                     viewport={{ once: true }}
                                     whileHover={{ scale: 1.02, y: -5 }}
                                     transition={{ duration: 0.4, delay: 0.1 }}
-                                    className="backdrop-blur-xl bg-gradient-to-br from-blue-500/20 via-indigo-500/20 to-purple-500/20 rounded-3xl p-8 border border-white/30 shadow-2xl hover:shadow-blue-500/30 transition-all duration-300"
+                                    className="bg-white rounded-3xl p-8 border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300"
                                 >
-                                    <div className="w-20 h-20 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-2xl flex items-center justify-center mb-6 shadow-xl shadow-blue-500/50">
+                                    <div className="w-20 h-20 bg-gradient-to-br from-blue-100 to-indigo-200 rounded-2xl flex items-center justify-center mb-6 shadow-md border border-blue-200">
                                         <span className="text-4xl">📈</span>
                                     </div>
-                                    <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">
+                                    <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4">
                                         10x Boost
                                     </h3>
-                                    <p className="text-white/80 leading-relaxed text-lg">
+                                    <p className="text-gray-700 leading-relaxed text-base">
                                         Students experience a 10x improvement in their preparation efficiency with AI-powered insights and personalized roadmaps.
                                     </p>
                                 </motion.div>
@@ -754,15 +754,15 @@ export default function LandingPage() {
                                     viewport={{ once: true }}
                                     whileHover={{ scale: 1.02, y: -5 }}
                                     transition={{ duration: 0.4, delay: 0.2 }}
-                                    className="backdrop-blur-xl bg-gradient-to-br from-purple-500/20 via-pink-500/20 to-rose-500/20 rounded-3xl p-8 border border-white/30 shadow-2xl hover:shadow-purple-500/30 transition-all duration-300"
+                                    className="bg-white rounded-3xl p-8 border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300"
                                 >
-                                    <div className="w-20 h-20 bg-gradient-to-br from-purple-400 to-pink-600 rounded-2xl flex items-center justify-center mb-6 shadow-xl shadow-purple-500/50">
+                                    <div className="w-20 h-20 bg-gradient-to-br from-purple-100 to-pink-200 rounded-2xl flex items-center justify-center mb-6 shadow-md border border-purple-200">
                                         <span className="text-4xl">📚</span>
                                     </div>
-                                    <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">
+                                    <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4">
                                         25+ Years of PYQs
                                     </h3>
-                                    <p className="text-white/80 leading-relaxed text-lg">
+                                    <p className="text-gray-700 leading-relaxed text-base">
                                         Access previous year questions from the past 25+ years across multiple competitive exams, all in one place.
                                     </p>
                                 </motion.div>
@@ -773,15 +773,15 @@ export default function LandingPage() {
                                     viewport={{ once: true }}
                                     whileHover={{ scale: 1.02, y: -5 }}
                                     transition={{ duration: 0.4, delay: 0.3 }}
-                                    className="backdrop-blur-xl bg-gradient-to-br from-teal-500/20 via-cyan-500/20 to-blue-500/20 rounded-3xl p-8 border border-white/30 shadow-2xl hover:shadow-teal-500/30 transition-all duration-300"
+                                    className="bg-white rounded-3xl p-8 border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300"
                                 >
-                                    <div className="w-20 h-20 bg-gradient-to-br from-teal-400 to-cyan-600 rounded-2xl flex items-center justify-center mb-6 shadow-xl shadow-teal-500/50">
+                                    <div className="w-20 h-20 bg-gradient-to-br from-teal-100 to-cyan-200 rounded-2xl flex items-center justify-center mb-6 shadow-md border border-teal-200">
                                         <span className="text-4xl">🎯</span>
                                     </div>
-                                    <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">
+                                    <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4">
                                         Multiple Exams
                                     </h3>
-                                    <p className="text-white/80 leading-relaxed text-lg">
+                                    <p className="text-gray-700 leading-relaxed text-base">
                                         Support for multiple competitive exams including UPSC, SSC, Banking, Railway, and many more.
                                     </p>
                                 </motion.div>
@@ -792,15 +792,15 @@ export default function LandingPage() {
                                     viewport={{ once: true }}
                                     whileHover={{ scale: 1.02, y: -5 }}
                                     transition={{ duration: 0.4, delay: 0.4 }}
-                                    className="backdrop-blur-xl bg-gradient-to-br from-orange-500/20 via-red-500/20 to-rose-500/20 rounded-3xl p-8 border border-white/30 shadow-2xl hover:shadow-orange-500/30 transition-all duration-300"
+                                    className="bg-white rounded-3xl p-8 border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300"
                                 >
-                                    <div className="w-20 h-20 bg-gradient-to-br from-orange-400 to-red-600 rounded-2xl flex items-center justify-center mb-6 shadow-xl shadow-orange-500/50">
+                                    <div className="w-20 h-20 bg-gradient-to-br from-orange-100 to-red-200 rounded-2xl flex items-center justify-center mb-6 shadow-md border border-orange-200">
                                         <span className="text-4xl">🔍</span>
                                     </div>
-                                    <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">
+                                    <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4">
                                         Smart Analytics
                                     </h3>
-                                    <p className="text-white/80 leading-relaxed text-lg">
+                                    <p className="text-gray-700 leading-relaxed text-base">
                                         Advanced analytics to track your progress, identify weak areas, and optimize your study strategy.
                                     </p>
                                 </motion.div>
@@ -811,15 +811,15 @@ export default function LandingPage() {
                                     viewport={{ once: true }}
                                     whileHover={{ scale: 1.02, y: -5 }}
                                     transition={{ duration: 0.4, delay: 0.5 }}
-                                    className="backdrop-blur-xl bg-gradient-to-br from-green-500/20 via-emerald-500/20 to-teal-500/20 rounded-3xl p-8 border border-white/30 shadow-2xl hover:shadow-green-500/30 transition-all duration-300"
+                                    className="bg-white rounded-3xl p-8 border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300"
                                 >
-                                    <div className="w-20 h-20 bg-gradient-to-br from-green-400 to-emerald-600 rounded-2xl flex items-center justify-center mb-6 shadow-xl shadow-green-500/50">
+                                    <div className="w-20 h-20 bg-gradient-to-br from-green-100 to-emerald-200 rounded-2xl flex items-center justify-center mb-6 shadow-md border border-green-200">
                                         <span className="text-4xl">⚡</span>
                                     </div>
-                                    <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">
+                                    <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4">
                                         Instant Search
                                     </h3>
-                                    <p className="text-white/80 leading-relaxed text-lg">
+                                    <p className="text-gray-700 leading-relaxed text-base">
                                         Find relevant PYQs instantly using natural language queries powered by advanced AI semantic search.
                                     </p>
                                 </motion.div>
@@ -830,15 +830,15 @@ export default function LandingPage() {
                                     viewport={{ once: true }}
                                     whileHover={{ scale: 1.02, y: -5 }}
                                     transition={{ duration: 0.4, delay: 0.6 }}
-                                    className="backdrop-blur-xl bg-gradient-to-br from-indigo-500/20 via-blue-500/20 to-purple-500/20 rounded-3xl p-8 border border-white/30 shadow-2xl hover:shadow-indigo-500/30 transition-all duration-300"
+                                    className="bg-white rounded-3xl p-8 border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300"
                                 >
-                                    <div className="w-20 h-20 bg-gradient-to-br from-indigo-400 to-blue-600 rounded-2xl flex items-center justify-center mb-6 shadow-xl shadow-indigo-500/50">
+                                    <div className="w-20 h-20 bg-gradient-to-br from-indigo-100 to-blue-200 rounded-2xl flex items-center justify-center mb-6 shadow-md border border-indigo-200">
                                         <span className="text-4xl">📊</span>
                                     </div>
-                                    <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">
+                                    <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4">
                                         Performance Tracking
                                     </h3>
-                                    <p className="text-white/80 leading-relaxed text-lg">
+                                    <p className="text-gray-700 leading-relaxed text-base">
                                         Monitor your performance across different topics and exams with detailed insights and recommendations.
                                     </p>
                                 </motion.div>
@@ -852,11 +852,11 @@ export default function LandingPage() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6 }}
-                                className="text-4xl lg:text-5xl font-extrabold text-white mb-10 lg:mb-12 text-center bg-gradient-to-r from-blue-200 via-indigo-200 to-purple-200 bg-clip-text text-transparent"
+                                className="text-3xl lg:text-4xl font-extrabold text-gray-900 mb-10 lg:mb-12 text-center bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent"
                             >
                                 What Students Say
                             </motion.h2>
-                            <div className="relative w-full overflow-hidden rounded-3xl backdrop-blur-xl bg-white/10 p-8 lg:p-10 border border-white/20 shadow-2xl">
+                            <div className="relative w-full overflow-hidden rounded-3xl bg-white p-8 lg:p-10 border border-gray-200 shadow-xl">
                                 <AnimatePresence mode="wait">
                                     {testimonialIndex === 0 && (
                                         <motion.div
@@ -872,17 +872,17 @@ export default function LandingPage() {
                                                     <span key={i} className="text-yellow-400 text-3xl drop-shadow-lg">★</span>
                                                 ))}
                                             </div>
-                                            <p className="text-xl lg:text-2xl text-white/95 italic text-center mb-10 leading-relaxed font-medium">
+                                            <p className="text-lg lg:text-xl text-gray-800 italic text-center mb-10 leading-relaxed font-medium">
                                                 "AI PYQ Assistant has completely transformed my preparation strategy. The semantic search 
                                                 helps me find exactly what I need without wasting time. Highly recommended!"
                                             </p>
                                             <div className="flex items-center justify-center gap-5 mt-auto">
-                                                <div className="w-20 h-20 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-xl shadow-blue-500/50 ring-4 ring-white/20">
+                                                <div className="w-20 h-20 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-md border-2 border-blue-200">
                                                     RK
                                                 </div>
                                                 <div>
-                                                    <div className="font-bold text-xl text-white">Rahul Kumar</div>
-                                                    <div className="text-white/70">UPSC Aspirant</div>
+                                                    <div className="font-bold text-lg text-gray-900">Rahul Kumar</div>
+                                                    <div className="text-gray-600 text-sm">UPSC Aspirant</div>
                                                 </div>
                                             </div>
                                         </motion.div>
@@ -901,17 +901,17 @@ export default function LandingPage() {
                                                     <span key={i} className="text-yellow-400 text-3xl drop-shadow-lg">★</span>
                                                 ))}
                                             </div>
-                                            <p className="text-xl lg:text-2xl text-white/95 italic text-center mb-10 leading-relaxed font-medium">
+                                            <p className="text-lg lg:text-xl text-gray-800 italic text-center mb-10 leading-relaxed font-medium">
                                                 "The AI Roadmap feature is a game-changer! It created a personalized study plan that 
                                                 actually works. My confidence has increased significantly."
                                             </p>
                                             <div className="flex items-center justify-center gap-5 mt-auto">
-                                                <div className="w-20 h-20 bg-gradient-to-br from-purple-400 to-pink-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-xl shadow-purple-500/50 ring-4 ring-white/20">
+                                                <div className="w-20 h-20 bg-gradient-to-br from-purple-400 to-pink-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-md border-2 border-purple-200">
                                                     PS
                                                 </div>
                                                 <div>
-                                                    <div className="font-bold text-xl text-white">Priya Sharma</div>
-                                                    <div className="text-white/70">SSC CGL Aspirant</div>
+                                                    <div className="font-bold text-xl text-gray-900">Priya Sharma</div>
+                                                    <div className="text-gray-600">SSC CGL Aspirant</div>
                                                 </div>
                                             </div>
                                         </motion.div>
@@ -930,17 +930,17 @@ export default function LandingPage() {
                                                     <span key={i} className="text-yellow-400 text-3xl drop-shadow-lg">★</span>
                                                 ))}
                                             </div>
-                                            <p className="text-xl lg:text-2xl text-white/95 italic text-center mb-10 leading-relaxed font-medium">
+                                            <p className="text-lg lg:text-xl text-gray-800 italic text-center mb-10 leading-relaxed font-medium">
                                                 "Topic-wise organization makes it so easy to focus on weak areas. The cross-exam insights 
                                                 feature helped me understand patterns I never noticed before."
                                             </p>
                                             <div className="flex items-center justify-center gap-5 mt-auto">
-                                                <div className="w-20 h-20 bg-gradient-to-br from-teal-400 to-cyan-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-xl shadow-teal-500/50 ring-4 ring-white/20">
+                                                <div className="w-20 h-20 bg-gradient-to-br from-teal-400 to-cyan-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-md border-2 border-teal-200">
                                                     AM
                                                 </div>
                                                 <div>
-                                                    <div className="font-bold text-xl text-white">Amit Mehta</div>
-                                                    <div className="text-white/70">Banking Exam Aspirant</div>
+                                                    <div className="font-bold text-xl text-gray-900">Amit Mehta</div>
+                                                    <div className="text-gray-600">Banking Exam Aspirant</div>
                                                 </div>
                                             </div>
                                         </motion.div>
@@ -959,17 +959,17 @@ export default function LandingPage() {
                                                     <span key={i} className="text-yellow-400 text-3xl drop-shadow-lg">★</span>
                                                 ))}
                                             </div>
-                                            <p className="text-xl lg:text-2xl text-white/95 italic text-center mb-10 leading-relaxed font-medium">
+                                            <p className="text-lg lg:text-xl text-gray-800 italic text-center mb-10 leading-relaxed font-medium">
                                                 "Best investment for my exam preparation! The premium features are worth every penny. 
                                                 My notes are organized and I can track my progress easily."
                                             </p>
                                             <div className="flex items-center justify-center gap-5 mt-auto">
-                                                <div className="w-20 h-20 bg-gradient-to-br from-orange-400 to-red-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-xl shadow-orange-500/50 ring-4 ring-white/20">
+                                                <div className="w-20 h-20 bg-gradient-to-br from-orange-400 to-red-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-md border-2 border-orange-200">
                                                     SK
                                                 </div>
                                                 <div>
-                                                    <div className="font-bold text-xl text-white">Sneha Kapoor</div>
-                                                    <div className="text-white/70">Railway Exam Aspirant</div>
+                                                    <div className="font-bold text-xl text-gray-900">Sneha Kapoor</div>
+                                                    <div className="text-gray-600">Railway Exam Aspirant</div>
                                                 </div>
                                             </div>
                                         </motion.div>
@@ -984,8 +984,8 @@ export default function LandingPage() {
                                             onClick={() => setTestimonialIndex(index)}
                                             className={`h-2.5 rounded-full transition-all duration-300 ${
                                                 testimonialIndex === index
-                                                    ? "w-10 bg-gradient-to-r from-blue-400 to-purple-400 shadow-lg shadow-blue-500/50"
-                                                    : "w-2.5 bg-white/30 hover:bg-white/50"
+                                                    ? "w-10 bg-gradient-to-r from-blue-500 to-indigo-600 shadow-md"
+                                                    : "w-2.5 bg-gray-300 hover:bg-gray-400"
                                             }`}
                                             aria-label={`Go to testimonial ${index + 1}`}
                                         />
