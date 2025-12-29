@@ -114,8 +114,8 @@ export default function SignUpPage() {
             window.dispatchEvent(new Event("premiumStatusChanged"));
             window.dispatchEvent(new Event("userLoggedIn"));
 
-            // Navigate to home
-            navigate("/");
+            // Navigate to exam dashboard
+            navigate("/exam-dashboard");
         } catch (err) {
             // Handle different error types
             if (err.name === 'AbortError') {

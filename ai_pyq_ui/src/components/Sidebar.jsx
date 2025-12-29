@@ -42,8 +42,7 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
     const isDashboard = location.pathname.includes("exam-dashboard");
     const isCrossExam = location.pathname.includes("cross-exam-insights");
     const isAIRoadmap = location.pathname.includes("ai-roadmap");
-    const isSearchPage =
-        location.pathname.includes("search") || (location.pathname === "/" && !isDashboard && !isCrossExam && !isAIRoadmap);
+    const isSearchPage = location.pathname.includes("search");
 
         // Check login status and subscription
     useEffect(() => {
@@ -307,7 +306,7 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                     </button>
 
                     <button
-                        onClick={() => navigate("/")}
+                        onClick={() => navigate("/search")}
                         className={`w-full text-left py-2 px-3 rounded-lg transition text-sm flex items-center gap-2 ${
                             isSearchPage
                                 ? "bg-blue-50 text-blue-700 font-medium"

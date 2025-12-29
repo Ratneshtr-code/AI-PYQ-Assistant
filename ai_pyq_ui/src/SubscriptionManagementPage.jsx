@@ -38,11 +38,11 @@ export default function SubscriptionManagementPage() {
                     fetchPlans();
                     fetchExams();
                 } else {
-                    navigate("/");
+                    navigate("/exam-dashboard");
                 }
             } catch (err) {
                 console.error("Failed to check admin status:", err);
-                navigate("/");
+                navigate("/exam-dashboard");
             } finally {
                 setLoading(false);
             }

@@ -80,11 +80,11 @@ export default function SubscriptionPage() {
                         {/* Back Button */}
                         <button
                             onClick={() => {
-                                // Check if there's history, otherwise go to home
+                                // Check if there's history, otherwise go to exam dashboard
                                 if (window.history.length > 1) {
                                     navigate(-1);
                                 } else {
-                                    navigate("/");
+                                    navigate("/exam-dashboard");
                                 }
                             }}
                             className="mb-4 flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
@@ -148,7 +148,7 @@ export default function SubscriptionPage() {
                                 </ul>
                                 {!hasPremium && (
                                     <button
-                                        onClick={() => navigate("/")}
+                                        onClick={() => navigate("/exam-dashboard")}
                                         className="w-full py-2 px-4 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
                                     >
                                         Current Plan

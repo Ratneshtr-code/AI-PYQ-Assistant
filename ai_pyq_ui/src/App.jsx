@@ -1,6 +1,8 @@
 ﻿// src/App.jsx
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
+import { isAuthenticated } from "./utils/auth";
+import LandingPage from "./LandingPage";
 import SearchPage from "./SearchPage";
 import ExamDashboardPage from "./ExamDashboardPage";
 import CrossExamInsightsPage from "./CrossExamInsightsPage";
@@ -44,7 +46,17 @@ function AppContent() {
     return (
         <>
             <Routes>
-                <Route path="/" element={<SearchPage />} />
+                <Route 
+                    path="/" 
+                    element={
+                        isAuthenticated() ? (
+                            <Navigate to="/exam-dashboard" replace />
+                        ) : (
+                            <LandingPage />
+                        )
+                    } 
+                />
+                <Route path="/search" element={<SearchPage />} />
                 <Route path="/exam-dashboard" element={<ExamDashboardPage />} />
                 <Route path="/cross-exam-insights" element={<CrossExamInsightsPage />} />
                 <Route path="/topic-wise-pyq" element={<TopicWisePYQPage />} />

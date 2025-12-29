@@ -17,7 +17,7 @@ export default function LoginPage() {
     // Redirect if already authenticated
     useEffect(() => {
         if (isAuthenticated()) {
-            navigate("/", { replace: true });
+            navigate("/exam-dashboard", { replace: true });
         }
     }, [navigate]);
 
@@ -128,8 +128,8 @@ export default function LoginPage() {
             window.dispatchEvent(new Event("premiumStatusChanged"));
             window.dispatchEvent(new Event("userLoggedIn"));
 
-            // Navigate to home page (don't go back to signup/login pages)
-            navigate("/", { replace: true });
+            // Navigate to exam dashboard
+            navigate("/exam-dashboard", { replace: true });
         } catch (err) {
             // Clear any partial auth data on error
             localStorage.removeItem("authToken");

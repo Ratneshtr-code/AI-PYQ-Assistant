@@ -434,7 +434,7 @@ export default function MyNotesPage() {
                         </p>
                         <div className="mt-6 flex items-center justify-center gap-3">
                             <button
-                                onClick={() => navigate("/")}
+                                onClick={() => navigate("/search")}
                                 className="px-5 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium shadow-sm transition-colors"
                             >
                                 Go to Search

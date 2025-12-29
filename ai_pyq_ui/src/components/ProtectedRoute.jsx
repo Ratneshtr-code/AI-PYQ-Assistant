@@ -36,8 +36,8 @@ export default function ProtectedRoute({ children }) {
     }
 
     if (!isAuthenticatedState) {
-        console.log("ProtectedRoute: Not authenticated (isLoggedIn=" + localStorage.getItem("isLoggedIn") + "), redirecting to login");
-        return <Navigate to="/login" replace state={{ from: location.pathname }} />;
+        console.log("ProtectedRoute: Not authenticated (isLoggedIn=" + localStorage.getItem("isLoggedIn") + "), redirecting to landing page");
+        return <Navigate to="/" replace state={{ from: location.pathname }} />;
     }
 
     // Logged in - allow access (session cookie will be validated by backend)
