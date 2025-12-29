@@ -74,3 +74,19 @@ ui:
   max_exam_comparison: 3  # Default: 3, can be adjusted based on UI/UX requirements
   # Default view mode for My Notes page: "compact" | "grid" | "list"
   default_notes_view: "grid"  # Default: "grid"
+
+# ==================== PAYMENT GATEWAY CONFIGURATION ====================
+# Payment gateway settings for subscription purchases
+payment:
+  # Payment mode: "test" or "production"
+  # - test: Shows "Coming Soon" message, no actual payments processed
+  # - production: Real payments via Razorpay (requires API keys in .env)
+  mode: "test"  # Change to "production" when ready to accept real payments
+  
+  # Note: Razorpay API keys are set via .env file:
+  #   RAZORPAY_KEY_ID=your_key_id
+  #   RAZORPAY_KEY_SECRET=your_key_secret
+  #   RAZORPAY_WEBHOOK_SECRET=your_webhook_secret
+  # 
+  # For test mode: No need to install razorpay package or set API keys
+  # For production: Install razorpay: pip install razorpay

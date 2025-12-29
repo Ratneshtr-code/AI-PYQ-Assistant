@@ -215,6 +215,103 @@ class LLMUsageLog(Base):
     user = relationship("User", backref="llm_usage_logs")
 
 
+class PaymentOrderStatus(str, enum.Enum):
+    """Payment order status"""
+    PENDING = "pending"
+    PAID = "paid"
+    FAILED = "failed"
+    REFUNDED = "refunded"
+    CANCELLED = "cancelled"
+
+
+class PaymentOrder(Base):
+    """Payment orders for subscription purchases"""
+    __tablename__ = "payment_orders"
+
+    id = Column(Integer, primary_key=True, index=True)
+    order_id = Column(String, unique=True, nullable=False, index=True)  # Internal order ID
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
+    subscription_plan_id = Column(Integer, ForeignKey("subscription_plan_templates.id"), nullable=True)
+    
+    # Payment details
+    amount = Column(Float, nullable=False)  # Amount in rupees
+    currency = Column(String, default="INR", nullable=False)
+    status = Column(SQLEnum(PaymentOrderStatus), default=PaymentOrderStatus.PENDING, nullable=False, index=True)
+    
+    # Razorpay details
+    razorpay_order_id = Column(String, nullable=True, index=True)  # Razorpay order ID
+    razorpay_payment_id = Column(String, nullable=True, index=True)  # Razorpay payment ID (after payment)
+    razorpay_signature = Column(String, nullable=True)  # Payment signature for verification
+    
+    # Plan details
+    plan_type = Column(SQLEnum(SubscriptionPlan), nullable=False)
+    duration_months = Column(Integer, nullable=False)
+    
+    # Payment method
+    payment_method = Column(String, nullable=True)  # "razorpay", "payu", etc.
+    
+    # Timestamps
+    created_at = Column(DateTime, default=datetime.utcnow, index=True)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    payment_date = Column(DateTime, nullable=True)  # Payment completion time
+    
+    # Relationships
+    user = relationship("User", backref="payment_orders")
+    plan_template = relationship("SubscriptionPlanTemplate", backref="payment_orders")
+
+
+class PaymentTransactionType(str, enum.Enum):
+    """Payment transaction types"""
+    PAYMENT = "payment"
+    REFUND = "refund"
+
+
+class PaymentTransactionStatus(str, enum.Enum):
+    """Payment transaction status"""
+    SUCCESS = "success"
+    FAILED = "failed"
+    PENDING = "pending"
+
+
+class PaymentTransaction(Base):
+    """Payment transactions log"""
+    __tablename__ = "payment_transactions"
+
+    id = Column(Integer, primary_key=True, index=True)
+    order_id = Column(Integer, ForeignKey("payment_orders.id"), nullable=False, index=True)
+    
+    # Transaction details
+    transaction_type = Column(SQLEnum(PaymentTransactionType), nullable=False)
+    amount = Column(Float, nullable=False)  # Transaction amount
+    status = Column(SQLEnum(PaymentTransactionStatus), nullable=False, index=True)
+    
+    # Razorpay transaction ID
+    razorpay_payment_id = Column(String, nullable=True, index=True)
+    
+    # Transaction metadata (JSON string for additional data)
+    # Note: Named 'transaction_metadata' to avoid conflict with SQLAlchemy's reserved 'metadata' attribute
+    transaction_metadata = Column(Text, nullable=True)  # JSON string for additional transaction data
+    
+    # Timestamps
+    created_at = Column(DateTime, default=datetime.utcnow, index=True)
+    
+    # Relationship
+    order = relationship("PaymentOrder", backref="transactions")
+    
+    def get_metadata(self) -> Optional[Dict[str, Any]]:
+        """Parse and return metadata as dict"""
+        if not self.transaction_metadata:
+            return None
+        try:
+            return json.loads(self.transaction_metadata)
+        except (json.JSONDecodeError, TypeError):
+            return None
+    
+    def set_metadata(self, data: Dict[str, Any]):
+        """Store metadata as JSON string"""
+        self.transaction_metadata = json.dumps(data) if data else None
+
+
 def init_db():
     """Initialize database tables"""
     Base.metadata.create_all(bind=engine)

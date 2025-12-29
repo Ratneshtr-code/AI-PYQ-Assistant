@@ -269,33 +269,33 @@ export default function LandingPage() {
                 <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-100/30 rounded-full blur-3xl"></div>
                 <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-100/30 rounded-full blur-3xl"></div>
                 <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-purple-100/20 rounded-full blur-3xl"></div>
-            </div>
+                    </div>
 
             {/* Top Section - Full Width: Branding (65%) + Auth (35%) */}
             <div className="relative z-10 min-h-screen flex flex-col lg:flex-row lg:items-start">
                 {/* Left Side - Branding Content (65%) */}
-                <div className="w-full lg:w-[65%] flex flex-col justify-center px-6 sm:px-8 lg:px-12 xl:px-16 py-12 lg:py-16">
-                    <motion.div
+                <div className="w-full lg:w-[65%] flex flex-col justify-center px-6 sm:px-8 lg:px-12 xl:px-16 pt-8 lg:pt-12 pb-12 lg:pb-16">
+                                <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
                         className="max-w-3xl"
                     >
                         {/* Hero Section */}
-                        <div className="mb-12 lg:mb-16">
-                            <motion.div 
+                        <div className="mb-6 lg:mb-8">
+                                <motion.div
                                 className="flex items-center gap-4 mb-8"
                                 initial={{ opacity: 0, x: -30 }}
-                                animate={{ opacity: 1, x: 0 }}
+                                    animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.8, delay: 0.2 }}
                             >
                                 <div className="w-20 h-20 bg-gradient-to-br from-blue-500 via-indigo-600 to-purple-600 rounded-3xl flex items-center justify-center shadow-lg border-2 border-blue-200">
                                     <span className="text-white font-bold text-3xl">AI</span>
-                                </div>
+                                    </div>
                                 <h1 className="text-4xl lg:text-5xl xl:text-6xl font-extrabold bg-gradient-to-r from-gray-900 via-blue-800 to-indigo-900 bg-clip-text text-transparent leading-tight">
                                     AI PYQ Assistant
                                 </h1>
-                            </motion.div>
+                                </motion.div>
                             <motion.p 
                                 className="text-xl lg:text-2xl font-semibold text-gray-800 mb-6 leading-relaxed"
                                 initial={{ opacity: 0, y: 20 }}
@@ -312,22 +312,22 @@ export default function LandingPage() {
                             >
                                 Revolutionize your exam preparation with intelligent search, personalized roadmaps, and comprehensive PYQ analysis.
                             </motion.p>
-                        </div>
+                                </div>
 
                         {/* Carousel Section */}
-                        <motion.div 
+                            <motion.div
                             className="mb-12"
                             initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
+                                animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.5 }}
                         >
                             <div className="bg-white rounded-3xl border border-gray-200 shadow-xl p-8 lg:p-10">
                                 <AnimatePresence mode="wait">
                                     {carouselIndex === 0 && (
-                                        <motion.div
+                            <motion.div
                                             key="features"
-                                            initial={{ opacity: 0, y: 20 }}
-                                            animate={{ opacity: 1, y: 0 }}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
                                             exit={{ opacity: 0, y: -20 }}
                                             transition={{ duration: 0.5, ease: "easeInOut" }}
                                         >
@@ -335,63 +335,63 @@ export default function LandingPage() {
                                                 Why Choose AI PYQ Assistant?
                                             </h2>
                                             <div className="space-y-6">
-                                                <motion.div 
+                            <motion.div
                                                     className="flex items-start gap-5 group"
                                                     whileHover={{ x: 5 }}
                                                     transition={{ duration: 0.2 }}
                                                 >
                                                     <div className="w-14 h-14 bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl flex items-center justify-center flex-shrink-0 mt-1 border border-blue-200 shadow-md">
                                                         <span className="text-3xl">🧠</span>
-                                                    </div>
+                                </div>
                                                     <div>
                                                         <h3 className="font-bold text-gray-900 text-base mb-2">AI-Powered Semantic Search</h3>
                                                         <p className="text-gray-700 leading-relaxed text-sm">Search through thousands of PYQs using natural language. Find exactly what you need, not just keyword matches.</p>
                                                     </div>
-                                                </motion.div>
-                                                <motion.div 
+                            </motion.div>
+                            <motion.div
                                                     className="flex items-start gap-5 group"
                                                     whileHover={{ x: 5 }}
                                                     transition={{ duration: 0.2 }}
                                                 >
                                                     <div className="w-14 h-14 bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-xl flex items-center justify-center flex-shrink-0 mt-1 border border-indigo-200 shadow-md">
                                                         <span className="text-3xl">🎯</span>
-                                                    </div>
+                                </div>
                                                     <div>
                                                         <h3 className="font-bold text-gray-900 text-base mb-2">Smart AI Roadmap</h3>
                                                         <p className="text-gray-700 leading-relaxed text-sm">Get personalized study roadmaps generated by AI. Quick help in creating your preparation strategy based on your goals.</p>
-                                                    </div>
+                            </div>
                                                 </motion.div>
-                                                <motion.div 
+                                    <motion.div
                                                     className="flex items-start gap-5 group"
                                                     whileHover={{ x: 5 }}
                                                     transition={{ duration: 0.2 }}
                                                 >
                                                     <div className="w-14 h-14 bg-gradient-to-br from-purple-100 to-purple-200 rounded-xl flex items-center justify-center flex-shrink-0 mt-1 border border-purple-200 shadow-md">
                                                         <span className="text-3xl">📑</span>
-                                                    </div>
-                                                    <div>
+                                                </div>
+                                                <div>
                                                         <h3 className="font-bold text-gray-900 text-base mb-2">Topic-wise Organization</h3>
                                                         <p className="text-gray-700 leading-relaxed text-sm">Access PYQs organized by topics for systematic preparation. Master each subject area efficiently.</p>
-                                                    </div>
-                                                </motion.div>
-                                                <motion.div 
+                                        </div>
+                                    </motion.div>
+                                    <motion.div
                                                     className="flex items-start gap-5 group"
                                                     whileHover={{ x: 5 }}
                                                     transition={{ duration: 0.2 }}
                                                 >
                                                     <div className="w-14 h-14 bg-gradient-to-br from-teal-100 to-teal-200 rounded-xl flex items-center justify-center flex-shrink-0 mt-1 border border-teal-200 shadow-md">
                                                         <span className="text-3xl">🔍</span>
-                                                    </div>
-                                                    <div>
+                                                </div>
+                                                <div>
                                                         <h3 className="font-bold text-gray-900 text-base mb-2">Cross-Exam Insights</h3>
                                                         <p className="text-gray-700 leading-relaxed text-sm">Compare patterns and trends across different competitive exams. Understand what's important.</p>
-                                                    </div>
+                                                </div>
                                                 </motion.div>
-                                            </div>
-                                        </motion.div>
-                                    )}
+                                        </div>
+                                    </motion.div>
+                                )}
                                     {carouselIndex === 1 && (
-                                        <motion.div
+                                    <motion.div
                                             key="premium"
                                             initial={{ opacity: 0, y: 20 }}
                                             animate={{ opacity: 1, y: 0 }}
@@ -406,7 +406,7 @@ export default function LandingPage() {
                                                     <motion.li 
                                                         className="flex items-center gap-3"
                                                         initial={{ opacity: 0, x: -20 }}
-                                                        animate={{ opacity: 1, x: 0 }}
+                                        animate={{ opacity: 1, x: 0 }}
                                                         transition={{ delay: 0.1 }}
                                                     >
                                                         <span className="text-green-600 font-bold text-xl">✓</span>
@@ -449,11 +449,11 @@ export default function LandingPage() {
                                                         <span className="text-gray-800 text-base font-medium">Exclusive Access to New Features</span>
                                                     </motion.li>
                                                 </ul>
-                                            </div>
-                                        </motion.div>
-                                    )}
+                                        </div>
+                                    </motion.div>
+                                )}
                                     {carouselIndex === 2 && (
-                                        <motion.div
+                                    <motion.div
                                             key="market"
                                             initial={{ opacity: 0, y: 20 }}
                                             animate={{ opacity: 1, y: 0 }}
@@ -472,249 +472,249 @@ export default function LandingPage() {
                                                 <div className="flex items-center gap-3">
                                                     <span className="text-4xl">🚀</span>
                                                     <span className="text-gray-900 font-bold text-lg">Revolutionary Learning Experience</span>
-                                                </div>
                                             </div>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                                
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                            
                                 {/* Carousel Indicators */}
                                 <div className="flex gap-3 mt-8 justify-center">
                                     {[0, 1, 2].map((index) => (
-                                        <button
-                                            key={index}
+                                    <button
+                                        key={index}
                                             onClick={() => setCarouselIndex(index)}
-                                            className={`h-2.5 rounded-full transition-all duration-300 ${
+                                        className={`h-2.5 rounded-full transition-all duration-300 ${
                                                 carouselIndex === index
                                                     ? "w-10 bg-gradient-to-r from-blue-500 to-indigo-600 shadow-md"
-                                                    : "w-2.5 bg-gray-300 hover:bg-gray-400"
-                                            }`}
+                                                : "w-2.5 bg-gray-300 hover:bg-gray-400"
+                                        }`}
                                             aria-label={`Go to slide ${index + 1}`}
-                                        />
-                                    ))}
-                                </div>
+                                    />
+                                ))}
                             </div>
+                        </div>
                         </motion.div>
                     </motion.div>
 
-                </div>
+            </div>
 
                 {/* Right Side - Authentication (35%) */}
-                <div className="w-full lg:w-[35%] flex items-start justify-center px-6 sm:px-8 lg:px-8 xl:px-12 py-12 lg:py-16 lg:sticky lg:top-0 lg:self-start">
-                    <motion.div
+                <div className="w-full lg:w-[35%] flex items-start justify-center px-6 sm:px-8 lg:px-8 xl:px-12 py-12 lg:py-16 lg:pt-32 lg:sticky lg:top-0 lg:self-start">
+                <motion.div
                         initial={{ opacity: 0, x: 30, scale: 0.95 }}
                         animate={{ opacity: 1, x: 0, scale: 1 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
-                        className="w-full max-w-md"
-                    >
-                        {/* Toggle between Sign In and Sign Up */}
+                    className="w-full max-w-md"
+                >
+                    {/* Toggle between Sign In and Sign Up */}
                         <div className="flex gap-2 mb-8 bg-white p-1.5 rounded-xl border border-gray-200 shadow-lg">
-                            <button
-                                onClick={() => {
-                                    setAuthMode("signin");
-                                    setSignInError("");
-                                    setSignUpError("");
-                                }}
+                        <button
+                            onClick={() => {
+                                setAuthMode("signin");
+                                setSignInError("");
+                                setSignUpError("");
+                            }}
                                 className={`flex-1 py-3 px-4 rounded-lg text-sm font-semibold transition-all duration-300 ${
-                                    authMode === "signin"
+                                authMode === "signin"
                                         ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md"
-                                        : "text-gray-600 hover:text-gray-900"
-                                }`}
-                            >
-                                Sign In
-                            </button>
-                            <button
-                                onClick={() => {
-                                    setAuthMode("signup");
-                                    setSignInError("");
-                                    setSignUpError("");
-                                }}
+                                    : "text-gray-600 hover:text-gray-900"
+                            }`}
+                        >
+                            Sign In
+                        </button>
+                        <button
+                            onClick={() => {
+                                setAuthMode("signup");
+                                setSignInError("");
+                                setSignUpError("");
+                            }}
                                 className={`flex-1 py-3 px-4 rounded-lg text-sm font-semibold transition-all duration-300 ${
-                                    authMode === "signup"
+                                authMode === "signup"
                                         ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md"
-                                        : "text-gray-600 hover:text-gray-900"
-                                }`}
-                            >
-                                Sign Up
-                            </button>
-                        </div>
+                                    : "text-gray-600 hover:text-gray-900"
+                            }`}
+                        >
+                            Sign Up
+                        </button>
+                    </div>
 
-                        {/* Sign In Form */}
-                        {authMode === "signin" && (
+                    {/* Sign In Form */}
+                    {authMode === "signin" && (
                             <motion.div 
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.5 }}
                                 className="bg-white rounded-3xl shadow-xl border border-gray-200 p-8"
                             >
-                                <div className="text-center mb-8">
-                                    <h2 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back</h2>
-                                    <p className="text-gray-600">Sign in to continue to AI PYQ Assistant</p>
+                            <div className="text-center mb-8">
+                                <h2 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back</h2>
+                                <p className="text-gray-600">Sign in to continue to AI PYQ Assistant</p>
+                            </div>
+
+                            <form onSubmit={handleSignIn} className="space-y-6">
+                                <div>
+                                        <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                        Email
+                                    </label>
+                                    <input
+                                        type="email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        placeholder="your.email@example.com"
+                                            className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none"
+                                        required
+                                    />
                                 </div>
 
-                                <form onSubmit={handleSignIn} className="space-y-6">
-                                    <div>
+                                <div>
                                         <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                            Email
-                                        </label>
-                                        <input
-                                            type="email"
-                                            value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
-                                            placeholder="your.email@example.com"
+                                        Password
+                                    </label>
+                                    <input
+                                        type="password"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        placeholder="Enter your password"
                                             className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none"
-                                            required
-                                        />
-                                    </div>
+                                        required
+                                    />
+                                </div>
 
-                                    <div>
-                                        <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                            Password
-                                        </label>
-                                        <input
-                                            type="password"
-                                            value={password}
-                                            onChange={(e) => setPassword(e.target.value)}
-                                            placeholder="Enter your password"
-                                            className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none"
-                                            required
-                                        />
-                                    </div>
-
-                                    {signInError && (
+                                {signInError && (
                                         <motion.div 
                                             initial={{ opacity: 0, y: -10 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm"
                                         >
-                                            {signInError}
+                                        {signInError}
                                         </motion.div>
-                                    )}
+                                )}
 
-                                    <button
-                                        type="submit"
-                                        disabled={signInLoading}
+                                <button
+                                    type="submit"
+                                    disabled={signInLoading}
                                         className="w-full bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-600 text-white py-3.5 rounded-xl font-bold shadow-md hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02] active:scale-[0.98]"
-                                    >
-                                        {signInLoading ? "Signing in..." : "Sign In"}
-                                    </button>
-                                </form>
+                                >
+                                    {signInLoading ? "Signing in..." : "Sign In"}
+                                </button>
+                            </form>
                             </motion.div>
-                        )}
+                    )}
 
-                        {/* Sign Up Form */}
-                        {authMode === "signup" && (
+                    {/* Sign Up Form */}
+                    {authMode === "signup" && (
                             <motion.div 
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.5 }}
                                 className="bg-white rounded-3xl shadow-xl border border-gray-200 p-8"
                             >
-                                <div className="text-center mb-8">
+                            <div className="text-center mb-8">
                                     <h2 className="text-2xl font-bold text-gray-900 mb-2">Create Account</h2>
                                     <p className="text-gray-600 text-sm">Sign up to get started with AI PYQ Assistant</p>
+                            </div>
+
+                            <form onSubmit={handleSignUp} className="space-y-6">
+                                <div>
+                                        <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                        Username <span className="text-red-500">*</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        value={username}
+                                        onChange={(e) => setUsername(e.target.value)}
+                                        placeholder="johndoe"
+                                            className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none"
+                                        required
+                                    />
+                                    <p className="text-xs text-gray-500 mt-1">3-20 characters, letters, numbers, and underscores only</p>
                                 </div>
 
-                                <form onSubmit={handleSignUp} className="space-y-6">
-                                    <div>
+                                <div>
                                         <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                            Username <span className="text-red-500">*</span>
-                                        </label>
-                                        <input
-                                            type="text"
-                                            value={username}
-                                            onChange={(e) => setUsername(e.target.value)}
-                                            placeholder="johndoe"
+                                        Email <span className="text-red-500">*</span>
+                                    </label>
+                                    <input
+                                        type="email"
+                                        value={signUpEmail}
+                                        onChange={(e) => setSignUpEmail(e.target.value)}
+                                        placeholder="your.email@example.com"
                                             className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none"
-                                            required
-                                        />
-                                        <p className="text-xs text-gray-500 mt-1">3-20 characters, letters, numbers, and underscores only</p>
-                                    </div>
+                                        required
+                                    />
+                                </div>
 
-                                    <div>
+                                <div>
                                         <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                            Email <span className="text-red-500">*</span>
-                                        </label>
-                                        <input
-                                            type="email"
-                                            value={signUpEmail}
-                                            onChange={(e) => setSignUpEmail(e.target.value)}
-                                            placeholder="your.email@example.com"
-                                            className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none"
-                                            required
-                                        />
-                                    </div>
-
-                                    <div>
-                                        <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                            Password <span className="text-red-500">*</span>
-                                        </label>
-                                        <input
-                                            type="password"
-                                            value={signUpPassword}
-                                            onChange={handlePasswordChange}
-                                            placeholder="At least 8 characters with uppercase, lowercase, and number"
+                                        Password <span className="text-red-500">*</span>
+                                    </label>
+                                    <input
+                                        type="password"
+                                        value={signUpPassword}
+                                        onChange={handlePasswordChange}
+                                        placeholder="At least 8 characters with uppercase, lowercase, and number"
                                             className={`w-full px-4 py-3 bg-gray-50 border rounded-xl text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none ${
                                                 passwordStrength ? "border-red-400" : "border-gray-300"
-                                            }`}
-                                            required
-                                        />
-                                        {passwordStrength && (
-                                            <p className="text-xs text-red-600 mt-1">{passwordStrength}</p>
-                                        )}
-                                        {signUpPassword && !passwordStrength && (
-                                            <p className="text-xs text-green-600 mt-1">✓ Password strength is good</p>
-                                        )}
-                                    </div>
+                                        }`}
+                                        required
+                                    />
+                                    {passwordStrength && (
+                                        <p className="text-xs text-red-600 mt-1">{passwordStrength}</p>
+                                    )}
+                                    {signUpPassword && !passwordStrength && (
+                                        <p className="text-xs text-green-600 mt-1">✓ Password strength is good</p>
+                                    )}
+                                </div>
 
-                                    <div>
+                                <div>
                                         <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                            Confirm Password
-                                        </label>
-                                        <input
-                                            type="password"
-                                            value={confirmPassword}
-                                            onChange={(e) => setConfirmPassword(e.target.value)}
-                                            placeholder="Re-enter your password"
+                                        Confirm Password
+                                    </label>
+                                    <input
+                                        type="password"
+                                        value={confirmPassword}
+                                        onChange={(e) => setConfirmPassword(e.target.value)}
+                                        placeholder="Re-enter your password"
                                             className={`w-full px-4 py-3 bg-gray-50 border rounded-xl text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none ${
                                                 confirmPassword && signUpPassword !== confirmPassword ? "border-red-400" : "border-gray-300"
-                                            }`}
-                                            required
-                                        />
-                                        {confirmPassword && signUpPassword !== confirmPassword && (
-                                            <p className="text-xs text-red-600 mt-1">Passwords do not match</p>
-                                        )}
-                                        {confirmPassword && signUpPassword === confirmPassword && signUpPassword && (
-                                            <p className="text-xs text-green-600 mt-1">✓ Passwords match</p>
-                                        )}
-                                    </div>
+                                        }`}
+                                        required
+                                    />
+                                    {confirmPassword && signUpPassword !== confirmPassword && (
+                                        <p className="text-xs text-red-600 mt-1">Passwords do not match</p>
+                                    )}
+                                    {confirmPassword && signUpPassword === confirmPassword && signUpPassword && (
+                                        <p className="text-xs text-green-600 mt-1">✓ Passwords match</p>
+                                    )}
+                                </div>
 
-                                    {signUpError && (
+                                {signUpError && (
                                         <motion.div 
                                             initial={{ opacity: 0, y: -10 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm"
                                         >
-                                            {signUpError}
+                                        {signUpError}
                                         </motion.div>
-                                    )}
+                                )}
 
-                                    <button
-                                        type="submit"
-                                        disabled={signUpLoading || !!passwordStrength}
+                                <button
+                                    type="submit"
+                                    disabled={signUpLoading || !!passwordStrength}
                                         className="w-full bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-600 text-white py-3.5 rounded-xl font-bold shadow-md hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02] active:scale-[0.98]"
-                                    >
-                                        {signUpLoading ? "Creating account..." : "Sign Up"}
-                                    </button>
-                                </form>
+                                >
+                                    {signUpLoading ? "Creating account..." : "Sign Up"}
+                                </button>
+                            </form>
                             </motion.div>
                         )}
                     </motion.div>
                 </div>
-            </div>
+                        </div>
 
             {/* Bottom Section - Full Width: Analytics (100%) + Testimonials (100%) */}
-            <div className="relative z-10 w-full px-6 sm:px-8 lg:px-12 xl:px-16 py-12 lg:py-16">
+            <div className="relative z-10 w-full px-6 sm:px-8 lg:px-12 xl:px-16 pt-6 lg:pt-8 pb-12 lg:pb-16">
                 <div className="max-w-7xl mx-auto">
                     <div className="w-full flex flex-col gap-12 lg:gap-16">
                         {/* Analytics & Features Section (100%) */}
@@ -729,7 +729,7 @@ export default function LandingPage() {
                                 Powerful Analytics & Features
                             </motion.h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-                                <motion.div
+                                    <motion.div
                                     initial={{ opacity: 0, y: 30, scale: 0.95 }}
                                     whileInView={{ opacity: 1, y: 0, scale: 1 }}
                                     viewport={{ once: true }}
@@ -739,16 +739,16 @@ export default function LandingPage() {
                                 >
                                     <div className="w-20 h-20 bg-gradient-to-br from-blue-100 to-indigo-200 rounded-2xl flex items-center justify-center mb-6 shadow-md border border-blue-200">
                                         <span className="text-4xl">📈</span>
-                                    </div>
+                                            </div>
                                     <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4">
                                         10x Boost
                                     </h3>
                                     <p className="text-gray-700 leading-relaxed text-base">
                                         Students experience a 10x improvement in their preparation efficiency with AI-powered insights and personalized roadmaps.
                                     </p>
-                                </motion.div>
+                                    </motion.div>
 
-                                <motion.div
+                                    <motion.div
                                     initial={{ opacity: 0, y: 30, scale: 0.95 }}
                                     whileInView={{ opacity: 1, y: 0, scale: 1 }}
                                     viewport={{ once: true }}
@@ -758,16 +758,16 @@ export default function LandingPage() {
                                 >
                                     <div className="w-20 h-20 bg-gradient-to-br from-purple-100 to-pink-200 rounded-2xl flex items-center justify-center mb-6 shadow-md border border-purple-200">
                                         <span className="text-4xl">📚</span>
-                                    </div>
+                                        </div>
                                     <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4">
                                         25+ Years of PYQs
                                     </h3>
                                     <p className="text-gray-700 leading-relaxed text-base">
                                         Access previous year questions from the past 25+ years across multiple competitive exams, all in one place.
                                     </p>
-                                </motion.div>
+                                    </motion.div>
 
-                                <motion.div
+                                    <motion.div
                                     initial={{ opacity: 0, y: 30, scale: 0.95 }}
                                     whileInView={{ opacity: 1, y: 0, scale: 1 }}
                                     viewport={{ once: true }}
@@ -777,14 +777,14 @@ export default function LandingPage() {
                                 >
                                     <div className="w-20 h-20 bg-gradient-to-br from-teal-100 to-cyan-200 rounded-2xl flex items-center justify-center mb-6 shadow-md border border-teal-200">
                                         <span className="text-4xl">🎯</span>
-                                    </div>
+                                        </div>
                                     <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4">
                                         Multiple Exams
                                     </h3>
                                     <p className="text-gray-700 leading-relaxed text-base">
                                         Support for multiple competitive exams including UPSC, SSC, Banking, Railway, and many more.
                                     </p>
-                                </motion.div>
+                                    </motion.div>
 
                                 <motion.div
                                     initial={{ opacity: 0, y: 30, scale: 0.95 }}
@@ -796,7 +796,7 @@ export default function LandingPage() {
                                 >
                                     <div className="w-20 h-20 bg-gradient-to-br from-orange-100 to-red-200 rounded-2xl flex items-center justify-center mb-6 shadow-md border border-orange-200">
                                         <span className="text-4xl">🔍</span>
-                                    </div>
+                            </div>
                                     <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4">
                                         Smart Analytics
                                     </h3>
@@ -815,7 +815,7 @@ export default function LandingPage() {
                                 >
                                     <div className="w-20 h-20 bg-gradient-to-br from-green-100 to-emerald-200 rounded-2xl flex items-center justify-center mb-6 shadow-md border border-green-200">
                                         <span className="text-4xl">⚡</span>
-                                    </div>
+                                        </div>
                                     <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4">
                                         Instant Search
                                     </h3>
@@ -834,7 +834,7 @@ export default function LandingPage() {
                                 >
                                     <div className="w-20 h-20 bg-gradient-to-br from-indigo-100 to-blue-200 rounded-2xl flex items-center justify-center mb-6 shadow-md border border-indigo-200">
                                         <span className="text-4xl">📊</span>
-                                    </div>
+                                        </div>
                                     <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4">
                                         Performance Tracking
                                     </h3>
@@ -842,8 +842,8 @@ export default function LandingPage() {
                                         Monitor your performance across different topics and exams with detailed insights and recommendations.
                                     </p>
                                 </motion.div>
-                            </div>
-                        </div>
+                                </div>
+                                </div>
 
                         {/* Testimonials Section (100%) */}
                         <div className="w-full">

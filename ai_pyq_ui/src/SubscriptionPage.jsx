@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Sidebar from "./components/Sidebar";
+import PaymentMethodSelector from "./components/PaymentMethodSelector";
+import CheckoutForm from "./components/CheckoutForm";
+import PaymentStatus from "./components/PaymentStatus";
 import { authenticatedFetch, setUserData, getUserData } from "./utils/auth";
 
 const API_BASE_URL = ""; // Use Vite proxy
@@ -14,6 +17,14 @@ export default function SubscriptionPage() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
+    
+    // Payment flow state
+    const [paymentStep, setPaymentStep] = useState("plans"); // "plans", "payment-method", "checkout", "status"
+    const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
+    const [selectedPlan, setSelectedPlan] = useState(null);
+    const [paymentStatus, setPaymentStatus] = useState(null); // "success", "failed", "pending"
+    const [orderData, setOrderData] = useState(null);
+    const [isTestMode, setIsTestMode] = useState(true); // Will be set based on API response
 
     useEffect(() => {
         // Check premium status from userData
@@ -32,39 +43,71 @@ export default function SubscriptionPage() {
             }
         };
         fetchExams();
+
+        // Load Razorpay script
+        const loadRazorpay = () => {
+            if (window.Razorpay) {
+                return; // Already loaded
+            }
+            const script = document.createElement("script");
+            script.src = "https://checkout.razorpay.com/v1/checkout.js";
+            script.async = true;
+            script.onerror = () => {
+                console.warn("Failed to load Razorpay script");
+            };
+            document.body.appendChild(script);
+        };
+        loadRazorpay();
     }, []);
 
-    const handleUpgrade = async () => {
-        setLoading(true);
+    const handleUpgradeClick = (plan) => {
+        setSelectedPlan({
+            id: null, // Will be fetched from API if available
+            name: "Premium",
+            plan_type: "premium",
+            price: 499,
+            duration_months: 1
+        });
+        setPaymentStep("payment-method");
         setError("");
         setSuccess("");
-        
-        try {
-            const response = await authenticatedFetch(`${API_BASE_URL}/auth/subscription`, {
-                method: "PUT",
-                body: JSON.stringify({ plan: "premium", months: 1 }),
-            });
-            
-            if (response.ok) {
-                const updatedUser = await response.json();
-                setUserData(updatedUser); // Update localStorage
-                setHasPremium(true);
-                setSuccess("Successfully upgraded to Premium!");
-                // Dispatch events to update Sidebar
-                window.dispatchEvent(new Event("premiumStatusChanged"));
-                window.dispatchEvent(new Event("userLoggedIn"));
-                window.dispatchEvent(new Event("userProfileUpdated"));
-                setTimeout(() => setSuccess(""), 3000);
-            } else {
-                const errorData = await response.json();
-                setError(errorData.detail || "Failed to upgrade subscription");
-            }
-        } catch (err) {
-            setError("Failed to upgrade subscription. Please try again.");
-            console.error("Upgrade error:", err);
-        } finally {
-            setLoading(false);
+    };
+
+    const handlePaymentMethodSelect = (methodId) => {
+        setSelectedPaymentMethod(methodId);
+        setPaymentStep("checkout");
+    };
+
+    const handlePaymentSuccess = async (result) => {
+        setPaymentStatus("success");
+        setOrderData(result);
+        setPaymentStep("status");
+
+        // Update user data
+        if (result.user) {
+            setUserData(result.user);
+            setHasPremium(true);
+            // Dispatch events to update Sidebar
+            window.dispatchEvent(new Event("premiumStatusChanged"));
+            window.dispatchEvent(new Event("userLoggedIn"));
+            window.dispatchEvent(new Event("userProfileUpdated"));
         }
+    };
+
+    const handlePaymentCancel = () => {
+        setPaymentStep("plans");
+        setSelectedPaymentMethod(null);
+        setSelectedPlan(null);
+        setError("");
+    };
+
+    const handleStatusClose = () => {
+        setPaymentStep("plans");
+        setPaymentStatus(null);
+        setOrderData(null);
+        setSelectedPaymentMethod(null);
+        setSelectedPlan(null);
+        navigate("/exam-dashboard");
     };
 
     return (
@@ -112,6 +155,67 @@ export default function SubscriptionPage() {
                             <div className="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
                                 {error}
                             </div>
+                        )}
+
+                        {/* Payment Status Screen */}
+                        {paymentStep === "status" && paymentStatus && (
+                            <div className="mb-8">
+                                <PaymentStatus 
+                                    status={paymentStatus}
+                                    orderData={orderData}
+                                    onClose={handleStatusClose}
+                                />
+                            </div>
+                        )}
+
+                        {/* Payment Flow Steps */}
+                        {paymentStep === "payment-method" && (
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="bg-white rounded-xl border-2 border-gray-200 p-6 shadow-sm mb-8"
+                            >
+                                <button
+                                    onClick={() => setPaymentStep("plans")}
+                                    className="mb-4 flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+                                >
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                    <span>Back to Plans</span>
+                                </button>
+                                <PaymentMethodSelector
+                                    selectedMethod={selectedPaymentMethod}
+                                    onSelect={handlePaymentMethodSelect}
+                                />
+                            </motion.div>
+                        )}
+
+                        {paymentStep === "checkout" && selectedPlan && (
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="bg-white rounded-xl border-2 border-gray-200 p-6 shadow-sm mb-8"
+                            >
+                                <button
+                                    onClick={() => setPaymentStep("payment-method")}
+                                    className="mb-4 flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+                                >
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                    <span>Back</span>
+                                </button>
+                                <CheckoutForm
+                                    plan={selectedPlan}
+                                    amount={selectedPlan.price}
+                                    durationMonths={selectedPlan.duration_months}
+                                    paymentMethod={selectedPaymentMethod}
+                                    onSuccess={handlePaymentSuccess}
+                                    onCancel={handlePaymentCancel}
+                                    isTestMode={isTestMode}
+                                />
+                            </motion.div>
                         )}
 
                         <div className="grid md:grid-cols-2 gap-6 mb-8">
@@ -201,8 +305,8 @@ export default function SubscriptionPage() {
                                     </button>
                                 ) : (
                                     <button
-                                        onClick={handleUpgrade}
-                                        disabled={loading}
+                                        onClick={() => handleUpgradeClick({ name: "Premium", price: 499, duration_months: 1 })}
+                                        disabled={loading || paymentStep !== "plans"}
                                         className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
                                         {loading ? "Upgrading..." : "Upgrade to Premium"}
@@ -211,12 +315,14 @@ export default function SubscriptionPage() {
                             </div>
                         </div>
 
-                        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-                            <p className="text-sm text-blue-800">
-                                <strong>Demo Mode:</strong> Click "Upgrade to Premium" to activate premium features instantly. 
-                                No payment required for testing.
-                            </p>
-                        </div>
+                        {paymentStep === "plans" && (
+                            <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                                <p className="text-sm text-blue-800">
+                                    <strong>Secure Payment:</strong> All payments are processed through secure payment gateways. 
+                                    Your payment information is encrypted and secure.
+                                </p>
+                            </div>
+                        )}
                     </motion.div>
                 </div>
             </main>
