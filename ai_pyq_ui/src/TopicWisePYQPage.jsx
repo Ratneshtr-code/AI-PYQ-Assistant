@@ -250,7 +250,6 @@ export default function TopicWisePYQPage() {
                                 <ResultsList
                                     results={results}
                                     onExplanationWindowChange={handleExplanationWindowChange}
-                                    hideExploreTopicGraph={true}
                                 />
                                 <div
                                     className={

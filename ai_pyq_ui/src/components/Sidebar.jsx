@@ -363,16 +363,6 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                             {!isCollapsed && <span>My Notes</span>}
                         </button>
                     )}
-
-                    <button
-                        onClick={() => {}}
-                        className="w-full text-left py-2 px-3 rounded-lg transition text-sm text-gray-500 hover:bg-gray-50 opacity-60 cursor-not-allowed flex items-center gap-2"
-                        disabled
-                        title="Concept Graph Explorer"
-                    >
-                        <span className="text-lg flex-shrink-0">🕸️</span>
-                        {!isCollapsed && <span>Concept Graph Explorer</span>}
-                    </button>
                 </div>
             </div>
 

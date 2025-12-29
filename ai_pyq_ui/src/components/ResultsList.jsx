@@ -3,7 +3,7 @@ import { getUserData } from "../utils/auth";
 import ExplanationWindow from "./ExplanationWindow";
 import SaveNoteButton from "./SaveNoteButton";
 
-export default function ResultsList({ results, onExplanationWindowChange, hideExploreTopicGraph = false }) {
+export default function ResultsList({ results, onExplanationWindowChange }) {
     const [visibleAnswers, setVisibleAnswers] = useState({});
     const [loadingExplain, setLoadingExplain] = useState({});
     const [isAdmin, setIsAdmin] = useState(false);
@@ -475,18 +475,6 @@ export default function ResultsList({ results, onExplanationWindowChange, hideEx
                                         console.error("Failed to save question:", error);
                                     }}
                                 />
-                                
-                                {/* Explore Topic Graph Button (Placeholder) - Hidden in Topic-wise PYQ page */}
-                                {!hideExploreTopicGraph && (
-                                    <button
-                                        disabled
-                                        className="info-layer-btn info-layer-btn-disabled"
-                                        title="Coming soon: Explore related topics in a graph view"
-                                    >
-                                        <span className="info-layer-icon">🗺️</span>
-                                        <span>Explore Topic Graph</span>
-                                    </button>
-                                )}
                             </div>
 
                             {/* Options */}
