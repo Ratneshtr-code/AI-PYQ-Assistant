@@ -1,15 +1,19 @@
 // src/AIRoadmapPage.jsx
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
+import ConsistencyRoadmap from "./components/ConsistencyRoadmap";
 
 export default function AIRoadmapPage() {
+    const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
     const [exam, setExam] = useState("");
     const [examsList, setExamsList] = useState([]);
     const [roadmapData, setRoadmapData] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [secondarySidebarOpen, setSecondarySidebarOpen] = useState(false);
+    const [activeSubPage, setActiveSubPage] = useState("priority-roadmap");
     const [primarySidebarCollapsed, setPrimarySidebarCollapsed] = useState(false);
     const [simulatedProgress, setSimulatedProgress] = useState(0);
     const [isDragging, setIsDragging] = useState(false);
@@ -17,6 +21,14 @@ export default function AIRoadmapPage() {
     const [showCelebration, setShowCelebration] = useState(false);
     const [prevProgress, setPrevProgress] = useState(0);
     const progressBarRef = useRef(null);
+
+    // Read exam from URL params on mount and when URL changes
+    useEffect(() => {
+        const examParam = searchParams.get('exam');
+        if (examParam && examParam !== exam) {
+            setExam(examParam);
+        }
+    }, [searchParams]);
 
     useEffect(() => {
         // Fetch exam filters
@@ -92,12 +104,13 @@ export default function AIRoadmapPage() {
         setSimulatedProgress(Math.min(100, totalWeightage));
     }, [selectedSubjects, roadmapData]);
 
-    // Interactive progress bar handlers
-    const updateProgress = (clientX) => {
+    // Interactive progress bar handlers - Updated for vertical bar
+    const updateProgress = (clientY) => {
         if (!progressBarRef.current) return;
         const rect = progressBarRef.current.getBoundingClientRect();
-        const clickX = clientX - rect.left;
-        const percentage = Math.max(0, Math.min(100, (clickX / rect.width) * 100));
+        const clickY = clientY - rect.top;
+        // For vertical bar, calculate from bottom (100% at top, 0% at bottom)
+        const percentage = Math.max(0, Math.min(100, 100 - (clickY / rect.height) * 100));
         setSimulatedProgress(percentage);
         
         // Update selected subjects based on progress
@@ -115,12 +128,12 @@ export default function AIRoadmapPage() {
     };
 
     const handleProgressClick = (e) => {
-        updateProgress(e.clientX);
+        updateProgress(e.clientY);
     };
 
     const handleMouseDown = (e) => {
         setIsDragging(true);
-        updateProgress(e.clientX);
+        updateProgress(e.clientY);
     };
 
     const handleReset = () => {
@@ -139,11 +152,16 @@ export default function AIRoadmapPage() {
         setSelectedSubjects(newSelected);
     };
 
+    const handleTopicClick = (e, subjectName, topicName) => {
+        e.stopPropagation(); // Prevent subject card toggle
+        navigate(`/topic-wise-pyq?exam=${encodeURIComponent(exam)}&subject=${encodeURIComponent(subjectName)}&topic=${encodeURIComponent(topicName)}&from=ai-roadmap`);
+    };
+
     useEffect(() => {
         if (!isDragging) return;
 
         const handleMouseMove = (e) => {
-            updateProgress(e.clientX);
+            updateProgress(e.clientY);
         };
 
         const handleMouseUp = () => {
@@ -246,12 +264,9 @@ export default function AIRoadmapPage() {
                 exam={exam}
                 setExam={setExam}
                 examsList={examsList}
-                onOpenSecondarySidebar={() => setSecondarySidebarOpen(!secondarySidebarOpen)}
+                onOpenSecondarySidebar={() => {}}
                 onCollapseChange={(isCollapsed) => {
                     setPrimarySidebarCollapsed(isCollapsed);
-                    if (isCollapsed) {
-                        setSecondarySidebarOpen(false);
-                    }
                 }}
             />
 
@@ -261,28 +276,72 @@ export default function AIRoadmapPage() {
                     primarySidebarCollapsed ? "ml-16" : "ml-64"
                 }`}
             >
-                <div className={`p-6 max-w-7xl mx-auto ${roadmapData && !loading && !error ? 'pb-56' : 'pb-6'}`}>
-                    {/* Compact Header */}
-                    <div className="mb-6">
-                        <motion.div
-                            initial={{ opacity: 0, y: -10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.3 }}
+                {/* Vertical Progress Simulator - Fixed Position - Only for Priority Roadmap */}
+                {activeSubPage === "priority-roadmap" && roadmapData && !loading && !error && (
+                    <div 
+                        className={`fixed z-30 flex flex-col items-center py-6 px-3 transition-all duration-300 ${
+                            primarySidebarCollapsed ? 'left-20' : 'left-72'
+                        }`}
+                        style={{ top: '50%', transform: 'translateY(-50%)' }}
+                    >
+                        {/* Percentage Display - Top */}
+                        <div className="mb-2 text-sm font-bold text-blue-600">
+                            {simulatedProgress.toFixed(0)}%
+                        </div>
+                        
+                        {/* Progress Bar Container */}
+                        <div
+                            ref={progressBarRef}
+                            className="relative w-5 h-[500px] bg-gray-100 rounded-full cursor-pointer overflow-hidden border border-gray-200/50"
+                            onClick={handleProgressClick}
+                            onMouseDown={handleMouseDown}
                         >
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                                        🎯 AI Roadmap
-                                    </h1>
-                                    <p className="text-sm text-gray-600 mt-1">
-                                        Strategic preparation based on question weightage
-                                    </p>
+                            {/* Progress Fill - Vertical (from bottom) */}
+                            <motion.div
+                                className="absolute bottom-0 w-full bg-gradient-to-t from-blue-500 via-purple-500 to-pink-500 rounded-full"
+                                initial={{ height: 0 }}
+                                animate={{ height: `${simulatedProgress}%` }}
+                                transition={{ duration: 0.1 }}
+                            />
+                            
+                            {/* Draggable Handle - Horizontal for vertical bar */}
+                            <motion.div
+                                className="absolute left-0 w-full h-1.5 bg-white shadow-lg cursor-grab active:cursor-grabbing z-10 rounded-full"
+                                style={{ bottom: `${simulatedProgress}%`, marginBottom: '-3px' }}
+                                animate={{ y: 0 }}
+                                whileHover={{ scaleY: 1.8 }}
+                                whileTap={{ scaleY: 1.3 }}
+                            >
+                                {/* Handle indicator dot */}
+                                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full border-2 border-white shadow-md"></div>
+                            </motion.div>
+                            
+                            {/* Dynamic Milestone Markers - Vertical */}
+                            {dynamicMilestones.map((milestone, idx) => (
+                                <div
+                                    key={idx}
+                                    className="absolute left-0 w-full flex items-center pointer-events-none group"
+                                    style={{ bottom: `${milestone.percentage}%`, marginBottom: '-0.5px' }}
+                                >
+                                    {/* Marker Line */}
+                                    <div className="h-0.5 w-full bg-blue-400 opacity-40 group-hover:opacity-100 transition-opacity"></div>
                                 </div>
-                            </div>
-                        </motion.div>
+                            ))}
+                        </div>
+                        
+                        {/* Reset Button - Bottom */}
+                        <button
+                            onClick={handleReset}
+                            className="mt-2 px-2.5 py-1.5 text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors"
+                            title="Reset to 0%"
+                        >
+                            ↻
+                        </button>
                     </div>
-
-                    {/* Compact Exam Selector */}
+                )}
+                
+                <div className={`p-6 max-w-7xl mx-auto ${activeSubPage === "priority-roadmap" && roadmapData && !loading && !error ? 'ml-24' : ''} ${activeSubPage === "priority-roadmap" && roadmapData && !loading && !error ? '' : 'pb-6'}`}>
+                    {/* Combined Tab Navigation and Exam Selector */}
                     <div className="mb-6">
                         <motion.div
                             initial={{ opacity: 0, y: 10 }}
@@ -290,21 +349,95 @@ export default function AIRoadmapPage() {
                             transition={{ duration: 0.3, delay: 0.1 }}
                             className="bg-white rounded-lg shadow-md p-4 border border-gray-200"
                         >
-                            <label className="block text-xs font-semibold text-gray-700 mb-2">
-                                Select Exam
-                            </label>
-                            <select
-                                value={exam}
-                                onChange={(e) => setExam(e.target.value)}
-                                className="w-full md:w-80 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-800 bg-white"
+                            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                                {/* Premium Tab Navigation */}
+                                <div className="bg-gray-50 rounded-xl p-1.5 inline-flex gap-1 flex-shrink-0">
+                                    <button
+                                        onClick={() => setActiveSubPage("priority-roadmap")}
+                                        className={`relative px-5 py-2.5 text-sm font-semibold rounded-lg transition-all duration-300 ${
+                                            activeSubPage === "priority-roadmap"
+                                                ? "text-blue-700"
+                                                : "text-gray-600 hover:text-gray-900 hover:bg-white"
+                                        }`}
+                                    >
+                                        {activeSubPage === "priority-roadmap" && (
+                                            <motion.div
+                                                layoutId="activeTab"
+                                                className="absolute inset-0 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 rounded-lg border border-blue-200/60 shadow-sm"
+                                                initial={false}
+                                                transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                                            />
+                                        )}
+                                        <span className="relative z-10 flex items-center gap-2">
+                                            <span className="text-base">🎯</span>
+                                            <span>Priority Roadmap</span>
+                                        </span>
+                                    </button>
+                                    <button
+                                        onClick={() => setActiveSubPage("stable-roadmap")}
+                                        className={`relative px-5 py-2.5 text-sm font-semibold rounded-lg transition-all duration-300 ${
+                                            activeSubPage === "stable-roadmap"
+                                                ? "text-blue-700"
+                                                : "text-gray-600 hover:text-gray-900 hover:bg-white"
+                                        }`}
+                                    >
+                                        {activeSubPage === "stable-roadmap" && (
+                                            <motion.div
+                                                layoutId="activeTab"
+                                                className="absolute inset-0 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 rounded-lg border border-blue-200/60 shadow-sm"
+                                                initial={false}
+                                                transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                                            />
+                                        )}
+                                        <span className="relative z-10 flex items-center gap-2">
+                                            <span className="text-base">📈</span>
+                                            <span>Stable Roadmap</span>
+                                        </span>
+                                    </button>
+                                </div>
+                                
+                                {/* Exam Selector */}
+                                <div className="flex-1 md:max-w-xs">
+                                    <label className="block text-xs font-semibold text-gray-700 mb-2">
+                                        Select Exam
+                                    </label>
+                                    <select
+                                        value={exam}
+                                        onChange={(e) => {
+                                            const newExam = e.target.value;
+                                            setExam(newExam);
+                                            if (newExam) {
+                                                navigate(`/ai-roadmap?exam=${encodeURIComponent(newExam)}`, { replace: true });
+                                            } else {
+                                                navigate('/ai-roadmap', { replace: true });
+                                            }
+                                        }}
+                                        className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-800 bg-white"
+                                    >
+                                        <option value="">-- Select an exam --</option>
+                                        {examsList.map((examName) => (
+                                            <option key={examName} value={examName}>
+                                                {examName}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            {/* Tab Description */}
+                            <motion.div
+                                key={activeSubPage}
+                                initial={{ opacity: 0, y: -5 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.2 }}
+                                className="mt-3 pt-3 border-t border-gray-100"
                             >
-                                <option value="">-- Select an exam --</option>
-                                {examsList.map((examName) => (
-                                    <option key={examName} value={examName}>
-                                        {examName}
-                                    </option>
-                                ))}
-                            </select>
+                                <p className="text-xs text-gray-500">
+                                    {activeSubPage === "priority-roadmap" 
+                                        ? "📊 Prioritize topics based on question weightage - focus on high-impact areas first"
+                                        : "📈 Focus on topics with consistent patterns across years - build a solid, predictable patterns rather than volatile topics."}
+                                </p>
+                            </motion.div>
                         </motion.div>
                     </div>
 
@@ -329,300 +462,190 @@ export default function AIRoadmapPage() {
                         </motion.div>
                     )}
 
-                    {/* Empty State */}
-                    {!exam && !loading && !error && (
-                        <motion.div
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="bg-white rounded-lg shadow-md p-8 text-center border border-gray-200"
-                        >
-                            <div className="text-5xl mb-3">🎯</div>
-                            <h3 className="text-lg font-semibold text-gray-800 mb-1">
-                                Select an Exam to Generate Roadmap
-                            </h3>
-                            <p className="text-sm text-gray-600">
-                                Choose an exam to see your personalized preparation roadmap
-                            </p>
-                        </motion.div>
-                    )}
-
-                    {/* Roadmap Content */}
-                    {roadmapData && !loading && !error && (
-                        <motion.div
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.3, delay: 0.2 }}
-                        >
-                            {/* Compact Subjects Roadmap */}
-                            <div className="space-y-3">
-                                {roadmapData.subjects.map((subject, subjectIdx) => {
-                                    const isSelected = selectedSubjects.has(subjectIdx);
-                                    const isCovered = subjectIdx < coveredSubjects.length;
-                                    const isNext = subjectIdx === nextSubjectIndex;
-                                    
-                                    return (
-                                        <motion.div
-                                            key={subjectIdx}
-                                            initial={{ opacity: 0, x: -20 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            transition={{ duration: 0.3, delay: subjectIdx * 0.05 }}
-                                        >
-                                            {/* Compact Subject Card - Clickable */}
-                                            <div 
-                                                className={`bg-white rounded-lg shadow-md border-2 transition-all cursor-pointer hover:shadow-lg ${
-                                                    isSelected || isCovered
-                                                        ? 'border-emerald-300 bg-emerald-50/30' 
-                                                        : isNext 
-                                                            ? 'border-blue-300 bg-blue-50/30' 
-                                                            : 'border-gray-200 hover:border-blue-200'
-                                                }`}
-                                                onClick={() => toggleSubject(subjectIdx)}
+                    {/* Roadmap Content - Only show active tab's content */}
+                    {activeSubPage === "stable-roadmap" ? (
+                        <>
+                            {/* Empty State for Stable Roadmap */}
+                            {!exam && !loading && !error && (
+                                <motion.div
+                                    key="stable-empty"
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="bg-white rounded-lg shadow-md p-8 text-center border border-gray-200"
+                                >
+                                    <div className="text-5xl mb-3">📈</div>
+                                    <h3 className="text-lg font-semibold text-gray-800 mb-1">
+                                        Select an Exam to Generate Consistency Roadmap
+                                    </h3>
+                                    <p className="text-sm text-gray-600">
+                                        Choose an exam to see topics based on consistency across years
+                                    </p>
+                                </motion.div>
+                            )}
+                            {/* Consistency Roadmap Component */}
+                            {exam && <ConsistencyRoadmap exam={exam} />}
+                        </>
+                    ) : (
+                        <>
+                            {/* Empty State for Priority Roadmap */}
+                            {!exam && !loading && !error && (
+                                <motion.div
+                                    key="priority-empty"
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="bg-white rounded-lg shadow-md p-8 text-center border border-gray-200"
+                                >
+                                    <div className="text-5xl mb-3">🎯</div>
+                                    <h3 className="text-lg font-semibold text-gray-800 mb-1">
+                                        Select an Exam to Generate Roadmap
+                                    </h3>
+                                    <p className="text-sm text-gray-600">
+                                        Choose an exam to see your personalized preparation roadmap
+                                    </p>
+                                </motion.div>
+                            )}
+                            {/* Priority Roadmap Content */}
+                            {roadmapData && !loading && !error && (
+                            <motion.div
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.3, delay: 0.2 }}
+                            >
+                                {/* Compact Subjects Roadmap */}
+                                <div className="space-y-3">
+                                    {roadmapData.subjects.map((subject, subjectIdx) => {
+                                        const isSelected = selectedSubjects.has(subjectIdx);
+                                        const isCovered = subjectIdx < coveredSubjects.length;
+                                        const isNext = subjectIdx === nextSubjectIndex;
+                                        
+                                        return (
+                                            <motion.div
+                                                key={subjectIdx}
+                                                initial={{ opacity: 0, x: -20 }}
+                                                animate={{ opacity: 1, x: 0 }}
+                                                transition={{ duration: 0.3, delay: subjectIdx * 0.05 }}
                                             >
-                                                {/* Compact Subject Header */}
-                                                <div className="p-3">
-                                                    <div className="flex items-center justify-between">
-                                                        <div className="flex items-center gap-3 flex-1 min-w-0">
-                                                            <div className={`w-8 h-8 flex-shrink-0 rounded-md flex items-center justify-center text-white font-bold text-sm transition-all ${
-                                                                isSelected || isCovered
-                                                                    ? 'bg-emerald-500' 
-                                                                    : isNext 
-                                                                        ? 'bg-blue-500 animate-pulse' 
-                                                                        : 'bg-gradient-to-br from-gray-400 to-gray-500'
-                                                            }`}>
-                                                                {isSelected && <span className="text-xs">✓</span>}
-                                                                {!isSelected && <span>{subjectIdx + 1}</span>}
-                                                            </div>
-                                                            <div className="flex-1 min-w-0">
-                                                                <h3 className="text-sm font-bold text-gray-800 truncate">
-                                                                    {subject.name}
-                                                                </h3>
-                                                                <p className="text-xs text-gray-600 mt-0.5">
-                                                                    {subject.question_count} questions
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                        <div className="flex items-center gap-2 flex-shrink-0">
-                                                            <div className="text-right">
-                                                                <div className="text-sm font-bold text-gray-800">
-                                                                    {subject.weightage}%
+                                                {/* Compact Subject Card - Clickable */}
+                                                <div 
+                                                    className={`bg-white rounded-lg shadow-md border-2 transition-all cursor-pointer hover:shadow-lg ${
+                                                        isSelected
+                                                            ? 'border-emerald-300 bg-emerald-50/30' 
+                                                            : isNext 
+                                                                ? 'border-blue-300 bg-blue-50/30' 
+                                                                : 'border-gray-200 hover:border-blue-200'
+                                                    }`}
+                                                    onClick={() => toggleSubject(subjectIdx)}
+                                                >
+                                                    {/* Compact Subject Header */}
+                                                    <div className="p-3">
+                                                        <div className="flex items-center justify-between">
+                                                            <div className="flex items-center gap-3 flex-1 min-w-0">
+                                                                <div className={`w-8 h-8 flex-shrink-0 rounded-md flex items-center justify-center text-white font-bold text-sm transition-all ${
+                                                                    isSelected
+                                                                        ? 'bg-emerald-500' 
+                                                                        : isNext 
+                                                                            ? 'bg-blue-500 animate-pulse' 
+                                                                            : 'bg-gradient-to-br from-gray-400 to-gray-500'
+                                                                }`}>
+                                                                    {isSelected && <span className="text-xs">✓</span>}
+                                                                    {!isSelected && <span>{subjectIdx + 1}</span>}
                                                                 </div>
-                                                                <div className="text-xs text-gray-500">Weight</div>
+                                                                <div className="flex-1 min-w-0">
+                                                                    <h3 className="text-sm font-bold text-gray-800 truncate">
+                                                                        {subject.name}
+                                                                    </h3>
+                                                                    <p className="text-xs text-gray-600 mt-0.5">
+                                                                        {subject.question_count} questions
+                                                                    </p>
+                                                                </div>
                                                             </div>
-                                                            <div
-                                                                className={`w-3 h-3 rounded-full ${getWeightageColor(
-                                                                    subject.weightage
-                                                                )}`}
-                                                            ></div>
+                                                            <div className="flex items-center gap-2 flex-shrink-0">
+                                                                <div className="text-right">
+                                                                    <div className="text-sm font-bold text-gray-800">
+                                                                        {subject.weightage}%
+                                                                    </div>
+                                                                    <div className="text-xs text-gray-500">Weight</div>
+                                                                </div>
+                                                                <div
+                                                                    className={`w-3 h-3 rounded-full ${getWeightageColor(
+                                                                        subject.weightage
+                                                                    )}`}
+                                                                ></div>
+                                                            </div>
                                                         </div>
                                                     </div>
+
+                                                    {/* Compact Topics List */}
+                                                    {subject.topics && subject.topics.length > 0 && (
+                                                        <div className="px-3 pb-3 pt-2 border-t border-gray-100">
+                                                            <div className="flex flex-wrap gap-2">
+                                                                {subject.topics.slice(0, 6).map((topic, topicIdx) => (
+                                                                    <div
+                                                                        key={topicIdx}
+                                                                        onClick={(e) => handleTopicClick(e, subject.name, topic.name)}
+                                                                        className="bg-gray-50 rounded-md px-2 py-1 border border-gray-200 text-xs cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-colors"
+                                                                    >
+                                                                        <span className="text-gray-700 font-medium">
+                                                                            {topic.name.length > 40 
+                                                                                ? topic.name.substring(0, 40) + '...' 
+                                                                                : topic.name}
+                                                                        </span>
+                                                                        <span className={`ml-2 px-1.5 py-0.5 text-xs font-bold text-white rounded ${getWeightageColor(
+                                                                            topic.weightage
+                                                                        )}`}>
+                                                                            {topic.weightage}%
+                                                                        </span>
+                                                                    </div>
+                                                                ))}
+                                                                {subject.topics.length > 6 && (
+                                                                    <div className="bg-gray-100 rounded-md px-2 py-1 text-xs text-gray-600">
+                                                                        +{subject.topics.length - 6} more
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                    )}
                                                 </div>
 
-                                                {/* Compact Topics List */}
-                                                {subject.topics && subject.topics.length > 0 && (
-                                                    <div className="px-3 pb-3 pt-2 border-t border-gray-100">
-                                                        <div className="flex flex-wrap gap-2">
-                                                            {subject.topics.slice(0, 6).map((topic, topicIdx) => (
-                                                                <div
-                                                                    key={topicIdx}
-                                                                    className="bg-gray-50 rounded-md px-2 py-1 border border-gray-200 text-xs"
-                                                                >
-                                                                    <span className="text-gray-700 font-medium">
-                                                                        {topic.name.length > 40 
-                                                                            ? topic.name.substring(0, 40) + '...' 
-                                                                            : topic.name}
-                                                                    </span>
-                                                                    <span className={`ml-2 px-1.5 py-0.5 text-xs font-bold text-white rounded ${getWeightageColor(
-                                                                        topic.weightage
-                                                                    )}`}>
-                                                                        {topic.weightage}%
-                                                                    </span>
-                                                                </div>
-                                                            ))}
-                                                            {subject.topics.length > 6 && (
-                                                                <div className="bg-gray-100 rounded-md px-2 py-1 text-xs text-gray-600">
-                                                                    +{subject.topics.length - 6} more
-                                                                </div>
-                                                            )}
-                                                        </div>
+                                                {/* Arrow Connector */}
+                                                {subjectIdx < roadmapData.subjects.length - 1 && (
+                                                    <div className="flex justify-center py-3">
+                                                        <motion.div
+                                                            initial={{ opacity: 0, y: -5 }}
+                                                            animate={{ opacity: 1, y: 0 }}
+                                                            transition={{ delay: subjectIdx * 0.05 + 0.2 }}
+                                                            className="relative"
+                                                        >
+                                                            {/* Arrow with shadow */}
+                                                            <svg
+                                                                width="20"
+                                                                height="20"
+                                                                viewBox="0 0 24 24"
+                                                                fill="none"
+                                                                className="text-blue-400 drop-shadow-sm"
+                                                            >
+                                                                <path
+                                                                    d="M12 4L12 20M12 20L6 14M12 20L18 14"
+                                                                    stroke="currentColor"
+                                                                    strokeWidth="2"
+                                                                    strokeLinecap="round"
+                                                                    strokeLinejoin="round"
+                                                                />
+                                                            </svg>
+                                                        </motion.div>
                                                     </div>
                                                 )}
-                                            </div>
-
-                                            {/* Prominent Arrow Connector */}
-                                            {subjectIdx < roadmapData.subjects.length - 1 && (
-                                                <div className="flex justify-center py-2">
-                                                    <motion.div
-                                                        initial={{ opacity: 0, y: -5 }}
-                                                        animate={{ opacity: 1, y: 0 }}
-                                                        transition={{ delay: subjectIdx * 0.05 + 0.2 }}
-                                                        className="relative"
-                                                    >
-                                                        {/* Arrow with shadow */}
-                                                        <svg
-                                                            width="32"
-                                                            height="32"
-                                                            viewBox="0 0 24 24"
-                                                            fill="none"
-                                                            className="text-blue-500 drop-shadow-sm"
-                                                        >
-                                                            <path
-                                                                d="M12 4L12 20M12 20L6 14M12 20L18 14"
-                                                                stroke="currentColor"
-                                                                strokeWidth="2.5"
-                                                                strokeLinecap="round"
-                                                                strokeLinejoin="round"
-                                                            />
-                                                        </svg>
-                                                        {/* Animated pulse effect */}
-                                                        <motion.div
-                                                            className="absolute inset-0 rounded-full bg-blue-400 opacity-20"
-                                                            animate={{
-                                                                scale: [1, 1.5, 1],
-                                                                opacity: [0.2, 0, 0.2],
-                                                            }}
-                                                            transition={{
-                                                                duration: 2,
-                                                                repeat: Infinity,
-                                                                ease: "easeInOut",
-                                                            }}
-                                                        />
-                                                    </motion.div>
-                                                </div>
-                                            )}
-                                        </motion.div>
+                                            </motion.div>
                                     );
                                 })}
                             </div>
                         </motion.div>
+                            )}
+                        </>
                     )}
                 </div>
             </div>
 
-            {/* Sticky Interactive Progress Ruler */}
-            {roadmapData && !loading && !error && (
-                <div 
-                    className={`fixed bottom-0 bg-white border-t border-gray-200 shadow-lg z-40 transition-all duration-300 ${
-                        primarySidebarCollapsed ? 'left-16' : 'left-64'
-                    } right-0`}
-                >
-                    <div className="max-w-7xl mx-auto p-4">
-                        <div className="flex items-center justify-between mb-3">
-                            <div className="flex items-center gap-3">
-                                <h3 className="text-sm font-semibold text-gray-800">
-                                    Simulate Your Progress
-                                </h3>
-                                <button
-                                    onClick={handleReset}
-                                    className="px-3 py-1 text-xs font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors"
-                                    title="Reset to 0%"
-                                >
-                                    Reset
-                                </button>
-                            </div>
-                            <div className="text-sm font-bold text-blue-600">
-                                {simulatedProgress.toFixed(1)}%
-                            </div>
-                        </div>
-                        <div
-                            ref={progressBarRef}
-                            className="relative h-10 bg-gray-200 rounded-full cursor-pointer overflow-hidden"
-                            onClick={handleProgressClick}
-                            onMouseDown={handleMouseDown}
-                        >
-                            {/* Progress Fill */}
-                            <motion.div
-                                className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full"
-                                initial={{ width: 0 }}
-                                animate={{ width: `${simulatedProgress}%` }}
-                                transition={{ duration: 0.1 }}
-                            />
-                            
-                            {/* Draggable Handle - Vertical Bar Design */}
-                            <motion.div
-                                className="absolute top-0 h-full w-1 bg-white shadow-lg cursor-grab active:cursor-grabbing z-10"
-                                style={{ left: `${simulatedProgress}%`, marginLeft: '-2px' }}
-                                animate={{ x: 0 }}
-                                whileHover={{ scaleX: 1.5 }}
-                                whileTap={{ scaleX: 1.2 }}
-                            >
-                                {/* Handle indicator dot */}
-                                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-blue-500 rounded-full border-2 border-white shadow-md"></div>
-                            </motion.div>
-                            
-                            {/* Dynamic Milestone Markers based on Subject Weightage */}
-                            {dynamicMilestones.map((milestone, idx) => (
-                                <div
-                                    key={idx}
-                                    className="absolute top-0 h-full flex flex-col items-center pointer-events-none group"
-                                    style={{ left: `${milestone.percentage}%`, marginLeft: '-1px' }}
-                                >
-                                    {/* Marker Line */}
-                                    <div className="w-0.5 h-full bg-blue-400 opacity-50 group-hover:opacity-100 transition-opacity"></div>
-                                    
-                                    {/* Marker Label - Shows on hover */}
-                                    <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-auto">
-                                        <div className="bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-lg whitespace-nowrap">
-                                            <div className="font-semibold">{milestone.percentage.toFixed(1)}%</div>
-                                            <div className="text-[10px] text-gray-300 mt-0.5 max-w-[120px] truncate">
-                                                {milestone.subjectName}
-                                            </div>
-                                        </div>
-                                        {/* Tooltip arrow */}
-                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full">
-                                            <div className="border-4 border-transparent border-b-gray-800"></div>
-                                        </div>
-                                    </div>
-                                    
-                                    {/* Always visible percentage */}
-                                    <div className="absolute -bottom-5 text-[10px] text-gray-500 whitespace-nowrap font-medium">
-                                        {milestone.percentage.toFixed(0)}%
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                        
-                        {/* Dynamic Progress Info */}
-                        {simulatedProgress > 0 && (
-                            <motion.div
-                                initial={{ opacity: 0, y: -5 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                className="mt-3 pt-3 border-t border-gray-200"
-                            >
-                                <div className="flex items-center justify-between flex-wrap gap-2">
-                                    <div className="text-xs text-gray-600">
-                                        {coveredSubjects.length > 0 ? (
-                                            <>
-                                                <span className="font-semibold text-gray-800">
-                                                    {coveredSubjects.length} subject{coveredSubjects.length !== 1 ? 's' : ''} covered
-                                                </span>
-                                                {nextSubjectIndex < roadmapData.subjects.length && (
-                                                    <> • Next: <span className="font-medium">{roadmapData.subjects[nextSubjectIndex]?.name}</span></>
-                                                )}
-                                            </>
-                                        ) : (
-                                            <>Start with: <span className="font-medium">{roadmapData.subjects[0]?.name}</span></>
-                                        )}
-                                    </div>
-                                    
-                                    {/* Next Milestone Indicator */}
-                                    {(() => {
-                                        const nextMilestone = dynamicMilestones.find(m => m.percentage > simulatedProgress);
-                                        if (nextMilestone) {
-                                            const remaining = (nextMilestone.percentage - simulatedProgress).toFixed(1);
-                                            return (
-                                                <div className="text-xs text-blue-600 font-medium bg-blue-50 px-2 py-1 rounded">
-                                                    Next milestone: {nextMilestone.percentage.toFixed(1)}% ({remaining}% away)
-                                                </div>
-                                            );
-                                        }
-                                        return null;
-                                    })()}
-                                </div>
-                            </motion.div>
-                        )}
-                    </div>
-                </div>
-            )}
         </div>
     );
 }

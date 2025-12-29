@@ -48,8 +48,30 @@ export default function SecondarySidebar({ isOpen, onClose, type, activeSubPage,
         },
     ];
 
-    const subPages = type === "exam-dashboard" ? examDashboardSubPages : crossExamSubPages;
-    const panelTitle = type === "exam-dashboard" ? "Exam Dashboard" : "Cross-Exam Insights";
+    // Sub-pages for AI Roadmap
+    const aiRoadmapSubPages = [
+        {
+            id: "priority-roadmap",
+            title: "Priority Roadmap",
+            icon: "🎯",
+        },
+        {
+            id: "stable-roadmap",
+            title: "Stable Roadmap",
+            icon: "📈",
+        },
+    ];
+
+    const subPages = type === "exam-dashboard" 
+        ? examDashboardSubPages 
+        : type === "ai-roadmap"
+        ? aiRoadmapSubPages
+        : crossExamSubPages;
+    const panelTitle = type === "exam-dashboard" 
+        ? "Exam Dashboard" 
+        : type === "ai-roadmap"
+        ? "AI Roadmap"
+        : "Cross-Exam Insights";
 
     // Set default active sub-page when panel opens
     useEffect(() => {

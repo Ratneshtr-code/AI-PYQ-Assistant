@@ -1,5 +1,6 @@
 // src/TopicWisePYQPage.jsx
 import { useState, useEffect } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { useSearchAPI } from "./hooks/useSearchAPI";
 import Sidebar from "./components/Sidebar";
 import FilterBar from "./components/FilterBar";
@@ -7,6 +8,8 @@ import ResultsList from "./components/ResultsList";
 import Pagination from "./components/Pagination";
 
 export default function TopicWisePYQPage() {
+    const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
     const apiUrl = "http://127.0.0.1:8000/search";
     const filtersUrl = "http://127.0.0.1:8000/filters";
     const subjectsUrl = "http://127.0.0.1:8000/topic-wise/subjects";
@@ -21,6 +24,18 @@ export default function TopicWisePYQPage() {
     const [explanationWindowOpen, setExplanationWindowOpen] = useState(false);
     const [explanationWindowMinimized, setExplanationWindowMinimized] = useState(false);
     const [primarySidebarCollapsed, setPrimarySidebarCollapsed] = useState(false);
+
+    // Check if coming from AI Roadmap
+    const fromRoadmap = searchParams.get('from') === 'ai-roadmap';
+    const roadmapExam = searchParams.get('exam');
+
+    // Read URL params on mount
+    useEffect(() => {
+        const examParam = searchParams.get('exam');
+        if (examParam) {
+            setExam(decodeURIComponent(examParam));
+        }
+    }, [searchParams]);
 
     const {
         results,
@@ -62,16 +77,28 @@ export default function TopicWisePYQPage() {
                 const res = await fetch(`${subjectsUrl}?exam=${encodeURIComponent(exam)}`);
                 const data = await res.json();
                 setSubjectsList(data.subjects || []);
-                setSubject(""); // Reset subject when exam changes
-                setTopicsList([]);
-                setTopic(""); // Reset topic when exam changes
+                
+                // Check if we have a subject from URL params
+                const subjectParam = searchParams.get('subject');
+                if (subjectParam) {
+                    const decodedSubject = decodeURIComponent(subjectParam);
+                    // Subject from URL exists in the list, set it
+                    if (data.subjects && data.subjects.includes(decodedSubject)) {
+                        setSubject(decodedSubject);
+                    }
+                } else {
+                    // No subject in URL, reset it
+                    setSubject("");
+                    setTopicsList([]);
+                    setTopic("");
+                }
             } catch (err) {
                 console.error("Failed to fetch subjects:", err);
                 setSubjectsList([]);
             }
         };
         fetchSubjects();
-    }, [exam, subjectsUrl]);
+    }, [exam, subjectsUrl, searchParams]);
 
     // Fetch topics when subject is selected
     useEffect(() => {
@@ -88,14 +115,26 @@ export default function TopicWisePYQPage() {
                 );
                 const data = await res.json();
                 setTopicsList(data.topics || []);
-                setTopic(""); // Reset topic when subject changes
+                
+                // Check if we have a topic from URL params
+                const topicParam = searchParams.get('topic');
+                if (topicParam) {
+                    const decodedTopic = decodeURIComponent(topicParam);
+                    // Topic from URL exists in the list, set it
+                    if (data.topics && data.topics.includes(decodedTopic)) {
+                        setTopic(decodedTopic);
+                    }
+                } else {
+                    // No topic in URL, reset it
+                    setTopic("");
+                }
             } catch (err) {
                 console.error("Failed to fetch topics:", err);
                 setTopicsList([]);
             }
         };
         fetchTopics();
-    }, [exam, subject, topicsUrl]);
+    }, [exam, subject, topicsUrl, searchParams]);
 
     // Search when topic is selected
     useEffect(() => {
@@ -162,6 +201,20 @@ export default function TopicWisePYQPage() {
 
                 {/* Content Area */}
                 <div className="w-full max-w-7xl mx-auto px-4 md:px-8 py-6 md:py-8 space-y-4 relative z-0">
+                    {/* Back Button - Show when coming from AI Roadmap */}
+                    {fromRoadmap && (
+                        <div className={`mb-4 ${explanationWindowOpen && !explanationWindowMinimized ? 'results-container-shifted' : ''}`} style={{ maxWidth: explanationWindowOpen && !explanationWindowMinimized ? '48rem' : '100%', width: '100%', marginLeft: 'auto', marginRight: explanationWindowOpen && !explanationWindowMinimized ? '440px' : 'auto' }}>
+                            <button
+                                onClick={() => navigate(`/ai-roadmap${roadmapExam ? `?exam=${encodeURIComponent(roadmapExam)}` : ''}`)}
+                                className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-colors shadow-sm"
+                            >
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                </svg>
+                                Back to AI Roadmap
+                            </button>
+                        </div>
+                    )}
                     {/* Header - Centered and shifts with explanation window */}
                     <div className={`flex items-center justify-center mb-3 ${explanationWindowOpen && !explanationWindowMinimized ? 'results-container-shifted' : ''}`} style={{ maxWidth: explanationWindowOpen && !explanationWindowMinimized ? '48rem' : '100%', width: '100%', marginLeft: 'auto', marginRight: explanationWindowOpen && !explanationWindowMinimized ? '440px' : 'auto' }}>
                         <h1 className="text-3xl font-bold text-gray-900">

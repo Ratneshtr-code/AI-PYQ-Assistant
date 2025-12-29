@@ -1574,6 +1574,193 @@ def generate_roadmap(
     }
 
 
+@app.get("/roadmap/consistency")
+def generate_consistency_roadmap(
+    exam: str = Query(..., description="Exam name for consistency-based roadmap generation")
+):
+    """Generate AI-powered preparation roadmap based on topic consistency across years"""
+    import statistics
+    
+    df = load_dataframe()
+    if df is None:
+        return {
+            "error": "Dataset not available",
+            "exam": exam,
+            "total_questions": 0,
+            "subjects": [],
+        }
+    
+    # Filter by exam (case-insensitive)
+    filtered_df = df[df["exam"].str.lower() == exam.lower()].copy()
+    
+    if len(filtered_df) == 0:
+        return {
+            "error": f"No questions found for exam: {exam}",
+            "exam": exam,
+            "total_questions": 0,
+            "subjects": [],
+        }
+    
+    # Check if year column exists
+    if "year" not in filtered_df.columns:
+        return {
+            "error": "Year column not found in dataset",
+            "exam": exam,
+            "total_questions": len(filtered_df),
+            "subjects": [],
+        }
+    
+    total_questions = len(filtered_df)
+    
+    # Get all available years for this exam
+    available_years = sorted(filtered_df["year"].dropna().unique())
+    total_years = len(available_years)
+    
+    if total_years == 0:
+        return {
+            "error": "No year data available for this exam",
+            "exam": exam,
+            "total_questions": total_questions,
+            "subjects": [],
+        }
+    
+    # Group by subject and topic, then calculate consistency metrics
+    subject_topic_data = {}
+    
+    for _, row in filtered_df.iterrows():
+        subject = str(row.get("subject", "")).strip()
+        topic = str(row.get("topic", "")).strip()
+        year = row.get("year")
+        
+        if pd.isna(subject) or not subject or pd.isna(topic) or not topic or pd.isna(year):
+            continue
+        
+        key = (subject, topic)
+        if key not in subject_topic_data:
+            subject_topic_data[key] = {
+                "years": [],
+                "question_counts": {}
+            }
+        
+        year_str = str(year)
+        if year_str not in subject_topic_data[key]["question_counts"]:
+            subject_topic_data[key]["question_counts"][year_str] = 0
+        subject_topic_data[key]["question_counts"][year_str] += 1
+    
+    # Calculate consistency scores for each subject-topic combination
+    topic_consistency_data = []
+    
+    for (subject, topic), data in subject_topic_data.items():
+        question_counts = data["question_counts"]
+        years_with_questions = len(question_counts)
+        
+        # Frequency: years appeared / total years
+        frequency = years_with_questions / total_years if total_years > 0 else 0
+        
+        # Stability: 1 - coefficient of variation
+        counts_list = list(question_counts.values())
+        if len(counts_list) > 1:
+            try:
+                mean_count = statistics.mean(counts_list)
+                std_count = statistics.stdev(counts_list) if len(counts_list) > 1 else 0
+                
+                if mean_count > 0:
+                    coefficient_of_variation = std_count / mean_count
+                    stability = max(0, 1 - coefficient_of_variation)  # Clamp to 0-1
+                else:
+                    stability = 0
+            except (statistics.StatisticsError, ZeroDivisionError):
+                stability = 0
+        elif len(counts_list) == 1:
+            # Only one year of data - consider it stable
+            stability = 1.0
+        else:
+            stability = 0
+        
+        # Combined consistency score (60% frequency, 40% stability)
+        consistency_score = (frequency * 0.6) + (stability * 0.4)
+        
+        # Determine stability rating
+        if stability >= 0.7:
+            stability_rating = "High"
+        elif stability >= 0.4:
+            stability_rating = "Medium"
+        else:
+            stability_rating = "Low"
+        
+        topic_consistency_data.append({
+            "subject": subject,
+            "topic": topic,
+            "consistency_score": round(consistency_score, 4),
+            "frequency": round(frequency, 4),
+            "stability": round(stability, 4),
+            "years_appeared": years_with_questions,
+            "total_years": total_years,
+            "stability_rating": stability_rating,
+            "question_count": sum(counts_list),
+            "question_counts": question_counts
+        })
+    
+    # Group by subject
+    subject_data = {}
+    
+    for item in topic_consistency_data:
+        subject = item["subject"]
+        if subject not in subject_data:
+            subject_data[subject] = {
+                "topics": [],
+                "total_questions": 0
+            }
+        
+        subject_data[subject]["topics"].append({
+            "name": item["topic"],
+            "consistency_score": item["consistency_score"],
+            "frequency": item["frequency"],
+            "stability": item["stability"],
+            "years_appeared": item["years_appeared"],
+            "total_years": item["total_years"],
+            "stability_rating": item["stability_rating"],
+            "question_count": item["question_count"]
+        })
+        subject_data[subject]["total_questions"] += item["question_count"]
+    
+    # Calculate subject-level consistency (weighted average of topics)
+    subjects_data = []
+    
+    for subject, data in subject_data.items():
+        topics = data["topics"]
+        total_questions = data["total_questions"]
+        
+        # Sort topics by consistency score (descending)
+        topics.sort(key=lambda x: x["consistency_score"], reverse=True)
+        
+        # Calculate subject consistency as weighted average
+        if topics:
+            weighted_consistency = sum(
+                topic["consistency_score"] * topic["question_count"] 
+                for topic in topics
+            ) / total_questions if total_questions > 0 else 0
+        else:
+            weighted_consistency = 0
+        
+        subjects_data.append({
+            "name": subject,
+            "consistency_score": round(weighted_consistency, 4),
+            "question_count": total_questions,
+            "topics": topics
+        })
+    
+    # Sort subjects by consistency score (descending)
+    subjects_data.sort(key=lambda x: x["consistency_score"], reverse=True)
+    
+    return {
+        "exam": exam,
+        "total_questions": total_questions,
+        "total_years": total_years,
+        "subjects": subjects_data
+    }
+
+
 if __name__ == "__main__":
     cfg = load_config()
     host = cfg["backend"]["host"]
