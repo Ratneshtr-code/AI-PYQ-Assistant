@@ -217,7 +217,7 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                         <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center flex-shrink-0">
                             <span className="text-white font-bold text-sm">AI</span>
                         </div>
-                        <span className="text-lg font-semibold text-gray-800 truncate">AI PYQ</span>
+                        <span className="text-lg font-semibold text-gray-800 truncate">AI PYQ Assistant</span>
                     </div>
                 )}
                 {isCollapsed && (
@@ -271,19 +271,6 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                 {/* Navigation Buttons */}
                 <div className="space-y-1">
                     <button
-                        onClick={() => navigate("/")}
-                        className={`w-full text-left py-2 px-3 rounded-lg transition text-sm flex items-center gap-2 ${
-                            isSearchPage
-                                ? "bg-blue-50 text-blue-700 font-medium"
-                                : "text-gray-700 hover:bg-gray-50 font-normal"
-                        }`}
-                        title="PYQ Search"
-                    >
-                        <span className="text-lg flex-shrink-0">🧠</span>
-                        {!isCollapsed && <span>PYQ Search</span>}
-                    </button>
-
-                    <button
                         onClick={() => {
                             navigate("/exam-dashboard");
                             if (onOpenSecondarySidebar) {
@@ -320,6 +307,19 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                     </button>
 
                     <button
+                        onClick={() => navigate("/")}
+                        className={`w-full text-left py-2 px-3 rounded-lg transition text-sm flex items-center gap-2 ${
+                            isSearchPage
+                                ? "bg-blue-50 text-blue-700 font-medium"
+                                : "text-gray-700 hover:bg-gray-50 font-normal"
+                        }`}
+                        title="PYQ Semantic Search"
+                    >
+                        <span className="text-lg flex-shrink-0">🧠</span>
+                        {!isCollapsed && <span>PYQ Semantic Search</span>}
+                    </button>
+
+                    <button
                         onClick={() => navigate("/topic-wise-pyq")}
                         className={`w-full text-left py-2 px-3 rounded-lg transition text-sm flex items-center gap-2 ${
                             location.pathname.includes("topic-wise-pyq")
@@ -332,7 +332,7 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                         {!isCollapsed && <span>Topic-wise PYQ</span>}
                     </button>
 
-                    {/* AI Roadmap - Only visible to logged-in users */}
+                    {/* Smart Roadmap - Only visible to logged-in users */}
                     {(localStorage.getItem("isLoggedIn") === "true" || isLoggedIn) && (
                         <button
                             onClick={() => navigate("/ai-roadmap")}
@@ -341,10 +341,10 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                                     ? "bg-blue-50 text-blue-700 font-medium"
                                     : "text-gray-700 hover:bg-gray-50 font-normal"
                             }`}
-                            title="AI Roadmap"
+                            title="Smart Roadmap"
                         >
                             <span className="text-lg flex-shrink-0">🎯</span>
-                            {!isCollapsed && <span>AI Roadmap</span>}
+                            {!isCollapsed && <span>Smart Roadmap</span>}
                         </button>
                     )}
 
