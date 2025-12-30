@@ -14,6 +14,7 @@ export default function ExamModePage() {
     const [error, setError] = useState("");
     
     // Test type selection - restore from URL params or localStorage
+    // Options: "exam", "subject", "my-attempts"
     const [testType, setTestType] = useState(() => {
         const urlTestType = new URLSearchParams(window.location.search).get("testType");
         const stored = localStorage.getItem("examMode_testType");
@@ -79,13 +80,27 @@ export default function ExamModePage() {
                 
                 const data = await response.json();
                 // Filter by exam type
-                const filtered = data.filter(set => {
+                let filtered = data.filter(set => {
                     if (testType === "exam") {
                         return !set.subject || set.exam_type === "pyp";
-                    } else {
+                    } else if (testType === "subject") {
                         return set.subject && set.exam_type === "subject_test";
+                    } else if (testType === "my-attempts") {
+                        // For "My Attempts", include all exam sets initially
+                        return true;
                     }
+                    return false;
                 });
+                
+                // If "My Attempts" tab, filter to show only completed exams
+                if (testType === "my-attempts") {
+                    filtered = filtered.filter(set => {
+                        const examSetId = String(set.id);
+                        const attempt = userAttempts[examSetId] || userAttempts[set.id];
+                        return attempt && (attempt.status === 'completed' || attempt.status === 'submitted');
+                    });
+                }
+                
                 setExamSets(filtered);
                 
                 // Check if exam sets response includes attempt information
@@ -113,7 +128,7 @@ export default function ExamModePage() {
         };
         
         fetchExamSets();
-    }, [exam, subject, testType]);
+    }, [exam, subject, testType, userAttempts]);
 
     // Fetch exams list
     useEffect(() => {
@@ -384,7 +399,7 @@ export default function ExamModePage() {
                     <div className="mb-8">
                         <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
                             <h2 className="text-xl font-bold text-gray-900 mb-4">Select Test Type</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                 <motion.button
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
@@ -445,11 +460,44 @@ export default function ExamModePage() {
                                         </div>
                                     </div>
                                 </motion.button>
+
+                                <motion.button
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    onClick={() => {
+                                        setTestType("my-attempts");
+                                        setSubject("");
+                                    }}
+                                    className={`p-6 rounded-xl border-2 transition-all ${
+                                        testType === "my-attempts"
+                                            ? "border-blue-500 bg-blue-50 shadow-md"
+                                            : "border-gray-200 bg-white hover:border-gray-300"
+                                    }`}
+                                >
+                                    <div className="flex items-center gap-4">
+                                        <div className={`w-16 h-16 rounded-lg flex items-center justify-center text-3xl ${
+                                            testType === "my-attempts" ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-600"
+                                        }`}>
+                                            ✅
+                                        </div>
+                                        <div className="text-left">
+                                            <h3 className={`text-lg font-bold mb-1 ${
+                                                testType === "my-attempts" ? "text-blue-700" : "text-gray-900"
+                                            }`}>
+                                                My Attempts
+                                            </h3>
+                                            <p className="text-sm text-gray-600">
+                                                View all your completed exam attempts
+                                            </p>
+                                        </div>
+                                    </div>
+                                </motion.button>
                             </div>
                         </div>
                     </div>
 
-                    {/* Filters */}
+                    {/* Filters - Hide when "My Attempts" is selected */}
+                    {testType !== "my-attempts" && (
                     <div className="mb-6 bg-white rounded-xl shadow-lg p-6 border border-gray-200">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
@@ -495,6 +543,7 @@ export default function ExamModePage() {
                             )}
                         </div>
                     </div>
+                    )}
 
                     {/* Loading State */}
                     {loading && (
