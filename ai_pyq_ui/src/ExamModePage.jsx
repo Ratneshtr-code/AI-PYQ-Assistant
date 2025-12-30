@@ -35,7 +35,7 @@ export default function ExamModePage() {
     const [examsList, setExamsList] = useState([]);
     const [subjectsList, setSubjectsList] = useState([]);
     const [primarySidebarCollapsed, setPrimarySidebarCollapsed] = useState(false);
-    const [userAttempts, setUserAttempts] = useState({}); // Map of examSetId -> { attemptId, status, completed_at }
+    const [userAttempts, setUserAttempts] = useState({}); // Map of examSetId -> { attemptId, status, completed_at, score, total_marks }
 
     // Sync state with URL params when component mounts or URL changes
     useEffect(() => {
@@ -112,7 +112,9 @@ export default function ExamModePage() {
                                 attempt_id: set.latest_attempt.id || set.latest_attempt.attempt_id,
                                 status: set.latest_attempt.status,
                                 completed_at: set.latest_attempt.completed_at,
-                                created_at: set.latest_attempt.created_at
+                                created_at: set.latest_attempt.created_at,
+                                score: set.latest_attempt.score || set.latest_attempt.total_score || set.latest_attempt.marks_obtained || 0,
+                                total_marks: set.latest_attempt.total_marks || set.latest_attempt.totalMarks || null
                             };
                         }
                     });
@@ -217,7 +219,9 @@ export default function ExamModePage() {
                                     attempt_id: attemptId,
                                     status: status,
                                     completed_at: attempt.completed_at || attempt.completedAt,
-                                    created_at: createdAt
+                                    created_at: createdAt,
+                                    score: attempt.score || attempt.total_score || attempt.marks_obtained || 0,
+                                    total_marks: attempt.total_marks || attempt.totalMarks || null
                                 };
                             }
                         }
@@ -231,7 +235,9 @@ export default function ExamModePage() {
                                 attempt_id: attempt.attempt_id || attempt.id,
                                 status: attempt.status,
                                 completed_at: attempt.completed_at,
-                                created_at: attempt.created_at
+                                created_at: attempt.created_at,
+                                score: attempt.score || attempt.total_score || attempt.marks_obtained || 0,
+                                total_marks: attempt.total_marks || attempt.totalMarks || null
                             };
                         }
                     });
@@ -296,7 +302,9 @@ export default function ExamModePage() {
                                             attempt_id: attemptId,
                                             status: status,
                                             completed_at: attempt.completed_at || attempt.completedAt,
-                                            created_at: createdAt
+                                            created_at: createdAt,
+                                            score: attempt.score || attempt.total_score || attempt.marks_obtained || 0,
+                                            total_marks: attempt.total_marks || attempt.totalMarks || null
                                         };
                                     }
                                 }
@@ -305,12 +313,14 @@ export default function ExamModePage() {
                             Object.keys(data).forEach(examSetId => {
                                 const attempt = data[examSetId];
                                 if (attempt && (attempt.attempt_id || attempt.id)) {
-                                    attemptsMap[String(examSetId)] = {
-                                        attempt_id: attempt.attempt_id || attempt.id,
-                                        status: attempt.status,
-                                        completed_at: attempt.completed_at,
-                                        created_at: attempt.created_at
-                                    };
+                            attemptsMap[String(examSetId)] = {
+                                attempt_id: attempt.attempt_id || attempt.id,
+                                status: attempt.status,
+                                completed_at: attempt.completed_at,
+                                created_at: attempt.created_at,
+                                score: attempt.score || attempt.total_score || attempt.marks_obtained || 0,
+                                total_marks: attempt.total_marks || attempt.totalMarks || null
+                            };
                                 }
                             });
                         }
@@ -613,16 +623,9 @@ export default function ExamModePage() {
                                                 </div>
 
                                                 {/* Title */}
-                                                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                                                <h3 className="text-xl font-bold text-gray-900 mb-4">
                                                     {examSet.name}
                                                 </h3>
-
-                                                {/* Description */}
-                                                {examSet.description && (
-                                                    <p className="text-sm text-gray-600 mb-4">
-                                                        {examSet.description}
-                                                    </p>
-                                                )}
 
                                                 {/* Exam Details */}
                                                 <div className="space-y-2 mb-4">
@@ -636,20 +639,13 @@ export default function ExamModePage() {
                                                     </div>
                                                     <div className="flex items-center text-sm text-gray-700">
                                                         <span className="font-semibold w-32">Marks:</span>
-                                                        <span>+{examSet.marks_per_question} / -{examSet.negative_marking}</span>
+                                                        <span>
+                                                            {isAttempted && attempt?.score !== undefined && attempt?.score !== null
+                                                                ? `${parseFloat(attempt.score).toFixed(1)}` 
+                                                                : '0'
+                                                            } / {attempt?.total_marks || (examSet.total_questions * examSet.marks_per_question)}
+                                                        </span>
                                                     </div>
-                                                    {examSet.exam_name && (
-                                                        <div className="flex items-center text-sm text-gray-700">
-                                                            <span className="font-semibold w-32">Exam:</span>
-                                                            <span>{examSet.exam_name}</span>
-                                                        </div>
-                                                    )}
-                                                    {examSet.subject && (
-                                                        <div className="flex items-center text-sm text-gray-700">
-                                                            <span className="font-semibold w-32">Subject:</span>
-                                                            <span>{examSet.subject}</span>
-                                                        </div>
-                                                    )}
                                                 </div>
 
                                                 {/* Action Buttons */}

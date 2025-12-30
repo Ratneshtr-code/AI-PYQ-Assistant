@@ -16,12 +16,14 @@ export default function ExamResults() {
     const [selectedCategory, setSelectedCategory] = useState("General");
     const [selectedQuestionId, setSelectedQuestionId] = useState(null);
     const [showSolutionViewer, setShowSolutionViewer] = useState(false);
+    const [examSetName, setExamSetName] = useState("");
+    const [activeWeaknessTab, setActiveWeaknessTab] = useState("weak"); // "weak" or "not_attempted"
 
     useEffect(() => {
         const fetchAnalysis = async () => {
             try {
                 setLoading(true);
-                // First fetch attempt details to get exam_set_id
+                // First fetch attempt details to get exam_set_id and exam set name
                 const attemptRes = await fetch(`${API_BASE_URL}/exam/attempt/${attemptId}`, {
                     credentials: "include"
                 });
@@ -45,22 +47,37 @@ export default function ExamResults() {
                 setAnalysis(analysisData);
                 setSolutions(solutionsData.solutions);
                 
+                // Get attempt data (only read once)
+                let attemptData = null;
+                if (attemptRes.ok) {
+                    attemptData = await attemptRes.json();
+                }
+                
+                // Get exam set name from attempt data or analysis
+                const examSetName = attemptData?.exam_set?.name || analysisData.exam_set_name || analysisData.exam_set?.name || "";
+                setExamSetName(examSetName);
+                
                 // Store attempt info in localStorage for quick access on Exam Mode page
                 try {
                     let examSetId = null;
-                    if (attemptRes.ok) {
-                        const attemptData = await attemptRes.json();
+                    if (attemptData) {
                         examSetId = attemptData.exam_set_id || attemptData.exam_set?.id || analysisData.exam_set_id;
                     } else {
                         examSetId = analysisData.exam_set_id || analysisData.examSetId;
                     }
                     
                     if (examSetId) {
+                        // Get score and total_marks from analysis data (same as shown in results page)
+                        const score = analysisData.overall_performance?.score || 0;
+                        const totalMarks = analysisData.overall_performance?.total_marks || 0;
+                        
                         const attemptInfo = {
                             attempt_id: attemptId,
                             exam_set_id: examSetId,
                             status: 'completed',
-                            completed_at: new Date().toISOString()
+                            completed_at: new Date().toISOString(),
+                            score: score,
+                            total_marks: totalMarks
                         };
                         
                         const storedAttempts = JSON.parse(localStorage.getItem('exam_attempts') || '{}');
@@ -156,7 +173,9 @@ export default function ExamResults() {
             <div className="bg-white border-b border-gray-200 py-4 px-6">
                 <div className="max-w-7xl mx-auto flex items-center justify-between">
                     <div>
-                        <h1 className="text-2xl font-bold text-gray-900">Exam Results</h1>
+                        <h1 className="text-2xl font-bold text-gray-900">
+                            Exam Results{examSetName ? ` - ${examSetName}` : ''}
+                        </h1>
                     </div>
                     <div className="flex items-center gap-4">
                         <button
@@ -348,42 +367,109 @@ export default function ExamResults() {
                     </div>
                 </div>
 
-                {/* Weak Areas Analysis */}
+                {/* Weakness and Strengths Analysis */}
                 <div className="mb-8 bg-white rounded-xl shadow-lg p-6">
                     <h2 className="text-xl font-bold text-gray-900 mb-4">Your Weakness and Strengths</h2>
 
-                    <div className="space-y-4">
-                        {analysis.weak_areas.weak_chapters.map((chapter, idx) => (
-                            <div key={idx} className="border border-gray-200 rounded-lg p-4">
-                                <div className="flex items-center justify-between mb-2">
-                                    <h3 className="font-semibold text-gray-900">
-                                        {idx + 1}. {chapter.subject}
-                                    </h3>
-                                    <span className="text-sm text-gray-600">
-                                        Correct %: {chapter.correct_percentage}%
-                                    </span>
-                                </div>
-                                <div className="mb-2">
-                                    <div className="w-full bg-gray-200 rounded-full h-2">
-                                        <div
-                                            className="bg-red-500 h-2 rounded-full"
-                                            style={{ width: `${chapter.correct_percentage}%` }}
-                                        ></div>
+                    {/* Tabs */}
+                    <div className="flex border-b border-gray-200 mb-4">
+                        <button
+                            onClick={() => setActiveWeaknessTab("weak")}
+                            className={`px-6 py-3 font-semibold text-sm transition-colors relative ${
+                                activeWeaknessTab === "weak"
+                                    ? "text-red-600"
+                                    : "text-gray-600 hover:text-gray-900"
+                            }`}
+                        >
+                            Weak Areas
+                            {activeWeaknessTab === "weak" && (
+                                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-red-600"></div>
+                            )}
+                        </button>
+                        <button
+                            onClick={() => setActiveWeaknessTab("not_attempted")}
+                            className={`px-6 py-3 font-semibold text-sm transition-colors relative ${
+                                activeWeaknessTab === "not_attempted"
+                                    ? "text-yellow-600"
+                                    : "text-gray-600 hover:text-gray-900"
+                            }`}
+                        >
+                            Not Attempted Areas
+                            {activeWeaknessTab === "not_attempted" && (
+                                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-yellow-600"></div>
+                            )}
+                        </button>
+                    </div>
+
+                    {/* Tab Content */}
+                    <div className="mt-4">
+                        {/* Weak Areas Tab */}
+                        {activeWeaknessTab === "weak" && (
+                            <div>
+                                {analysis.weak_areas.weak_chapters && analysis.weak_areas.weak_chapters.length > 0 ? (
+                                    <div className="space-y-3">
+                                        {analysis.weak_areas.weak_chapters.map((chapter, idx) => (
+                                            <div key={idx} className="border border-gray-200 rounded-lg p-3 hover:bg-gray-50 transition-colors">
+                                                <div className="flex items-center justify-between">
+                                                    <span className="font-semibold text-gray-900 flex-shrink-0 min-w-[200px]">
+                                                        {chapter.subject}
+                                                    </span>
+                                                    <div className="flex flex-wrap gap-2 items-center flex-1 justify-end">
+                                                        {chapter.question_ids.map((qId) => (
+                                                            <button
+                                                                key={qId}
+                                                                onClick={() => handleViewSolution(qId)}
+                                                                className="px-2 py-1 bg-red-100 text-red-700 rounded text-sm font-medium hover:bg-red-200 transition-colors"
+                                                            >
+                                                                {qId}
+                                                            </button>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
                                     </div>
-                                </div>
-                                <div className="flex flex-wrap gap-2">
-                                    {chapter.question_ids.map((qId) => (
-                                        <button
-                                            key={qId}
-                                            onClick={() => handleViewSolution(qId)}
-                                            className="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm font-semibold hover:bg-red-200 transition-colors"
-                                        >
-                                            {qId}
-                                        </button>
-                                    ))}
-                                </div>
+                                ) : (
+                                    <div className="text-center py-8 text-gray-500">
+                                        <p>No weak areas found.</p>
+                                    </div>
+                                )}
                             </div>
-                        ))}
+                        )}
+
+                        {/* Not Attempted Areas Tab */}
+                        {activeWeaknessTab === "not_attempted" && (
+                            <div>
+                                {analysis.weak_areas.not_attempted_areas && analysis.weak_areas.not_attempted_areas.length > 0 ? (
+                                    <div className="space-y-3">
+                                        {analysis.weak_areas.not_attempted_areas.map((area, idx) => (
+                                            <div key={idx} className="border border-gray-200 rounded-lg p-3 hover:bg-gray-50 transition-colors">
+                                                <div className="flex items-center justify-between">
+                                                    <span className="font-semibold text-gray-900 flex-shrink-0 min-w-[200px]">
+                                                        {area.subject}
+                                                    </span>
+                                                    <div className="flex flex-wrap gap-2 items-center flex-1 justify-end">
+                                                        {area.question_ids.map((qId) => (
+                                                            <button
+                                                                key={qId}
+                                                                onClick={() => handleViewSolution(qId)}
+                                                                className="px-2 py-1 bg-yellow-100 text-yellow-700 rounded text-sm font-medium hover:bg-yellow-200 transition-colors"
+                                                            >
+                                                                {qId}
+                                                            </button>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <div className="text-center py-8 text-gray-500">
+                                        <p>No unattempted areas found.</p>
+                                    </div>
+                                )}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

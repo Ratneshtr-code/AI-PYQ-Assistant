@@ -676,13 +676,29 @@ def get_exam_analysis(
             section["accuracy"] = round((section["correct"] / section["answered"]) * 100, 2)
         section["score"] = round(max(0.0, section["score"]), 2)
     
-    # Calculate weak areas (accuracy < 50%)
+    # Categorize areas: weak (attempted but < 50%) and not_attempted (0 attempts)
     weak_chapters = []
+    not_attempted_areas = []
+    
     for subject, area in weak_areas.items():
         total_attempted = area["correct"] + area["wrong"]
-        if total_attempted > 0:
+        
+        if total_attempted == 0:
+            # Not attempted - all questions were skipped
+            not_attempted_areas.append({
+                "subject": subject,
+                "correct_percentage": 0.0,
+                "total_questions": area["total_questions"],
+                "correct": 0,
+                "wrong": 0,
+                "not_answered": area["not_answered"],
+                "question_ids": area["question_ids"]
+            })
+        else:
+            # Attempted - calculate accuracy
             accuracy = (area["correct"] / total_attempted) * 100
             if accuracy < 50:
+                # Weak area - attempted but low accuracy
                 weak_chapters.append({
                     "subject": subject,
                     "correct_percentage": round(accuracy, 2),
@@ -716,6 +732,7 @@ def get_exam_analysis(
         "sectional_summary": list(section_analysis.values()),
         "weak_areas": {
             "weak_chapters": sorted(weak_chapters, key=lambda x: x["correct_percentage"]),
+            "not_attempted_areas": sorted(not_attempted_areas, key=lambda x: x["total_questions"], reverse=True),
             "uncategorized": []
         }
     }
