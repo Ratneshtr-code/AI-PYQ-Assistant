@@ -28,6 +28,7 @@ export default function ExamInterface() {
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [userData, setUserData] = useState(null);
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+    const [showExitModal, setShowExitModal] = useState(false);
     
     const timerIntervalRef = useRef(null);
     const questionTimerRef = useRef(null);
@@ -289,6 +290,19 @@ export default function ExamInterface() {
         setIsFullscreen(!isFullscreen);
     };
 
+    const handleExitExam = () => {
+        setShowExitModal(true);
+    };
+
+    const confirmExit = () => {
+        // Exit fullscreen if in fullscreen mode
+        if (isFullscreen) {
+            document.exitFullscreen?.();
+        }
+        // Navigate back to exam mode page
+        navigate("/exam-mode");
+    };
+
     const formatTime = (seconds) => {
         const mins = Math.floor(seconds / 60);
         const secs = seconds % 60;
@@ -393,6 +407,16 @@ export default function ExamInterface() {
                                 className="px-3 py-1.5 bg-white bg-opacity-20 hover:bg-opacity-30 rounded text-sm font-medium transition-all"
                             >
                                 {isPaused ? "Resume" : "Pause"}
+                            </button>
+                            <button
+                                onClick={handleExitExam}
+                                className="px-3 py-1.5 bg-red-600 hover:bg-red-700 rounded text-sm font-medium transition-all flex items-center gap-2"
+                                title="Exit Exam"
+                            >
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                                Exit
                             </button>
                             <div className={`text-lg font-bold ${timeRemaining < 300 ? "text-red-300" : "text-white"}`}>
                                 Time Left {formatTime(timeRemaining)}
@@ -571,7 +595,9 @@ export default function ExamInterface() {
                         <div className="border-b-2 border-gray-300 mb-3 flex-shrink-0"></div>
 
                         {/* Question Palette Grid - All questions in one grid, no subject grouping */}
-                        <div className="grid grid-cols-5 gap-1 mb-4 flex-1 overflow-y-auto overflow-x-hidden" style={{ rowGap: '0.25rem' }}>
+                        <div className="question-palette-grid mb-4 flex-1 overflow-y-auto overflow-x-hidden" style={{ 
+                            gridTemplateColumns: 'repeat(5, minmax(0, 1fr))'
+                        }}>
                             {examData.questions.map((question, index) => {
                                 const status = getQuestionStatus(question.question_id, index);
                                 const bgColor = {
@@ -587,6 +613,20 @@ export default function ExamInterface() {
                                         key={question.question_id}
                                         onClick={() => handleQuestionNavigation(index)}
                                         className={`w-10 h-10 rounded text-sm font-semibold ${bgColor} hover:opacity-80 transition-opacity`}
+                                        style={{ 
+                                            margin: 0, 
+                                            marginTop: 0, 
+                                            marginBottom: 0,
+                                            padding: 0, 
+                                            lineHeight: '1', 
+                                            display: 'flex', 
+                                            alignItems: 'center', 
+                                            justifyContent: 'center',
+                                            height: '2.5rem',
+                                            minHeight: '2.5rem',
+                                            maxHeight: '2.5rem',
+                                            boxSizing: 'border-box'
+                                        }}
                                         title={`Question ${index + 1}`}
                                     >
                                         {index + 1}
@@ -702,6 +742,54 @@ export default function ExamInterface() {
                                         className="px-6 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700"
                                     >
                                         Close
+                                    </button>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
+
+            {/* Exit Confirmation Modal */}
+            <AnimatePresence>
+                {showExitModal && (
+                    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.9 }}
+                            className="bg-white rounded-xl shadow-2xl max-w-md w-full mx-4"
+                        >
+                            <div className="p-6">
+                                <div className="flex justify-between items-center mb-4">
+                                    <h2 className="text-2xl font-bold text-gray-900">Exit Exam?</h2>
+                                    <button
+                                        onClick={() => setShowExitModal(false)}
+                                        className="text-gray-500 hover:text-gray-700 text-2xl"
+                                    >
+                                        ×
+                                    </button>
+                                </div>
+                                <div className="mb-6">
+                                    <p className="text-gray-700 mb-2">
+                                        Are you sure you want to exit the exam? Your progress will be saved, but you will need to resume from where you left off.
+                                    </p>
+                                    <p className="text-sm text-gray-500">
+                                        You can continue this exam later from the Exam Mode page.
+                                    </p>
+                                </div>
+                                <div className="flex gap-3 justify-end">
+                                    <button
+                                        onClick={() => setShowExitModal(false)}
+                                        className="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition-colors"
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button
+                                        onClick={confirmExit}
+                                        className="px-6 py-2 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition-colors"
+                                    >
+                                        Exit Exam
                                     </button>
                                 </div>
                             </div>

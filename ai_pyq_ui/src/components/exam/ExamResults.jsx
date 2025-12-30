@@ -14,7 +14,6 @@ export default function ExamResults() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("General");
-    const [weakChaptersTab, setWeakChaptersTab] = useState("weak-chapters");
     const [selectedQuestionId, setSelectedQuestionId] = useState(null);
     const [showSolutionViewer, setShowSolutionViewer] = useState(false);
 
@@ -22,6 +21,11 @@ export default function ExamResults() {
         const fetchAnalysis = async () => {
             try {
                 setLoading(true);
+                // First fetch attempt details to get exam_set_id
+                const attemptRes = await fetch(`${API_BASE_URL}/exam/attempt/${attemptId}`, {
+                    credentials: "include"
+                });
+                
                 const [analysisRes, solutionsRes] = await Promise.all([
                     fetch(`${API_BASE_URL}/exam/attempt/${attemptId}/analysis`, {
                         credentials: "include"
@@ -40,6 +44,33 @@ export default function ExamResults() {
                 
                 setAnalysis(analysisData);
                 setSolutions(solutionsData.solutions);
+                
+                // Store attempt info in localStorage for quick access on Exam Mode page
+                try {
+                    let examSetId = null;
+                    if (attemptRes.ok) {
+                        const attemptData = await attemptRes.json();
+                        examSetId = attemptData.exam_set_id || attemptData.exam_set?.id || analysisData.exam_set_id;
+                    } else {
+                        examSetId = analysisData.exam_set_id || analysisData.examSetId;
+                    }
+                    
+                    if (examSetId) {
+                        const attemptInfo = {
+                            attempt_id: attemptId,
+                            exam_set_id: examSetId,
+                            status: 'completed',
+                            completed_at: new Date().toISOString()
+                        };
+                        
+                        const storedAttempts = JSON.parse(localStorage.getItem('exam_attempts') || '{}');
+                        storedAttempts[String(examSetId)] = attemptInfo;
+                        localStorage.setItem('exam_attempts', JSON.stringify(storedAttempts));
+                        console.log("Stored attempt in localStorage:", attemptInfo);
+                    }
+                } catch (err) {
+                    console.error("Failed to store attempt in localStorage:", err);
+                }
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -64,7 +95,7 @@ export default function ExamResults() {
             }
 
             const data = await response.json();
-            navigate(`/exam-mode/attempt/${data.attempt_id}`);
+            navigate(`/exam/${data.attempt_id}`);
         } catch (err) {
             alert(err.message);
         }
@@ -92,7 +123,20 @@ export default function ExamResults() {
                 <div className="text-center">
                     <p className="text-red-600 text-lg">{error || "Results not found"}</p>
                     <button
-                        onClick={() => navigate("/exam-mode")}
+                        onClick={() => {
+                            // Restore filter state from localStorage
+                            const testType = localStorage.getItem("examMode_testType") || "exam";
+                            const exam = localStorage.getItem("examMode_exam") || "";
+                            const subject = localStorage.getItem("examMode_subject") || "";
+                            
+                            // Build URL with filter params
+                            const params = new URLSearchParams();
+                            if (testType) params.set("testType", testType);
+                            if (exam) params.set("exam", exam);
+                            if (subject) params.set("subject", subject);
+                            
+                            navigate(`/exam-mode?${params.toString()}`);
+                        }}
                         className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
                     >
                         Go Back
@@ -122,7 +166,20 @@ export default function ExamResults() {
                             Reattempt This Test
                         </button>
                         <button
-                            onClick={() => navigate("/exam-mode")}
+                            onClick={() => {
+                                // Restore filter state from localStorage
+                                const testType = localStorage.getItem("examMode_testType") || "exam";
+                                const exam = localStorage.getItem("examMode_exam") || "";
+                                const subject = localStorage.getItem("examMode_subject") || "";
+                                
+                                // Build URL with filter params
+                                const params = new URLSearchParams();
+                                if (testType) params.set("testType", testType);
+                                if (exam) params.set("exam", exam);
+                                if (subject) params.set("subject", subject);
+                                
+                                navigate(`/exam-mode?${params.toString()}`);
+                            }}
                             className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition-colors"
                         >
                             Go to Tests
@@ -294,64 +351,40 @@ export default function ExamResults() {
                 {/* Weak Areas Analysis */}
                 <div className="mb-8 bg-white rounded-xl shadow-lg p-6">
                     <h2 className="text-xl font-bold text-gray-900 mb-4">Your Weakness and Strengths</h2>
-                    <div className="flex gap-2 border-b border-gray-200 mb-4">
-                        <button
-                            onClick={() => setWeakChaptersTab("weak-chapters")}
-                            className={`px-4 py-2 font-semibold ${
-                                weakChaptersTab === "weak-chapters"
-                                    ? "text-blue-600 border-b-2 border-blue-600"
-                                    : "text-gray-600"
-                            }`}
-                        >
-                            Weak Chapters
-                        </button>
-                        <button
-                            onClick={() => setWeakChaptersTab("uncategorized")}
-                            className={`px-4 py-2 font-semibold ${
-                                weakChaptersTab === "uncategorized"
-                                    ? "text-blue-600 border-b-2 border-blue-600"
-                                    : "text-gray-600"
-                            }`}
-                        >
-                            Uncategorized Chapters
-                        </button>
-                    </div>
 
-                    {weakChaptersTab === "weak-chapters" && (
-                        <div className="space-y-4">
-                            {analysis.weak_areas.weak_chapters.map((chapter, idx) => (
-                                <div key={idx} className="border border-gray-200 rounded-lg p-4">
-                                    <div className="flex items-center justify-between mb-2">
-                                        <h3 className="font-semibold text-gray-900">
-                                            {idx + 1}. {chapter.subject}
-                                        </h3>
-                                        <span className="text-sm text-gray-600">
-                                            Correct %: {chapter.correct_percentage}%
-                                        </span>
-                                    </div>
-                                    <div className="mb-2">
-                                        <div className="w-full bg-gray-200 rounded-full h-2">
-                                            <div
-                                                className="bg-red-500 h-2 rounded-full"
-                                                style={{ width: `${chapter.correct_percentage}%` }}
-                                            ></div>
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-wrap gap-2">
-                                        {chapter.question_ids.map((qId) => (
-                                            <button
-                                                key={qId}
-                                                onClick={() => handleViewSolution(qId)}
-                                                className="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm font-semibold hover:bg-red-200 transition-colors"
-                                            >
-                                                {qId}
-                                            </button>
-                                        ))}
+                    <div className="space-y-4">
+                        {analysis.weak_areas.weak_chapters.map((chapter, idx) => (
+                            <div key={idx} className="border border-gray-200 rounded-lg p-4">
+                                <div className="flex items-center justify-between mb-2">
+                                    <h3 className="font-semibold text-gray-900">
+                                        {idx + 1}. {chapter.subject}
+                                    </h3>
+                                    <span className="text-sm text-gray-600">
+                                        Correct %: {chapter.correct_percentage}%
+                                    </span>
+                                </div>
+                                <div className="mb-2">
+                                    <div className="w-full bg-gray-200 rounded-full h-2">
+                                        <div
+                                            className="bg-red-500 h-2 rounded-full"
+                                            style={{ width: `${chapter.correct_percentage}%` }}
+                                        ></div>
                                     </div>
                                 </div>
-                            ))}
-                        </div>
-                    )}
+                                <div className="flex flex-wrap gap-2">
+                                    {chapter.question_ids.map((qId) => (
+                                        <button
+                                            key={qId}
+                                            onClick={() => handleViewSolution(qId)}
+                                            className="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm font-semibold hover:bg-red-200 transition-colors"
+                                        >
+                                            {qId}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
 

@@ -1,6 +1,6 @@
 // src/ExamModePage.jsx
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import Sidebar from "./components/Sidebar";
 
@@ -8,19 +8,54 @@ const API_BASE_URL = "";
 
 export default function ExamModePage() {
     const navigate = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams();
     const [examSets, setExamSets] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     
-    // Test type selection
-    const [testType, setTestType] = useState("exam"); // "exam" or "subject"
+    // Test type selection - restore from URL params or localStorage
+    const [testType, setTestType] = useState(() => {
+        const urlTestType = new URLSearchParams(window.location.search).get("testType");
+        const stored = localStorage.getItem("examMode_testType");
+        return urlTestType || stored || "exam";
+    });
     
-    // Filters
-    const [exam, setExam] = useState("");
-    const [subject, setSubject] = useState("");
+    // Filters - restore from URL params or localStorage
+    const [exam, setExam] = useState(() => {
+        const urlExam = new URLSearchParams(window.location.search).get("exam");
+        const stored = localStorage.getItem("examMode_exam");
+        return urlExam || stored || "";
+    });
+    const [subject, setSubject] = useState(() => {
+        const urlSubject = new URLSearchParams(window.location.search).get("subject");
+        const stored = localStorage.getItem("examMode_subject");
+        return urlSubject || stored || "";
+    });
     const [examsList, setExamsList] = useState([]);
     const [subjectsList, setSubjectsList] = useState([]);
     const [primarySidebarCollapsed, setPrimarySidebarCollapsed] = useState(false);
+    const [userAttempts, setUserAttempts] = useState({}); // Map of examSetId -> { attemptId, status, completed_at }
+
+    // Sync state with URL params when component mounts or URL changes
+    useEffect(() => {
+        const urlTestType = searchParams.get("testType");
+        const urlExam = searchParams.get("exam");
+        const urlSubject = searchParams.get("subject");
+        
+        if (urlTestType && urlTestType !== testType) {
+            setTestType(urlTestType);
+            localStorage.setItem("examMode_testType", urlTestType);
+        }
+        if (urlExam !== null && urlExam !== exam) {
+            setExam(urlExam);
+            localStorage.setItem("examMode_exam", urlExam);
+        }
+        if (urlSubject !== null && urlSubject !== subject) {
+            setSubject(urlSubject);
+            localStorage.setItem("examMode_subject", urlSubject);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [searchParams]); // Only run when URL params change
 
     // Fetch exam sets
     useEffect(() => {
@@ -52,6 +87,24 @@ export default function ExamModePage() {
                     }
                 });
                 setExamSets(filtered);
+                
+                // Check if exam sets response includes attempt information
+                if (filtered.length > 0 && filtered[0].latest_attempt) {
+                    const attemptsFromSets = {};
+                    filtered.forEach(set => {
+                        if (set.latest_attempt) {
+                            attemptsFromSets[String(set.id)] = {
+                                attempt_id: set.latest_attempt.id || set.latest_attempt.attempt_id,
+                                status: set.latest_attempt.status,
+                                completed_at: set.latest_attempt.completed_at,
+                                created_at: set.latest_attempt.created_at
+                            };
+                        }
+                    });
+                    if (Object.keys(attemptsFromSets).length > 0) {
+                        setUserAttempts(prev => ({ ...prev, ...attemptsFromSets }));
+                    }
+                }
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -97,8 +150,194 @@ export default function ExamModePage() {
         fetchSubjects();
     }, [exam]);
 
+    // Fetch user exam attempts
+    useEffect(() => {
+        const fetchUserAttempts = async () => {
+            // First, load from localStorage as fallback
+            try {
+                const storedAttempts = JSON.parse(localStorage.getItem('exam_attempts') || '{}');
+                if (Object.keys(storedAttempts).length > 0) {
+                    setUserAttempts(storedAttempts);
+                }
+            } catch (err) {
+                console.error("Failed to load attempts from localStorage:", err);
+            }
+            
+            try {
+                // Try multiple possible API endpoints
+                let response = await fetch(`${API_BASE_URL}/exam/user/attempts`, {
+                    credentials: "include"
+                });
+                
+                // If first endpoint fails, try alternative
+                if (!response.ok) {
+                    response = await fetch(`${API_BASE_URL}/exam/attempts`, {
+                        credentials: "include"
+                    });
+                }
+                
+                if (!response.ok) {
+                    console.warn("Failed to fetch user attempts from API, using localStorage data if available");
+                    return;
+                }
+                
+                const data = await response.json();
+                console.log("User attempts data from API:", data); // Debug log
+                
+                // Transform data into a map: exam_set_id -> { attempt_id, status, completed_at }
+                const attemptsMap = {};
+                if (Array.isArray(data)) {
+                    data.forEach(attempt => {
+                        // Handle both string and number IDs
+                        const examSetId = String(attempt.exam_set_id || attempt.examSetId || attempt.exam_set?.id);
+                        const attemptId = attempt.id || attempt.attempt_id;
+                        const status = attempt.status;
+                        const createdAt = attempt.created_at || attempt.createdAt;
+                        
+                        if (examSetId && attemptId) {
+                            // Keep only the latest attempt for each exam set
+                            if (!attemptsMap[examSetId] || 
+                                (createdAt && new Date(createdAt) > new Date(attemptsMap[examSetId].created_at || 0))) {
+                                attemptsMap[examSetId] = {
+                                    attempt_id: attemptId,
+                                    status: status,
+                                    completed_at: attempt.completed_at || attempt.completedAt,
+                                    created_at: createdAt
+                                };
+                            }
+                        }
+                    });
+                } else if (typeof data === 'object' && data !== null) {
+                    // If data is already a map/object
+                    Object.keys(data).forEach(examSetId => {
+                        const attempt = data[examSetId];
+                        if (attempt && (attempt.attempt_id || attempt.id)) {
+                            attemptsMap[String(examSetId)] = {
+                                attempt_id: attempt.attempt_id || attempt.id,
+                                status: attempt.status,
+                                completed_at: attempt.completed_at,
+                                created_at: attempt.created_at
+                            };
+                        }
+                    });
+                }
+                
+                console.log("Processed attempts map from API:", attemptsMap); // Debug log
+                
+                // Merge with localStorage data (API data takes precedence)
+                const storedAttempts = JSON.parse(localStorage.getItem('exam_attempts') || '{}');
+                setUserAttempts({ ...storedAttempts, ...attemptsMap });
+            } catch (err) {
+                console.error("Error fetching user attempts:", err);
+                // Silently fail - don't break the page if attempts can't be loaded
+            }
+        };
+        
+        fetchUserAttempts();
+        
+        // Refetch attempts when page becomes visible (user returns to tab)
+        const handleVisibilityChange = () => {
+            if (!document.hidden) {
+                fetchUserAttempts();
+            }
+        };
+        
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+        
+        return () => {
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+        };
+    }, []); // Refetch when component mounts or when returning to page
+    
+    // Also refetch attempts when exam sets are loaded (in case they include attempt info)
+    useEffect(() => {
+        if (examSets.length > 0) {
+            const fetchUserAttempts = async () => {
+                try {
+                    let response = await fetch(`${API_BASE_URL}/exam/user/attempts`, {
+                        credentials: "include"
+                    });
+                    
+                    if (!response.ok) {
+                        response = await fetch(`${API_BASE_URL}/exam/attempts`, {
+                            credentials: "include"
+                        });
+                    }
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        const attemptsMap = {};
+                        if (Array.isArray(data)) {
+                            data.forEach(attempt => {
+                                const examSetId = String(attempt.exam_set_id || attempt.examSetId || attempt.exam_set?.id);
+                                const attemptId = attempt.id || attempt.attempt_id;
+                                const status = attempt.status;
+                                const createdAt = attempt.created_at || attempt.createdAt;
+                                
+                                if (examSetId && attemptId) {
+                                    if (!attemptsMap[examSetId] || 
+                                        (createdAt && new Date(createdAt) > new Date(attemptsMap[examSetId].created_at || 0))) {
+                                        attemptsMap[examSetId] = {
+                                            attempt_id: attemptId,
+                                            status: status,
+                                            completed_at: attempt.completed_at || attempt.completedAt,
+                                            created_at: createdAt
+                                        };
+                                    }
+                                }
+                            });
+                        } else if (typeof data === 'object' && data !== null) {
+                            Object.keys(data).forEach(examSetId => {
+                                const attempt = data[examSetId];
+                                if (attempt && (attempt.attempt_id || attempt.id)) {
+                                    attemptsMap[String(examSetId)] = {
+                                        attempt_id: attempt.attempt_id || attempt.id,
+                                        status: attempt.status,
+                                        completed_at: attempt.completed_at,
+                                        created_at: attempt.created_at
+                                    };
+                                }
+                            });
+                        }
+                        setUserAttempts(prev => ({ ...prev, ...attemptsMap }));
+                    }
+                } catch (err) {
+                    console.error("Error refetching user attempts:", err);
+                }
+            };
+            
+            fetchUserAttempts();
+        }
+    }, [examSets.length]); // Refetch when exam sets change
+
+    // Save filter state to localStorage whenever it changes
+    useEffect(() => {
+        localStorage.setItem("examMode_testType", testType);
+        localStorage.setItem("examMode_exam", exam);
+        localStorage.setItem("examMode_subject", subject);
+        
+        // Update URL params
+        const params = new URLSearchParams();
+        if (testType) params.set("testType", testType);
+        if (exam) params.set("exam", exam);
+        if (subject) params.set("subject", subject);
+        setSearchParams(params, { replace: true });
+    }, [testType, exam, subject, setSearchParams]);
+
     const handleStartExam = (examSetId) => {
+        // Save current filter state before navigating
+        localStorage.setItem("examMode_testType", testType);
+        localStorage.setItem("examMode_exam", exam);
+        localStorage.setItem("examMode_subject", subject);
         navigate(`/exam-mode/instructions/${examSetId}`);
+    };
+
+    const handleViewResults = (attemptId) => {
+        navigate(`/exam/${attemptId}/results`);
+    };
+
+    const handleContinueExam = (attemptId) => {
+        navigate(`/exam/${attemptId}`);
     };
 
     const formatDuration = (minutes) => {
@@ -283,23 +522,46 @@ export default function ExamModePage() {
                                 </div>
                             ) : (
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    {examSets.map((examSet, index) => (
+                                    {examSets.map((examSet, index) => {
+                                        // Try both string and number ID matching
+                                        const examSetId = String(examSet.id);
+                                        const attempt = userAttempts[examSetId] || userAttempts[examSet.id];
+                                        const isAttempted = !!attempt;
+                                        const isCompleted = attempt?.status === 'completed' || attempt?.status === 'submitted';
+                                        const isInProgress = attempt?.status === 'in_progress';
+                                        
+                                        // Debug log to help troubleshoot
+                                        if (isAttempted) {
+                                            console.log(`Exam ${examSetId} has attempt:`, attempt);
+                                        }
+                                        
+                                        return (
                                         <motion.div
                                             key={examSet.id}
                                             initial={{ opacity: 0, y: 20 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             transition={{ duration: 0.3, delay: index * 0.1 }}
-                                            className="bg-white rounded-xl border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+                                            className={`bg-white rounded-xl border shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden ${
+                                                isAttempted ? 'border-green-300 bg-green-50/30' : 'border-gray-200'
+                                            }`}
                                         >
                                             <div className="p-6">
-                                                {/* Exam Type Badge */}
-                                                {examSet.exam_type && (
-                                                    <div className="mb-3">
+                                                {/* Exam Type Badge and Attempt Indicator */}
+                                                <div className="mb-3 flex items-center justify-between gap-2">
+                                                    {examSet.exam_type && (
                                                         <span className="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
                                                             {examSet.exam_type.toUpperCase()}
                                                         </span>
-                                                    </div>
-                                                )}
+                                                    )}
+                                                    {isAttempted && (
+                                                        <span className="inline-flex items-center gap-1 px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                                                            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                                            </svg>
+                                                            {isCompleted ? 'Completed' : 'In Progress'}
+                                                        </span>
+                                                    )}
+                                                </div>
 
                                                 {/* Title */}
                                                 <h3 className="text-xl font-bold text-gray-900 mb-2">
@@ -341,16 +603,51 @@ export default function ExamModePage() {
                                                     )}
                                                 </div>
 
-                                                {/* Start Button */}
-                                                <button
-                                                    onClick={() => handleStartExam(examSet.id)}
-                                                    className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-[1.02] active:scale-[0.98]"
-                                                >
-                                                    Start Exam
-                                                </button>
+                                                {/* Action Buttons */}
+                                                <div className="space-y-2">
+                                                    {isCompleted ? (
+                                                        <>
+                                                            <button
+                                                                onClick={() => handleViewResults(attempt.attempt_id)}
+                                                                className="w-full bg-gradient-to-r from-teal-500 to-teal-600 text-white py-3 rounded-lg font-semibold hover:from-teal-600 hover:to-teal-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-[1.02] active:scale-[0.98]"
+                                                            >
+                                                                View Results
+                                                            </button>
+                                                            <button
+                                                                onClick={() => handleStartExam(examSet.id)}
+                                                                className="w-full bg-gray-200 text-gray-700 py-2 rounded-lg font-semibold hover:bg-gray-300 transition-all duration-300 text-sm"
+                                                            >
+                                                                Reattempt Test
+                                                            </button>
+                                                        </>
+                                                    ) : isInProgress ? (
+                                                        <>
+                                                            <button
+                                                                onClick={() => handleContinueExam(attempt.attempt_id)}
+                                                                className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-[1.02] active:scale-[0.98]"
+                                                            >
+                                                                Continue Exam
+                                                            </button>
+                                                            <button
+                                                                onClick={() => handleViewResults(attempt.attempt_id)}
+                                                                className="w-full bg-gray-200 text-gray-700 py-2 rounded-lg font-semibold hover:bg-gray-300 transition-all duration-300 text-sm"
+                                                            >
+                                                                View Progress
+                                                            </button>
+                                                        </>
+                                                    ) : (
+                                                        <button
+                                                            onClick={() => handleStartExam(examSet.id)}
+                                                            className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-[1.02] active:scale-[0.98]"
+                                                        >
+                                                            Start Exam
+                                                        </button>
+                                                    )}
+                                                </div>
                                             </div>
                                         </motion.div>
-                                    ))}
+                                        );
+                                    })}
                                 </div>
                             )}
                         </>

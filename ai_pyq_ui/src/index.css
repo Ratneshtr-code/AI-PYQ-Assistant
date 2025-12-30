@@ -2,6 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Question Palette Grid - Remove all spacing between rows */
+.question-palette-grid {
+    display: grid !important;
+    grid-auto-rows: min-content !important;
+    row-gap: 4px !important;
+    column-gap: 2px !important;
+}
+
+.question-palette-grid > button {
+    margin: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+    vertical-align: top !important;
+    height: 2.5rem !important;
+    min-height: 2.5rem !important;
+    max-height: 2.5rem !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
 /* Toast Animation */
 @keyframes slide-in {
     from {

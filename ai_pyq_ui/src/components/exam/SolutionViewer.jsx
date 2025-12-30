@@ -1,6 +1,7 @@
 // src/components/exam/SolutionViewer.jsx
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { formatMarkdown } from "../../utils/formatMarkdown";
 
 const API_BASE_URL = "";
 
@@ -184,10 +185,18 @@ export default function SolutionViewer({ solutions, currentQuestionId, onClose, 
                                 <p className="text-gray-500 mt-2">Loading explanation...</p>
                             </div>
                         ) : (
-                            <div className="prose max-w-none">
-                                <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
-                                    {explanation || "Solution: " + correctOptionLetter}
-                                </p>
+                            <div className="prose prose-sm max-w-none explanation-text">
+                                {explanation ? (
+                                    <div
+                                        dangerouslySetInnerHTML={{
+                                            __html: formatMarkdown(explanation),
+                                        }}
+                                    />
+                                ) : (
+                                    <p className="text-gray-700 leading-relaxed">
+                                        Solution: {correctOptionLetter}
+                                    </p>
+                                )}
                             </div>
                         )}
                     </div>
