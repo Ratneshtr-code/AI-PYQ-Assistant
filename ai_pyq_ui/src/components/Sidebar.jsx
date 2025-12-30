@@ -384,6 +384,19 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                         {!isCollapsed && <span>Topic-wise PYQ</span>}
                     </button>
 
+                    <button
+                        onClick={() => navigate("/exam-mode")}
+                        className={`w-full text-left py-2 px-3 rounded-lg transition text-sm flex items-center gap-2 ${
+                            location.pathname.includes("exam-mode")
+                                ? "bg-blue-50 text-blue-700 font-medium"
+                                : "text-gray-700 hover:bg-gray-50 font-normal"
+                        }`}
+                        title="Exam Mode"
+                    >
+                        <span className="text-lg flex-shrink-0">📝</span>
+                        {!isCollapsed && <span>Exam Mode</span>}
+                    </button>
+
                     {/* Smart Roadmap - Only visible to logged-in users */}
                     {(localStorage.getItem("isLoggedIn") === "true" || isLoggedIn) && (
                         <button

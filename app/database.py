@@ -320,11 +320,6 @@ class PaymentTransaction(Base):
         self.transaction_metadata = json.dumps(data) if data else None
 
 
-def init_db():
-    """Initialize database tables"""
-    Base.metadata.create_all(bind=engine)
-
-
 class EmailVerification(Base):
     """Email verification OTP codes"""
     __tablename__ = "email_verifications"
@@ -354,6 +349,78 @@ class PasswordResetToken(Base):
     
     # Relationship
     user = relationship("User", backref="password_reset_tokens")
+
+
+class ExamAttemptStatus(str, enum.Enum):
+    """Exam attempt status"""
+    IN_PROGRESS = "in_progress"
+    SUBMITTED = "submitted"
+    ABANDONED = "abandoned"
+
+
+class ExamSet(Base):
+    """Predefined exam configurations"""
+    __tablename__ = "exam_sets"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, nullable=False, index=True)  # e.g., "SSC CGL 2024 Tier-I Full Paper"
+    description = Column(Text, nullable=True)
+    exam_type = Column(String, nullable=True)  # "mock", "pyp", "chapter_test", etc.
+    exam_name = Column(String, nullable=True, index=True)  # e.g., "SSC CGL"
+    subject = Column(String, nullable=True, index=True)
+    topic = Column(String, nullable=True)
+    year_from = Column(Integer, nullable=True)
+    year_to = Column(Integer, nullable=True)
+    total_questions = Column(Integer, nullable=False, default=0)
+    duration_minutes = Column(Integer, nullable=False)  # Exam duration in minutes
+    marks_per_question = Column(Float, nullable=False, default=2.0)
+    negative_marking = Column(Float, nullable=False, default=0.5)  # Negative marks per wrong answer
+    is_active = Column(Boolean, default=True, index=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    
+    # Relationship
+    attempts = relationship("ExamAttempt", backref="exam_set")
+
+
+class ExamAttempt(Base):
+    """User exam attempts"""
+    __tablename__ = "exam_attempts"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
+    exam_set_id = Column(Integer, ForeignKey("exam_sets.id"), nullable=False, index=True)
+    started_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    submitted_at = Column(DateTime, nullable=True)
+    time_spent_seconds = Column(Integer, default=0)  # Total time spent in seconds
+    total_questions = Column(Integer, nullable=False, default=0)
+    questions_answered = Column(Integer, default=0)
+    questions_correct = Column(Integer, default=0)
+    questions_wrong = Column(Integer, default=0)
+    total_score = Column(Float, default=0.0)
+    status = Column(SQLEnum(ExamAttemptStatus), default=ExamAttemptStatus.IN_PROGRESS, nullable=False, index=True)
+    created_at = Column(DateTime, default=datetime.utcnow, index=True)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    
+    # Relationships
+    user = relationship("User", backref="exam_attempts")
+    responses = relationship("ExamQuestionResponse", backref="exam_attempt", cascade="all, delete-orphan")
+
+
+class ExamQuestionResponse(Base):
+    """Individual question responses in an exam attempt"""
+    __tablename__ = "exam_question_responses"
+
+    id = Column(Integer, primary_key=True, index=True)
+    exam_attempt_id = Column(Integer, ForeignKey("exam_attempts.id"), nullable=False, index=True)
+    question_id = Column(Integer, nullable=False, index=True)  # References question from CSV
+    selected_option = Column(String, nullable=True)  # A, B, C, D or null if not answered
+    is_correct = Column(Boolean, nullable=True)  # True if correct, False if wrong, None if not answered
+    time_spent_seconds = Column(Integer, default=0)  # Time spent on this question
+    is_marked_for_review = Column(Boolean, default=False)
+    answered_at = Column(DateTime, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
 
 def init_db():

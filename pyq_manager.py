@@ -596,6 +596,86 @@ def migrate_auth_features():
         return False
 
 
+def merge_json_to_csv():
+    """Merge JSON files from data extraction pipeline into CSV format"""
+    print_header("Merge JSON to CSV")
+    
+    # Find merge script - check relative to project root
+    project_root = get_project_root()
+    script_path = project_root.parent / "dataset_creation" / "data_extractor" / "merge_json_to_csv.py"
+    
+    if not script_path.exists():
+        print_error(f"Merge script not found: {script_path}")
+        print_info("Expected location: dataset_creation/data_extractor/merge_json_to_csv.py")
+        return False
+    
+    print_info("This tool merges JSON files from the data extraction pipeline into CSV format.")
+    print_info("Options:")
+    print_info("  • --input-dir: Directory containing JSON files (default: output/)")
+    print_info("  • --output: Output CSV path (default: ../../ai_pyq/data/questions.csv)")
+    print_info("  • --append: Append to existing CSV instead of overwriting")
+    print_info("  • --update-exam-sets: Automatically update exam sets after merging")
+    print()
+    
+    # Get input directory
+    default_input = "output"
+    input_dir = input(f"{Colors.BOLD}Input directory (default: {default_input}): {Colors.ENDC}").strip()
+    if not input_dir:
+        input_dir = default_input
+    
+    # Get output path
+    default_output = "../../ai_pyq/data/questions.csv"
+    output_path = input(f"{Colors.BOLD}Output CSV path (default: {default_output}): {Colors.ENDC}").strip()
+    if not output_path:
+        output_path = default_output
+    
+    # Ask about append mode
+    append_choice = input(f"{Colors.BOLD}Append to existing CSV? (y/n, default: n): {Colors.ENDC}").strip().lower()
+    append_mode = append_choice in ['y', 'yes']
+    
+    # Ask about updating exam sets
+    update_exam_choice = input(f"{Colors.BOLD}Update exam sets after merging? (y/n, default: y): {Colors.ENDC}").strip().lower()
+    update_exam_sets = update_exam_choice not in ['n', 'no']
+    
+    print()
+    print_info("Starting merge process...")
+    print()
+    
+    # Build command arguments
+    cmd_args = [
+        "--input-dir", input_dir,
+        "--output", output_path,
+    ]
+    
+    if append_mode:
+        cmd_args.append("--append")
+    
+    if update_exam_sets:
+        cmd_args.append("--update-exam-sets")
+    
+    try:
+        # Run from the script's directory
+        script_dir = script_path.parent
+        python_exe = get_python_executable()
+        
+        result = subprocess.run(
+            [python_exe, str(script_path)] + cmd_args,
+            cwd=script_dir,
+            check=True
+        )
+        
+        print_success("Merge completed successfully!")
+        if update_exam_sets:
+            print_info("Exam sets have been updated automatically.")
+        return True
+    except subprocess.CalledProcessError as e:
+        print_error(f"Merge failed: {e}")
+        return False
+    except KeyboardInterrupt:
+        print_warning("Merge cancelled by user.")
+        return False
+
+
 def show_project_status():
     """Show project status and configuration"""
     print_header("Project Status")
@@ -676,6 +756,7 @@ def show_main_menu():
         ("12", "Overall Summary", "Show overall system configuration and status"),
         ("13", "Migrate Plan Template ID", "Sync subscription plan template ID (payment_orders → users)"),
         ("14", "Migrate Auth Features", "Add email verification and password reset tables/columns"),
+        ("15", "Merge JSON to CSV", "Merge JSON files from data extraction into CSV format"),
         ("0", "Exit", "Exit the manager"),
     ]
     
@@ -684,7 +765,7 @@ def show_main_menu():
         print(f"  {Colors.CYAN}{num}.{Colors.ENDC} {Colors.BOLD}{title}{Colors.ENDC}")
         print(f"     {Colors.YELLOW}→{Colors.ENDC} {desc}\n")
     
-    print(f"{Colors.BOLD}Enter your choice (0-14):{Colors.ENDC} ", end="")
+    print(f"{Colors.BOLD}Enter your choice (0-15):{Colors.ENDC} ", end="")
 
 
 def main():
@@ -698,7 +779,7 @@ def main():
         "--direct",
         type=int,
         metavar="N",
-        help="Run operation directly by number (1-14) without menu"
+        help="Run operation directly by number (1-15) without menu"
     )
     args = parser.parse_args()
     
@@ -719,13 +800,14 @@ def main():
             12: show_overall_summary,
             13: migrate_plan_template_id,
             14: migrate_auth_features,
+            15: merge_json_to_csv,
         }
         
         if args.direct in operations:
             operations[args.direct]()
         else:
             print_error(f"Invalid operation number: {args.direct}")
-            print_info("Valid numbers: 1-14")
+            print_info("Valid numbers: 1-15")
             sys.exit(1)
         return
     
@@ -766,9 +848,11 @@ def main():
                 migrate_plan_template_id()
             elif choice == "14":
                 migrate_auth_features()
+            elif choice == "15":
+                merge_json_to_csv()
             else:
                 print_error(f"Invalid choice: {choice}")
-                print_info("Please enter a number between 0-14")
+                print_info("Please enter a number between 0-15")
             
             if choice != "0":
                 input(f"\n{Colors.YELLOW}Press Enter to continue...{Colors.ENDC}")

@@ -20,6 +20,11 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import PremiumProtectedRoute from "./components/PremiumProtectedRoute";
 import MyNotesPage from "./pages/MyNotesPage";
 import AIRoadmapPage from "./AIRoadmapPage";
+import ExamModePage from "./ExamModePage";
+import ExamInstructions from "./components/exam/ExamInstructions";
+import ExamInterface from "./components/exam/ExamInterface";
+import ExamResults from "./components/exam/ExamResults";
+import SolutionViewer from "./components/exam/SolutionViewer";
 import ToastContainer, { useToast } from "./components/ToastContainer";
 import "./index.css";
 
@@ -108,6 +113,46 @@ function AppContent() {
                         <PremiumProtectedRoute>
                             <AIRoadmapPage />
                         </PremiumProtectedRoute>
+                    } 
+                />
+                <Route 
+                    path="/exam-mode" 
+                    element={
+                        <ProtectedRoute>
+                            <ExamModePage />
+                        </ProtectedRoute>
+                    } 
+                />
+                <Route 
+                    path="/exam-mode/instructions/:examSetId" 
+                    element={
+                        <ProtectedRoute>
+                            <ExamInstructions />
+                        </ProtectedRoute>
+                    } 
+                />
+                <Route 
+                    path="/exam/:attemptId" 
+                    element={
+                        <ProtectedRoute>
+                            <ExamInterface />
+                        </ProtectedRoute>
+                    } 
+                />
+                <Route 
+                    path="/exam/:attemptId/results" 
+                    element={
+                        <ProtectedRoute>
+                            <ExamResults />
+                        </ProtectedRoute>
+                    } 
+                />
+                <Route 
+                    path="/exam/:attemptId/solution/:questionIndex" 
+                    element={
+                        <ProtectedRoute>
+                            <SolutionViewer />
+                        </ProtectedRoute>
                     } 
                 />
             </Routes>

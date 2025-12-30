@@ -587,3 +587,13 @@ body.explanation-window-open .exam-filter-compact {
     }
 }
 
+/* ===== Hide Scrollbar Styles ===== */
+.scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+}
+
