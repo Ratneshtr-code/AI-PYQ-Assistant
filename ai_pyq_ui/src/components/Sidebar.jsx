@@ -1,6 +1,7 @@
 // src/components/Sidebar.jsx
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import UserMenuDropdown from "./UserMenuDropdown";
 
 export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySidebar, onCollapseChange }) {
     const [isCollapsed, setIsCollapsed] = useState(false);
@@ -39,6 +40,7 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
     const [subscriptionPlan, setSubscriptionPlan] = useState(
         initialUserData?.subscription_plan === "premium" ? "Premium" : "Free"
     );
+    const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
     const isDashboard = location.pathname.includes("exam-dashboard");
     const isCrossExam = location.pathname.includes("cross-exam-insights");
@@ -437,97 +439,54 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
             </div>
 
             {/* Spacer for visual separation */}
-            <div className="h-4"></div>
+            <div className="flex-1"></div>
 
-            {/* Account Card Section (Sticky Bottom) */}
-            <div className="px-4 pb-4 border-t border-gray-100 bg-gray-50/50">
-                {/* Check login status from localStorage */}
+            {/* Compact User Menu (ChatGPT-style) */}
+            <div className="px-4 pb-4 border-t border-gray-100 bg-gray-50/50 relative">
                 {localStorage.getItem("isLoggedIn") === "true" || isLoggedIn ? (
-                    /* Logged In State */
-                    <div className={`mt-4 p-3 bg-white rounded-lg border border-gray-200 shadow-sm ${isCollapsed ? "p-2" : ""}`}>
-                        {isCollapsed ? (
-                            /* Collapsed: Show only avatar */
-                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-white font-semibold text-sm mx-auto">
+                    /* Logged In State - Compact Menu */
+                    <div className="mt-4 relative">
+                        <button
+                            onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                            className={`w-full flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 transition-colors ${
+                                isCollapsed ? "justify-center" : ""
+                            }`}
+                        >
+                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-white font-semibold text-xs flex-shrink-0">
                                 {userInitials}
                             </div>
-                        ) : (
-                            <>
-                                <div className="flex items-center gap-3 mb-2">
-                                    {/* Avatar */}
-                                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-white font-semibold text-sm flex-shrink-0">
-                                        {userInitials}
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <div className="flex items-center gap-2">
-                                            <p className="text-xs font-normal text-gray-900 truncate">
-                                                {userName}
-                                            </p>
-                                            {/* Admin Badge - Only show if user is database admin */}
-                                            {(() => {
-                                                try {
-                                                    const userData = JSON.parse(localStorage.getItem("userData") || "{}");
-                                                    return userData.is_admin ? (
-                                                        <span className="px-1.5 py-0.5 text-[10px] font-medium bg-purple-100 text-purple-700 rounded">
-                                                            Admin
-                                                        </span>
-                                                    ) : null;
-                                                } catch {
-                                                    return null;
-                                                }
-                                            })()}
-                                        </div>
-                                        <div className="flex items-center gap-1.5 mt-0.5">
-                                            {subscriptionPlan === "Premium" ? (
-                                                <>
-                                                    <span className="text-xs font-medium text-emerald-700">Premium</span>
-                                                    <span className="text-emerald-600">✓</span>
-                                                </>
-                                            ) : (
-                                                <>
-                                                    <span className="text-xs text-gray-500">Free Plan</span>
-                                                </>
-                                            )}
-                                        </div>
-                                    </div>
+                            {!isCollapsed && (
+                                <div className="flex-1 min-w-0 text-left">
+                                    <p className="text-sm font-medium text-gray-900 truncate">
+                                        {userName}
+                                    </p>
+                                    <p className="text-xs text-gray-500">
+                                        {subscriptionPlan === "Premium" ? "Premium" : "Free"}
+                                    </p>
                                 </div>
-                                {/* Upgrade CTA for Free users */}
-                                {subscriptionPlan === "Free" && (
-                                    <button
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            e.stopPropagation();
-                                            console.log("Navigating to /subscription");
-                                            navigate("/subscription");
-                                        }}
-                                        className="w-full mt-2 py-1.5 px-3 text-xs font-medium text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-md transition-colors cursor-pointer"
-                                        type="button"
-                                    >
-                                        Upgrade to Premium
-                                    </button>
-                                )}
-                                {/* View Subscription for Premium users */}
-                                {subscriptionPlan === "Premium" && (
-                                    <button
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            e.stopPropagation();
-                                            console.log("Navigating to /subscription");
-                                            navigate("/subscription");
-                                        }}
-                                        className="w-full mt-2 py-1.5 px-3 text-xs font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 rounded-md transition-colors cursor-pointer"
-                                        type="button"
-                                    >
-                                        Manage Subscription
-                                    </button>
-                                )}
-                            </>
-                        )}
+                            )}
+                            {!isCollapsed && (
+                                <svg className="w-4 h-4 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                </svg>
+                            )}
+                        </button>
+                        
+                        {/* User Menu Dropdown */}
+                        <UserMenuDropdown
+                            isOpen={isUserMenuOpen}
+                            onClose={() => setIsUserMenuOpen(false)}
+                            onSignOut={handleSignOut}
+                            userName={userName}
+                            userInitials={userInitials}
+                            subscriptionPlan={subscriptionPlan}
+                            isCollapsed={isCollapsed}
+                        />
                     </div>
                 ) : (
                     /* Logged Out State */
-                    <div className={`mt-4 p-3 bg-white rounded-lg border border-gray-200 shadow-sm ${isCollapsed ? "p-2" : ""}`}>
+                    <div className="mt-4">
                         {isCollapsed ? (
-                            /* Collapsed: Show only sign in icon */
                             <button
                                 onClick={handleSignIn}
                                 className="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center mx-auto transition-colors"
@@ -560,42 +519,6 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                         )}
                     </div>
                 )}
-
-                {/* Footer Utilities (Icon-first, more visible) */}
-                <div className="mt-3 pt-3 border-t border-gray-100 space-y-1.5">
-                    <button
-                        onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            console.log("Navigating to /account, isLoggedIn:", localStorage.getItem("isLoggedIn"));
-                            navigate("/account");
-                        }}
-                        className={`w-full flex items-center gap-2 text-sm transition py-2 px-3 rounded-lg cursor-pointer font-normal ${
-                            location.pathname === "/account"
-                                ? "text-blue-700 bg-blue-50 font-medium"
-                                : "text-gray-700 hover:text-gray-900 hover:bg-gray-100"
-                        }`}
-                        title="My Account"
-                        type="button"
-                    >
-                        <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                        {!isCollapsed && <span>My Account</span>}
-                    </button>
-                    {(localStorage.getItem("isLoggedIn") === "true" || isLoggedIn) && (
-                        <button
-                            onClick={handleSignOut}
-                            className="w-full flex items-center gap-2 text-sm text-red-600 hover:text-red-700 hover:bg-red-50 transition py-2 px-3 rounded-lg font-normal hover:font-medium"
-                            title="Sign Out"
-                        >
-                            <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                            </svg>
-                            {!isCollapsed && <span>Sign Out</span>}
-                        </button>
-                    )}
-                </div>
             </div>
         </aside>
     );

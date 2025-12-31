@@ -22,11 +22,16 @@ export default function AIRoadmapPage() {
     const [prevProgress, setPrevProgress] = useState(0);
     const progressBarRef = useRef(null);
 
-    // Read exam from URL params on mount and when URL changes
+    // Read exam and tab from URL params on mount and when URL changes
     useEffect(() => {
         const examParam = searchParams.get('exam');
         if (examParam && examParam !== exam) {
             setExam(examParam);
+        }
+        
+        const tabParam = searchParams.get('tab');
+        if (tabParam && (tabParam === "my-progress" || tabParam === "roadmap-strategy")) {
+            setActiveSubPage(tabParam);
         }
     }, [searchParams]);
 

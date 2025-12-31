@@ -3,13 +3,18 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import Sidebar from "./components/Sidebar";
+import AvatarEditor from "./components/AvatarEditor";
+import EditProfileModal from "./components/EditProfileModal";
+import TransactionModal from "./components/TransactionModal";
 import { getCurrentUser, getUserData, authenticatedFetch, setUserData } from "./utils/auth";
+import { useProgressTracking } from "./hooks/useProgressTracking";
 
 // Use empty string for Vite proxy (same-origin)
 const API_BASE_URL = "";
 
 export default function AccountPage() {
     const navigate = useNavigate();
+    const location = useLocation();
     const [examsList, setExamsList] = useState([]);
     const [userIsAdmin, setUserIsAdmin] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -27,6 +32,17 @@ export default function AccountPage() {
     const [isEditingName, setIsEditingName] = useState(false);
     const [isEditingUsername, setIsEditingUsername] = useState(false);
     const [isChangingPassword, setIsChangingPassword] = useState(false);
+    const [isEditingAvatar, setIsEditingAvatar] = useState(false);
+    const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
+    const [isTransactionModalOpen, setIsTransactionModalOpen] = useState(false);
+    
+    // Tabs
+    const [activeTab, setActiveTab] = useState("notes"); // "notes" or "progress"
+    
+    // Subscription plans
+    const [availablePlans, setAvailablePlans] = useState([]);
+    const [plansLoading, setPlansLoading] = useState(false);
+    const [activePlanTemplateId, setActivePlanTemplateId] = useState(null);
     
     // Password change form
     const [currentPassword, setCurrentPassword] = useState("");
@@ -36,6 +52,24 @@ export default function AccountPage() {
     // Messages
     const [successMessage, setSuccessMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    
+    // Progress Overview
+    const [selectedExam, setSelectedExam] = useState("");
+    const { fetchProgress, progressData: progressOverviewData, loading: progressLoading } = useProgressTracking();
+    
+    // My Notes
+    const [notesCount, setNotesCount] = useState(null);
+    
+    // Feedback
+    const [feedback, setFeedback] = useState("");
+    const [isSubmittingFeedback, setIsSubmittingFeedback] = useState(false);
+    
+    // Language preference
+    const [language, setLanguage] = useState(localStorage.getItem("language") || "en");
+    
+    // Account deletion
+    const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+    const [deleteConfirmText, setDeleteConfirmText] = useState("");
 
     // Separate effect to refresh data when page becomes visible (user navigates back)
     useEffect(() => {
@@ -91,6 +125,71 @@ export default function AccountPage() {
             }
         };
         fetchExams();
+        
+        // Fetch notes count
+        const fetchNotesCount = async () => {
+            try {
+                const response = await authenticatedFetch("/notes/stats");
+                if (response.ok) {
+                    const data = await response.json();
+                    setNotesCount(data.total || 0);
+                } else {
+                    // Endpoint might not exist, set to null to hide count
+                    setNotesCount(null);
+                }
+            } catch (err) {
+                // Endpoint might not exist, set to null to hide count
+                console.error("Failed to fetch notes count:", err);
+                setNotesCount(null);
+            }
+        };
+        fetchNotesCount();
+        
+        // Fetch subscription plans
+        const fetchPlans = async () => {
+            setPlansLoading(true);
+            try {
+                const res = await fetch(`/subscription-plans?t=${Date.now()}`, {
+                    cache: 'no-store',
+                    headers: {
+                        'Cache-Control': 'no-cache'
+                    }
+                });
+                if (res.ok) {
+                    const plans = await res.json();
+                    setAvailablePlans(plans || []);
+                } else {
+                    setAvailablePlans([]);
+                }
+            } catch (err) {
+                console.error("Failed to fetch subscription plans:", err);
+                setAvailablePlans([]);
+            } finally {
+                setPlansLoading(false);
+            }
+        };
+        fetchPlans();
+        
+        // Fetch active subscription plan template ID
+        const fetchActiveSubscription = async () => {
+            try {
+                const res = await authenticatedFetch("/payment/active-subscription");
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.is_active && data.active_plan_template_id) {
+                        setActivePlanTemplateId(data.active_plan_template_id);
+                    } else {
+                        setActivePlanTemplateId(null);
+                    }
+                } else {
+                    setActivePlanTemplateId(null);
+                }
+            } catch (err) {
+                console.error("Failed to fetch active subscription:", err);
+                setActivePlanTemplateId(null);
+            }
+        };
+        fetchActiveSubscription();
 
         // Load user data
         const loadUserData = async () => {
@@ -116,6 +215,12 @@ export default function AccountPage() {
                             setUsername(user.username || "");
                             setEmail(user.email || "");
                             setUserIsAdmin(user.is_admin === true);
+                            // Update subscription plan state
+                            if (user.subscription_plan) {
+                                const plan = user.subscription_plan.toLowerCase();
+                                setSubscriptionPlan(plan);
+                                console.log("AccountPage: Updated subscription plan from backend:", plan);
+                            }
                         }
                     })
                     .catch(() => {
@@ -134,11 +239,15 @@ export default function AccountPage() {
             console.log("AccountPage: User data changed, refreshing...");
             // Immediately update from localStorage (fastest)
             const cachedData = getUserData();
+            console.log("AccountPage: Cached user data:", cachedData);
             if (cachedData?.subscription_plan) {
                 const plan = cachedData.subscription_plan.toLowerCase();
                 setSubscriptionPlan(plan);
                 console.log("AccountPage: Immediately updated subscription plan to:", plan);
             }
+            // Also check hasPremium flag
+            const hasPremium = cachedData?.hasPremium === true || localStorage.getItem("hasPremium") === "true";
+            console.log("AccountPage: hasPremium flag:", hasPremium);
             // Force immediate state update
             setRefreshKey(prev => prev + 1);
             // Then refresh user data from backend
@@ -218,6 +327,264 @@ export default function AccountPage() {
             refreshUserData();
         }
     }, [location.pathname]); // Refresh when pathname changes (user navigates to this page)
+    
+    // Auto-select exam with most progress on page load
+    useEffect(() => {
+        const autoSelectBestExam = async () => {
+            // Only run if no exam is selected and we have exams list
+            if (selectedExam || examsList.length === 0) {
+                return;
+            }
+            
+            try {
+                // Fetch progress for all exams in parallel
+                const progressPromises = examsList.map(async (exam) => {
+                    try {
+                        const response = await fetch(`/roadmap/progress/${encodeURIComponent(exam)}`, {
+                            credentials: "include"
+                        });
+                        if (response.ok) {
+                            const data = await response.json();
+                            return { exam, progress: data };
+                        }
+                        return { exam, progress: null };
+                    } catch (err) {
+                        console.error(`Failed to fetch progress for ${exam}:`, err);
+                        return { exam, progress: null };
+                    }
+                });
+                
+                const results = await Promise.all(progressPromises);
+                
+                // Find exam with highest progress percentage
+                let bestExam = null;
+                let highestProgress = -1;
+                
+                results.forEach(({ exam, progress }) => {
+                    if (progress && progress.progress_percentage !== undefined) {
+                        if (progress.progress_percentage > highestProgress) {
+                            highestProgress = progress.progress_percentage;
+                            bestExam = exam;
+                        }
+                    }
+                });
+                
+                // If we found an exam with progress, select it
+                if (bestExam) {
+                    console.log(`Auto-selected exam with highest progress: ${bestExam} (${highestProgress.toFixed(1)}%)`);
+                    setSelectedExam(bestExam);
+                } else if (examsList.length > 0) {
+                    // If no progress found, select the first exam as fallback
+                    setSelectedExam(examsList[0]);
+                }
+            } catch (err) {
+                console.error("Failed to auto-select exam:", err);
+                // Fallback to first exam if available
+                if (examsList.length > 0) {
+                    setSelectedExam(examsList[0]);
+                }
+            }
+        };
+        
+        // Run auto-select after a short delay to ensure exams list is loaded
+        const timer = setTimeout(() => {
+            autoSelectBestExam();
+        }, 500);
+        
+        return () => clearTimeout(timer);
+    }, [examsList, selectedExam]);
+    
+    // Fetch progress when exam is selected
+    useEffect(() => {
+        if (selectedExam) {
+            fetchProgress(selectedExam);
+        }
+    }, [selectedExam, fetchProgress]);
+    
+    // Get user initials for avatar
+    const getUserInitials = () => {
+        const name = fullName || username || "User";
+        const names = name.split(" ");
+        return names.length > 1 
+            ? (names[0][0] + names[1][0]).toUpperCase()
+            : name.substring(0, 2).toUpperCase();
+    };
+    
+    // Handle edit profile save
+    const handleEditProfileSave = async ({ fullName: newFullName, username: newUsername }) => {
+        try {
+            // Update both fields
+            const response = await authenticatedFetch(`${API_BASE_URL}/auth/profile`, {
+                method: "PUT",
+                body: JSON.stringify({ 
+                    full_name: newFullName,
+                    username: newUsername
+                }),
+            });
+            
+            if (response.ok) {
+                const updatedUser = await response.json();
+                setUserData(updatedUser);
+                setUserDataState(updatedUser);
+                setFullName(newFullName);
+                setUsername(newUsername);
+                setIsEditProfileOpen(false);
+                setSuccessMessage("Profile updated successfully!");
+                setTimeout(() => setSuccessMessage(""), 3000);
+                window.dispatchEvent(new Event("userProfileUpdated"));
+                window.dispatchEvent(new Event("userLoggedIn"));
+            } else {
+                const error = await response.json();
+                setErrorMessage(error.detail || "Failed to update profile. Please try again.");
+            }
+        } catch (err) {
+            setErrorMessage("Failed to update profile. Please try again.");
+        }
+    };
+    
+    // Handle avatar save
+    const handleAvatarSave = async (avatarData) => {
+        try {
+            if (avatarData.type === "image") {
+                // Upload image
+                const formData = new FormData();
+                formData.append("avatar", avatarData.image);
+                
+                // For FormData, we need to let the browser set Content-Type with boundary
+                const response = await fetch(`${API_BASE_URL}/auth/profile/avatar`, {
+                    method: "PUT",
+                    credentials: "include",
+                    body: formData,
+                });
+                
+                if (response.ok) {
+                    const updatedUser = await response.json();
+                    setUserData(updatedUser);
+                    setUserDataState(updatedUser);
+                    setSuccessMessage("Avatar updated successfully!");
+                    setTimeout(() => setSuccessMessage(""), 3000);
+                    window.dispatchEvent(new Event("userProfileUpdated"));
+                } else {
+                    setErrorMessage("Failed to update avatar. Please try again.");
+                }
+            } else {
+                // Save initials/color preference (store in localStorage for now)
+                localStorage.setItem("avatarInitials", avatarData.initials);
+                localStorage.setItem("avatarColor", avatarData.color);
+                setSuccessMessage("Avatar preferences saved!");
+                setTimeout(() => setSuccessMessage(""), 3000);
+            }
+        } catch (err) {
+            setErrorMessage("Failed to update avatar. Please try again.");
+        }
+    };
+    
+    // Handle feedback submission
+    const handleSubmitFeedback = async () => {
+        if (!feedback.trim()) {
+            setErrorMessage("Please enter your feedback");
+            return;
+        }
+        
+        setIsSubmittingFeedback(true);
+        setErrorMessage("");
+        
+        try {
+            const response = await authenticatedFetch(`${API_BASE_URL}/feedback`, {
+                method: "POST",
+                body: JSON.stringify({ feedback: feedback.trim() }),
+            });
+            
+            if (response.ok) {
+                setFeedback("");
+                setSuccessMessage("Thank you for your feedback!");
+                setTimeout(() => setSuccessMessage(""), 3000);
+            } else {
+                setErrorMessage("Failed to submit feedback. Please try again.");
+            }
+        } catch (err) {
+            setErrorMessage("Failed to submit feedback. Please try again.");
+        } finally {
+            setIsSubmittingFeedback(false);
+        }
+    };
+    
+    // Handle language change
+    const handleLanguageChange = (newLanguage) => {
+        setLanguage(newLanguage);
+        localStorage.setItem("language", newLanguage);
+        // Could dispatch event to update app language
+        setSuccessMessage("Language preference saved!");
+        setTimeout(() => setSuccessMessage(""), 3000);
+    };
+    
+    // Handle data export
+    const handleExportData = async () => {
+        try {
+            const response = await authenticatedFetch(`${API_BASE_URL}/user/export`);
+            if (response.ok) {
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = `user-data-${new Date().toISOString().split('T')[0]}.json`;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+                setSuccessMessage("Data exported successfully!");
+                setTimeout(() => setSuccessMessage(""), 3000);
+            } else {
+                // Fallback: export from localStorage
+                const userData = getUserData();
+                const dataStr = JSON.stringify(userData, null, 2);
+                const blob = new Blob([dataStr], { type: "application/json" });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = `user-data-${new Date().toISOString().split('T')[0]}.json`;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+                setSuccessMessage("Data exported successfully!");
+                setTimeout(() => setSuccessMessage(""), 3000);
+            }
+        } catch (err) {
+            setErrorMessage("Failed to export data. Please try again.");
+        }
+    };
+    
+    // Handle account deletion
+    const handleDeleteAccount = async () => {
+        if (deleteConfirmText !== "DELETE") {
+            setErrorMessage("Please type DELETE to confirm");
+            return;
+        }
+        
+        try {
+            const response = await authenticatedFetch(`${API_BASE_URL}/auth/account`, {
+                method: "DELETE",
+            });
+            
+            if (response.ok) {
+                // Clear local storage
+                localStorage.clear();
+                // Dispatch logout event
+                window.dispatchEvent(new Event("userLoggedOut"));
+                // Redirect to home and log out
+                navigate("/", { replace: true });
+                // Force page reload to ensure complete logout
+                setTimeout(() => {
+                    window.location.href = "/";
+                }, 500);
+            } else {
+                setErrorMessage("Failed to delete account. Please try again.");
+            }
+        } catch (err) {
+            setErrorMessage("Failed to delete account. Please try again.");
+        }
+    };
 
     const handleUpdateName = async () => {
         if (!fullName.trim()) {
@@ -480,28 +847,14 @@ export default function AccountPage() {
             <Sidebar exam="" setExam={() => {}} examsList={examsList} onOpenSecondarySidebar={() => {}} />
             
             <main className="flex-1 ml-64">
-                <div className="max-w-4xl mx-auto px-4 md:px-8 py-8">
+                <div className="max-w-7xl mx-auto px-4 md:px-8 py-8">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                     >
-                        {/* Back Button */}
-                        <button
-                            onClick={() => navigate(-1)}
-                            className="mb-4 flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
-                        >
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                            </svg>
-                            <span>Back</span>
-                        </button>
-                        
-                        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+                        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
                             👤 My Account
                         </h1>
-                        <p className="text-gray-600 mb-8">
-                            Manage your profile, subscription, and account settings
-                        </p>
 
                         {successMessage && (
                             <div className="mb-6 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg">
@@ -514,224 +867,572 @@ export default function AccountPage() {
                                 {errorMessage}
                             </div>
                         )}
-
-                        <div className="space-y-6">
-                            {/* Profile Information */}
-                            <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-                                <h2 className="text-xl font-semibold text-gray-900 mb-4">Profile Information</h2>
-                                <div className="space-y-4">
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                                            Email
-                                        </label>
-                                        <input
-                                            type="email"
-                                            value={email}
-                                            disabled
-                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-500"
-                                        />
-                                        <p className="text-xs text-gray-500 mt-1">Email cannot be changed</p>
-                                    </div>
-                                    
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                                            Full Name
-                                        </label>
-                                        {isEditingName ? (
-                                            <div className="flex gap-2">
-                                                <input
-                                                    type="text"
-                                                    value={fullName}
-                                                    onChange={(e) => setFullName(e.target.value)}
-                                                    className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                                                    placeholder="Enter your full name"
-                                                />
-                                                <button
-                                                    onClick={handleUpdateName}
-                                                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-                                                >
-                                                    Save
-                                                </button>
-                                                <button
-                                                    onClick={() => {
-                                                        setIsEditingName(false);
-                                                        setFullName(userData?.full_name || "");
-                                                    }}
-                                                    className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
-                                                >
-                                                    Cancel
-                                                </button>
-                                            </div>
-                                        ) : (
-                                            <div className="flex items-center gap-2">
-                                                <input
-                                                    type="text"
-                                                    value={fullName || "Not set"}
-                                                    disabled
-                                                    className="flex-1 px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-500"
-                                                />
-                                                <button
-                                                    onClick={() => setIsEditingName(true)}
-                                                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-                                                >
-                                                    Edit
-                                                </button>
-                                            </div>
-                                        )}
-                                    </div>
-
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                                            Username
-                                        </label>
-                                        {isEditingUsername ? (
-                                            <div className="flex gap-2">
-                                                <input
-                                                    type="text"
-                                                    value={username}
-                                                    onChange={(e) => setUsername(e.target.value)}
-                                                    className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                                                    placeholder="Enter username"
-                                                />
-                                                <button
-                                                    onClick={handleUpdateUsername}
-                                                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-                                                >
-                                                    Save
-                                                </button>
-                                                <button
-                                                    onClick={() => {
-                                                        setIsEditingUsername(false);
-                                                        setUsername(userData?.username || "");
-                                                    }}
-                                                    className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
-                                                >
-                                                    Cancel
-                                                </button>
-                                            </div>
-                                        ) : (
-                                            <div className="flex items-center gap-2">
-                                                <input
-                                                    type="text"
-                                                    value={username || "Not set"}
-                                                    disabled
-                                                    className="flex-1 px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-500"
-                                                />
-                                                <button
-                                                    onClick={() => setIsEditingUsername(true)}
-                                                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-                                                >
-                                                    Edit
-                                                </button>
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Change Password */}
-                            <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-                                <h2 className="text-xl font-semibold text-gray-900 mb-4">Change Password</h2>
-                                {isChangingPassword ? (
-                                    <div className="space-y-4">
-                                        <div>
-                                            <label className="block text-sm font-medium text-gray-700 mb-1">
-                                                Current Password
-                                            </label>
-                                            <input
-                                                type="password"
-                                                value={currentPassword}
-                                                onChange={(e) => setCurrentPassword(e.target.value)}
-                                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                                            />
-                                        </div>
-                                        <div>
-                                            <label className="block text-sm font-medium text-gray-700 mb-1">
-                                                New Password
-                                            </label>
-                                            <input
-                                                type="password"
-                                                value={newPassword}
-                                                onChange={(e) => setNewPassword(e.target.value)}
-                                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                                            />
-                                            <p className="text-xs text-gray-500 mt-1">
-                                                Must be at least 8 characters with uppercase, lowercase, and numbers
-                                            </p>
-                                        </div>
-                                        <div>
-                                            <label className="block text-sm font-medium text-gray-700 mb-1">
-                                                Confirm New Password
-                                            </label>
-                                            <input
-                                                type="password"
-                                                value={confirmPassword}
-                                                onChange={(e) => setConfirmPassword(e.target.value)}
-                                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                                            />
-                                        </div>
-                                        <div className="flex gap-2">
-                                            <button
-                                                onClick={handleChangePassword}
-                                                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-                                            >
-                                                Change Password
-                                            </button>
-                                            <button
-                                                onClick={() => {
-                                                    setIsChangingPassword(false);
-                                                    setCurrentPassword("");
-                                                    setNewPassword("");
-                                                    setConfirmPassword("");
-                                                }}
-                                                className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
-                                            >
-                                                Cancel
-                                            </button>
-                                        </div>
-                                    </div>
-                                ) : (
-                                    <button
-                                        onClick={() => setIsChangingPassword(true)}
-                                        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-                                    >
-                                        Change Password
-                                    </button>
-                                )}
-                            </div>
-
-                            {/* Admin Section */}
-                            {userIsAdmin && (
+                        
+                        {/* Two Column Layout */}
+                        <div className="grid grid-cols-1 lg:grid-cols-10 gap-6">
+                            {/* Left Section (25-30%) */}
+                            <div className="lg:col-span-3 space-y-4">
+                                {/* User Profile Card */}
                                 <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-                                    <h2 className="text-xl font-semibold text-gray-900 mb-4">Admin Tools</h2>
-                                    <div className="flex items-center gap-3 mb-4">
-                                        <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-lg text-sm font-medium">
-                                            🔧 Admin Account
-                                        </span>
-                                        <p className="text-sm text-gray-600">
-                                            You have full admin access to manage users, subscriptions, and system settings.
-                                        </p>
-                                    </div>
-                                    <div className="space-y-2">
-                                        <button
-                                            onClick={() => navigate("/admin")}
-                                            className="w-full px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
+                                    <div className="flex flex-col items-center mb-4">
+                                        <div
+                                            className="w-24 h-24 rounded-full flex items-center justify-center text-white font-semibold text-2xl mb-4"
+                                            style={{ 
+                                                backgroundColor: localStorage.getItem("avatarColor") || "#14b8a6" 
+                                            }}
                                         >
-                                            Open Admin Panel
+                                            {localStorage.getItem("avatarInitials") || getUserInitials()}
+                                        </div>
+                                        <p className="text-lg font-semibold text-gray-900">{fullName || "Not set"}</p>
+                                        <p className="text-sm text-gray-500">@{username || "username"}</p>
+                                    </div>
+                                    <button
+                                        onClick={() => setIsEditProfileOpen(true)}
+                                        className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                                    >
+                                        Edit Profile
+                                    </button>
+                                </div>
+                                
+                                {/* Premium/Upgrade Status */}
+                                <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                                    <div>
+                                        {(() => {
+                                            // Re-check subscription status directly from localStorage for most accurate status
+                                            const cachedData = getUserData();
+                                            const planFromCache = cachedData?.subscription_plan || "";
+                                            const planFromState = userData?.subscription_plan || "";
+                                            const planFromLocal = subscriptionPlan || "";
+                                            
+                                            // Check all possible sources and normalize
+                                            const currentPlanRaw = planFromCache || planFromState || planFromLocal || "free";
+                                            const currentPlan = String(currentPlanRaw).toLowerCase().trim();
+                                            
+                                            // Check if user has premium (more lenient check)
+                                            const isUserPremium = currentPlan === "premium" || 
+                                                                  currentPlan.includes("premium") ||
+                                                                  cachedData?.hasPremium === true ||
+                                                                  localStorage.getItem("hasPremium") === "true";
+                                            
+                                            // Check subscription end date
+                                            const subscriptionEndDate = cachedData?.subscription_end_date || userData?.subscription_end_date;
+                                            let isSubscriptionActive = false;
+                                            let diffDays = null;
+                                            
+                                            if (subscriptionEndDate) {
+                                                try {
+                                                    const endDate = new Date(subscriptionEndDate);
+                                                    const today = new Date();
+                                                    isSubscriptionActive = endDate > today;
+                                                    if (isSubscriptionActive) {
+                                                        const diffTime = endDate - today;
+                                                        diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                                                    }
+                                                } catch (e) {
+                                                    console.error("Error parsing subscription end date:", e);
+                                                }
+                                            }
+                                            
+                                            // Show Premium if user has premium plan, even if end date check fails
+                                            // (end date might not be set for some subscription types)
+                                            if (isUserPremium) {
+                                                return (
+                                                    <div className="text-center">
+                                                        <span className="px-4 py-2 bg-emerald-100 text-emerald-700 rounded-lg font-semibold text-sm inline-block mb-2">
+                                                            Premium
+                                                        </span>
+                                                        {diffDays !== null && diffDays > 0 && (
+                                                            <p className="text-xs text-gray-600 mt-2">
+                                                                Expires in {diffDays} {diffDays === 1 ? "day" : "days"}
+                                                            </p>
+                                                        )}
+                                                        {subscriptionEndDate && !isSubscriptionActive && (
+                                                            <p className="text-xs text-orange-600 mt-2">
+                                                                Subscription expired
+                                                            </p>
+                                                        )}
+                                                    </div>
+                                                );
+                                            } else {
+                                                return (
+                                                    <div className="text-center">
+                                                        <p className="text-sm text-gray-600 mb-3">Free Plan</p>
+                                                        <button
+                                                            onClick={() => navigate("/subscription")}
+                                                            className="w-full px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-colors text-sm font-medium"
+                                                        >
+                                                            Upgrade to Premium
+                                                        </button>
+                                                    </div>
+                                                );
+                                            }
+                                        })()}
+                                    </div>
+                                </div>
+                                
+                                {/* Admin Section */}
+                                {userIsAdmin && (
+                                    <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                                        <h3 className="text-sm font-semibold text-gray-900 mb-3">Admin Tools</h3>
+                                        <div className="space-y-2">
+                                            <button
+                                                onClick={() => navigate("/admin")}
+                                                className="w-full px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors text-sm font-medium"
+                                            >
+                                                Admin Panel
+                                            </button>
+                                            <button
+                                                onClick={() => navigate("/admin/subscription-management")}
+                                                className="w-full px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors text-sm font-medium"
+                                            >
+                                                Subscription Management
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
+                                
+                                {/* Language Preference */}
+                                <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                        Language Mode:
+                                    </label>
+                                    <select
+                                        value={language}
+                                        onChange={(e) => handleLanguageChange(e.target.value)}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                    >
+                                        <option value="en">English</option>
+                                        <option value="hi">Hindi</option>
+                                        <option value="es">Spanish</option>
+                                        <option value="fr">French</option>
+                                        <option value="de">German</option>
+                                    </select>
+                                </div>
+                                
+                                {/* Transaction Button */}
+                                <button
+                                    onClick={() => setIsTransactionModalOpen(true)}
+                                    className="w-full px-4 py-2 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors text-purple-600 font-medium shadow-sm"
+                                >
+                                    Transaction
+                                </button>
+                                
+                                {/* Delete Account Button */}
+                                <button
+                                    onClick={() => setShowDeleteConfirm(true)}
+                                    className="w-full px-4 py-2 bg-white border border-gray-200 rounded-lg hover:bg-red-50 transition-colors text-red-600 font-medium shadow-sm"
+                                >
+                                    Delete Account
+                                </button>
+                            </div>
+                            
+                            {/* Right Section (70%) */}
+                            <div className="lg:col-span-7 space-y-6">
+
+                                {/* Progress Overview Section */}
+                                <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                                    <div className="flex items-center justify-between mb-4">
+                                        <h2 className="text-xl font-semibold text-gray-900">Progress Overview</h2>
+                                        <select
+                                            value={selectedExam}
+                                            onChange={(e) => setSelectedExam(e.target.value)}
+                                            className="px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                        >
+                                            <option value="">Select Exam</option>
+                                            {examsList.map((exam) => (
+                                                <option key={exam} value={exam}>
+                                                    {exam}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                    {selectedExam && (
+                                        <div>
+                                            {progressLoading ? (
+                                                <div className="flex items-center justify-center py-12">
+                                                    <div className="text-center">
+                                                        <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mb-2"></div>
+                                                        <p className="text-gray-600 text-sm">Loading progress...</p>
+                                                    </div>
+                                                </div>
+                                            ) : progressOverviewData ? (
+                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                    {/* Circular Progress Chart */}
+                                                    <div className="flex items-center justify-center">
+                                                        <div className="relative w-48 h-48">
+                                                            <svg className="transform -rotate-90 w-48 h-48">
+                                                                <circle
+                                                                    cx="50%"
+                                                                    cy="50%"
+                                                                    r="70"
+                                                                    stroke="currentColor"
+                                                                    strokeWidth="10"
+                                                                    fill="none"
+                                                                    className="text-gray-200"
+                                                                />
+                                                                <motion.circle
+                                                                    cx="50%"
+                                                                    cy="50%"
+                                                                    r="70"
+                                                                    stroke="url(#gradient)"
+                                                                    strokeWidth="10"
+                                                                    fill="none"
+                                                                    strokeLinecap="round"
+                                                                    strokeDasharray={439.82}
+                                                                    initial={{ strokeDashoffset: 439.82 }}
+                                                                    animate={{ 
+                                                                        strokeDashoffset: 439.82 - (progressOverviewData.progress_percentage / 100) * 439.82 
+                                                                    }}
+                                                                    transition={{ duration: 1, ease: "easeOut" }}
+                                                                />
+                                                                <defs>
+                                                                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                                        <stop offset="0%" stopColor="#3B82F6" />
+                                                                        <stop offset="50%" stopColor="#8B5CF6" />
+                                                                        <stop offset="100%" stopColor="#EC4899" />
+                                                                    </linearGradient>
+                                                                </defs>
+                                                            </svg>
+                                                            <div className="absolute inset-0 flex items-center justify-center">
+                                                                <div className="text-center">
+                                                                    <div className="text-3xl font-bold text-gray-900">
+                                                                        {progressOverviewData.progress_percentage.toFixed(0)}%
+                                                                    </div>
+                                                                    <div className="text-sm text-gray-500 mt-1">Complete</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {/* Statistics Cards */}
+                                                    <div className="grid grid-cols-2 gap-3">
+                                                        <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4">
+                                                            <div className="text-xs text-gray-600 mb-1">Questions Solved</div>
+                                                            <div className="text-2xl font-bold text-gray-900">
+                                                                {progressOverviewData.solved_count} / {progressOverviewData.total_questions}
+                                                            </div>
+                                                        </div>
+                                                        <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4">
+                                                            <div className="text-xs text-gray-600 mb-1">Weightage Progress</div>
+                                                            <div className="text-2xl font-bold text-gray-900">
+                                                                {progressOverviewData.weightage_progress.toFixed(1)}%
+                                                            </div>
+                                                        </div>
+                                                        <div className="bg-gradient-to-r from-orange-50 to-amber-50 rounded-lg p-4">
+                                                            <div className="text-xs text-gray-600 mb-1">Remaining</div>
+                                                            <div className="text-2xl font-bold text-gray-900">
+                                                                {progressOverviewData.total_questions - progressOverviewData.solved_count}
+                                                            </div>
+                                                        </div>
+                                                        <div className="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-lg p-4">
+                                                            <div className="text-xs text-gray-600 mb-1">Subjects</div>
+                                                            <div className="text-2xl font-bold text-gray-900">
+                                                                {progressOverviewData.subjects?.filter(s => s.solved_count > 0).length || 0} / {progressOverviewData.subjects?.length || 0}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ) : (
+                                                <div className="text-center py-12 text-gray-600">
+                                                    No progress data available for this exam
+                                                </div>
+                                            )}
+                                        </div>
+                                    )}
+                                    {!selectedExam && (
+                                        <div className="text-center py-12 text-gray-500">
+                                            Select an exam to view progress
+                                        </div>
+                                    )}
+                                </div>
+                                
+                                {/* Tabs Section */}
+                                <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                                    <div className="flex gap-2 mb-4">
+                                        <button
+                                            onClick={() => {
+                                                setActiveTab("notes");
+                                                navigate("/my-notes");
+                                            }}
+                                            className={`flex-1 px-4 py-2 rounded-lg font-medium transition-colors ${
+                                                activeTab === "notes"
+                                                    ? "bg-blue-600 text-white"
+                                                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                                            }`}
+                                        >
+                                            My Notes
                                         </button>
                                         <button
-                                            onClick={() => navigate("/admin/subscription-management")}
-                                            className="w-full px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
+                                            onClick={() => {
+                                                setActiveTab("progress");
+                                                navigate("/ai-roadmap?tab=my-progress");
+                                            }}
+                                            className={`flex-1 px-4 py-2 rounded-lg font-medium transition-colors ${
+                                                activeTab === "progress"
+                                                    ? "bg-blue-600 text-white"
+                                                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                                            }`}
                                         >
-                                            Manage Subscription Plans
+                                            My Progress
                                         </button>
                                     </div>
                                 </div>
-                            )}
+                                
+                                {/* Subscription Plans Section */}
+                                <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                                    <h2 className="text-xl font-semibold text-gray-900 mb-4">Subscription Plans</h2>
+                                    {plansLoading ? (
+                                        <div className="flex items-center justify-center py-8">
+                                            <div className="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
+                                        </div>
+                                    ) : (
+                                        <div className={`grid gap-4 ${availablePlans.filter(p => p.plan_type === "premium").length > 0 ? (availablePlans.filter(p => p.plan_type === "premium").length === 1 ? "md:grid-cols-2" : "md:grid-cols-3") : "md:grid-cols-2"}`}>
+                                            {/* Free Plan */}
+                                            <div className="bg-white rounded-xl border-2 border-gray-200 p-4 shadow-sm">
+                                                <div className="mb-4">
+                                                    <h3 className="text-xl font-bold text-gray-900 mb-2">Free</h3>
+                                                    <div className="flex items-baseline">
+                                                        <span className="text-3xl font-bold text-gray-900">₹0</span>
+                                                        <span className="text-gray-600 ml-2 text-sm">/month</span>
+                                                    </div>
+                                                </div>
+                                                <ul className="space-y-2 mb-4 text-sm">
+                                                    <li className="flex items-start">
+                                                        <span className="text-green-500 mr-2">✓</span>
+                                                        <span className="text-gray-700">Basic PYQ search</span>
+                                                    </li>
+                                                    <li className="flex items-start">
+                                                        <span className="text-green-500 mr-2">✓</span>
+                                                        <span className="text-gray-700">Exam Dashboard access</span>
+                                                    </li>
+                                                    <li className="flex items-start">
+                                                        <span className="text-green-500 mr-2">✓</span>
+                                                        <span className="text-gray-700">Basic analytics</span>
+                                                    </li>
+                                                    <li className="flex items-start">
+                                                        <span className="text-gray-400 mr-2">✗</span>
+                                                        <span className="text-gray-500">Stable/Volatile insights</span>
+                                                    </li>
+                                                    <li className="flex items-start">
+                                                        <span className="text-gray-400 mr-2">✗</span>
+                                                        <span className="text-gray-500">Advanced analytics</span>
+                                                    </li>
+                                                </ul>
+                                                {(() => {
+                                                    const cachedData = getUserData();
+                                                    const currentPlan = (cachedData?.subscription_plan || subscriptionPlan || "free").toLowerCase();
+                                                    const isUserPremium = currentPlan === "premium";
+                                                    const subscriptionEndDate = cachedData?.subscription_end_date || userData?.subscription_end_date;
+                                                    const isSubscriptionActive = subscriptionEndDate ? new Date(subscriptionEndDate) > new Date() : false;
+                                                    
+                                                    if (!isUserPremium || !isSubscriptionActive) {
+                                                        return (
+                                                            <button
+                                                                disabled
+                                                                className="w-full py-2 px-4 border-2 border-gray-300 text-gray-700 rounded-lg bg-gray-50 cursor-default text-sm"
+                                                            >
+                                                                Current Plan
+                                                            </button>
+                                                        );
+                                                    }
+                                                    return null;
+                                                })()}
+                                            </div>
+
+                                            {/* Premium Plans */}
+                                            {availablePlans.filter(p => p.plan_type === "premium").map((plan) => {
+                                                const isActivePlan = activePlanTemplateId !== null && plan.id === activePlanTemplateId;
+                                                
+                                                return (
+                                                    <div
+                                                        key={plan.id}
+                                                        className={`relative bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border-2 ${
+                                                            isActivePlan ? "border-emerald-500" : "border-blue-500"
+                                                        } p-4 shadow-lg`}
+                                                    >
+                                                        {isActivePlan && (
+                                                            <div className="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                                                                Active
+                                                            </div>
+                                                        )}
+                                                        {(() => {
+                                                            const cachedData = getUserData();
+                                                            const currentPlan = (cachedData?.subscription_plan || subscriptionPlan || "free").toLowerCase();
+                                                            const isUserPremium = currentPlan === "premium";
+                                                            const subscriptionEndDate = cachedData?.subscription_end_date || userData?.subscription_end_date;
+                                                            const isSubscriptionActive = subscriptionEndDate ? new Date(subscriptionEndDate) > new Date() : false;
+                                                            
+                                                            if (!isUserPremium || !isSubscriptionActive) {
+                                                                return (
+                                                                    <div className="absolute top-2 right-2">
+                                                                        <span className="text-blue-600 text-xs font-semibold">↑ Next</span>
+                                                                    </div>
+                                                                );
+                                                            }
+                                                            return null;
+                                                        })()}
+                                                        <div className="mb-4">
+                                                            <h3 className="text-xl font-bold text-gray-900 mb-2">{plan.name}</h3>
+                                                            <div className="flex items-baseline">
+                                                                <span className="text-3xl font-bold text-gray-900">₹{plan.price}</span>
+                                                                <span className="text-gray-600 ml-2 text-sm">
+                                                                    /{plan.duration_months === 1 ? "month" : `${plan.duration_months} months`}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <ul className="space-y-2 mb-4 text-sm">
+                                                            <li className="flex items-start">
+                                                                <span className="text-green-500 mr-2">✓</span>
+                                                                <span className="text-gray-700">Everything in Free</span>
+                                                            </li>
+                                                            <li className="flex items-start">
+                                                                <span className="text-green-500 mr-2">✓</span>
+                                                                <span className="text-gray-700">Stable/Volatile topic insights</span>
+                                                            </li>
+                                                            <li className="flex items-start">
+                                                                <span className="text-green-500 mr-2">✓</span>
+                                                                <span className="text-gray-700">Advanced analytics & trends</span>
+                                                            </li>
+                                                            <li className="flex items-start">
+                                                                <span className="text-green-500 mr-2">✓</span>
+                                                                <span className="text-gray-700">Cross-exam comparisons</span>
+                                                            </li>
+                                                            <li className="flex items-start">
+                                                                <span className="text-green-500 mr-2">✓</span>
+                                                                <span className="text-gray-700">Priority support</span>
+                                                            </li>
+                                                        </ul>
+                                                        {isActivePlan ? (
+                                                            <button
+                                                                disabled
+                                                                className="w-full py-2 px-4 bg-green-500 text-white rounded-lg cursor-not-allowed text-sm font-semibold"
+                                                            >
+                                                                Premium Active ✓
+                                                            </button>
+                                                        ) : (
+                                                            <button
+                                                                onClick={() => navigate("/subscription")}
+                                                                className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-semibold"
+                                                            >
+                                                                Upgrade to {plan.name}
+                                                            </button>
+                                                        )}
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    )}
+                                </div>
+                                
+                                {/* Feedback Section */}
+                                <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                                    <h2 className="text-xl font-semibold text-gray-900 mb-4">Feedback</h2>
+                                    <p className="text-sm text-gray-600 mb-4">
+                                        We'd love to hear your thoughts and suggestions
+                                    </p>
+                                    <textarea
+                                        value={feedback}
+                                        onChange={(e) => setFeedback(e.target.value)}
+                                        placeholder="Share your feedback, suggestions, or report issues..."
+                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 resize-none"
+                                        rows={4}
+                                    />
+                                    <button
+                                        onClick={handleSubmitFeedback}
+                                        disabled={isSubmittingFeedback || !feedback.trim()}
+                                        className="mt-3 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+                                    >
+                                        {isSubmittingFeedback ? "Submitting..." : "Submit Feedback"}
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </motion.div>
                 </div>
             </main>
+            
+            {/* Edit Profile Modal */}
+            <EditProfileModal
+                isOpen={isEditProfileOpen}
+                onClose={() => setIsEditProfileOpen(false)}
+                currentFullName={fullName}
+                currentUsername={username}
+                onSave={handleEditProfileSave}
+            />
+            
+            {/* Transaction Modal */}
+            <TransactionModal
+                isOpen={isTransactionModalOpen}
+                onClose={() => setIsTransactionModalOpen(false)}
+            />
+            
+            {/* Avatar Editor Modal */}
+            <AvatarEditor
+                isOpen={isEditingAvatar}
+                onClose={() => setIsEditingAvatar(false)}
+                currentInitials={getUserInitials()}
+                currentName={fullName || username}
+                onSave={handleAvatarSave}
+            />
+            
+            {/* Delete Account Confirmation Modal - Double Confirmation */}
+            {showDeleteConfirm && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="bg-white rounded-xl shadow-xl max-w-md w-full mx-4 p-6"
+                    >
+                        <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 bg-red-100 rounded-full">
+                            <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                        </div>
+                        <h2 className="text-xl font-semibold text-gray-900 mb-2 text-center">Delete Account</h2>
+                        <p className="text-gray-600 mb-2 text-center">
+                            This action cannot be undone. All your data will be permanently deleted.
+                        </p>
+                        <p className="text-sm text-red-600 mb-4 text-center font-medium">
+                            You will be immediately logged out after deletion.
+                        </p>
+                        <div className="mb-4">
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Type <span className="font-mono text-red-600 font-bold">DELETE</span> to confirm:
+                            </label>
+                            <input
+                                type="text"
+                                value={deleteConfirmText}
+                                onChange={(e) => setDeleteConfirmText(e.target.value)}
+                                className="w-full px-4 py-2 border-2 border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                                placeholder="Type DELETE here"
+                            />
+                        </div>
+                        {errorMessage && deleteConfirmText && (
+                            <div className="mb-4 bg-red-50 border border-red-200 text-red-700 px-4 py-2 rounded-lg text-sm">
+                                {errorMessage}
+                            </div>
+                        )}
+                        <div className="flex gap-3">
+                            <button
+                                onClick={() => {
+                                    setShowDeleteConfirm(false);
+                                    setDeleteConfirmText("");
+                                    setErrorMessage("");
+                                }}
+                                className="flex-1 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={handleDeleteAccount}
+                                disabled={deleteConfirmText !== "DELETE"}
+                                className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed font-semibold"
+                            >
+                                Delete Account
+                            </button>
+                        </div>
+                    </motion.div>
+                </div>
+            )}
         </div>
     );
 }
