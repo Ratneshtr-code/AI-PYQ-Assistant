@@ -568,3 +568,63 @@ async def get_active_subscription(
             detail="Failed to get active subscription"
         )
 
+
+class UserOrderResponse(BaseModel):
+    id: int
+    order_id: str
+    amount: float
+    currency: str
+    status: str
+    razorpay_order_id: Optional[str] = None
+    razorpay_payment_id: Optional[str] = None
+    subscription_plan_id: Optional[int] = None
+    plan_name: Optional[str] = None
+    created_at: datetime
+    payment_date: Optional[datetime] = None
+
+
+@router.get("/user-orders", response_model=list[UserOrderResponse])
+async def get_user_orders(
+    current_user: User = Depends(get_current_active_user),
+    db: Session = Depends(get_db)
+):
+    """Get all payment orders for the current user"""
+    try:
+        # Get all payment orders for this user, ordered by most recent first
+        payment_orders = db.query(PaymentOrder).filter(
+            PaymentOrder.user_id == current_user.id
+        ).order_by(PaymentOrder.created_at.desc()).all()
+        
+        # Convert to response models
+        orders = []
+        for order in payment_orders:
+            # Get plan name if available
+            plan_name = None
+            if order.subscription_plan_id:
+                plan_template = db.query(SubscriptionPlanTemplate).filter(
+                    SubscriptionPlanTemplate.id == order.subscription_plan_id
+                ).first()
+                if plan_template:
+                    plan_name = plan_template.name
+            
+            orders.append(UserOrderResponse(
+                id=order.id,
+                order_id=order.order_id,
+                amount=order.amount,
+                currency=order.currency,
+                status=order.status.value,
+                razorpay_order_id=order.razorpay_order_id,
+                razorpay_payment_id=order.razorpay_payment_id,
+                subscription_plan_id=order.subscription_plan_id,
+                plan_name=plan_name,
+                created_at=order.created_at,
+                payment_date=order.payment_date
+            ))
+        
+        return orders
+    except Exception as e:
+        logger.error(f"Error getting user orders: {e}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to get user orders"
+        )

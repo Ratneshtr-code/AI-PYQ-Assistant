@@ -448,6 +448,23 @@ class UserQuestionProgress(Base):
     )
 
 
+class UserFeedback(Base):
+    """User feedback and suggestions"""
+    __tablename__ = "user_feedback"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
+    feedback_text = Column(Text, nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow, nullable=False, index=True)
+    
+    # Optional: Status tracking
+    status = Column(String, default="new", nullable=False)  # "new", "read", "resolved", "archived"
+    admin_notes = Column(Text, nullable=True)  # Admin can add notes
+    
+    # Relationship
+    user = relationship("User", backref="feedback")
+
+
 def init_db():
     """Initialize database tables"""
     Base.metadata.create_all(bind=engine)

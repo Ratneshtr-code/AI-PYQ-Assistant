@@ -28,6 +28,7 @@ from app.notes_api import router as notes_router
 from app.payment_api import router as payment_router
 from app.exam_api import router as exam_router
 from app.roadmap_api import router as roadmap_router
+from app.feedback_api import router as feedback_router
 
 # LLM Service
 from app.llm_service import get_llm_service
@@ -42,6 +43,7 @@ app.include_router(notes_router)
 app.include_router(payment_router)
 app.include_router(exam_router)
 app.include_router(roadmap_router)
+app.include_router(feedback_router)
 
 # Log registered routes for debugging
 print("✅ Routers included:")
@@ -51,6 +53,7 @@ print(f"   - Notes router: {len(notes_router.routes)} routes")
 print(f"   - Payment router: {len(payment_router.routes)} routes")
 print(f"   - Exam router: {len(exam_router.routes)} routes")
 print(f"   - Roadmap router: {len(roadmap_router.routes)} routes")
+print(f"   - Feedback router: {len(feedback_router.routes)} routes")
 print(f"   Notes routes: {[r.path for r in notes_router.routes]}")
 
 origins = [

@@ -871,10 +871,11 @@ export default function AccountPage() {
                         {/* Two Column Layout */}
                         <div className="grid grid-cols-1 lg:grid-cols-10 gap-6">
                             {/* Left Section (25-30%) */}
-                            <div className="lg:col-span-3 space-y-4">
-                                {/* User Profile Card */}
+                            <div className="lg:col-span-3">
+                                {/* Combined User Account Card */}
                                 <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-                                    <div className="flex flex-col items-center mb-4">
+                                    {/* User Profile Section */}
+                                    <div className="flex flex-col items-center mb-6">
                                         <div
                                             className="w-24 h-24 rounded-full flex items-center justify-center text-white font-semibold text-2xl mb-4"
                                             style={{ 
@@ -888,15 +889,16 @@ export default function AccountPage() {
                                     </div>
                                     <button
                                         onClick={() => setIsEditProfileOpen(true)}
-                                        className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                                        className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors mb-6"
                                     >
                                         Edit Profile
                                     </button>
-                                </div>
-                                
-                                {/* Premium/Upgrade Status */}
-                                <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-                                    <div>
+                                    
+                                    {/* Divider */}
+                                    <div className="border-t border-gray-200 my-6"></div>
+                                    
+                                    {/* Premium/Upgrade Status Section */}
+                                    <div className="mb-6">
                                         {(() => {
                                             // Re-check subscription status directly from localStorage for most accurate status
                                             const cachedData = getUserData();
@@ -968,62 +970,75 @@ export default function AccountPage() {
                                             }
                                         })()}
                                     </div>
-                                </div>
-                                
-                                {/* Admin Section */}
-                                {userIsAdmin && (
-                                    <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-                                        <h3 className="text-sm font-semibold text-gray-900 mb-3">Admin Tools</h3>
-                                        <div className="space-y-2">
-                                            <button
-                                                onClick={() => navigate("/admin")}
-                                                className="w-full px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors text-sm font-medium"
-                                            >
-                                                Admin Panel
-                                            </button>
-                                            <button
-                                                onClick={() => navigate("/admin/subscription-management")}
-                                                className="w-full px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors text-sm font-medium"
-                                            >
-                                                Subscription Management
-                                            </button>
-                                        </div>
+                                    
+                                    {/* Admin Section */}
+                                    {userIsAdmin && (
+                                        <>
+                                            {/* Divider */}
+                                            <div className="border-t border-gray-200 my-6"></div>
+                                            <div className="mb-6">
+                                                <h3 className="text-sm font-semibold text-gray-900 mb-3">Admin Tools</h3>
+                                                <div className="space-y-2">
+                                                    <button
+                                                        onClick={() => navigate("/admin")}
+                                                        className="w-full px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors text-sm font-medium"
+                                                    >
+                                                        Admin Panel
+                                                    </button>
+                                                    <button
+                                                        onClick={() => navigate("/admin/subscription-management")}
+                                                        className="w-full px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors text-sm font-medium"
+                                                    >
+                                                        Subscription Management
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </>
+                                    )}
+                                    
+                                    {/* Divider */}
+                                    <div className="border-t border-gray-200 my-6"></div>
+                                    
+                                    {/* Language Preference Section */}
+                                    <div className="mb-6">
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Language Mode:
+                                        </label>
+                                        <select
+                                            value={language}
+                                            onChange={(e) => handleLanguageChange(e.target.value)}
+                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                        >
+                                            <option value="en">English</option>
+                                            <option value="hi">Hindi</option>
+                                            <option value="es">Spanish</option>
+                                            <option value="fr">French</option>
+                                            <option value="de">German</option>
+                                        </select>
                                     </div>
-                                )}
-                                
-                                {/* Language Preference */}
-                                <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Language Mode:
-                                    </label>
-                                    <select
-                                        value={language}
-                                        onChange={(e) => handleLanguageChange(e.target.value)}
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                    
+                                    {/* Divider */}
+                                    <div className="border-t border-gray-200 my-6"></div>
+                                    
+                                    {/* Transaction Button */}
+                                    <button
+                                        onClick={() => setIsTransactionModalOpen(true)}
+                                        className="w-full px-4 py-2 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors text-purple-600 font-medium mb-4"
                                     >
-                                        <option value="en">English</option>
-                                        <option value="hi">Hindi</option>
-                                        <option value="es">Spanish</option>
-                                        <option value="fr">French</option>
-                                        <option value="de">German</option>
-                                    </select>
+                                        Transaction
+                                    </button>
+                                    
+                                    {/* Divider */}
+                                    <div className="border-t border-gray-200 my-6"></div>
+                                    
+                                    {/* Delete Account Button */}
+                                    <button
+                                        onClick={() => setShowDeleteConfirm(true)}
+                                        className="w-full px-4 py-2 bg-white border border-gray-200 rounded-lg hover:bg-red-50 transition-colors text-red-600 font-medium"
+                                    >
+                                        Delete Account
+                                    </button>
                                 </div>
-                                
-                                {/* Transaction Button */}
-                                <button
-                                    onClick={() => setIsTransactionModalOpen(true)}
-                                    className="w-full px-4 py-2 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors text-purple-600 font-medium shadow-sm"
-                                >
-                                    Transaction
-                                </button>
-                                
-                                {/* Delete Account Button */}
-                                <button
-                                    onClick={() => setShowDeleteConfirm(true)}
-                                    className="w-full px-4 py-2 bg-white border border-gray-200 rounded-lg hover:bg-red-50 transition-colors text-red-600 font-medium shadow-sm"
-                                >
-                                    Delete Account
-                                </button>
                             </div>
                             
                             {/* Right Section (70%) */}

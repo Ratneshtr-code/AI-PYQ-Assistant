@@ -1,7 +1,7 @@
 // src/components/TransactionModal.jsx
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { authenticatedFetch } from "../utils/auth";
+import { authenticatedFetch, getUserData } from "../utils/auth";
 
 export default function TransactionModal({ isOpen, onClose }) {
     const [transactions, setTransactions] = useState([]);
@@ -17,16 +17,160 @@ export default function TransactionModal({ isOpen, onClose }) {
     const fetchTransactions = async () => {
         setLoading(true);
         setError("");
+        const allTransactions = [];
+        
         try {
-            const response = await authenticatedFetch("/payment/transactions");
-            if (response.ok) {
-                const data = await response.json();
-                setTransactions(data.transactions || data || []);
-            } else if (response.status === 404) {
-                // No transactions endpoint or no transactions
-                setTransactions([]);
-            } else {
-                setError("Failed to load transactions");
+            // PRIMARY: Fetch user orders from the database (this is the main source)
+            try {
+                const ordersResponse = await authenticatedFetch("/payment/user-orders");
+                if (ordersResponse.ok) {
+                    const orders = await ordersResponse.json();
+                    if (Array.isArray(orders) && orders.length > 0) {
+                        orders.forEach(order => {
+                            allTransactions.push({
+                                id: order.id,
+                                order_id: order.order_id,
+                                plan_name: order.plan_name || "Premium Subscription",
+                                amount: order.amount || 0,
+                                status: order.status?.toLowerCase() === "paid" ? "completed" : 
+                                       order.status?.toLowerCase() === "success" ? "completed" :
+                                       order.status?.toLowerCase() || "completed",
+                                created_at: order.created_at || order.payment_date || order.created_at,
+                                description: `Subscription: ${order.plan_name || "Premium"}`,
+                                payment_method: "Razorpay",
+                                razorpay_order_id: order.razorpay_order_id,
+                                razorpay_payment_id: order.razorpay_payment_id,
+                                currency: order.currency || "INR"
+                            });
+                        });
+                        console.log("Found orders from /payment/user-orders:", orders.length);
+                    }
+                } else if (ordersResponse.status !== 404) {
+                    console.log("User orders endpoint returned:", ordersResponse.status);
+                }
+            } catch (err) {
+                console.log("User orders endpoint error:", err);
+            }
+            
+            // Try to fetch from transactions endpoint (if it exists) - secondary source
+            try {
+                const response = await authenticatedFetch("/payment/transactions");
+                if (response.ok) {
+                    const data = await response.json();
+                    const transactions = data.transactions || data || [];
+                    if (Array.isArray(transactions)) {
+                        transactions.forEach(transaction => {
+                            // Check if we already have this transaction
+                            const existing = allTransactions.find(
+                                t => t.order_id === transaction.order_id || 
+                                     (transaction.id && t.id === transaction.id)
+                            );
+                            if (!existing) {
+                                allTransactions.push(transaction);
+                            }
+                        });
+                        console.log("Found transactions from /payment/transactions:", transactions.length);
+                    }
+                } else if (response.status !== 404) {
+                    console.log("Transactions endpoint returned:", response.status);
+                }
+            } catch (err) {
+                // Endpoint doesn't exist (404) - this is expected, ignore
+                if (err.message && !err.message.includes("404")) {
+                    console.log("Transactions endpoint error:", err);
+                }
+            }
+            
+            // Also try to fetch active subscription which might contain transaction info (fallback)
+            try {
+                const activeSubResponse = await authenticatedFetch("/payment/active-subscription");
+                if (activeSubResponse.ok) {
+                    const activeSubData = await activeSubResponse.json();
+                    console.log("Active subscription data:", activeSubData);
+                    
+                    // Handle different response structures
+                    const subscription = activeSubData.subscription || activeSubData;
+                    
+                    // If user has active subscription, create a transaction entry from it
+                    if (activeSubData.is_active) {
+                        // Try to find order_id from various possible fields
+                        const orderId = subscription.order_id || 
+                                       subscription.payment_order_id || 
+                                       subscription.razorpay_order_id ||
+                                       subscription.payment_id ||
+                                       subscription.id ||
+                                       activeSubData.order_id;
+                        
+                        // Try to find plan name from various possible fields
+                        const planName = subscription.plan_name || 
+                                       subscription.plan_template?.name ||
+                                       subscription.plan_template_name ||
+                                       activeSubData.plan_name ||
+                                       (activeSubData.active_plan_template_id ? "Premium Subscription" : null) ||
+                                       "Premium Subscription";
+                        
+                        // Try to find amount from various possible fields
+                        const amount = subscription.amount || 
+                                     subscription.price ||
+                                     subscription.plan_template?.price ||
+                                     subscription.payment_amount ||
+                                     activeSubData.amount ||
+                                     activeSubData.price ||
+                                     0;
+                        
+                        // Try to find dates from various possible fields
+                        const createdAt = subscription.created_at || 
+                                        subscription.subscription_start_date || 
+                                        subscription.payment_date ||
+                                        subscription.start_date ||
+                                        subscription.purchased_at ||
+                                        subscription.created_date ||
+                                        activeSubData.created_at ||
+                                        activeSubData.subscription_start_date ||
+                                        activeSubData.payment_date;
+                        
+                        // Check if we already have this transaction
+                        const existingTransaction = allTransactions.find(
+                            t => (orderId && (t.order_id === orderId || t.id === orderId)) ||
+                                 (t.plan_name === planName && amount > 0 && t.amount === amount)
+                        );
+                        
+                        // For premium users with active subscription, always create a transaction entry
+                        // even if some details are missing
+                        if (!existingTransaction) {
+                            // Create transaction entry from subscription data
+                            const transaction = {
+                                id: orderId || `sub_${activeSubData.active_plan_template_id || Date.now()}`,
+                                order_id: orderId || `SUB-${activeSubData.active_plan_template_id || Date.now()}`,
+                                plan_name: planName,
+                                amount: amount,
+                                status: subscription.status || subscription.payment_status || activeSubData.status || "completed",
+                                created_at: createdAt || subscription.subscription_start_date || activeSubData.subscription_start_date || new Date().toISOString(),
+                                description: `Subscription: ${planName}`,
+                                payment_method: subscription.payment_method || subscription.payment_gateway || activeSubData.payment_method || "Razorpay",
+                                subscription_end_date: subscription.subscription_end_date || subscription.end_date || activeSubData.subscription_end_date
+                            };
+                            allTransactions.push(transaction);
+                            console.log("Created transaction from active subscription:", transaction);
+                        }
+                    }
+                }
+            } catch (err) {
+                console.log("Active subscription endpoint not available or failed:", err);
+            }
+            
+            
+            // Sort transactions by date (newest first)
+            allTransactions.sort((a, b) => {
+                const dateA = new Date(a.created_at || a.date || a.timestamp || 0);
+                const dateB = new Date(b.created_at || b.date || b.timestamp || 0);
+                return dateB - dateA;
+            });
+            
+            setTransactions(allTransactions);
+            
+            if (allTransactions.length === 0) {
+                console.log("No transactions found from any endpoint");
             }
         } catch (err) {
             console.error("Failed to fetch transactions:", err);
@@ -99,7 +243,26 @@ export default function TransactionModal({ isOpen, onClose }) {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                             </svg>
                             <p className="text-gray-600 font-medium">No transactions found</p>
-                            <p className="text-sm text-gray-500 mt-2">You haven't made any transactions yet</p>
+                            {(() => {
+                                const userData = getUserData();
+                                const isPremium = userData?.subscription_plan === "premium" || 
+                                                  localStorage.getItem("hasPremium") === "true";
+                                if (isPremium) {
+                                    return (
+                                        <>
+                                            <p className="text-sm text-gray-500 mt-2">
+                                                Your subscription is active, but transaction details are not available.
+                                            </p>
+                                            <p className="text-xs text-gray-400 mt-1">
+                                                This may be due to a test subscription or admin-granted access.
+                                            </p>
+                                        </>
+                                    );
+                                }
+                                return (
+                                    <p className="text-sm text-gray-500 mt-2">You haven't made any transactions yet</p>
+                                );
+                            })()}
                         </div>
                     ) : (
                         <div className="space-y-3">
@@ -134,11 +297,23 @@ export default function TransactionModal({ isOpen, onClose }) {
                                             </span>
                                         </div>
                                     </div>
-                                    {transaction.order_id && (
-                                        <p className="text-xs text-gray-500 mt-2">
-                                            Order ID: {transaction.order_id}
-                                        </p>
-                                    )}
+                                    <div className="mt-2 space-y-1">
+                                        {transaction.order_id && (
+                                            <p className="text-xs text-gray-500">
+                                                Order ID: {transaction.order_id}
+                                            </p>
+                                        )}
+                                        {transaction.razorpay_order_id && (
+                                            <p className="text-xs text-gray-500">
+                                                Razorpay Order: {transaction.razorpay_order_id}
+                                            </p>
+                                        )}
+                                        {transaction.razorpay_payment_id && (
+                                            <p className="text-xs text-gray-500">
+                                                Payment ID: {transaction.razorpay_payment_id}
+                                            </p>
+                                        )}
+                                    </div>
                                 </div>
                             ))}
                         </div>
