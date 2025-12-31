@@ -935,3 +935,18 @@ def reattempt_exam(
         db=db
     )
 
+
+@router.get("/languages")
+def get_supported_languages():
+    """
+    Get list of supported languages for the application.
+    Currently supports: English and Hindi
+    Future: This can be moved to a database table for dynamic management
+    """
+    return {
+        "languages": [
+            {"code": "en", "name": "English"},
+            {"code": "hi", "name": "Hindi"}
+        ]
+    }
+

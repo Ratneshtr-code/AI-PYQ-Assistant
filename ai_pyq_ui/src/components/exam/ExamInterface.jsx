@@ -369,7 +369,7 @@ export default function ExamInterface() {
     return (
         <div className="min-h-screen bg-white">
             {/* Header */}
-            <div className="bg-gradient-to-r from-blue-700 via-blue-800 to-blue-900 text-white shadow-lg flex-shrink-0 z-50">
+            <div className="bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600 text-white shadow-lg flex-shrink-0 z-50">
                 <div className="w-full px-6 py-4">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
@@ -377,48 +377,53 @@ export default function ExamInterface() {
                                 <span className="text-xl font-bold">📝</span>
                             </div>
                             <div>
-                                <h1 className="text-lg font-bold">AI PYQ Assistant</h1>
-                                <p className="text-xs text-blue-200 opacity-90">Exam Mode</p>
+                                <h1 className="text-xl font-bold">AI PYQ Assistant</h1>
+                                <p className="text-sm text-blue-100 opacity-95">
+                                    {examData?.exam_set?.exam_type === "pyp" ? "PYQ Test" :
+                                     examData?.exam_set?.exam_type === "mock_test" ? "Mock Test" :
+                                     examData?.exam_set?.exam_type === "subject_test" ? "Subject Test" :
+                                     "Exam Mode"}
+                                </p>
                             </div>
-                            <span className="text-blue-300 mx-2">|</span>
-                            <span className="text-sm font-medium truncate max-w-xl">{examData.exam_set.name}</span>
+                            <span className="text-blue-200 mx-2">|</span>
+                            <span className="text-base font-semibold truncate max-w-xl">{examData?.exam_set?.name}</span>
                         </div>
                         <div className="flex items-center gap-4">
                             <button
                                 onClick={() => setFontSize(Math.max(12, fontSize - 2))}
-                                className="px-3 py-1.5 bg-white bg-opacity-20 hover:bg-opacity-30 rounded text-sm font-medium transition-all"
+                                className="px-3 py-1.5 bg-white bg-opacity-20 hover:bg-opacity-30 rounded text-base font-semibold transition-all"
                             >
                                 Zoom (-)
                             </button>
                             <button
                                 onClick={() => setFontSize(Math.min(24, fontSize + 2))}
-                                className="px-3 py-1.5 bg-white bg-opacity-20 hover:bg-opacity-30 rounded text-sm font-medium transition-all"
+                                className="px-3 py-1.5 bg-white bg-opacity-20 hover:bg-opacity-30 rounded text-base font-semibold transition-all"
                             >
                                 Zoom (+)
                             </button>
                             <button
                                 onClick={toggleFullscreen}
-                                className="px-3 py-1.5 bg-white bg-opacity-20 hover:bg-opacity-30 rounded text-sm font-medium transition-all"
+                                className="px-3 py-1.5 bg-white bg-opacity-20 hover:bg-opacity-30 rounded text-base font-semibold transition-all"
                             >
                                 {isFullscreen ? "Exit Fullscreen" : "Switch Full Screen"}
                             </button>
                             <button
                                 onClick={() => setIsPaused(!isPaused)}
-                                className="px-3 py-1.5 bg-white bg-opacity-20 hover:bg-opacity-30 rounded text-sm font-medium transition-all"
+                                className="px-3 py-1.5 bg-white bg-opacity-20 hover:bg-opacity-30 rounded text-base font-semibold transition-all"
                             >
                                 {isPaused ? "Resume" : "Pause"}
                             </button>
                             <button
                                 onClick={handleExitExam}
-                                className="px-3 py-1.5 bg-red-600 hover:bg-red-700 rounded text-sm font-medium transition-all flex items-center gap-2"
+                                className="px-3 py-1.5 bg-red-500 hover:bg-red-600 rounded text-base font-semibold transition-all flex items-center gap-2"
                                 title="Exit Exam"
                             >
-                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                                 </svg>
                                 Exit
                             </button>
-                            <div className={`text-lg font-bold ${timeRemaining < 300 ? "text-red-300" : "text-white"}`}>
+                            <div className={`text-xl font-bold ${timeRemaining < 300 ? "text-red-200" : "text-white"}`}>
                                 Time Left {formatTime(timeRemaining)}
                             </div>
                         </div>
@@ -557,10 +562,10 @@ export default function ExamInterface() {
                         {/* User Profile */}
                         {userData && (
                             <div className="mb-3 flex items-center gap-3 flex-shrink-0">
-                                <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                                <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-xl flex-shrink-0">
                                     {userData.username?.[0]?.toUpperCase() || "U"}
                                 </div>
-                                <div className="text-sm font-semibold text-gray-700 truncate">{userData.username || "User"}</div>
+                                <div className="text-base font-semibold text-gray-700 truncate">{userData.username || "User"}</div>
                             </div>
                         )}
 

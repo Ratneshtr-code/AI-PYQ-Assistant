@@ -15,8 +15,7 @@ export default function ExamInstructions() {
     const [declarationChecked, setDeclarationChecked] = useState(false);
     const [starting, setStarting] = useState(false);
     const [currentPage, setCurrentPage] = useState("symbols"); // "symbols" or "instructions"
-
-    const languages = ["English", "Hindi", "Telugu", "Bengali", "Marathi", "Gujarati", "Kannada", "Tamil"];
+    const [languages, setLanguages] = useState([]);
 
     useEffect(() => {
         const fetchExamSet = async () => {
@@ -43,6 +42,32 @@ export default function ExamInstructions() {
             fetchExamSet();
         }
     }, [examSetId]);
+
+    // Fetch supported languages from backend
+    useEffect(() => {
+        const fetchLanguages = async () => {
+            try {
+                const response = await fetch(`${API_BASE_URL}/exam/languages`, {
+                    credentials: "include"
+                });
+                
+                if (!response.ok) {
+                    throw new Error("Failed to fetch languages");
+                }
+                
+                const data = await response.json();
+                // Extract language names from the response
+                const languageNames = data.languages.map(lang => lang.name);
+                setLanguages(languageNames);
+            } catch (err) {
+                console.error("Error fetching languages:", err);
+                // Fallback to default languages if API fails
+                setLanguages(["English", "Hindi"]);
+            }
+        };
+        
+        fetchLanguages();
+    }, []);
 
     const handleStartExam = async () => {
         if (!selectedLanguage) {
@@ -120,7 +145,7 @@ export default function ExamInstructions() {
     return (
         <div className="h-screen bg-gray-50 flex flex-col overflow-hidden">
             {/* Premium Header - Fixed at top */}
-            <div className="bg-gradient-to-r from-blue-700 via-blue-800 to-blue-900 text-white shadow-lg flex-shrink-0 z-50 fixed top-0 left-0 right-0">
+            <div className="bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600 text-white shadow-lg flex-shrink-0 z-50 fixed top-0 left-0 right-0">
                 <div className="w-full px-6 py-4">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
@@ -128,11 +153,16 @@ export default function ExamInstructions() {
                                 <span className="text-xl font-bold">📝</span>
                             </div>
                             <div>
-                                <h1 className="text-lg font-bold">AI PYQ Assistant</h1>
-                                <p className="text-xs text-blue-200 opacity-90">Exam Mode</p>
+                                <h1 className="text-xl font-bold">AI PYQ Assistant</h1>
+                                <p className="text-sm text-blue-100 opacity-95">
+                                    {examSet?.exam_type === "pyp" ? "PYQ Test" :
+                                     examSet?.exam_type === "mock_test" ? "Mock Test" :
+                                     examSet?.exam_type === "subject_test" ? "Subject Test" :
+                                     "Exam Mode"}
+                                </p>
                             </div>
-                            <span className="text-blue-300 mx-2">|</span>
-                            <span className="text-sm font-medium truncate max-w-xl">{examSet.name}</span>
+                            <span className="text-blue-200 mx-2">|</span>
+                            <span className="text-base font-semibold truncate max-w-xl">{examSet?.name}</span>
                         </div>
                     </div>
                 </div>

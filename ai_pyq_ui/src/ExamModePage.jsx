@@ -101,7 +101,8 @@ export default function ExamModePage() {
                     if (testType === "mock") {
                         return set.exam_type === "mock_test";
                     } else if (testType === "exam") {
-                        return !set.subject || set.exam_type === "pyp";
+                        // PYQ Tests: Only show exam_type === "pyp" and no subject (full papers)
+                        return set.exam_type === "pyp" && !set.subject;
                     } else if (testType === "subject") {
                         return set.subject && set.exam_type === "subject_test";
                     } else if (testType === "my-attempts") {
@@ -461,10 +462,10 @@ export default function ExamModePage() {
                 }`}
             >
                 {/* Content Area */}
-                <div className="w-full max-w-7xl mx-auto px-4 md:px-8 py-6 md:py-8 space-y-4">
+                <div className="w-full max-w-6xl mx-auto px-4 md:px-6 py-6 md:py-8 space-y-4">
                     {/* Header */}
-                    <div className="mb-8">
-                        <h1 className="text-4xl font-bold text-gray-900 mb-2">
+                    <div className="mb-6">
+                        <h1 className="text-2xl font-bold text-gray-900 mb-2">
                             Test Series
                         </h1>
                         <p className="text-gray-600 text-lg">
@@ -473,23 +474,23 @@ export default function ExamModePage() {
                     </div>
 
                     {/* Test Type Selection */}
-                    <div className="mb-8">
-                        <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div className="mb-6">
+                        <div className="bg-white rounded-xl shadow-lg p-4 border border-gray-200">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
                                 <motion.button
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
                                     onClick={() => {
                                         setTestType("mock");
                                     }}
-                                    className={`p-6 rounded-xl border-2 transition-all ${
+                                    className={`p-4 rounded-xl border-2 transition-all ${
                                         testType === "mock"
                                             ? "border-blue-500 bg-blue-50 shadow-md"
                                             : "border-gray-200 bg-white hover:border-gray-300"
                                     }`}
                                 >
-                                    <div className="flex items-center gap-4">
-                                        <div className={`w-16 h-16 rounded-lg flex items-center justify-center text-3xl ${
+                                    <div className="flex items-center gap-3">
+                                        <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-2xl ${
                                             testType === "mock" ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-600"
                                         }`}>
                                             🎯
@@ -514,14 +515,14 @@ export default function ExamModePage() {
                                         setTestType("exam");
                                         setSubject("");
                                     }}
-                                    className={`p-6 rounded-xl border-2 transition-all ${
+                                    className={`p-4 rounded-xl border-2 transition-all ${
                                         testType === "exam"
                                             ? "border-blue-500 bg-blue-50 shadow-md"
                                             : "border-gray-200 bg-white hover:border-gray-300"
                                     }`}
                                 >
-                                    <div className="flex items-center gap-4">
-                                        <div className={`w-16 h-16 rounded-lg flex items-center justify-center text-3xl ${
+                                    <div className="flex items-center gap-3">
+                                        <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-2xl ${
                                             testType === "exam" ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-600"
                                         }`}>
                                             📝
@@ -543,14 +544,14 @@ export default function ExamModePage() {
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
                                     onClick={() => setTestType("subject")}
-                                    className={`p-6 rounded-xl border-2 transition-all ${
+                                    className={`p-4 rounded-xl border-2 transition-all ${
                                         testType === "subject"
                                             ? "border-blue-500 bg-blue-50 shadow-md"
                                             : "border-gray-200 bg-white hover:border-gray-300"
                                     }`}
                                 >
-                                    <div className="flex items-center gap-4">
-                                        <div className={`w-16 h-16 rounded-lg flex items-center justify-center text-3xl ${
+                                    <div className="flex items-center gap-3">
+                                        <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-2xl ${
                                             testType === "subject" ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-600"
                                         }`}>
                                             📚
@@ -576,14 +577,14 @@ export default function ExamModePage() {
                                         setExam(""); // Clear exam filter for "My Tests" tab
                                         setSubject(""); // Clear subject filter for "My Tests" tab
                                     }}
-                                    className={`p-6 rounded-xl border-2 transition-all ${
+                                    className={`p-4 rounded-xl border-2 transition-all ${
                                         testType === "my-attempts"
                                             ? "border-blue-500 bg-blue-50 shadow-md"
                                             : "border-gray-200 bg-white hover:border-gray-300"
                                     }`}
                                 >
-                                    <div className="flex items-center gap-4">
-                                        <div className={`w-16 h-16 rounded-lg flex items-center justify-center text-3xl ${
+                                    <div className="flex items-center gap-3">
+                                        <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-2xl ${
                                             testType === "my-attempts" ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-600"
                                         }`}>
                                             ✅
@@ -606,7 +607,7 @@ export default function ExamModePage() {
 
                     {/* Filters for My Tests - Test Type Filter */}
                     {testType === "my-attempts" && (
-                    <div className="mb-6 bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+                    <div className="mb-6 bg-white rounded-xl shadow-lg p-4 border border-gray-200">
                         <label className="block text-sm font-semibold text-gray-700 mb-3">
                             Filter by Test Type
                         </label>
@@ -669,8 +670,8 @@ export default function ExamModePage() {
 
                     {/* Filters - Show for Mock Tests, PYQ Tests, and Subject Tests */}
                     {testType !== "my-attempts" && (
-                    <div className="mb-6 bg-white rounded-xl shadow-lg p-6 border border-gray-200">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="mb-6 bg-white rounded-xl shadow-lg p-4 border border-gray-200">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                             <div>
                                 <label className="block text-sm font-semibold text-gray-700 mb-2">
                                     Select Exam
@@ -743,7 +744,7 @@ export default function ExamModePage() {
                                     </p>
                                 </div>
                             ) : (
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                                     {examSets.map((examSet, index) => {
                                         // Try both string and number ID matching
                                         const examSetId = String(examSet.id);
@@ -767,7 +768,7 @@ export default function ExamModePage() {
                                                 isAttempted ? 'border-green-300 bg-green-50/30' : 'border-gray-200'
                                             }`}
                                         >
-                                            <div className="p-6">
+                                            <div className="p-5">
                                                 {/* Exam Type Badge and Attempt Indicator */}
                                                 <div className="mb-3 flex items-center justify-between gap-2">
                                                     {examSet.exam_type && (
@@ -786,7 +787,7 @@ export default function ExamModePage() {
                                                 </div>
 
                                                 {/* Title */}
-                                                <h3 className="text-xl font-bold text-gray-900 mb-4">
+                                                <h3 className="text-lg font-semibold text-gray-900 mb-4">
                                                     {examSet.name}
                                                 </h3>
 
