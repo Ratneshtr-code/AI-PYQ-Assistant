@@ -36,6 +36,8 @@ class User(Base):
     username = Column(String, unique=True, index=True, nullable=False)
     hashed_password = Column(String, nullable=True)  # Nullable for OAuth users
     full_name = Column(String, nullable=True)
+    mobile_number = Column(String, nullable=True)  # Mobile number
+    preferred_language = Column(String, default="en", nullable=False)  # User's preferred language (ISO 639-1 code)
     is_active = Column(Boolean, default=True)
     is_admin = Column(Boolean, default=False)
     subscription_plan = Column(SQLEnum(SubscriptionPlan), default=SubscriptionPlan.FREE)

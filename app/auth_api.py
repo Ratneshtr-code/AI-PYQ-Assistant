@@ -56,6 +56,8 @@ class UserResponse(BaseModel):
     email: str
     username: str
     full_name: Optional[str]
+    mobile_number: Optional[str] = None
+    preferred_language: Optional[str] = "en"
     subscription_plan: str
     is_admin: bool
     profile_picture_url: Optional[str]
@@ -385,6 +387,8 @@ async def get_current_user_info(
         email=current_user.email,
         username=current_user.username,
         full_name=current_user.full_name,
+        mobile_number=current_user.mobile_number,
+        preferred_language=current_user.preferred_language,
         subscription_plan=current_user.subscription_plan.value,
         is_admin=current_user.is_admin,
         profile_picture_url=current_user.profile_picture_url,
@@ -413,6 +417,8 @@ async def logout(
 class ProfileUpdate(BaseModel):
     full_name: Optional[str] = None
     username: Optional[str] = None
+    mobile_number: Optional[str] = None
+    preferred_language: Optional[str] = None
 
 
 class PasswordChange(BaseModel):
@@ -452,6 +458,29 @@ async def update_profile(
             )
         current_user.username = username
     
+    # Update mobile_number if provided
+    if profile_update.mobile_number is not None:
+        mobile_number = profile_update.mobile_number.strip() if profile_update.mobile_number.strip() else None
+        # Basic validation: should be digits only, 10-15 digits (international format)
+        if mobile_number and not re.match(r"^\+?[1-9]\d{9,14}$", mobile_number):
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Mobile number must be 10-15 digits (international format with + prefix allowed)"
+            )
+        current_user.mobile_number = mobile_number
+    
+    # Update preferred_language if provided
+    if profile_update.preferred_language is not None:
+        # Validate language code - currently only English and Hindi are supported
+        valid_languages = ["en", "hi"]
+        language = profile_update.preferred_language.strip().lower()
+        if language and language not in valid_languages:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Invalid language code. Supported languages: English (en), Hindi (hi)"
+            )
+        current_user.preferred_language = language if language else "en"
+    
     current_user.updated_at = datetime.utcnow()
     db.commit()
     db.refresh(current_user)
@@ -461,12 +490,27 @@ async def update_profile(
         email=current_user.email,
         username=current_user.username,
         full_name=current_user.full_name,
+        mobile_number=current_user.mobile_number,
+        preferred_language=current_user.preferred_language,
         subscription_plan=current_user.subscription_plan.value,
         is_admin=current_user.is_admin,
         profile_picture_url=current_user.profile_picture_url,
         current_subscription_plan_template_id=current_user.current_subscription_plan_template_id,
         email_verified=current_user.email_verified
     )
+
+
+@router.get("/supported-languages")
+async def get_supported_languages():
+    """
+    Get list of supported languages
+    Currently supporting: English and Hindi only
+    """
+    languages = [
+        {"code": "en", "name": "English"},
+        {"code": "hi", "name": "Hindi"},
+    ]
+    return {"languages": languages}
 
 
 @router.put("/change-password")
@@ -555,6 +599,8 @@ async def upgrade_subscription(
         email=current_user.email,
         username=current_user.username,
         full_name=current_user.full_name,
+        mobile_number=current_user.mobile_number,
+        preferred_language=current_user.preferred_language,
         subscription_plan=current_user.subscription_plan.value,
         is_admin=current_user.is_admin,
         profile_picture_url=current_user.profile_picture_url,

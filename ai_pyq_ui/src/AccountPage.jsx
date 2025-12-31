@@ -24,6 +24,7 @@ export default function AccountPage() {
     const [fullName, setFullName] = useState("");
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
+    const [mobileNumber, setMobileNumber] = useState("");
     const [refreshKey, setRefreshKey] = useState(0); // Force re-render when subscription changes
     const [subscriptionPlan, setSubscriptionPlan] = useState("free"); // Subscription plan state for reactive updates
     const [refreshTrigger, setRefreshTrigger] = useState(0); // Force re-render when subscription changes
@@ -66,6 +67,8 @@ export default function AccountPage() {
     
     // Language preference
     const [language, setLanguage] = useState(localStorage.getItem("language") || "en");
+    const [supportedLanguages, setSupportedLanguages] = useState([]);
+    const [languagesLoading, setLanguagesLoading] = useState(true);
     
     // Account deletion
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
@@ -84,6 +87,7 @@ export default function AccountPage() {
                         setFullName(cachedUserData.full_name || "");
                         setUsername(cachedUserData.username || "");
                         setEmail(cachedUserData.email || "");
+                        setMobileNumber(cachedUserData.mobile_number || "");
                         setUserIsAdmin(cachedUserData.is_admin === true);
                     }
                     // Also fetch fresh data from backend
@@ -214,6 +218,7 @@ export default function AccountPage() {
                             setFullName(user.full_name || "");
                             setUsername(user.username || "");
                             setEmail(user.email || "");
+                            setMobileNumber(user.mobile_number || "");
                             setUserIsAdmin(user.is_admin === true);
                             // Update subscription plan state
                             if (user.subscription_plan) {
@@ -291,6 +296,7 @@ export default function AccountPage() {
                         setFullName(cachedUserData.full_name || "");
                         setUsername(cachedUserData.username || "");
                         setEmail(cachedUserData.email || "");
+                        setMobileNumber(cachedUserData.mobile_number || "");
                         setUserIsAdmin(cachedUserData.is_admin === true);
                         // Update subscription plan immediately from cached data
                         if (cachedUserData.subscription_plan) {
@@ -411,14 +417,15 @@ export default function AccountPage() {
     };
     
     // Handle edit profile save
-    const handleEditProfileSave = async ({ fullName: newFullName, username: newUsername }) => {
+    const handleEditProfileSave = async ({ fullName: newFullName, username: newUsername, mobileNumber: newMobileNumber }) => {
         try {
-            // Update both fields
+            // Update all fields
             const response = await authenticatedFetch(`${API_BASE_URL}/auth/profile`, {
                 method: "PUT",
                 body: JSON.stringify({ 
                     full_name: newFullName,
-                    username: newUsername
+                    username: newUsername,
+                    mobile_number: newMobileNumber
                 }),
             });
             
@@ -428,6 +435,7 @@ export default function AccountPage() {
                 setUserDataState(updatedUser);
                 setFullName(newFullName);
                 setUsername(newUsername);
+                setMobileNumber(newMobileNumber || "");
                 setIsEditProfileOpen(false);
                 setSuccessMessage("Profile updated successfully!");
                 setTimeout(() => setSuccessMessage(""), 3000);
@@ -509,13 +517,75 @@ export default function AccountPage() {
         }
     };
     
+    // Fetch supported languages from backend
+    useEffect(() => {
+        const fetchLanguages = async () => {
+            try {
+                const response = await authenticatedFetch(`${API_BASE_URL}/auth/supported-languages`);
+                if (response.ok) {
+                    const data = await response.json();
+                    setSupportedLanguages(data.languages || []);
+                } else {
+                    // Fallback to default languages if API fails
+                    setSupportedLanguages([
+                        { code: "en", name: "English" },
+                        { code: "hi", name: "Hindi" },
+                    ]);
+                }
+            } catch (err) {
+                console.error("Failed to fetch languages:", err);
+                // Fallback to default languages
+                setSupportedLanguages([
+                    { code: "en", name: "English" },
+                    { code: "hi", name: "Hindi" },
+                ]);
+            } finally {
+                setLanguagesLoading(false);
+            }
+        };
+        fetchLanguages();
+    }, []);
+
+    // Load language preference from user data
+    useEffect(() => {
+        if (userData?.preferred_language) {
+            setLanguage(userData.preferred_language);
+            localStorage.setItem("language", userData.preferred_language);
+        } else {
+            // Check localStorage as fallback
+            const storedLanguage = localStorage.getItem("language");
+            if (storedLanguage) {
+                setLanguage(storedLanguage);
+            }
+        }
+    }, [userData]);
+
     // Handle language change
-    const handleLanguageChange = (newLanguage) => {
+    const handleLanguageChange = async (newLanguage) => {
         setLanguage(newLanguage);
         localStorage.setItem("language", newLanguage);
-        // Could dispatch event to update app language
-        setSuccessMessage("Language preference saved!");
-        setTimeout(() => setSuccessMessage(""), 3000);
+        
+        // Save to backend
+        try {
+            const response = await authenticatedFetch(`${API_BASE_URL}/auth/profile`, {
+                method: "PUT",
+                body: JSON.stringify({ preferred_language: newLanguage }),
+            });
+            
+            if (response.ok) {
+                const updatedUser = await response.json();
+                setUserData(updatedUser);
+                setUserDataState(updatedUser);
+                setSuccessMessage("Language preference saved!");
+                setTimeout(() => setSuccessMessage(""), 3000);
+                window.dispatchEvent(new Event("userProfileUpdated"));
+            } else {
+                setErrorMessage("Failed to save language preference. Please try again.");
+            }
+        } catch (err) {
+            console.error("Failed to save language preference:", err);
+            setErrorMessage("Failed to save language preference. Please try again.");
+        }
     };
     
     // Handle data export
@@ -875,17 +945,19 @@ export default function AccountPage() {
                                 {/* Combined User Account Card */}
                                 <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
                                     {/* User Profile Section */}
-                                    <div className="flex flex-col items-center mb-6">
+                                    <div className="flex items-center gap-4 mb-6">
                                         <div
-                                            className="w-24 h-24 rounded-full flex items-center justify-center text-white font-semibold text-2xl mb-4"
+                                            className="w-24 h-24 rounded-full flex items-center justify-center text-white font-semibold text-3xl flex-shrink-0"
                                             style={{ 
                                                 backgroundColor: localStorage.getItem("avatarColor") || "#14b8a6" 
                                             }}
                                         >
                                             {localStorage.getItem("avatarInitials") || getUserInitials()}
                                         </div>
-                                        <p className="text-lg font-semibold text-gray-900">{fullName || "Not set"}</p>
-                                        <p className="text-sm text-gray-500">@{username || "username"}</p>
+                                        <div className="flex-1 min-w-0">
+                                            <p className="text-2xl font-semibold text-gray-900 truncate">{fullName || "Not set"}</p>
+                                            <p className="text-sm text-gray-500 truncate">@{username || "username"}</p>
+                                        </div>
                                     </div>
                                     <button
                                         onClick={() => setIsEditProfileOpen(true)}
@@ -1008,12 +1080,17 @@ export default function AccountPage() {
                                             value={language}
                                             onChange={(e) => handleLanguageChange(e.target.value)}
                                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                            disabled={languagesLoading}
                                         >
-                                            <option value="en">English</option>
-                                            <option value="hi">Hindi</option>
-                                            <option value="es">Spanish</option>
-                                            <option value="fr">French</option>
-                                            <option value="de">German</option>
+                                            {languagesLoading ? (
+                                                <option>Loading languages...</option>
+                                            ) : (
+                                                supportedLanguages.map((lang) => (
+                                                    <option key={lang.code} value={lang.code}>
+                                                        {lang.name}
+                                                    </option>
+                                                ))
+                                            )}
                                         </select>
                                     </div>
                                     
@@ -1161,34 +1238,71 @@ export default function AccountPage() {
                                 </div>
                                 
                                 {/* Tabs Section */}
-                                <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-                                    <div className="flex gap-2 mb-4">
-                                        <button
+                                <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                        <motion.button
+                                            whileHover={{ scale: 1.02 }}
+                                            whileTap={{ scale: 0.98 }}
                                             onClick={() => {
                                                 setActiveTab("notes");
                                                 navigate("/my-notes");
                                             }}
-                                            className={`flex-1 px-4 py-2 rounded-lg font-medium transition-colors ${
+                                            className={`p-4 rounded-xl border-2 transition-all ${
                                                 activeTab === "notes"
-                                                    ? "bg-blue-600 text-white"
-                                                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                                                    ? "border-blue-500 bg-blue-50 shadow-md"
+                                                    : "border-gray-200 bg-white hover:border-gray-300"
                                             }`}
                                         >
-                                            My Notes
-                                        </button>
-                                        <button
+                                            <div className="flex items-center gap-3">
+                                                <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-2xl ${
+                                                    activeTab === "notes" ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-600"
+                                                }`}>
+                                                    📝
+                                                </div>
+                                                <div className="text-left">
+                                                    <h3 className={`text-lg font-bold mb-1 ${
+                                                        activeTab === "notes" ? "text-blue-700" : "text-gray-900"
+                                                    }`}>
+                                                        My Notes
+                                                    </h3>
+                                                    <p className="text-sm text-gray-600">
+                                                        View and manage your saved notes
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </motion.button>
+
+                                        <motion.button
+                                            whileHover={{ scale: 1.02 }}
+                                            whileTap={{ scale: 0.98 }}
                                             onClick={() => {
                                                 setActiveTab("progress");
                                                 navigate("/ai-roadmap?tab=my-progress");
                                             }}
-                                            className={`flex-1 px-4 py-2 rounded-lg font-medium transition-colors ${
+                                            className={`p-4 rounded-xl border-2 transition-all ${
                                                 activeTab === "progress"
-                                                    ? "bg-blue-600 text-white"
-                                                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                                                    ? "border-blue-500 bg-blue-50 shadow-md"
+                                                    : "border-gray-200 bg-white hover:border-gray-300"
                                             }`}
                                         >
-                                            My Progress
-                                        </button>
+                                            <div className="flex items-center gap-3">
+                                                <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-2xl ${
+                                                    activeTab === "progress" ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-600"
+                                                }`}>
+                                                    📊
+                                                </div>
+                                                <div className="text-left">
+                                                    <h3 className={`text-lg font-bold mb-1 ${
+                                                        activeTab === "progress" ? "text-blue-700" : "text-gray-900"
+                                                    }`}>
+                                                        My Progress
+                                                    </h3>
+                                                    <p className="text-sm text-gray-600">
+                                                        Track your learning progress and analytics
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </motion.button>
                                     </div>
                                 </div>
                                 
@@ -1269,22 +1383,6 @@ export default function AccountPage() {
                                                                 Active
                                                             </div>
                                                         )}
-                                                        {(() => {
-                                                            const cachedData = getUserData();
-                                                            const currentPlan = (cachedData?.subscription_plan || subscriptionPlan || "free").toLowerCase();
-                                                            const isUserPremium = currentPlan === "premium";
-                                                            const subscriptionEndDate = cachedData?.subscription_end_date || userData?.subscription_end_date;
-                                                            const isSubscriptionActive = subscriptionEndDate ? new Date(subscriptionEndDate) > new Date() : false;
-                                                            
-                                                            if (!isUserPremium || !isSubscriptionActive) {
-                                                                return (
-                                                                    <div className="absolute top-2 right-2">
-                                                                        <span className="text-blue-600 text-xs font-semibold">↑ Next</span>
-                                                                    </div>
-                                                                );
-                                                            }
-                                                            return null;
-                                                        })()}
                                                         <div className="mb-4">
                                                             <h3 className="text-xl font-bold text-gray-900 mb-2">{plan.name}</h3>
                                                             <div className="flex items-baseline">
@@ -1371,6 +1469,7 @@ export default function AccountPage() {
                 onClose={() => setIsEditProfileOpen(false)}
                 currentFullName={fullName}
                 currentUsername={username}
+                currentMobileNumber={mobileNumber}
                 onSave={handleEditProfileSave}
             />
             

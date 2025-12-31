@@ -2,18 +2,20 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function EditProfileModal({ isOpen, onClose, currentFullName, currentUsername, onSave }) {
+export default function EditProfileModal({ isOpen, onClose, currentFullName, currentUsername, currentMobileNumber, onSave }) {
     const [fullName, setFullName] = useState(currentFullName || "");
     const [username, setUsername] = useState(currentUsername || "");
+    const [mobileNumber, setMobileNumber] = useState(currentMobileNumber || "");
     const [error, setError] = useState("");
 
     useEffect(() => {
         if (isOpen) {
             setFullName(currentFullName || "");
             setUsername(currentUsername || "");
+            setMobileNumber(currentMobileNumber || "");
             setError("");
         }
-    }, [isOpen, currentFullName, currentUsername]);
+    }, [isOpen, currentFullName, currentUsername, currentMobileNumber]);
 
     const handleSave = () => {
         if (!fullName.trim()) {
@@ -32,7 +34,16 @@ export default function EditProfileModal({ isOpen, onClose, currentFullName, cur
             setError("Username can only contain letters, numbers, and underscores");
             return;
         }
-        onSave({ fullName: fullName.trim(), username: username.trim() });
+        // Validate mobile number if provided
+        if (mobileNumber.trim() && !/^\+?[1-9]\d{9,14}$/.test(mobileNumber.trim())) {
+            setError("Mobile number must be 10-15 digits (international format with + prefix allowed)");
+            return;
+        }
+        onSave({ 
+            fullName: fullName.trim(), 
+            username: username.trim(),
+            mobileNumber: mobileNumber.trim() || null
+        });
     };
 
     if (!isOpen) return null;
@@ -91,6 +102,21 @@ export default function EditProfileModal({ isOpen, onClose, currentFullName, cur
                             />
                             <p className="text-xs text-gray-500 mt-1">
                                 3-20 characters, letters, numbers, and underscores only
+                            </p>
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Mobile Number
+                            </label>
+                            <input
+                                type="tel"
+                                value={mobileNumber}
+                                onChange={(e) => setMobileNumber(e.target.value)}
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                placeholder="Enter mobile number (e.g., +91 9876543210)"
+                            />
+                            <p className="text-xs text-gray-500 mt-1">
+                                Optional: 10-15 digits, international format with + prefix allowed
                             </p>
                         </div>
                     </div>

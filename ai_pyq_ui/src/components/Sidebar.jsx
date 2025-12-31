@@ -2,6 +2,7 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import UserMenuDropdown from "./UserMenuDropdown";
+import FeedbackModal from "./FeedbackModal";
 
 export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySidebar, onCollapseChange }) {
     const [isCollapsed, setIsCollapsed] = useState(false);
@@ -41,6 +42,7 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
         initialUserData?.subscription_plan === "premium" ? "Premium" : "Free"
     );
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+    const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
 
     const isDashboard = location.pathname.includes("exam-dashboard");
     const isCrossExam = location.pathname.includes("cross-exam-insights");
@@ -481,6 +483,7 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                             userInitials={userInitials}
                             subscriptionPlan={subscriptionPlan}
                             isCollapsed={isCollapsed}
+                            onOpenFeedback={() => setIsFeedbackModalOpen(true)}
                         />
                     </div>
                 ) : (
@@ -520,6 +523,12 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                     </div>
                 )}
             </div>
+            
+            {/* Feedback Modal - Rendered outside dropdown for instant display */}
+            <FeedbackModal 
+                isOpen={isFeedbackModalOpen} 
+                onClose={() => setIsFeedbackModalOpen(false)} 
+            />
         </aside>
     );
 }
