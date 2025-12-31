@@ -806,7 +806,8 @@ def manage_exam_metrics():
                     'duration_minutes': first_set.duration_minutes,
                     'marks_per_question': first_set.marks_per_question,
                     'negative_marking': first_set.negative_marking,
-                    'has_negative': first_set.negative_marking > 0
+                    'has_negative': first_set.negative_marking > 0,
+                    'cutoff_marks': first_set.cutoff_marks
                 }
         
         # Display exams with their defaults
@@ -819,8 +820,10 @@ def manage_exam_metrics():
             neg_marks = defaults.get('negative_marking', 0.5)
             
             neg_str = f"Yes, -{neg_marks}" if has_neg else "No"
+            cutoff = defaults.get('cutoff_marks')
+            cutoff_str = f"{cutoff}" if cutoff is not None else "Auto (25% of total marks)"
             print(f"  {Colors.CYAN}{idx}.{Colors.ENDC} {exam_name}")
-            print(f"     Default: Duration: {duration} min, Marks: {marks}, Negative Marking: {neg_str}")
+            print(f"     Default: Duration: {duration} min, Marks: {marks}, Negative Marking: {neg_str}, Cutoff: {cutoff_str}")
         
         print()
         exam_choice = input(f"{Colors.BOLD}Select exam to edit (1-{len(exam_names)}) or 0 to cancel: {Colors.ENDC}").strip()
@@ -837,7 +840,8 @@ def manage_exam_metrics():
                 'duration_minutes': 120,
                 'marks_per_question': 2.0,
                 'negative_marking': 0.5,
-                'has_negative': True
+                'has_negative': True,
+                'cutoff_marks': None
             })
             
             # Edit metrics
@@ -849,11 +853,15 @@ def manage_exam_metrics():
                 print(f"  {Colors.CYAN}2.{Colors.ENDC} Marks per question: {current_values['marks_per_question']}")
                 print(f"  {Colors.CYAN}3.{Colors.ENDC} Has negative marking: {'Yes' if current_values['has_negative'] else 'No'}")
                 print(f"  {Colors.CYAN}4.{Colors.ENDC} Negative marking value: {current_values['negative_marking']}")
-                print(f"  {Colors.CYAN}5.{Colors.ENDC} Save changes")
+                cutoff_display = current_values.get('cutoff_marks', 'Not set (default: 25% of total marks)')
+                if cutoff_display is not None:
+                    cutoff_display = f"{cutoff_display}"
+                print(f"  {Colors.CYAN}5.{Colors.ENDC} Cutoff marks: {cutoff_display}")
+                print(f"  {Colors.CYAN}6.{Colors.ENDC} Save changes")
                 print(f"  {Colors.CYAN}0.{Colors.ENDC} Cancel")
                 print()
                 
-                metric_choice = input(f"{Colors.BOLD}Select metric to edit (0-5): {Colors.ENDC}").strip()
+                metric_choice = input(f"{Colors.BOLD}Select metric to edit (0-6): {Colors.ENDC}").strip()
                 
                 if metric_choice == "0":
                     print_warning("Cancelled")
@@ -893,11 +901,28 @@ def manage_exam_metrics():
                             except ValueError:
                                 print_error("Invalid negative marking. Must be a number.")
                 elif metric_choice == "5":
+                    new_cutoff = input(f"{Colors.BOLD}Enter cutoff marks (current: {current_values.get('cutoff_marks', 'Not set')}, or 'auto' for 25% of total marks): {Colors.ENDC}").strip()
+                    if new_cutoff:
+                        if new_cutoff.lower() == 'auto':
+                            current_values['cutoff_marks'] = None  # Will be calculated as 25% of total marks
+                            print_success("Cutoff marks set to auto (25% of total marks)")
+                        else:
+                            try:
+                                current_values['cutoff_marks'] = float(new_cutoff)
+                                print_success(f"Cutoff marks updated to {current_values['cutoff_marks']}")
+                            except ValueError:
+                                print_error("Invalid cutoff marks. Must be a number or 'auto'.")
+                elif metric_choice == "6":
                     # Confirm and update
                     print(f"\n{Colors.BOLD}Summary of changes for {selected_exam}:{Colors.ENDC}")
                     print(f"  Duration: {current_values['duration_minutes']} minutes")
                     print(f"  Marks per question: {current_values['marks_per_question']}")
                     print(f"  Negative marking: {'Yes, -' + str(current_values['negative_marking']) if current_values['has_negative'] else 'No'}")
+                    cutoff_display = current_values.get('cutoff_marks')
+                    if cutoff_display is None:
+                        print(f"  Cutoff marks: Auto (25% of total marks)")
+                    else:
+                        print(f"  Cutoff marks: {cutoff_display}")
                     print()
                     
                     confirm = input(f"{Colors.YELLOW}Confirm update? (yes/no): {Colors.ENDC}").strip().lower()
@@ -913,6 +938,8 @@ def manage_exam_metrics():
                             exam_set.duration_minutes = current_values['duration_minutes']
                             exam_set.marks_per_question = current_values['marks_per_question']
                             exam_set.negative_marking = current_values['negative_marking'] if current_values['has_negative'] else 0.0
+                            # Set cutoff marks (None means auto-calculate as 25% of total marks)
+                            exam_set.cutoff_marks = current_values.get('cutoff_marks')
                             updated_count += 1
                         
                         db.commit()
@@ -1173,6 +1200,10 @@ def create_mock_test():
         # Calculate duration (approximately 1 minute per question, minimum 30 minutes)
         mock_duration = max(30, int(num_questions * 1.0))
         
+        # Calculate cutoff marks (25% of total marks by default)
+        total_marks = num_questions * marks_per_q
+        cutoff_marks = total_marks * 0.25  # Default: 25% of total marks
+        
         # Create exam set
         description = f"Mock test with {num_questions} random questions from {selected_exam}"
         if selected_subject:
@@ -1196,6 +1227,7 @@ def create_mock_test():
             duration_minutes=mock_duration,
             marks_per_question=marks_per_q,
             negative_marking=neg_marking,
+            cutoff_marks=cutoff_marks,
             is_active=True
         )
         

@@ -375,6 +375,7 @@ class ExamSet(Base):
     duration_minutes = Column(Integer, nullable=False)  # Exam duration in minutes
     marks_per_question = Column(Float, nullable=False, default=2.0)
     negative_marking = Column(Float, nullable=False, default=0.5)  # Negative marks per wrong answer
+    cutoff_marks = Column(Float, nullable=True)  # Fixed cutoff marks (default: 25% of total marks)
     is_active = Column(Boolean, default=True, index=True)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)

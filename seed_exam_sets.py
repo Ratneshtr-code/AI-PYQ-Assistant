@@ -75,6 +75,8 @@ def create_exam_sets():
                 # Create full paper exam set for this specific year
                 total_questions = len(year_df)
                 duration_minutes = max(60, total_questions * 0.6)  # ~0.6 min per question
+                total_marks = total_questions * 2.0  # Default marks per question is 2.0
+                cutoff_marks = total_marks * 0.25  # Default: 25% of total marks
                 
                 exam_set = ExamSet(
                     name=f"{exam_name} {year_int}",
@@ -87,6 +89,7 @@ def create_exam_sets():
                     duration_minutes=int(duration_minutes),
                     marks_per_question=2.0,
                     negative_marking=0.5,
+                    cutoff_marks=cutoff_marks,
                     is_active=True
                 )
                 
@@ -113,6 +116,8 @@ def create_exam_sets():
                     
                     subject_question_count = len(subject_df)
                     subject_duration = max(30, int(subject_question_count * 0.6))
+                    subject_total_marks = subject_question_count * 2.0  # Default marks per question is 2.0
+                    subject_cutoff_marks = subject_total_marks * 0.25  # Default: 25% of total marks
                     
                     subject_exam_set = ExamSet(
                         name=f"{exam_name} {year_int} - {subject_name}",
@@ -126,6 +131,7 @@ def create_exam_sets():
                         duration_minutes=subject_duration,
                         marks_per_question=2.0,
                         negative_marking=0.5,
+                        cutoff_marks=subject_cutoff_marks,
                         is_active=True
                     )
                     

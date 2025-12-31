@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import SubmitConfirmation from "./SubmitConfirmation";
 import QuestionPaperView from "./QuestionPaperView";
 import { getUserData } from "../../utils/auth";
+import SaveNoteButton from "../SaveNoteButton";
 
 const API_BASE_URL = "";
 
@@ -455,6 +456,27 @@ export default function ExamInterface() {
                                         <select className="px-2 py-1 border border-gray-300 rounded text-sm">
                                             <option>English</option>
                                         </select>
+                                        <SaveNoteButton
+                                            noteType="question"
+                                            questionData={{
+                                                id: currentQuestion.question_id,
+                                                question_id: currentQuestion.question_id,
+                                                json_question_id: currentQuestion.question_id,
+                                                question_text: currentQuestion.question_text,
+                                                option_a: currentQuestion.option_a,
+                                                option_b: currentQuestion.option_b,
+                                                option_c: currentQuestion.option_c,
+                                                option_d: currentQuestion.option_d,
+                                                correct_option: currentQuestion.correct_option,
+                                                exam: examData?.exam_set?.exam_name || "",
+                                                year: currentQuestion.year || "",
+                                                subject: currentQuestion.subject || "",
+                                                topic: currentQuestion.topic || "",
+                                            }}
+                                            size="small"
+                                            showLabel={true}
+                                            className="px-2 py-1 text-sm"
+                                        />
                                         <button className="px-2 py-1 text-blue-600 hover:underline text-sm">
                                             ▲ Report
                                         </button>

@@ -13,7 +13,7 @@ export default function ExamResults() {
     const [solutions, setSolutions] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
-    const [selectedCategory, setSelectedCategory] = useState("General");
+    // Category dropdown removed - not currently implemented in backend
     const [selectedQuestionId, setSelectedQuestionId] = useState(null);
     const [showSolutionViewer, setShowSolutionViewer] = useState(false);
     const [examSetName, setExamSetName] = useState("");
@@ -165,8 +165,10 @@ export default function ExamResults() {
     }
 
     const perf = analysis.overall_performance;
-    const cutoffGap = perf.cutoff_gap || 0;
-    const isBelowCutoff = cutoffGap > 0;
+    const cutoffMarks = perf.cutoff_marks || 0;
+    const cutoffGap = perf.cutoff_gap || 0;  // Positive = below cutoff, negative = above cutoff
+    const isAboveCutoff = cutoffGap < 0;  // If gap is negative, score is above cutoff
+    const gapAbs = Math.abs(cutoffGap);
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -285,48 +287,153 @@ export default function ExamResults() {
                     </div>
                 </div>
 
-                {/* Cutoff Gap */}
-                {isBelowCutoff && (
-                    <div className="mb-8 bg-red-50 border-l-4 border-red-500 p-6 rounded-r-lg">
-                        <div className="flex items-center gap-4">
-                            <div className="text-4xl">⚠️</div>
-                            <div>
-                                <p className="text-lg font-bold text-red-800">
-                                    You scored <span className="text-2xl">{cutoffGap.toFixed(0)} Marks</span> ▼ less than cutoff!
-                                </p>
+                {/* Marks Distribution */}
+                {perf.marks_gained !== undefined && (
+                <div className="mb-8">
+                    <h2 className="text-xl font-bold text-gray-900 mb-4">Marks Distribution</h2>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        {/* Marks Gained */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.1 }}
+                            className="bg-white rounded-xl p-6 border border-gray-200 shadow-lg"
+                        >
+                            <div className="text-3xl mb-2">💰</div>
+                            <div className="text-2xl font-bold text-green-600 mb-2">
+                                +{perf.marks_gained?.toFixed(1) || 0}
                             </div>
-                        </div>
+                            <div className="text-sm text-gray-600 mb-3">Marks Gained</div>
+                            <div className="w-full bg-gray-200 rounded-full h-2">
+                                <div
+                                    className="bg-green-500 h-2 rounded-full transition-all duration-500"
+                                    style={{
+                                        width: `${((perf.marks_gained || 0) / perf.total_marks) * 100}%`
+                                    }}
+                                ></div>
+                            </div>
+                            <div className="text-xs text-gray-500 mt-1">
+                                {perf.correct || 0} correct
+                            </div>
+                        </motion.div>
+
+                        {/* Marks Lost */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2 }}
+                            className="bg-white rounded-xl p-6 border border-gray-200 shadow-lg"
+                        >
+                            <div className="text-3xl mb-2">❌</div>
+                            <div className="text-2xl font-bold text-red-600 mb-2">
+                                -{perf.marks_lost?.toFixed(1) || 0}
+                            </div>
+                            <div className="text-sm text-gray-600 mb-3">Marks Lost</div>
+                            <div className="w-full bg-gray-200 rounded-full h-2">
+                                <div
+                                    className="bg-red-500 h-2 rounded-full transition-all duration-500"
+                                    style={{
+                                        width: `${((perf.marks_lost || 0) / perf.total_marks) * 100}%`
+                                    }}
+                                ></div>
+                            </div>
+                            <div className="text-xs text-gray-500 mt-1">
+                                {perf.wrong || 0} wrong
+                            </div>
+                        </motion.div>
+
+                        {/* Net Score */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.3 }}
+                            className="bg-white rounded-xl p-6 border border-gray-200 shadow-lg"
+                        >
+                            <div className="text-3xl mb-2">📊</div>
+                            <div className="text-2xl font-bold text-blue-600 mb-2">
+                                {perf.score?.toFixed(1) || 0}
+                            </div>
+                            <div className="text-sm text-gray-600 mb-3">Net Score</div>
+                            <div className="w-full bg-gray-200 rounded-full h-2">
+                                <div
+                                    className="bg-blue-500 h-2 rounded-full transition-all duration-500"
+                                    style={{
+                                        width: `${((perf.score || 0) / perf.total_marks) * 100}%`
+                                    }}
+                                ></div>
+                            </div>
+                            <div className="text-xs text-gray-500 mt-1">
+                                {((perf.score || 0) / perf.total_marks * 100).toFixed(1)}% of total
+                            </div>
+                        </motion.div>
+
+                        {/* Potential Marks */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.4 }}
+                            className="bg-white rounded-xl p-6 border border-gray-200 shadow-lg"
+                        >
+                            <div className="text-3xl mb-2">🎯</div>
+                            <div className="text-2xl font-bold text-yellow-600 mb-2">
+                                {perf.potential_marks?.toFixed(1) || 0}
+                            </div>
+                            <div className="text-sm text-gray-600 mb-3">Potential Marks</div>
+                            <div className="w-full bg-gray-200 rounded-full h-2">
+                                <div
+                                    className="bg-yellow-500 h-2 rounded-full transition-all duration-500"
+                                    style={{
+                                        width: `${((perf.potential_marks || 0) / perf.total_marks) * 100}%`
+                                    }}
+                                ></div>
+                            </div>
+                            <div className="text-xs text-gray-500 mt-1">
+                                If all attempted correct
+                            </div>
+                        </motion.div>
                     </div>
+                </div>
                 )}
 
-                {/* Performance Feedback */}
-                {isBelowCutoff && (
-                    <div className="mb-8 bg-yellow-50 border border-yellow-200 rounded-lg p-6">
-                        <div className="flex items-start gap-4">
-                            <div className="text-3xl">⚠️</div>
-                            <div className="flex-1">
-                                <p className="text-gray-800 mb-2">
-                                    Major gaps observed, strong basics needed. Turn weaknesses into strengths with guided practice.
-                                </p>
-                            </div>
+                {/* Cutoff Marks and Gap */}
+                {cutoffMarks > 0 && (
+                <div className={`mb-8 border-l-4 p-6 rounded-r-lg ${
+                    isAboveCutoff 
+                        ? "bg-green-50 border-green-500" 
+                        : "bg-red-50 border-red-500"
+                }`}>
+                    <div className="flex items-center gap-4">
+                        <div className="text-4xl">{isAboveCutoff ? "✅" : "⚠️"}</div>
+                        <div className="flex-1">
+                            {isAboveCutoff ? (
+                                <>
+                                    <p className="text-lg font-bold text-green-800">
+                                        You scored <span className="text-2xl">{gapAbs.toFixed(1)} Marks</span> ▲ above cutoff!
+                                    </p>
+                                    <p className="text-sm text-green-600 mt-1">
+                                        Cutoff: {cutoffMarks.toFixed(1)} marks | Your score: {perf.score.toFixed(1)} marks
+                                    </p>
+                                </>
+                            ) : (
+                                <>
+                                    <p className="text-lg font-bold text-red-800">
+                                        You scored <span className="text-2xl">{gapAbs.toFixed(1)} Marks</span> ▼ below cutoff!
+                                    </p>
+                                    <p className="text-sm text-red-600 mt-1">
+                                        Cutoff: {cutoffMarks.toFixed(1)} marks | Your score: {perf.score.toFixed(1)} marks
+                                    </p>
+                                </>
+                            )}
                         </div>
                     </div>
+                </div>
                 )}
 
                 {/* Sectional Summary */}
                 <div className="mb-8 bg-white rounded-xl shadow-lg p-6">
                     <div className="flex items-center justify-between mb-4">
                         <h2 className="text-xl font-bold text-gray-900">Sectional Summary</h2>
-                        <select
-                            value={selectedCategory}
-                            onChange={(e) => setSelectedCategory(e.target.value)}
-                            className="px-4 py-2 border border-gray-300 rounded-lg text-sm"
-                        >
-                            <option value="General">General</option>
-                            <option value="OBC">OBC</option>
-                            <option value="SC">SC</option>
-                            <option value="ST">ST</option>
-                        </select>
+                        {/* Category dropdown removed - not currently implemented in backend */}
                     </div>
                     <div className="overflow-x-auto">
                         <table className="w-full border-collapse">

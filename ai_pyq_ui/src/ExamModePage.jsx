@@ -1,5 +1,5 @@
 // src/ExamModePage.jsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import Sidebar from "./components/Sidebar";
@@ -36,6 +36,7 @@ export default function ExamModePage() {
     const [subjectsList, setSubjectsList] = useState([]);
     const [primarySidebarCollapsed, setPrimarySidebarCollapsed] = useState(false);
     const [userAttempts, setUserAttempts] = useState({}); // Map of examSetId -> { attemptId, status, completed_at, score, total_marks }
+    const userAttemptsRef = useRef({}); // Ref to track userAttempts without causing re-renders
     
     // Test type filter for "My Tests" section: "all", "mock_test", "subject_test", "pyp"
     const [myTestsFilterType, setMyTestsFilterType] = useState(() => {
@@ -116,7 +117,7 @@ export default function ExamModePage() {
                 if (testType === "my-attempts") {
                     filtered = filtered.filter(set => {
                         const examSetId = String(set.id);
-                        const attempt = userAttempts[examSetId] || userAttempts[set.id];
+                        const attempt = userAttemptsRef.current[examSetId] || userAttemptsRef.current[set.id];
                         const isCompleted = attempt && (attempt.status === 'completed' || attempt.status === 'submitted');
                         
                         if (!isCompleted) return false;
@@ -135,11 +136,10 @@ export default function ExamModePage() {
                     });
                 }
                 
-                setExamSets(filtered);
-                
-                // Check if exam sets response includes attempt information
+                // Check if exam sets response includes attempt information BEFORE setting examSets
+                // This prevents double rendering
+                let attemptsFromSets = {};
                 if (filtered.length > 0 && filtered[0].latest_attempt) {
-                    const attemptsFromSets = {};
                     filtered.forEach(set => {
                         if (set.latest_attempt) {
                             attemptsFromSets[String(set.id)] = {
@@ -152,10 +152,17 @@ export default function ExamModePage() {
                             };
                         }
                     });
-                    if (Object.keys(attemptsFromSets).length > 0) {
-                        setUserAttempts(prev => ({ ...prev, ...attemptsFromSets }));
-                    }
                 }
+                
+                // Batch state updates to prevent double render
+                if (Object.keys(attemptsFromSets).length > 0) {
+                    setUserAttempts(prev => {
+                        const updated = { ...prev, ...attemptsFromSets };
+                        userAttemptsRef.current = updated;
+                        return updated;
+                    });
+                }
+                setExamSets(filtered);
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -164,7 +171,8 @@ export default function ExamModePage() {
         };
         
         fetchExamSets();
-    }, [exam, subject, testType, userAttempts, myTestsFilterType]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [exam, subject, testType, myTestsFilterType]); // Removed userAttempts - using ref instead to prevent double render
 
     // Fetch exams list
     useEffect(() => {
@@ -221,6 +229,7 @@ export default function ExamModePage() {
                     console.warn("Failed to fetch user attempts from API");
                     // On API failure, clear localStorage to prevent showing wrong user's data
                     localStorage.removeItem('exam_attempts');
+                    userAttemptsRef.current = {};
                     setUserAttempts({});
                     return;
                 }
@@ -292,6 +301,7 @@ export default function ExamModePage() {
                 });
                 
                 // Update state with database data
+                userAttemptsRef.current = finalAttempts;
                 setUserAttempts(finalAttempts);
                 // Update localStorage with database data (for performance, but database is source of truth)
                 localStorage.setItem('exam_attempts', JSON.stringify(finalAttempts));
@@ -299,6 +309,7 @@ export default function ExamModePage() {
                 console.error("Error fetching user attempts:", err);
                 // Clear localStorage on error to prevent showing stale/wrong user's data
                 localStorage.removeItem('exam_attempts');
+                userAttemptsRef.current = {};
                 setUserAttempts({});
             }
         };
@@ -314,6 +325,7 @@ export default function ExamModePage() {
         
         // Clear attempts when user logs out
         const handleUserLogout = () => {
+            userAttemptsRef.current = {};
             setUserAttempts({});
             localStorage.removeItem('exam_attempts');
         };
@@ -322,6 +334,7 @@ export default function ExamModePage() {
         const handleUserLogin = () => {
             // Clear localStorage first to ensure we don't show previous user's data
             localStorage.removeItem('exam_attempts');
+            userAttemptsRef.current = {};
             setUserAttempts({});
             // Then fetch fresh data from database
             fetchUserAttempts();
@@ -392,7 +405,11 @@ export default function ExamModePage() {
                                 }
                             });
                         }
-                        setUserAttempts(prev => ({ ...prev, ...attemptsMap }));
+                        setUserAttempts(prev => {
+                            const updated = { ...prev, ...attemptsMap };
+                            userAttemptsRef.current = updated;
+                            return updated;
+                        });
                     }
                 } catch (err) {
                     console.error("Error refetching user attempts:", err);
@@ -402,6 +419,11 @@ export default function ExamModePage() {
             fetchUserAttempts();
         }
     }, [examSets.length]); // Refetch when exam sets change
+
+    // Safety: Keep ref in sync with state (in case any setUserAttempts is missed)
+    useEffect(() => {
+        userAttemptsRef.current = userAttempts;
+    }, [userAttempts]);
 
     // Save filter state to localStorage whenever it changes
     useEffect(() => {
@@ -759,11 +781,8 @@ export default function ExamModePage() {
                                         }
                                         
                                         return (
-                                        <motion.div
-                                            key={examSet.id}
-                                            initial={{ opacity: 0, y: 20 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            transition={{ duration: 0.3, delay: index * 0.1 }}
+                                        <div
+                                            key={`${testType}-${examSet.id}`}
                                             className={`bg-white rounded-xl border shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden ${
                                                 isAttempted ? 'border-green-300 bg-green-50/30' : 'border-gray-200'
                                             }`}
@@ -854,7 +873,7 @@ export default function ExamModePage() {
                                                     )}
                                                 </div>
                                             </div>
-                                        </motion.div>
+                                        </div>
                                         );
                                     })}
                                 </div>

@@ -104,10 +104,13 @@ def get_exam_sets(
         query = query.filter(ExamSet.is_active == True)
     
     if exam:
-        query = query.filter(ExamSet.exam_name.ilike(f"%{exam}%"))
+        # Use exact match (case-insensitive) instead of substring match
+        # This prevents "PSC" from matching "UPSC"
+        query = query.filter(func.lower(ExamSet.exam_name) == func.lower(exam))
     
     if subject:
-        query = query.filter(ExamSet.subject.ilike(f"%{subject}%"))
+        # Use exact match (case-insensitive) for subject as well
+        query = query.filter(func.lower(ExamSet.subject) == func.lower(subject))
     
     if year_from:
         query = query.filter(
@@ -715,9 +718,21 @@ def get_exam_analysis(
                     "question_ids": area["question_ids"]
                 })
     
-    # Calculate cutoff gap (if we have a cutoff, otherwise use average)
+    # Calculate cutoff marks (use fixed cutoff if set, otherwise 25% of total marks)
+    total_marks = attempt.exam_set.total_questions * attempt.exam_set.marks_per_question
+    if attempt.exam_set.cutoff_marks is not None:
+        cutoff_marks = attempt.exam_set.cutoff_marks
+    else:
+        # Default: 25% of total marks
+        cutoff_marks = total_marks * 0.25
+    
+    # Calculate cutoff gap (positive = below cutoff, negative = above cutoff)
+    # If score is 1.5 and cutoff is 1.0, gap = 1.0 - 1.5 = -0.5 (above cutoff)
+    # If score is 0.5 and cutoff is 1.0, gap = 1.0 - 0.5 = 0.5 (below cutoff)
+    cutoff_gap = cutoff_marks - attempt.total_score
+    
+    # Also calculate average for reference
     avg_score = sum(att.total_score for att in all_attempts) / len(all_attempts) if all_attempts else 0
-    cutoff_gap = max(0.0, avg_score - attempt.total_score)
     
     return {
         "attempt_id": attempt.id,
@@ -725,15 +740,21 @@ def get_exam_analysis(
             "rank": user_rank,
             "total_attempts": total_attempts,
             "score": attempt.total_score,
-            "total_marks": attempt.exam_set.total_questions * attempt.exam_set.marks_per_question,
+            "total_marks": total_marks,
             "attempted": attempt.questions_answered,
             "total_questions": attempt.total_questions,
             "correct": attempt.questions_correct,
             "wrong": attempt.questions_wrong,
             "accuracy": round((attempt.questions_correct / attempt.questions_answered * 100) if attempt.questions_answered > 0 else 0, 2),
             "percentile": round(percentile, 2),
-            "cutoff_gap": round(cutoff_gap, 2),
-            "average_score": round(avg_score, 2)
+            "cutoff_marks": round(cutoff_marks, 2),
+            "cutoff_gap": round(cutoff_gap, 2),  # Positive = below cutoff, negative = above cutoff
+            "average_score": round(avg_score, 2),
+            "marks_per_question": attempt.exam_set.marks_per_question,
+            "negative_marking": attempt.exam_set.negative_marking,
+            "marks_gained": round(attempt.questions_correct * attempt.exam_set.marks_per_question, 2),
+            "marks_lost": round(attempt.questions_wrong * attempt.exam_set.negative_marking, 2),
+            "potential_marks": round(attempt.questions_answered * attempt.exam_set.marks_per_question, 2)
         },
         "sectional_summary": list(section_analysis.values()),
         "weak_areas": {
