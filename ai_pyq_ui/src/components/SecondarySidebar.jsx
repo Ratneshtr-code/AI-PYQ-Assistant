@@ -51,14 +51,14 @@ export default function SecondarySidebar({ isOpen, onClose, type, activeSubPage,
     // Sub-pages for AI Roadmap
     const aiRoadmapSubPages = [
         {
-            id: "priority-roadmap",
-            title: "Priority Roadmap",
+            id: "roadmap-strategy",
+            title: "Roadmap Strategy",
             icon: "🎯",
         },
         {
-            id: "stable-roadmap",
-            title: "Stable Roadmap",
-            icon: "📈",
+            id: "my-progress",
+            title: "My Progress",
+            icon: "📊",
         },
     ];
 

@@ -424,6 +424,30 @@ class ExamQuestionResponse(Base):
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
 
+class UserQuestionProgress(Base):
+    """Track user's progress on questions for roadmap"""
+    __tablename__ = "user_question_progress"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
+    question_id = Column(Integer, nullable=False, index=True)  # References question from CSV
+    exam = Column(String, nullable=True, index=True)  # Exam name
+    subject = Column(String, nullable=True, index=True)  # Subject name
+    topic = Column(String, nullable=True)  # Topic name
+    source = Column(String, nullable=False)  # "exam_mode", "topic_wise", "semantic_search"
+    is_correct = Column(Boolean, nullable=True)  # Whether answer was correct (optional)
+    solved_at = Column(DateTime, default=datetime.utcnow, nullable=False, index=True)
+    created_at = Column(DateTime, default=datetime.utcnow, index=True)
+    
+    # Relationship
+    user = relationship("User", backref="question_progress")
+    
+    # Unique constraint: one record per user-question combination
+    __table_args__ = (
+        {'sqlite_autoincrement': True},
+    )
+
+
 def init_db():
     """Initialize database tables"""
     Base.metadata.create_all(bind=engine)

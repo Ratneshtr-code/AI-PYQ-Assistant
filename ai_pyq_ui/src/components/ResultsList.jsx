@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { getUserData } from "../utils/auth";
 import ExplanationWindow from "./ExplanationWindow";
 import SaveNoteButton from "./SaveNoteButton";
+import { useProgressTracking } from "../hooks/useProgressTracking";
 
 export default function ResultsList({ results, onExplanationWindowChange }) {
     const [visibleAnswers, setVisibleAnswers] = useState({});
@@ -18,6 +19,10 @@ export default function ResultsList({ results, onExplanationWindowChange }) {
     
     // Track clicked options for styling
     const [clickedOptions, setClickedOptions] = useState({}); // { questionId: { optionKey: true/false } }
+    
+    // Progress tracking
+    const { trackQuestion, checkSolved, isSolved } = useProgressTracking();
+    const [solvedStatus, setSolvedStatus] = useState({}); // { questionId: true/false }
 
     // Check if user is admin (database admin only)
     useEffect(() => {
@@ -44,6 +49,25 @@ export default function ResultsList({ results, onExplanationWindowChange }) {
             window.removeEventListener('premiumStatusChanged', handleUserChange);
         };
     }, []);
+
+    // Check solved status when results change
+    useEffect(() => {
+        if (results && results.length > 0) {
+            const questionIds = results
+                .map(item => item.id || item.json_question_id || item.question_id)
+                .filter(id => id && typeof id === 'number');
+            
+            if (questionIds.length > 0) {
+                checkSolved(questionIds).then(solvedMap => {
+                    const statusMap = {};
+                    Object.keys(solvedMap).forEach(qid => {
+                        statusMap[parseInt(qid)] = solvedMap[qid];
+                    });
+                    setSolvedStatus(statusMap);
+                });
+            }
+        }
+    }, [results, checkSolved]);
 
     const toggleAnswer = (id) => {
         const newShowAns = !visibleAnswers[id];
@@ -132,7 +156,7 @@ export default function ResultsList({ results, onExplanationWindowChange }) {
         );
     };
 
-    const handleOptionClick = (item, optKey) => {
+    const handleOptionClick = async (item, optKey) => {
         const id = item.id || item.json_question_id || item.question_id;
         const currentState = clickedOptions[id]?.[optKey];
         
@@ -142,6 +166,21 @@ export default function ResultsList({ results, onExplanationWindowChange }) {
             ? String(text).trim() 
             : "(No option provided)";
         const isCorrect = checkIfOptionIsCorrect(item, optKey, text, displayText);
+        
+        // Track progress when user selects an option
+        if (id && typeof id === 'number' && !solvedStatus[id]) {
+            const source = window.location.pathname.includes('topic-wise') ? 'topic_wise' : 'semantic_search';
+            await trackQuestion(
+                id,
+                item.exam || null,
+                item.subject || null,
+                item.topic || null,
+                source,
+                isCorrect
+            );
+            // Update local solved status
+            setSolvedStatus(prev => ({ ...prev, [id]: true }));
+        }
         
         // If clicking an incorrect option and "Show Answer" is currently visible,
         // hide the answer to collapse the correct answer display
@@ -411,8 +450,27 @@ export default function ResultsList({ results, onExplanationWindowChange }) {
                     const id = item.id || item.json_question_id || item.question_id || `q-${Math.random()}`;
                     const showAns = !!visibleAnswers[id];
 
+                    const questionId = typeof id === 'number' ? id : null;
+                    const isQuestionSolved = questionId ? (solvedStatus[questionId] || isSolved(questionId)) : false;
+
                     return (
-                        <div key={id} className={`question-card ${explanationWindowOpen && !explanationWindowMinimized ? 'question-card-shifted' : ''}`}>
+                        <div 
+                            key={id} 
+                            className={`question-card relative ${explanationWindowOpen && !explanationWindowMinimized ? 'question-card-shifted' : ''} ${
+                                isQuestionSolved ? 'border-l-4 border-l-green-500 bg-green-50/20' : ''
+                            }`}
+                        >
+                            {/* Solved Indicator - Subtle like LeetCode */}
+                            {isQuestionSolved && (
+                                <div className="absolute top-3 right-3 flex items-center gap-1.5" title="You've solved this question">
+                                    <span className="text-xs text-gray-400 font-normal">Solved</span>
+                                    <div className="w-4 h-4 border border-green-300 rounded-full flex items-center justify-center bg-transparent">
+                                        <svg className="w-2.5 h-2.5 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            )}
                             {/* Question */}
                             {renderQuestionText(item)}
 

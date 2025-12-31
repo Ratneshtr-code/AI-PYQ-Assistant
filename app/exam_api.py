@@ -14,7 +14,7 @@ import os
 
 from app.database import (
     get_db, ExamSet, ExamAttempt, ExamQuestionResponse, 
-    ExamAttemptStatus, User
+    ExamAttemptStatus, User, UserQuestionProgress
 )
 from app.auth import get_user_id_from_session
 from utils.config_loader import load_config
@@ -449,6 +449,35 @@ def answer_question(
         exam_set = attempt.exam_set
         score = (correct_count * exam_set.marks_per_question) - (wrong_count * exam_set.negative_marking)
         attempt.total_score = max(0.0, score)  # Score can't be negative
+        
+        # Track progress for roadmap (only when user selects an answer)
+        if request.selected_option:
+            # Check if already tracked
+            existing_progress = db.query(UserQuestionProgress).filter(
+                UserQuestionProgress.user_id == user_id,
+                UserQuestionProgress.question_id == request.question_id
+            ).first()
+            
+            if not existing_progress:
+                # Get question metadata
+                q_row = df[df["id"] == request.question_id]
+                if len(q_row) > 0:
+                    row = q_row.iloc[0]
+                    exam_name = str(row.get("exam", "")).strip()
+                    subject = str(row.get("subject", "")).strip()
+                    topic = str(row.get("topic", "")).strip()
+                    
+                    progress = UserQuestionProgress(
+                        user_id=user_id,
+                        question_id=request.question_id,
+                        exam=exam_name,
+                        subject=subject,
+                        topic=topic,
+                        source="exam_mode",
+                        is_correct=is_correct,
+                        solved_at=datetime.utcnow()
+                    )
+                    db.add(progress)
     
     db.commit()
     
