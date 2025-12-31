@@ -341,104 +341,130 @@ export default function AIRoadmapPage() {
                 )}
                 
                 <div className={`p-6 max-w-7xl mx-auto ${activeSubPage === "roadmap-strategy" && roadmapData && !loading && !error ? 'ml-24' : ''} ${activeSubPage === "roadmap-strategy" && roadmapData && !loading && !error ? '' : 'pb-6'}`}>
-                    {/* Combined Tab Navigation and Exam Selector */}
+                    {/* Tab Navigation and Exam Selector - Clean Design */}
                     <div className="mb-6">
-                        <motion.div
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.3, delay: 0.1 }}
-                            className="bg-white rounded-lg shadow-md p-4 border border-gray-200"
-                        >
-                            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                                {/* Premium Tab Navigation */}
-                                <div className="bg-gray-50 rounded-xl p-1.5 inline-flex gap-1 flex-shrink-0">
-                                    <button
-                                        onClick={() => setActiveSubPage("roadmap-strategy")}
-                                        className={`relative px-5 py-2.5 text-sm font-semibold rounded-lg transition-all duration-300 ${
-                                            activeSubPage === "roadmap-strategy"
-                                                ? "text-blue-700"
-                                                : "text-gray-600 hover:text-gray-900 hover:bg-white"
-                                        }`}
-                                    >
-                                        {activeSubPage === "roadmap-strategy" && (
-                                            <motion.div
-                                                layoutId="activeTab"
-                                                className="absolute inset-0 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 rounded-lg border border-blue-200/60 shadow-sm"
-                                                initial={false}
-                                                transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                                            />
-                                        )}
-                                        <span className="relative z-10 flex items-center gap-2">
-                                            <span className="text-base">🎯</span>
-                                            <span>Roadmap Strategy</span>
-                                        </span>
-                                    </button>
-                                    <button
-                                        onClick={() => setActiveSubPage("my-progress")}
-                                        className={`relative px-5 py-2.5 text-sm font-semibold rounded-lg transition-all duration-300 ${
-                                            activeSubPage === "my-progress"
-                                                ? "text-blue-700"
-                                                : "text-gray-600 hover:text-gray-900 hover:bg-white"
-                                        }`}
-                                    >
-                                        {activeSubPage === "my-progress" && (
-                                            <motion.div
-                                                layoutId="activeTab"
-                                                className="absolute inset-0 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 rounded-lg border border-blue-200/60 shadow-sm"
-                                                initial={false}
-                                                transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                                            />
-                                        )}
-                                        <span className="relative z-10 flex items-center gap-2">
-                                            <span className="text-base">📊</span>
-                                            <span>My Progress</span>
-                                        </span>
-                                    </button>
-                                </div>
-                                
-                                {/* Exam Selector */}
-                                <div className="flex-1 md:max-w-xs">
-                                    <label className="block text-xs font-semibold text-gray-700 mb-2">
-                                        Select Exam
-                                    </label>
-                                    <select
-                                        value={exam}
-                                        onChange={(e) => {
-                                            const newExam = e.target.value;
-                                            setExam(newExam);
-                                            if (newExam) {
-                                                navigate(`/ai-roadmap?exam=${encodeURIComponent(newExam)}`, { replace: true });
-                                            } else {
-                                                navigate('/ai-roadmap', { replace: true });
-                                            }
-                                        }}
-                                        className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-800 bg-white"
-                                    >
-                                        <option value="">-- Select an exam --</option>
-                                        {examsList.map((examName) => (
-                                            <option key={examName} value={examName}>
-                                                {examName}
-                                            </option>
-                                        ))}
-                                    </select>
+                        <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+                            {/* Tab Navigation - Elegant Tabs */}
+                            <div className="flex border-b border-gray-200 bg-gray-100">
+                                <motion.button
+                                    whileHover={{ backgroundColor: "rgba(59, 130, 246, 0.1)" }}
+                                    whileTap={{ scale: 0.98 }}
+                                    onClick={() => setActiveSubPage("roadmap-strategy")}
+                                    className={`flex-1 px-8 py-5 text-left transition-all relative ${
+                                        activeSubPage === "roadmap-strategy"
+                                            ? "bg-blue-50"
+                                            : "bg-gray-100 hover:bg-gray-200"
+                                    }`}
+                                >
+                                    {activeSubPage === "roadmap-strategy" && (
+                                        <motion.div
+                                            layoutId="activeTabIndicator"
+                                            className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-indigo-600"
+                                            initial={false}
+                                            transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                                        />
+                                    )}
+                                    <div className="flex items-center gap-4">
+                                        <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-2xl transition-colors ${
+                                            activeSubPage === "roadmap-strategy" 
+                                                ? "bg-blue-500 text-white" 
+                                                : "bg-gray-100 text-gray-500"
+                                        }`}>
+                                            🎯
+                                        </div>
+                                        <div>
+                                            <h3 className={`text-lg font-bold mb-1 ${
+                                                activeSubPage === "roadmap-strategy" ? "text-blue-700" : "text-gray-700"
+                                            }`}>
+                                                Roadmap Strategy
+                                            </h3>
+                                            <p className="text-sm text-gray-500">
+                                                Prioritize high-impact topics
+                                            </p>
+                                        </div>
+                                    </div>
+                                </motion.button>
+
+                                <div className="w-px bg-gray-200"></div>
+
+                                <motion.button
+                                    whileHover={{ backgroundColor: "rgba(59, 130, 246, 0.1)" }}
+                                    whileTap={{ scale: 0.98 }}
+                                    onClick={() => setActiveSubPage("my-progress")}
+                                    className={`flex-1 px-8 py-5 text-left transition-all relative ${
+                                        activeSubPage === "my-progress"
+                                            ? "bg-blue-50"
+                                            : "bg-gray-100 hover:bg-gray-200"
+                                    }`}
+                                >
+                                    {activeSubPage === "my-progress" && (
+                                        <motion.div
+                                            layoutId="activeTabIndicator"
+                                            className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-indigo-600"
+                                            initial={false}
+                                            transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                                        />
+                                    )}
+                                    <div className="flex items-center gap-4">
+                                        <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-2xl transition-colors ${
+                                            activeSubPage === "my-progress" 
+                                                ? "bg-blue-500 text-white" 
+                                                : "bg-gray-100 text-gray-500"
+                                        }`}>
+                                            📊
+                                        </div>
+                                        <div>
+                                            <h3 className={`text-lg font-bold mb-1 ${
+                                                activeSubPage === "my-progress" ? "text-blue-700" : "text-gray-700"
+                                            }`}>
+                                                My Progress
+                                            </h3>
+                                            <p className="text-sm text-gray-500">
+                                                Track your advancement
+                                            </p>
+                                        </div>
+                                    </div>
+                                </motion.button>
+                            </div>
+
+                            {/* Exam Selector - Integrated in same card */}
+                            <div className="p-4 border-t border-gray-200">
+                                <div className="flex items-center gap-3">
+                                    <div className="flex-shrink-0">
+                                        <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center shadow-md">
+                                            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div className="flex-1">
+                                        <label className="block text-xs font-semibold text-gray-700 mb-1.5">
+                                            Select Exam
+                                        </label>
+                                        <select
+                                            value={exam}
+                                            onChange={(e) => {
+                                                const newExam = e.target.value;
+                                                setExam(newExam);
+                                                if (newExam) {
+                                                    navigate(`/ai-roadmap?exam=${encodeURIComponent(newExam)}`, { replace: true });
+                                                } else {
+                                                    navigate('/ai-roadmap', { replace: true });
+                                                }
+                                            }}
+                                            className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-sm text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                                        >
+                                            <option value="">-- Select an exam --</option>
+                                            {examsList.map((examName) => (
+                                                <option key={examName} value={examName}>
+                                                    {examName}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                            
-                            {/* Tab Description */}
-                            <motion.div
-                                key={activeSubPage}
-                                initial={{ opacity: 0, y: -5 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.2 }}
-                                className="mt-3 pt-3 border-t border-gray-100"
-                            >
-                                <p className="text-xs text-gray-500">
-                                    {activeSubPage === "roadmap-strategy" 
-                                        ? "📊 Prioritize topics based on question weightage - focus on high-impact areas first"
-                                        : "📈 Track your progress and see how you're advancing through the roadmap"}
-                                </p>
-                            </motion.div>
-                        </motion.div>
+                        </div>
                     </div>
 
                     {/* Loading State */}
