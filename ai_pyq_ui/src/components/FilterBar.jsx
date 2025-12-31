@@ -56,25 +56,28 @@ export default function FilterBar({
     }, [localYearTo]);
 
     return (
-        <div className="w-full max-w-7xl mx-auto px-4 md:px-8">
+        <div className="w-full max-w-7xl mx-auto px-4 md:px-6">
             <motion.div
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                className="bg-gradient-to-r from-blue-50 to-indigo-50 border-y border-blue-100/80 shadow-sm"
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className="bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 border-y border-blue-100/60 shadow-md"
             >
-                <div className="py-4">
+                <div className="py-3">
                     <div className="w-full px-2 md:px-3">
-                        {/* Filter Container - Stretches horizontally to fit all elements on one line */}
-                        <div className="bg-white/70 backdrop-blur-sm border border-blue-200/60 rounded-xl px-5 py-4 shadow-sm w-full overflow-hidden">
-                        <div className="flex items-center gap-4 overflow-hidden">
+                        {/* Filter Container - Premium Styling */}
+                        <div className="bg-white/80 backdrop-blur-md border border-blue-200/70 rounded-xl px-4 py-3 shadow-lg hover:shadow-xl transition-shadow duration-300 w-full overflow-hidden relative">
+                            {/* Subtle gradient overlay */}
+                            <div className="absolute inset-0 bg-gradient-to-br from-white/50 to-blue-50/30 pointer-events-none rounded-2xl" />
+                        <div className="flex items-center gap-3 overflow-hidden relative z-10">
                             {/* Year Range */}
                             {showYearRange && (
                                 <div className="flex items-center gap-2 min-w-0 flex-shrink">
-                                    <span className="text-gray-700 text-sm font-normal whitespace-nowrap flex-shrink-0">Year Range:</span>
+                                    <span className="text-gray-700 text-sm font-semibold whitespace-nowrap flex-shrink-0">Year Range:</span>
                                     <select
                                         value={localYearFrom}
                                         onChange={(e) => setLocalYearFrom(e.target.value)}
-                                        className="bg-white text-gray-900 border border-gray-300 rounded-lg px-3 py-2 text-sm font-normal focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all hover:border-gray-400 shadow-sm min-w-[100px]"
+                                        className="bg-white/90 text-gray-900 border border-gray-300/80 rounded-lg px-3 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition-all hover:border-blue-400 hover:bg-white shadow-sm hover:shadow-md min-w-[100px] cursor-pointer"
                                     >
                                         <option value="" className="text-gray-800">From</option>
                                         {availableYears?.map((year) => (
@@ -83,11 +86,11 @@ export default function FilterBar({
                                             </option>
                                         ))}
                                     </select>
-                                    <span className="text-gray-500 text-sm font-normal">to</span>
+                                    <span className="text-gray-500 text-sm font-medium">to</span>
                                     <select
                                         value={localYearTo}
                                         onChange={(e) => setLocalYearTo(e.target.value)}
-                                        className="bg-white text-gray-900 border border-gray-300 rounded-lg px-3 py-2 text-sm font-normal focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all hover:border-gray-400 shadow-sm min-w-[100px]"
+                                        className="bg-white/90 text-gray-900 border border-gray-300/80 rounded-lg px-3 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition-all hover:border-blue-400 hover:bg-white shadow-sm hover:shadow-md min-w-[100px] cursor-pointer"
                                     >
                                         <option value="" className="text-gray-800">To</option>
                                         {availableYears?.map((year) => (
@@ -102,11 +105,11 @@ export default function FilterBar({
                             {/* Exam Filter - Single Exam Mode */}
                             {showExam && !multipleExamsMode && (
                                 <div className="flex items-center gap-2 min-w-0 flex-shrink">
-                                    <span className="text-gray-700 text-sm font-normal whitespace-nowrap flex-shrink-0">Exam:</span>
+                                    <span className="text-gray-700 text-sm font-semibold whitespace-nowrap flex-shrink-0">Exam:</span>
                                     <select
                                         value={exam || ""}
                                         onChange={(e) => setExam(e.target.value)}
-                                        className="bg-white text-gray-900 border border-gray-300 rounded-lg px-3 py-2 text-sm font-normal focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all hover:border-gray-400 shadow-sm min-w-[160px] max-w-[200px] truncate"
+                                        className="bg-white/90 text-gray-900 border border-gray-300/80 rounded-lg px-3 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition-all hover:border-blue-400 hover:bg-white shadow-sm hover:shadow-md min-w-[160px] max-w-[200px] truncate cursor-pointer"
                                         style={{ textOverflow: 'ellipsis' }}
                                     >
                                         <option value="" className="text-gray-800">{showTopic ? "Select Exam" : "All Exams"}</option>
@@ -122,7 +125,7 @@ export default function FilterBar({
                             {/* Exam Filter - Multiple Exams Mode */}
                             {showExam && multipleExamsMode && (
                                 <div className="flex items-center gap-2 min-w-0 flex-shrink">
-                                    <span className="text-gray-700 text-sm font-normal whitespace-nowrap flex-shrink-0">Exams:</span>
+                                    <span className="text-gray-700 text-sm font-semibold whitespace-nowrap flex-shrink-0">Exams:</span>
                                     <select
                                         value=""
                                         onChange={(e) => {
@@ -131,7 +134,7 @@ export default function FilterBar({
                                                 e.target.value = "";
                                             }
                                         }}
-                                        className="bg-white text-gray-900 border border-gray-300 rounded-lg px-3 py-2 text-sm font-normal focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all hover:border-gray-400 shadow-sm min-w-[150px] max-w-[200px] truncate"
+                                        className="bg-white/90 text-gray-900 border border-gray-300/80 rounded-lg px-3 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition-all hover:border-blue-400 hover:bg-white shadow-sm hover:shadow-md min-w-[150px] max-w-[200px] truncate cursor-pointer"
                                         style={{ textOverflow: 'ellipsis' }}
                                     >
                                         <option value="" className="text-gray-800">+ Add Exam</option>
@@ -149,12 +152,12 @@ export default function FilterBar({
                             {/* Subject Filter */}
                             {showSubject && (
                                 <div className="flex items-center gap-2 min-w-0 flex-shrink">
-                                    <span className="text-gray-700 text-sm font-normal whitespace-nowrap flex-shrink-0">Subject:</span>
+                                    <span className="text-gray-700 text-sm font-semibold whitespace-nowrap flex-shrink-0">Subject:</span>
                                     <select
                                         value={subject || ""}
                                         onChange={(e) => setSubject(e.target.value)}
                                         disabled={showExam && !exam}
-                                        className="bg-white text-gray-900 border border-gray-300 rounded-lg px-3 py-2 text-sm font-normal focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all hover:border-gray-400 shadow-sm min-w-[160px] max-w-[200px] truncate disabled:bg-gray-100 disabled:cursor-not-allowed disabled:text-gray-400"
+                                        className="bg-white/90 text-gray-900 border border-gray-300/80 rounded-lg px-3 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition-all hover:border-blue-400 hover:bg-white shadow-sm hover:shadow-md min-w-[160px] max-w-[200px] truncate disabled:bg-gray-100/80 disabled:cursor-not-allowed disabled:text-gray-400 disabled:border-gray-200 cursor-pointer"
                                         style={{ textOverflow: 'ellipsis' }}
                                     >
                                         <option value="" className="text-gray-800">{showTopic ? "Select Subject" : "All Subjects"}</option>
@@ -170,12 +173,12 @@ export default function FilterBar({
                             {/* Topic Filter */}
                             {showTopic && (
                                 <div className="flex items-center gap-2 min-w-0 flex-1">
-                                    <span className="text-gray-700 text-sm font-normal whitespace-nowrap flex-shrink-0">Topic:</span>
+                                    <span className="text-gray-700 text-sm font-semibold whitespace-nowrap flex-shrink-0">Topic:</span>
                                     <select
                                         value={topic || ""}
                                         onChange={(e) => setTopic(e.target.value)}
                                         disabled={!subject || !exam || !topicsList || topicsList.length === 0}
-                                        className="bg-white text-gray-900 border border-gray-300 rounded-lg px-3 py-2 text-sm font-normal focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all hover:border-gray-400 shadow-sm min-w-[160px] max-w-full truncate disabled:bg-gray-100 disabled:cursor-not-allowed disabled:text-gray-400"
+                                        className="bg-white/90 text-gray-900 border border-gray-300/80 rounded-lg px-3 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition-all hover:border-blue-400 hover:bg-white shadow-sm hover:shadow-md min-w-[160px] max-w-full truncate disabled:bg-gray-100/80 disabled:cursor-not-allowed disabled:text-gray-400 disabled:border-gray-200 cursor-pointer"
                                         style={{ textOverflow: 'ellipsis', width: '100%' }}
                                     >
                                         <option value="" className="text-gray-800">Select Topic</option>
@@ -190,41 +193,47 @@ export default function FilterBar({
 
                             {/* Language Toggle Icon - Extreme Right */}
                             <div className="ml-auto flex-shrink-0">
-                                <button
+                                <motion.button
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
                                     onClick={() => setLanguage(language === "english" ? "hindi" : "english")}
-                                    className="px-2.5 py-1.5 rounded-lg border border-gray-300 bg-white hover:bg-gray-50 transition-colors shadow-sm flex items-center justify-center"
+                                    className="px-3 py-1.5 rounded-lg border border-gray-300/80 bg-white/90 hover:bg-white hover:border-blue-400 transition-all shadow-sm hover:shadow-md flex items-center justify-center backdrop-blur-sm"
                                     title={language === "english" ? "Switch to Hindi" : "Switch to English"}
                                 >
                                     {language === "english" ? (
-                                        <span className="text-sm font-semibold text-gray-700">EN</span>
+                                        <span className="text-sm font-bold text-gray-700">EN</span>
                                     ) : (
-                                        <span className="text-sm font-semibold text-gray-700">हि</span>
+                                        <span className="text-sm font-bold text-gray-700">हि</span>
                                     )}
-                                </button>
+                                </motion.button>
                             </div>
                         </div>
 
                         {/* Selected Exams Tags for Multiple Exams Mode */}
                         {showExam && multipleExamsMode && exams && exams.length > 0 && (
-                            <div className="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-gray-200">
+                            <div className="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-gray-200/60 relative z-10">
                                 {exams.map((examName) => (
-                                    <div
+                                    <motion.div
                                         key={examName}
-                                        className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex items-center gap-2"
+                                        initial={{ opacity: 0, scale: 0.8 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-3 py-1.5 rounded-full text-sm font-semibold flex items-center gap-2 shadow-md hover:shadow-lg transition-shadow duration-300"
                                     >
                                         <span>{examName}</span>
                                         {onRemoveExam && (
-                                            <button
+                                            <motion.button
+                                                whileHover={{ scale: 1.1 }}
+                                                whileTap={{ scale: 0.9 }}
                                                 onClick={() => onRemoveExam(examName)}
-                                                className="hover:bg-blue-200 rounded-full w-4 h-4 flex items-center justify-center text-blue-600 font-semibold"
+                                                className="hover:bg-white/20 rounded-full w-4 h-4 flex items-center justify-center text-white font-bold transition-colors text-xs"
                                             >
                                                 ×
-                                            </button>
+                                            </motion.button>
                                         )}
-                                    </div>
+                                    </motion.div>
                                 ))}
                                 {maxExams && exams.length >= maxExams && (
-                                    <div className="text-yellow-600 text-xs font-medium">
+                                    <div className="bg-amber-50 border border-amber-200 text-amber-700 px-2.5 py-1 rounded-full text-xs font-semibold shadow-sm">
                                         Max {maxExams} exams
                                     </div>
                                 )}

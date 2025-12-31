@@ -1,8 +1,7 @@
 // src/CrossExamInsightsPage.jsx
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Sidebar from "./components/Sidebar";
-import SecondarySidebar from "./components/SecondarySidebar";
 import FilterBar from "./components/FilterBar";
 import SubjectCards from "./components/SubjectCards";
 import CrossExamSubjectAnalysis from "./components/CrossExamSubjectAnalysis";
@@ -15,8 +14,8 @@ export default function CrossExamInsightsPage() {
     const [yearTo, setYearTo] = useState(null);
     const [availableYears, setAvailableYears] = useState([]);
     const [selectedSubject, setSelectedSubject] = useState(null);
-    const [activeSubPage, setActiveSubPage] = useState("subject-cards");
-    const [secondarySidebarOpen, setSecondarySidebarOpen] = useState(true);
+    const [viewMode, setViewMode] = useState("cards"); // "cards" or "content"
+    const [activeSubPage, setActiveSubPage] = useState(null);
     const [primarySidebarCollapsed, setPrimarySidebarCollapsed] = useState(false);
     const [maxExams, setMaxExams] = useState(3); // Default to 3, will be updated from config
 
@@ -86,7 +85,19 @@ export default function CrossExamInsightsPage() {
         }
     };
 
+    const handleCardClick = (subPageId) => {
+        setActiveSubPage(subPageId);
+        setViewMode("content");
+    };
+
+    const handleBackToCards = () => {
+        setViewMode("cards");
+        setActiveSubPage(null);
+    };
+
     const renderContent = () => {
+        if (!activeSubPage) return null;
+        
         switch (activeSubPage) {
             case "subject-cards":
                 return (
@@ -110,14 +121,7 @@ export default function CrossExamInsightsPage() {
             case "hot-topics":
                 return <CrossExamHotTopics exams={exams} yearFrom={yearFrom} yearTo={yearTo} />;
             default:
-                return (
-                    <SubjectCards
-                        exams={exams}
-                        yearFrom={yearFrom}
-                        yearTo={yearTo}
-                        onSubjectClick={setSelectedSubject}
-                    />
-                );
+                return null;
         }
     };
 
@@ -128,57 +132,20 @@ export default function CrossExamInsightsPage() {
                 exam={""} 
                 setExam={() => {}} 
                 examsList={examsList}
-                onOpenSecondarySidebar={() => setSecondarySidebarOpen(!secondarySidebarOpen)}
+                onOpenSecondarySidebar={() => {}}
                 onCollapseChange={(isCollapsed) => {
                     setPrimarySidebarCollapsed(isCollapsed);
-                    // When Primary Sidebar collapses, also close Secondary Sidebar
-                    if (isCollapsed) {
-                        setSecondarySidebarOpen(false);
-                    }
                 }}
-            />
-
-            {/* Secondary Sidebar */}
-            <SecondarySidebar
-                isOpen={secondarySidebarOpen}
-                onClose={() => setSecondarySidebarOpen(false)}
-                type="cross-exam"
-                activeSubPage={activeSubPage}
-                onSubPageChange={setActiveSubPage}
             />
 
             {/* Main Content */}
             <main
                 className={`flex-1 flex flex-col transition-all duration-300 min-h-screen ${
-                    primarySidebarCollapsed ? "ml-16" : secondarySidebarOpen ? "ml-64 lg:ml-[496px]" : "ml-64"
+                    primarySidebarCollapsed ? "ml-16" : "ml-64"
                 }`}
             >
-                {/* Filter Bar - Now part of page content, not sticky */}
+                {/* Filter Bar */}
                 <div className="w-full relative z-10">
-                    {/* Hamburger Button - Positioned in the middle between Primary Sidebar and Filter Pane */}
-                    {!primarySidebarCollapsed && !secondarySidebarOpen && (
-                        <div className="w-full max-w-7xl mx-auto px-4 md:px-8 relative">
-                            <button
-                                onClick={() => setSecondarySidebarOpen(true)}
-                                className="absolute -left-6 md:-left-8 top-4 p-2 bg-gray-100 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-200 hover:border-gray-400 shadow-sm transition-colors flex items-center justify-center z-10"
-                                title="Open sub-pages navigation"
-                            >
-                                <svg
-                                    className="w-5 h-5"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M4 6h16M4 12h16M4 18h16"
-                                    />
-                                </svg>
-                            </button>
-                        </div>
-                    )}
                     <FilterBar
                         exams={exams}
                         onAddExam={handleAddExam}
@@ -198,60 +165,209 @@ export default function CrossExamInsightsPage() {
 
                 {/* Content Area */}
                 <div className="w-full max-w-7xl mx-auto px-4 md:px-8 py-6 md:py-8 space-y-4 relative z-0">
-                    {/* Header */}
-                    <div className="mb-6 flex items-start justify-between">
-                        <div>
-                                {(() => {
-                                    const pageInfo = {
-                                        "subject-cards": {
-                                            title: "📋 Subject Comparison",
-                                            description: "Compare subject distribution and performance across multiple exams with visual comparison cards"
-                                        },
-                                        "subject-analysis": {
-                                            title: "📊 Subject & Topic Analysis",
-                                            description: "Compare detailed subject and topic distribution patterns across selected exams for comprehensive insights"
-                                        },
-                                        "hot-topics": {
-                                            title: "🔥 Hot Topics Across Exams",
-                                            description: "Identify trending and frequently asked topics across multiple exams to prioritize your study focus"
-                                        }
-                                    };
-                                    const info = pageInfo[activeSubPage] || {
-                                        title: "🔍 Cross-Exam Insights",
-                                        description: "Compare subjects and topics across different exams"
-                                    };
-                                    return (
-                                        <>
-                                            <h1 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
-                                                {info.title}
-                                            </h1>
-                                            <p className="text-xs md:text-sm text-gray-600">
-                                                {info.description}
+                    <AnimatePresence mode="wait">
+                        {viewMode === "cards" ? (
+                            <motion.div
+                                key="cards"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                {/* Header */}
+                                <div className="mb-8">
+                                    <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                                        🔍 Cross-Exam Insights
+                                    </h1>
+                                    <p className="text-sm md:text-base text-gray-600">
+                                        Compare subjects and topics across different exams with comprehensive analytics
+                                    </p>
+                                </div>
+
+                                {/* Premium Cards Grid */}
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                                    {/* Subject Comparison Card */}
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        transition={{ delay: 0.1 }}
+                                        onClick={() => handleCardClick("subject-cards")}
+                                        className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl border border-gray-200 hover:border-indigo-300 cursor-pointer transition-all duration-300 overflow-hidden p-8"
+                                        whileHover={{ scale: 1.02 }}
+                                    >
+                                        {/* Gradient Overlay */}
+                                        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-indigo-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                        
+                                        {/* Content */}
+                                        <div className="relative z-10">
+                                            <div className="text-5xl mb-4">📋</div>
+                                            <h3 className="text-xl font-bold text-gray-900 mb-2">
+                                                Subject Comparison
+                                            </h3>
+                                            <p className="text-sm text-gray-600 leading-relaxed">
+                                                Compare subject distribution and performance across multiple exams with visual comparison cards
                                             </p>
-                                        </>
-                                    );
-                                })()}
-                        </div>
-                    </div>
+                                            
+                                            {/* Arrow Indicator */}
+                                            <div className="mt-6 flex items-center text-indigo-600 font-medium text-sm group-hover:translate-x-1 transition-transform duration-300">
+                                                <span>Explore</span>
+                                                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </motion.div>
 
-                    {/* Content based on active sub-page */}
-                    <motion.div
-                        key={activeSubPage}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.3 }}
-                    >
-                        {renderContent()}
-                    </motion.div>
+                                    {/* Subject & Topic Analysis Card */}
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        transition={{ delay: 0.2 }}
+                                        onClick={() => handleCardClick("subject-analysis")}
+                                        className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl border border-gray-200 hover:border-indigo-300 cursor-pointer transition-all duration-300 overflow-hidden p-8"
+                                        whileHover={{ scale: 1.02 }}
+                                    >
+                                        {/* Gradient Overlay */}
+                                        <div className="absolute inset-0 bg-gradient-to-br from-purple-50/50 to-pink-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                        
+                                        {/* Content */}
+                                        <div className="relative z-10">
+                                            <div className="text-5xl mb-4">📊</div>
+                                            <h3 className="text-xl font-bold text-gray-900 mb-2">
+                                                Subject & Topic Analysis
+                                            </h3>
+                                            <p className="text-sm text-gray-600 leading-relaxed">
+                                                Compare detailed subject and topic distribution patterns across selected exams for comprehensive insights
+                                            </p>
+                                            
+                                            {/* Arrow Indicator */}
+                                            <div className="mt-6 flex items-center text-indigo-600 font-medium text-sm group-hover:translate-x-1 transition-transform duration-300">
+                                                <span>Explore</span>
+                                                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </motion.div>
 
-                    {/* Info Section */}
-                    {exams.length === 0 && (
-                        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
-                            <p className="text-blue-800">
-                                👆 Add exams from the filter bar to start comparing insights
-                            </p>
-                        </div>
-                    )}
+                                    {/* Hot Topics Card */}
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        transition={{ delay: 0.3 }}
+                                        onClick={() => handleCardClick("hot-topics")}
+                                        className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl border border-gray-200 hover:border-indigo-300 cursor-pointer transition-all duration-300 overflow-hidden p-8"
+                                        whileHover={{ scale: 1.02 }}
+                                    >
+                                        {/* Gradient Overlay */}
+                                        <div className="absolute inset-0 bg-gradient-to-br from-orange-50/50 to-red-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                        
+                                        {/* Content */}
+                                        <div className="relative z-10">
+                                            <div className="text-5xl mb-4">🔥</div>
+                                            <h3 className="text-xl font-bold text-gray-900 mb-2">
+                                                Hot Topics
+                                            </h3>
+                                            <p className="text-sm text-gray-600 leading-relaxed">
+                                                Identify trending and frequently asked topics across multiple exams to prioritize your study focus
+                                            </p>
+                                            
+                                            {/* Arrow Indicator */}
+                                            <div className="mt-6 flex items-center text-indigo-600 font-medium text-sm group-hover:translate-x-1 transition-transform duration-300">
+                                                <span>Explore</span>
+                                                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                </div>
+
+                                {/* Info Section */}
+                                {exams.length === 0 && (
+                                    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6 text-center shadow-sm">
+                                        <p className="text-blue-800 font-medium">
+                                            👆 Add exams from the filter bar to start comparing insights
+                                        </p>
+                                    </div>
+                                )}
+                            </motion.div>
+                        ) : (
+                            <motion.div
+                                key="content"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                {/* Header with Back Button */}
+                                <div className="mb-6 flex items-start justify-between">
+                                    <div className="flex items-center gap-4">
+                                        <button
+                                            onClick={handleBackToCards}
+                                            className="flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 transition-colors shadow-sm"
+                                            title="Back to cards"
+                                        >
+                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                            </svg>
+                                        </button>
+                                        <div>
+                                            {(() => {
+                                                const pageInfo = {
+                                                    "subject-cards": {
+                                                        title: "📋 Subject Comparison",
+                                                        description: "Compare subject distribution and performance across multiple exams with visual comparison cards"
+                                                    },
+                                                    "subject-analysis": {
+                                                        title: "📊 Subject & Topic Analysis",
+                                                        description: "Compare detailed subject and topic distribution patterns across selected exams for comprehensive insights"
+                                                    },
+                                                    "hot-topics": {
+                                                        title: "🔥 Hot Topics Across Exams",
+                                                        description: "Identify trending and frequently asked topics across multiple exams to prioritize your study focus"
+                                                    }
+                                                };
+                                                const info = pageInfo[activeSubPage] || {
+                                                    title: "🔍 Cross-Exam Insights",
+                                                    description: "Compare subjects and topics across different exams"
+                                                };
+                                                return (
+                                                    <>
+                                                        <h1 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
+                                                            {info.title}
+                                                        </h1>
+                                                        <p className="text-xs md:text-sm text-gray-600">
+                                                            {info.description}
+                                                        </p>
+                                                    </>
+                                                );
+                                            })()}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Content based on active sub-page */}
+                                <motion.div
+                                    key={activeSubPage}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.3 }}
+                                >
+                                    {renderContent()}
+                                </motion.div>
+
+                                {/* Info Section */}
+                                {exams.length === 0 && (
+                                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
+                                        <p className="text-blue-800">
+                                            👆 Add exams from the filter bar to start comparing insights
+                                        </p>
+                                    </div>
+                                )}
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </div>
             </main>
         </div>
