@@ -74,8 +74,9 @@ export default function ExamResults() {
                         const attemptInfo = {
                             attempt_id: attemptId,
                             exam_set_id: examSetId,
-                            status: 'completed',
+                            status: 'submitted', // Match database enum value
                             completed_at: new Date().toISOString(),
+                            created_at: new Date().toISOString(),
                             score: score,
                             total_marks: totalMarks
                         };

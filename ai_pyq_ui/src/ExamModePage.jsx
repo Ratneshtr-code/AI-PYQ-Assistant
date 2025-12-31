@@ -14,11 +14,11 @@ export default function ExamModePage() {
     const [error, setError] = useState("");
     
     // Test type selection - restore from URL params or localStorage
-    // Options: "exam", "subject", "my-attempts"
+    // Options: "mock", "exam", "subject", "my-attempts"
     const [testType, setTestType] = useState(() => {
         const urlTestType = new URLSearchParams(window.location.search).get("testType");
         const stored = localStorage.getItem("examMode_testType");
-        return urlTestType || stored || "exam";
+        return urlTestType || stored || "mock";
     });
     
     // Filters - restore from URL params or localStorage
@@ -36,6 +36,12 @@ export default function ExamModePage() {
     const [subjectsList, setSubjectsList] = useState([]);
     const [primarySidebarCollapsed, setPrimarySidebarCollapsed] = useState(false);
     const [userAttempts, setUserAttempts] = useState({}); // Map of examSetId -> { attemptId, status, completed_at, score, total_marks }
+    
+    // Test type filter for "My Tests" section: "all", "mock_test", "subject_test", "pyp"
+    const [myTestsFilterType, setMyTestsFilterType] = useState(() => {
+        const stored = localStorage.getItem("examMode_myTestsFilterType");
+        return stored || "all";
+    });
 
     // Sync state with URL params when component mounts or URL changes
     useEffect(() => {
@@ -58,16 +64,27 @@ export default function ExamModePage() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchParams]); // Only run when URL params change
 
-    // Fetch exam sets
+    // Fetch exam sets - re-run when userAttempts changes (important for "My Tests" tab)
     useEffect(() => {
         const fetchExamSets = async () => {
             try {
                 setLoading(true);
                 const params = new URLSearchParams();
-                if (exam) params.append("exam", exam);
-                if (testType === "subject" && subject) {
-                    params.append("subject", subject);
+                
+                // Apply filters based on test type
+                if (testType === "mock") {
+                    // Mock Tests: can filter by exam, and optionally by subject
+                    if (exam) params.append("exam", exam);
+                    if (subject) params.append("subject", subject);
+                } else if (testType === "exam") {
+                    // PYQ Tests: filter by exam only
+                    if (exam) params.append("exam", exam);
+                } else if (testType === "subject") {
+                    // Subject Tests: filter by exam and subject
+                    if (exam) params.append("exam", exam);
+                    if (subject) params.append("subject", subject);
                 }
+                // "My Tests" tab doesn't apply filters - shows all completed tests
                 
                 const url = `${API_BASE_URL}/exam/sets?${params.toString()}`;
                 const response = await fetch(url, {
@@ -81,23 +98,39 @@ export default function ExamModePage() {
                 const data = await response.json();
                 // Filter by exam type
                 let filtered = data.filter(set => {
-                    if (testType === "exam") {
+                    if (testType === "mock") {
+                        return set.exam_type === "mock_test";
+                    } else if (testType === "exam") {
                         return !set.subject || set.exam_type === "pyp";
                     } else if (testType === "subject") {
                         return set.subject && set.exam_type === "subject_test";
                     } else if (testType === "my-attempts") {
-                        // For "My Attempts", include all exam sets initially
+                        // For "My Tests", include all exam sets initially (no exam/subject filtering)
                         return true;
                     }
                     return false;
                 });
                 
-                // If "My Attempts" tab, filter to show only completed exams
+                // If "My Tests" tab, filter to show only completed exams
                 if (testType === "my-attempts") {
                     filtered = filtered.filter(set => {
                         const examSetId = String(set.id);
                         const attempt = userAttempts[examSetId] || userAttempts[set.id];
-                        return attempt && (attempt.status === 'completed' || attempt.status === 'submitted');
+                        const isCompleted = attempt && (attempt.status === 'completed' || attempt.status === 'submitted');
+                        
+                        if (!isCompleted) return false;
+                        
+                        // Apply test type filter
+                        if (myTestsFilterType === "all") {
+                            return true;
+                        } else if (myTestsFilterType === "mock_test") {
+                            return set.exam_type === "mock_test";
+                        } else if (myTestsFilterType === "subject_test") {
+                            return set.exam_type === "subject_test";
+                        } else if (myTestsFilterType === "pyp") {
+                            return set.exam_type === "pyp";
+                        }
+                        return true;
                     });
                 }
                 
@@ -130,7 +163,7 @@ export default function ExamModePage() {
         };
         
         fetchExamSets();
-    }, [exam, subject, testType, userAttempts]);
+    }, [exam, subject, testType, userAttempts, myTestsFilterType]);
 
     // Fetch exams list
     useEffect(() => {
@@ -170,18 +203,8 @@ export default function ExamModePage() {
     // Fetch user exam attempts
     useEffect(() => {
         const fetchUserAttempts = async () => {
-            // First, load from localStorage as fallback
             try {
-                const storedAttempts = JSON.parse(localStorage.getItem('exam_attempts') || '{}');
-                if (Object.keys(storedAttempts).length > 0) {
-                    setUserAttempts(storedAttempts);
-                }
-            } catch (err) {
-                console.error("Failed to load attempts from localStorage:", err);
-            }
-            
-            try {
-                // Try multiple possible API endpoints
+                // DATABASE IS THE SOURCE OF TRUTH - Always fetch from API first
                 let response = await fetch(`${API_BASE_URL}/exam/user/attempts`, {
                     credentials: "include"
                 });
@@ -194,12 +217,15 @@ export default function ExamModePage() {
                 }
                 
                 if (!response.ok) {
-                    console.warn("Failed to fetch user attempts from API, using localStorage data if available");
+                    console.warn("Failed to fetch user attempts from API");
+                    // On API failure, clear localStorage to prevent showing wrong user's data
+                    localStorage.removeItem('exam_attempts');
+                    setUserAttempts({});
                     return;
                 }
                 
                 const data = await response.json();
-                console.log("User attempts data from API:", data); // Debug log
+                console.log("User attempts data from API (DATABASE):", data); // Debug log
                 
                 // Transform data into a map: exam_set_id -> { attempt_id, status, completed_at }
                 const attemptsMap = {};
@@ -210,6 +236,7 @@ export default function ExamModePage() {
                         const attemptId = attempt.id || attempt.attempt_id;
                         const status = attempt.status;
                         const createdAt = attempt.created_at || attempt.createdAt;
+                        const completedAt = attempt.completed_at || attempt.completedAt;
                         
                         if (examSetId && attemptId) {
                             // Keep only the latest attempt for each exam set
@@ -218,7 +245,7 @@ export default function ExamModePage() {
                                 attemptsMap[examSetId] = {
                                     attempt_id: attemptId,
                                     status: status,
-                                    completed_at: attempt.completed_at || attempt.completedAt,
+                                    completed_at: completedAt,
                                     created_at: createdAt,
                                     score: attempt.score || attempt.total_score || attempt.marks_obtained || 0,
                                     total_marks: attempt.total_marks || attempt.totalMarks || null
@@ -234,7 +261,7 @@ export default function ExamModePage() {
                             attemptsMap[String(examSetId)] = {
                                 attempt_id: attempt.attempt_id || attempt.id,
                                 status: attempt.status,
-                                completed_at: attempt.completed_at,
+                                completed_at: attempt.completed_at || attempt.completedAt,
                                 created_at: attempt.created_at,
                                 score: attempt.score || attempt.total_score || attempt.marks_obtained || 0,
                                 total_marks: attempt.total_marks || attempt.totalMarks || null
@@ -243,14 +270,35 @@ export default function ExamModePage() {
                     });
                 }
                 
-                console.log("Processed attempts map from API:", attemptsMap); // Debug log
+                console.log("Processed attempts map from API (DATABASE):", attemptsMap); // Debug log
                 
-                // Merge with localStorage data (API data takes precedence)
+                // Use ONLY API data (database is source of truth)
+                // Only merge localStorage if it has very recent data (within last 2 minutes) from current session
                 const storedAttempts = JSON.parse(localStorage.getItem('exam_attempts') || '{}');
-                setUserAttempts({ ...storedAttempts, ...attemptsMap });
+                const finalAttempts = { ...attemptsMap };
+                
+                // Only keep localStorage data if it's very recent (just submitted in current session)
+                // This prevents cross-user contamination
+                Object.keys(storedAttempts).forEach(examSetId => {
+                    if (!attemptsMap[examSetId]) {
+                        const storedAttempt = storedAttempts[examSetId];
+                        const storedDate = storedAttempt.completed_at || storedAttempt.created_at;
+                        // Only keep if it's from the last 2 minutes (very recent, likely just submitted)
+                        if (storedDate && new Date(storedDate) > new Date(Date.now() - 2 * 60 * 1000)) {
+                            finalAttempts[examSetId] = storedAttempt;
+                        }
+                    }
+                });
+                
+                // Update state with database data
+                setUserAttempts(finalAttempts);
+                // Update localStorage with database data (for performance, but database is source of truth)
+                localStorage.setItem('exam_attempts', JSON.stringify(finalAttempts));
             } catch (err) {
                 console.error("Error fetching user attempts:", err);
-                // Silently fail - don't break the page if attempts can't be loaded
+                // Clear localStorage on error to prevent showing stale/wrong user's data
+                localStorage.removeItem('exam_attempts');
+                setUserAttempts({});
             }
         };
         
@@ -263,10 +311,29 @@ export default function ExamModePage() {
             }
         };
         
+        // Clear attempts when user logs out
+        const handleUserLogout = () => {
+            setUserAttempts({});
+            localStorage.removeItem('exam_attempts');
+        };
+        
+        // Refetch attempts when user logs in (clear localStorage first to prevent cross-user contamination)
+        const handleUserLogin = () => {
+            // Clear localStorage first to ensure we don't show previous user's data
+            localStorage.removeItem('exam_attempts');
+            setUserAttempts({});
+            // Then fetch fresh data from database
+            fetchUserAttempts();
+        };
+        
         document.addEventListener('visibilitychange', handleVisibilityChange);
+        window.addEventListener('userLoggedOut', handleUserLogout);
+        window.addEventListener('userLoggedIn', handleUserLogin);
         
         return () => {
             document.removeEventListener('visibilitychange', handleVisibilityChange);
+            window.removeEventListener('userLoggedOut', handleUserLogout);
+            window.removeEventListener('userLoggedIn', handleUserLogin);
         };
     }, []); // Refetch when component mounts or when returning to page
     
@@ -398,7 +465,7 @@ export default function ExamModePage() {
                     {/* Header */}
                     <div className="mb-8">
                         <h1 className="text-4xl font-bold text-gray-900 mb-2">
-                            Exam Mode
+                            Test Series
                         </h1>
                         <p className="text-gray-600 text-lg">
                             Practice with full-length mock tests and previous year papers
@@ -408,8 +475,38 @@ export default function ExamModePage() {
                     {/* Test Type Selection */}
                     <div className="mb-8">
                         <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
-                            <h2 className="text-xl font-bold text-gray-900 mb-4">Select Test Type</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                <motion.button
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    onClick={() => {
+                                        setTestType("mock");
+                                    }}
+                                    className={`p-6 rounded-xl border-2 transition-all ${
+                                        testType === "mock"
+                                            ? "border-blue-500 bg-blue-50 shadow-md"
+                                            : "border-gray-200 bg-white hover:border-gray-300"
+                                    }`}
+                                >
+                                    <div className="flex items-center gap-4">
+                                        <div className={`w-16 h-16 rounded-lg flex items-center justify-center text-3xl ${
+                                            testType === "mock" ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-600"
+                                        }`}>
+                                            🎯
+                                        </div>
+                                        <div className="text-left">
+                                            <h3 className={`text-lg font-bold mb-1 ${
+                                                testType === "mock" ? "text-blue-700" : "text-gray-900"
+                                            }`}>
+                                                Mock Tests
+                                            </h3>
+                                            <p className="text-sm text-gray-600">
+                                                Random 20 questions from exam/subject
+                                            </p>
+                                        </div>
+                                    </div>
+                                </motion.button>
+
                                 <motion.button
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
@@ -433,10 +530,10 @@ export default function ExamModePage() {
                                             <h3 className={`text-lg font-bold mb-1 ${
                                                 testType === "exam" ? "text-blue-700" : "text-gray-900"
                                             }`}>
-                                                Exam Test
+                                                PYQ Test
                                             </h3>
                                             <p className="text-sm text-gray-600">
-                                                Full-length previous year papers and mock tests
+                                                Full-length previous year papers
                                             </p>
                                         </div>
                                     </div>
@@ -476,7 +573,8 @@ export default function ExamModePage() {
                                     whileTap={{ scale: 0.98 }}
                                     onClick={() => {
                                         setTestType("my-attempts");
-                                        setSubject("");
+                                        setExam(""); // Clear exam filter for "My Tests" tab
+                                        setSubject(""); // Clear subject filter for "My Tests" tab
                                     }}
                                     className={`p-6 rounded-xl border-2 transition-all ${
                                         testType === "my-attempts"
@@ -494,10 +592,10 @@ export default function ExamModePage() {
                                             <h3 className={`text-lg font-bold mb-1 ${
                                                 testType === "my-attempts" ? "text-blue-700" : "text-gray-900"
                                             }`}>
-                                                My Attempts
+                                                My Tests
                                             </h3>
                                             <p className="text-sm text-gray-600">
-                                                View all your completed exam attempts
+                                                View all your completed tests
                                             </p>
                                         </div>
                                     </div>
@@ -506,7 +604,70 @@ export default function ExamModePage() {
                         </div>
                     </div>
 
-                    {/* Filters - Hide when "My Attempts" is selected */}
+                    {/* Filters for My Tests - Test Type Filter */}
+                    {testType === "my-attempts" && (
+                    <div className="mb-6 bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+                        <label className="block text-sm font-semibold text-gray-700 mb-3">
+                            Filter by Test Type
+                        </label>
+                        <div className="flex flex-wrap gap-3">
+                            <button
+                                onClick={() => {
+                                    setMyTestsFilterType("all");
+                                    localStorage.setItem("examMode_myTestsFilterType", "all");
+                                }}
+                                className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                                    myTestsFilterType === "all"
+                                        ? "bg-blue-500 text-white shadow-md"
+                                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                                }`}
+                            >
+                                All Tests
+                            </button>
+                            <button
+                                onClick={() => {
+                                    setMyTestsFilterType("mock_test");
+                                    localStorage.setItem("examMode_myTestsFilterType", "mock_test");
+                                }}
+                                className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                                    myTestsFilterType === "mock_test"
+                                        ? "bg-blue-500 text-white shadow-md"
+                                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                                }`}
+                            >
+                                Mock Tests
+                            </button>
+                            <button
+                                onClick={() => {
+                                    setMyTestsFilterType("subject_test");
+                                    localStorage.setItem("examMode_myTestsFilterType", "subject_test");
+                                }}
+                                className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                                    myTestsFilterType === "subject_test"
+                                        ? "bg-blue-500 text-white shadow-md"
+                                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                                }`}
+                            >
+                                Subject Tests
+                            </button>
+                            <button
+                                onClick={() => {
+                                    setMyTestsFilterType("pyp");
+                                    localStorage.setItem("examMode_myTestsFilterType", "pyp");
+                                }}
+                                className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                                    myTestsFilterType === "pyp"
+                                        ? "bg-blue-500 text-white shadow-md"
+                                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                                }`}
+                            >
+                                Previous Year Papers
+                            </button>
+                        </div>
+                    </div>
+                    )}
+
+                    {/* Filters - Show for Mock Tests, PYQ Tests, and Subject Tests */}
                     {testType !== "my-attempts" && (
                     <div className="mb-6 bg-white rounded-xl shadow-lg p-6 border border-gray-200">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -518,7 +679,9 @@ export default function ExamModePage() {
                                     value={exam}
                                     onChange={(e) => {
                                         setExam(e.target.value);
-                                        setSubject("");
+                                        if (testType !== "mock") {
+                                            setSubject("");
+                                        }
                                     }}
                                     className="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                 >
@@ -531,10 +694,10 @@ export default function ExamModePage() {
                                 </select>
                             </div>
 
-                            {testType === "subject" && (
+                            {(testType === "subject" || testType === "mock") && (
                                 <div>
                                     <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                        Select Subject
+                                        Select Subject {testType === "mock" && "(Optional)"}
                                     </label>
                                     <select
                                         value={subject}

@@ -183,9 +183,15 @@ def start_exam(
     if exam_set.year_to:
         filtered_df = filtered_df[filtered_df["year"] <= exam_set.year_to]
     
-    # Limit to total_questions if specified
-    if exam_set.total_questions > 0:
-        filtered_df = filtered_df.head(exam_set.total_questions)
+    # For mock tests, randomly sample questions. For PYP and Subject tests, use ALL questions.
+    if exam_set.exam_type == "mock_test":
+        # Randomly sample questions for mock tests (use exam_set_id as seed for consistency)
+        # This ensures the same mock test always gets the same questions
+        num_to_select = min(exam_set.total_questions if exam_set.total_questions > 0 else 20, len(filtered_df))
+        if num_to_select < len(filtered_df):
+            filtered_df = filtered_df.sample(n=num_to_select, random_state=exam_set.id).reset_index(drop=True)
+    # For PYP and Subject tests, use ALL filtered questions (no limit)
+    # total_questions is stored for reference but doesn't limit the actual questions shown
     
     if len(filtered_df) == 0:
         raise HTTPException(status_code=400, detail="No questions found for this exam set")
@@ -852,6 +858,55 @@ def get_question_solution(
         "topic": str(row.get("topic", "")),
         "year": int(row.get("year", 0)) if pd.notna(row.get("year")) else None
     }
+
+
+@router.get("/user/attempts")
+def get_user_attempts(
+    session_id: Optional[str] = Cookie(None),
+    db: Session = Depends(get_db)
+):
+    """Get all exam attempts for the current user"""
+    user_id = get_user_id_from_session(session_id, db)
+    if not user_id:
+        raise HTTPException(status_code=401, detail="Authentication required")
+    
+    # Fetch all attempts for this user
+    attempts = db.query(ExamAttempt).filter(
+        ExamAttempt.user_id == user_id
+    ).order_by(ExamAttempt.created_at.desc()).all()
+    
+    # Return list of attempts with relevant info
+    return [
+        {
+            "id": attempt.id,
+            "attempt_id": attempt.id,
+            "exam_set_id": attempt.exam_set_id,
+            "examSetId": attempt.exam_set_id,
+            "status": attempt.status.value,
+            "created_at": attempt.created_at.isoformat() if attempt.created_at else None,
+            "createdAt": attempt.created_at.isoformat() if attempt.created_at else None,
+            "completed_at": attempt.submitted_at.isoformat() if attempt.submitted_at else None,
+            "completedAt": attempt.submitted_at.isoformat() if attempt.submitted_at else None,
+            "total_score": attempt.total_score,
+            "score": attempt.total_score,
+            "total_marks": attempt.exam_set.total_questions * attempt.exam_set.marks_per_question if attempt.exam_set else None,
+            "totalMarks": attempt.exam_set.total_questions * attempt.exam_set.marks_per_question if attempt.exam_set else None,
+            "exam_set": {
+                "id": attempt.exam_set.id,
+                "name": attempt.exam_set.name
+            } if attempt.exam_set else None
+        }
+        for attempt in attempts
+    ]
+
+
+@router.get("/attempts")
+def get_attempts(
+    session_id: Optional[str] = Cookie(None),
+    db: Session = Depends(get_db)
+):
+    """Alias for /user/attempts for backward compatibility"""
+    return get_user_attempts(session_id=session_id, db=db)
 
 
 @router.post("/attempt/{attempt_id}/reattempt")

@@ -234,6 +234,11 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
         localStorage.removeItem("hasPremium");
         localStorage.removeItem("userData");
         localStorage.removeItem("ui_mode");
+        // Clear exam-related localStorage
+        localStorage.removeItem("exam_attempts");
+        localStorage.removeItem("examMode_testType");
+        localStorage.removeItem("examMode_exam");
+        localStorage.removeItem("examMode_subject");
         
         // Immediately update state
         setIsLoggedIn(false);
@@ -391,10 +396,10 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                                 ? "bg-blue-50 text-blue-700 font-medium"
                                 : "text-gray-700 hover:bg-gray-50 font-normal"
                         }`}
-                        title="Exam Mode"
+                        title="Test Series"
                     >
                         <span className="text-lg flex-shrink-0">📝</span>
-                        {!isCollapsed && <span>Exam Mode</span>}
+                        {!isCollapsed && <span>Test Series</span>}
                     </button>
 
                     {/* Smart Roadmap - Only visible to logged-in users */}

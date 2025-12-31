@@ -11,7 +11,7 @@ from sqlalchemy import func
 # Add project root to path
 sys.path.append(str(Path(__file__).parent))
 
-from app.database import SessionLocal, User, SubscriptionPlan, UserNote, init_db
+from app.database import SessionLocal, User, SubscriptionPlan, UserNote, ExamAttempt, ExamSet, ExamAttemptStatus, init_db
 
 
 def format_date(date):
@@ -172,6 +172,71 @@ def search_users(query: str):
         
     except Exception as e:
         print(f"❌ Error searching users: {e}")
+    finally:
+        db.close()
+
+
+def show_user_attempts():
+    """Show all user attempts with exam details"""
+    db = SessionLocal()
+    try:
+        # Get all users with their attempts
+        users = db.query(User).order_by(User.id).all()
+        
+        if not users:
+            print("\n📭 No users found")
+            return
+        
+        print("\n" + "=" * 150)
+        print(f"{'User ID':<10} {'Username':<20} {'isAdmin':<10} {'Total Tests':<15} {'Exam Set Names':<80}")
+        print("=" * 150)
+        
+        total_tests_all = 0
+        
+        for user in users:
+            # Get all submitted attempts for this user
+            attempts = db.query(ExamAttempt).filter(
+                ExamAttempt.user_id == user.id,
+                ExamAttempt.status == ExamAttemptStatus.SUBMITTED
+            ).order_by(ExamAttempt.created_at.desc()).all()
+            
+            # Group attempts by exam_set_id to get unique exam sets
+            exam_set_ids = set()
+            exam_set_names = []
+            
+            for attempt in attempts:
+                exam_set_id = attempt.exam_set_id
+                if exam_set_id not in exam_set_ids:
+                    exam_set_ids.add(exam_set_id)
+                    # Get exam set name
+                    exam_set = db.query(ExamSet).filter(ExamSet.id == exam_set_id).first()
+                    exam_name = exam_set.name if exam_set else f"Exam Set {exam_set_id}"
+                    exam_set_names.append(exam_name)
+            
+            # Format exam set names list
+            total_tests = len(exam_set_names)
+            total_tests_all += total_tests
+            
+            if exam_set_names:
+                # Join exam set names with comma, limit display length
+                exam_names_str = ", ".join(exam_set_names)
+                if len(exam_names_str) > 75:
+                    exam_names_str = exam_names_str[:72] + "..."
+            else:
+                exam_names_str = "N/A"
+            
+            # Show user info
+            is_admin = "Yes" if user.is_admin else "No"
+            print(f"{user.id:<10} {user.username[:18]:<20} {is_admin:<10} {total_tests:<15} {exam_names_str:<80}")
+        
+        print("=" * 150)
+        print(f"\nTotal users: {len(users)}")
+        print(f"Total unique tests given: {total_tests_all}")
+        
+    except Exception as e:
+        print(f"❌ Error showing user attempts: {e}")
+        import traceback
+        traceback.print_exc()
     finally:
         db.close()
 
