@@ -1,6 +1,6 @@
 // src/components/Sidebar.jsx
 import { useNavigate, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import UserMenuDropdown from "./UserMenuDropdown";
 import FeedbackModal from "./FeedbackModal";
 
@@ -43,6 +43,7 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
     );
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
     const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
+    const userMenuButtonRef = useRef(null);
 
     const isDashboard = location.pathname.includes("exam-dashboard");
     const isCrossExam = location.pathname.includes("cross-exam-insights");
@@ -426,7 +427,7 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                     {/* Divider with spacing - Only visible to logged-in users */}
                     {(localStorage.getItem("isLoggedIn") === "true" || isLoggedIn) && (
                         <>
-                            <div className="pt-6 pb-6 px-3">
+                            <div className="pt-6 pb-2 px-3">
                                 <div className="border-t border-gray-200"></div>
                             </div>
                         </>
@@ -472,6 +473,7 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                     /* Logged In State - Compact Menu */
                     <div className="mt-4 relative">
                         <button
+                            ref={userMenuButtonRef}
                             onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                             className={`w-full flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 transition-colors ${
                                 isCollapsed ? "justify-center" : ""
@@ -501,6 +503,7 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                         <UserMenuDropdown
                             isOpen={isUserMenuOpen}
                             onClose={() => setIsUserMenuOpen(false)}
+                            toggleButtonRef={userMenuButtonRef}
                             onSignOut={handleSignOut}
                             userName={userName}
                             userInitials={userInitials}

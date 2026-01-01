@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUserData } from "../utils/auth";
 
-export default function UserMenuDropdown({ isOpen, onClose, onSignOut, userName, userInitials, subscriptionPlan, isCollapsed, onOpenFeedback }) {
+export default function UserMenuDropdown({ isOpen, onClose, onSignOut, userName, userInitials, subscriptionPlan, isCollapsed, onOpenFeedback, toggleButtonRef }) {
     const navigate = useNavigate();
     const dropdownRef = useRef(null);
     const userData = getUserData();
@@ -12,19 +12,28 @@ export default function UserMenuDropdown({ isOpen, onClose, onSignOut, userName,
     // Close dropdown when clicking outside
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            // Check if click is inside the dropdown
+            const isInsideDropdown = dropdownRef.current && dropdownRef.current.contains(event.target);
+            // Check if click is on the toggle button
+            const isOnToggleButton = toggleButtonRef && toggleButtonRef.current && toggleButtonRef.current.contains(event.target);
+            
+            // Only close if click is outside both dropdown and toggle button
+            if (!isInsideDropdown && !isOnToggleButton) {
                 onClose();
             }
         };
 
         if (isOpen) {
-            document.addEventListener("mousedown", handleClickOutside);
+            // Use a small delay to allow the toggle click to process first
+            setTimeout(() => {
+                document.addEventListener("mousedown", handleClickOutside);
+            }, 0);
         }
 
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [isOpen, onClose]);
+    }, [isOpen, onClose, toggleButtonRef]);
 
     if (!isOpen) return null;
 
