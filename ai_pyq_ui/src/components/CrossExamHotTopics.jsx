@@ -1,8 +1,10 @@
 // src/components/CrossExamHotTopics.jsx
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "../contexts/LanguageContext";
 
 export default function CrossExamHotTopics({ exams, yearFrom, yearTo }) {
+    const { language } = useLanguage(); // Get language from context
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -21,7 +23,8 @@ export default function CrossExamHotTopics({ exams, yearFrom, yearTo }) {
         setError(null);
 
         const examsStr = exams.join(",");
-        let url = `http://127.0.0.1:8000/dashboard/cross-exam/hot-topics?exams=${encodeURIComponent(examsStr)}`;
+        const langParam = language === "hi" ? "hi" : "en";
+        let url = `http://127.0.0.1:8000/dashboard/cross-exam/hot-topics?exams=${encodeURIComponent(examsStr)}&language=${langParam}`;
         if (yearFrom) {
             url += `&year_from=${yearFrom}`;
         }
@@ -65,7 +68,7 @@ export default function CrossExamHotTopics({ exams, yearFrom, yearTo }) {
                 setError("Failed to load hot topics");
                 setLoading(false);
             });
-    }, [exams, yearFrom, yearTo]);
+    }, [exams, yearFrom, yearTo, language]);
 
     const getTopicData = (topicName) => {
         const topicInfo = {};

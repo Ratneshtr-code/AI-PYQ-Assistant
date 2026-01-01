@@ -2,8 +2,10 @@
 import { useState, useEffect } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, LabelList } from "recharts";
 import { motion } from "framer-motion";
+import { useLanguage } from "../contexts/LanguageContext";
 
 export default function HottestTopicsByExam({ exam, yearFrom, yearTo }) {
+    const { language } = useLanguage(); // Get language from context
     const [examHotTopics, setExamHotTopics] = useState([]);
     const [examCoverage, setExamCoverage] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -20,7 +22,8 @@ export default function HottestTopicsByExam({ exam, yearFrom, yearTo }) {
         setLoading(true);
         setError(null);
 
-        let url = `http://127.0.0.1:8000/dashboard/hot-topics?exam=${encodeURIComponent(exam)}&min_years=1`;
+        const langParam = language === "hi" ? "hi" : "en";
+        let url = `http://127.0.0.1:8000/dashboard/hot-topics?exam=${encodeURIComponent(exam)}&min_years=1&language=${langParam}`;
         if (yearFrom) {
             url += `&year_from=${yearFrom}`;
         }
@@ -45,7 +48,7 @@ export default function HottestTopicsByExam({ exam, yearFrom, yearTo }) {
                 setError("Failed to load hot topics");
                 setLoading(false);
             });
-    }, [exam, yearFrom, yearTo]);
+    }, [exam, yearFrom, yearTo, language]);
 
     // Fetch exam coverage
     useEffect(() => {
@@ -54,7 +57,8 @@ export default function HottestTopicsByExam({ exam, yearFrom, yearTo }) {
             return;
         }
 
-        let url = `http://127.0.0.1:8000/dashboard/coverage?exam=${encodeURIComponent(exam)}&top_n=10`;
+        const langParam = language === "hi" ? "hi" : "en";
+        let url = `http://127.0.0.1:8000/dashboard/coverage?exam=${encodeURIComponent(exam)}&top_n=10&language=${langParam}`;
         if (yearFrom) {
             url += `&year_from=${yearFrom}`;
         }
@@ -70,7 +74,7 @@ export default function HottestTopicsByExam({ exam, yearFrom, yearTo }) {
             .catch((err) => {
                 console.error("Error fetching coverage:", err);
             });
-    }, [exam, yearFrom, yearTo]);
+    }, [exam, yearFrom, yearTo, language]);
 
     const getHotTopicColor = (index) => {
         const colors = ["#dc2626", "#ea580c", "#f59e0b", "#eab308", "#84cc16", "#22c55e", "#10b981", "#14b8a6", "#06b6d4", "#3b82f6"];

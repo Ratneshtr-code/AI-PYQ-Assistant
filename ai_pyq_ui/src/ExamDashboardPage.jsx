@@ -8,8 +8,10 @@ import SubjectAnalysis from "./components/SubjectAnalysis";
 import HottestTopicsByExam from "./components/HottestTopicsByExam";
 import HottestTopicsBySubject from "./components/HottestTopicsBySubject";
 import { getCurrentUser, isAuthenticated } from "./utils/auth";
+import { useLanguage } from "./contexts/LanguageContext";
 
 export default function ExamDashboardPage() {
+    const { language } = useLanguage(); // Get language from context
     const [exam, setExam] = useState("");
     const [subject, setSubject] = useState("");
     const [yearFrom, setYearFrom] = useState(null);
@@ -86,8 +88,9 @@ export default function ExamDashboardPage() {
             }
 
             // Fetch subjects from all exams and combine them
+            const langParam = language === "hi" ? "hi" : "en";
             const subjectPromises = examsList.map((examName) =>
-                fetch(`http://127.0.0.1:8000/dashboard/filters?exam=${encodeURIComponent(examName)}`)
+                fetch(`http://127.0.0.1:8000/dashboard/filters?exam=${encodeURIComponent(examName)}&language=${langParam}`)
                     .then((res) => res.json())
                     .then((result) => result.subjects || [])
                     .catch(() => [])
@@ -106,7 +109,8 @@ export default function ExamDashboardPage() {
                 return;
             }
 
-            fetch(`http://127.0.0.1:8000/dashboard/filters?exam=${encodeURIComponent(exam)}`)
+            const langParam = language === "hi" ? "hi" : "en";
+            fetch(`http://127.0.0.1:8000/dashboard/filters?exam=${encodeURIComponent(exam)}&language=${langParam}`)
                 .then((res) => res.json())
                 .then((result) => {
                     if (result.subjects) {
@@ -117,7 +121,7 @@ export default function ExamDashboardPage() {
                     console.error("Error fetching subjects:", err);
                 });
         }
-    }, [exam, examsList, activeSubPage]);
+    }, [exam, examsList, activeSubPage, language]);
 
     const handleCardClick = (subPageId) => {
         setActiveSubPage(subPageId);
@@ -215,7 +219,9 @@ export default function ExamDashboardPage() {
                                         📊 Exam Dashboard
                                     </h1>
                                     <p className="text-sm md:text-base text-gray-600">
-                                        Data-driven insights to help you prioritize your study based on PYQ patterns
+                                        {language === "hi" 
+                                            ? "PYQ पैटर्न के आधार पर आपकी पढ़ाई को प्राथमिकता देने में मदद करने के लिए डेटा-संचालित विश्लेषण"
+                                            : "Data-driven insights to help you prioritize your study based on PYQ patterns"}
                                     </p>
                                 </div>
 
@@ -240,12 +246,14 @@ export default function ExamDashboardPage() {
                                                 Exam Analysis
                                             </h3>
                                             <p className="text-sm text-gray-600 leading-relaxed mb-4 flex-1">
-                                                Analyze subject and topic distribution patterns for a selected exam to identify high-priority study areas
+                                                {language === "hi"
+                                                    ? "चयनित परीक्षा के लिए विषय और विषय वितरण पैटर्न का विश्लेषण करें ताकि उच्च-प्राथमिकता वाले अध्ययन क्षेत्रों की पहचान की जा सके"
+                                                    : "Analyze subject and topic distribution patterns for a selected exam to identify high-priority study areas"}
                                             </p>
                                             
                                             {/* Arrow Indicator */}
                                             <div className="mt-auto pt-2 flex items-center text-indigo-600 font-medium text-sm group-hover:translate-x-1 transition-transform duration-300">
-                                                <span>Explore</span>
+                                                <span>{language === "hi" ? "अन्वेषण करें" : "Explore"}</span>
                                                 <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                                 </svg>
@@ -272,12 +280,14 @@ export default function ExamDashboardPage() {
                                                 Subject Analysis
                                             </h3>
                                             <p className="text-sm text-gray-600 leading-relaxed mb-4 flex-1">
-                                                Explore how a subject is distributed across different exams to understand cross-exam relevance
+                                                {language === "hi"
+                                                    ? "यह जानने के लिए जांचें कि एक विषय विभिन्न परीक्षाओं में कैसे वितरित है कि क्रॉस-परीक्षा प्रासंगिकता को समझने के लिए"
+                                                    : "Explore how a subject is distributed across different exams to understand cross-exam relevance"}
                                             </p>
                                             
                                             {/* Arrow Indicator */}
                                             <div className="mt-auto pt-2 flex items-center text-indigo-600 font-medium text-sm group-hover:translate-x-1 transition-transform duration-300">
-                                                <span>Explore</span>
+                                                <span>{language === "hi" ? "अन्वेषण करें" : "Explore"}</span>
                                                 <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                                 </svg>
@@ -304,12 +314,14 @@ export default function ExamDashboardPage() {
                                                 Hottest Topic by Exam
                                             </h3>
                                             <p className="text-sm text-gray-600 leading-relaxed mb-4 flex-1">
-                                                Discover the most frequently asked topics for a selected exam to focus your preparation effectively
+                                                {language === "hi"
+                                                    ? "अपनी तैयारी को प्रभावी ढंग से केंद्रित करने के लिए चयनित परीक्षा के लिए सबसे अधिक पूछे जाने वाले विषयों की खोज करें"
+                                                    : "Discover the most frequently asked topics for a selected exam to focus your preparation effectively"}
                                             </p>
                                             
                                             {/* Arrow Indicator */}
                                             <div className="mt-auto pt-2 flex items-center text-indigo-600 font-medium text-sm group-hover:translate-x-1 transition-transform duration-300">
-                                                <span>Explore</span>
+                                                <span>{language === "hi" ? "अन्वेषण करें" : "Explore"}</span>
                                                 <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                                 </svg>
@@ -336,12 +348,14 @@ export default function ExamDashboardPage() {
                                                 Hottest Topic by Subject
                                             </h3>
                                             <p className="text-sm text-gray-600 leading-relaxed mb-4 flex-1">
-                                                Identify the most important topics within a specific subject and exam combination for targeted learning
+                                                {language === "hi"
+                                                    ? "लक्षित सीखने के लिए एक विशिष्ट विषय और परीक्षा संयोजन के भीतर सबसे महत्वपूर्ण विषयों की पहचान करें"
+                                                    : "Identify the most important topics within a specific subject and exam combination for targeted learning"}
                                             </p>
                                             
                                             {/* Arrow Indicator */}
                                             <div className="mt-auto pt-2 flex items-center text-indigo-600 font-medium text-sm group-hover:translate-x-1 transition-transform duration-300">
-                                                <span>Explore</span>
+                                                <span>{language === "hi" ? "अन्वेषण करें" : "Explore"}</span>
                                                 <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                                 </svg>
@@ -375,32 +389,48 @@ export default function ExamDashboardPage() {
                                                 const pageInfo = {
                                                     "exam-analysis": {
                                                         title: "📊 Exam Analysis",
-                                                        description: "Analyze subject and topic distribution patterns for a selected exam to identify high-priority study areas"
+                                                        description: {
+                                                            en: "Analyze subject and topic distribution patterns for a selected exam to identify high-priority study areas",
+                                                            hi: "चयनित परीक्षा के लिए विषय और विषय वितरण पैटर्न का विश्लेषण करें ताकि उच्च-प्राथमिकता वाले अध्ययन क्षेत्रों की पहचान की जा सके"
+                                                        }
                                                     },
                                                     "subject-analysis": {
                                                         title: "📚 Subject Analysis",
-                                                        description: "Explore how a subject is distributed across different exams to understand cross-exam relevance"
+                                                        description: {
+                                                            en: "Explore how a subject is distributed across different exams to understand cross-exam relevance",
+                                                            hi: "यह जानने के लिए जांचें कि एक विषय विभिन्न परीक्षाओं में कैसे वितरित है कि क्रॉस-परीक्षा प्रासंगिकता को समझने के लिए"
+                                                        }
                                                     },
                                                     "hottest-topics-by-exam": {
                                                         title: "🔥 Hottest Topic by Exam",
-                                                        description: "Discover the most frequently asked topics for a selected exam to focus your preparation effectively"
+                                                        description: {
+                                                            en: "Discover the most frequently asked topics for a selected exam to focus your preparation effectively",
+                                                            hi: "अपनी तैयारी को प्रभावी ढंग से केंद्रित करने के लिए चयनित परीक्षा के लिए सबसे अधिक पूछे जाने वाले विषयों की खोज करें"
+                                                        }
                                                     },
                                                     "hottest-topics-by-subject": {
                                                         title: "🔥 Hottest Topic by Subject",
-                                                        description: "Identify the most important topics within a specific subject and exam combination for targeted learning"
+                                                        description: {
+                                                            en: "Identify the most important topics within a specific subject and exam combination for targeted learning",
+                                                            hi: "लक्षित सीखने के लिए एक विशिष्ट विषय और परीक्षा संयोजन के भीतर सबसे महत्वपूर्ण विषयों की पहचान करें"
+                                                        }
                                                     }
                                                 };
                                                 const info = pageInfo[activeSubPage] || {
                                                     title: "📊 Exam Dashboard",
-                                                    description: "Data-driven insights to help you prioritize your study based on PYQ patterns"
+                                                    description: {
+                                                        en: "Data-driven insights to help you prioritize your study based on PYQ patterns",
+                                                        hi: "PYQ पैटर्न के आधार पर आपकी पढ़ाई को प्राथमिकता देने में मदद करने के लिए डेटा-संचालित अंतर्दृष्टि"
+                                                    }
                                                 };
+                                                const description = info.description[language] || info.description.en;
                                                 return (
                                                     <>
                                                         <h1 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
                                                             {info.title}
                                                         </h1>
                                                         <p className="text-xs md:text-sm text-gray-600">
-                                                            {info.description}
+                                                            {description}
                                                         </p>
                                                     </>
                                                 );
@@ -423,14 +453,18 @@ export default function ExamDashboardPage() {
                                 {!exam && (activeSubPage === "exam-analysis" || activeSubPage === "hottest-topics-by-exam") && (
                                     <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
                                         <p className="text-blue-800">
-                                            👆 Select an exam from the filter bar to view analytics and insights
+                                            {language === "hi" 
+                                                ? "👆 एनालिटिक्स और विश्लेषण देखने के लिए फ़िल्टर बार से एक परीक्षा चुनें"
+                                                : "👆 Select an exam from the filter bar to view analytics and insights"}
                                         </p>
                                     </div>
                                 )}
                                 {!subject && activeSubPage === "subject-analysis" && (
                                     <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
                                         <p className="text-blue-800">
-                                            👆 Select a subject from the filter bar to view analytics and insights
+                                            {language === "hi"
+                                                ? "👆 एनालिटिक्स और विश्लेषण देखने के लिए फ़िल्टर बार से एक विषय चुनें"
+                                                : "👆 Select a subject from the filter bar to view analytics and insights"}
                                         </p>
                                     </div>
                                 )}
@@ -438,10 +472,16 @@ export default function ExamDashboardPage() {
                                     <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
                                         <p className="text-blue-800">
                                             {!exam && !subject
-                                                ? "👆 Select an exam and a subject from the filter bar to view hot topics"
+                                                ? (language === "hi" 
+                                                    ? "👆 हॉट टॉपिक्स देखने के लिए फ़िल्टर बार से एक परीक्षा और एक विषय चुनें"
+                                                    : "👆 Select an exam and a subject from the filter bar to view hot topics")
                                                 : !exam
-                                                ? "👆 Select an exam from the filter bar to view hot topics"
-                                                : "👆 Select a subject from the filter bar to view hot topics"}
+                                                ? (language === "hi"
+                                                    ? "👆 हॉट टॉपिक्स देखने के लिए फ़िल्टर बार से एक परीक्षा चुनें"
+                                                    : "👆 Select an exam from the filter bar to view hot topics")
+                                                : (language === "hi"
+                                                    ? "👆 हॉट टॉपिक्स देखने के लिए फ़िल्टर बार से एक विषय चुनें"
+                                                    : "👆 Select a subject from the filter bar to view hot topics")}
                                         </p>
                                     </div>
                                 )}

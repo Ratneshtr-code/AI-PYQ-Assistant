@@ -468,7 +468,8 @@ def get_topics_by_exam_subject(
 def get_subject_weightage(
     exam: Optional[str] = Query(None, description="Filter by exam name"),
     year_from: Optional[int] = Query(None, description="Filter from year"),
-    year_to: Optional[int] = Query(None, description="Filter to year")
+    year_to: Optional[int] = Query(None, description="Filter to year"),
+    language: str = Query("en", description="Language code: 'en' or 'hi'")
 ):
     """Get subject weightage distribution for an exam"""
     df = load_dataframe()
@@ -497,8 +498,20 @@ def get_subject_weightage(
     for subject, count in subject_counts.items():
         if pd.notna(subject) and str(subject).strip():
             percentage = round((count / total) * 100, 2)
+            subject_name = str(subject)
+            
+            # Translate subject name if Hindi is requested
+            if language and language.lower() in ["hi", "hindi"]:
+                from app.translation_service import translate_text
+                subject_name = translate_text(
+                    subject_name,
+                    target_language="hi",
+                    source_language="en",
+                    field="subject_name"
+                )
+            
             subjects.append({
-                "name": str(subject),
+                "name": subject_name,
                 "count": int(count),
                 "percentage": percentage
             })
@@ -517,7 +530,8 @@ def get_topic_weightage(
     exam: Optional[str] = Query(None, description="Filter by exam name"),
     subject: Optional[str] = Query(None, description="Filter by subject name"),
     year_from: Optional[int] = Query(None, description="Filter from year"),
-    year_to: Optional[int] = Query(None, description="Filter to year")
+    year_to: Optional[int] = Query(None, description="Filter to year"),
+    language: str = Query("en", description="Language code: 'en' or 'hi'")
 ):
     """Get topic weightage distribution for an exam and subject"""
     df = load_dataframe()
@@ -551,8 +565,20 @@ def get_topic_weightage(
     for topic, count in topic_counts.items():
         if pd.notna(topic) and str(topic).strip():
             percentage = round((count / total) * 100, 2)
+            topic_name = str(topic)
+            
+            # Translate topic name if Hindi is requested
+            if language and language.lower() in ["hi", "hindi"]:
+                from app.translation_service import translate_text
+                topic_name = translate_text(
+                    topic_name,
+                    target_language="hi",
+                    source_language="en",
+                    field="topic_name"
+                )
+            
             topics.append({
-                "name": str(topic),
+                "name": topic_name,
                 "count": int(count),
                 "percentage": percentage
             })
@@ -572,7 +598,8 @@ def get_hot_topics(
     min_years: int = Query(1, description="Minimum number of years topic should appear"),
     year_from: Optional[int] = Query(None, description="Filter from year"),
     year_to: Optional[int] = Query(None, description="Filter to year"),
-    subject: Optional[str] = Query(None, description="Filter by subject name")
+    subject: Optional[str] = Query(None, description="Filter by subject name"),
+    language: str = Query("en", description="Language code: 'en' or 'hi'")
 ):
     """Get hot topics that appear consistently across years"""
     df = load_dataframe()
@@ -625,6 +652,11 @@ def get_hot_topics(
                 topic_year_counts[topic_str].add(year_int)
             topic_total_counts[topic_str] += 1
     
+    # Translate topics if Hindi is requested
+    translate_topics = language and language.lower() in ["hi", "hindi"]
+    if translate_topics:
+        from app.translation_service import translate_text
+    
     # Calculate consistency
     hot_topics = []
     for topic, years_set in topic_year_counts.items():
@@ -632,8 +664,19 @@ def get_hot_topics(
         
         if years_appeared >= min_years:
             consistency = round((years_appeared / total_years) * 100, 2)
+            topic_name = topic
+            
+            # Translate topic name if Hindi is requested
+            if translate_topics:
+                topic_name = translate_text(
+                    topic_name,
+                    target_language="hi",
+                    source_language="en",
+                    field="topic_name"
+                )
+            
             hot_topics.append({
-                "name": topic,
+                "name": topic_name,
                 "years_appeared": years_appeared,
                 "total_years": total_years,
                 "consistency_percentage": consistency,
@@ -731,7 +774,10 @@ def get_topic_trend(
 
 
 @app.get("/dashboard/filters")
-def get_dashboard_filters(exam: Optional[str] = Query(None, description="Filter by exam name")):
+def get_dashboard_filters(
+    exam: Optional[str] = Query(None, description="Filter by exam name"),
+    language: str = Query("en", description="Language code: 'en' or 'hi'")
+):
     """Get available filters (subjects, topics, years) for dashboard"""
     df = load_dataframe()
     if df is None:
@@ -743,9 +789,18 @@ def get_dashboard_filters(exam: Optional[str] = Query(None, description="Filter 
     if exam:
         filtered_df = filtered_df[filtered_df["exam"].str.lower() == exam.lower()]
     
-    subjects = sorted(filtered_df["subject"].dropna().unique().tolist())
-    topics = sorted(filtered_df["topic"].dropna().unique().tolist())
+    subjects_raw = sorted(filtered_df["subject"].dropna().unique().tolist())
+    topics_raw = sorted(filtered_df["topic"].dropna().unique().tolist())
     years = sorted(filtered_df["year"].dropna().unique().tolist())
+    
+    # Translate subjects and topics if Hindi is requested
+    if language and language.lower() in ["hi", "hindi"]:
+        from app.translation_service import translate_text
+        subjects = [translate_text(s, target_language="hi", source_language="en", field="subject_name") for s in subjects_raw]
+        topics = [translate_text(t, target_language="hi", source_language="en", field="topic_name") for t in topics_raw]
+    else:
+        subjects = subjects_raw
+        topics = topics_raw
     
     return {
         "subjects": subjects,
@@ -866,7 +921,8 @@ def get_coverage(
     subject: Optional[str] = Query(None, description="Filter by subject name"),
     year_from: Optional[int] = Query(None, description="Filter from year"),
     year_to: Optional[int] = Query(None, description="Filter to year"),
-    top_n: int = Query(10, description="Number of top topics to consider")
+    top_n: int = Query(10, description="Number of top topics to consider"),
+    language: str = Query("en", description="Language code: 'en' or 'hi'")
 ):
     """Calculate coverage percentage for top N topics"""
     df = load_dataframe()
@@ -897,14 +953,30 @@ def get_coverage(
     # Count by topic
     topic_counts = filtered_df["topic"].value_counts()
     
+    # Translate topics if Hindi is requested
+    translate_topics = language and language.lower() in ["hi", "hindi"]
+    if translate_topics:
+        from app.translation_service import translate_text
+    
     # Get top N topics
     top_topics_list = []
     top_topics_count = 0
     
     for topic, count in topic_counts.head(top_n).items():
         if pd.notna(topic) and str(topic).strip():
+            topic_name = str(topic)
+            
+            # Translate topic name if Hindi is requested
+            if translate_topics:
+                topic_name = translate_text(
+                    topic_name,
+                    target_language="hi",
+                    source_language="en",
+                    field="topic_name"
+                )
+            
             top_topics_list.append({
-                "name": str(topic),
+                "name": topic_name,
                 "count": int(count)
             })
             top_topics_count += int(count)
@@ -923,7 +995,8 @@ def get_coverage(
 def get_cross_exam_subject_distribution(
     exams: str = Query(..., description="Comma-separated list of exam names"),
     year_from: Optional[int] = Query(None, description="Filter from year"),
-    year_to: Optional[int] = Query(None, description="Filter to year")
+    year_to: Optional[int] = Query(None, description="Filter to year"),
+    language: str = Query("en", description="Language code: 'en' or 'hi'")
 ):
     """Get subject distribution across multiple exams"""
     df = load_dataframe()
@@ -947,6 +1020,11 @@ def get_cross_exam_subject_distribution(
     
     result = {}
     
+    # Translate subjects if Hindi is requested
+    translate_subjects = language and language.lower() in ["hi", "hindi"]
+    if translate_subjects:
+        from app.translation_service import translate_text
+    
     for exam_name in exam_list:
         exam_df = filtered_df[filtered_df["exam"].str.lower() == exam_name.lower()]
         if len(exam_df) == 0:
@@ -960,8 +1038,19 @@ def get_cross_exam_subject_distribution(
         for subject, count in subject_counts.items():
             if pd.notna(subject) and str(subject).strip():
                 percentage = round((count / total) * 100, 2)
+                subject_name = str(subject)
+                
+                # Translate subject name if Hindi is requested
+                if translate_subjects:
+                    subject_name = translate_text(
+                        subject_name,
+                        target_language="hi",
+                        source_language="en",
+                        field="subject_name"
+                    )
+                
                 subjects.append({
-                    "name": str(subject),
+                    "name": subject_name,
                     "count": int(count),
                     "percentage": percentage
                 })
@@ -981,7 +1070,8 @@ def get_cross_exam_topic_distribution(
     exams: str = Query(..., description="Comma-separated list of exam names"),
     subject: str = Query(..., description="Subject name"),
     year_from: Optional[int] = Query(None, description="Filter from year"),
-    year_to: Optional[int] = Query(None, description="Filter to year")
+    year_to: Optional[int] = Query(None, description="Filter to year"),
+    language: str = Query("en", description="Language code: 'en' or 'hi'")
 ):
     """Get topic distribution for a subject across multiple exams"""
     df = load_dataframe()
@@ -1008,6 +1098,11 @@ def get_cross_exam_topic_distribution(
     
     result = {}
     
+    # Translate topics if Hindi is requested
+    translate_topics = language and language.lower() in ["hi", "hindi"]
+    if translate_topics:
+        from app.translation_service import translate_text
+    
     for exam_name in exam_list:
         exam_df = filtered_df[filtered_df["exam"].str.lower() == exam_name.lower()]
         if len(exam_df) == 0:
@@ -1021,8 +1116,19 @@ def get_cross_exam_topic_distribution(
         for topic, count in topic_counts.items():
             if pd.notna(topic) and str(topic).strip():
                 percentage = round((count / total) * 100, 2)
+                topic_name = str(topic)
+                
+                # Translate topic name if Hindi is requested
+                if translate_topics:
+                    topic_name = translate_text(
+                        topic_name,
+                        target_language="hi",
+                        source_language="en",
+                        field="topic_name"
+                    )
+                
                 topics.append({
-                    "name": str(topic),
+                    "name": topic_name,
                     "count": int(count),
                     "percentage": percentage
                 })
@@ -1042,7 +1148,8 @@ def get_cross_exam_hot_topics(
     exams: str = Query(..., description="Comma-separated list of exam names"),
     year_from: Optional[int] = Query(None, description="Filter from year"),
     year_to: Optional[int] = Query(None, description="Filter to year"),
-    min_years: int = Query(1, description="Minimum number of years topic should appear")
+    min_years: int = Query(1, description="Minimum number of years topic should appear"),
+    language: str = Query("en", description="Language code: 'en' or 'hi'")
 ):
     """Get hot topics across multiple exams"""
     df = load_dataframe()
@@ -1065,6 +1172,11 @@ def get_cross_exam_hot_topics(
         filtered_df = filtered_df[filtered_df["year"] <= year_to]
     
     result = {}
+    
+    # Translate topics if Hindi is requested
+    translate_topics = language and language.lower() in ["hi", "hindi"]
+    if translate_topics:
+        from app.translation_service import translate_text
     
     for exam_name in exam_list:
         exam_df = filtered_df[filtered_df["exam"].str.lower() == exam_name.lower()]
@@ -1104,8 +1216,19 @@ def get_cross_exam_hot_topics(
             
             if years_appeared >= min_years:
                 consistency = round((years_appeared / total_years) * 100, 2)
+                topic_name = topic
+                
+                # Translate topic name if Hindi is requested
+                if translate_topics:
+                    topic_name = translate_text(
+                        topic_name,
+                        target_language="hi",
+                        source_language="en",
+                        field="topic_name"
+                    )
+                
                 hot_topics.append({
-                    "name": topic,
+                    "name": topic_name,
                     "years_appeared": years_appeared,
                     "total_years": total_years,
                     "consistency_percentage": consistency,

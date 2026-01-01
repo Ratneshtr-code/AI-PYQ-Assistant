@@ -1,29 +1,117 @@
 // src/components/SubjectAnalysis.jsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, LabelList } from "recharts";
 import { motion } from "framer-motion";
 import InsightsWindow from "./InsightsWindow";
+import { useLanguage } from "../contexts/LanguageContext";
 
 export default function SubjectAnalysis({ subject, yearFrom, yearTo, examsList }) {
+    const { language } = useLanguage(); // Get language from context
     const [examData, setExamData] = useState([]);
     const [topicData, setTopicData] = useState([]);
     const [selectedExam, setSelectedExam] = useState(null);
     const [availableExams, setAvailableExams] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    
+    // Map to store translated subject name -> original English name
+    // This is needed because backend filters by English subject name, but UI shows translated name
+    const subjectNameMapRef = useRef({});
+    
+    // Track mapping readiness state
+    const [mappingReady, setMappingReady] = useState(false);
+    
+    // Build mapping between translated and English subject names
+    // Fetch from all exams to build a comprehensive mapping
+    useEffect(() => {
+        if (!subject || !examsList || examsList.length === 0) {
+            subjectNameMapRef.current = {};
+            setMappingReady(false);
+            return;
+        }
+        
+        // Reset mapping ready state when subject changes
+        setMappingReady(false);
+        
+        // Fetch subjects from all exams to build comprehensive mapping
+        const langParam = language === "hi" ? "hi" : "en";
+        const fetchPromises = examsList.map((examName) => {
+            let url = `http://127.0.0.1:8000/dashboard/subject-weightage?exam=${encodeURIComponent(examName)}&language=${langParam}`;
+            if (yearFrom) {
+                url += `&year_from=${yearFrom}`;
+            }
+            if (yearTo) {
+                url += `&year_to=${yearTo}`;
+            }
+            
+            let englishUrl = `http://127.0.0.1:8000/dashboard/subject-weightage?exam=${encodeURIComponent(examName)}&language=en`;
+            if (yearFrom) {
+                englishUrl += `&year_from=${yearFrom}`;
+            }
+            if (yearTo) {
+                englishUrl += `&year_to=${yearTo}`;
+            }
+            
+            return Promise.all([
+                fetch(url).then(res => res.json()).catch(() => ({ subjects: [] })),
+                language === "hi" ? fetch(englishUrl).then(res => res.json()).catch(() => ({ subjects: [] })) : Promise.resolve({ subjects: [] })
+            ]);
+        });
+        
+        Promise.all(fetchPromises)
+            .then((results) => {
+                const nameMap = {};
+                results.forEach(([result, englishResult]) => {
+                    if (language === "hi" && englishResult.subjects && result.subjects) {
+                        // Map by index (assuming same order)
+                        result.subjects.forEach((translatedSubj, index) => {
+                            if (englishResult.subjects[index]) {
+                                nameMap[translatedSubj.name] = englishResult.subjects[index].name;
+                            }
+                        });
+                    } else if (result.subjects) {
+                        // For English, map is identity
+                        result.subjects.forEach(subj => {
+                            nameMap[subj.name] = subj.name;
+                        });
+                    }
+                });
+                subjectNameMapRef.current = nameMap;
+                setMappingReady(true);
+            })
+            .catch((err) => {
+                console.error("Error building subject name mapping:", err);
+                // Fallback: use identity mapping
+                subjectNameMapRef.current = { [subject]: subject };
+                setMappingReady(true);
+            });
+    }, [subject, yearFrom, yearTo, examsList, language]);
 
     // Fetch available exams for this subject from all exams
     useEffect(() => {
-        if (!subject) return;
+        if (!subject || !mappingReady) {
+            // Reset state when subject changes or mapping not ready
+            setAvailableExams([]);
+            setSelectedExam(null);
+            return;
+        }
+
+        // Convert translated subject name to English for API call
+        const englishSubjectName = subjectNameMapRef.current[subject] || subject;
 
         // Get exams that have this subject from all available exams
+        const langParam = language === "hi" ? "hi" : "en";
         const examPromises = (examsList || []).map((examName) =>
             fetch(
-                `http://127.0.0.1:8000/dashboard/subject-weightage?exam=${encodeURIComponent(examName)}&year_from=${yearFrom || ""}&year_to=${yearTo || ""}`
+                `http://127.0.0.1:8000/dashboard/subject-weightage?exam=${encodeURIComponent(examName)}&year_from=${yearFrom || ""}&year_to=${yearTo || ""}&language=${langParam}`
             )
                 .then((res) => res.json())
                 .then((result) => {
-                    const hasSubject = result.subjects?.some((s) => s.name.toLowerCase() === subject.toLowerCase());
+                    // Check both translated and English names
+                    const hasSubject = result.subjects?.some((s) => 
+                        s.name.toLowerCase() === subject.toLowerCase() || 
+                        s.name.toLowerCase() === englishSubjectName.toLowerCase()
+                    );
                     return hasSubject ? examName : null;
                 })
                 .catch(() => null)
@@ -40,11 +128,11 @@ export default function SubjectAnalysis({ subject, yearFrom, yearTo, examsList }
                 return available.length > 0 ? available[0] : null;
             });
         });
-    }, [subject, yearFrom, yearTo, examsList]);
+    }, [subject, yearFrom, yearTo, examsList, mappingReady, language]);
 
     // Fetch exam distribution for this subject from all exams
     useEffect(() => {
-        if (!subject) {
+        if (!subject || !mappingReady) {
             setExamData([]);
             setLoading(false);
             return;
@@ -53,10 +141,15 @@ export default function SubjectAnalysis({ subject, yearFrom, yearTo, examsList }
         setLoading(true);
         setError(null);
 
+        // Convert translated subject name to English for API call
+        // Backend filters by English subject name, not translated name
+        const englishSubjectName = subjectNameMapRef.current[subject] || subject;
+
         // Fetch data for each exam from all available exams
+        const langParam = language === "hi" ? "hi" : "en";
         const examPromises = (examsList || []).map((examName) =>
             fetch(
-                `http://127.0.0.1:8000/dashboard/topic-weightage?exam=${encodeURIComponent(examName)}&subject=${encodeURIComponent(subject)}${yearFrom ? `&year_from=${yearFrom}` : ""}${yearTo ? `&year_to=${yearTo}` : ""}`
+                `http://127.0.0.1:8000/dashboard/topic-weightage?exam=${encodeURIComponent(examName)}&subject=${encodeURIComponent(englishSubjectName)}${yearFrom ? `&year_from=${yearFrom}` : ""}${yearTo ? `&year_to=${yearTo}` : ""}&language=${langParam}`
             )
                 .then((res) => res.json())
                 .then((result) => ({
@@ -84,16 +177,21 @@ export default function SubjectAnalysis({ subject, yearFrom, yearTo, examsList }
                 setError("Failed to load exam data");
                 setLoading(false);
             });
-    }, [subject, yearFrom, yearTo, examsList]);
+    }, [subject, yearFrom, yearTo, examsList, language, mappingReady]);
 
     // Fetch topic distribution for selected exam and subject
     useEffect(() => {
-        if (!subject || !selectedExam) {
+        if (!subject || !selectedExam || !mappingReady) {
             setTopicData([]);
             return;
         }
 
-        let url = `http://127.0.0.1:8000/dashboard/topic-weightage?exam=${encodeURIComponent(selectedExam)}&subject=${encodeURIComponent(subject)}`;
+        // Convert translated subject name to English for API call
+        // Backend filters by English subject name, not translated name
+        const englishSubjectName = subjectNameMapRef.current[subject] || subject;
+
+        const langParam = language === "hi" ? "hi" : "en";
+        let url = `http://127.0.0.1:8000/dashboard/topic-weightage?exam=${encodeURIComponent(selectedExam)}&subject=${encodeURIComponent(englishSubjectName)}&language=${langParam}`;
         if (yearFrom) {
             url += `&year_from=${yearFrom}`;
         }
@@ -114,7 +212,7 @@ export default function SubjectAnalysis({ subject, yearFrom, yearTo, examsList }
                 console.error("Error fetching topic weightage:", err);
                 setTopicData([]);
             });
-    }, [subject, selectedExam, yearFrom, yearTo]);
+    }, [subject, selectedExam, yearFrom, yearTo, language, mappingReady]);
 
     // Categorical color palette for charts
     // Using a professional color scheme with good contrast and accessibility
@@ -388,7 +486,12 @@ export default function SubjectAnalysis({ subject, yearFrom, yearTo, examsList }
             </div>
 
             {/* Window 3: Insights Window (Below) */}
-            <InsightsWindow exam={selectedExam} subject={subject} yearFrom={yearFrom} yearTo={yearTo} />
+            <InsightsWindow 
+                exam={selectedExam} 
+                subject={subject ? (subjectNameMapRef.current[subject] || subject) : null} 
+                yearFrom={yearFrom} 
+                yearTo={yearTo} 
+            />
         </div>
     );
 }

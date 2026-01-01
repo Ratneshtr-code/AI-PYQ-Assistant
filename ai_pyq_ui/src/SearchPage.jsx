@@ -164,6 +164,21 @@ export default function SearchPage() {
             {/* 📚 Main Content Area */}
             <main className="flex-1 flex flex-col items-center justify-start p-8 pl-64 transition-all duration-300 relative">
 
+                {/* Language Toggle - Top Right Corner */}
+                <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => setLanguage(language === "en" ? "hi" : "en")}
+                    className="fixed top-8 right-8 z-30 px-4 py-2.5 rounded-lg border border-gray-300/80 bg-white/90 hover:bg-white hover:border-blue-400 transition-all shadow-sm hover:shadow-md flex items-center justify-center backdrop-blur-sm min-w-[60px]"
+                    title={language === "en" ? "Switch to Hindi" : "Switch to English"}
+                >
+                    {language === "en" ? (
+                        <span className="text-sm font-bold text-gray-700">EN</span>
+                    ) : (
+                        <span className="text-sm font-bold text-gray-700">हि</span>
+                    )}
+                </motion.button>
+
                 {/* Exam Filter - Fixed/Sticky Position */}
                 <div className="fixed left-64 top-8 z-30 flex flex-col gap-1.5 pl-3 bg-gray-50 py-2 pr-2 rounded-r-lg shadow-sm exam-filter-compact" style={{ width: '140px' }}>
                     <label className="text-base font-medium text-gray-700 whitespace-nowrap text-center">
@@ -172,7 +187,7 @@ export default function SearchPage() {
                     <select
                         value={exam}
                         onChange={(e) => setExam(e.target.value)}
-                        className="border border-gray-300 rounded-lg px-2 py-1.5 text-sm text-gray-700 bg-gradient-to-r from-blue-50 to-indigo-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all w-full shadow-sm"
+                        className="border border-gray-300 rounded-lg px-2 py-1.5 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all w-full shadow-sm"
                     >
                         <option value="">All Exams</option>
                         {examsList.map((ex, idx) => (
@@ -193,7 +208,7 @@ export default function SearchPage() {
                             </h1>
                         </div>
 
-                        {/* Search Bar with Language Toggle */}
+                        {/* Search Bar */}
                         <div className={`flex flex-col gap-3 ${explanationWindowOpen && !explanationWindowMinimized ? 'results-container-shifted' : ''}`} style={{ maxWidth: explanationWindowOpen && !explanationWindowMinimized ? '48rem' : '100%', width: '100%', marginLeft: 'auto', marginRight: explanationWindowOpen && !explanationWindowMinimized ? '440px' : 'auto' }}>
                             <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
                                 <input
@@ -218,20 +233,6 @@ export default function SearchPage() {
                                 >
                                     {loading ? "Searching..." : "Search"}
                                 </button>
-                                {/* Language Toggle - Premium Styling */}
-                                <motion.button
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    onClick={() => setLanguage(language === "en" ? "hi" : "en")}
-                                    className="px-4 py-2.5 rounded-lg border border-gray-300/80 bg-white/90 hover:bg-white hover:border-blue-400 transition-all shadow-sm hover:shadow-md flex items-center justify-center backdrop-blur-sm min-w-[60px]"
-                                    title={language === "en" ? "Switch to Hindi" : "Switch to English"}
-                                >
-                                    {language === "en" ? (
-                                        <span className="text-sm font-bold text-gray-700">EN</span>
-                                    ) : (
-                                        <span className="text-sm font-bold text-gray-700">हि</span>
-                                    )}
-                                </motion.button>
                             </div>
                         </div>
 

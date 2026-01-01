@@ -2,8 +2,10 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts";
+import { useLanguage } from "../contexts/LanguageContext";
 
 export default function SubjectCards({ exams, yearFrom, yearTo, onSubjectClick }) {
+    const { language } = useLanguage(); // Get language from context
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -21,7 +23,8 @@ export default function SubjectCards({ exams, yearFrom, yearTo, onSubjectClick }
         setError(null);
 
         const examsStr = exams.join(",");
-        let url = `http://127.0.0.1:8000/dashboard/cross-exam/subject-distribution?exams=${encodeURIComponent(examsStr)}`;
+        const langParam = language === "hi" ? "hi" : "en";
+        let url = `http://127.0.0.1:8000/dashboard/cross-exam/subject-distribution?exams=${encodeURIComponent(examsStr)}&language=${langParam}`;
         if (yearFrom) {
             url += `&year_from=${yearFrom}`;
         }
@@ -53,7 +56,7 @@ export default function SubjectCards({ exams, yearFrom, yearTo, onSubjectClick }
                 setError("Failed to load subject distribution");
                 setLoading(false);
             });
-    }, [exams, yearFrom, yearTo]);
+    }, [exams, yearFrom, yearTo, language]);
 
     const getExamColor = (index) => {
         const colors = ["#3b82f6", "#10b981", "#f59e0b", "#ef4444"];

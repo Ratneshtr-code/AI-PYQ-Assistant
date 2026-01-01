@@ -1,15 +1,84 @@
 // src/components/CrossExamSubjectAnalysis.jsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, Legend } from "recharts";
 import { motion } from "framer-motion";
+import { useLanguage } from "../contexts/LanguageContext";
 
 export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, selectedSubject, onSubjectSelect }) {
+    const { language } = useLanguage(); // Get language from context
     const [subjectData, setSubjectData] = useState({});
     const [topicData, setTopicData] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [visibleExams, setVisibleExams] = useState(new Set(exams)); // Track which exams to show
     const [viewMode, setViewMode] = useState("count"); // "count" or "percentage"
+    
+    // Map to store translated subject name -> original English name
+    // This is needed because backend filters by English subject name, but UI shows translated name
+    const subjectNameMapRef = useRef({});
+    
+    // Track mapping readiness state
+    const [mappingReady, setMappingReady] = useState(false);
+    
+    // Build mapping between translated and English subject names
+    useEffect(() => {
+        if (!exams || exams.length === 0) {
+            subjectNameMapRef.current = {};
+            setMappingReady(false);
+            return;
+        }
+        
+        // Reset mapping ready state when exams change
+        setMappingReady(false);
+        
+        // Fetch subjects from first exam to build mapping
+        const langParam = language === "hi" ? "hi" : "en";
+        const firstExam = exams[0];
+        let url = `http://127.0.0.1:8000/dashboard/subject-weightage?exam=${encodeURIComponent(firstExam)}&language=${langParam}`;
+        if (yearFrom) {
+            url += `&year_from=${yearFrom}`;
+        }
+        if (yearTo) {
+            url += `&year_to=${yearTo}`;
+        }
+        
+        let englishUrl = `http://127.0.0.1:8000/dashboard/subject-weightage?exam=${encodeURIComponent(firstExam)}&language=en`;
+        if (yearFrom) {
+            englishUrl += `&year_from=${yearFrom}`;
+        }
+        if (yearTo) {
+            englishUrl += `&year_to=${yearTo}`;
+        }
+        
+        Promise.all([
+            fetch(url).then(res => res.json()).catch(() => ({ subjects: [] })),
+            language === "hi" ? fetch(englishUrl).then(res => res.json()).catch(() => ({ subjects: [] })) : Promise.resolve({ subjects: [] })
+        ])
+            .then(([result, englishResult]) => {
+                const nameMap = {};
+                if (language === "hi" && englishResult.subjects && result.subjects) {
+                    // Map by index (assuming same order)
+                    result.subjects.forEach((translatedSubj, index) => {
+                        if (englishResult.subjects[index]) {
+                            nameMap[translatedSubj.name] = englishResult.subjects[index].name;
+                        }
+                    });
+                } else if (result.subjects) {
+                    // For English, map is identity
+                    result.subjects.forEach(subj => {
+                        nameMap[subj.name] = subj.name;
+                    });
+                }
+                subjectNameMapRef.current = nameMap;
+                setMappingReady(true);
+            })
+            .catch((err) => {
+                console.error("Error building subject name mapping:", err);
+                // Fallback: use identity mapping
+                subjectNameMapRef.current = {};
+                setMappingReady(true);
+            });
+    }, [exams, yearFrom, yearTo, language]);
 
     // Fetch subject distribution
     useEffect(() => {
@@ -23,7 +92,8 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
         setError(null);
 
         const examsStr = exams.join(",");
-        let url = `http://127.0.0.1:8000/dashboard/cross-exam/subject-distribution?exams=${encodeURIComponent(examsStr)}`;
+        const langParam = language === "hi" ? "hi" : "en";
+        let url = `http://127.0.0.1:8000/dashboard/cross-exam/subject-distribution?exams=${encodeURIComponent(examsStr)}&language=${langParam}`;
         if (yearFrom) {
             url += `&year_from=${yearFrom}`;
         }
@@ -46,17 +116,22 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
                 setError("Failed to load subject distribution");
                 setLoading(false);
             });
-    }, [exams, yearFrom, yearTo]);
+    }, [exams, yearFrom, yearTo, language]);
 
     // Fetch topic distribution for selected subject
     useEffect(() => {
-        if (!exams || exams.length === 0 || !selectedSubject) {
+        if (!exams || exams.length === 0 || !selectedSubject || !mappingReady) {
             setTopicData({});
             return;
         }
 
+        // Convert translated subject name to English for API call
+        // Backend filters by English subject name, not translated name
+        const englishSubjectName = subjectNameMapRef.current[selectedSubject] || selectedSubject;
+
         const examsStr = exams.join(",");
-        let url = `http://127.0.0.1:8000/dashboard/cross-exam/topic-distribution?exams=${encodeURIComponent(examsStr)}&subject=${encodeURIComponent(selectedSubject)}`;
+        const langParam = language === "hi" ? "hi" : "en";
+        let url = `http://127.0.0.1:8000/dashboard/cross-exam/topic-distribution?exams=${encodeURIComponent(examsStr)}&subject=${encodeURIComponent(englishSubjectName)}&language=${langParam}`;
         if (yearFrom) {
             url += `&year_from=${yearFrom}`;
         }
@@ -77,7 +152,7 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
                 console.error("Error fetching topic distribution:", err);
                 setTopicData({});
             });
-    }, [exams, selectedSubject, yearFrom, yearTo]);
+    }, [exams, selectedSubject, yearFrom, yearTo, language, mappingReady]);
 
     // Update visible exams when exams prop changes
     useEffect(() => {

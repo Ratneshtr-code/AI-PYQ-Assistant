@@ -6,8 +6,10 @@ import FilterBar from "./components/FilterBar";
 import SubjectCards from "./components/SubjectCards";
 import CrossExamSubjectAnalysis from "./components/CrossExamSubjectAnalysis";
 import CrossExamHotTopics from "./components/CrossExamHotTopics";
+import { useLanguage } from "./contexts/LanguageContext";
 
 export default function CrossExamInsightsPage() {
+    const { language } = useLanguage(); // Get language from context
     const [exams, setExams] = useState([]);
     const [examsList, setExamsList] = useState([]);
     const [yearFrom, setYearFrom] = useState(null);
@@ -70,7 +72,10 @@ export default function CrossExamInsightsPage() {
 
     const handleAddExam = (exam) => {
         if (exams.length >= maxExams) {
-            alert(`Maximum ${maxExams} exams allowed. Please remove one first.`);
+            const message = language === "hi" 
+                ? `अधिकतम ${maxExams} परीक्षाएं अनुमत हैं। कृपया पहले एक हटाएं।`
+                : `Maximum ${maxExams} exams allowed. Please remove one first.`;
+            alert(message);
             return;
         }
         if (!exams.includes(exam)) {
@@ -180,7 +185,9 @@ export default function CrossExamInsightsPage() {
                                         🔍 Cross-Exam Insights
                                     </h1>
                                     <p className="text-sm md:text-base text-gray-600">
-                                        Compare subjects and topics across different exams with comprehensive analytics
+                                        {language === "hi"
+                                            ? "व्यापक एनालिटिक्स के साथ विभिन्न परीक्षाओं में विषयों और विषयों की तुलना करें"
+                                            : "Compare subjects and topics across different exams with comprehensive analytics"}
                                     </p>
                                 </div>
 
@@ -205,12 +212,14 @@ export default function CrossExamInsightsPage() {
                                                 Subject Comparison
                                             </h3>
                                             <p className="text-sm text-gray-600 leading-relaxed">
-                                                Compare subject distribution and performance across multiple exams with visual comparison cards
+                                                {language === "hi"
+                                                    ? "विज़ुअल तुलना कार्ड के साथ कई परीक्षाओं में विषय वितरण और प्रदर्शन की तुलना करें"
+                                                    : "Compare subject distribution and performance across multiple exams with visual comparison cards"}
                                             </p>
                                             
                                             {/* Arrow Indicator */}
                                             <div className="mt-6 flex items-center text-indigo-600 font-medium text-sm group-hover:translate-x-1 transition-transform duration-300">
-                                                <span>Explore</span>
+                                                <span>{language === "hi" ? "अन्वेषण करें" : "Explore"}</span>
                                                 <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                                 </svg>
@@ -237,12 +246,14 @@ export default function CrossExamInsightsPage() {
                                                 Subject & Topic Analysis
                                             </h3>
                                             <p className="text-sm text-gray-600 leading-relaxed">
-                                                Compare detailed subject and topic distribution patterns across selected exams for comprehensive insights
+                                                {language === "hi"
+                                                    ? "व्यापक विश्लेषण के लिए चयनित परीक्षाओं में विस्तृत विषय और विषय वितरण पैटर्न की तुलना करें"
+                                                    : "Compare detailed subject and topic distribution patterns across selected exams for comprehensive insights"}
                                             </p>
                                             
                                             {/* Arrow Indicator */}
                                             <div className="mt-6 flex items-center text-indigo-600 font-medium text-sm group-hover:translate-x-1 transition-transform duration-300">
-                                                <span>Explore</span>
+                                                <span>{language === "hi" ? "अन्वेषण करें" : "Explore"}</span>
                                                 <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                                 </svg>
@@ -269,12 +280,14 @@ export default function CrossExamInsightsPage() {
                                                 Hot Topics
                                             </h3>
                                             <p className="text-sm text-gray-600 leading-relaxed">
-                                                Identify trending and frequently asked topics across multiple exams to prioritize your study focus
+                                                {language === "hi"
+                                                    ? "अपने अध्ययन फोकस को प्राथमिकता देने के लिए कई परीक्षाओं में ट्रेंडिंग और अक्सर पूछे जाने वाले विषयों की पहचान करें"
+                                                    : "Identify trending and frequently asked topics across multiple exams to prioritize your study focus"}
                                             </p>
                                             
                                             {/* Arrow Indicator */}
                                             <div className="mt-6 flex items-center text-indigo-600 font-medium text-sm group-hover:translate-x-1 transition-transform duration-300">
-                                                <span>Explore</span>
+                                                <span>{language === "hi" ? "अन्वेषण करें" : "Explore"}</span>
                                                 <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                                 </svg>
@@ -287,7 +300,9 @@ export default function CrossExamInsightsPage() {
                                 {exams.length === 0 && (
                                     <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6 text-center shadow-sm">
                                         <p className="text-blue-800 font-medium">
-                                            👆 Add exams from the filter bar to start comparing insights
+                                            {language === "hi"
+                                                ? "👆 विश्लेषण की तुलना शुरू करने के लिए फ़िल्टर बार से परीक्षाएं जोड़ें"
+                                                : "👆 Add exams from the filter bar to start comparing insights"}
                                         </p>
                                     </div>
                                 )}
@@ -317,28 +332,41 @@ export default function CrossExamInsightsPage() {
                                                 const pageInfo = {
                                                     "subject-cards": {
                                                         title: "📋 Subject Comparison",
-                                                        description: "Compare subject distribution and performance across multiple exams with visual comparison cards"
+                                                        description: {
+                                                            en: "Compare subject distribution and performance across multiple exams with visual comparison cards",
+                                                            hi: "विज़ुअल तुलना कार्ड के साथ कई परीक्षाओं में विषय वितरण और प्रदर्शन की तुलना करें"
+                                                        }
                                                     },
                                                     "subject-analysis": {
                                                         title: "📊 Subject & Topic Analysis",
-                                                        description: "Compare detailed subject and topic distribution patterns across selected exams for comprehensive insights"
+                                                        description: {
+                                                            en: "Compare detailed subject and topic distribution patterns across selected exams for comprehensive insights",
+                                                            hi: "व्यापक विश्लेषण के लिए चयनित परीक्षाओं में विस्तृत विषय और विषय वितरण पैटर्न की तुलना करें"
+                                                        }
                                                     },
                                                     "hot-topics": {
                                                         title: "🔥 Hot Topics Across Exams",
-                                                        description: "Identify trending and frequently asked topics across multiple exams to prioritize your study focus"
+                                                        description: {
+                                                            en: "Identify trending and frequently asked topics across multiple exams to prioritize your study focus",
+                                                            hi: "अपने अध्ययन फोकस को प्राथमिकता देने के लिए कई परीक्षाओं में ट्रेंडिंग और अक्सर पूछे जाने वाले विषयों की पहचान करें"
+                                                        }
                                                     }
                                                 };
                                                 const info = pageInfo[activeSubPage] || {
                                                     title: "🔍 Cross-Exam Insights",
-                                                    description: "Compare subjects and topics across different exams"
+                                                    description: {
+                                                        en: "Compare subjects and topics across different exams",
+                                                        hi: "विभिन्न परीक्षाओं में विषयों और विषयों की तुलना करें"
+                                                    }
                                                 };
+                                                const description = info.description[language] || info.description.en;
                                                 return (
                                                     <>
                                                         <h1 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
                                                             {info.title}
                                                         </h1>
                                                         <p className="text-xs md:text-sm text-gray-600">
-                                                            {info.description}
+                                                            {description}
                                                         </p>
                                                     </>
                                                 );
@@ -361,7 +389,9 @@ export default function CrossExamInsightsPage() {
                                 {exams.length === 0 && (
                                     <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
                                         <p className="text-blue-800">
-                                            👆 Add exams from the filter bar to start comparing insights
+                                            {language === "hi"
+                                                ? "👆 विश्लेषण की तुलना शुरू करने के लिए फ़िल्टर बार से परीक्षाएं जोड़ें"
+                                                : "👆 Add exams from the filter bar to start comparing insights"}
                                         </p>
                                     </div>
                                 )}

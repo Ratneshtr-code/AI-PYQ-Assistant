@@ -1,17 +1,85 @@
 // src/components/HottestTopicsBySubject.jsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, LabelList } from "recharts";
 import { motion } from "framer-motion";
+import { useLanguage } from "../contexts/LanguageContext";
 
 export default function HottestTopicsBySubject({ exam, subject, yearFrom, yearTo }) {
+    const { language } = useLanguage(); // Get language from context
     const [subjectHotTopics, setSubjectHotTopics] = useState([]);
     const [subjectCoverage, setSubjectCoverage] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    
+    // Map to store translated subject name -> original English name
+    // This is needed because backend filters by English subject name, but UI shows translated name
+    const subjectNameMapRef = useRef({});
+    
+    // Track mapping readiness state
+    const [mappingReady, setMappingReady] = useState(false);
+    
+    // Build mapping between translated and English subject names
+    useEffect(() => {
+        if (!exam || !subject) {
+            subjectNameMapRef.current = {};
+            setMappingReady(false);
+            return;
+        }
+        
+        // Reset mapping ready state when subject changes
+        setMappingReady(false);
+        
+        // Fetch subjects from the exam to build mapping
+        const langParam = language === "hi" ? "hi" : "en";
+        let url = `http://127.0.0.1:8000/dashboard/subject-weightage?exam=${encodeURIComponent(exam)}&language=${langParam}`;
+        if (yearFrom) {
+            url += `&year_from=${yearFrom}`;
+        }
+        if (yearTo) {
+            url += `&year_to=${yearTo}`;
+        }
+        
+        let englishUrl = `http://127.0.0.1:8000/dashboard/subject-weightage?exam=${encodeURIComponent(exam)}&language=en`;
+        if (yearFrom) {
+            englishUrl += `&year_from=${yearFrom}`;
+        }
+        if (yearTo) {
+            englishUrl += `&year_to=${yearTo}`;
+        }
+        
+        Promise.all([
+            fetch(url).then(res => res.json()).catch(() => ({ subjects: [] })),
+            language === "hi" ? fetch(englishUrl).then(res => res.json()).catch(() => ({ subjects: [] })) : Promise.resolve({ subjects: [] })
+        ])
+            .then(([result, englishResult]) => {
+                const nameMap = {};
+                if (language === "hi" && englishResult.subjects && result.subjects) {
+                    // Map by index (assuming same order)
+                    result.subjects.forEach((translatedSubj, index) => {
+                        if (englishResult.subjects[index]) {
+                            nameMap[translatedSubj.name] = englishResult.subjects[index].name;
+                        }
+                    });
+                } else if (result.subjects) {
+                    // For English, map is identity
+                    result.subjects.forEach(subj => {
+                        nameMap[subj.name] = subj.name;
+                    });
+                }
+                subjectNameMapRef.current = nameMap;
+                setMappingReady(true);
+            })
+            .catch((err) => {
+                console.error("Error building subject name mapping:", err);
+                // Fallback: use identity mapping
+                subjectNameMapRef.current = { [subject]: subject };
+                setMappingReady(true);
+            });
+    }, [exam, subject, yearFrom, yearTo, language]);
 
     // Fetch subject hot topics for specific exam and subject
     useEffect(() => {
-        if (!exam || !subject) {
+        if (!exam || !subject || !mappingReady) {
             setSubjectHotTopics([]);
             setLoading(false);
             return;
@@ -20,7 +88,12 @@ export default function HottestTopicsBySubject({ exam, subject, yearFrom, yearTo
         setLoading(true);
         setError(null);
 
-        let url = `http://127.0.0.1:8000/dashboard/hot-topics?exam=${encodeURIComponent(exam)}&subject=${encodeURIComponent(subject)}&min_years=1`;
+        // Convert translated subject name to English for API call
+        // Backend filters by English subject name, not translated name
+        const englishSubjectName = subjectNameMapRef.current[subject] || subject;
+
+        const langParam = language === "hi" ? "hi" : "en";
+        let url = `http://127.0.0.1:8000/dashboard/hot-topics?exam=${encodeURIComponent(exam)}&subject=${encodeURIComponent(englishSubjectName)}&min_years=1&language=${langParam}`;
         if (yearFrom) {
             url += `&year_from=${yearFrom}`;
         }
@@ -44,16 +117,21 @@ export default function HottestTopicsBySubject({ exam, subject, yearFrom, yearTo
                 setError("Failed to load hot topics");
                 setLoading(false);
             });
-    }, [exam, subject, yearFrom, yearTo]);
+    }, [exam, subject, yearFrom, yearTo, language, mappingReady]);
 
     // Fetch subject coverage for specific exam and subject
     useEffect(() => {
-        if (!exam || !subject) {
+        if (!exam || !subject || !mappingReady) {
             setSubjectCoverage(null);
             return;
         }
 
-        let url = `http://127.0.0.1:8000/dashboard/coverage?exam=${encodeURIComponent(exam)}&subject=${encodeURIComponent(subject)}&top_n=10`;
+        // Convert translated subject name to English for API call
+        // Backend filters by English subject name, not translated name
+        const englishSubjectName = subjectNameMapRef.current[subject] || subject;
+
+        const langParam = language === "hi" ? "hi" : "en";
+        let url = `http://127.0.0.1:8000/dashboard/coverage?exam=${encodeURIComponent(exam)}&subject=${encodeURIComponent(englishSubjectName)}&top_n=10&language=${langParam}`;
         if (yearFrom) {
             url += `&year_from=${yearFrom}`;
         }
@@ -69,7 +147,7 @@ export default function HottestTopicsBySubject({ exam, subject, yearFrom, yearTo
             .catch((err) => {
                 console.error("Error fetching subject coverage:", err);
             });
-    }, [exam, subject, yearFrom, yearTo]);
+    }, [exam, subject, yearFrom, yearTo, language, mappingReady]);
 
     const getHotTopicColor = (index) => {
         const colors = ["#dc2626", "#ea580c", "#f59e0b", "#eab308", "#84cc16", "#22c55e", "#10b981", "#14b8a6", "#06b6d4", "#3b82f6"];

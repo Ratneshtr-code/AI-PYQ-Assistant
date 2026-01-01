@@ -1,22 +1,29 @@
 // src/components/ExamAnalysis.jsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, LabelList } from "recharts";
 import { motion } from "framer-motion";
 import InsightsWindow from "./InsightsWindow";
+import { useLanguage } from "../contexts/LanguageContext";
 
 export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
+    const { language } = useLanguage(); // Get language from context
     const [subjectData, setSubjectData] = useState([]);
     const [topicData, setTopicData] = useState([]);
     const [selectedSubject, setSelectedSubject] = useState(null);
     const [availableSubjects, setAvailableSubjects] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    
+    // Map to store translated name -> original English name
+    // This is needed because backend filters by English name, but UI shows translated name
+    const subjectNameMapRef = useRef({});
 
     // Fetch available subjects
     useEffect(() => {
         if (!exam) return;
 
-        fetch(`http://127.0.0.1:8000/dashboard/filters?exam=${encodeURIComponent(exam)}`)
+        const langParam = language === "hi" ? "hi" : "en";
+        fetch(`http://127.0.0.1:8000/dashboard/filters?exam=${encodeURIComponent(exam)}&language=${langParam}`)
             .then((res) => res.json())
             .then((result) => {
                 if (result.subjects) {
@@ -26,7 +33,7 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
             .catch((err) => {
                 console.error("Error fetching subjects:", err);
             });
-    }, [exam]);
+    }, [exam, language]);
 
     // Fetch subject weightage
     useEffect(() => {
@@ -39,7 +46,8 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
         setLoading(true);
         setError(null);
 
-        let url = `http://127.0.0.1:8000/dashboard/subject-weightage?exam=${encodeURIComponent(exam)}`;
+        const langParam = language === "hi" ? "hi" : "en";
+        let url = `http://127.0.0.1:8000/dashboard/subject-weightage?exam=${encodeURIComponent(exam)}&language=${langParam}`;
         if (yearFrom) {
             url += `&year_from=${yearFrom}`;
         }
@@ -47,11 +55,40 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
             url += `&year_to=${yearTo}`;
         }
 
-        fetch(url)
-            .then((res) => res.json())
-            .then((result) => {
+        // Also fetch English version to build mapping between translated and English names
+        let englishUrl = `http://127.0.0.1:8000/dashboard/subject-weightage?exam=${encodeURIComponent(exam)}&language=en`;
+        if (yearFrom) {
+            englishUrl += `&year_from=${yearFrom}`;
+        }
+        if (yearTo) {
+            englishUrl += `&year_to=${yearTo}`;
+        }
+
+        Promise.all([
+            fetch(url).then(res => res.json()),
+            language === "hi" ? fetch(englishUrl).then(res => res.json()) : Promise.resolve({ subjects: [] })
+        ])
+            .then(([result, englishResult]) => {
                 if (result.subjects && result.subjects.length > 0) {
                     setSubjectData(result.subjects);
+                    
+                    // Build mapping: translated name -> English name
+                    const nameMap = {};
+                    if (language === "hi" && englishResult.subjects && englishResult.subjects.length === result.subjects.length) {
+                        // Map by index (assuming same order)
+                        result.subjects.forEach((translatedSubj, index) => {
+                            if (englishResult.subjects[index]) {
+                                nameMap[translatedSubj.name] = englishResult.subjects[index].name;
+                            }
+                        });
+                    } else {
+                        // For English, map is identity
+                        result.subjects.forEach(subj => {
+                            nameMap[subj.name] = subj.name;
+                        });
+                    }
+                    subjectNameMapRef.current = nameMap;
+                    
                     // Auto-select first subject
                     if (!selectedSubject && result.subjects[0]) {
                         setSelectedSubject(result.subjects[0].name);
@@ -66,7 +103,7 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
                 setError("Failed to load subject data");
                 setLoading(false);
             });
-    }, [exam, yearFrom, yearTo]);
+    }, [exam, yearFrom, yearTo, language]);
 
     // Fetch topic weightage for selected subject
     useEffect(() => {
@@ -75,7 +112,12 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
             return;
         }
 
-        let url = `http://127.0.0.1:8000/dashboard/topic-weightage?exam=${encodeURIComponent(exam)}&subject=${encodeURIComponent(selectedSubject)}`;
+        // Convert translated subject name to English for API call
+        // Backend filters by English subject name, not translated name
+        const englishSubjectName = subjectNameMapRef.current[selectedSubject] || selectedSubject;
+        
+        const langParam = language === "hi" ? "hi" : "en";
+        let url = `http://127.0.0.1:8000/dashboard/topic-weightage?exam=${encodeURIComponent(exam)}&subject=${encodeURIComponent(englishSubjectName)}&language=${langParam}`;
         if (yearFrom) {
             url += `&year_from=${yearFrom}`;
         }
@@ -96,7 +138,7 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
                 console.error("Error fetching topic weightage:", err);
                 setTopicData([]);
             });
-    }, [exam, selectedSubject, yearFrom, yearTo]);
+    }, [exam, selectedSubject, yearFrom, yearTo, language]);
 
     // Categorical color palette for charts
     // Using a professional color scheme with good contrast and accessibility
@@ -377,7 +419,12 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
             </div>
 
             {/* Window 3: Insights Window (Below) */}
-            <InsightsWindow exam={exam} subject={selectedSubject} yearFrom={yearFrom} yearTo={yearTo} />
+            <InsightsWindow 
+                exam={exam} 
+                subject={selectedSubject ? (subjectNameMapRef.current[selectedSubject] || selectedSubject) : null} 
+                yearFrom={yearFrom} 
+                yearTo={yearTo} 
+            />
         </div>
     );
 }
