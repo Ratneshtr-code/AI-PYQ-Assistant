@@ -1,7 +1,9 @@
 // src/SearchPage.jsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
 import { useSearchAPI } from "./hooks/useSearchAPI";
+import { useLanguage } from "./contexts/LanguageContext";
 import Sidebar from "./components/Sidebar";
 import ResultsList from "./components/ResultsList";
 import Pagination from "./components/Pagination";
@@ -15,7 +17,7 @@ export default function SearchPage() {
     const [query, setQuery] = useState("");
     const [exam, setExam] = useState("");
     const [examsList, setExamsList] = useState([]);
-    const [language, setLanguage] = useState("english");
+    const { language, setLanguage } = useLanguage(); // Get language from context
     const [allResults, setAllResults] = useState([]);
     const [explanationWindowOpen, setExplanationWindowOpen] = useState(false);
     const [explanationWindowMinimized, setExplanationWindowMinimized] = useState(false);
@@ -76,17 +78,60 @@ export default function SearchPage() {
         }
     }, [query, exam, page, hasSearched]);
 
-    // Auto-search when exam changes if query exists
-    useEffect(() => {
-        if (query.trim() && hasSearched) {
-            handleSearch();
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [exam]);
+    // Debounce timer ref for auto-search
+    const autoSearchTimerRef = useRef(null);
+    const lastSearchParamsRef = useRef({ exam: "", language: "en" });
 
-    const handleSearch = async () => {
-        if (!query.trim()) return;
-        await doSearch(query, 1, { exam });
+    // Auto-search when exam or language changes if query exists
+    // Added debouncing and duplicate check to prevent multiple requests
+    useEffect(() => {
+        // Clear any pending auto-search
+        if (autoSearchTimerRef.current) {
+            clearTimeout(autoSearchTimerRef.current);
+        }
+
+        // Check if exam or language actually changed
+        const currentParams = { exam: exam || "", language: language || "en" };
+        const paramsChanged = 
+            currentParams.exam !== lastSearchParamsRef.current.exam ||
+            currentParams.language !== lastSearchParamsRef.current.language;
+
+        if (!paramsChanged) {
+            // No change, don't search
+            return;
+        }
+
+        // Update last params
+        lastSearchParamsRef.current = currentParams;
+
+        // Only auto-search if query exists and user has searched before
+        if (query.trim() && hasSearched && !loading) {
+            // Debounce: Wait 300ms before triggering search
+            // This prevents rapid filter changes from causing multiple requests
+            autoSearchTimerRef.current = setTimeout(() => {
+                // Double-check we're not already loading
+                if (!loading) {
+                    handleSearch();
+                }
+            }, 300);
+        }
+
+        // Cleanup on unmount or dependency change
+        return () => {
+            if (autoSearchTimerRef.current) {
+                clearTimeout(autoSearchTimerRef.current);
+            }
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [exam, language, query, hasSearched, loading]);
+
+    const handleSearch = useCallback(async () => {
+        // Prevent double-clicks and concurrent searches
+        if (!query.trim() || loading) {
+            return;
+        }
+        
+        await doSearch(query, 1, { exam, language });
 
         if (exam === "") {
             const allFetched = [];
@@ -96,7 +141,7 @@ export default function SearchPage() {
                 const response = await fetch(apiUrl, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ query, page: currentPage, exam }),
+                    body: JSON.stringify({ query, page: currentPage, exam, language }),
                 });
                 const data = await response.json();
                 allFetched.push(...(data.results || []));
@@ -107,9 +152,9 @@ export default function SearchPage() {
         } else {
             setAllResults([]);
         }
-    };
+    }, [query, exam, language, loading, doSearch, apiUrl]);
 
-    const handlePageChange = (p) => doSearch(query, p, { exam });
+    const handlePageChange = (p) => doSearch(query, p, { exam, language });
 
     return (
         <div className="flex min-h-screen bg-gray-50 text-gray-800">
@@ -118,20 +163,6 @@ export default function SearchPage() {
 
             {/* 📚 Main Content Area */}
             <main className="flex-1 flex flex-col items-center justify-start p-8 pl-64 transition-all duration-300 relative">
-                {/* Language Toggle - Fixed at top right corner */}
-                <div className="fixed top-4 right-4 z-50">
-                    <button
-                        onClick={() => setLanguage(language === "english" ? "hindi" : "english")}
-                        className="px-2.5 py-1.5 rounded border border-gray-300 bg-white hover:bg-gray-50 transition-colors shadow-sm flex items-center justify-center"
-                        title={language === "english" ? "Switch to Hindi" : "Switch to English"}
-                    >
-                        {language === "english" ? (
-                            <span className="text-sm font-semibold text-gray-700">EN</span>
-                        ) : (
-                            <span className="text-sm font-semibold text-gray-700">हि</span>
-                        )}
-                    </button>
-                </div>
 
                 {/* Exam Filter - Fixed/Sticky Position */}
                 <div className="fixed left-64 top-8 z-30 flex flex-col gap-1.5 pl-3 bg-gray-50 py-2 pr-2 rounded-r-lg shadow-sm exam-filter-compact" style={{ width: '140px' }}>
@@ -162,27 +193,47 @@ export default function SearchPage() {
                             </h1>
                         </div>
 
-                        {/* Search Bar */}
-                        <div className={`flex flex-col sm:flex-row gap-3 justify-center ${explanationWindowOpen && !explanationWindowMinimized ? 'results-container-shifted' : ''}`} style={{ maxWidth: explanationWindowOpen && !explanationWindowMinimized ? '48rem' : '100%', width: '100%', marginLeft: 'auto', marginRight: explanationWindowOpen && !explanationWindowMinimized ? '440px' : 'auto' }}>
-                        <input
-                            type="text"
-                            value={query}
-                            onChange={(e) => setQuery(e.target.value)}
-                            placeholder="Search PYQs or topics (e.g. Article 15, Fundamental Rights...)"
-                            className="flex-1 border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                        />
-                        <button
-                            onClick={handleSearch}
-                            className={`px-6 py-2 rounded-lg text-white font-medium ${loading
-                                    ? "bg-gray-400"
-                                    : "bg-blue-600 hover:bg-blue-700 transition"
-                                }`}
-                            disabled={loading}
-                        >
-                            {loading ? "Searching..." : "Search"}
-                        </button>
-                    </div>
+                        {/* Search Bar with Language Toggle */}
+                        <div className={`flex flex-col gap-3 ${explanationWindowOpen && !explanationWindowMinimized ? 'results-container-shifted' : ''}`} style={{ maxWidth: explanationWindowOpen && !explanationWindowMinimized ? '48rem' : '100%', width: '100%', marginLeft: 'auto', marginRight: explanationWindowOpen && !explanationWindowMinimized ? '440px' : 'auto' }}>
+                            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+                                <input
+                                    type="text"
+                                    value={query}
+                                    onChange={(e) => setQuery(e.target.value)}
+                                    placeholder="Search PYQs or topics (e.g. Article 15, Fundamental Rights...)"
+                                    className="flex-1 border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                    onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                                />
+                                <button
+                                    onClick={() => {
+                                        if (!loading) {
+                                            handleSearch();
+                                        }
+                                    }}
+                                    disabled={loading}
+                                    className={`px-6 py-2 rounded-lg text-white font-medium ${loading
+                                            ? "bg-gray-400 cursor-not-allowed"
+                                            : "bg-blue-600 hover:bg-blue-700 transition"
+                                        }`}
+                                >
+                                    {loading ? "Searching..." : "Search"}
+                                </button>
+                                {/* Language Toggle - Premium Styling */}
+                                <motion.button
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    onClick={() => setLanguage(language === "en" ? "hi" : "en")}
+                                    className="px-4 py-2.5 rounded-lg border border-gray-300/80 bg-white/90 hover:bg-white hover:border-blue-400 transition-all shadow-sm hover:shadow-md flex items-center justify-center backdrop-blur-sm min-w-[60px]"
+                                    title={language === "en" ? "Switch to Hindi" : "Switch to English"}
+                                >
+                                    {language === "en" ? (
+                                        <span className="text-sm font-bold text-gray-700">EN</span>
+                                    ) : (
+                                        <span className="text-sm font-bold text-gray-700">हि</span>
+                                    )}
+                                </motion.button>
+                            </div>
+                        </div>
 
                     {/* Conditional Rendering */}
                     {!hasSearched ? (

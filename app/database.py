@@ -18,7 +18,17 @@ DB_URL = f"sqlite:///{DB_PATH}"
 # Create database directory if it doesn't exist
 DB_PATH.parent.mkdir(parents=True, exist_ok=True)
 
-engine = create_engine(DB_URL, connect_args={"check_same_thread": False})
+# Configure SQLite for better concurrency
+# timeout=20: Wait up to 20 seconds for database lock to be released
+# check_same_thread=False: Allow connections from different threads
+engine = create_engine(
+    DB_URL, 
+    connect_args={
+        "check_same_thread": False,
+        "timeout": 20.0  # Wait up to 20 seconds for lock to be released
+    },
+    pool_pre_ping=True  # Verify connections before using
+)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
@@ -402,6 +412,7 @@ class ExamAttempt(Base):
     questions_wrong = Column(Integer, default=0)
     total_score = Column(Float, default=0.0)
     status = Column(SQLEnum(ExamAttemptStatus), default=ExamAttemptStatus.IN_PROGRESS, nullable=False, index=True)
+    language = Column(String, default="en", nullable=False)  # Language selected in instructions ("en" or "hi")
     created_at = Column(DateTime, default=datetime.utcnow, index=True)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
@@ -465,6 +476,26 @@ class UserFeedback(Base):
     
     # Relationship
     user = relationship("User", backref="feedback")
+
+
+class TranslationCache(Base):
+    """Persistent cache for translations - shared across all users"""
+    __tablename__ = "translation_cache"
+
+    id = Column(Integer, primary_key=True, index=True)
+    cache_key = Column(String, nullable=False, unique=True, index=True)  # e.g., "q_12345_question_text_hi"
+    question_id = Column(Integer, nullable=True, index=True)  # Question ID if available
+    field = Column(String, nullable=False)  # "question_text", "option_a", "option_b", "option_c", "option_d", "llm_response"
+    target_language = Column(String, nullable=False, default="hi")  # Target language code
+    translated_text = Column(Text, nullable=False)  # Translated text
+    hit_count = Column(Integer, default=0, nullable=False)  # Number of times this translation was used
+    created_at = Column(DateTime, default=datetime.utcnow, nullable=False, index=True)
+    last_used_at = Column(DateTime, default=datetime.utcnow, nullable=False, index=True)
+    
+    # Index for faster lookups
+    __table_args__ = (
+        {'sqlite_autoincrement': True},
+    )
 
 
 def init_db():

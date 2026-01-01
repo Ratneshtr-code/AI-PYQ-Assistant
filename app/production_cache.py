@@ -51,7 +51,7 @@ class ProductionCache:
         is_correct: Optional[bool] = None
     ) -> str:
         """
-        Generate cache key - same format as testing cache for consistency
+        Generate cache key - language-agnostic (LLM generates English, we translate if needed)
         
         Args:
             question_id: The question ID (from database or CSV)
@@ -85,7 +85,7 @@ class ProductionCache:
         is_correct: Optional[bool] = None
     ) -> Optional[Dict[str, Any]]:
         """
-        Get cached response if available
+        Get cached response if available (returns English explanation, translate separately if needed)
         
         Args:
             question_id: The question ID
@@ -94,7 +94,7 @@ class ProductionCache:
             is_correct: Optional boolean for option explanations
             
         Returns:
-            Dict with 'response' and metadata, or None if not found
+            Dict with 'response' (English) and metadata, or None if not found
         """
         if not self.enabled:
             return None
@@ -148,12 +148,12 @@ class ProductionCache:
         output_tokens: Optional[int] = None
     ):
         """
-        Store response in production cache
+        Store response in production cache (stores English explanation, translate when retrieving if needed)
         
         Args:
             question_id: The question ID
             explanation_type: "concept", "correct_option", or "wrong_option"
-            response: The LLM response to cache
+            response: The LLM response to cache (should be in English)
             option_letter: Optional option letter for option explanations
             is_correct: Optional boolean for option explanations
             model: Model name used

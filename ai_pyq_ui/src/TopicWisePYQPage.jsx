@@ -1,7 +1,8 @@
 // src/TopicWisePYQPage.jsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useSearchAPI } from "./hooks/useSearchAPI";
+import { useLanguage } from "./contexts/LanguageContext";
 import Sidebar from "./components/Sidebar";
 import FilterBar from "./components/FilterBar";
 import ResultsList from "./components/ResultsList";
@@ -15,25 +16,45 @@ export default function TopicWisePYQPage() {
     const subjectsUrl = "http://127.0.0.1:8000/topic-wise/subjects";
     const topicsUrl = "http://127.0.0.1:8000/topic-wise/topics";
 
-    const [exam, setExam] = useState("");
-    const [subject, setSubject] = useState("");
-    const [topic, setTopic] = useState("");
+    // Initialize state from URL params if they exist (for direct navigation from roadmap)
+    const [exam, setExam] = useState(() => {
+        const examParam = searchParams.get('exam');
+        return examParam ? decodeURIComponent(examParam) : "";
+    });
+    const [subject, setSubject] = useState(() => {
+        const subjectParam = searchParams.get('subject');
+        return subjectParam ? decodeURIComponent(subjectParam) : "";
+    });
+    const [topic, setTopic] = useState(() => {
+        const topicParam = searchParams.get('topic');
+        return topicParam ? decodeURIComponent(topicParam) : "";
+    });
     const [examsList, setExamsList] = useState([]);
     const [subjectsList, setSubjectsList] = useState([]);
     const [topicsList, setTopicsList] = useState([]);
     const [explanationWindowOpen, setExplanationWindowOpen] = useState(false);
     const [explanationWindowMinimized, setExplanationWindowMinimized] = useState(false);
     const [primarySidebarCollapsed, setPrimarySidebarCollapsed] = useState(false);
+    const { language } = useLanguage(); // Get language from context
 
     // Check if coming from AI Roadmap
     const fromRoadmap = searchParams.get('from') === 'ai-roadmap';
     const roadmapExam = searchParams.get('exam');
 
-    // Read URL params on mount
+    // Update state when URL params change (for browser back/forward navigation)
     useEffect(() => {
         const examParam = searchParams.get('exam');
-        if (examParam) {
+        const subjectParam = searchParams.get('subject');
+        const topicParam = searchParams.get('topic');
+        
+        if (examParam && decodeURIComponent(examParam) !== exam) {
             setExam(decodeURIComponent(examParam));
+        }
+        if (subjectParam && decodeURIComponent(subjectParam) !== subject) {
+            setSubject(decodeURIComponent(subjectParam));
+        }
+        if (topicParam && decodeURIComponent(topicParam) !== topic) {
+            setTopic(decodeURIComponent(topicParam));
         }
     }, [searchParams]);
 
@@ -67,9 +88,16 @@ export default function TopicWisePYQPage() {
         const fetchSubjects = async () => {
             if (!exam) {
                 setSubjectsList([]);
-                setSubject("");
+                // Only reset subject if it's not in URL params
+                const subjectParam = searchParams.get('subject');
+                if (!subjectParam) {
+                    setSubject("");
+                }
                 setTopicsList([]);
-                setTopic("");
+                const topicParam = searchParams.get('topic');
+                if (!topicParam) {
+                    setTopic("");
+                }
                 return;
             }
 
@@ -78,16 +106,15 @@ export default function TopicWisePYQPage() {
                 const data = await res.json();
                 setSubjectsList(data.subjects || []);
                 
-                // Check if we have a subject from URL params
+                // Check if we have a subject from URL params - always respect URL params
                 const subjectParam = searchParams.get('subject');
                 if (subjectParam) {
                     const decodedSubject = decodeURIComponent(subjectParam);
-                    // Subject from URL exists in the list, set it
-                    if (data.subjects && data.subjects.includes(decodedSubject)) {
-                        setSubject(decodedSubject);
-                    }
-                } else {
-                    // No subject in URL, reset it
+                    // Set subject from URL (it might not be in the list yet, but that's okay)
+                    // The search will work with the URL value even if dropdown doesn't show it
+                    setSubject(decodedSubject);
+                } else if (!subject) {
+                    // No subject in URL and no subject set, reset it
                     setSubject("");
                     setTopicsList([]);
                     setTopic("");
@@ -105,7 +132,11 @@ export default function TopicWisePYQPage() {
         const fetchTopics = async () => {
             if (!exam || !subject) {
                 setTopicsList([]);
-                setTopic("");
+                // Only reset topic if it's not in URL params
+                const topicParam = searchParams.get('topic');
+                if (!topicParam) {
+                    setTopic("");
+                }
                 return;
             }
 
@@ -116,16 +147,15 @@ export default function TopicWisePYQPage() {
                 const data = await res.json();
                 setTopicsList(data.topics || []);
                 
-                // Check if we have a topic from URL params
+                // Check if we have a topic from URL params - always respect URL params
                 const topicParam = searchParams.get('topic');
                 if (topicParam) {
                     const decodedTopic = decodeURIComponent(topicParam);
-                    // Topic from URL exists in the list, set it
-                    if (data.topics && data.topics.includes(decodedTopic)) {
-                        setTopic(decodedTopic);
-                    }
-                } else {
-                    // No topic in URL, reset it
+                    // Set topic from URL (it might not be in the list yet, but that's okay)
+                    // The search will work with the URL value even if dropdown doesn't show it
+                    setTopic(decodedTopic);
+                } else if (!topic) {
+                    // No topic in URL and no topic set, reset it
                     setTopic("");
                 }
             } catch (err) {
@@ -136,23 +166,91 @@ export default function TopicWisePYQPage() {
         fetchTopics();
     }, [exam, subject, topicsUrl, searchParams]);
 
-    // Search when topic is selected
+    // Debounce timer ref for auto-search
+    const autoSearchTimerRef = useRef(null);
+    const lastSearchParamsRef = useRef({ topic: "", exam: "", subject: "", language: "en" });
+    const hasInitializedRef = useRef(false);
+
+    // Search when topic or language is selected (with debouncing to prevent duplicate requests)
     useEffect(() => {
-        if (topic && exam && subject) {
-            handleSearch();
+        // Clear any pending auto-search
+        if (autoSearchTimerRef.current) {
+            clearTimeout(autoSearchTimerRef.current);
         }
-    }, [topic, exam, subject]); // Trigger when any filter changes
+
+        // Check if params actually changed
+        const currentParams = { 
+            topic: topic || "", 
+            exam: exam || "", 
+            subject: subject || "", 
+            language: language || "en" 
+        };
+        const paramsChanged = 
+            currentParams.topic !== lastSearchParamsRef.current.topic ||
+            currentParams.exam !== lastSearchParamsRef.current.exam ||
+            currentParams.subject !== lastSearchParamsRef.current.subject ||
+            currentParams.language !== lastSearchParamsRef.current.language;
+
+        // On initial load with URL params, we need to trigger search even if params haven't "changed"
+        // (because ref starts with empty values, but we want to search with URL values)
+        const isInitialLoadWithParams = !hasInitializedRef.current && topic && exam && subject;
+
+        if ((!paramsChanged && !isInitialLoadWithParams) || !topic || !exam || !subject) {
+            // No change (and not initial load) or missing required params, don't search
+            if (isInitialLoadWithParams) {
+                hasInitializedRef.current = true;
+            }
+            return;
+        }
+
+        // Mark as initialized
+        hasInitializedRef.current = true;
+
+        // Update last params
+        lastSearchParamsRef.current = currentParams;
+
+        // Only auto-search if all required params exist
+        if (topic && exam && subject) {
+            // For initial load with URL params, trigger search immediately (no debounce)
+            // For subsequent changes, use debounce to prevent duplicate requests
+            if (isInitialLoadWithParams) {
+                // Immediate search for initial load from roadmap
+                console.log("🚀 Initial load with URL params - triggering immediate search", { exam, subject, topic });
+                handleSearch();
+            } else if (!loading) {
+                // Debounce for subsequent changes: Wait 300ms before triggering search
+                autoSearchTimerRef.current = setTimeout(() => {
+                    // Double-check we're not already loading
+                    if (!loading && topic && exam && subject) {
+                        handleSearch();
+                    }
+                }, 300);
+            }
+        }
+
+        // Cleanup on unmount or dependency change
+        return () => {
+            if (autoSearchTimerRef.current) {
+                clearTimeout(autoSearchTimerRef.current);
+            }
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [topic, exam, subject, language, loading]);
 
     const handleSearch = async () => {
-        if (!exam || !subject || !topic) return;
+        if (!exam || !subject || !topic) {
+            console.warn("⚠️ Cannot search - missing required params:", { exam, subject, topic });
+            return;
+        }
         
+        console.log("🔍 Triggering search with params:", { exam, subject, topic, language });
         // Use topic as the search query - the backend will filter by topic_tag
-        await doSearch(topic, 1, { exam, subject, topic });
+        await doSearch(topic, 1, { exam, subject, topic, language });
     };
 
     const handlePageChange = (p) => {
         if (topic && exam && subject) {
-            doSearch(topic, p, { exam, subject });
+            doSearch(topic, p, { exam, subject, language });
         }
     };
 

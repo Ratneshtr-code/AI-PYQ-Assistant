@@ -1,6 +1,7 @@
 // src/components/FilterBar.jsx
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "../contexts/LanguageContext";
 
 export default function FilterBar({
     exam,
@@ -30,7 +31,7 @@ export default function FilterBar({
 }) {
     const [localYearFrom, setLocalYearFrom] = useState(yearFrom || "");
     const [localYearTo, setLocalYearTo] = useState(yearTo || "");
-    const [language, setLanguage] = useState("english"); // Language state (english/hindi)
+    const { language, setLanguage } = useLanguage(); // Get language from context
 
     useEffect(() => {
         if (availableYears && availableYears.length > 0) {
@@ -196,11 +197,11 @@ export default function FilterBar({
                                 <motion.button
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
-                                    onClick={() => setLanguage(language === "english" ? "hindi" : "english")}
+                                    onClick={() => setLanguage(language === "en" ? "hi" : "en")}
                                     className="px-3 py-1.5 rounded-lg border border-gray-300/80 bg-white/90 hover:bg-white hover:border-blue-400 transition-all shadow-sm hover:shadow-md flex items-center justify-center backdrop-blur-sm"
-                                    title={language === "english" ? "Switch to Hindi" : "Switch to English"}
+                                    title={language === "en" ? "Switch to Hindi" : "Switch to English"}
                                 >
-                                    {language === "english" ? (
+                                    {language === "en" ? (
                                         <span className="text-sm font-bold text-gray-700">EN</span>
                                     ) : (
                                         <span className="text-sm font-bold text-gray-700">हि</span>

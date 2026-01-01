@@ -33,6 +33,7 @@ from app.feedback_api import router as feedback_router
 # LLM Service
 from app.llm_service import get_llm_service
 from app.prompt_loader import get_prompt_loader
+from app.translation_service import translate_question_data
 
 app = FastAPI(title="AI PYQ Assistant - Search API")
 
@@ -73,11 +74,12 @@ app.add_middleware(
 class SearchRequest(BaseModel):
     query: str
     page: int = 1
-    page_size: int = 10
+    page_size: int = 4  # Reduced from 10 to match UI visibility (3-4 questions visible at once)
     exam: str | None = None
     year: int | None = None
     subject: str | None = None  # Filter by subject
     topic: str | None = None  # Filter by topic_tag
+    language: str = "en"  # Language code: "en" or "hi"
 
 
 @app.on_event("startup")
@@ -115,7 +117,7 @@ def startup_event():
 def search(req: SearchRequest):
     query = req.query.strip()
     page = max(req.page, 1)
-    page_size = cfg["backend"].get("default_page_size", 10)
+    page_size = cfg["backend"].get("default_page_size", 4)  # Reduced from 10 to match UI visibility
     retrieval_k = cfg["backend"].get("retrieval_k", 100)
     min_score = cfg["backend"].get("min_score", 0.35)
 
@@ -196,6 +198,34 @@ def search(req: SearchRequest):
         end = start + page_size
         paginated = filtered[start:end]
 
+        # Translate results if language is Hindi (only translate current page, not all results)
+        # Translation is optimized: checks cache first (fast), only translates uncached items
+        if req.language and req.language.lower() in ["hi", "hindi"]:
+            # Translate current page's results (user needs these immediately)
+            paginated = [translate_question_data(result, target_language="hi") for result in paginated]
+            
+            # Proactive translation: Translate next page in background while user reads current page
+            # This ensures next page is ready when user clicks "Next"
+            next_page_start = end
+            next_page_end = min(next_page_start + page_size, total_matches)
+            if next_page_start < total_matches:
+                # Get next page questions
+                next_page_questions = filtered[next_page_start:next_page_end]
+                # Translate in background (async, non-blocking)
+                # Use threading to avoid blocking the response
+                import threading
+                def translate_next_page():
+                    try:
+                        for result in next_page_questions:
+                            translate_question_data(result, target_language="hi")
+                    except Exception as e:
+                        # Silently fail - background translation is non-critical
+                        pass
+                
+                # Start background translation thread
+                background_thread = threading.Thread(target=translate_next_page, daemon=True)
+                background_thread.start()
+
         return {
             "query": query,
             "total_matches": total_matches,
@@ -251,6 +281,34 @@ def search(req: SearchRequest):
     start = (page - 1) * page_size
     end = start + page_size
     paginated = filtered[start:end]
+
+    # Translate results if language is Hindi (only translate current page, not all results)
+    # Translation is optimized: checks cache first (fast), only translates uncached items
+    if req.language and req.language.lower() in ["hi", "hindi"]:
+        # Translate current page's results (user needs these immediately)
+        paginated = [translate_question_data(result, target_language="hi") for result in paginated]
+        
+        # Proactive translation: Translate next page in background while user reads current page
+        # This ensures next page is ready when user clicks "Next"
+        next_page_start = end
+        next_page_end = min(next_page_start + page_size, total_matches)
+        if next_page_start < total_matches:
+            # Get next page questions
+            next_page_questions = filtered[next_page_start:next_page_end]
+            # Translate in background (async, non-blocking)
+            # Use threading to avoid blocking the response
+            import threading
+            def translate_next_page():
+                try:
+                    for result in next_page_questions:
+                        translate_question_data(result, target_language="hi")
+                except Exception as e:
+                    # Silently fail - background translation is non-critical
+                    pass
+            
+            # Start background translation thread
+            background_thread = threading.Thread(target=translate_next_page, daemon=True)
+            background_thread.start()
 
     return {
         "query": query,
@@ -1092,6 +1150,7 @@ def explain_question(
         subject = data.get("subject", None)
         topic = data.get("topic", None)
         year = data.get("year", None)
+        language = data.get("language", "en")
 
         if not question_text or not correct_option:
             return {
@@ -1171,7 +1230,8 @@ def explain_question(
             subject=subject,
             topic=topic,
             year=year,
-            user_id=get_user_id_from_session(session_id, db) if session_id else None
+            user_id=get_user_id_from_session(session_id, db) if session_id else None,
+            language=language
         )
         
         # Extract explanation and cache info
@@ -1235,6 +1295,7 @@ def explain_option(
         subject = data.get("subject", None)
         topic = data.get("topic", None)
         year = data.get("year", None)
+        language = data.get("language", "en")
 
         if not selected_option:
             return {"error": "selected_option is required."}
@@ -1333,7 +1394,8 @@ def explain_option(
             subject=subject,
             topic=topic,
             year=year,
-            user_id=get_user_id_from_session(session_id, db) if session_id else None
+            user_id=get_user_id_from_session(session_id, db) if session_id else None,
+            language=language
         )
         
         # Extract explanation and cache info
@@ -1424,6 +1486,7 @@ def explain_concept(
         subject = data.get("subject", None)
         topic = data.get("topic", None)
         year = data.get("year", None)
+        language = data.get("language", "en")
 
         # Handle options - can be dict or individual fields
         if not options or not isinstance(options, dict):
@@ -1454,13 +1517,20 @@ def explain_concept(
             year=year
         )
 
-        # Extract question_id from data
+        # Extract question_id from data (CRITICAL for cache hits)
         question_id = data.get("question_id") or data.get("id") or data.get("json_question_id")
         if question_id:
             try:
                 question_id = int(question_id)
             except (ValueError, TypeError):
                 question_id = None
+                print(f"⚠️ WARNING: Could not convert question_id to int: {data.get('question_id')}")
+        
+        # Log warning if question_id is missing (will cause cache misses)
+        if not question_id:
+            print(f"⚠️ WARNING: question_id is missing in explain_concept request! This will cause cache misses.")
+            print(f"   Question text: {question_text[:100]}...")
+            print(f"   Data keys: {list(data.keys())}")
         
         # Generate explanation using Gemini
         llm_service = get_llm_service()
@@ -1475,7 +1545,8 @@ def explain_concept(
             subject=subject,
             topic=topic,
             year=year,
-            user_id=get_user_id_from_session(session_id, db) if session_id else None
+            user_id=get_user_id_from_session(session_id, db) if session_id else None,
+            language=language
         )
         
         # Extract explanation and cache info
@@ -1624,6 +1695,121 @@ def generate_roadmap(
         "subjects": subjects_data,
         "preparation_milestones": preparation_milestones
     }
+
+
+@app.post("/translate_question")
+def translate_question_endpoint(data: dict):
+    """
+    Translate a single question and its options to the target language.
+    Used by SolutionViewer and other components that need on-demand translation.
+    """
+    try:
+        question_text = data.get("question_text", "")
+        option_a = data.get("option_a", "")
+        option_b = data.get("option_b", "")
+        option_c = data.get("option_c", "")
+        option_d = data.get("option_d", "")
+        question_id = data.get("question_id") or data.get("id") or data.get("json_question_id")
+        target_language = data.get("language", "hi")
+        
+        if not question_text:
+            return {
+                "error": "question_text is required",
+                "question_text": "",
+                "option_a": "",
+                "option_b": "",
+                "option_c": "",
+                "option_d": ""
+            }
+        
+        # Create question data dict
+        question_data = {
+            "id": question_id,
+            "question_id": question_id,
+            "json_question_id": question_id,
+            "question_text": question_text,
+            "option_a": option_a,
+            "option_b": option_b,
+            "option_c": option_c,
+            "option_d": option_d
+        }
+        
+        # Translate if target language is Hindi
+        if target_language and target_language.lower() in ["hi", "hindi"]:
+            translated = translate_question_data(question_data, target_language="hi")
+            return {
+                "question_text": translated.get("question_text", question_text),
+                "option_a": translated.get("option_a", option_a),
+                "option_b": translated.get("option_b", option_b),
+                "option_c": translated.get("option_c", option_c),
+                "option_d": translated.get("option_d", option_d),
+                "language": "hi"
+            }
+        else:
+            # For English, try to get original English text from database if question_id is provided
+            # This handles the case where the question might already be in Hindi
+            if question_id:
+                try:
+                    question_id_int = int(question_id)
+                    df = load_dataframe()
+                    if df is not None and not df.empty:
+                        # Find the question in the dataframe
+                        question_row = df[df["question_id"] == question_id_int]
+                        if not question_row.empty:
+                            # Return original English text from database
+                            db_question_text = str(question_row.iloc[0].get("question_text", ""))
+                            db_option_a = str(question_row.iloc[0].get("option_a", ""))
+                            db_option_b = str(question_row.iloc[0].get("option_b", ""))
+                            db_option_c = str(question_row.iloc[0].get("option_c", ""))
+                            db_option_d = str(question_row.iloc[0].get("option_d", ""))
+                            
+                            # Only return database values if they're not empty
+                            if db_question_text:
+                                print(f"✅ Fetched original English text from database for question_id={question_id}")
+                                return {
+                                    "question_text": db_question_text,
+                                    "option_a": db_option_a if db_option_a else option_a,
+                                    "option_b": db_option_b if db_option_b else option_b,
+                                    "option_c": db_option_c if db_option_c else option_c,
+                                    "option_d": db_option_d if db_option_d else option_d,
+                                    "language": "en"
+                                }
+                            else:
+                                print(f"⚠️ Database returned empty question_text for question_id={question_id}")
+                        else:
+                            print(f"⚠️ Question not found in database for question_id={question_id}")
+                    else:
+                        print(f"⚠️ Dataframe is empty or None, cannot fetch English text for question_id={question_id}")
+                except (ValueError, TypeError) as e:
+                    print(f"⚠️ Could not convert question_id to int: {question_id}, error: {e}")
+                except Exception as e:
+                    print(f"⚠️ Error fetching original English text for question_id={question_id}: {e}")
+            else:
+                print(f"⚠️ No question_id provided, cannot fetch original English text from database")
+            
+            # If database fetch failed or no question_id, return what was provided
+            # NOTE: This might still be in Hindi if the question was already translated
+            # The frontend should handle this case by storing original English when first loaded
+            print(f"⚠️ Returning provided text as-is (may be in Hindi if question was translated): question_id={question_id}")
+            return {
+                "question_text": question_text,
+                "option_a": option_a,
+                "option_b": option_b,
+                "option_c": option_c,
+                "option_d": option_d,
+                "language": "en"
+            }
+    except Exception as e:
+        error_msg = f"Error translating question: {str(e)}"
+        print(f"❌ {error_msg}")
+        return {
+            "error": error_msg,
+            "question_text": data.get("question_text", ""),
+            "option_a": data.get("option_a", ""),
+            "option_b": data.get("option_b", ""),
+            "option_c": data.get("option_c", ""),
+            "option_d": data.get("option_d", "")
+        }
 
 
 @app.get("/roadmap/consistency")

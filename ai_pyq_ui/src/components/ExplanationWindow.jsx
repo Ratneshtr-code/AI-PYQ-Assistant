@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getUserData } from "../utils/auth";
+import { useLanguage } from "../contexts/LanguageContext";
 import SaveNoteButton from "./SaveNoteButton";
 import { formatMarkdown } from "../utils/formatMarkdown";
 
@@ -20,6 +21,7 @@ export default function ExplanationWindow({
     const [cacheKey, setCacheKey] = useState("");
     const [source, setSource] = useState("");
     const [isAdmin, setIsAdmin] = useState(false);
+    const { language } = useLanguage(); // Get language from context
 
     useEffect(() => {
         // Check admin status
@@ -39,7 +41,7 @@ export default function ExplanationWindow({
             setSource("");
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isOpen, questionData, selectedOption, explanationType, isCorrect]);
+    }, [isOpen, questionData, selectedOption, explanationType, isCorrect, language]);
 
     const fetchExplanation = async () => {
         setLoading(true);
@@ -68,6 +70,7 @@ export default function ExplanationWindow({
                     subject: questionData.subject || null,
                     topic: questionData.topic || questionData.topic_tag || null,
                     year: questionData.year || null,
+                    language: language || "en",
                     // Include question_id for cache key
                     question_id: questionData.id || questionData.question_id || questionData.json_question_id || null,
                     id: questionData.id || questionData.question_id || questionData.json_question_id || null,
@@ -87,6 +90,7 @@ export default function ExplanationWindow({
                         subject: questionData.subject || null,
                         topic: questionData.topic || questionData.topic_tag || null,
                         year: questionData.year || null,
+                        language: language || "en",
                         // Include question_id for cache key
                         question_id: questionData.id || questionData.question_id || questionData.json_question_id || null,
                         id: questionData.id || questionData.question_id || questionData.json_question_id || null,
@@ -106,6 +110,7 @@ export default function ExplanationWindow({
                         subject: questionData.subject || null,
                         topic: questionData.topic || questionData.topic_tag || null,
                         year: questionData.year || null,
+                        language: language || "en",
                         // Include question_id for cache key
                         question_id: questionData.id || questionData.question_id || questionData.json_question_id || null,
                         id: questionData.id || questionData.question_id || questionData.json_question_id || null,

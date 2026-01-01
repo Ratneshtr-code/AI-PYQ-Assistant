@@ -17,6 +17,7 @@ from app.database import (
     ExamAttemptStatus, User, UserQuestionProgress
 )
 from app.auth import get_user_id_from_session
+from app.translation_service import translate_question_data
 from utils.config_loader import load_config
 
 router = APIRouter(prefix="/exam", tags=["exam"])
@@ -63,6 +64,7 @@ class ExamSetResponse(BaseModel):
 
 class StartExamRequest(BaseModel):
     exam_set_id: int
+    language: Optional[str] = "en"  # Language selected in instructions ("en" or "hi")
 
 
 class StartExamResponse(BaseModel):
@@ -199,18 +201,25 @@ def start_exam(
     if len(filtered_df) == 0:
         raise HTTPException(status_code=400, detail="No questions found for this exam set")
     
+    # Normalize language code
+    lang = "hi" if request.language and request.language.lower() in ["hi", "hindi"] else "en"
+    
     # Create exam attempt
     attempt = ExamAttempt(
         user_id=user_id,
         exam_set_id=exam_set.id,
         started_at=datetime.utcnow(),
         total_questions=len(filtered_df),
-        status=ExamAttemptStatus.IN_PROGRESS
+        status=ExamAttemptStatus.IN_PROGRESS,
+        language=lang
     )
     db.add(attempt)
     db.flush()
     
     # Convert questions to list format
+    # NOTE: Do NOT translate all questions at start - translate on-demand when user views them
+    # This prevents database lock issues and improves performance
+    # Translation happens in get_exam_attempt when questions are fetched
     questions = []
     for idx, row in filtered_df.iterrows():
         question = {
@@ -228,6 +237,8 @@ def start_exam(
             "topic": str(row.get("topic", "")),
             "topic_tag": str(row.get("topic_tag", "")) if "topic_tag" in row else None
         }
+        # DO NOT translate here - translate on-demand in get_exam_attempt
+        # This prevents translating 100+ questions simultaneously
         questions.append(question)
         
         # Create response record
@@ -266,6 +277,7 @@ def start_exam(
 @router.get("/attempt/{attempt_id}")
 def get_exam_attempt(
     attempt_id: int,
+    language: Optional[str] = Query(None, description="Language code: 'en' or 'hi' (optional, uses attempt language if not provided)"),
     session_id: Optional[str] = Cookie(None),
     db: Session = Depends(get_db)
 ):
@@ -281,6 +293,10 @@ def get_exam_attempt(
     
     if not attempt:
         raise HTTPException(status_code=404, detail="Exam attempt not found")
+    
+    # Use language from attempt if not provided in query param
+    exam_language = language if language else (attempt.language or "en")
+    exam_lang = "hi" if exam_language and exam_language.lower() in ["hi", "hindi"] else "en"
     
     # Get responses
     responses = db.query(ExamQuestionResponse).filter(
@@ -305,9 +321,14 @@ def get_exam_attempt(
     }
     
     # Get questions
+    # OPTIMIZATION: Translate only first 2 questions immediately (for initial display)
+    # Remaining questions will be translated on-demand when user navigates to them
+    # This prevents database lock issues from concurrent writes and reduces initial load time
     question_ids = [r.question_id for r in responses]
     questions = []
-    for qid in question_ids:
+    translate_batch_size = 2  # Translate first 2 questions immediately (reduced from 5 for faster load)
+    
+    for idx, qid in enumerate(question_ids):
         q_row = df[df["id"] == qid]
         if len(q_row) > 0:
             row = q_row.iloc[0]
@@ -327,6 +348,11 @@ def get_exam_attempt(
                 "topic_tag": str(row.get("topic_tag", "")) if "topic_tag" in row else None,
                 "response": response_map.get(qid, {})
             }
+            # Translate only first batch immediately (for initial display)
+            # Remaining questions translated on-demand via /exam/attempt/{id}/translate-questions endpoint
+            # This prevents database lock issues from concurrent writes
+            if exam_lang == "hi" and idx < translate_batch_size:
+                question = translate_question_data(question, target_language="hi")
             questions.append(question)
     
     return {
@@ -356,7 +382,8 @@ def get_exam_attempt(
         "questions_answered": attempt.questions_answered,
         "questions_correct": attempt.questions_correct,
         "questions_wrong": attempt.questions_wrong,
-        "total_score": attempt.total_score
+        "total_score": attempt.total_score,
+        "language": attempt.language or "en"  # Language selected in instructions
     }
 
 
@@ -813,6 +840,9 @@ def get_exam_solutions(
     if not attempt:
         raise HTTPException(status_code=404, detail="Exam attempt not found")
     
+    # Get exam language from attempt
+    exam_lang = "hi" if attempt.language and attempt.language.lower() in ["hi", "hindi"] else "en"
+    
     # Get responses
     responses = db.query(ExamQuestionResponse).filter(
         ExamQuestionResponse.exam_attempt_id == attempt_id
@@ -830,7 +860,7 @@ def get_exam_solutions(
             continue
         
         row = q_row.iloc[0]
-        solutions.append({
+        question = {
             "question_id": response.question_id,
             "question_text": str(row.get("question_text", "")),
             "option_a": str(row.get("option_a", "")),
@@ -845,10 +875,17 @@ def get_exam_solutions(
             "subject": str(row.get("subject", "")),
             "topic": str(row.get("topic", "")),
             "year": int(row.get("year", 0)) if pd.notna(row.get("year")) else None
-        })
+        }
+        
+        # Translate if exam language is Hindi
+        if exam_lang == "hi":
+            question = translate_question_data(question, target_language="hi")
+        
+        solutions.append(question)
     
     return {
         "attempt_id": attempt_id,
+        "language": attempt.language or "en",  # Return exam language
         "solutions": solutions
     }
 
@@ -999,4 +1036,76 @@ def get_supported_languages():
             {"code": "hi", "name": "Hindi"}
         ]
     }
+
+
+class TranslateQuestionsRequest(BaseModel):
+    question_ids: List[int]
+
+
+@router.post("/attempt/{attempt_id}/translate-questions")
+def translate_questions_batch(
+    attempt_id: int,
+    request: TranslateQuestionsRequest,
+    session_id: Optional[str] = Cookie(None),
+    db: Session = Depends(get_db)
+):
+    """
+    Translate a batch of questions on-demand
+    Used to translate questions when user navigates to them (prevents translating all 100+ questions at once)
+    This solves the database lock issue by translating only visible/needed questions
+    
+    Args:
+        attempt_id: Exam attempt ID
+        request: Contains list of question_ids to translate
+    """
+    user_id = get_user_id_from_session(session_id, db)
+    if not user_id:
+        raise HTTPException(status_code=401, detail="Authentication required")
+    
+    attempt = db.query(ExamAttempt).filter(
+        ExamAttempt.id == attempt_id,
+        ExamAttempt.user_id == user_id
+    ).first()
+    
+    if not attempt:
+        raise HTTPException(status_code=404, detail="Exam attempt not found")
+    
+    # Get exam language
+    exam_lang = "hi" if attempt.language and attempt.language.lower() in ["hi", "hindi"] else "en"
+    
+    if exam_lang != "hi":
+        # Not Hindi, return empty (questions already in English)
+        return {"translations": {}}
+    
+    # Load questions
+    df = load_dataframe()
+    if df is None:
+        raise HTTPException(status_code=500, detail="Question data not available")
+    
+    # Translate requested questions one by one (prevents database locks from concurrent writes)
+    translations = {}
+    for qid in request.question_ids:
+        q_row = df[df["id"] == qid]
+        if len(q_row) > 0:
+            row = q_row.iloc[0]
+            question = {
+                "question_id": int(row.get("id", qid)),
+                "question_text": str(row.get("question_text", "")),
+                "option_a": str(row.get("option_a", "")),
+                "option_b": str(row.get("option_b", "")),
+                "option_c": str(row.get("option_c", "")),
+                "option_d": str(row.get("option_d", "")),
+            }
+            # Translate one question at a time (sequential, not parallel)
+            # This prevents multiple concurrent database writes that cause locks
+            translated = translate_question_data(question, target_language="hi")
+            translations[qid] = {
+                "question_text": translated.get("question_text", question["question_text"]),
+                "option_a": translated.get("option_a", question["option_a"]),
+                "option_b": translated.get("option_b", question["option_b"]),
+                "option_c": translated.get("option_c", question["option_c"]),
+                "option_d": translated.get("option_d", question["option_d"]),
+            }
+    
+    return {"translations": translations}
 

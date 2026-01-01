@@ -50,7 +50,7 @@ export default function ResultsList({ results, onExplanationWindowChange }) {
         };
     }, []);
 
-    // Check solved status when results change
+    // Check solved status when results change (debounced to reduce API calls)
     useEffect(() => {
         if (results && results.length > 0) {
             const questionIds = results
@@ -58,13 +58,19 @@ export default function ResultsList({ results, onExplanationWindowChange }) {
                 .filter(id => id && typeof id === 'number');
             
             if (questionIds.length > 0) {
-                checkSolved(questionIds).then(solvedMap => {
-                    const statusMap = {};
-                    Object.keys(solvedMap).forEach(qid => {
-                        statusMap[parseInt(qid)] = solvedMap[qid];
+                // Debounce: wait 300ms before making the API call
+                // This prevents multiple rapid calls when results update frequently
+                const timeoutId = setTimeout(() => {
+                    checkSolved(questionIds).then(solvedMap => {
+                        const statusMap = {};
+                        Object.keys(solvedMap).forEach(qid => {
+                            statusMap[parseInt(qid)] = solvedMap[qid];
+                        });
+                        setSolvedStatus(statusMap);
                     });
-                    setSolvedStatus(statusMap);
-                });
+                }, 300);
+                
+                return () => clearTimeout(timeoutId);
             }
         }
     }, [results, checkSolved]);

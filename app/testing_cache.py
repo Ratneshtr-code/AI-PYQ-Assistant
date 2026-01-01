@@ -106,11 +106,7 @@ class TestingCache:
         is_correct: Optional[bool] = None
     ) -> str:
         """
-        Generate cache key - public method for tracking purposes
-        """
-        """
-        Generate a unique cache key based on question and explanation type
-        Same format as production cache for consistency
+        Generate cache key - language-agnostic (LLM generates English, we translate if needed)
         
         Args:
             question_id: The question ID (from database or CSV)
@@ -143,7 +139,7 @@ class TestingCache:
         is_correct: Optional[bool] = None
     ) -> Optional[str]:
         """
-        Get cached response if available
+        Get cached response if available (returns English explanation, translate separately if needed)
         
         Args:
             question_id: The question ID
@@ -152,7 +148,7 @@ class TestingCache:
             is_correct: Optional boolean for option explanations
             
         Returns:
-            Cached response text or None if not found
+            Cached response text (English) or None if not found
         """
         if not self.enabled:
             return None

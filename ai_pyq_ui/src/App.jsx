@@ -2,6 +2,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { isAuthenticated } from "./utils/auth";
+import { LanguageProvider } from "./contexts/LanguageContext";
 import LandingPage from "./LandingPage";
 import SearchPage from "./SearchPage";
 import ExamDashboardPage from "./ExamDashboardPage";
@@ -163,8 +164,10 @@ function AppContent() {
 
 export default function App() {
     return (
-        <BrowserRouter>
-            <AppContent />
-        </BrowserRouter>
+        <LanguageProvider>
+            <BrowserRouter>
+                <AppContent />
+            </BrowserRouter>
+        </LanguageProvider>
     );
 }

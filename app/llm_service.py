@@ -162,7 +162,8 @@ class LLMService:
         user_id: Optional[int] = None,
         subject: Optional[str] = None,
         topic: Optional[str] = None,
-        year: Optional[int] = None
+        year: Optional[int] = None,
+        language: str = "en"
     ) -> Dict[str, Any]:
         """
         Generate explanation using Gemini API with retry logic for rate limits
@@ -190,7 +191,8 @@ class LLMService:
             "max_output_tokens": self.max_tokens,
         }
         
-        # Build the full prompt
+        # Always generate English explanations (translate later if needed for cost optimization)
+        # Build the full prompt (no language instruction - always English)
         if system_instruction:
             full_prompt = f"{system_instruction}\n\n{prompt}"
         else:
@@ -205,7 +207,7 @@ class LLMService:
             explanation_type=explanation_type
         )
         
-        # Check production cache first (if enabled)
+        # Check production cache first (if enabled) - language-agnostic cache
         cached_data = None
         if self.production_cache.enabled:
             cached_data = self.production_cache.get(
@@ -236,6 +238,23 @@ class LLMService:
                 }
         
         if cached_data:
+            # Get English explanation from cache
+            english_explanation = cached_data['response']
+            
+            # Translate if Hindi is requested
+            if language and language.lower() in ["hi", "hindi"]:
+                from app.translation_service import translate_llm_response
+                explanation = translate_llm_response(
+                    english_explanation, 
+                    target_language="hi", 
+                    question_id=question_id,
+                    explanation_type=explanation_type,
+                    option_letter=option_letter,
+                    is_correct=is_correct
+                )
+            else:
+                explanation = english_explanation
+            
             # Log usage (from cache - no tokens used)
             self._log_usage(
                 user_id=user_id,
@@ -253,7 +272,7 @@ class LLMService:
             )
             
             return {
-                "explanation": cached_data['response'],
+                "explanation": explanation,
                 "from_cache": True,
                 "cache_key": cached_data.get('cache_key'),
                 "source": cached_data.get('source', 'cache')
@@ -304,12 +323,13 @@ class LLMService:
                     cache_key=cache_key
                 )
                 
+                # Always store English explanation in cache (translate when retrieving if needed)
                 # Save to production cache (if enabled)
                 if self.production_cache.enabled:
                     self.production_cache.set(
                         question_id=question_id,
                         explanation_type=explanation_type,
-                        response=explanation,
+                        response=explanation,  # English explanation
                         option_letter=option_letter,
                         is_correct=is_correct,
                         model=self.model_name,
@@ -326,11 +346,23 @@ class LLMService:
                     self.testing_cache.set(
                         question_id=question_id,
                         explanation_type=explanation_type,
-                        response=explanation,
+                        response=explanation,  # English explanation
                         option_letter=option_letter,
                         is_correct=is_correct,
                         model=self.model_name,
                         exam=exam
+                    )
+                
+                # Translate explanation if Hindi is requested (after caching English version)
+                if language and language.lower() in ["hi", "hindi"]:
+                    from app.translation_service import translate_llm_response
+                    explanation = translate_llm_response(
+                        explanation, 
+                        target_language="hi", 
+                        question_id=question_id,
+                        explanation_type=explanation_type,
+                        option_letter=option_letter,
+                        is_correct=is_correct
                     )
                 
                 # Log usage (from API - tokens used)
@@ -523,8 +555,10 @@ class LLMService:
             input_tokens: Input token count
             output_tokens: Output token count
         """
-        # Log usage even for anonymous users (user_id=None)
-        # This allows tracking total API usage even without authentication
+        # Skip logging for anonymous users (user_id=None)
+        # Database requires user_id, so we can't log anonymous usage
+        if user_id is None:
+            return
         
         db = SessionLocal()
         try:

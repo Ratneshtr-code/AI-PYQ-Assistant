@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
+import { getUserData } from "../../utils/auth";
 
 const API_BASE_URL = "";
 
@@ -11,7 +12,17 @@ export default function ExamInstructions() {
     const [examSet, setExamSet] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
-    const [selectedLanguage, setSelectedLanguage] = useState("");
+    // Initialize language from user preference or localStorage, default to "English"
+    const [selectedLanguage, setSelectedLanguage] = useState(() => {
+        const userData = getUserData();
+        const preferredLang = userData?.preferred_language;
+        if (preferredLang) {
+            const lang = preferredLang.toLowerCase();
+            return (lang === "hi" || lang === "hindi") ? "Hindi" : "English";
+        }
+        const storedLang = localStorage.getItem("language");
+        return (storedLang === "hi" || storedLang === "hindi") ? "Hindi" : "English";
+    });
     const [declarationChecked, setDeclarationChecked] = useState(false);
     const [starting, setStarting] = useState(false);
     const [currentPage, setCurrentPage] = useState("symbols"); // "symbols" or "instructions"
@@ -82,6 +93,9 @@ export default function ExamInstructions() {
 
         try {
             setStarting(true);
+            // Convert language name to code
+            const langCode = selectedLanguage.toLowerCase() === "hindi" ? "hi" : "en";
+            
             const response = await fetch(`${API_BASE_URL}/exam/start`, {
                 method: "POST",
                 headers: {
@@ -89,7 +103,8 @@ export default function ExamInstructions() {
                 },
                 credentials: "include",
                 body: JSON.stringify({
-                    exam_set_id: parseInt(examSetId)
+                    exam_set_id: parseInt(examSetId),
+                    language: langCode
                 })
             });
 

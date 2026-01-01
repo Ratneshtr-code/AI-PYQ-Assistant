@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import SubmitConfirmation from "./SubmitConfirmation";
 import QuestionPaperView from "./QuestionPaperView";
 import { getUserData } from "../../utils/auth";
+import { useLanguage } from "../../contexts/LanguageContext";
 import SaveNoteButton from "../SaveNoteButton";
 
 const API_BASE_URL = "";
@@ -30,6 +31,7 @@ export default function ExamInterface() {
     const [userData, setUserData] = useState(null);
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
     const [showExitModal, setShowExitModal] = useState(false);
+    const [examLanguage, setExamLanguage] = useState("en"); // Language from exam attempt (not global context)
     
     const timerIntervalRef = useRef(null);
     const questionTimerRef = useRef(null);
@@ -44,6 +46,7 @@ export default function ExamInterface() {
         const fetchExamAttempt = async () => {
             try {
                 setLoading(true);
+                // Use exam's stored language (from instructions page), not global context
                 const response = await fetch(`${API_BASE_URL}/exam/attempt/${attemptId}`, {
                     credentials: "include"
                 });
@@ -54,6 +57,11 @@ export default function ExamInterface() {
                 
                 const data = await response.json();
                 setExamData(data);
+                
+                // Get language from attempt (stored when exam was started)
+                // Use language from attempt, not from global context
+                const attemptLanguage = data.language || "en";
+                setExamLanguage(attemptLanguage);
                 
                 // Initialize selected options and marked for review from responses
                 const options = {};
@@ -160,6 +168,158 @@ export default function ExamInterface() {
         setQuestionStartTime(Date.now());
         setTimeSpentOnQuestion(0);
     }, [currentQuestionIndex]);
+
+    // Translate questions on-demand when user navigates (prevents translating all 100+ questions at once)
+    useEffect(() => {
+        if (!examData || !examData.questions || examLanguage !== "hi") {
+            return; // Only translate if Hindi mode
+        }
+
+        // Translate current question + next 2 questions (for smooth navigation)
+        const questionsToTranslate = [];
+        const translateBatchSize = 3; // Current + next 2
+        
+        for (let i = 0; i < translateBatchSize && (currentQuestionIndex + i) < examData.questions.length; i++) {
+            const question = examData.questions[currentQuestionIndex + i];
+            // Check if already translated (has Hindi text or is in English)
+            // If question_text contains Devanagari characters, it's likely already translated
+            const isTranslated = /[\u0900-\u097F]/.test(question.question_text);
+            if (!isTranslated) {
+                questionsToTranslate.push(question.question_id);
+            }
+        }
+
+        // Translate on-demand
+        if (questionsToTranslate.length > 0) {
+            const translateQuestions = async () => {
+                try {
+                    const response = await fetch(`${API_BASE_URL}/exam/attempt/${attemptId}/translate-questions`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        credentials: "include",
+                        body: JSON.stringify({
+                            question_ids: questionsToTranslate
+                        })
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        const translations = data.translations || {};
+
+                        // Update examData with translations
+                        setExamData(prevData => {
+                            if (!prevData || !prevData.questions) return prevData;
+                            
+                            const updatedQuestions = prevData.questions.map(q => {
+                                const translation = translations[q.question_id];
+                                if (translation) {
+                                    return {
+                                        ...q,
+                                        question_text: translation.question_text || q.question_text,
+                                        option_a: translation.option_a || q.option_a,
+                                        option_b: translation.option_b || q.option_b,
+                                        option_c: translation.option_c || q.option_c,
+                                        option_d: translation.option_d || q.option_d,
+                                    };
+                                }
+                                return q;
+                            });
+
+                            return {
+                                ...prevData,
+                                questions: updatedQuestions
+                            };
+                        });
+                    }
+                } catch (error) {
+                    // Silently fail - questions will remain in English
+                    console.error("Failed to translate questions:", error);
+                }
+            };
+
+            translateQuestions();
+        }
+    }, [currentQuestionIndex, examData, examLanguage, attemptId]);
+
+    // Background translation: Translate next 2 questions while user is reading current question
+    useEffect(() => {
+        if (!examData || !examData.questions || examLanguage !== "hi") {
+            return; // Only translate if Hindi mode
+        }
+
+        // Wait a bit before starting background translation (user is reading)
+        const backgroundTranslateTimer = setTimeout(() => {
+            // Translate next 2 questions (after the ones already being translated)
+            const questionsToTranslate = [];
+            const backgroundBatchSize = 2; // Next 2 questions
+            const startIndex = currentQuestionIndex + 3; // Skip current + next 2 (already handled above)
+            
+            for (let i = 0; i < backgroundBatchSize && (startIndex + i) < examData.questions.length; i++) {
+                const question = examData.questions[startIndex + i];
+                // Check if already translated
+                const isTranslated = /[\u0900-\u097F]/.test(question.question_text);
+                if (!isTranslated) {
+                    questionsToTranslate.push(question.question_id);
+                }
+            }
+
+            // Silently translate in background
+            if (questionsToTranslate.length > 0) {
+                fetch(`${API_BASE_URL}/exam/attempt/${attemptId}/translate-questions`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    credentials: "include",
+                    body: JSON.stringify({
+                        question_ids: questionsToTranslate
+                    })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                })
+                .then(data => {
+                    if (data && data.translations) {
+                        // Update examData with background translations
+                        setExamData(prevData => {
+                            if (!prevData || !prevData.questions) return prevData;
+                            
+                            const updatedQuestions = prevData.questions.map(q => {
+                                const translation = data.translations[q.question_id];
+                                if (translation) {
+                                    return {
+                                        ...q,
+                                        question_text: translation.question_text || q.question_text,
+                                        option_a: translation.option_a || q.option_a,
+                                        option_b: translation.option_b || q.option_b,
+                                        option_c: translation.option_c || q.option_c,
+                                        option_d: translation.option_d || q.option_d,
+                                    };
+                                }
+                                return q;
+                            });
+
+                            return {
+                                ...prevData,
+                                questions: updatedQuestions
+                            };
+                        });
+                    }
+                })
+                .catch(error => {
+                    // Silently fail - background translation is non-critical
+                });
+            }
+        }, 1500); // Wait 2 seconds after question load before background translation
+
+        return () => {
+            clearTimeout(backgroundTranslateTimer);
+        };
+    }, [currentQuestionIndex, examData, examLanguage, attemptId]);
 
     const handleAutoSubmit = async () => {
         if (examData && examData.status === "in_progress") {
@@ -453,8 +613,14 @@ export default function ExamInterface() {
                                         <span className="text-gray-600">
                                             Time {formatTime(timeSpentOnQuestion)}
                                         </span>
-                                        <select className="px-2 py-1 border border-gray-300 rounded text-sm">
-                                            <option>English</option>
+                                        <select 
+                                            className="px-2 py-1 border border-gray-300 rounded text-sm"
+                                            value={examLanguage === "hi" ? "Hindi" : "English"}
+                                            disabled
+                                            title="Language selected in instructions (can be changed per question in future)"
+                                        >
+                                            <option value="English">English</option>
+                                            <option value="Hindi">Hindi</option>
                                         </select>
                                         <SaveNoteButton
                                             noteType="question"

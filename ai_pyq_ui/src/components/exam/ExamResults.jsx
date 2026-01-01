@@ -18,6 +18,7 @@ export default function ExamResults() {
     const [showSolutionViewer, setShowSolutionViewer] = useState(false);
     const [examSetName, setExamSetName] = useState("");
     const [activeWeaknessTab, setActiveWeaknessTab] = useState("weak"); // "weak" or "not_attempted"
+    const [examLanguage, setExamLanguage] = useState("en"); // Language used during exam
 
     useEffect(() => {
         const fetchAnalysis = async () => {
@@ -46,6 +47,11 @@ export default function ExamResults() {
                 
                 setAnalysis(analysisData);
                 setSolutions(solutionsData.solutions);
+                
+                // Store exam language from solutions response for SolutionViewer
+                if (solutionsData.language) {
+                    setExamLanguage(solutionsData.language);
+                }
                 
                 // Get attempt data (only read once)
                 let attemptData = null;
@@ -587,6 +593,7 @@ export default function ExamResults() {
                 <SolutionViewer
                     solutions={solutions}
                     currentQuestionId={selectedQuestionId || solutions[0]?.question_id}
+                    examLanguage={examLanguage}  // Pass exam language to SolutionViewer
                     onClose={() => {
                         setShowSolutionViewer(false);
                         setSelectedQuestionId(null);
