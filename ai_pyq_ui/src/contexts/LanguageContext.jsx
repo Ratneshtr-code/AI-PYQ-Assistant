@@ -84,7 +84,7 @@ export const LanguageProvider = ({ children }) => {
         }
     };
 
-    // Listen for user login/logout events to sync language
+    // Listen for user login/logout events and profile updates to sync language
     useEffect(() => {
         const handleUserChange = () => {
             const userData = getUserData();
@@ -96,12 +96,42 @@ export const LanguageProvider = ({ children }) => {
             }
         };
 
+        const handleProfileUpdate = () => {
+            // When profile is updated (e.g., language preference changed in My Account)
+            // Re-check userData and sync language
+            const userData = getUserData();
+            let validLang = "en"; // Default
+            
+            if (userData?.preferred_language) {
+                const lang = userData.preferred_language.toLowerCase();
+                validLang = (lang === "hi" || lang === "hindi") ? "hi" : "en";
+            } else {
+                // Fallback to localStorage if userData doesn't have preferred_language
+                const storedLanguage = localStorage.getItem("language");
+                if (storedLanguage && (storedLanguage === "hi" || storedLanguage === "hindi")) {
+                    validLang = "hi";
+                }
+            }
+            
+            // Only update if different to avoid unnecessary re-renders
+            setLanguageState(prevLang => {
+                if (prevLang !== validLang) {
+                    localStorage.setItem("language", validLang);
+                    console.log("Language synced from profile update:", validLang);
+                    return validLang;
+                }
+                return prevLang;
+            });
+        };
+
         window.addEventListener("userLoggedIn", handleUserChange);
         window.addEventListener("userLoggedOut", handleUserChange);
+        window.addEventListener("userProfileUpdated", handleProfileUpdate);
 
         return () => {
             window.removeEventListener("userLoggedIn", handleUserChange);
             window.removeEventListener("userLoggedOut", handleUserChange);
+            window.removeEventListener("userProfileUpdated", handleProfileUpdate);
         };
     }, []);
 
