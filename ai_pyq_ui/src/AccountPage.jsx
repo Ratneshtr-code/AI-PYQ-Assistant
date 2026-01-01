@@ -1277,7 +1277,7 @@ export default function AccountPage() {
                                             whileTap={{ scale: 0.98 }}
                                             onClick={() => {
                                                 setActiveTab("progress");
-                                                navigate("/ai-roadmap?tab=my-progress");
+                                                navigate("/my-progress");
                                             }}
                                             className={`p-4 rounded-xl border-2 transition-all ${
                                                 activeTab === "progress"

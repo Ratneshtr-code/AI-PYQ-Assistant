@@ -47,6 +47,7 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
     const isDashboard = location.pathname.includes("exam-dashboard");
     const isCrossExam = location.pathname.includes("cross-exam-insights");
     const isAIRoadmap = location.pathname.includes("ai-roadmap");
+    const isMyProgress = location.pathname.includes("my-progress");
     const isSearchPage = location.pathname.includes("search");
 
         // Check login status and subscription
@@ -344,6 +345,22 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                         >
                             <span className="text-lg flex-shrink-0">🎯</span>
                             {!isCollapsed && <span>Smart Roadmap</span>}
+                        </button>
+                    )}
+
+                    {/* My Progress - Only visible to logged-in users */}
+                    {(localStorage.getItem("isLoggedIn") === "true" || isLoggedIn) && (
+                        <button
+                            onClick={() => navigate("/my-progress")}
+                            className={`w-full text-left py-2 px-3 rounded-lg transition text-sm flex items-center gap-2 ${
+                                isMyProgress
+                                    ? "bg-blue-50 text-blue-700 font-medium"
+                                    : "text-gray-700 hover:bg-gray-50 font-normal"
+                            }`}
+                            title="My Progress"
+                        >
+                            <span className="text-lg flex-shrink-0">📈</span>
+                            {!isCollapsed && <span>My Progress</span>}
                         </button>
                     )}
 

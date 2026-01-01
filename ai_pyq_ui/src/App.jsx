@@ -20,6 +20,7 @@ import SubscriptionManagementPage from "./SubscriptionManagementPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PremiumProtectedRoute from "./components/PremiumProtectedRoute";
 import MyNotesPage from "./pages/MyNotesPage";
+import MyProgressPage from "./pages/MyProgressPage";
 import AIRoadmapPage from "./AIRoadmapPage";
 import ExamModePage from "./ExamModePage";
 import ExamInstructions from "./components/exam/ExamInstructions";
@@ -114,6 +115,14 @@ function AppContent() {
                         <PremiumProtectedRoute>
                             <AIRoadmapPage />
                         </PremiumProtectedRoute>
+                    } 
+                />
+                <Route 
+                    path="/my-progress" 
+                    element={
+                        <ProtectedRoute>
+                            <MyProgressPage />
+                        </ProtectedRoute>
                     } 
                 />
                 <Route 
