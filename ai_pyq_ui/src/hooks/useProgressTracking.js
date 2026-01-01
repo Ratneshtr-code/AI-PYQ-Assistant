@@ -91,7 +91,7 @@ export function useProgressTracking() {
     /**
      * Fetch progress for a specific exam
      */
-    const fetchProgress = useCallback(async (exam) => {
+    const fetchProgress = useCallback(async (exam, language = "en") => {
         if (!exam) {
             setProgressData(null);
             return;
@@ -99,7 +99,8 @@ export function useProgressTracking() {
 
         setLoading(true);
         try {
-            const response = await fetch(`${API_BASE_URL}/roadmap/progress/${encodeURIComponent(exam)}`, {
+            const langParam = language === "hi" ? "hi" : "en";
+            const response = await fetch(`${API_BASE_URL}/roadmap/progress/${encodeURIComponent(exam)}?language=${langParam}`, {
                 credentials: "include"
             });
 

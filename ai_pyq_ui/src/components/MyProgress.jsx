@@ -2,18 +2,20 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useProgressTracking } from "../hooks/useProgressTracking";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const API_BASE_URL = "";
 
 export default function MyProgress({ exam }) {
+    const { language } = useLanguage(); // Get language from context
     const { fetchProgress, progressData, loading } = useProgressTracking();
     const [selectedSubject, setSelectedSubject] = useState(null);
 
     useEffect(() => {
         if (exam) {
-            fetchProgress(exam);
+            fetchProgress(exam, language);
         }
-    }, [exam, fetchProgress]);
+    }, [exam, language, fetchProgress]);
 
     if (!exam) {
         return (

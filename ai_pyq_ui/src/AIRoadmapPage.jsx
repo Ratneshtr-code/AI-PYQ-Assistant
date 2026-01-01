@@ -4,10 +4,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import MyProgress from "./components/MyProgress";
+import { useLanguage } from "./contexts/LanguageContext";
 
 export default function AIRoadmapPage() {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
+    const { language } = useLanguage(); // Get language from context
     const [exam, setExam] = useState("");
     const [examsList, setExamsList] = useState([]);
     const [roadmapData, setRoadmapData] = useState(null);
@@ -59,8 +61,9 @@ export default function AIRoadmapPage() {
             setLoading(true);
             setError(null);
             try {
+                const langParam = language === "hi" ? "hi" : "en";
                 const res = await fetch(
-                    `http://127.0.0.1:8000/roadmap/generate?exam=${encodeURIComponent(exam)}`
+                    `http://127.0.0.1:8000/roadmap/generate?exam=${encodeURIComponent(exam)}&language=${langParam}`
                 );
                 const data = await res.json();
                 
@@ -84,7 +87,7 @@ export default function AIRoadmapPage() {
         };
 
         fetchRoadmap();
-    }, [exam]);
+    }, [exam, language]);
 
     // Track progress changes for celebration
     useEffect(() => {
@@ -157,8 +160,11 @@ export default function AIRoadmapPage() {
         setSelectedSubjects(newSelected);
     };
 
-    const handleTopicClick = (e, subjectName, topicName) => {
+    const handleTopicClick = (e, subject, topic) => {
         e.stopPropagation(); // Prevent subject card toggle
+        // Use English names for navigation to ensure proper filtering
+        const subjectName = subject.name_en || subject.name;  // Use English name for navigation
+        const topicName = topic.name_en || topic.name;  // Use English name for navigation
         navigate(`/topic-wise-pyq?exam=${encodeURIComponent(exam)}&subject=${encodeURIComponent(subjectName)}&topic=${encodeURIComponent(topicName)}&from=ai-roadmap`);
     };
 
@@ -593,7 +599,7 @@ export default function AIRoadmapPage() {
                                                                 {subject.topics.slice(0, 6).map((topic, topicIdx) => (
                                                                     <div
                                                                         key={topicIdx}
-                                                                        onClick={(e) => handleTopicClick(e, subject.name, topic.name)}
+                                                                        onClick={(e) => handleTopicClick(e, subject, topic)}
                                                                         className="bg-gray-50 rounded-md px-2 py-1 border border-gray-200 text-xs cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-colors"
                                                                     >
                                                                         <span className="text-gray-700 font-medium">

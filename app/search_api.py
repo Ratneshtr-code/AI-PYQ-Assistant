@@ -1713,7 +1713,8 @@ def explain_concept(
 
 @app.get("/roadmap/generate")
 def generate_roadmap(
-    exam: str = Query(..., description="Exam name for roadmap generation")
+    exam: str = Query(..., description="Exam name for roadmap generation"),
+    language: str = Query("en", description="Language code: 'en' or 'hi'")
 ):
     """Generate AI-powered preparation roadmap based on question weightage analysis"""
     df = load_dataframe()
@@ -1753,6 +1754,17 @@ def generate_roadmap(
         subject_name = str(subject).strip()
         subject_weightage = round((count / total_questions) * 100, 2)
         
+        # Translate subject name if Hindi is requested
+        display_subject_name = subject_name
+        if language and language.lower() in ["hi", "hindi"]:
+            from app.translation_service import translate_text
+            display_subject_name = translate_text(
+                subject_name,
+                target_language="hi",
+                source_language="en",
+                field="subject_name"
+            )
+        
         # Filter questions for this subject
         subject_df = filtered_df[filtered_df["subject"].str.lower() == subject_name.lower()]
         
@@ -1769,8 +1781,20 @@ def generate_roadmap(
             topic_weightage = round((topic_count / len(subject_df)) * 100, 2)
             topic_cumulative += topic_weightage
             
+            # Translate topic name if Hindi is requested
+            display_topic_name = topic_name
+            if language and language.lower() in ["hi", "hindi"]:
+                from app.translation_service import translate_text
+                display_topic_name = translate_text(
+                    topic_name,
+                    target_language="hi",
+                    source_language="en",
+                    field="topic_name"
+                )
+            
             topics_data.append({
-                "name": topic_name,
+                "name": display_topic_name,  # Translated name for display
+                "name_en": topic_name,  # Original English name for navigation
                 "weightage": topic_weightage,
                 "question_count": int(topic_count),
                 "cumulative_weightage": round(topic_cumulative, 2)
@@ -1788,7 +1812,8 @@ def generate_roadmap(
         cumulative_weightage += subject_weightage
         
         subjects_data.append({
-            "name": subject_name,
+            "name": display_subject_name,  # Translated name for display
+            "name_en": subject_name,  # Original English name for navigation
             "weightage": subject_weightage,
             "question_count": int(count),
             "topics": topics_data,

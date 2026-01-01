@@ -149,6 +149,7 @@ def check_solved(
 @router.get("/progress/{exam}")
 def get_progress(
     exam: str,
+    language: str = Query("en", description="Language code: 'en' or 'hi'"),
     session_id: Optional[str] = Cookie(None),
     db: Session = Depends(get_db)
 ):
@@ -200,6 +201,17 @@ def get_progress(
         subject_name = str(subject).strip()
         subject_weightage = (count / total_questions) * 100
         
+        # Translate subject name if Hindi is requested
+        display_subject_name = subject_name
+        if language and language.lower() in ["hi", "hindi"]:
+            from app.translation_service import translate_text
+            display_subject_name = translate_text(
+                subject_name,
+                target_language="hi",
+                source_language="en",
+                field="subject_name"
+            )
+        
         # Filter questions for this subject
         subject_df = filtered_df[filtered_df["subject"].str.lower() == subject_name.lower()]
         subject_total = len(subject_df)
@@ -223,8 +235,20 @@ def get_progress(
             topic_progress = (topic_solved / topic_total * 100) if topic_total > 0 else 0.0
             topic_weightage = (topic_count / subject_total) * 100 if subject_total > 0 else 0.0
             
+            # Translate topic name if Hindi is requested
+            display_topic_name = topic_name
+            if language and language.lower() in ["hi", "hindi"]:
+                from app.translation_service import translate_text
+                display_topic_name = translate_text(
+                    topic_name,
+                    target_language="hi",
+                    source_language="en",
+                    field="topic_name"
+                )
+            
             topics_data.append({
-                "name": topic_name,
+                "name": display_topic_name,  # Translated name for display
+                "name_en": topic_name,  # Original English name (for consistency with roadmap)
                 "total_questions": int(topic_total),
                 "solved_count": topic_solved,
                 "progress_percentage": round(topic_progress, 2),
@@ -240,7 +264,8 @@ def get_progress(
         total_weightage += subject_weightage
         
         subjects_data.append({
-            "name": subject_name,
+            "name": display_subject_name,  # Translated name for display
+            "name_en": subject_name,  # Original English name (for consistency with roadmap)
             "total_questions": int(subject_total),
             "solved_count": subject_solved,
             "progress_percentage": round(subject_progress, 2),
