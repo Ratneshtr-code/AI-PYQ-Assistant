@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useSearchAPI } from "./hooks/useSearchAPI";
 import { useLanguage } from "./contexts/LanguageContext";
+import { buildApiUrl } from "./config/apiConfig";
 import Sidebar from "./components/Sidebar";
 import FilterBar from "./components/FilterBar";
 import ResultsList from "./components/ResultsList";
@@ -11,10 +12,10 @@ import Pagination from "./components/Pagination";
 export default function TopicWisePYQPage() {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
-    const apiUrl = "http://127.0.0.1:8000/search";
-    const filtersUrl = "http://127.0.0.1:8000/filters";
-    const subjectsUrl = "http://127.0.0.1:8000/topic-wise/subjects";
-    const topicsUrl = "http://127.0.0.1:8000/topic-wise/topics";
+    const apiUrl = buildApiUrl("search");
+    const filtersUrl = buildApiUrl("filters");
+    const subjectsUrl = buildApiUrl("topic-wise/subjects");
+    const topicsUrl = buildApiUrl("topic-wise/topics");
 
     // Initialize state from URL params if they exist (for direct navigation from roadmap)
     const [exam, setExam] = useState(() => {

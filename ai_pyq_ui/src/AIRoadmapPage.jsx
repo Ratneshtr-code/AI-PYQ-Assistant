@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { buildApiUrl } from "./config/apiConfig";
 import Sidebar from "./components/Sidebar";
 import MyProgress from "./components/MyProgress";
 import { useLanguage } from "./contexts/LanguageContext";
@@ -41,7 +42,7 @@ export default function AIRoadmapPage() {
         // Fetch exam filters
         const fetchExams = async () => {
             try {
-                const res = await fetch("http://127.0.0.1:8000/filters");
+                const res = await fetch(buildApiUrl("filters"));
                 const data = await res.json();
                 setExamsList(data.exams || []);
             } catch (err) {
@@ -63,7 +64,7 @@ export default function AIRoadmapPage() {
             try {
                 const langParam = language === "hi" ? "hi" : "en";
                 const res = await fetch(
-                    `http://127.0.0.1:8000/roadmap/generate?exam=${encodeURIComponent(exam)}&language=${langParam}`
+                    `${buildApiUrl("roadmap/generate")}?exam=${encodeURIComponent(exam)}&language=${langParam}`
                 );
                 const data = await res.json();
                 

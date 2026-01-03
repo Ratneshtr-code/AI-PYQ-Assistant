@@ -4,14 +4,15 @@ import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useSearchAPI } from "./hooks/useSearchAPI";
 import { useLanguage } from "./contexts/LanguageContext";
+import { buildApiUrl } from "./config/apiConfig";
 import Sidebar from "./components/Sidebar";
 import ResultsList from "./components/ResultsList";
 import Pagination from "./components/Pagination";
 import ResultsChart from "./components/ResultsChart";
 
 export default function SearchPage() {
-    const apiUrl = "http://127.0.0.1:8000/search";
-    const filtersUrl = "http://127.0.0.1:8000/filters";
+    const apiUrl = buildApiUrl("search");
+    const filtersUrl = buildApiUrl("filters");
 
     // Initialize with empty state (fresh load)
     const [query, setQuery] = useState("");
@@ -138,7 +139,7 @@ export default function SearchPage() {
             let currentPage = 1;
             let morePages = true;
             while (morePages) {
-                const response = await fetch(apiUrl, {
+                const response = await fetch(buildApiUrl("search"), {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ query, page: currentPage, exam, language }),

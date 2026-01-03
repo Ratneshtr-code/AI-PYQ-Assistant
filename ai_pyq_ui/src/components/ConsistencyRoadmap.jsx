@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { buildApiUrl } from "../config/apiConfig";
 
 export default function ConsistencyRoadmap({ exam }) {
     const [roadmapData, setRoadmapData] = useState(null);
@@ -20,7 +21,7 @@ export default function ConsistencyRoadmap({ exam }) {
             setError(null);
             try {
                 const res = await fetch(
-                    `http://127.0.0.1:8000/roadmap/consistency?exam=${encodeURIComponent(exam)}`
+                    `${buildApiUrl("roadmap/consistency")}?exam=${encodeURIComponent(exam)}`
                 );
                 const data = await res.json();
                 

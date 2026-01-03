@@ -1,6 +1,7 @@
 // src/components/CrossExamHotTopics.jsx
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { buildApiUrl } from "../config/apiConfig";
 import { useLanguage } from "../contexts/LanguageContext";
 
 export default function CrossExamHotTopics({ exams, yearFrom, yearTo }) {
@@ -24,7 +25,7 @@ export default function CrossExamHotTopics({ exams, yearFrom, yearTo }) {
 
         const examsStr = exams.join(",");
         const langParam = language === "hi" ? "hi" : "en";
-        let url = `http://127.0.0.1:8000/dashboard/cross-exam/hot-topics?exams=${encodeURIComponent(examsStr)}&language=${langParam}`;
+        let url = `${buildApiUrl("dashboard/cross-exam/hot-topics")}?exams=${encodeURIComponent(examsStr)}&language=${langParam}`;
         if (yearFrom) {
             url += `&year_from=${yearFrom}`;
         }

@@ -57,14 +57,22 @@ print(f"   - Roadmap router: {len(roadmap_router.routes)} routes")
 print(f"   - Feedback router: {len(feedback_router.routes)} routes")
 print(f"   Notes routes: {[r.path for r in notes_router.routes]}")
 
+# CORS configuration
+# For mobile apps (Capacitor), we need to explicitly allow the Capacitor origin
+# Cannot use wildcard "*" when credentials are included
 origins = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    # Capacitor app origins (required for mobile app with credentials)
+    "capacitor://localhost",
+    "ionic://localhost",
+    "https://localhost",
+    "http://localhost",
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=origins,  # Explicit origins (not wildcard) when using credentials
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

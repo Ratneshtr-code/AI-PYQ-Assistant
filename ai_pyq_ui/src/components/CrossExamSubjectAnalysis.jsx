@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, Legend } from "recharts";
 import { motion } from "framer-motion";
+import { buildApiUrl } from "../config/apiConfig";
 import { useLanguage } from "../contexts/LanguageContext";
 
 export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, selectedSubject, onSubjectSelect }) {
@@ -34,7 +35,7 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
         // Fetch subjects from first exam to build mapping
         const langParam = language === "hi" ? "hi" : "en";
         const firstExam = exams[0];
-        let url = `http://127.0.0.1:8000/dashboard/subject-weightage?exam=${encodeURIComponent(firstExam)}&language=${langParam}`;
+        let url = `${buildApiUrl("dashboard/subject-weightage")}?exam=${encodeURIComponent(firstExam)}&language=${langParam}`;
         if (yearFrom) {
             url += `&year_from=${yearFrom}`;
         }
@@ -42,7 +43,7 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
             url += `&year_to=${yearTo}`;
         }
         
-        let englishUrl = `http://127.0.0.1:8000/dashboard/subject-weightage?exam=${encodeURIComponent(firstExam)}&language=en`;
+        let englishUrl = `${buildApiUrl("dashboard/subject-weightage")}?exam=${encodeURIComponent(firstExam)}&language=en`;
         if (yearFrom) {
             englishUrl += `&year_from=${yearFrom}`;
         }
@@ -93,7 +94,7 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
 
         const examsStr = exams.join(",");
         const langParam = language === "hi" ? "hi" : "en";
-        let url = `http://127.0.0.1:8000/dashboard/cross-exam/subject-distribution?exams=${encodeURIComponent(examsStr)}&language=${langParam}`;
+        let url = `${buildApiUrl("dashboard/cross-exam/subject-distribution")}?exams=${encodeURIComponent(examsStr)}&language=${langParam}`;
         if (yearFrom) {
             url += `&year_from=${yearFrom}`;
         }
@@ -131,7 +132,7 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
 
         const examsStr = exams.join(",");
         const langParam = language === "hi" ? "hi" : "en";
-        let url = `http://127.0.0.1:8000/dashboard/cross-exam/topic-distribution?exams=${encodeURIComponent(examsStr)}&subject=${encodeURIComponent(englishSubjectName)}&language=${langParam}`;
+        let url = `${buildApiUrl("dashboard/cross-exam/topic-distribution")}?exams=${encodeURIComponent(examsStr)}&subject=${encodeURIComponent(englishSubjectName)}&language=${langParam}`;
         if (yearFrom) {
             url += `&year_from=${yearFrom}`;
         }

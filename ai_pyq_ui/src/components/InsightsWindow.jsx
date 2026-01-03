@@ -1,6 +1,7 @@
 // src/components/InsightsWindow.jsx
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { buildApiUrl } from "../config/apiConfig";
 
 export default function InsightsWindow({ exam, subject, yearFrom, yearTo }) {
     const [data, setData] = useState(null);
@@ -24,7 +25,7 @@ export default function InsightsWindow({ exam, subject, yearFrom, yearTo }) {
         setLoading(true);
         setError(null);
 
-        let url = `http://127.0.0.1:8000/dashboard/stable-volatile?exam=${encodeURIComponent(exam)}`;
+        let url = `${buildApiUrl("dashboard/stable-volatile")}?exam=${encodeURIComponent(exam)}`;
         if (subject) {
             url += `&subject=${encodeURIComponent(subject)}`;
         }

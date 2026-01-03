@@ -3,8 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { setUserData, isAuthenticated } from "./utils/auth";
-
-const API_BASE_URL = "";
+import { buildApiUrl } from "./config/apiConfig";
 
 export default function LandingPage() {
     const navigate = useNavigate();
@@ -109,7 +108,7 @@ export default function LandingPage() {
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 10000);
             
-            const response = await fetch(`${API_BASE_URL}/auth/login`, {
+            const response = await fetch(buildApiUrl("auth/login"), {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -226,7 +225,7 @@ export default function LandingPage() {
         setSignUpLoading(true);
 
         try {
-            const response = await fetch(`${API_BASE_URL}/auth/signup`, {
+            const response = await fetch(buildApiUrl("auth/signup"), {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -640,7 +639,7 @@ export default function LandingPage() {
 
                                     <button
                                         onClick={() => {
-                                            window.location.href = `${API_BASE_URL || "http://localhost:8000"}/auth/google`;
+                                            window.location.href = buildApiUrl("auth/google");
                                         }}
                                         className="mt-4 w-full flex items-center justify-center gap-3 bg-white border border-gray-300 text-gray-700 py-3 rounded-xl font-semibold hover:bg-gray-50 transition-colors shadow-sm"
                                     >
@@ -797,7 +796,7 @@ export default function LandingPage() {
 
                                     <button
                                         onClick={() => {
-                                            window.location.href = `${API_BASE_URL || "http://localhost:8000"}/auth/google`;
+                                            window.location.href = buildApiUrl("auth/google");
                                         }}
                                         className="mt-4 w-full flex items-center justify-center gap-3 bg-white border border-gray-300 text-gray-700 py-3 rounded-xl font-semibold hover:bg-gray-50 transition-colors shadow-sm"
                                     >

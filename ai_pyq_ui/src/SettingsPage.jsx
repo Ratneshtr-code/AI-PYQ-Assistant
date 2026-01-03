@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { buildApiUrl } from "./config/apiConfig";
 import Sidebar from "./components/Sidebar";
 import { getCurrentUser, isAuthenticated, getUserData } from "./utils/auth";
 
@@ -18,7 +19,7 @@ export default function SettingsPage() {
         // Fetch exams list for sidebar
         const fetchExams = async () => {
             try {
-                const res = await fetch("http://127.0.0.1:8000/filters");
+                const res = await fetch(buildApiUrl("filters"));
                 const data = await res.json();
                 setExamsList(data.exams || []);
             } catch (err) {

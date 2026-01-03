@@ -1,6 +1,7 @@
 // src/CrossExamInsightsPage.jsx
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { buildApiUrl } from "./config/apiConfig";
 import Sidebar from "./components/Sidebar";
 import FilterBar from "./components/FilterBar";
 import SubjectCards from "./components/SubjectCards";
@@ -25,7 +26,7 @@ export default function CrossExamInsightsPage() {
         // Fetch UI config for max exam comparison
         const fetchUIConfig = async () => {
             try {
-                const res = await fetch("http://127.0.0.1:8000/ui-config");
+                const res = await fetch(buildApiUrl("ui-config"));
                 const data = await res.json();
                 if (data.max_exam_comparison) {
                     setMaxExams(data.max_exam_comparison);
@@ -40,7 +41,7 @@ export default function CrossExamInsightsPage() {
         // Fetch exam filters
         const fetchExams = async () => {
             try {
-                const res = await fetch("http://127.0.0.1:8000/filters");
+                const res = await fetch(buildApiUrl("filters"));
                 const data = await res.json();
                 setExamsList(data.exams || []);
             } catch (err) {
@@ -52,7 +53,7 @@ export default function CrossExamInsightsPage() {
         // Fetch available years
         const fetchYears = async () => {
             try {
-                const res = await fetch("http://127.0.0.1:8000/dashboard/filters");
+                const res = await fetch(buildApiUrl("dashboard/filters"));
                 const data = await res.json();
                 if (data.years && data.years.length > 0) {
                     setAvailableYears(data.years);

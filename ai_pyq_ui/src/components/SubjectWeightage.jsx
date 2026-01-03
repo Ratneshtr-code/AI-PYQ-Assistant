@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts";
 import { motion } from "framer-motion";
+import { buildApiUrl } from "../config/apiConfig";
 
 export default function SubjectWeightage({ exam, onSubjectSelect, selectedSubject }) {
     const [data, setData] = useState([]);
@@ -19,7 +20,7 @@ export default function SubjectWeightage({ exam, onSubjectSelect, selectedSubjec
         setLoading(true);
         setError(null);
 
-        fetch(`http://127.0.0.1:8000/dashboard/subject-weightage?exam=${encodeURIComponent(exam)}`)
+        fetch(`${buildApiUrl("dashboard/subject-weightage")}?exam=${encodeURIComponent(exam)}`)
             .then((res) => res.json())
             .then((result) => {
                 if (result.subjects && result.subjects.length > 0) {

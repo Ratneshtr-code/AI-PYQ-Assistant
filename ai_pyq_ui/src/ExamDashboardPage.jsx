@@ -1,6 +1,7 @@
 // src/ExamDashboardPage.jsx
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { buildApiUrl } from "./config/apiConfig";
 import Sidebar from "./components/Sidebar";
 import FilterBar from "./components/FilterBar";
 import ExamAnalysis from "./components/ExamAnalysis";
@@ -48,7 +49,7 @@ export default function ExamDashboardPage() {
         // Fetch exam filters
         const fetchExams = async () => {
             try {
-                const res = await fetch("http://127.0.0.1:8000/filters");
+                const res = await fetch(buildApiUrl("filters"));
                 const data = await res.json();
                 setExamsList(data.exams || []);
             } catch (err) {
@@ -60,7 +61,7 @@ export default function ExamDashboardPage() {
         // Fetch available years
         const fetchYears = async () => {
             try {
-                const res = await fetch("http://127.0.0.1:8000/dashboard/filters");
+                const res = await fetch(buildApiUrl("dashboard/filters"));
                 const data = await res.json();
                 if (data.years && data.years.length > 0) {
                     setAvailableYears(data.years);
@@ -90,7 +91,7 @@ export default function ExamDashboardPage() {
             // Fetch subjects from all exams and combine them
             const langParam = language === "hi" ? "hi" : "en";
             const subjectPromises = examsList.map((examName) =>
-                fetch(`http://127.0.0.1:8000/dashboard/filters?exam=${encodeURIComponent(examName)}&language=${langParam}`)
+                fetch(`${buildApiUrl("dashboard/filters")}?exam=${encodeURIComponent(examName)}&language=${langParam}`)
                     .then((res) => res.json())
                     .then((result) => result.subjects || [])
                     .catch(() => [])
@@ -110,7 +111,7 @@ export default function ExamDashboardPage() {
             }
 
             const langParam = language === "hi" ? "hi" : "en";
-            fetch(`http://127.0.0.1:8000/dashboard/filters?exam=${encodeURIComponent(exam)}&language=${langParam}`)
+            fetch(`${buildApiUrl("dashboard/filters")}?exam=${encodeURIComponent(exam)}&language=${langParam}`)
                 .then((res) => res.json())
                 .then((result) => {
                     if (result.subjects) {

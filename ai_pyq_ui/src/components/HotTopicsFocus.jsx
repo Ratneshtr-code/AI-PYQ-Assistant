@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, LabelList } from "recharts";
 import { motion } from "framer-motion";
+import { buildApiUrl } from "../config/apiConfig";
 
 export default function HotTopicsFocus({ exam, yearFrom, yearTo }) {
     const [examHotTopics, setExamHotTopics] = useState([]);
@@ -17,7 +18,7 @@ export default function HotTopicsFocus({ exam, yearFrom, yearTo }) {
     useEffect(() => {
         if (!exam) return;
 
-        fetch(`http://127.0.0.1:8000/dashboard/filters?exam=${encodeURIComponent(exam)}`)
+        fetch(`${buildApiUrl("dashboard/filters")}?exam=${encodeURIComponent(exam)}`)
             .then((res) => res.json())
             .then((result) => {
                 if (result.subjects) {
@@ -43,7 +44,7 @@ export default function HotTopicsFocus({ exam, yearFrom, yearTo }) {
         setLoading(true);
         setError(null);
 
-        let url = `http://127.0.0.1:8000/dashboard/hot-topics?exam=${encodeURIComponent(exam)}&min_years=1`;
+        let url = `${buildApiUrl("dashboard/hot-topics")}?exam=${encodeURIComponent(exam)}&min_years=1`;
         if (yearFrom) {
             url += `&year_from=${yearFrom}`;
         }
@@ -77,7 +78,7 @@ export default function HotTopicsFocus({ exam, yearFrom, yearTo }) {
             return;
         }
 
-        let url = `http://127.0.0.1:8000/dashboard/coverage?exam=${encodeURIComponent(exam)}&top_n=10`;
+        let url = `${buildApiUrl("dashboard/coverage")}?exam=${encodeURIComponent(exam)}&top_n=10`;
         if (yearFrom) {
             url += `&year_from=${yearFrom}`;
         }
@@ -102,7 +103,7 @@ export default function HotTopicsFocus({ exam, yearFrom, yearTo }) {
             return;
         }
 
-        let url = `http://127.0.0.1:8000/dashboard/hot-topics?exam=${encodeURIComponent(exam)}&subject=${encodeURIComponent(selectedSubject)}&min_years=1`;
+        let url = `${buildApiUrl("dashboard/hot-topics")}?exam=${encodeURIComponent(exam)}&subject=${encodeURIComponent(selectedSubject)}&min_years=1`;
         if (yearFrom) {
             url += `&year_from=${yearFrom}`;
         }
@@ -133,7 +134,7 @@ export default function HotTopicsFocus({ exam, yearFrom, yearTo }) {
             return;
         }
 
-        let url = `http://127.0.0.1:8000/dashboard/coverage?exam=${encodeURIComponent(exam)}&subject=${encodeURIComponent(selectedSubject)}&top_n=10`;
+        let url = `${buildApiUrl("dashboard/coverage")}?exam=${encodeURIComponent(exam)}&subject=${encodeURIComponent(selectedSubject)}&top_n=10`;
         if (yearFrom) {
             url += `&year_from=${yearFrom}`;
         }

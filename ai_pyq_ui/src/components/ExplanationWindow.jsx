@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getUserData } from "../utils/auth";
 import { useLanguage } from "../contexts/LanguageContext";
+import { buildApiUrl } from "../config/apiConfig";
 import SaveNoteButton from "./SaveNoteButton";
 import { formatMarkdown } from "../utils/formatMarkdown";
 
@@ -52,7 +53,7 @@ export default function ExplanationWindow({
             let body = {};
 
             if (explanationType === "concept") {
-                endpoint = "http://127.0.0.1:8000/explain_concept";
+                endpoint = buildApiUrl("explain_concept");
                 body = {
                     question_text: questionData.question_text,
                     options: {
@@ -78,7 +79,7 @@ export default function ExplanationWindow({
                 };
             } else if (explanationType === "option") {
                 if (isCorrect) {
-                    endpoint = "http://127.0.0.1:8000/explain";
+                    endpoint = buildApiUrl("explain");
                     body = {
                         question_text: questionData.question_text,
                         correct_option: questionData.correct_option || selectedOption,
@@ -97,7 +98,7 @@ export default function ExplanationWindow({
                         json_question_id: questionData.json_question_id || questionData.question_id || questionData.id || null,
                     };
                 } else {
-                    endpoint = "http://127.0.0.1:8000/explain_option";
+                    endpoint = buildApiUrl("explain_option");
                     body = {
                         question_text: questionData.question_text,
                         selected_option: selectedOption,

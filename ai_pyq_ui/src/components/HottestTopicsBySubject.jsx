@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, LabelList } from "recharts";
 import { motion } from "framer-motion";
+import { buildApiUrl } from "../config/apiConfig";
 import { useLanguage } from "../contexts/LanguageContext";
 
 export default function HottestTopicsBySubject({ exam, subject, yearFrom, yearTo }) {
@@ -31,7 +32,7 @@ export default function HottestTopicsBySubject({ exam, subject, yearFrom, yearTo
         
         // Fetch subjects from the exam to build mapping
         const langParam = language === "hi" ? "hi" : "en";
-        let url = `http://127.0.0.1:8000/dashboard/subject-weightage?exam=${encodeURIComponent(exam)}&language=${langParam}`;
+        let url = `${buildApiUrl("dashboard/subject-weightage")}?exam=${encodeURIComponent(exam)}&language=${langParam}`;
         if (yearFrom) {
             url += `&year_from=${yearFrom}`;
         }
@@ -39,7 +40,7 @@ export default function HottestTopicsBySubject({ exam, subject, yearFrom, yearTo
             url += `&year_to=${yearTo}`;
         }
         
-        let englishUrl = `http://127.0.0.1:8000/dashboard/subject-weightage?exam=${encodeURIComponent(exam)}&language=en`;
+        let englishUrl = `${buildApiUrl("dashboard/subject-weightage")}?exam=${encodeURIComponent(exam)}&language=en`;
         if (yearFrom) {
             englishUrl += `&year_from=${yearFrom}`;
         }
@@ -93,7 +94,7 @@ export default function HottestTopicsBySubject({ exam, subject, yearFrom, yearTo
         const englishSubjectName = subjectNameMapRef.current[subject] || subject;
 
         const langParam = language === "hi" ? "hi" : "en";
-        let url = `http://127.0.0.1:8000/dashboard/hot-topics?exam=${encodeURIComponent(exam)}&subject=${encodeURIComponent(englishSubjectName)}&min_years=1&language=${langParam}`;
+        let url = `${buildApiUrl("dashboard/hot-topics")}?exam=${encodeURIComponent(exam)}&subject=${encodeURIComponent(englishSubjectName)}&min_years=1&language=${langParam}`;
         if (yearFrom) {
             url += `&year_from=${yearFrom}`;
         }
@@ -131,7 +132,7 @@ export default function HottestTopicsBySubject({ exam, subject, yearFrom, yearTo
         const englishSubjectName = subjectNameMapRef.current[subject] || subject;
 
         const langParam = language === "hi" ? "hi" : "en";
-        let url = `http://127.0.0.1:8000/dashboard/coverage?exam=${encodeURIComponent(exam)}&subject=${encodeURIComponent(englishSubjectName)}&top_n=10&language=${langParam}`;
+        let url = `${buildApiUrl("dashboard/coverage")}?exam=${encodeURIComponent(exam)}&subject=${encodeURIComponent(englishSubjectName)}&top_n=10&language=${langParam}`;
         if (yearFrom) {
             url += `&year_from=${yearFrom}`;
         }

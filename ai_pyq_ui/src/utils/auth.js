@@ -4,10 +4,7 @@
  * Cookies are automatically sent by the browser - we don't need to do anything!
  */
 
-// Use relative URLs when using Vite proxy (same-origin), or absolute URLs for direct access
-// With Vite proxy configured, we can use relative URLs which makes cookies work properly
-const API_BASE_URL = ""; // Empty string = same origin (Vite proxy handles it)
-// For direct access (without proxy), use: "http://127.0.0.1:8000"
+import { buildApiUrl } from "../config/apiConfig";
 
 /**
  * Store user data in localStorage (for UI display only)
@@ -99,7 +96,7 @@ export const authenticatedFetch = async (url, options = {}) => {
 export const getCurrentUser = async () => {
     try {
         console.log("getCurrentUser: Fetching /auth/me with credentials: include");
-        const response = await fetch(`${API_BASE_URL}/auth/me`, {
+        const response = await fetch(buildApiUrl("auth/me"), {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from "recharts";
 import { motion } from "framer-motion";
+import { buildApiUrl } from "../config/apiConfig";
 
 export default function TopicTrend({ exam, subject, topic }) {
     const [data, setData] = useState([]);
@@ -14,7 +15,7 @@ export default function TopicTrend({ exam, subject, topic }) {
     useEffect(() => {
         if (!exam) return;
 
-        fetch(`http://127.0.0.1:8000/dashboard/filters?exam=${encodeURIComponent(exam)}`)
+        fetch(`${buildApiUrl("dashboard/filters")}?exam=${encodeURIComponent(exam)}`)
             .then((res) => res.json())
             .then((result) => {
                 if (result.subjects) {
@@ -37,7 +38,7 @@ export default function TopicTrend({ exam, subject, topic }) {
         setLoading(true);
         setError(null);
 
-        let url = `http://127.0.0.1:8000/dashboard/topic-trend?exam=${encodeURIComponent(exam)}`;
+        let url = `${buildApiUrl("dashboard/topic-trend")}?exam=${encodeURIComponent(exam)}`;
         if (subject) {
             url += `&subject=${encodeURIComponent(subject)}`;
         }

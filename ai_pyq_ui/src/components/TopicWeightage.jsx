@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts";
 import { motion } from "framer-motion";
+import { buildApiUrl } from "../config/apiConfig";
 
 export default function TopicWeightage({ exam, subject, onBack }) {
     const [data, setData] = useState([]);
@@ -14,7 +15,7 @@ export default function TopicWeightage({ exam, subject, onBack }) {
     useEffect(() => {
         if (!exam) return;
 
-        fetch(`http://127.0.0.1:8000/dashboard/filters?exam=${encodeURIComponent(exam)}`)
+        fetch(`${buildApiUrl("dashboard/filters")}?exam=${encodeURIComponent(exam)}`)
             .then((res) => res.json())
             .then((result) => {
                 if (result.subjects) {
@@ -37,7 +38,7 @@ export default function TopicWeightage({ exam, subject, onBack }) {
         setLoading(true);
         setError(null);
 
-        const url = `http://127.0.0.1:8000/dashboard/topic-weightage?exam=${encodeURIComponent(exam)}&subject=${encodeURIComponent(subject)}`;
+        const url = `${buildApiUrl("dashboard/topic-weightage")}?exam=${encodeURIComponent(exam)}&subject=${encodeURIComponent(subject)}`;
         fetch(url)
             .then((res) => res.json())
             .then((result) => {

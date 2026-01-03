@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, LabelList } from "recharts";
 import { motion } from "framer-motion";
+import { buildApiUrl } from "../config/apiConfig";
 import InsightsWindow from "./InsightsWindow";
 import { useLanguage } from "../contexts/LanguageContext";
 
@@ -36,7 +37,7 @@ export default function SubjectAnalysis({ subject, yearFrom, yearTo, examsList }
         // Fetch subjects from all exams to build comprehensive mapping
         const langParam = language === "hi" ? "hi" : "en";
         const fetchPromises = examsList.map((examName) => {
-            let url = `http://127.0.0.1:8000/dashboard/subject-weightage?exam=${encodeURIComponent(examName)}&language=${langParam}`;
+            let url = `${buildApiUrl("dashboard/subject-weightage")}?exam=${encodeURIComponent(examName)}&language=${langParam}`;
             if (yearFrom) {
                 url += `&year_from=${yearFrom}`;
             }
@@ -44,7 +45,7 @@ export default function SubjectAnalysis({ subject, yearFrom, yearTo, examsList }
                 url += `&year_to=${yearTo}`;
             }
             
-            let englishUrl = `http://127.0.0.1:8000/dashboard/subject-weightage?exam=${encodeURIComponent(examName)}&language=en`;
+            let englishUrl = `${buildApiUrl("dashboard/subject-weightage")}?exam=${encodeURIComponent(examName)}&language=en`;
             if (yearFrom) {
                 englishUrl += `&year_from=${yearFrom}`;
             }
@@ -103,7 +104,7 @@ export default function SubjectAnalysis({ subject, yearFrom, yearTo, examsList }
         const langParam = language === "hi" ? "hi" : "en";
         const examPromises = (examsList || []).map((examName) =>
             fetch(
-                `http://127.0.0.1:8000/dashboard/subject-weightage?exam=${encodeURIComponent(examName)}&year_from=${yearFrom || ""}&year_to=${yearTo || ""}&language=${langParam}`
+                `${buildApiUrl("dashboard/subject-weightage")}?exam=${encodeURIComponent(examName)}&year_from=${yearFrom || ""}&year_to=${yearTo || ""}&language=${langParam}`
             )
                 .then((res) => res.json())
                 .then((result) => {
@@ -149,7 +150,7 @@ export default function SubjectAnalysis({ subject, yearFrom, yearTo, examsList }
         const langParam = language === "hi" ? "hi" : "en";
         const examPromises = (examsList || []).map((examName) =>
             fetch(
-                `http://127.0.0.1:8000/dashboard/topic-weightage?exam=${encodeURIComponent(examName)}&subject=${encodeURIComponent(englishSubjectName)}${yearFrom ? `&year_from=${yearFrom}` : ""}${yearTo ? `&year_to=${yearTo}` : ""}&language=${langParam}`
+                `${buildApiUrl("dashboard/topic-weightage")}?exam=${encodeURIComponent(examName)}&subject=${encodeURIComponent(englishSubjectName)}${yearFrom ? `&year_from=${yearFrom}` : ""}${yearTo ? `&year_to=${yearTo}` : ""}&language=${langParam}`
             )
                 .then((res) => res.json())
                 .then((result) => ({
@@ -191,7 +192,7 @@ export default function SubjectAnalysis({ subject, yearFrom, yearTo, examsList }
         const englishSubjectName = subjectNameMapRef.current[subject] || subject;
 
         const langParam = language === "hi" ? "hi" : "en";
-        let url = `http://127.0.0.1:8000/dashboard/topic-weightage?exam=${encodeURIComponent(selectedExam)}&subject=${encodeURIComponent(englishSubjectName)}&language=${langParam}`;
+        let url = `${buildApiUrl("dashboard/topic-weightage")}?exam=${encodeURIComponent(selectedExam)}&subject=${encodeURIComponent(englishSubjectName)}&language=${langParam}`;
         if (yearFrom) {
             url += `&year_from=${yearFrom}`;
         }

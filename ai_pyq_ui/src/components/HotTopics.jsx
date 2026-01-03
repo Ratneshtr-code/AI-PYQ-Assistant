@@ -1,6 +1,7 @@
 // src/components/HotTopics.jsx
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { buildApiUrl } from "../config/apiConfig";
 
 export default function HotTopics({ exam, minConsistency = 0 }) {
     const [data, setData] = useState([]);
@@ -18,7 +19,7 @@ export default function HotTopics({ exam, minConsistency = 0 }) {
         setLoading(true);
         setError(null);
 
-        const url = `http://127.0.0.1:8000/dashboard/hot-topics?exam=${encodeURIComponent(exam)}&min_years=1`;
+        const url = `${buildApiUrl("dashboard/hot-topics")}?exam=${encodeURIComponent(exam)}&min_years=1`;
         fetch(url)
             .then((res) => res.json())
             .then((result) => {

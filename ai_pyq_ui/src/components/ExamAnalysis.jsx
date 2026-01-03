@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, LabelList } from "recharts";
 import { motion } from "framer-motion";
+import { buildApiUrl } from "../config/apiConfig";
 import InsightsWindow from "./InsightsWindow";
 import { useLanguage } from "../contexts/LanguageContext";
 
@@ -23,7 +24,7 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
         if (!exam) return;
 
         const langParam = language === "hi" ? "hi" : "en";
-        fetch(`http://127.0.0.1:8000/dashboard/filters?exam=${encodeURIComponent(exam)}&language=${langParam}`)
+        fetch(`${buildApiUrl("dashboard/filters")}?exam=${encodeURIComponent(exam)}&language=${langParam}`)
             .then((res) => res.json())
             .then((result) => {
                 if (result.subjects) {
@@ -47,7 +48,7 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
         setError(null);
 
         const langParam = language === "hi" ? "hi" : "en";
-        let url = `http://127.0.0.1:8000/dashboard/subject-weightage?exam=${encodeURIComponent(exam)}&language=${langParam}`;
+        let url = `${buildApiUrl("dashboard/subject-weightage")}?exam=${encodeURIComponent(exam)}&language=${langParam}`;
         if (yearFrom) {
             url += `&year_from=${yearFrom}`;
         }
@@ -56,7 +57,7 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
         }
 
         // Also fetch English version to build mapping between translated and English names
-        let englishUrl = `http://127.0.0.1:8000/dashboard/subject-weightage?exam=${encodeURIComponent(exam)}&language=en`;
+        let englishUrl = `${buildApiUrl("dashboard/subject-weightage")}?exam=${encodeURIComponent(exam)}&language=en`;
         if (yearFrom) {
             englishUrl += `&year_from=${yearFrom}`;
         }
@@ -117,7 +118,7 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
         const englishSubjectName = subjectNameMapRef.current[selectedSubject] || selectedSubject;
         
         const langParam = language === "hi" ? "hi" : "en";
-        let url = `http://127.0.0.1:8000/dashboard/topic-weightage?exam=${encodeURIComponent(exam)}&subject=${encodeURIComponent(englishSubjectName)}&language=${langParam}`;
+        let url = `${buildApiUrl("dashboard/topic-weightage")}?exam=${encodeURIComponent(exam)}&subject=${encodeURIComponent(englishSubjectName)}&language=${langParam}`;
         if (yearFrom) {
             url += `&year_from=${yearFrom}`;
         }

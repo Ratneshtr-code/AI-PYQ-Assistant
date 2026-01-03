@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, LabelList } from "recharts";
 import { motion } from "framer-motion";
+import { buildApiUrl } from "../config/apiConfig";
 import { useLanguage } from "../contexts/LanguageContext";
 
 export default function HottestTopicsByExam({ exam, yearFrom, yearTo }) {
@@ -23,7 +24,7 @@ export default function HottestTopicsByExam({ exam, yearFrom, yearTo }) {
         setError(null);
 
         const langParam = language === "hi" ? "hi" : "en";
-        let url = `http://127.0.0.1:8000/dashboard/hot-topics?exam=${encodeURIComponent(exam)}&min_years=1&language=${langParam}`;
+        let url = `${buildApiUrl("dashboard/hot-topics")}?exam=${encodeURIComponent(exam)}&min_years=1&language=${langParam}`;
         if (yearFrom) {
             url += `&year_from=${yearFrom}`;
         }
@@ -58,7 +59,7 @@ export default function HottestTopicsByExam({ exam, yearFrom, yearTo }) {
         }
 
         const langParam = language === "hi" ? "hi" : "en";
-        let url = `http://127.0.0.1:8000/dashboard/coverage?exam=${encodeURIComponent(exam)}&top_n=10&language=${langParam}`;
+        let url = `${buildApiUrl("dashboard/coverage")}?exam=${encodeURIComponent(exam)}&top_n=10&language=${langParam}`;
         if (yearFrom) {
             url += `&year_from=${yearFrom}`;
         }

@@ -3,9 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { setUserData, isAuthenticated } from "./utils/auth";
-
-// Use empty string for Vite proxy (same-origin), or "http://127.0.0.1:8000" for direct access
-const API_BASE_URL = "";
+import { buildApiUrl } from "./config/apiConfig";
 
 export default function LoginPage() {
     const navigate = useNavigate();
@@ -51,7 +49,7 @@ export default function LoginPage() {
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
             
-            const response = await fetch(`${API_BASE_URL}/auth/login`, {
+            const response = await fetch(buildApiUrl("auth/login"), {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -140,7 +138,7 @@ export default function LoginPage() {
             if (err.name === 'AbortError') {
                 setError("Request timed out. Please check your connection and try again.");
             } else if (err.message && err.message.includes("Failed to fetch")) {
-                setError("Cannot connect to server. Please make sure the backend server is running on http://127.0.0.1:8000");
+                setError("Cannot connect to server. Please make sure the backend server is running.");
             } else if (err.message) {
                 setError(err.message);
             } else {
@@ -222,7 +220,7 @@ export default function LoginPage() {
 
                     <button
                         onClick={() => {
-                            window.location.href = `${API_BASE_URL || "http://localhost:8000"}/auth/google`;
+                            window.location.href = buildApiUrl("auth/google");
                         }}
                         className="mt-4 w-full flex items-center justify-center gap-3 bg-white border border-gray-300 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
                         style={{ display: 'flex', visibility: 'visible' }}

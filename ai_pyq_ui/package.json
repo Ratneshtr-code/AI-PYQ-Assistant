@@ -8,9 +8,15 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "jest"
+    "test": "jest",
+    "android:sync": "npx cap sync android",
+    "android:open": "npx cap open android",
+    "android:build": "npm run build && npx cap sync android",
+    "android:run": "npm run build && npx cap sync android && npx cap run android"
   },
   "dependencies": {
+    "@capacitor/android": "^6.0.0",
+    "@capacitor/core": "^6.0.0",
     "axios": "^1.13.1",
     "framer-motion": "^12.23.24",
     "lucide-react": "^0.552.0",
@@ -23,6 +29,7 @@
     "@babel/core": "^7.28.5",
     "@babel/preset-env": "^7.28.5",
     "@babel/preset-react": "^7.28.5",
+    "@capacitor/cli": "^6.0.0",
     "@eslint/js": "^9.36.0",
     "@tailwindcss/postcss": "^4.1.16",
     "@testing-library/jest-dom": "^6.9.1",

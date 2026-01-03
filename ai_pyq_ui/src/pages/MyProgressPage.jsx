@@ -1,6 +1,7 @@
 // src/pages/MyProgressPage.jsx
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
+import { buildApiUrl } from "../config/apiConfig";
 import Sidebar from "../components/Sidebar";
 import MyProgress from "../components/MyProgress";
 
@@ -14,7 +15,7 @@ export default function MyProgressPage() {
     useEffect(() => {
         const fetchExams = async () => {
             try {
-                const res = await fetch("http://127.0.0.1:8000/filters");
+                const res = await fetch(buildApiUrl("filters"));
                 const data = await res.json();
                 setExamsList(data.exams || []);
             } catch (err) {

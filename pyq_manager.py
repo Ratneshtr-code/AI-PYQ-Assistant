@@ -193,7 +193,7 @@ def start_backend():
         print_error(f"Backend script not found: {script_path}")
         return False
     
-    print_info("Starting FastAPI backend server on http://127.0.0.1:8000")
+    print_info("Starting FastAPI backend server on http://0.0.0.0:8000 (accessible from network)")
     print_info("Press Ctrl+C to stop the server")
     print()
     
@@ -201,8 +201,9 @@ def start_backend():
     
     try:
         # Use uvicorn to run FastAPI
+        # Using 0.0.0.0 to allow access from mobile devices on the same network
         subprocess.run(
-            [python_exe, "-m", "uvicorn", "app.search_api:app", "--host", "127.0.0.1", "--port", "8000", "--reload"],
+            [python_exe, "-m", "uvicorn", "app.search_api:app", "--host", "0.0.0.0", "--port", "8000", "--reload"],
             cwd=get_project_root(),
             check=True
         )

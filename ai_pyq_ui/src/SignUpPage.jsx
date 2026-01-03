@@ -3,9 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { setUserData } from "./utils/auth";
-
-// Use empty string for Vite proxy (same-origin)
-const API_BASE_URL = "";
+import { buildApiUrl } from "./config/apiConfig";
 
 export default function SignUpPage() {
     const navigate = useNavigate();
@@ -70,7 +68,7 @@ export default function SignUpPage() {
         setLoading(true);
 
         try {
-            const response = await fetch(`${API_BASE_URL}/auth/signup`, {
+            const response = await fetch(buildApiUrl("auth/signup"), {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -255,7 +253,7 @@ export default function SignUpPage() {
 
                     <button
                         onClick={() => {
-                            window.location.href = `${API_BASE_URL || "http://localhost:8000"}/auth/google`;
+                            window.location.href = buildApiUrl("auth/google");
                         }}
                         className="mt-4 w-full flex items-center justify-center gap-3 bg-white border border-gray-300 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
                     >
