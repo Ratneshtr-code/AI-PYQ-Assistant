@@ -31,7 +31,24 @@ export default function FilterBar({
 }) {
     const [localYearFrom, setLocalYearFrom] = useState(yearFrom || "");
     const [localYearTo, setLocalYearTo] = useState(yearTo || "");
+    const [showFilters, setShowFilters] = useState(false); // Mobile filter pane visibility
     const { language, setLanguage } = useLanguage(); // Get language from context
+    
+    // Count active filter cards
+    const filterCardCount = [
+        showYearRange,
+        showExam,
+        showSubject,
+        showTopic
+    ].filter(Boolean).length;
+    
+    // Check if any filters are active
+    const hasActiveFilters = (exam && exam !== "") || 
+                            (subject && subject !== "") || 
+                            (topic && topic !== "") || 
+                            (exams && exams.length > 0) ||
+                            (localYearFrom && localYearFrom !== "") ||
+                            (localYearTo && localYearTo !== "");
 
     useEffect(() => {
         if (availableYears && availableYears.length > 0) {
@@ -57,7 +74,7 @@ export default function FilterBar({
     }, [localYearTo]);
 
     return (
-        <div className="w-full max-w-7xl mx-auto px-4 md:px-6">
+        <div className="w-full max-w-7xl mx-auto px-4 md:px-6" style={{ position: 'relative', zIndex: 10 }}>
             <motion.div
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -70,7 +87,7 @@ export default function FilterBar({
                         <div className="bg-white/80 backdrop-blur-md border border-blue-200/70 rounded-xl px-4 py-3 shadow-lg hover:shadow-xl transition-shadow duration-300 w-full overflow-hidden relative">
                             {/* Subtle gradient overlay */}
                             <div className="absolute inset-0 bg-gradient-to-br from-white/50 to-blue-50/30 pointer-events-none rounded-2xl" />
-                        <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3 md:gap-3 overflow-hidden relative z-10">
+                        <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3 md:gap-3 overflow-hidden relative z-10 pointer-events-auto" style={{ position: 'relative', zIndex: 10 }}>
                             {/* Year Range */}
                             {showYearRange && (
                                 <div className="flex flex-col md:flex-row items-stretch md:items-center gap-2 min-w-0 flex-shrink">
@@ -78,7 +95,10 @@ export default function FilterBar({
                                     <select
                                         value={localYearFrom}
                                         onChange={(e) => setLocalYearFrom(e.target.value)}
-                                        className="bg-white/90 text-gray-900 border border-gray-300/80 rounded-lg px-3 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition-all hover:border-blue-400 hover:bg-white shadow-sm hover:shadow-md w-full md:w-auto md:min-w-[100px] cursor-pointer"
+                                        onClick={(e) => e.stopPropagation()}
+                                        onTouchStart={(e) => e.stopPropagation()}
+                                        className="bg-white/90 text-gray-900 border border-gray-300/80 rounded-lg px-3 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition-all hover:border-blue-400 hover:bg-white shadow-sm hover:shadow-md w-full md:w-auto md:min-w-[100px] cursor-pointer relative z-20"
+                                        style={{ touchAction: 'manipulation' }}
                                     >
                                         <option value="" className="text-gray-800">From</option>
                                         {availableYears?.map((year) => (
@@ -91,7 +111,10 @@ export default function FilterBar({
                                     <select
                                         value={localYearTo}
                                         onChange={(e) => setLocalYearTo(e.target.value)}
-                                        className="bg-white/90 text-gray-900 border border-gray-300/80 rounded-lg px-3 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition-all hover:border-blue-400 hover:bg-white shadow-sm hover:shadow-md w-full md:w-auto md:min-w-[100px] cursor-pointer"
+                                        onClick={(e) => e.stopPropagation()}
+                                        onTouchStart={(e) => e.stopPropagation()}
+                                        className="bg-white/90 text-gray-900 border border-gray-300/80 rounded-lg px-3 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition-all hover:border-blue-400 hover:bg-white shadow-sm hover:shadow-md w-full md:w-auto md:min-w-[100px] cursor-pointer relative z-20"
+                                        style={{ touchAction: 'manipulation' }}
                                     >
                                         <option value="" className="text-gray-800">To</option>
                                         {availableYears?.map((year) => (
@@ -110,8 +133,10 @@ export default function FilterBar({
                                     <select
                                         value={exam || ""}
                                         onChange={(e) => setExam(e.target.value)}
-                                        className="bg-white/90 text-gray-900 border border-gray-300/80 rounded-lg px-3 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition-all hover:border-blue-400 hover:bg-white shadow-sm hover:shadow-md w-full md:w-auto md:min-w-[160px] md:max-w-[200px] truncate cursor-pointer"
-                                        style={{ textOverflow: 'ellipsis' }}
+                                        onClick={(e) => e.stopPropagation()}
+                                        onTouchStart={(e) => e.stopPropagation()}
+                                        className="bg-white/90 text-gray-900 border border-gray-300/80 rounded-lg px-3 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition-all hover:border-blue-400 hover:bg-white shadow-sm hover:shadow-md w-full md:w-auto md:min-w-[160px] md:max-w-[200px] truncate cursor-pointer relative z-20"
+                                        style={{ textOverflow: 'ellipsis', touchAction: 'manipulation' }}
                                     >
                                         <option value="" className="text-gray-800">{showTopic ? "Select Exam" : "All Exams"}</option>
                                         {examsList?.map((ex, idx) => (
@@ -135,8 +160,10 @@ export default function FilterBar({
                                                 e.target.value = "";
                                             }
                                         }}
-                                        className="bg-white/90 text-gray-900 border border-gray-300/80 rounded-lg px-3 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition-all hover:border-blue-400 hover:bg-white shadow-sm hover:shadow-md w-full md:w-auto md:min-w-[150px] md:max-w-[200px] truncate cursor-pointer"
-                                        style={{ textOverflow: 'ellipsis' }}
+                                        onClick={(e) => e.stopPropagation()}
+                                        onTouchStart={(e) => e.stopPropagation()}
+                                        className="bg-white/90 text-gray-900 border border-gray-300/80 rounded-lg px-3 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition-all hover:border-blue-400 hover:bg-white shadow-sm hover:shadow-md w-full md:w-auto md:min-w-[150px] md:max-w-[200px] truncate cursor-pointer relative z-20"
+                                        style={{ textOverflow: 'ellipsis', touchAction: 'manipulation' }}
                                     >
                                         <option value="" className="text-gray-800">+ Add Exam</option>
                                         {examsList
@@ -158,8 +185,10 @@ export default function FilterBar({
                                         value={subject || ""}
                                         onChange={(e) => setSubject(e.target.value)}
                                         disabled={showExam && !exam}
-                                        className="bg-white/90 text-gray-900 border border-gray-300/80 rounded-lg px-3 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition-all hover:border-blue-400 hover:bg-white shadow-sm hover:shadow-md w-full md:w-auto md:min-w-[160px] md:max-w-[200px] truncate disabled:bg-gray-100/80 disabled:cursor-not-allowed disabled:text-gray-400 disabled:border-gray-200 cursor-pointer"
-                                        style={{ textOverflow: 'ellipsis' }}
+                                        onClick={(e) => e.stopPropagation()}
+                                        onTouchStart={(e) => e.stopPropagation()}
+                                        className="bg-white/90 text-gray-900 border border-gray-300/80 rounded-lg px-3 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition-all hover:border-blue-400 hover:bg-white shadow-sm hover:shadow-md w-full md:w-auto md:min-w-[160px] md:max-w-[200px] truncate disabled:bg-gray-100/80 disabled:cursor-not-allowed disabled:text-gray-400 disabled:border-gray-200 cursor-pointer relative z-20"
+                                        style={{ textOverflow: 'ellipsis', touchAction: 'manipulation' }}
                                     >
                                         <option value="" className="text-gray-800">{showTopic ? "Select Subject" : "All Subjects"}</option>
                                         {subjectsList?.map((subj, idx) => (
@@ -179,8 +208,10 @@ export default function FilterBar({
                                         value={topic || ""}
                                         onChange={(e) => setTopic(e.target.value)}
                                         disabled={!subject || !exam || !topicsList || topicsList.length === 0}
-                                        className="bg-white/90 text-gray-900 border border-gray-300/80 rounded-lg px-3 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition-all hover:border-blue-400 hover:bg-white shadow-sm hover:shadow-md w-full md:w-auto md:min-w-[160px] md:max-w-full truncate disabled:bg-gray-100/80 disabled:cursor-not-allowed disabled:text-gray-400 disabled:border-gray-200 cursor-pointer"
-                                        style={{ textOverflow: 'ellipsis' }}
+                                        onClick={(e) => e.stopPropagation()}
+                                        onTouchStart={(e) => e.stopPropagation()}
+                                        className="bg-white/90 text-gray-900 border border-gray-300/80 rounded-lg px-3 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition-all hover:border-blue-400 hover:bg-white shadow-sm hover:shadow-md w-full md:w-auto md:min-w-[160px] md:max-w-full truncate disabled:bg-gray-100/80 disabled:cursor-not-allowed disabled:text-gray-400 disabled:border-gray-200 cursor-pointer relative z-20"
+                                        style={{ textOverflow: 'ellipsis', touchAction: 'manipulation' }}
                                     >
                                         <option value="" className="text-gray-800">Select Topic</option>
                                         {topicsList?.map((top, idx) => (

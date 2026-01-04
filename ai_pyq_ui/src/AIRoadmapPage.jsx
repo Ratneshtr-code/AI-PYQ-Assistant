@@ -285,13 +285,13 @@ export default function AIRoadmapPage() {
             {/* Main Content */}
             <div
                 className={`flex-1 transition-all duration-300 ${
-                    primarySidebarCollapsed ? "ml-16" : "ml-64"
+                    primarySidebarCollapsed ? "md:ml-16" : "md:ml-64"
                 }`}
             >
                 {/* Vertical Progress Simulator - Fixed Position - Only for Roadmap Strategy */}
                 {activeSubPage === "roadmap-strategy" && roadmapData && !loading && !error && (
                     <div 
-                        className={`fixed z-30 flex flex-col items-center py-6 px-3 transition-all duration-300 ${
+                        className={`hidden md:flex fixed z-30 flex-col items-center py-6 px-3 transition-all duration-300 ${
                             primarySidebarCollapsed ? 'left-20' : 'left-72'
                         }`}
                         style={{ top: '50%', transform: 'translateY(-50%)' }}
@@ -352,7 +352,7 @@ export default function AIRoadmapPage() {
                     </div>
                 )}
                 
-                <div className={`p-6 max-w-7xl mx-auto ${activeSubPage === "roadmap-strategy" && roadmapData && !loading && !error ? 'ml-24' : ''} ${activeSubPage === "roadmap-strategy" && roadmapData && !loading && !error ? '' : 'pb-6'}`}>
+                <div className={`p-4 md:p-6 max-w-7xl mx-auto ${activeSubPage === "roadmap-strategy" && roadmapData && !loading && !error ? 'md:ml-24' : ''} ${activeSubPage === "roadmap-strategy" && roadmapData && !loading && !error ? '' : 'pb-6'}`}>
                     {/* Tab Navigation and Exam Selector - Clean Design */}
                     <div className="mb-6">
                         <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">

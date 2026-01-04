@@ -22,6 +22,8 @@ import argparse
 import subprocess
 import sys
 import os
+import time
+import socket
 from pathlib import Path
 from typing import Optional, List
 
@@ -1338,6 +1340,252 @@ def show_project_status():
     print()
 
 
+# Mobile App Management Configuration
+ADB_PATH = r"C:\Users\Ratnesh\AppData\Local\Android\Sdk\platform-tools\adb.exe"
+BACKEND_PORT = 8000
+BACKEND_URL = f"http://localhost:{BACKEND_PORT}"
+TEST_ENDPOINT = f"{BACKEND_URL}/filters"
+APP_PACKAGE = "com.aipyq.app"
+APP_ACTIVITY = "com.aipyq.app.MainActivity"
+
+def check_adb_available():
+    """Check if ADB is available."""
+    if not os.path.exists(ADB_PATH):
+        print_error(f"ADB not found at: {ADB_PATH}")
+        print_info("Please update ADB_PATH in pyq_manager.py with your ADB location")
+        return False
+    return True
+
+def check_device_connected():
+    """Check if an Android device is connected."""
+    if not check_adb_available():
+        return False
+    
+    try:
+        result = subprocess.run([ADB_PATH, "devices"], capture_output=True, text=True, check=False)
+        lines = result.stdout.split('\n')[1:]  # Skip header
+        devices = [line for line in lines if line.strip() and 'device' in line]
+        
+        if not devices:
+            print_warning("No Android device connected")
+            print_info("Please:")
+            print_info("  1. Connect your phone via USB")
+            print_info("  2. Enable USB Debugging on your phone")
+            print_info("  3. Try again")
+            return False
+        
+        device_id = devices[0].split()[0]
+        print_success(f"Device connected: {device_id}")
+        return True
+    except Exception as e:
+        print_error(f"Error checking devices: {e}")
+        return False
+
+def check_port_forwarding():
+    """Check if port forwarding is already set up."""
+    if not check_adb_available():
+        return False
+    
+    try:
+        result = subprocess.run([ADB_PATH, "reverse", "--list"], capture_output=True, text=True, check=False)
+        forwards = result.stdout.split('\n')
+        for forward in forwards:
+            if f"tcp:{BACKEND_PORT}" in forward and f"tcp:{BACKEND_PORT}" in forward:
+                print_success(f"Port forwarding already active: tcp:{BACKEND_PORT} → tcp:{BACKEND_PORT}")
+                return True
+        return False
+    except Exception:
+        return False
+
+def setup_port_forwarding():
+    """Set up ADB port forwarding."""
+    if not check_adb_available():
+        return False
+    
+    print_info(f"Setting up port forwarding: tcp:{BACKEND_PORT} → tcp:{BACKEND_PORT}")
+    
+    try:
+        result = subprocess.run([ADB_PATH, "reverse", f"tcp:{BACKEND_PORT}", f"tcp:{BACKEND_PORT}"], check=True)
+        print_success("Port forwarding set up successfully")
+        return True
+    except subprocess.CalledProcessError:
+        print_error("Failed to set up port forwarding")
+        return False
+
+def check_backend_running():
+    """Check if backend server is running."""
+    try:
+        import requests
+    except ImportError:
+        print_warning("requests library not installed. Install with: pip install requests")
+        print_info("Skipping backend check...")
+        return False
+    
+    try:
+        response = requests.get(TEST_ENDPOINT, timeout=2)
+        if response.status_code == 200:
+            print_success(f"Backend is running on port {BACKEND_PORT}")
+            return True
+        else:
+            print_warning(f"Backend responded with status {response.status_code}")
+            return False
+    except requests.exceptions.ConnectionError:
+        print_error(f"Backend is not running on port {BACKEND_PORT}")
+        print_info("Please start your backend server:")
+        print_info("  Option 2: Start Backend Server")
+        return False
+    except Exception as e:
+        print_error(f"Error checking backend: {e}")
+        return False
+
+def setup_mobile_environment():
+    """Set up the complete environment for mobile app testing."""
+    print_header("Setting Up Mobile App Environment")
+    
+    # Check ADB
+    if not check_adb_available():
+        return False
+    
+    # Check device
+    if not check_device_connected():
+        return False
+    
+    # Setup port forwarding
+    if not check_port_forwarding():
+        if not setup_port_forwarding():
+            return False
+    else:
+        print_info("Port forwarding already active")
+    
+    # Check backend
+    if not check_backend_running():
+        print_warning("Backend is not running. Please start it manually.")
+        print_info("You can still proceed, but the app won't work without the backend.")
+        return True  # Continue anyway
+    
+    print_header("Setup Complete")
+    print_success("Environment is ready for mobile app testing!")
+    print_info("You can now:")
+    print_info("  1. Launch the app from Android Studio (Run → Run 'app')")
+    print_info("  2. Or use option 16 → 3 to launch the app directly")
+    
+    return True
+
+def show_mobile_status():
+    """Show current status of mobile app components."""
+    print_header("Mobile App Status")
+    
+    # Check ADB
+    adb_ok = check_adb_available()
+    if adb_ok:
+        print_success("ADB is available")
+    else:
+        print_error("ADB is not available")
+        return
+    
+    # Check device
+    device_ok = check_device_connected()
+    
+    # Check port forwarding
+    if device_ok:
+        port_forward_ok = check_port_forwarding()
+        if not port_forward_ok:
+            print_warning("Port forwarding is not set up")
+    
+    # Check backend
+    backend_ok = check_backend_running()
+    
+    print_header("Summary")
+    print(f"ADB:           {'✅' if adb_ok else '❌'}")
+    print(f"Device:        {'✅' if device_ok else '❌'}")
+    print(f"Port Forward:  {'✅' if device_ok and check_port_forwarding() else '❌'}")
+    print(f"Backend:       {'✅' if backend_ok else '❌'}")
+    
+    if adb_ok and device_ok and backend_ok:
+        print_success("\nAll systems ready! You can launch the app from Android Studio.")
+    else:
+        print_warning("\nSome components are not ready. Run option 16 → 1 to fix.")
+
+def launch_mobile_app():
+    """Launch the app on connected device."""
+    if not check_adb_available():
+        return False
+    
+    if not check_device_connected():
+        return False
+    
+    print_info(f"Launching app: {APP_PACKAGE}")
+    try:
+        subprocess.run([
+            ADB_PATH, "shell", "am", "start",
+            "-n", f"{APP_PACKAGE}/{APP_ACTIVITY}"
+        ], check=True)
+        print_success("App launch command sent")
+        return True
+    except subprocess.CalledProcessError:
+        print_error("Failed to launch app")
+        return False
+
+def show_mobile_app_submenu():
+    """Display mobile app management submenu"""
+    print_header("Android App Management")
+    
+    print(f"{Colors.BOLD}When to use each option:{Colors.ENDC}\n")
+    print(f"{Colors.YELLOW}📱 First time setup or after USB disconnect:{Colors.ENDC}")
+    print(f"   {Colors.CYAN}1.{Colors.ENDC} {Colors.BOLD}Setup Mobile App Testing{Colors.ENDC}")
+    print(f"      → Complete setup: checks device, sets up port forwarding, verifies backend")
+    print(f"      → Use this when starting fresh or after disconnecting USB\n")
+    
+    print(f"{Colors.YELLOW}📊 Quick status check:{Colors.ENDC}")
+    print(f"   {Colors.CYAN}2.{Colors.ENDC} {Colors.BOLD}Mobile App Status{Colors.ENDC}")
+    print(f"      → Check if device is connected, port forwarding is active, backend is running")
+    print(f"      → Use this to quickly verify everything is ready\n")
+    
+    print(f"{Colors.YELLOW}🚀 Launch app directly:{Colors.ENDC}")
+    print(f"   {Colors.CYAN}3.{Colors.ENDC} {Colors.BOLD}Launch Mobile App{Colors.ENDC}")
+    print(f"      → Launch app directly on device (alternative to Android Studio)")
+    print(f"      → Use this if you want to launch without opening Android Studio\n")
+    
+    print(f"{Colors.YELLOW}🔌 Port forwarding only:{Colors.ENDC}")
+    print(f"   {Colors.CYAN}4.{Colors.ENDC} {Colors.BOLD}Setup Port Forwarding{Colors.ENDC}")
+    print(f"      → Just set up port forwarding (if device is already connected)")
+    print(f"      → Use this when USB was disconnected/reconnected and you just need port forwarding\n")
+    
+    print(f"{Colors.CYAN}0.{Colors.ENDC} {Colors.BOLD}Back to Main Menu{Colors.ENDC}\n")
+    
+    print(f"{Colors.BOLD}Enter your choice (0-4):{Colors.ENDC} ", end="")
+
+def handle_mobile_app_menu():
+    """Handle mobile app submenu interactions"""
+    while True:
+        try:
+            show_mobile_app_submenu()
+            choice = input().strip()
+            
+            if choice == "0":
+                break
+            elif choice == "1":
+                setup_mobile_environment()
+            elif choice == "2":
+                show_mobile_status()
+            elif choice == "3":
+                launch_mobile_app()
+            elif choice == "4":
+                if check_device_connected():
+                    setup_port_forwarding()
+            else:
+                print_error(f"Invalid choice: {choice}")
+                print_info("Please enter a number between 0-4")
+            
+            if choice != "0":
+                input(f"\n{Colors.YELLOW}Press Enter to continue...{Colors.ENDC}")
+        
+        except KeyboardInterrupt:
+            print(f"\n\n{Colors.YELLOW}Returning to main menu...{Colors.ENDC}")
+            break
+        except EOFError:
+            break
+
 def show_main_menu():
     """Display main menu"""
     print_header("AI PYQ Manager - Main Menu")
@@ -1358,6 +1606,7 @@ def show_main_menu():
         ("13", "Migrate Plan Template ID", "Sync subscription plan template ID (payment_orders → users)"),
         ("14", "Migrate Auth Features", "Add email verification and password reset tables/columns"),
         ("15", "Merge/Update Dataset", "Merge JSON files and manage exam set metrics"),
+        ("16", "Android App Management", "Setup, status, launch mobile app (submenu)"),
         ("0", "Exit", "Exit the manager"),
     ]
     
@@ -1366,7 +1615,7 @@ def show_main_menu():
         print(f"  {Colors.CYAN}{num}.{Colors.ENDC} {Colors.BOLD}{title}{Colors.ENDC}")
         print(f"     {Colors.YELLOW}→{Colors.ENDC} {desc}\n")
     
-    print(f"{Colors.BOLD}Enter your choice (0-15):{Colors.ENDC} ", end="")
+    print(f"{Colors.BOLD}Enter your choice (0-16):{Colors.ENDC} ", end="")
 
 
 def main():
@@ -1380,7 +1629,7 @@ def main():
         "--direct",
         type=int,
         metavar="N",
-        help="Run operation directly by number (1-15) without menu"
+        help="Run operation directly by number (1-16) without menu"
     )
     args = parser.parse_args()
     
@@ -1402,13 +1651,14 @@ def main():
             13: migrate_plan_template_id,
             14: migrate_auth_features,
             15: merge_json_to_csv,
+            16: handle_mobile_app_menu,  # Opens submenu
         }
         
         if args.direct in operations:
             operations[args.direct]()
         else:
             print_error(f"Invalid operation number: {args.direct}")
-            print_info("Valid numbers: 1-15")
+            print_info("Valid numbers: 1-16")
             sys.exit(1)
         return
     
@@ -1451,9 +1701,11 @@ def main():
                 migrate_auth_features()
             elif choice == "15":
                 merge_json_to_csv()
+            elif choice == "16":
+                handle_mobile_app_menu()
             else:
                 print_error(f"Invalid choice: {choice}")
-                print_info("Please enter a number between 0-15")
+                print_info("Please enter a number between 0-16")
             
             if choice != "0":
                 input(f"\n{Colors.YELLOW}Press Enter to continue...{Colors.ENDC}")

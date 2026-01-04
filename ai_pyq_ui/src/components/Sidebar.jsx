@@ -9,6 +9,13 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
     const [isMobileOpen, setIsMobileOpen] = useState(false); // Mobile drawer state
     const navigate = useNavigate();
     const location = useLocation();
+    
+    // Swipe gesture state
+    const touchStartX = useRef(null);
+    const touchStartY = useRef(null);
+    const touchEndX = useRef(null);
+    const touchEndY = useRef(null);
+    const minSwipeDistance = 50; // Minimum distance for swipe
 
     // Notify parent when collapse state changes
     useEffect(() => {
@@ -266,20 +273,151 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
         }, 1000);
     };
 
+    // Swipe gesture handlers
+    const onTouchStart = (e) => {
+        // Don't interfere with clicks on interactive elements
+        const target = e.target;
+        if (target.closest('button') || 
+            target.closest('a') || 
+            target.closest('input') || 
+            target.closest('select') || 
+            target.closest('[role="button"]') ||
+            target.closest('[data-filter-button]') ||
+            target.closest('.filter-bar-container')) {
+            return;
+        }
+        touchStartX.current = e.touches[0].clientX;
+        touchStartY.current = e.touches[0].clientY;
+    };
+
+    const onTouchMove = (e) => {
+        // Don't interfere with clicks on interactive elements
+        const target = e.target;
+        if (target.closest('button') || 
+            target.closest('a') || 
+            target.closest('input') || 
+            target.closest('select') || 
+            target.closest('[role="button"]') ||
+            target.closest('[data-filter-button]') ||
+            target.closest('.filter-bar-container')) {
+            return;
+        }
+        touchEndX.current = e.touches[0].clientX;
+        touchEndY.current = e.touches[0].clientY;
+    };
+
+    const onTouchEnd = (e) => {
+        // Don't interfere with clicks on interactive elements
+        const target = e.target;
+        if (target.closest('button') || 
+            target.closest('a') || 
+            target.closest('input') || 
+            target.closest('select') || 
+            target.closest('[role="button"]') ||
+            target.closest('[data-filter-button]') ||
+            target.closest('.filter-bar-container')) {
+            return;
+        }
+        
+        if (!touchStartX.current || !touchEndX.current || !touchStartY.current || !touchEndY.current) return;
+        
+        const distanceX = touchEndX.current - touchStartX.current;
+        const distanceY = touchEndY.current - touchStartY.current;
+        const isHorizontalSwipe = Math.abs(distanceX) > Math.abs(distanceY);
+        
+        if (isHorizontalSwipe && Math.abs(distanceX) > minSwipeDistance) {
+            // Swipe right from left edge (within 50px) to open sidebar
+            if (distanceX > 0 && touchStartX.current < 50 && !isMobileOpen) {
+                setIsMobileOpen(true);
+            }
+            // Swipe left to close sidebar when open
+            else if (distanceX < 0 && isMobileOpen) {
+                setIsMobileOpen(false);
+            }
+        }
+        
+        // Reset touch coordinates
+        touchStartX.current = null;
+        touchStartY.current = null;
+        touchEndX.current = null;
+        touchEndY.current = null;
+    };
+
+    // Add touch event listeners for swipe gesture (mobile only)
+    useEffect(() => {
+        // Only add listeners on mobile devices
+        const isMobile = window.innerWidth < 768;
+        if (!isMobile) return;
+
+        const handleTouchStart = (e) => {
+            const target = e.target;
+            // Skip if touching filter button, filter bar, or any interactive element
+            if (target.closest('[data-filter-button]') || 
+                target.closest('.filter-bar-container') ||
+                target.closest('button') ||
+                target.closest('select') ||
+                target.closest('input') ||
+                target.closest('a') ||
+                target.closest('[role="button"]')) {
+                // Don't process this touch - let the button handle it
+                touchStartX.current = null;
+                touchStartY.current = null;
+                return;
+            }
+            onTouchStart(e);
+        };
+
+        const handleTouchMove = (e) => {
+            const target = e.target;
+            // Skip if touching filter button, filter bar, or any interactive element
+            if (target.closest('[data-filter-button]') || 
+                target.closest('.filter-bar-container') ||
+                target.closest('button') ||
+                target.closest('select') ||
+                target.closest('input') ||
+                target.closest('a') ||
+                target.closest('[role="button"]')) {
+                // Don't process this touch - let the button handle it
+                touchEndX.current = null;
+                touchEndY.current = null;
+                return;
+            }
+            onTouchMove(e);
+        };
+
+        const handleTouchEnd = (e) => {
+            const target = e.target;
+            // Skip if touching filter button, filter bar, or any interactive element
+            if (target.closest('[data-filter-button]') || 
+                target.closest('.filter-bar-container') ||
+                target.closest('button') ||
+                target.closest('select') ||
+                target.closest('input') ||
+                target.closest('a') ||
+                target.closest('[role="button"]')) {
+                // Don't process this touch - let the button handle it
+                touchStartX.current = null;
+                touchStartY.current = null;
+                touchEndX.current = null;
+                touchEndY.current = null;
+                return;
+            }
+            onTouchEnd(e);
+        };
+
+        document.addEventListener('touchstart', handleTouchStart, { passive: true });
+        document.addEventListener('touchmove', handleTouchMove, { passive: true });
+        document.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+        return () => {
+            document.removeEventListener('touchstart', handleTouchStart);
+            document.removeEventListener('touchmove', handleTouchMove);
+            document.removeEventListener('touchend', handleTouchEnd);
+        };
+    }, [isMobileOpen]);
 
     return (
         <>
-            {/* Mobile Menu Toggle Button - Only visible on mobile */}
-            <button
-                onClick={() => setIsMobileOpen(true)}
-                className="md:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-lg shadow-lg border border-gray-200 hover:bg-gray-50 transition-colors"
-                aria-label="Open menu"
-            >
-                <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </button>
-
             {/* Mobile Backdrop - Only visible on mobile when sidebar is open */}
             {isMobileOpen && (
                 <div
@@ -289,14 +427,14 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
             )}
 
             {/* Sidebar - Drawer on mobile, fixed on desktop */}
-            <aside
-                className={`fixed top-0 left-0 z-40 h-screen bg-white shadow-md border-r border-gray-200 flex flex-col transition-all duration-300 ${
-                    isCollapsed ? "w-16" : "w-64"
+        <aside
+            className={`fixed top-0 left-0 z-40 h-screen bg-white shadow-md border-r border-gray-200 flex flex-col transition-all duration-300 ${
+                isCollapsed ? "w-16" : "w-64"
                 } ${
                     // Mobile: transform based on isMobileOpen, Desktop: always visible
                     isMobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
-                }`}
-            >
+            }`}
+        >
             {/* Header with Logo and Collapse Button */}
             <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50">
                 {!isCollapsed && (

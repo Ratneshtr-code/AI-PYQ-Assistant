@@ -3,8 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { getUserData } from "../../utils/auth";
-
-const API_BASE_URL = "";
+import { buildApiUrl } from "../../config/apiConfig";
 
 export default function ExamInstructions() {
     const navigate = useNavigate();
@@ -32,7 +31,7 @@ export default function ExamInstructions() {
         const fetchExamSet = async () => {
             try {
                 setLoading(true);
-                const response = await fetch(`${API_BASE_URL}/exam/sets/${examSetId}`, {
+                const response = await fetch(buildApiUrl(`exam/sets/${examSetId}`), {
                     credentials: "include"
                 });
                 
@@ -58,14 +57,25 @@ export default function ExamInstructions() {
     useEffect(() => {
         const fetchLanguages = async () => {
             try {
-                const response = await fetch(`${API_BASE_URL}/exam/languages`, {
-                    credentials: "include"
+                const response = await fetch(buildApiUrl(`exam/languages`), {
+                    credentials: "include",
+                    headers: {
+                        "Accept": "application/json"
+                    }
                 });
-                
+
                 if (!response.ok) {
                     throw new Error("Failed to fetch languages");
                 }
-                
+
+                // Check if response is actually JSON
+                const contentType = response.headers.get("content-type");
+                if (!contentType || !contentType.includes("application/json")) {
+                    console.warn("⚠️ [ExamInstructions] Languages response is not JSON, using default languages");
+                    // Use default languages instead of throwing error
+                    return;
+                }
+
                 const data = await response.json();
                 // Extract language names from the response
                 const languageNames = data.languages.map(lang => lang.name);
@@ -96,7 +106,7 @@ export default function ExamInstructions() {
             // Convert language name to code
             const langCode = selectedLanguage.toLowerCase() === "hindi" ? "hi" : "en";
             
-            const response = await fetch(`${API_BASE_URL}/exam/start`, {
+            const response = await fetch(buildApiUrl(`exam/start`), {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -3,8 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import SolutionViewer from "./SolutionViewer";
-
-const API_BASE_URL = "";
+import { buildApiUrl } from "../../config/apiConfig";
 
 export default function ExamResults() {
     const navigate = useNavigate();
@@ -25,25 +24,69 @@ export default function ExamResults() {
             try {
                 setLoading(true);
                 // First fetch attempt details to get exam_set_id and exam set name
-                const attemptRes = await fetch(`${API_BASE_URL}/exam/attempt/${attemptId}`, {
-                    credentials: "include"
+                const attemptRes = await fetch(buildApiUrl(`exam/attempt/${attemptId}`), {
+                    credentials: "include",
+                    headers: {
+                        "Accept": "application/json"
+                    }
                 });
                 
                 const [analysisRes, solutionsRes] = await Promise.all([
-                    fetch(`${API_BASE_URL}/exam/attempt/${attemptId}/analysis`, {
-                        credentials: "include"
+                    fetch(buildApiUrl(`exam/attempt/${attemptId}/analysis`), {
+                        credentials: "include",
+                        headers: {
+                            "Accept": "application/json"
+                        }
                     }),
-                    fetch(`${API_BASE_URL}/exam/attempt/${attemptId}/solutions`, {
-                        credentials: "include"
+                    fetch(buildApiUrl(`exam/attempt/${attemptId}/solutions`), {
+                        credentials: "include",
+                        headers: {
+                            "Accept": "application/json"
+                        }
                     })
                 ]);
 
-                if (!analysisRes.ok || !solutionsRes.ok) {
-                    throw new Error("Failed to fetch results");
-                }
+                // Check content-type first before reading body
+                const analysisContentType = analysisRes.headers.get("content-type") || "";
+                const solutionsContentType = solutionsRes.headers.get("content-type") || "";
+                
+                // Helper function to safely parse response
+                const parseResponse = async (response, contentType, responseName) => {
+                    if (contentType.includes("text/html")) {
+                        const text = await response.text();
+                        console.error(`❌ [ExamResults] ${responseName} response is HTML error page:`, text.substring(0, 200));
+                        throw new Error("Server returned an error page. Please check your connection and try again.");
+                    }
+                    
+                    if (!response.ok) {
+                        if (contentType.includes("application/json")) {
+                            try {
+                                const errorData = await response.json();
+                                throw new Error(errorData.message || errorData.error || `Failed to fetch ${responseName}`);
+                            } catch (parseErr) {
+                                throw new Error(`Failed to fetch ${responseName}`);
+                            }
+                        } else {
+                            const text = await response.text();
+                            console.error(`❌ [ExamResults] ${responseName} error response:`, text.substring(0, 200));
+                            throw new Error(`Failed to fetch ${responseName}`);
+                        }
+                    }
+                    
+                    if (!contentType.includes("application/json")) {
+                        const text = await response.text();
+                        console.error(`❌ [ExamResults] ${responseName} response is not JSON:`, contentType, text.substring(0, 200));
+                        throw new Error("Server returned invalid response format. Please try again.");
+                    }
+                    
+                    return await response.json();
+                };
 
-                const analysisData = await analysisRes.json();
-                const solutionsData = await solutionsRes.json();
+                // Parse both responses
+                const [analysisData, solutionsData] = await Promise.all([
+                    parseResponse(analysisRes, analysisContentType, "Analysis"),
+                    parseResponse(solutionsRes, solutionsContentType, "Solutions")
+                ]);
                 
                 setAnalysis(analysisData);
                 setSolutions(solutionsData.solutions);
@@ -56,7 +99,12 @@ export default function ExamResults() {
                 // Get attempt data (only read once)
                 let attemptData = null;
                 if (attemptRes.ok) {
-                    attemptData = await attemptRes.json();
+                    const attemptContentType = attemptRes.headers.get("content-type");
+                    if (attemptContentType && attemptContentType.includes("application/json")) {
+                        attemptData = await attemptRes.json();
+                    } else {
+                        console.warn("⚠️ [ExamResults] Attempt response is not JSON, skipping");
+                    }
                 }
                 
                 // Get exam set name from attempt data or analysis
@@ -109,13 +157,24 @@ export default function ExamResults() {
 
     const handleReattempt = async () => {
         try {
-            const response = await fetch(`${API_BASE_URL}/exam/attempt/${attemptId}/reattempt`, {
+            const response = await fetch(buildApiUrl(`exam/attempt/${attemptId}/reattempt`), {
                 method: "POST",
-                credentials: "include"
+                credentials: "include",
+                headers: {
+                    "Accept": "application/json"
+                }
             });
 
             if (!response.ok) {
                 throw new Error("Failed to start reattempt");
+            }
+
+            // Check if response is actually JSON
+            const contentType = response.headers.get("content-type");
+            if (!contentType || !contentType.includes("application/json")) {
+                const text = await response.text();
+                console.error("❌ [ExamResults] Reattempt response is not JSON:", contentType, text.substring(0, 200));
+                throw new Error("Server returned invalid response format. Please try again.");
             }
 
             const data = await response.json();

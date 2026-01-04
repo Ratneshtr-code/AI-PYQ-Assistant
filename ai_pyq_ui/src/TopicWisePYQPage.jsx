@@ -306,7 +306,7 @@ export default function TopicWisePYQPage() {
                 }`}
             >
                 {/* Filter Bar - Now part of page content, not sticky */}
-                <div className={`w-full relative z-10 ${explanationWindowOpen && !explanationWindowMinimized ? 'results-container-shifted' : ''}`} style={{ maxWidth: explanationWindowOpen && !explanationWindowMinimized ? '48rem' : '100%', width: '100%', marginLeft: 'auto', marginRight: explanationWindowOpen && !explanationWindowMinimized ? '440px' : 'auto' }}>
+                <div className={`w-full relative z-10 md:z-10 ${explanationWindowOpen && !explanationWindowMinimized ? 'results-container-shifted z-0 md:z-10' : ''}`} style={{ maxWidth: explanationWindowOpen && !explanationWindowMinimized ? '48rem' : '100%', width: '100%', marginLeft: 'auto', marginRight: explanationWindowOpen && !explanationWindowMinimized ? '440px' : 'auto' }}>
                     <FilterBar
                         exam={exam}
                         setExam={setExam}

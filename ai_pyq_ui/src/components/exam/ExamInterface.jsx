@@ -7,8 +7,7 @@ import QuestionPaperView from "./QuestionPaperView";
 import { getUserData } from "../../utils/auth";
 import { useLanguage } from "../../contexts/LanguageContext";
 import SaveNoteButton from "../SaveNoteButton";
-
-const API_BASE_URL = "";
+import { buildApiUrl } from "../../config/apiConfig";
 
 export default function ExamInterface() {
     const navigate = useNavigate();
@@ -47,12 +46,23 @@ export default function ExamInterface() {
             try {
                 setLoading(true);
                 // Use exam's stored language (from instructions page), not global context
-                const response = await fetch(`${API_BASE_URL}/exam/attempt/${attemptId}`, {
-                    credentials: "include"
+                const response = await fetch(buildApiUrl(`exam/attempt/${attemptId}`), {
+                    credentials: "include",
+                    headers: {
+                        "Accept": "application/json"
+                    }
                 });
                 
                 if (!response.ok) {
                     throw new Error("Failed to fetch exam attempt");
+                }
+                
+                // Check if response is actually JSON
+                const contentType = response.headers.get("content-type");
+                if (!contentType || !contentType.includes("application/json")) {
+                    const text = await response.text();
+                    console.error("❌ [ExamInterface] Response is not JSON:", contentType, text.substring(0, 200));
+                    throw new Error("Server returned invalid response format. Please try again.");
                 }
                 
                 const data = await response.json();
@@ -193,10 +203,11 @@ export default function ExamInterface() {
         if (questionsToTranslate.length > 0) {
             const translateQuestions = async () => {
                 try {
-                    const response = await fetch(`${API_BASE_URL}/exam/attempt/${attemptId}/translate-questions`, {
+                    const response = await fetch(buildApiUrl(`exam/attempt/${attemptId}/translate-questions`), {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
+                            "Accept": "application/json",
                         },
                         credentials: "include",
                         body: JSON.stringify({
@@ -205,6 +216,12 @@ export default function ExamInterface() {
                     });
 
                     if (response.ok) {
+                        // Check if response is actually JSON
+                        const contentType = response.headers.get("content-type");
+                        if (!contentType || !contentType.includes("application/json")) {
+                            console.warn("⚠️ [ExamInterface] Translate response is not JSON, skipping");
+                            return;
+                        }
                         const data = await response.json();
                         const translations = data.translations || {};
 
@@ -267,20 +284,28 @@ export default function ExamInterface() {
 
             // Silently translate in background
             if (questionsToTranslate.length > 0) {
-                fetch(`${API_BASE_URL}/exam/attempt/${attemptId}/translate-questions`, {
+                fetch(buildApiUrl(`exam/attempt/${attemptId}/translate-questions`), {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
+                        "Accept": "application/json",
                     },
                     credentials: "include",
                     body: JSON.stringify({
                         question_ids: questionsToTranslate
                     })
                 })
-                .then(response => {
+                .then(async response => {
                     if (response.ok) {
+                        // Check if response is actually JSON
+                        const contentType = response.headers.get("content-type");
+                        if (!contentType || !contentType.includes("application/json")) {
+                            console.warn("⚠️ [ExamInterface] Background translate response is not JSON");
+                            return null;
+                        }
                         return response.json();
                     }
+                    return null;
                 })
                 .then(data => {
                     if (data && data.translations) {
@@ -340,7 +365,7 @@ export default function ExamInterface() {
 
         // Save to backend
         try {
-            await fetch(`${API_BASE_URL}/exam/attempt/${attemptId}/answer`, {
+            await fetch(buildApiUrl(`exam/attempt/${attemptId}/answer`), {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -370,7 +395,7 @@ export default function ExamInterface() {
         }));
 
         try {
-            await fetch(`${API_BASE_URL}/exam/attempt/${attemptId}/mark-review?question_id=${questionId}&is_marked=${newMarkedState}`, {
+            await fetch(buildApiUrl(`exam/attempt/${attemptId}/mark-review?question_id=${questionId}&is_marked=${newMarkedState}`), {
                 method: "POST",
                 credentials: "include"
             });
@@ -403,7 +428,7 @@ export default function ExamInterface() {
         });
 
         try {
-            await fetch(`${API_BASE_URL}/exam/attempt/${attemptId}/answer`, {
+            await fetch(buildApiUrl(`exam/attempt/${attemptId}/answer`), {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -426,13 +451,24 @@ export default function ExamInterface() {
 
     const handleSubmit = async () => {
         try {
-            const response = await fetch(`${API_BASE_URL}/exam/attempt/${attemptId}/submit`, {
+            const response = await fetch(buildApiUrl(`exam/attempt/${attemptId}/submit`), {
                 method: "POST",
-                credentials: "include"
+                credentials: "include",
+                headers: {
+                    "Accept": "application/json"
+                }
             });
 
             if (!response.ok) {
                 throw new Error("Failed to submit exam");
+            }
+
+            // Check if response is actually JSON
+            const contentType = response.headers.get("content-type");
+            if (!contentType || !contentType.includes("application/json")) {
+                const text = await response.text();
+                console.error("❌ [ExamInterface] Submit response is not JSON:", contentType, text.substring(0, 200));
+                throw new Error("Server returned invalid response format. Please try again.");
             }
 
             const data = await response.json();

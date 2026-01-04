@@ -3,8 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { formatMarkdown } from "../../utils/formatMarkdown";
 import { useLanguage } from "../../contexts/LanguageContext";
-
-const API_BASE_URL = "";
+import { buildApiUrl } from "../../config/apiConfig";
 
 export default function SolutionViewer({ solutions, currentQuestionId, onClose, onNavigate, examLanguage }) {
     const { language: globalLanguage } = useLanguage();
@@ -54,10 +53,11 @@ export default function SolutionViewer({ solutions, currentQuestionId, onClose, 
             // This handles the case where question might already be in Hindi
             setLoadingTranslation(true);
             try {
-                const response = await fetch(`${API_BASE_URL}/translate_question`, {
+                const response = await fetch(buildApiUrl("translate_question"), {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
+                        "Accept": "application/json"
                     },
                     credentials: "include",
                     body: JSON.stringify({
@@ -73,53 +73,62 @@ export default function SolutionViewer({ solutions, currentQuestionId, onClose, 
                     })
                 });
 
-                if (response.ok) {
-                    const data = await response.json();
-                    if (data.error) {
-                        console.error("Translation error:", data.error);
-                        // Fallback to stored original or current question
-                        setTranslatedQuestion(originalEnglish ? {
-                            ...question,
-                            ...originalEnglish
-                        } : question);
-                    } else {
-                        // Always store the English text from backend (it's fetched from database)
-                        // This ensures we have the correct English text even if exam was in Hindi
-                        originalEnglishQuestionsRef.current[questionId] = {
-                            question_text: data.question_text,
-                            option_a: data.option_a,
-                            option_b: data.option_b,
-                            option_c: data.option_c,
-                            option_d: data.option_d,
-                        };
-                        
-                        // Validate that we got English text (check if it's different from the Hindi text we sent)
-                        const receivedText = data.question_text || "";
-                        const sentText = question.question_text || "";
-                        
-                        if (receivedText !== sentText) {
-                            console.log("✅ Using English text from database (different from sent text) for question_id:", questionId);
-                        } else {
-                            console.warn("⚠️ Received text matches sent text - database lookup may have failed for question_id:", questionId, "Using anyway.");
-                        }
-                        
-                        // Use the English text from backend
-                        setTranslatedQuestion({
-                            ...question,
-                            question_text: data.question_text,
-                            option_a: data.option_a,
-                            option_b: data.option_b,
-                            option_c: data.option_c,
-                            option_d: data.option_d,
-                        });
-                    }
-                } else {
-                    console.error("Failed to fetch English text, status:", response.status);
+                // Check content-type before parsing
+                const contentType = response.headers.get("content-type") || "";
+                if (contentType.includes("text/html")) {
+                    const text = await response.text();
+                    console.error("❌ [SolutionViewer] Translation response is HTML error page:", text.substring(0, 200));
+                    throw new Error("Server returned an error page");
+                }
+
+                if (!response.ok) {
+                    throw new Error("Failed to fetch translation");
+                }
+
+                if (!contentType.includes("application/json")) {
+                    const text = await response.text();
+                    console.error("❌ [SolutionViewer] Translation response is not JSON:", contentType, text.substring(0, 200));
+                    throw new Error("Server returned invalid response format");
+                }
+
+                const data = await response.json();
+                if (data.error) {
+                    console.error("Translation error:", data.error);
                     // Fallback to stored original or current question
                     setTranslatedQuestion(originalEnglish ? {
                         ...question,
                         ...originalEnglish
                     } : question);
+                } else {
+                    // Always store the English text from backend (it's fetched from database)
+                    // This ensures we have the correct English text even if exam was in Hindi
+                    originalEnglishQuestionsRef.current[questionId] = {
+                        question_text: data.question_text,
+                        option_a: data.option_a,
+                        option_b: data.option_b,
+                        option_c: data.option_c,
+                        option_d: data.option_d,
+                    };
+                    
+                    // Validate that we got English text (check if it's different from the Hindi text we sent)
+                    const receivedText = data.question_text || "";
+                    const sentText = question.question_text || "";
+                    
+                    if (receivedText !== sentText) {
+                        console.log("✅ Using English text from database (different from sent text) for question_id:", questionId);
+                    } else {
+                        console.warn("⚠️ Received text matches sent text - database lookup may have failed for question_id:", questionId, "Using anyway.");
+                    }
+                    
+                    // Use the English text from backend
+                    setTranslatedQuestion({
+                        ...question,
+                        question_text: data.question_text,
+                        option_a: data.option_a,
+                        option_b: data.option_b,
+                        option_c: data.option_c,
+                        option_d: data.option_d,
+                    });
                 }
             } catch (err) {
                 console.error("Error fetching English text:", err);
@@ -141,10 +150,11 @@ export default function SolutionViewer({ solutions, currentQuestionId, onClose, 
             const sourceQuestion = originalEnglish || question;
             
             // Call backend translation endpoint
-            const response = await fetch(`${API_BASE_URL}/translate_question`, {
+            const response = await fetch(buildApiUrl("translate_question"), {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "Accept": "application/json"
                 },
                 credentials: "include",
                 body: JSON.stringify({
@@ -160,36 +170,49 @@ export default function SolutionViewer({ solutions, currentQuestionId, onClose, 
                 })
             });
 
-            if (response.ok) {
-                const data = await response.json();
-                if (data.error) {
-                    console.error("Translation error:", data.error);
-                    setTranslatedQuestion(question);
-                } else {
-                    // Merge translated data with original question to preserve all fields
-                    setTranslatedQuestion({
-                        ...question,
-                        question_text: data.question_text || question.question_text,
-                        option_a: data.option_a || question.option_a,
-                        option_b: data.option_b || question.option_b,
-                        option_c: data.option_c || question.option_c,
-                        option_d: data.option_d || question.option_d,
-                    });
-                    
-                    // Store original English if we just translated and don't have it stored
-                    if (!originalEnglish && sourceQuestion === question) {
-                        originalEnglishQuestionsRef.current[questionId] = {
-                            question_text: question.question_text,
-                            option_a: question.option_a,
-                            option_b: question.option_b,
-                            option_c: question.option_c,
-                            option_d: question.option_d,
-                        };
-                    }
-                }
-            } else {
-                console.error("Translation request failed:", response.status);
+            // Check content-type before parsing
+            const contentType = response.headers.get("content-type") || "";
+            if (contentType.includes("text/html")) {
+                const text = await response.text();
+                console.error("❌ [SolutionViewer] Translation response is HTML error page:", text.substring(0, 200));
+                throw new Error("Server returned an error page");
+            }
+
+            if (!response.ok) {
+                throw new Error("Failed to fetch translation");
+            }
+
+            if (!contentType.includes("application/json")) {
+                const text = await response.text();
+                console.error("❌ [SolutionViewer] Translation response is not JSON:", contentType, text.substring(0, 200));
+                throw new Error("Server returned invalid response format");
+            }
+
+            const data = await response.json();
+            if (data.error) {
+                console.error("Translation error:", data.error);
                 setTranslatedQuestion(question);
+            } else {
+                // Merge translated data with original question to preserve all fields
+                setTranslatedQuestion({
+                    ...question,
+                    question_text: data.question_text || question.question_text,
+                    option_a: data.option_a || question.option_a,
+                    option_b: data.option_b || question.option_b,
+                    option_c: data.option_c || question.option_c,
+                    option_d: data.option_d || question.option_d,
+                });
+                
+                // Store original English if we just translated and don't have it stored
+                if (!originalEnglish && sourceQuestion === question) {
+                    originalEnglishQuestionsRef.current[questionId] = {
+                        question_text: question.question_text,
+                        option_a: question.option_a,
+                        option_b: question.option_b,
+                        option_c: question.option_c,
+                        option_d: question.option_d,
+                    };
+                }
             }
         } catch (err) {
             console.error("Error translating question:", err);
@@ -224,10 +247,11 @@ export default function SolutionViewer({ solutions, currentQuestionId, onClose, 
             // Ensure question_id is passed (use fallback if needed)
             const finalQuestionId = questionId || question.json_question_id || question._id || null;
             
-            const response = await fetch(`${API_BASE_URL}/explain_concept`, {
+            const response = await fetch(buildApiUrl("explain_concept"), {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "Accept": "application/json"
                 },
                 credentials: "include",
                 body: JSON.stringify({
@@ -249,12 +273,29 @@ export default function SolutionViewer({ solutions, currentQuestionId, onClose, 
                 })
             });
 
-            if (response.ok) {
-                const data = await response.json();
-                setExplanation(data.explanation || "");
-            } else {
-                setExplanation("Explanation not available.");
+            // Check content-type before parsing
+            const contentType = response.headers.get("content-type") || "";
+            if (contentType.includes("text/html")) {
+                const text = await response.text();
+                console.error("❌ [SolutionViewer] Explanation response is HTML error page:", text.substring(0, 200));
+                setExplanation("Error: Server returned an error page. Please check your connection.");
+                return;
             }
+
+            if (!response.ok) {
+                setExplanation("Explanation not available.");
+                return;
+            }
+
+            if (!contentType.includes("application/json")) {
+                const text = await response.text();
+                console.error("❌ [SolutionViewer] Explanation response is not JSON:", contentType, text.substring(0, 200));
+                setExplanation("Error: Server returned invalid response format.");
+                return;
+            }
+
+            const data = await response.json();
+            setExplanation(data.explanation || "");
         } catch (err) {
             console.error("Error fetching explanation:", err);
             setExplanation("Error loading explanation.");
