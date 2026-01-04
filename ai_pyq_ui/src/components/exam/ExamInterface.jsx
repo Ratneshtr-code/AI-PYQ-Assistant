@@ -1011,7 +1011,10 @@ export default function ExamInterface() {
                                         <button
                                             onClick={() => {
                                                 setSidebarTab("list");
-                                                setShowQuestionPaper(true);
+                                                // On mobile, show inline list view; on desktop, open modal
+                                                if (!isMobile) {
+                                                    setShowQuestionPaper(true);
+                                                }
                                             }}
                                             className={`flex-1 px-3 py-2 text-sm font-semibold transition-colors relative ${
                                                 sidebarTab === "list"
@@ -1071,6 +1074,49 @@ export default function ExamInterface() {
                                         >
                                             View Instructions
                                         </button>
+                                    </div>
+                                )}
+
+                                {/* List View Tab Content - Mobile Only */}
+                                {isMobile && sidebarTab === "list" && (
+                                    <div className="flex-1 overflow-y-auto mb-4">
+                                        <div className="space-y-2">
+                                            {examData.questions.map((question, index) => {
+                                                const status = getQuestionStatus(question.question_id, index);
+                                                const isCurrent = index === currentQuestionIndex;
+                                                const bgColor = {
+                                                    "current": "bg-blue-500 text-white border-2 border-blue-700",
+                                                    "answered": "bg-green-500 text-white",
+                                                    "marked": "bg-purple-500 text-white",
+                                                    "answered-marked": "bg-purple-500 text-white border-2 border-green-500",
+                                                    "not-visited": "bg-white text-gray-700 border-2 border-gray-400"
+                                                }[status] || "bg-white text-gray-700 border-2 border-gray-400";
+                                                
+                                                return (
+                                                    <button
+                                                        key={question.question_id}
+                                                        onClick={() => {
+                                                            handleQuestionNavigation(index);
+                                                            setIsSidebarCollapsed(true);
+                                                        }}
+                                                        className={`w-full p-2.5 rounded text-left transition-all ${
+                                                            isCurrent 
+                                                                ? "bg-blue-50 border-2 border-blue-500" 
+                                                                : "border border-gray-200 hover:bg-gray-50"
+                                                        }`}
+                                                    >
+                                                        <div className="flex items-start gap-2.5">
+                                                            <span className={`flex-shrink-0 w-7 h-7 rounded text-xs font-semibold flex items-center justify-center ${bgColor}`}>
+                                                                {index + 1}
+                                                            </span>
+                                                            <p className="text-sm text-gray-700 line-clamp-2 flex-1 leading-relaxed">
+                                                                {question.question_text}
+                                                            </p>
+                                                        </div>
+                                                    </button>
+                                                );
+                                            })}
+                                        </div>
                                     </div>
                                 )}
 
@@ -1152,8 +1198,8 @@ export default function ExamInterface() {
                                 {/* Divider between Content and Action Buttons */}
                                 <div className="border-t-2 border-gray-300 mb-3 flex-shrink-0"></div>
 
-                                {/* Action Buttons - Desktop: Always show, Mobile: Show based on tab */}
-                                {(!isMobile || sidebarTab === "grid") && (
+                                {/* Action Buttons - Desktop: Always show, Mobile: Show for Grid and List View tabs */}
+                                {(!isMobile || sidebarTab === "grid" || sidebarTab === "list") && (
                                     <div className="space-y-2 flex-shrink-0">
                                         {!isMobile && (
                                             <>
@@ -1201,9 +1247,9 @@ export default function ExamInterface() {
                 )}
             </AnimatePresence>
 
-            {/* Question Paper View */}
+            {/* Question Paper View - Desktop Only (Mobile uses inline List View in sidebar) */}
             <AnimatePresence>
-                {showQuestionPaper && (
+                {showQuestionPaper && !isMobile && (
                     <QuestionPaperView
                         questions={examData.questions}
                         currentIndex={currentQuestionIndex}
