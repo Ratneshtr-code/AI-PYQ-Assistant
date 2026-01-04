@@ -38,11 +38,37 @@ export default function SearchPage() {
     useEffect(() => {
         const fetchExams = async () => {
             try {
-                const res = await fetch(filtersUrl);
+                console.log("🔍 [Search Page] Fetching exams from:", filtersUrl);
+                const res = await fetch(filtersUrl, {
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    }
+                });
+                console.log("📡 [Search Page] Response status:", res.status, res.statusText);
+                
+                if (!res.ok) {
+                    const text = await res.text();
+                    console.error("❌ [Search Page] Failed to fetch exams. Status:", res.status, "Response:", text.substring(0, 200));
+                    setExamsList([]);
+                    return;
+                }
+                
+                const contentType = res.headers.get("content-type");
+                if (!contentType || !contentType.includes("application/json")) {
+                    const text = await res.text();
+                    console.error("❌ [Search Page] Response is not JSON. Content-Type:", contentType, "Response:", text.substring(0, 200));
+                    setExamsList([]);
+                    return;
+                }
+                
                 const data = await res.json();
+                console.log("✅ [Search Page] Exams data received:", data);
                 setExamsList(data.exams || []);
             } catch (err) {
-                console.error("Failed to fetch exam filters:", err);
+                console.error("❌ [Search Page] Error fetching exam filters:", err);
+                setExamsList([]);
             }
         };
         fetchExams();
@@ -163,14 +189,14 @@ export default function SearchPage() {
             <Sidebar exam={exam} setExam={setExam} examsList={examsList} onOpenSecondarySidebar={() => {}} />
 
             {/* 📚 Main Content Area */}
-            <main className="flex-1 flex flex-col items-center justify-start p-8 pl-64 transition-all duration-300 relative">
+            <main className="flex-1 flex flex-col items-center justify-start p-2 md:p-8 md:pl-64 transition-all duration-300 relative">
 
                 {/* Language Toggle - Top Right Corner */}
                 <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setLanguage(language === "en" ? "hi" : "en")}
-                    className="fixed top-8 right-8 z-30 px-4 py-2.5 rounded-lg border border-gray-300/80 bg-white/90 hover:bg-white hover:border-blue-400 transition-all shadow-sm hover:shadow-md flex items-center justify-center backdrop-blur-sm min-w-[60px]"
+                    className="fixed top-16 md:top-8 right-4 md:right-8 z-30 px-3 md:px-4 py-2 md:py-2.5 rounded-lg border border-gray-300/80 bg-white/90 hover:bg-white hover:border-blue-400 transition-all shadow-sm hover:shadow-md flex items-center justify-center backdrop-blur-sm min-w-[50px] md:min-w-[60px]"
                     title={language === "en" ? "Switch to Hindi" : "Switch to English"}
                 >
                     {language === "en" ? (
@@ -181,7 +207,7 @@ export default function SearchPage() {
                 </motion.button>
 
                 {/* Exam Filter - Fixed/Sticky Position */}
-                <div className="fixed left-64 top-8 z-30 flex flex-col gap-1.5 pl-3 bg-gray-50 py-2 pr-2 rounded-r-lg shadow-sm exam-filter-compact" style={{ width: '140px' }}>
+                <div className="fixed left-0 md:left-64 top-16 md:top-8 z-30 flex flex-col gap-1.5 pl-3 bg-gray-50 py-2 pr-2 rounded-r-lg shadow-sm exam-filter-compact w-full md:w-auto" style={{ maxWidth: '140px' }}>
                     <label className="text-base font-medium text-gray-700 whitespace-nowrap text-center">
                         Exam
                     </label>
@@ -199,9 +225,9 @@ export default function SearchPage() {
                     </select>
                 </div>
 
-                <div className="w-full space-y-6 px-4 md:px-0">
+                <div className="w-full space-y-4 md:space-y-6 px-2 md:px-4 md:px-0">
                     {/* Content Container */}
-                    <div className="max-w-3xl w-full mx-auto space-y-6 results-parent-container">
+                    <div className="max-w-3xl w-full mx-auto space-y-4 md:space-y-6 results-parent-container">
                         {/* Header with Heading Centered - Shifts with explanation window */}
                         <div className={`flex items-center justify-center relative w-full ${explanationWindowOpen && !explanationWindowMinimized ? 'results-container-shifted mb-8' : 'mb-8'}`} style={{ maxWidth: explanationWindowOpen && !explanationWindowMinimized ? '48rem' : '100%', width: '100%', marginLeft: 'auto', marginRight: explanationWindowOpen && !explanationWindowMinimized ? '440px' : 'auto' }}>
                             <h1 className="text-3xl font-bold">

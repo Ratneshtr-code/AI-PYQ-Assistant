@@ -8,9 +8,9 @@ import EditProfileModal from "./components/EditProfileModal";
 import TransactionModal from "./components/TransactionModal";
 import { getCurrentUser, getUserData, authenticatedFetch, setUserData } from "./utils/auth";
 import { useProgressTracking } from "./hooks/useProgressTracking";
+import { buildApiUrl } from "./config/apiConfig";
 
-// Use empty string for Vite proxy (same-origin)
-const API_BASE_URL = "";
+// API URLs are now handled by buildApiUrl from apiConfig
 
 export default function AccountPage() {
     const navigate = useNavigate();
@@ -121,7 +121,7 @@ export default function AccountPage() {
         // Fetch exams list for sidebar
         const fetchExams = async () => {
             try {
-                const res = await fetch("/filters");
+                const res = await fetch(buildApiUrl("filters"));
                 const data = await res.json();
                 setExamsList(data.exams || []);
             } catch (err) {
@@ -153,7 +153,7 @@ export default function AccountPage() {
         const fetchPlans = async () => {
             setPlansLoading(true);
             try {
-                const res = await fetch(`/subscription-plans?t=${Date.now()}`, {
+                const res = await fetch(`${buildApiUrl("subscription-plans")}?t=${Date.now()}`, {
                     cache: 'no-store',
                     headers: {
                         'Cache-Control': 'no-cache'
@@ -346,7 +346,7 @@ export default function AccountPage() {
                 // Fetch progress for all exams in parallel
                 const progressPromises = examsList.map(async (exam) => {
                     try {
-                        const response = await fetch(`/roadmap/progress/${encodeURIComponent(exam)}`, {
+                        const response = await fetch(buildApiUrl(`roadmap/progress/${encodeURIComponent(exam)}`), {
                             credentials: "include"
                         });
                         if (response.ok) {
@@ -420,7 +420,7 @@ export default function AccountPage() {
     const handleEditProfileSave = async ({ fullName: newFullName, username: newUsername, mobileNumber: newMobileNumber }) => {
         try {
             // Update all fields
-            const response = await authenticatedFetch(`${API_BASE_URL}/auth/profile`, {
+            const response = await authenticatedFetch(buildApiUrl("auth/profile"), {
                 method: "PUT",
                 body: JSON.stringify({ 
                     full_name: newFullName,
@@ -459,7 +459,7 @@ export default function AccountPage() {
                 formData.append("avatar", avatarData.image);
                 
                 // For FormData, we need to let the browser set Content-Type with boundary
-                const response = await fetch(`${API_BASE_URL}/auth/profile/avatar`, {
+                const response = await fetch(buildApiUrl("auth/profile/avatar"), {
                     method: "PUT",
                     credentials: "include",
                     body: formData,
@@ -498,7 +498,7 @@ export default function AccountPage() {
         setErrorMessage("");
         
         try {
-            const response = await authenticatedFetch(`${API_BASE_URL}/feedback`, {
+            const response = await authenticatedFetch(buildApiUrl("feedback"), {
                 method: "POST",
                 body: JSON.stringify({ feedback: feedback.trim() }),
             });
@@ -521,7 +521,7 @@ export default function AccountPage() {
     useEffect(() => {
         const fetchLanguages = async () => {
             try {
-                const response = await authenticatedFetch(`${API_BASE_URL}/auth/supported-languages`);
+                const response = await authenticatedFetch(buildApiUrl("auth/supported-languages"));
                 if (response.ok) {
                     const data = await response.json();
                     setSupportedLanguages(data.languages || []);
@@ -567,7 +567,7 @@ export default function AccountPage() {
         
         // Save to backend
         try {
-            const response = await authenticatedFetch(`${API_BASE_URL}/auth/profile`, {
+            const response = await authenticatedFetch(buildApiUrl("auth/profile"), {
                 method: "PUT",
                 body: JSON.stringify({ preferred_language: newLanguage }),
             });
@@ -591,7 +591,7 @@ export default function AccountPage() {
     // Handle data export
     const handleExportData = async () => {
         try {
-            const response = await authenticatedFetch(`${API_BASE_URL}/user/export`);
+            const response = await authenticatedFetch(buildApiUrl("user/export"));
             if (response.ok) {
                 const blob = await response.blob();
                 const url = window.URL.createObjectURL(blob);
@@ -633,7 +633,7 @@ export default function AccountPage() {
         }
         
         try {
-            const response = await authenticatedFetch(`${API_BASE_URL}/auth/account`, {
+            const response = await authenticatedFetch(buildApiUrl("auth/account"), {
                 method: "DELETE",
             });
             
@@ -666,7 +666,7 @@ export default function AccountPage() {
         setSuccessMessage("");
         
         try {
-            const response = await authenticatedFetch(`${API_BASE_URL}/auth/profile`, {
+            const response = await authenticatedFetch(buildApiUrl("auth/profile"), {
                 method: "PUT",
                 body: JSON.stringify({ full_name: fullName.trim() }),
             });
@@ -723,7 +723,7 @@ export default function AccountPage() {
         setSuccessMessage("");
         
         try {
-            const response = await authenticatedFetch(`${API_BASE_URL}/auth/profile`, {
+            const response = await authenticatedFetch(buildApiUrl("auth/profile"), {
                 method: "PUT",
                 body: JSON.stringify({ username: username.trim() }),
             });
@@ -785,7 +785,7 @@ export default function AccountPage() {
         setSuccessMessage("");
         
         try {
-            const response = await authenticatedFetch(`${API_BASE_URL}/auth/change-password`, {
+            const response = await authenticatedFetch(buildApiUrl("auth/change-password"), {
                 method: "PUT",
                 body: JSON.stringify({
                     current_password: currentPassword,
@@ -916,13 +916,13 @@ export default function AccountPage() {
         <div className="flex min-h-screen bg-gray-50">
             <Sidebar exam="" setExam={() => {}} examsList={examsList} onOpenSecondarySidebar={() => {}} />
             
-            <main className="flex-1 ml-64">
-                <div className="max-w-7xl mx-auto px-4 md:px-8 py-8">
+            <main className="flex-1 md:ml-64">
+                <div className="max-w-7xl mx-auto px-2 md:px-4 lg:px-8 py-4 md:py-6 lg:py-8">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                     >
-                        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 md:mb-6">
                             👤 My Account
                         </h1>
 
@@ -939,24 +939,24 @@ export default function AccountPage() {
                         )}
                         
                         {/* Two Column Layout */}
-                        <div className="grid grid-cols-1 lg:grid-cols-10 gap-6">
+                        <div className="grid grid-cols-1 lg:grid-cols-10 gap-4 md:gap-6">
                             {/* Left Section (25-30%) */}
                             <div className="lg:col-span-3">
                                 {/* Combined User Account Card */}
-                                <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                                <div className="bg-white rounded-xl border border-gray-200 p-4 md:p-6 shadow-sm">
                                     {/* User Profile Section */}
-                                    <div className="flex items-center gap-4 mb-6">
+                                    <div className="flex flex-col md:flex-row items-center md:items-start gap-4 mb-4 md:mb-6">
                                         <div
-                                            className="w-24 h-24 rounded-full flex items-center justify-center text-white font-semibold text-3xl flex-shrink-0"
+                                            className="w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center text-white font-semibold text-2xl md:text-3xl flex-shrink-0"
                                             style={{ 
                                                 backgroundColor: localStorage.getItem("avatarColor") || "#14b8a6" 
                                             }}
                                         >
                                             {localStorage.getItem("avatarInitials") || getUserInitials()}
                                         </div>
-                                        <div className="flex-1 min-w-0">
-                                            <p className="text-2xl font-semibold text-gray-900 truncate">{fullName || "Not set"}</p>
-                                            <p className="text-sm text-gray-500 truncate">@{username || "username"}</p>
+                                        <div className="flex-1 min-w-0 text-center md:text-left">
+                                            <p className="text-xl md:text-2xl font-semibold text-gray-900 truncate">{fullName || "Not set"}</p>
+                                            <p className="text-xs md:text-sm text-gray-500 truncate">@{username || "username"}</p>
                                         </div>
                                     </div>
                                     <button
@@ -1122,13 +1122,13 @@ export default function AccountPage() {
                             <div className="lg:col-span-7 space-y-6">
 
                                 {/* Progress Overview Section */}
-                                <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-                                    <div className="flex items-center justify-between mb-4">
+                                <div className="bg-white rounded-xl border border-gray-200 p-4 md:p-6 shadow-sm">
+                                    <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-4 gap-3 md:gap-0">
                                         <h2 className="text-xl font-semibold text-gray-900">Progress Overview</h2>
                                         <select
                                             value={selectedExam}
                                             onChange={(e) => setSelectedExam(e.target.value)}
-                                            className="px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                            className="w-full md:w-auto px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                         >
                                             <option value="">Select Exam</option>
                                             {examsList.map((exam) => (
@@ -1148,7 +1148,7 @@ export default function AccountPage() {
                                                     </div>
                                                 </div>
                                             ) : progressOverviewData ? (
-                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
                                                     {/* Circular Progress Chart */}
                                                     <div className="flex items-center justify-center">
                                                         <div className="relative w-48 h-48">
@@ -1238,8 +1238,8 @@ export default function AccountPage() {
                                 </div>
                                 
                                 {/* Tabs Section */}
-                                <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <div className="bg-white rounded-xl border border-gray-200 p-3 md:p-4 shadow-sm">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3">
                                         <motion.button
                                             whileHover={{ scale: 1.02 }}
                                             whileTap={{ scale: 0.98 }}
@@ -1307,16 +1307,16 @@ export default function AccountPage() {
                                 </div>
                                 
                                 {/* Subscription Plans Section */}
-                                <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-                                    <h2 className="text-xl font-semibold text-gray-900 mb-4">Subscription Plans</h2>
+                                <div className="bg-white rounded-xl border border-gray-200 p-4 md:p-6 shadow-sm">
+                                    <h2 className="text-lg md:text-xl font-semibold text-gray-900 mb-3 md:mb-4">Subscription Plans</h2>
                                     {plansLoading ? (
                                         <div className="flex items-center justify-center py-8">
                                             <div className="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
                                         </div>
                                     ) : (
-                                        <div className={`grid gap-4 ${availablePlans.filter(p => p.plan_type === "premium").length > 0 ? (availablePlans.filter(p => p.plan_type === "premium").length === 1 ? "md:grid-cols-2" : "md:grid-cols-3") : "md:grid-cols-2"}`}>
+                                        <div className={`grid grid-cols-1 gap-3 md:gap-4 ${availablePlans.filter(p => p.plan_type === "premium").length > 0 ? (availablePlans.filter(p => p.plan_type === "premium").length === 1 ? "md:grid-cols-2" : "md:grid-cols-3") : "md:grid-cols-2"}`}>
                                             {/* Free Plan */}
-                                            <div className="bg-white rounded-xl border-2 border-gray-200 p-4 shadow-sm">
+                                            <div className="bg-white rounded-xl border-2 border-gray-200 p-3 md:p-4 shadow-sm">
                                                 <div className="mb-4">
                                                     <h3 className="text-xl font-bold text-gray-900 mb-2">Free</h3>
                                                     <div className="flex items-baseline">
@@ -1376,7 +1376,7 @@ export default function AccountPage() {
                                                         key={plan.id}
                                                         className={`relative bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border-2 ${
                                                             isActivePlan ? "border-emerald-500" : "border-blue-500"
-                                                        } p-4 shadow-lg`}
+                                                        } p-3 md:p-4 shadow-lg`}
                                                     >
                                                         {isActivePlan && (
                                                             <div className="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">
@@ -1437,8 +1437,8 @@ export default function AccountPage() {
                                 </div>
                                 
                                 {/* Feedback Section */}
-                                <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-                                    <h2 className="text-xl font-semibold text-gray-900 mb-4">Feedback</h2>
+                                <div className="bg-white rounded-xl border border-gray-200 p-4 md:p-6 shadow-sm">
+                                    <h2 className="text-lg md:text-xl font-semibold text-gray-900 mb-3 md:mb-4">Feedback</h2>
                                     <p className="text-sm text-gray-600 mb-4">
                                         We'd love to hear your thoughts and suggestions
                                     </p>

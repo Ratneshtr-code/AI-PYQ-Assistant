@@ -45,14 +45,18 @@ export default function LoginPage() {
         }
 
         try {
+            const loginUrl = buildApiUrl("auth/login");
+            console.log("🔐 [Login] Attempting login to:", loginUrl);
+            
             // Add timeout to prevent hanging
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+            const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
             
-            const response = await fetch(buildApiUrl("auth/login"), {
+            const response = await fetch(loginUrl, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "Accept": "application/json"
                 },
                 credentials: "include", // Important: include cookies
                 signal: controller.signal,
@@ -63,6 +67,7 @@ export default function LoginPage() {
             });
             
             clearTimeout(timeoutId);
+            console.log("📡 [Login] Response status:", response.status, response.statusText);
 
             // Check response status BEFORE parsing JSON
             if (!response.ok) {
@@ -93,10 +98,12 @@ export default function LoginPage() {
                     }
                 }
                 
+                console.error("❌ [Login] Login failed:", errorMessage);
                 throw new Error(errorMessage);
             }
 
             const data = await response.json();
+            console.log("✅ [Login] Login successful, user:", data.user?.email || data.user?.username);
 
             // Validate response has required fields
             if (!data.user) {
@@ -134,18 +141,24 @@ export default function LoginPage() {
             localStorage.removeItem("refreshToken");
             localStorage.removeItem("userData");
             
+            console.error("❌ [Login] Error details:", err);
+            
             // Handle different error types
-            if (err.name === 'AbortError') {
-                setError("Request timed out. Please check your connection and try again.");
-            } else if (err.message && err.message.includes("Failed to fetch")) {
-                setError("Cannot connect to server. Please make sure the backend server is running.");
+            if (err.name === 'AbortError' || err.message.includes('timeout') || err.message.includes('aborted')) {
+                const loginUrl = buildApiUrl("auth/login");
+                setError(`Connection timeout. Cannot reach backend at ${loginUrl}. Please check:\n1. Backend is running on port 8000\n2. For USB debugging, run: adb reverse tcp:8000 tcp:8000\n3. Or ensure phone and computer are on same WiFi network`);
+                console.error("⏱️ [Login] Request timed out - backend not reachable");
+            } else if (err.message && (err.message.includes('Failed to fetch') || err.message.includes('NetworkError'))) {
+                const loginUrl = buildApiUrl("auth/login");
+                setError(`Cannot connect to backend at ${loginUrl}. Please check:\n1. Backend is running\n2. For USB debugging, run: adb reverse tcp:8000 tcp:8000\n3. Check your network connection`);
+                console.error("🌐 [Login] Network error - cannot reach backend");
             } else if (err.message) {
                 setError(err.message);
             } else {
                 setError("Failed to login. Please check your credentials and try again.");
             }
             
-            console.error("Login error:", err);
+            console.error("❌ [Login] Login error:", err);
         } finally {
             setLoading(false);
         }

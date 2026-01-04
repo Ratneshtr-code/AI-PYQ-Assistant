@@ -293,7 +293,7 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
                 <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    className="bg-white rounded-2xl shadow-lg p-6 border border-gray-200"
+                    className="bg-white rounded-2xl shadow-lg p-4 md:p-6 border border-gray-200 overflow-x-auto"
                 >
                     <div className="mb-4">
                         <h3 className="text-xl font-semibold text-gray-800 mb-1">Subject Distribution</h3>
@@ -350,7 +350,8 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
                         </div>
                     </div>
                     {subjectChartData.length > 0 ? (
-                        <ResponsiveContainer width="100%" height={Math.max(400, subjectChartData.length * 50)}>
+                        <div className="w-full overflow-x-auto" style={{ minHeight: `${Math.max(400, subjectChartData.length * 50)}px` }}>
+                            <ResponsiveContainer width="100%" height={Math.max(400, subjectChartData.length * 50)} minHeight={400}>
                             <BarChart
                                 data={subjectChartData}
                                 layout="vertical"
@@ -401,6 +402,7 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
                                     ))}
                             </BarChart>
                         </ResponsiveContainer>
+                        </div>
                     ) : (
                         <p className="text-gray-500 text-center py-8">No subject data available</p>
                     )}
@@ -417,7 +419,7 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
                 <motion.div
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    className="bg-white rounded-2xl shadow-lg p-6 border border-gray-200"
+                    className="bg-white rounded-2xl shadow-lg p-4 md:p-6 border border-gray-200 overflow-x-auto"
                 >
                     <div className="mb-4">
                         <h3 className="text-xl font-semibold text-gray-800 mb-1">
@@ -481,7 +483,8 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
                     </div>
                     {selectedSubject ? (
                         topicChartData.length > 0 ? (
-                            <ResponsiveContainer width="100%" height={Math.max(400, topicChartData.length * 50)}>
+                            <div className="w-full overflow-x-auto" style={{ minHeight: `${Math.max(400, topicChartData.length * 50)}px` }}>
+                                <ResponsiveContainer width="100%" height={Math.max(400, topicChartData.length * 50)} minHeight={400}>
                                 <BarChart
                                     data={topicChartData}
                                     layout="vertical"
@@ -526,6 +529,7 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
                                         ))}
                                 </BarChart>
                             </ResponsiveContainer>
+                            </div>
                         ) : (
                             <p className="text-gray-500 text-center py-8">No topic data available for {selectedSubject}</p>
                         )

@@ -66,15 +66,24 @@ export const LanguageProvider = ({ children }) => {
             if (userData) {
                 const response = await authenticatedFetch("/auth/profile/update", {
                     method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
                     body: JSON.stringify({ preferred_language: validLang }),
                 });
 
                 if (response.ok) {
-                    const updatedUser = await response.json();
-                    // Update localStorage with new user data
-                    const updatedUserData = { ...userData, preferred_language: validLang };
-                    localStorage.setItem("userData", JSON.stringify(updatedUserData));
-                    console.log("Language preference saved to account");
+                    const contentType = response.headers.get("content-type");
+                    if (contentType && contentType.includes("application/json")) {
+                        const updatedUser = await response.json();
+                        // Update localStorage with new user data
+                        const updatedUserData = { ...userData, preferred_language: validLang };
+                        localStorage.setItem("userData", JSON.stringify(updatedUserData));
+                        console.log("Language preference saved to account");
+                    } else {
+                        console.warn("Response is not JSON, skipping parse");
+                    }
                 } else {
                     console.warn("Failed to save language preference to account");
                 }

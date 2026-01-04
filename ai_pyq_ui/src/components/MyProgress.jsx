@@ -19,7 +19,7 @@ export default function MyProgress({ exam }) {
 
     if (!exam) {
         return (
-            <div className="bg-white rounded-lg shadow-md p-8 text-center border border-gray-200">
+            <div className="bg-white rounded-lg shadow-md p-4 md:p-8 text-center border border-gray-200">
                 <div className="text-5xl mb-3">📊</div>
                 <h3 className="text-lg font-semibold text-gray-800 mb-1">
                     Select an Exam to View Progress
@@ -44,7 +44,7 @@ export default function MyProgress({ exam }) {
 
     if (!progressData) {
         return (
-            <div className="bg-white rounded-lg shadow-md p-8 text-center border border-gray-200">
+            <div className="bg-white rounded-lg shadow-md p-4 md:p-8 text-center border border-gray-200">
                 <div className="text-5xl mb-3">📊</div>
                 <h3 className="text-lg font-semibold text-gray-800 mb-1">
                     No Progress Data Available
@@ -69,17 +69,17 @@ export default function MyProgress({ exam }) {
             <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-white rounded-xl shadow-lg p-4 border border-gray-200"
+                className="bg-white rounded-xl shadow-lg p-3 md:p-4 lg:p-6 border border-gray-200"
             >
                 <h2 className="text-xl font-bold text-gray-900 mb-4">
                     Progress Overview of {exam}
                 </h2>
                 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
                     {/* Circular Progress Chart - Increased size */}
                     <div className="flex flex-col items-center justify-center lg:col-span-1">
-                        <div className="relative w-64 h-64">
-                            <svg className="transform -rotate-90 w-64 h-64">
+                        <div className="relative w-48 h-48 md:w-64 md:h-64 mx-auto">
+                            <svg className="transform -rotate-90 w-48 h-48 md:w-64 md:h-64">
                                 {/* Background circle */}
                                 <circle
                                     cx="50%"
@@ -275,7 +275,7 @@ export default function MyProgress({ exam }) {
                         </motion.div>
                     ))
                 ) : (
-                    <div className="bg-white rounded-lg shadow-md p-8 text-center border border-gray-200">
+                    <div className="bg-white rounded-lg shadow-md p-4 md:p-8 text-center border border-gray-200">
                         <p className="text-gray-600">No subjects found for this exam</p>
                     </div>
                 )}

@@ -74,11 +74,37 @@ export default function TopicWisePYQPage() {
     useEffect(() => {
         const fetchExams = async () => {
             try {
-                const res = await fetch(filtersUrl);
+                console.log("🔍 [Topic-wise PYQ] Fetching exams from:", filtersUrl);
+                const res = await fetch(filtersUrl, {
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    }
+                });
+                console.log("📡 [Topic-wise PYQ] Response status:", res.status, res.statusText);
+                
+                if (!res.ok) {
+                    const text = await res.text();
+                    console.error("❌ [Topic-wise PYQ] Failed to fetch exams. Status:", res.status, "Response:", text.substring(0, 200));
+                    setExamsList([]);
+                    return;
+                }
+                
+                const contentType = res.headers.get("content-type");
+                if (!contentType || !contentType.includes("application/json")) {
+                    const text = await res.text();
+                    console.error("❌ [Topic-wise PYQ] Response is not JSON. Content-Type:", contentType, "Response:", text.substring(0, 200));
+                    setExamsList([]);
+                    return;
+                }
+                
                 const data = await res.json();
+                console.log("✅ [Topic-wise PYQ] Exams data received:", data);
                 setExamsList(data.exams || []);
             } catch (err) {
-                console.error("Failed to fetch exam filters:", err);
+                console.error("❌ [Topic-wise PYQ] Error fetching exam filters:", err);
+                setExamsList([]);
             }
         };
         fetchExams();
@@ -276,7 +302,7 @@ export default function TopicWisePYQPage() {
             {/* 📚 Main Content Area */}
             <main
                 className={`flex-1 flex flex-col transition-all duration-300 min-h-screen ${
-                    primarySidebarCollapsed ? "ml-16" : "ml-64"
+                    primarySidebarCollapsed ? "md:ml-16" : "md:ml-64"
                 }`}
             >
                 {/* Filter Bar - Now part of page content, not sticky */}
@@ -299,7 +325,7 @@ export default function TopicWisePYQPage() {
                 </div>
 
                 {/* Content Area */}
-                <div className="w-full max-w-7xl mx-auto px-4 md:px-8 py-6 md:py-8 space-y-4 relative z-0">
+                <div className="w-full max-w-7xl mx-auto px-2 md:px-4 lg:px-8 py-4 md:py-6 lg:py-8 space-y-4 relative z-0">
                     {/* Back Button - Show when coming from AI Roadmap */}
                     {fromRoadmap && (
                         <div className={`mb-4 ${explanationWindowOpen && !explanationWindowMinimized ? 'results-container-shifted' : ''}`} style={{ maxWidth: explanationWindowOpen && !explanationWindowMinimized ? '48rem' : '100%', width: '100%', marginLeft: 'auto', marginRight: explanationWindowOpen && !explanationWindowMinimized ? '440px' : 'auto' }}>

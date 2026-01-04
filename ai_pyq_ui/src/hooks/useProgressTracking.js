@@ -1,7 +1,6 @@
 // src/hooks/useProgressTracking.js
 import { useState, useCallback, useRef } from "react";
-
-const API_BASE_URL = "";
+import { buildApiUrl } from "../config/apiConfig";
 
 /**
  * Hook for tracking user's question-solving progress
@@ -17,10 +16,11 @@ export function useProgressTracking() {
      */
     const trackQuestion = useCallback(async (questionId, exam, subject, topic, source, isCorrect = null) => {
         try {
-            const response = await fetch(`${API_BASE_URL}/roadmap/track-question`, {
+            const response = await fetch(buildApiUrl("roadmap/track-question"), {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "Accept": "application/json"
                 },
                 credentials: "include",
                 body: JSON.stringify({
@@ -57,10 +57,11 @@ export function useProgressTracking() {
         }
 
         try {
-            const response = await fetch(`${API_BASE_URL}/roadmap/check-solved`, {
+            const response = await fetch(buildApiUrl("roadmap/check-solved"), {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "Accept": "application/json"
                 },
                 credentials: "include",
                 body: JSON.stringify({
@@ -69,17 +70,23 @@ export function useProgressTracking() {
             });
 
             if (response.ok) {
-                const data = await response.json();
-                // Update local cache
-                const newSet = new Set(solvedQuestionIds);
-                Object.keys(data).forEach(qid => {
-                    if (data[qid]) {
-                        newSet.add(parseInt(qid));
-                        solvedCacheRef.current.add(parseInt(qid));
-                    }
-                });
-                setSolvedQuestionIds(newSet);
-                return data;
+                const contentType = response.headers.get("content-type");
+                if (contentType && contentType.includes("application/json")) {
+                    const data = await response.json();
+                    // Update local cache
+                    const newSet = new Set(solvedQuestionIds);
+                    Object.keys(data).forEach(qid => {
+                        if (data[qid]) {
+                            newSet.add(parseInt(qid));
+                            solvedCacheRef.current.add(parseInt(qid));
+                        }
+                    });
+                    setSolvedQuestionIds(newSet);
+                    return data;
+                } else {
+                    console.warn("Response is not JSON, skipping parse");
+                    return {};
+                }
             }
             return {};
         } catch (error) {
@@ -100,23 +107,33 @@ export function useProgressTracking() {
         setLoading(true);
         try {
             const langParam = language === "hi" ? "hi" : "en";
-            const response = await fetch(`${API_BASE_URL}/roadmap/progress/${encodeURIComponent(exam)}?language=${langParam}`, {
-                credentials: "include"
+            const response = await fetch(buildApiUrl(`roadmap/progress/${encodeURIComponent(exam)}?language=${langParam}`), {
+                credentials: "include",
+                headers: {
+                    "Accept": "application/json"
+                }
             });
 
             if (response.ok) {
-                const data = await response.json();
-                setProgressData(data);
-                
-                // Update solved question IDs cache
-                if (data.solved_question_ids) {
-                    const newSet = new Set(data.solved_question_ids);
-                    setSolvedQuestionIds(newSet);
-                    data.solved_question_ids.forEach(id => {
-                        solvedCacheRef.current.add(id);
-                    });
+                const contentType = response.headers.get("content-type");
+                if (contentType && contentType.includes("application/json")) {
+                    const data = await response.json();
+                    setProgressData(data);
+                    
+                    // Update solved question IDs cache
+                    if (data.solved_question_ids) {
+                        const newSet = new Set(data.solved_question_ids);
+                        setSolvedQuestionIds(newSet);
+                        data.solved_question_ids.forEach(id => {
+                            solvedCacheRef.current.add(id);
+                        });
+                    }
+                    return data;
+                } else {
+                    console.warn("Response is not JSON, skipping parse");
+                    setProgressData(null);
+                    return null;
                 }
-                return data;
             } else {
                 setProgressData(null);
                 return null;

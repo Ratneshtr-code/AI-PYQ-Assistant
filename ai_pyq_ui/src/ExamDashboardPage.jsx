@@ -49,11 +49,38 @@ export default function ExamDashboardPage() {
         // Fetch exam filters
         const fetchExams = async () => {
             try {
-                const res = await fetch(buildApiUrl("filters"));
+                const url = buildApiUrl("filters");
+                console.log("🔍 Fetching exams from:", url);
+                const res = await fetch(url, {
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    }
+                });
+                console.log("📡 Exams response status:", res.status, res.statusText);
+                
+                if (!res.ok) {
+                    const text = await res.text();
+                    console.error("❌ Failed to fetch exams. Status:", res.status, "Response:", text.substring(0, 200));
+                    setExamsList([]);
+                    return;
+                }
+                
+                const contentType = res.headers.get("content-type");
+                if (!contentType || !contentType.includes("application/json")) {
+                    const text = await res.text();
+                    console.error("❌ Response is not JSON. Content-Type:", contentType, "Response:", text.substring(0, 200));
+                    setExamsList([]);
+                    return;
+                }
+                
                 const data = await res.json();
+                console.log("✅ Exams data received:", data);
                 setExamsList(data.exams || []);
             } catch (err) {
-                console.error("Failed to fetch exams:", err);
+                console.error("❌ Error fetching exams:", err);
+                setExamsList([]);
             }
         };
         fetchExams();
@@ -61,8 +88,34 @@ export default function ExamDashboardPage() {
         // Fetch available years
         const fetchYears = async () => {
             try {
-                const res = await fetch(buildApiUrl("dashboard/filters"));
+                const url = buildApiUrl("dashboard/filters");
+                console.log("🔍 Fetching years from:", url);
+                const res = await fetch(url, {
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    }
+                });
+                console.log("📡 Years response status:", res.status, res.statusText);
+                
+                if (!res.ok) {
+                    const text = await res.text();
+                    console.error("❌ Failed to fetch years. Status:", res.status, "Response:", text.substring(0, 200));
+                    setAvailableYears([]);
+                    return;
+                }
+                
+                const contentType = res.headers.get("content-type");
+                if (!contentType || !contentType.includes("application/json")) {
+                    const text = await res.text();
+                    console.error("❌ Response is not JSON. Content-Type:", contentType, "Response:", text.substring(0, 200));
+                    setAvailableYears([]);
+                    return;
+                }
+                
                 const data = await res.json();
+                console.log("✅ Years data received:", data);
                 if (data.years && data.years.length > 0) {
                     setAvailableYears(data.years);
                     if (!yearFrom && data.years[0]) {
@@ -71,9 +124,12 @@ export default function ExamDashboardPage() {
                     if (!yearTo && data.years[data.years.length - 1]) {
                         setYearTo(data.years[data.years.length - 1]);
                     }
+                } else {
+                    setAvailableYears([]);
                 }
             } catch (err) {
-                console.error("Failed to fetch years:", err);
+                console.error("❌ Error fetching years:", err);
+                setAvailableYears([]);
             }
         };
         fetchYears();
@@ -181,7 +237,7 @@ export default function ExamDashboardPage() {
             {/* Main Content */}
             <main
                 className={`flex-1 flex flex-col transition-all duration-300 min-h-screen ${
-                    primarySidebarCollapsed ? "ml-16" : "ml-64"
+                    primarySidebarCollapsed ? "md:ml-16" : "md:ml-64"
                 }`}
             >
                 {/* Filter Bar */}
@@ -204,7 +260,7 @@ export default function ExamDashboardPage() {
                 </div>
 
                 {/* Content Area */}
-                <div className="w-full max-w-7xl mx-auto px-4 md:px-8 py-6 md:py-8 space-y-4 relative z-0">
+                <div className="w-full max-w-7xl mx-auto px-2 md:px-4 lg:px-8 py-4 md:py-6 lg:py-8 space-y-4 relative z-0">
                     <AnimatePresence mode="wait">
                         {viewMode === "cards" ? (
                             <motion.div
@@ -227,14 +283,14 @@ export default function ExamDashboardPage() {
                                 </div>
 
                                 {/* Premium Cards Grid */}
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 max-w-7xl mx-auto">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-6 md:mb-8 max-w-7xl mx-auto">
                                     {/* Exam Analysis Card */}
                                     <motion.div
                                         initial={{ opacity: 0, scale: 0.9 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         transition={{ delay: 0.1 }}
                                         onClick={() => handleCardClick("exam-analysis")}
-                                        className="group relative bg-white rounded-xl shadow-lg hover:shadow-2xl border border-gray-200 hover:border-indigo-300 cursor-pointer transition-all duration-300 overflow-hidden p-6 flex flex-col h-full"
+                                        className="group relative bg-white rounded-xl shadow-lg hover:shadow-2xl border border-gray-200 hover:border-indigo-300 cursor-pointer transition-all duration-300 overflow-hidden p-4 md:p-6 flex flex-col h-full"
                                         whileHover={{ scale: 1.02 }}
                                     >
                                         {/* Gradient Overlay */}
@@ -268,7 +324,7 @@ export default function ExamDashboardPage() {
                                         animate={{ opacity: 1, scale: 1 }}
                                         transition={{ delay: 0.2 }}
                                         onClick={() => handleCardClick("subject-analysis")}
-                                        className="group relative bg-white rounded-xl shadow-lg hover:shadow-2xl border border-gray-200 hover:border-indigo-300 cursor-pointer transition-all duration-300 overflow-hidden p-6 flex flex-col h-full"
+                                        className="group relative bg-white rounded-xl shadow-lg hover:shadow-2xl border border-gray-200 hover:border-indigo-300 cursor-pointer transition-all duration-300 overflow-hidden p-4 md:p-6 flex flex-col h-full"
                                         whileHover={{ scale: 1.02 }}
                                     >
                                         {/* Gradient Overlay */}
@@ -302,7 +358,7 @@ export default function ExamDashboardPage() {
                                         animate={{ opacity: 1, scale: 1 }}
                                         transition={{ delay: 0.3 }}
                                         onClick={() => handleCardClick("hottest-topics-by-exam")}
-                                        className="group relative bg-white rounded-xl shadow-lg hover:shadow-2xl border border-gray-200 hover:border-indigo-300 cursor-pointer transition-all duration-300 overflow-hidden p-6 flex flex-col h-full"
+                                        className="group relative bg-white rounded-xl shadow-lg hover:shadow-2xl border border-gray-200 hover:border-indigo-300 cursor-pointer transition-all duration-300 overflow-hidden p-4 md:p-6 flex flex-col h-full"
                                         whileHover={{ scale: 1.02 }}
                                     >
                                         {/* Gradient Overlay */}
@@ -336,7 +392,7 @@ export default function ExamDashboardPage() {
                                         animate={{ opacity: 1, scale: 1 }}
                                         transition={{ delay: 0.4 }}
                                         onClick={() => handleCardClick("hottest-topics-by-subject")}
-                                        className="group relative bg-white rounded-xl shadow-lg hover:shadow-2xl border border-gray-200 hover:border-indigo-300 cursor-pointer transition-all duration-300 overflow-hidden p-6 flex flex-col h-full"
+                                        className="group relative bg-white rounded-xl shadow-lg hover:shadow-2xl border border-gray-200 hover:border-indigo-300 cursor-pointer transition-all duration-300 overflow-hidden p-4 md:p-6 flex flex-col h-full"
                                         whileHover={{ scale: 1.02 }}
                                     >
                                         {/* Gradient Overlay */}

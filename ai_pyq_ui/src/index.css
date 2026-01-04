@@ -45,6 +45,11 @@
 /* ===== Base Styles ===== */
 body {
     @apply bg-baseLight text-baseText font-sans text-[15px] leading-relaxed;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+html {
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -73,6 +78,7 @@ html {
     box-sizing: border-box;
     padding-top: 0;
     margin-top: 0;
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 .results-container-shifted {
@@ -253,9 +259,18 @@ body.explanation-window-open .results-parent-container {
 
 .question-card {
     margin-bottom: 1rem;
-    padding: 1rem;
+    padding: 0.75rem;
     scroll-margin-top: 120px; /* Space to prevent hiding behind fixed Exam Filter when scrolling (top-8 + filter height) */
     position: relative;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+    .question-card {
+        padding: 1rem;
+    }
 }
 
     /* ===== Extra (optional aesthetic tweaks) ===== */
@@ -272,7 +287,7 @@ body.explanation-window-open .results-parent-container {
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 40;
+    z-index: 999; /* Just below explanation window */
     backdrop-filter: blur(2px);
 }
 
@@ -284,7 +299,7 @@ body.explanation-window-open .results-parent-container {
     height: 100vh;
     background: #fafafa;
     box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
-    z-index: 50;
+    z-index: 1000; /* Higher than filter bar (z-10) to ensure it appears above */
     display: flex;
     flex-direction: column;
     transition: width 0.3s ease-in-out, height 0.3s ease-in-out, top 0.3s ease-in-out;
@@ -570,20 +585,35 @@ body.explanation-window-open .exam-filter-compact {
 /* ===== Mobile Responsive Styles ===== */
 @media (max-width: 768px) {
     .explanation-window {
-        width: 90%;
-        max-width: 400px;
-        height: 85vh;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        border-radius: 12px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        border-left: none;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 100vh !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        transform: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        border-left: none !important;
+        z-index: 9999 !important; /* Ensure it's above filter bar (z-10) */
+    }
+
+    .explanation-backdrop {
+        z-index: 9998 !important; /* Just below explanation window */
+    }
+    
+    /* Ensure filter bar doesn't overlap explanation window */
+    .explanation-window-open ~ * .filter-bar,
+    body.explanation-window-open .filter-bar {
+        z-index: 1 !important; /* Lower than explanation window */
     }
 
     .results-container-shifted {
         margin-right: 0 !important;
-        padding-top: 0 !important; /* No extra padding needed on mobile */
+        margin-left: 0 !important;
+        padding-top: 0 !important;
+        max-width: 100% !important;
     }
 
     .question-card-shifted {
@@ -596,7 +626,19 @@ body.explanation-window-open .exam-filter-compact {
 
     .explanation-content {
         padding: 1rem;
-        margin: 0.25rem;
+        margin: 0.5rem;
+        border-radius: 8px;
+    }
+
+    .explanation-header {
+        padding: 1rem !important;
+        min-height: 56px !important;
+    }
+
+    /* Prevent horizontal overflow on mobile */
+    * {
+        max-width: 100%;
+        box-sizing: border-box;
     }
 }
 

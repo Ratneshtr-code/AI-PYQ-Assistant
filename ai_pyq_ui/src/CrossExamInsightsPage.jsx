@@ -41,11 +41,38 @@ export default function CrossExamInsightsPage() {
         // Fetch exam filters
         const fetchExams = async () => {
             try {
-                const res = await fetch(buildApiUrl("filters"));
+                const url = buildApiUrl("filters");
+                console.log("🔍 [Cross-Exam] Fetching exams from:", url);
+                const res = await fetch(url, {
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    }
+                });
+                console.log("📡 [Cross-Exam] Response status:", res.status, res.statusText);
+                
+                if (!res.ok) {
+                    const text = await res.text();
+                    console.error("❌ [Cross-Exam] Failed to fetch exams. Status:", res.status, "Response:", text.substring(0, 200));
+                    setExamsList([]);
+                    return;
+                }
+                
+                const contentType = res.headers.get("content-type");
+                if (!contentType || !contentType.includes("application/json")) {
+                    const text = await res.text();
+                    console.error("❌ [Cross-Exam] Response is not JSON. Content-Type:", contentType, "Response:", text.substring(0, 200));
+                    setExamsList([]);
+                    return;
+                }
+                
                 const data = await res.json();
+                console.log("✅ [Cross-Exam] Exams data received:", data);
                 setExamsList(data.exams || []);
             } catch (err) {
-                console.error("Failed to fetch exams:", err);
+                console.error("❌ [Cross-Exam] Error fetching exams:", err);
+                setExamsList([]);
             }
         };
         fetchExams();
@@ -53,8 +80,34 @@ export default function CrossExamInsightsPage() {
         // Fetch available years
         const fetchYears = async () => {
             try {
-                const res = await fetch(buildApiUrl("dashboard/filters"));
+                const url = buildApiUrl("dashboard/filters");
+                console.log("🔍 [Cross-Exam] Fetching years from:", url);
+                const res = await fetch(url, {
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    }
+                });
+                console.log("📡 [Cross-Exam] Years response status:", res.status, res.statusText);
+                
+                if (!res.ok) {
+                    const text = await res.text();
+                    console.error("❌ [Cross-Exam] Failed to fetch years. Status:", res.status, "Response:", text.substring(0, 200));
+                    setAvailableYears([]);
+                    return;
+                }
+                
+                const contentType = res.headers.get("content-type");
+                if (!contentType || !contentType.includes("application/json")) {
+                    const text = await res.text();
+                    console.error("❌ [Cross-Exam] Response is not JSON. Content-Type:", contentType, "Response:", text.substring(0, 200));
+                    setAvailableYears([]);
+                    return;
+                }
+                
                 const data = await res.json();
+                console.log("✅ [Cross-Exam] Years data received:", data);
                 if (data.years && data.years.length > 0) {
                     setAvailableYears(data.years);
                     if (!yearFrom && data.years[0]) {
@@ -63,9 +116,12 @@ export default function CrossExamInsightsPage() {
                     if (!yearTo && data.years[data.years.length - 1]) {
                         setYearTo(data.years[data.years.length - 1]);
                     }
+                } else {
+                    setAvailableYears([]);
                 }
             } catch (err) {
-                console.error("Failed to fetch years:", err);
+                console.error("❌ [Cross-Exam] Error fetching years:", err);
+                setAvailableYears([]);
             }
         };
         fetchYears();
@@ -147,7 +203,7 @@ export default function CrossExamInsightsPage() {
             {/* Main Content */}
             <main
                 className={`flex-1 flex flex-col transition-all duration-300 min-h-screen ${
-                    primarySidebarCollapsed ? "ml-16" : "ml-64"
+                    primarySidebarCollapsed ? "md:ml-16" : "md:ml-64"
                 }`}
             >
                 {/* Filter Bar */}
@@ -170,7 +226,7 @@ export default function CrossExamInsightsPage() {
                 </div>
 
                 {/* Content Area */}
-                <div className="w-full max-w-7xl mx-auto px-4 md:px-8 py-6 md:py-8 space-y-4 relative z-0">
+                <div className="w-full max-w-7xl mx-auto px-2 md:px-4 lg:px-8 py-4 md:py-6 lg:py-8 space-y-4 relative z-0">
                     <AnimatePresence mode="wait">
                         {viewMode === "cards" ? (
                             <motion.div
@@ -193,14 +249,14 @@ export default function CrossExamInsightsPage() {
                                 </div>
 
                                 {/* Premium Cards Grid */}
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6 mb-6 md:mb-8">
                                     {/* Subject Comparison Card */}
                                     <motion.div
                                         initial={{ opacity: 0, scale: 0.9 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         transition={{ delay: 0.1 }}
                                         onClick={() => handleCardClick("subject-cards")}
-                                        className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl border border-gray-200 hover:border-indigo-300 cursor-pointer transition-all duration-300 overflow-hidden p-8"
+                                        className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl border border-gray-200 hover:border-indigo-300 cursor-pointer transition-all duration-300 overflow-hidden p-4 md:p-6 lg:p-8"
                                         whileHover={{ scale: 1.02 }}
                                     >
                                         {/* Gradient Overlay */}
@@ -234,7 +290,7 @@ export default function CrossExamInsightsPage() {
                                         animate={{ opacity: 1, scale: 1 }}
                                         transition={{ delay: 0.2 }}
                                         onClick={() => handleCardClick("subject-analysis")}
-                                        className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl border border-gray-200 hover:border-indigo-300 cursor-pointer transition-all duration-300 overflow-hidden p-8"
+                                        className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl border border-gray-200 hover:border-indigo-300 cursor-pointer transition-all duration-300 overflow-hidden p-4 md:p-6 lg:p-8"
                                         whileHover={{ scale: 1.02 }}
                                     >
                                         {/* Gradient Overlay */}
@@ -268,7 +324,7 @@ export default function CrossExamInsightsPage() {
                                         animate={{ opacity: 1, scale: 1 }}
                                         transition={{ delay: 0.3 }}
                                         onClick={() => handleCardClick("hot-topics")}
-                                        className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl border border-gray-200 hover:border-indigo-300 cursor-pointer transition-all duration-300 overflow-hidden p-8"
+                                        className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl border border-gray-200 hover:border-indigo-300 cursor-pointer transition-all duration-300 overflow-hidden p-4 md:p-6 lg:p-8"
                                         whileHover={{ scale: 1.02 }}
                                     >
                                         {/* Gradient Overlay */}
@@ -299,7 +355,7 @@ export default function CrossExamInsightsPage() {
 
                                 {/* Info Section */}
                                 {exams.length === 0 && (
-                                    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6 text-center shadow-sm">
+                                    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-4 md:p-6 text-center shadow-sm">
                                         <p className="text-blue-800 font-medium">
                                             {language === "hi"
                                                 ? "👆 विश्लेषण की तुलना शुरू करने के लिए फ़िल्टर बार से परीक्षाएं जोड़ें"
@@ -388,7 +444,7 @@ export default function CrossExamInsightsPage() {
 
                                 {/* Info Section */}
                                 {exams.length === 0 && (
-                                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
+                                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 md:p-6 text-center">
                                         <p className="text-blue-800">
                                             {language === "hi"
                                                 ? "👆 विश्लेषण की तुलना शुरू करने के लिए फ़िल्टर बार से परीक्षाएं जोड़ें"

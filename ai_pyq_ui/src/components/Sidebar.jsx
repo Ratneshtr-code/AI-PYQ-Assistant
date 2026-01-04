@@ -6,6 +6,7 @@ import FeedbackModal from "./FeedbackModal";
 
 export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySidebar, onCollapseChange }) {
     const [isCollapsed, setIsCollapsed] = useState(false);
+    const [isMobileOpen, setIsMobileOpen] = useState(false); // Mobile drawer state
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -267,11 +268,35 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
 
 
     return (
-        <aside
-            className={`fixed top-0 left-0 z-40 h-screen bg-white shadow-md border-r border-gray-200 flex flex-col transition-all duration-300 ${
-                isCollapsed ? "w-16" : "w-64"
-            }`}
-        >
+        <>
+            {/* Mobile Menu Toggle Button - Only visible on mobile */}
+            <button
+                onClick={() => setIsMobileOpen(true)}
+                className="md:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-lg shadow-lg border border-gray-200 hover:bg-gray-50 transition-colors"
+                aria-label="Open menu"
+            >
+                <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+
+            {/* Mobile Backdrop - Only visible on mobile when sidebar is open */}
+            {isMobileOpen && (
+                <div
+                    className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300"
+                    onClick={() => setIsMobileOpen(false)}
+                />
+            )}
+
+            {/* Sidebar - Drawer on mobile, fixed on desktop */}
+            <aside
+                className={`fixed top-0 left-0 z-40 h-screen bg-white shadow-md border-r border-gray-200 flex flex-col transition-all duration-300 ${
+                    isCollapsed ? "w-16" : "w-64"
+                } ${
+                    // Mobile: transform based on isMobileOpen, Desktop: always visible
+                    isMobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+                }`}
+            >
             {/* Header with Logo and Collapse Button */}
             <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50">
                 {!isCollapsed && (
@@ -288,6 +313,17 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                         <span className="text-white font-bold text-xs">AI</span>
                     </div>
                 )}
+                {/* Close button for mobile */}
+                <button
+                    onClick={() => setIsMobileOpen(false)}
+                    className="md:hidden p-1.5 hover:bg-gray-200 rounded-lg transition-colors text-gray-500 hover:text-gray-700 flex-shrink-0 mr-2"
+                    title="Close menu"
+                    aria-label="Close menu"
+                >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
                 <button
                     onClick={() => {
                         const newCollapsedState = !isCollapsed;
@@ -298,7 +334,7 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                             // This will be handled by the parent component
                         }
                     }}
-                    className="p-1.5 hover:bg-gray-200 rounded-lg transition-colors text-gray-500 hover:text-gray-700 flex-shrink-0 ml-2"
+                    className="hidden md:block p-1.5 hover:bg-gray-200 rounded-lg transition-colors text-gray-500 hover:text-gray-700 flex-shrink-0 ml-2"
                     title={isCollapsed ? "Open sidebar" : "Close sidebar"}
                     aria-label={isCollapsed ? "Open sidebar" : "Close sidebar"}
                 >
@@ -336,7 +372,10 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                     {/* Smart Roadmap - Only visible to logged-in users */}
                     {(localStorage.getItem("isLoggedIn") === "true" || isLoggedIn) && (
                         <button
-                            onClick={() => navigate("/ai-roadmap")}
+                            onClick={() => {
+                                navigate("/ai-roadmap");
+                                setIsMobileOpen(false);
+                            }}
                             className={`w-full text-left py-2 px-3 rounded-lg transition text-sm flex items-center gap-2 ${
                                 location.pathname.includes("ai-roadmap")
                                     ? "bg-blue-50 text-blue-700 font-medium"
@@ -352,6 +391,7 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                     <button
                         onClick={() => {
                             navigate("/exam-dashboard");
+                            setIsMobileOpen(false); // Close mobile drawer on navigation
                             if (onOpenSecondarySidebar) {
                                 setTimeout(() => onOpenSecondarySidebar(), 100);
                             }
@@ -370,6 +410,7 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                     <button
                         onClick={() => {
                             navigate("/cross-exam-insights");
+                            setIsMobileOpen(false);
                             if (onOpenSecondarySidebar) {
                                 setTimeout(() => onOpenSecondarySidebar(), 100);
                             }
@@ -386,7 +427,10 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                     </button>
 
                     <button
-                        onClick={() => navigate("/topic-wise-pyq")}
+                        onClick={() => {
+                            navigate("/topic-wise-pyq");
+                            setIsMobileOpen(false);
+                        }}
                         className={`w-full text-left py-2 px-3 rounded-lg transition text-sm flex items-center gap-2 ${
                             location.pathname.includes("topic-wise-pyq")
                                 ? "bg-blue-50 text-blue-700 font-medium"
@@ -399,7 +443,10 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                     </button>
 
                     <button
-                        onClick={() => navigate("/exam-mode")}
+                        onClick={() => {
+                            navigate("/exam-mode");
+                            setIsMobileOpen(false);
+                        }}
                         className={`w-full text-left py-2 px-3 rounded-lg transition text-sm flex items-center gap-2 ${
                             location.pathname.includes("exam-mode")
                                 ? "bg-blue-50 text-blue-700 font-medium"
@@ -412,7 +459,10 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                     </button>
 
                     <button
-                        onClick={() => navigate("/search")}
+                        onClick={() => {
+                            navigate("/search");
+                            setIsMobileOpen(false);
+                        }}
                         className={`w-full text-left py-2 px-3 rounded-lg transition text-sm flex items-center gap-2 ${
                             isSearchPage
                                 ? "bg-blue-50 text-blue-700 font-medium"
@@ -436,7 +486,10 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                     {/* My Progress - Only visible to logged-in users */}
                     {(localStorage.getItem("isLoggedIn") === "true" || isLoggedIn) && (
                         <button
-                            onClick={() => navigate("/my-progress")}
+                            onClick={() => {
+                                navigate("/my-progress");
+                                setIsMobileOpen(false);
+                            }}
                             className={`w-full text-left py-2 px-3 rounded-lg transition text-sm flex items-center gap-2 ${
                                 isMyProgress
                                     ? "bg-blue-50 text-blue-700 font-medium"
@@ -452,7 +505,10 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                     {/* My Notes - Only visible to logged-in users */}
                     {(localStorage.getItem("isLoggedIn") === "true" || isLoggedIn) && (
                         <button
-                            onClick={() => navigate("/my-notes")}
+                            onClick={() => {
+                                navigate("/my-notes");
+                                setIsMobileOpen(false);
+                            }}
                             className={`w-full text-left py-2 px-3 rounded-lg transition text-sm flex items-center gap-2 ${
                                 location.pathname.includes("my-notes")
                                     ? "bg-blue-50 text-blue-700 font-medium"
@@ -556,5 +612,6 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                 onClose={() => setIsFeedbackModalOpen(false)} 
             />
         </aside>
+        </>
     );
 }

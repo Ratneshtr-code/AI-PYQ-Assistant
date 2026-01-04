@@ -2,7 +2,7 @@
 /**
  * API helper functions for notes operations
  */
-const API_BASE_URL = ""; // Use relative URLs with Vite proxy
+import { buildApiUrl } from "../config/apiConfig";
 
 /**
  * Save a note (question or explanation)
@@ -10,13 +10,14 @@ const API_BASE_URL = ""; // Use relative URLs with Vite proxy
 export const saveNote = async (noteData) => {
     try {
         console.log("📝 Attempting to save note:", noteData.note_type);
-        const url = `${API_BASE_URL}/notes/save`;
+        const url = buildApiUrl("notes/save");
         console.log("   URL:", url);
         
         const response = await fetch(url, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             },
             credentials: "include",
             body: JSON.stringify(noteData),
@@ -45,8 +46,13 @@ export const saveNote = async (noteData) => {
             }
         }
 
-        const data = await response.json();
-        return data;
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+            const data = await response.json();
+            return data;
+        } else {
+            throw new Error("Invalid response format from server");
+        }
     } catch (error) {
         console.error("Error saving note:", error);
         // Re-throw with better error message if it's a network error
@@ -87,10 +93,11 @@ export const getNotes = async (params = {}) => {
         if (subject) queryParams.append("subject", subject);
         if (year) queryParams.append("year", year.toString());
 
-        const response = await fetch(`${API_BASE_URL}/notes?${queryParams}`, {
+        const response = await fetch(buildApiUrl(`notes?${queryParams}`), {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             },
             credentials: "include",
         });
@@ -143,10 +150,11 @@ export const getNotes = async (params = {}) => {
  */
 export const getNote = async (noteId) => {
     try {
-        const response = await fetch(`${API_BASE_URL}/notes/${noteId}`, {
+        const response = await fetch(buildApiUrl(`notes/${noteId}`), {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             },
             credentials: "include",
         });
@@ -155,11 +163,21 @@ export const getNote = async (noteId) => {
             if (response.status === 403) {
                 throw new Error("PREMIUM_REQUIRED");
             }
-            const error = await response.json().catch(() => ({ detail: "Failed to fetch note" }));
-            throw new Error(error.detail || "Failed to fetch note");
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.includes("application/json")) {
+                const error = await response.json().catch(() => ({ detail: "Failed to fetch note" }));
+                throw new Error(error.detail || "Failed to fetch note");
+            } else {
+                throw new Error(`Server error (${response.status}): Failed to fetch note`);
+            }
         }
 
-        return await response.json();
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+            return await response.json();
+        } else {
+            throw new Error("Invalid response format from server");
+        }
     } catch (error) {
         console.error("Error fetching note:", error);
         throw error;
@@ -171,20 +189,31 @@ export const getNote = async (noteId) => {
  */
 export const deleteNote = async (noteId) => {
     try {
-        const response = await fetch(`${API_BASE_URL}/notes/${noteId}`, {
+        const response = await fetch(buildApiUrl(`notes/${noteId}`), {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             },
             credentials: "include",
         });
 
         if (!response.ok) {
-            const error = await response.json().catch(() => ({ detail: "Failed to delete note" }));
-            throw new Error(error.detail || "Failed to delete note");
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.includes("application/json")) {
+                const error = await response.json().catch(() => ({ detail: "Failed to delete note" }));
+                throw new Error(error.detail || "Failed to delete note");
+            } else {
+                throw new Error(`Server error (${response.status}): Failed to delete note`);
+            }
         }
 
-        return await response.json();
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+            return await response.json();
+        } else {
+            return { success: true }; // Assume success if no JSON response
+        }
     } catch (error) {
         console.error("Error deleting note:", error);
         throw error;
@@ -196,21 +225,32 @@ export const deleteNote = async (noteId) => {
  */
 export const updateNote = async (noteId, updateData) => {
     try {
-        const response = await fetch(`${API_BASE_URL}/notes/${noteId}`, {
+        const response = await fetch(buildApiUrl(`notes/${noteId}`), {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             },
             credentials: "include",
             body: JSON.stringify(updateData),
         });
 
         if (!response.ok) {
-            const error = await response.json().catch(() => ({ detail: "Failed to update note" }));
-            throw new Error(error.detail || "Failed to update note");
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.includes("application/json")) {
+                const error = await response.json().catch(() => ({ detail: "Failed to update note" }));
+                throw new Error(error.detail || "Failed to update note");
+            } else {
+                throw new Error(`Server error (${response.status}): Failed to update note`);
+            }
         }
 
-        return await response.json();
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+            return await response.json();
+        } else {
+            return { success: true }; // Assume success if no JSON response
+        }
     } catch (error) {
         console.error("Error updating note:", error);
         throw error;
@@ -222,10 +262,11 @@ export const updateNote = async (noteId, updateData) => {
  */
 export const getNotesStats = async () => {
     try {
-        const response = await fetch(`${API_BASE_URL}/notes/stats/summary`, {
+        const response = await fetch(buildApiUrl("notes/stats/summary"), {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             },
             credentials: "include",
         });
@@ -283,12 +324,13 @@ export const checkSaved = async (questionId, explanationType = null, optionLette
         if (explanationType) queryParams.append("explanation_type", explanationType);
         if (optionLetter) queryParams.append("option_letter", optionLetter);
 
-        const url = `${API_BASE_URL}/notes/check-saved/${questionId}${queryParams.toString() ? `?${queryParams}` : ""}`;
+        const url = buildApiUrl(`notes/check-saved/${questionId}${queryParams.toString() ? `?${queryParams}` : ""}`);
         
         const response = await fetch(url, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             },
             credentials: "include",
         });
@@ -298,11 +340,23 @@ export const checkSaved = async (questionId, explanationType = null, optionLette
             if (response.status === 401) {
                 return { is_saved: false, note_id: null };
             }
-            const error = await response.json().catch(() => ({ detail: "Failed to check saved status" }));
-            throw new Error(error.detail || "Failed to check saved status");
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.includes("application/json")) {
+                const error = await response.json().catch(() => ({ detail: "Failed to check saved status" }));
+                throw new Error(error.detail || "Failed to check saved status");
+            } else {
+                // Non-JSON response - return not saved
+                return { is_saved: false, note_id: null };
+            }
         }
 
-        return await response.json();
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+            return await response.json();
+        } else {
+            // Non-JSON response - return not saved
+            return { is_saved: false, note_id: null };
+        }
     } catch (error) {
         console.error("Error checking saved status:", error);
         // Return not saved on error

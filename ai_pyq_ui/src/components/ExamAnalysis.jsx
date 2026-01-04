@@ -218,7 +218,7 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
                 <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    className="bg-white rounded-2xl shadow-lg p-6 border border-gray-200"
+                    className="bg-white rounded-2xl shadow-lg p-4 md:p-6 border border-gray-200 overflow-x-auto"
                     style={{ minHeight: `${subjectHeight + 120}px` }}
                 >
                     <div className="mb-4">
@@ -228,7 +228,8 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
                     </div>
 
                     {subjectData.length > 0 ? (
-                        <ResponsiveContainer width="100%" height={subjectHeight}>
+                        <div className="w-full overflow-x-auto" style={{ minHeight: `${subjectHeight}px` }}>
+                            <ResponsiveContainer width="100%" height={subjectHeight} minHeight={300}>
                             <BarChart
                                 data={subjectData}
                                 layout="vertical"
@@ -309,6 +310,7 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
                                 </Bar>
                             </BarChart>
                         </ResponsiveContainer>
+                        </div>
                     ) : (
                         <p className="text-gray-500 text-center py-8">No subject data available</p>
                     )}
@@ -318,7 +320,7 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
                 <motion.div
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    className="bg-white rounded-2xl shadow-lg p-6 border border-gray-200"
+                    className="bg-white rounded-2xl shadow-lg p-4 md:p-6 border border-gray-200 overflow-x-auto"
                     style={{ minHeight: `${topicHeight + 120}px` }}
                 >
                     <div className="mb-4">
@@ -344,7 +346,8 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
                     </div>
 
                     {selectedSubject && topicData.length > 0 ? (
-                        <ResponsiveContainer width="100%" height={topicHeight}>
+                        <div className="w-full overflow-x-auto" style={{ minHeight: `${topicHeight}px` }}>
+                            <ResponsiveContainer width="100%" height={topicHeight} minHeight={300}>
                             <BarChart
                                 data={topicData}
                                 layout="vertical"
@@ -411,6 +414,7 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
                                 </Bar>
                             </BarChart>
                         </ResponsiveContainer>
+                        </div>
                     ) : selectedSubject ? (
                         <p className="text-gray-500 text-center py-8">No topic data available for this subject</p>
                     ) : (

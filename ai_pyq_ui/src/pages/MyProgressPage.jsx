@@ -62,10 +62,10 @@ export default function MyProgressPage() {
             {/* Main Content */}
             <div
                 className={`flex-1 transition-all duration-300 ${
-                    primarySidebarCollapsed ? "ml-16" : "ml-64"
+                    primarySidebarCollapsed ? "md:ml-16" : "md:ml-64"
                 }`}
             >
-                <div className="p-6 md:p-8">
+                <div className="p-4 md:p-6 lg:p-8">
                     {/* Page Header */}
                     <div className="mb-6">
                         <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">

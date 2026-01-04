@@ -245,11 +245,11 @@ export default function MyNotesPage() {
             />
             
             {/* Main Content */}
-            <div className={`flex-1 transition-all duration-300 ${primarySidebarCollapsed ? "ml-16" : "ml-64"}`}>
+            <div className={`flex-1 transition-all duration-300 ${primarySidebarCollapsed ? "md:ml-16" : "md:ml-64"}`}>
             {/* Header */}
             <div className="bg-white border-b border-gray-200 sticky top-0 z-10">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-                    <div className="flex items-center justify-between">
+                <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 py-3 md:py-4">
+                    <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-0">
                         <div>
                             <h1 className="text-2xl font-bold text-gray-900">My Notes</h1>
                             {stats && (
@@ -317,7 +317,7 @@ export default function MyNotesPage() {
                 </div>
             </div>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 py-4 md:py-6">
                 {/* Tabs */}
                 <div className="mb-6">
                     <div className="border-b border-gray-200">

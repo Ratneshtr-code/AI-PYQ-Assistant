@@ -3,8 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import Sidebar from "./components/Sidebar";
-
-const API_BASE_URL = "";
+import { buildApiUrl } from "./config/apiConfig";
 
 export default function ExamModePage() {
     const navigate = useNavigate();
@@ -87,7 +86,7 @@ export default function ExamModePage() {
                 }
                 // "My Tests" tab doesn't apply filters - shows all completed tests
                 
-                const url = `${API_BASE_URL}/exam/sets?${params.toString()}`;
+                const url = `${buildApiUrl("exam/sets")}?${params.toString()}`;
                 const response = await fetch(url, {
                     credentials: "include"
                 });
@@ -178,11 +177,41 @@ export default function ExamModePage() {
     useEffect(() => {
         const fetchExams = async () => {
             try {
-                const res = await fetch(`${API_BASE_URL}/filters`);
+                const url = buildApiUrl("filters");
+                console.log("🔍 [Practice Page] Fetching exams from:", url);
+                const res = await fetch(url, {
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    }
+                });
+                console.log("📡 [Practice Page] Response status:", res.status, res.statusText);
+                
+                if (!res.ok) {
+                    const text = await res.text();
+                    console.error("❌ [Practice Page] Failed to fetch exams. Status:", res.status, "Response:", text.substring(0, 200));
+                    setExamsList([]);
+                    return;
+                }
+                
+                // Check if response is actually JSON
+                const contentType = res.headers.get("content-type");
+                if (!contentType || !contentType.includes("application/json")) {
+                    console.error("❌ [Practice Page] Response is not JSON, got:", contentType);
+                    // Try to get text to see what we got
+                    const text = await res.text();
+                    console.error("❌ [Practice Page] Response text:", text.substring(0, 200));
+                    setExamsList([]);
+                    return;
+                }
+                
                 const data = await res.json();
+                console.log("✅ [Practice Page] Exams data received:", data);
                 setExamsList(data.exams || []);
             } catch (err) {
-                console.error("Failed to fetch exams:", err);
+                console.error("❌ [Practice Page] Error fetching exams:", err);
+                setExamsList([]);
             }
         };
         fetchExams();
@@ -198,7 +227,22 @@ export default function ExamModePage() {
             }
 
             try {
-                const res = await fetch(`${API_BASE_URL}/topic-wise/subjects?exam=${encodeURIComponent(exam)}`);
+                const res = await fetch(`${buildApiUrl("topic-wise/subjects")}?exam=${encodeURIComponent(exam)}`, {
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    }
+                });
+                
+                // Check if response is actually JSON
+                const contentType = res.headers.get("content-type");
+                if (!contentType || !contentType.includes("application/json")) {
+                    console.error("Response is not JSON for subjects");
+                    setSubjectsList([]);
+                    return;
+                }
+                
                 const data = await res.json();
                 setSubjectsList(data.subjects || []);
             } catch (err) {
@@ -214,16 +258,16 @@ export default function ExamModePage() {
         const fetchUserAttempts = async () => {
             try {
                 // DATABASE IS THE SOURCE OF TRUTH - Always fetch from API first
-                let response = await fetch(`${API_BASE_URL}/exam/user/attempts`, {
-                    credentials: "include"
-                });
-                
-                // If first endpoint fails, try alternative
-                if (!response.ok) {
-                    response = await fetch(`${API_BASE_URL}/exam/attempts`, {
+                    let response = await fetch(buildApiUrl("exam/user/attempts"), {
                         credentials: "include"
                     });
-                }
+                    
+                    // If first endpoint fails, try alternative
+                    if (!response.ok) {
+                        response = await fetch(buildApiUrl("exam/attempts"), {
+                            credentials: "include"
+                        });
+                    }
                 
                 if (!response.ok) {
                     console.warn("Failed to fetch user attempts from API");
@@ -356,12 +400,12 @@ export default function ExamModePage() {
         if (examSets.length > 0) {
             const fetchUserAttempts = async () => {
                 try {
-                    let response = await fetch(`${API_BASE_URL}/exam/user/attempts`, {
+                    let response = await fetch(buildApiUrl("exam/user/attempts"), {
                         credentials: "include"
                     });
                     
                     if (!response.ok) {
-                        response = await fetch(`${API_BASE_URL}/exam/attempts`, {
+                        response = await fetch(buildApiUrl("exam/attempts"), {
                             credentials: "include"
                         });
                     }
@@ -480,11 +524,11 @@ export default function ExamModePage() {
             {/* Main Content */}
             <main
                 className={`flex-1 flex flex-col transition-all duration-300 min-h-screen ${
-                    primarySidebarCollapsed ? "ml-16" : "ml-64"
+                    primarySidebarCollapsed ? "md:ml-16" : "md:ml-64"
                 }`}
             >
                 {/* Content Area */}
-                <div className="w-full max-w-6xl mx-auto px-4 md:px-6 py-6 md:py-8 space-y-4">
+                <div className="w-full max-w-6xl mx-auto px-2 md:px-4 lg:px-6 py-4 md:py-6 lg:py-8 space-y-4">
                     {/* Header */}
                     <div className="mb-6">
                         <h1 className="text-2xl font-bold text-gray-900 mb-2">
@@ -497,8 +541,8 @@ export default function ExamModePage() {
 
                     {/* Test Type Selection */}
                     <div className="mb-6">
-                        <div className="bg-white rounded-xl shadow-lg p-4 border border-gray-200">
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+                        <div className="bg-white rounded-xl shadow-lg p-3 md:p-4 border border-gray-200">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3">
                                 <motion.button
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
@@ -766,7 +810,7 @@ export default function ExamModePage() {
                                     </p>
                                 </div>
                             ) : (
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
                                     {examSets.map((examSet, index) => {
                                         // Try both string and number ID matching
                                         const examSetId = String(examSet.id);
