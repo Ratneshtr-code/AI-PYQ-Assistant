@@ -8,10 +8,12 @@ import Sidebar from "./components/Sidebar";
 import FilterBar from "./components/FilterBar";
 import ResultsList from "./components/ResultsList";
 import Pagination from "./components/Pagination";
+import { useMobileDetection } from "./utils/useMobileDetection";
 
 export default function TopicWisePYQPage() {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
+    const isMobile = useMobileDetection();
     const apiUrl = buildApiUrl("search");
     const filtersUrl = buildApiUrl("filters");
     const subjectsUrl = buildApiUrl("topic-wise/subjects");
@@ -306,7 +308,7 @@ export default function TopicWisePYQPage() {
                 }`}
             >
                 {/* Filter Bar - Now part of page content, not sticky */}
-                <div className={`w-full relative z-10 md:z-10 ${explanationWindowOpen && !explanationWindowMinimized ? 'results-container-shifted z-0 md:z-10' : ''}`} style={{ maxWidth: explanationWindowOpen && !explanationWindowMinimized ? '48rem' : '100%', width: '100%', marginLeft: 'auto', marginRight: explanationWindowOpen && !explanationWindowMinimized ? '440px' : 'auto' }}>
+                <div className={`w-full relative ${isMobile && explanationWindowOpen && !explanationWindowMinimized ? 'z-0' : 'z-10'} md:z-10 ${explanationWindowOpen && !explanationWindowMinimized ? 'results-container-shifted' : ''}`} style={{ maxWidth: explanationWindowOpen && !explanationWindowMinimized ? '48rem' : '100%', width: '100%', marginLeft: 'auto', marginRight: explanationWindowOpen && !explanationWindowMinimized ? '440px' : 'auto' }}>
                     <FilterBar
                         exam={exam}
                         setExam={setExam}

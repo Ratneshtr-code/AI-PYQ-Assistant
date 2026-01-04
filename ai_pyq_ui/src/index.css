@@ -620,7 +620,7 @@ body.explanation-window-open .exam-filter-compact {
         border-radius: 0 !important;
         box-shadow: none !important;
         border-left: none !important;
-        z-index: 9999 !important; /* Ensure it's above filter bar (z-10) */
+        z-index: 9999 !important; /* Highest z-index to appear above everything including filter bar */
     }
 
     .explanation-backdrop {
@@ -631,6 +631,29 @@ body.explanation-window-open .exam-filter-compact {
     .explanation-window-open ~ * .filter-bar,
     body.explanation-window-open .filter-bar {
         z-index: 1 !important; /* Lower than explanation window */
+    }
+    
+    /* Lower z-index for filter bar container when explanation window is open on mobile */
+    body.explanation-window-open [class*="relative"][class*="z-10"],
+    body.explanation-window-open [class*="relative"][class*="z-0"],
+    body.explanation-window-open div[class*="w-full"][class*="relative"] {
+        z-index: 1 !important;
+    }
+    
+    /* Ensure FilterBar component and its children are below explanation window on mobile */
+    body.explanation-window-open [class*="FilterBar"],
+    body.explanation-window-open [class*="filter"] {
+        z-index: 1 !important;
+    }
+    
+    /* Target filter container divs with backdrop blur (the main filter container) */
+    body.explanation-window-open div[class*="bg-white"][class*="backdrop-blur"] {
+        z-index: 1 !important;
+    }
+    
+    /* Target the inner flex container with z-10 in FilterBar */
+    body.explanation-window-open div[class*="flex"][class*="relative"][class*="z-10"] {
+        z-index: 1 !important;
     }
 
     .results-container-shifted {
