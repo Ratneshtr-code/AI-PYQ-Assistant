@@ -513,8 +513,10 @@ export default function ResultsList({ results, onExplanationWindowChange }) {
                                     className={`info-layer-btn info-layer-btn-answer ${isMobile ? 'px-2 py-0.5 text-[11px] gap-1 flex-shrink-0' : ''}`}
                                     title={showAns ? "Hide the correct answer" : "Show the correct answer"}
                                 >
-                                    <span className={`info-layer-icon flex-shrink-0 ${isMobile ? 'text-[10px]' : ''}`}>{showAns ? "👁️" : "👁️‍🗨️"}</span>
-                                    <span className={`flex-shrink-0 ${isMobile ? 'whitespace-nowrap' : ''}`}>{isMobile ? (showAns ? "Hide" : "Answer") : (showAns ? "Hide Answer" : "Show Answer")}</span>
+                                    {!isMobile && (
+                                        <span className={`info-layer-icon flex-shrink-0 ${isMobile ? 'text-[10px]' : ''}`}>{showAns ? "👁️" : "👁️‍🗨️"}</span>
+                                    )}
+                                    <span className={`flex-shrink-0 ${isMobile ? 'whitespace-nowrap' : ''}`}>{showAns ? "Hide Answer" : "Show Answer"}</span>
                                 </button>
 
                                 {/* Explain Concept Button */}
