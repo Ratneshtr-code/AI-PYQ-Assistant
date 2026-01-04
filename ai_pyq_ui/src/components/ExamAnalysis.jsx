@@ -18,6 +18,69 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
     // Map to store translated name -> original English name
     // This is needed because backend filters by English name, but UI shows translated name
     const subjectNameMapRef = useRef({});
+    const subjectChartRef = useRef(null);
+    const topicChartRef = useRef(null);
+    const [isMobile, setIsMobile] = useState(false);
+    const [containerWidth, setContainerWidth] = useState(0);
+
+    // Detect mobile and container width
+    useEffect(() => {
+        const checkMobile = () => {
+            const mobile = window.innerWidth < 768;
+            setIsMobile(mobile);
+            // Set initial width immediately, accounting for padding (32px on each side = 64px total)
+            const initialWidth = window.innerWidth - 64;
+            setContainerWidth(initialWidth > 0 ? initialWidth : window.innerWidth);
+        };
+        
+        // Set immediately
+        checkMobile();
+        
+        // Also set after a small delay to ensure DOM is ready
+        const timer = setTimeout(checkMobile, 0);
+        
+        window.addEventListener('resize', checkMobile);
+        
+        return () => {
+            window.removeEventListener('resize', checkMobile);
+            clearTimeout(timer);
+        };
+    }, []);
+
+    // Update container width when chart refs are available
+    useEffect(() => {
+        const updateWidth = () => {
+            if (subjectChartRef.current) {
+                const rect = subjectChartRef.current.getBoundingClientRect();
+                const width = rect.width || subjectChartRef.current.offsetWidth || subjectChartRef.current.clientWidth;
+                if (width > 0) {
+                    setContainerWidth(width);
+                } else {
+                    // Fallback to window width minus padding
+                    const fallbackWidth = window.innerWidth - 64; // Account for padding
+                    setContainerWidth(fallbackWidth);
+                }
+            } else {
+                // Fallback to window width minus padding
+                const fallbackWidth = window.innerWidth - 64;
+                setContainerWidth(fallbackWidth);
+            }
+        };
+        
+        updateWidth();
+        const timer1 = setTimeout(updateWidth, 50);
+        const timer2 = setTimeout(updateWidth, 200);
+        const timer3 = setTimeout(updateWidth, 500);
+        
+        window.addEventListener('resize', updateWidth);
+        
+        return () => {
+            window.removeEventListener('resize', updateWidth);
+            clearTimeout(timer1);
+            clearTimeout(timer2);
+            clearTimeout(timer3);
+        };
+    }, [subjectData.length, topicData.length]);
 
     // Fetch available subjects
     useEffect(() => {
@@ -205,21 +268,21 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
 
     // Calculate dynamic height based on actual data length (per chart)
     // Subject Distribution: more spacing for clarity
-    const subjectHeight = Math.max(300, subjectData.length * 45);
+    const subjectHeight = subjectData.length > 0 ? Math.max(300, subjectData.length * 45) : 300;
     // Topic Distribution: consistent spacing (40px per item) for better readability
     // Ensure minimum height even for 1 item to prevent centering, but start from top
     const topicHeight = topicData.length > 0 ? Math.max(150, topicData.length * 40) : 300;
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-6 w-full" style={{ width: '100%' }}>
             {/* Windows 1 & 2 Side by Side */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full" style={{ width: '100%' }}>
                 {/* Window 1: Subject Distribution */}
                 <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    className="bg-white rounded-2xl shadow-lg p-4 md:p-6 border border-gray-200 overflow-x-auto"
-                    style={{ minHeight: `${subjectHeight + 120}px` }}
+                    className="bg-white rounded-2xl shadow-lg p-4 md:p-6 border border-gray-200"
+                    style={{ minHeight: `${subjectHeight + 120}px`, width: '100%' }}
                 >
                     <div className="mb-4">
                         <h3 className="text-lg font-semibold text-gray-800 mb-1">Subject Distribution</h3>
@@ -228,8 +291,23 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
                     </div>
 
                     {subjectData.length > 0 ? (
-                        <div className="w-full overflow-x-auto" style={{ minHeight: `${subjectHeight}px` }}>
-                            <ResponsiveContainer width="100%" height={subjectHeight} minHeight={300}>
+                        <div 
+                            ref={subjectChartRef}
+                            style={{ 
+                                width: '100%',
+                                height: `${subjectHeight}px`,
+                                minHeight: `${subjectHeight}px`,
+                                minWidth: '100%',
+                                position: 'relative',
+                                overflow: 'visible'
+                            }}
+                        >
+                            {containerWidth > 0 ? (
+                            <ResponsiveContainer 
+                                width={isMobile ? containerWidth : "100%"} 
+                                height={subjectHeight} 
+                                minHeight={300}
+                            >
                             <BarChart
                                 data={subjectData}
                                 layout="vertical"
@@ -309,7 +387,12 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
                                     />
                                 </Bar>
                             </BarChart>
-                        </ResponsiveContainer>
+                            </ResponsiveContainer>
+                            ) : (
+                                <div style={{ width: '100%', height: `${subjectHeight}px`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <p className="text-gray-500">Loading chart...</p>
+                                </div>
+                            )}
                         </div>
                     ) : (
                         <p className="text-gray-500 text-center py-8">No subject data available</p>
@@ -320,8 +403,8 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
                 <motion.div
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    className="bg-white rounded-2xl shadow-lg p-4 md:p-6 border border-gray-200 overflow-x-auto"
-                    style={{ minHeight: `${topicHeight + 120}px` }}
+                    className="bg-white rounded-2xl shadow-lg p-4 md:p-6 border border-gray-200"
+                    style={{ minHeight: `${topicHeight + 120}px`, width: '100%' }}
                 >
                     <div className="mb-4">
                         <h3 className="text-lg font-semibold text-gray-800 mb-1">Topic Distribution</h3>
@@ -346,8 +429,23 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
                     </div>
 
                     {selectedSubject && topicData.length > 0 ? (
-                        <div className="w-full overflow-x-auto" style={{ minHeight: `${topicHeight}px` }}>
-                            <ResponsiveContainer width="100%" height={topicHeight} minHeight={300}>
+                        <div 
+                            ref={topicChartRef}
+                            style={{ 
+                                width: '100%',
+                                height: `${topicHeight}px`,
+                                minHeight: `${topicHeight}px`,
+                                minWidth: '100%',
+                                position: 'relative',
+                                overflow: 'visible'
+                            }}
+                        >
+                            {containerWidth > 0 ? (
+                            <ResponsiveContainer 
+                                width={isMobile ? containerWidth : "100%"} 
+                                height={topicHeight} 
+                                minHeight={300}
+                            >
                             <BarChart
                                 data={topicData}
                                 layout="vertical"
@@ -413,7 +511,12 @@ export default function ExamAnalysis({ exam, yearFrom, yearTo }) {
                                     />
                                 </Bar>
                             </BarChart>
-                        </ResponsiveContainer>
+                            </ResponsiveContainer>
+                            ) : (
+                                <div style={{ width: '100%', height: `${topicHeight}px`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <p className="text-gray-500">Loading chart...</p>
+                                </div>
+                            )}
                         </div>
                     ) : selectedSubject ? (
                         <p className="text-gray-500 text-center py-8">No topic data available for this subject</p>

@@ -15,9 +15,71 @@ export default function HottestTopicsBySubject({ exam, subject, yearFrom, yearTo
     // Map to store translated subject name -> original English name
     // This is needed because backend filters by English subject name, but UI shows translated name
     const subjectNameMapRef = useRef({});
+    const chartRef = useRef(null);
+    const [isMobile, setIsMobile] = useState(false);
+    const [containerWidth, setContainerWidth] = useState(0);
     
     // Track mapping readiness state
     const [mappingReady, setMappingReady] = useState(false);
+
+    // Detect mobile and container width
+    useEffect(() => {
+        const checkMobile = () => {
+            const mobile = window.innerWidth < 768;
+            setIsMobile(mobile);
+            // Set initial width immediately, accounting for padding (32px on each side = 64px total)
+            const initialWidth = window.innerWidth - 64;
+            setContainerWidth(initialWidth > 0 ? initialWidth : window.innerWidth);
+        };
+        
+        // Set immediately
+        checkMobile();
+        
+        // Also set after a small delay to ensure DOM is ready
+        const timer = setTimeout(checkMobile, 0);
+        
+        window.addEventListener('resize', checkMobile);
+        
+        return () => {
+            window.removeEventListener('resize', checkMobile);
+            clearTimeout(timer);
+        };
+    }, []);
+
+    // Update container width when chart refs are available
+    useEffect(() => {
+        const updateWidth = () => {
+            if (chartRef.current) {
+                const rect = chartRef.current.getBoundingClientRect();
+                const width = rect.width || chartRef.current.offsetWidth || chartRef.current.clientWidth;
+                if (width > 0) {
+                    setContainerWidth(width);
+                } else {
+                    // Fallback to window width minus padding
+                    const fallbackWidth = window.innerWidth - 64; // Account for padding
+                    setContainerWidth(fallbackWidth);
+                }
+            } else {
+                // Fallback to window width minus padding
+                const fallbackWidth = window.innerWidth - 64;
+                setContainerWidth(fallbackWidth);
+            }
+        };
+        
+        updateWidth();
+        const timer1 = setTimeout(updateWidth, 50);
+        const timer2 = setTimeout(updateWidth, 200);
+        const timer3 = setTimeout(updateWidth, 500);
+        
+        window.addEventListener('resize', updateWidth);
+        
+        return () => {
+            window.removeEventListener('resize', updateWidth);
+            clearTimeout(timer1);
+            clearTimeout(timer2);
+            clearTimeout(timer3);
+        };
+    }, [subjectHotTopics.length]);
     
     // Build mapping between translated and English subject names
     useEffect(() => {
@@ -213,7 +275,22 @@ export default function HottestTopicsBySubject({ exam, subject, yearFrom, yearTo
                     </div>
 
                     {subjectHotTopics.length > 0 ? (
-                        <ResponsiveContainer width="100%" height={subjectHotTopicsHeight}>
+                        <div 
+                            ref={chartRef}
+                            style={{ 
+                                width: '100%',
+                                height: `${subjectHotTopicsHeight}px`,
+                                minHeight: `${subjectHotTopicsHeight}px`,
+                                minWidth: '100%',
+                                position: 'relative',
+                                overflow: 'visible'
+                            }}
+                        >
+                            {containerWidth > 0 ? (
+                            <ResponsiveContainer 
+                                width={isMobile ? containerWidth : "100%"} 
+                                height={subjectHotTopicsHeight}
+                            >
                             <BarChart
                                 data={subjectHotTopics}
                                 layout="vertical"
@@ -273,7 +350,13 @@ export default function HottestTopicsBySubject({ exam, subject, yearFrom, yearTo
                                     />
                                 </Bar>
                             </BarChart>
-                        </ResponsiveContainer>
+                            </ResponsiveContainer>
+                            ) : (
+                                <div style={{ width: '100%', height: `${subjectHotTopicsHeight}px`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <p className="text-gray-500">Loading chart...</p>
+                                </div>
+                            )}
+                        </div>
                     ) : (
                         <p className="text-gray-500 text-center py-8">No hot topics available for this subject</p>
                     )}

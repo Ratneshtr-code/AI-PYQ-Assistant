@@ -18,9 +18,72 @@ export default function SubjectAnalysis({ subject, yearFrom, yearTo, examsList }
     // Map to store translated subject name -> original English name
     // This is needed because backend filters by English subject name, but UI shows translated name
     const subjectNameMapRef = useRef({});
+    const examChartRef = useRef(null);
+    const topicChartRef = useRef(null);
+    const [isMobile, setIsMobile] = useState(false);
+    const [containerWidth, setContainerWidth] = useState(0);
     
     // Track mapping readiness state
     const [mappingReady, setMappingReady] = useState(false);
+
+    // Detect mobile and container width
+    useEffect(() => {
+        const checkMobile = () => {
+            const mobile = window.innerWidth < 768;
+            setIsMobile(mobile);
+            // Set initial width immediately, accounting for padding (32px on each side = 64px total)
+            const initialWidth = window.innerWidth - 64;
+            setContainerWidth(initialWidth > 0 ? initialWidth : window.innerWidth);
+        };
+        
+        // Set immediately
+        checkMobile();
+        
+        // Also set after a small delay to ensure DOM is ready
+        const timer = setTimeout(checkMobile, 0);
+        
+        window.addEventListener('resize', checkMobile);
+        
+        return () => {
+            window.removeEventListener('resize', checkMobile);
+            clearTimeout(timer);
+        };
+    }, []);
+
+    // Update container width when chart refs are available
+    useEffect(() => {
+        const updateWidth = () => {
+            if (examChartRef.current) {
+                const rect = examChartRef.current.getBoundingClientRect();
+                const width = rect.width || examChartRef.current.offsetWidth || examChartRef.current.clientWidth;
+                if (width > 0) {
+                    setContainerWidth(width);
+                } else {
+                    // Fallback to window width minus padding
+                    const fallbackWidth = window.innerWidth - 64; // Account for padding
+                    setContainerWidth(fallbackWidth);
+                }
+            } else {
+                // Fallback to window width minus padding
+                const fallbackWidth = window.innerWidth - 64;
+                setContainerWidth(fallbackWidth);
+            }
+        };
+        
+        updateWidth();
+        const timer1 = setTimeout(updateWidth, 50);
+        const timer2 = setTimeout(updateWidth, 200);
+        const timer3 = setTimeout(updateWidth, 500);
+        
+        window.addEventListener('resize', updateWidth);
+        
+        return () => {
+            window.removeEventListener('resize', updateWidth);
+            clearTimeout(timer1);
+            clearTimeout(timer2);
+            clearTimeout(timer3);
+        };
+    }, [examData.length, topicData.length]);
     
     // Build mapping between translated and English subject names
     // Fetch from all exams to build a comprehensive mapping
@@ -298,8 +361,23 @@ export default function SubjectAnalysis({ subject, yearFrom, yearTo, examsList }
                     </div>
 
                     {examData.length > 0 ? (
-                        <div className="w-full overflow-x-auto" style={{ minHeight: `${examHeight}px` }}>
-                            <ResponsiveContainer width="100%" height={examHeight} minHeight={300}>
+                        <div 
+                            ref={examChartRef}
+                            style={{ 
+                                width: '100%',
+                                height: `${examHeight}px`,
+                                minHeight: `${examHeight}px`,
+                                minWidth: '100%',
+                                position: 'relative',
+                                overflow: 'visible'
+                            }}
+                        >
+                            {containerWidth > 0 ? (
+                            <ResponsiveContainer 
+                                width={isMobile ? containerWidth : "100%"} 
+                                height={examHeight} 
+                                minHeight={300}
+                            >
                             <BarChart
                                 data={examData}
                                 layout="vertical"
@@ -379,7 +457,12 @@ export default function SubjectAnalysis({ subject, yearFrom, yearTo, examsList }
                                     />
                                 </Bar>
                             </BarChart>
-                        </ResponsiveContainer>
+                            </ResponsiveContainer>
+                            ) : (
+                                <div style={{ width: '100%', height: `${examHeight}px`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <p className="text-gray-500">Loading chart...</p>
+                                </div>
+                            )}
                         </div>
                     ) : (
                         <p className="text-gray-500 text-center py-8">No exam data available for this subject</p>
@@ -413,8 +496,23 @@ export default function SubjectAnalysis({ subject, yearFrom, yearTo, examsList }
                     </div>
 
                     {selectedExam && topicData.length > 0 ? (
-                        <div className="w-full overflow-x-auto" style={{ minHeight: `${topicHeight}px` }}>
-                            <ResponsiveContainer width="100%" height={topicHeight} minHeight={300}>
+                        <div 
+                            ref={topicChartRef}
+                            style={{ 
+                                width: '100%',
+                                height: `${topicHeight}px`,
+                                minHeight: `${topicHeight}px`,
+                                minWidth: '100%',
+                                position: 'relative',
+                                overflow: 'visible'
+                            }}
+                        >
+                            {containerWidth > 0 ? (
+                            <ResponsiveContainer 
+                                width={isMobile ? containerWidth : "100%"} 
+                                height={topicHeight} 
+                                minHeight={300}
+                            >
                             <BarChart
                                 data={topicData}
                                 layout="vertical"
@@ -480,7 +578,12 @@ export default function SubjectAnalysis({ subject, yearFrom, yearTo, examsList }
                                     />
                                 </Bar>
                             </BarChart>
-                        </ResponsiveContainer>
+                            </ResponsiveContainer>
+                            ) : (
+                                <div style={{ width: '100%', height: `${topicHeight}px`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <p className="text-gray-500">Loading chart...</p>
+                                </div>
+                            )}
                         </div>
                     ) : selectedExam ? (
                         <p className="text-gray-500 text-center py-8">No topic data available for this exam</p>
