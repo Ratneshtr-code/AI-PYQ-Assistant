@@ -17,9 +17,72 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
     // Map to store translated subject name -> original English name
     // This is needed because backend filters by English subject name, but UI shows translated name
     const subjectNameMapRef = useRef({});
+    const subjectChartRef = useRef(null);
+    const topicChartRef = useRef(null);
+    const [isMobile, setIsMobile] = useState(false);
+    const [containerWidth, setContainerWidth] = useState(0);
     
     // Track mapping readiness state
     const [mappingReady, setMappingReady] = useState(false);
+
+    // Detect mobile and container width
+    useEffect(() => {
+        const checkMobile = () => {
+            const mobile = window.innerWidth < 768;
+            setIsMobile(mobile);
+            // Set initial width immediately, accounting for padding (32px on each side = 64px total)
+            const initialWidth = window.innerWidth - 64;
+            setContainerWidth(initialWidth > 0 ? initialWidth : window.innerWidth);
+        };
+        
+        // Set immediately
+        checkMobile();
+        
+        // Also set after a small delay to ensure DOM is ready
+        const timer = setTimeout(checkMobile, 0);
+        
+        window.addEventListener('resize', checkMobile);
+        
+        return () => {
+            window.removeEventListener('resize', checkMobile);
+            clearTimeout(timer);
+        };
+    }, []);
+
+    // Update container width when chart refs are available
+    useEffect(() => {
+        const updateWidth = () => {
+            if (subjectChartRef.current) {
+                const rect = subjectChartRef.current.getBoundingClientRect();
+                const width = rect.width || subjectChartRef.current.offsetWidth || subjectChartRef.current.clientWidth;
+                if (width > 0) {
+                    setContainerWidth(width);
+                } else {
+                    // Fallback to window width minus padding
+                    const fallbackWidth = window.innerWidth - 64; // Account for padding
+                    setContainerWidth(fallbackWidth);
+                }
+            } else {
+                // Fallback to window width minus padding
+                const fallbackWidth = window.innerWidth - 64;
+                setContainerWidth(fallbackWidth);
+            }
+        };
+        
+        updateWidth();
+        const timer1 = setTimeout(updateWidth, 50);
+        const timer2 = setTimeout(updateWidth, 200);
+        const timer3 = setTimeout(updateWidth, 500);
+        
+        window.addEventListener('resize', updateWidth);
+        
+        return () => {
+            window.removeEventListener('resize', updateWidth);
+            clearTimeout(timer1);
+            clearTimeout(timer2);
+            clearTimeout(timer3);
+        };
+    }, [Object.keys(subjectData).length, Object.keys(topicData).length]);
     
     // Build mapping between translated and English subject names
     useEffect(() => {
@@ -293,7 +356,8 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
                 <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    className="bg-white rounded-2xl shadow-lg p-4 md:p-6 border border-gray-200 overflow-x-auto"
+                    className="bg-white rounded-2xl shadow-lg p-4 md:p-6 border border-gray-200"
+                    style={{ width: '100%' }}
                 >
                     <div className="mb-4">
                         <h3 className="text-xl font-semibold text-gray-800 mb-1">Subject Distribution</h3>
@@ -350,8 +414,22 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
                         </div>
                     </div>
                     {subjectChartData.length > 0 ? (
-                        <div className="w-full overflow-x-auto" style={{ minHeight: `${Math.max(400, subjectChartData.length * 50)}px` }}>
-                            <ResponsiveContainer width="100%" height={Math.max(400, subjectChartData.length * 50)} minHeight={400}>
+                        <div 
+                            ref={subjectChartRef}
+                            style={{ 
+                                width: '100%',
+                                height: `${Math.max(400, subjectChartData.length * 50)}px`,
+                                minHeight: `${Math.max(400, subjectChartData.length * 50)}px`,
+                                minWidth: '100%',
+                                position: 'relative',
+                                overflow: 'visible'
+                            }}
+                        >
+                            <ResponsiveContainer 
+                                width={isMobile && containerWidth > 0 ? containerWidth : "100%"} 
+                                height={Math.max(400, subjectChartData.length * 50)} 
+                                minHeight={400}
+                            >
                             <BarChart
                                 data={subjectChartData}
                                 layout="vertical"
@@ -401,7 +479,7 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
                                         />
                                     ))}
                             </BarChart>
-                        </ResponsiveContainer>
+                            </ResponsiveContainer>
                         </div>
                     ) : (
                         <p className="text-gray-500 text-center py-8">No subject data available</p>
@@ -419,7 +497,8 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
                 <motion.div
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    className="bg-white rounded-2xl shadow-lg p-4 md:p-6 border border-gray-200 overflow-x-auto"
+                    className="bg-white rounded-2xl shadow-lg p-4 md:p-6 border border-gray-200"
+                    style={{ width: '100%' }}
                 >
                     <div className="mb-4">
                         <h3 className="text-xl font-semibold text-gray-800 mb-1">
@@ -483,8 +562,22 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
                     </div>
                     {selectedSubject ? (
                         topicChartData.length > 0 ? (
-                            <div className="w-full overflow-x-auto" style={{ minHeight: `${Math.max(400, topicChartData.length * 50)}px` }}>
-                                <ResponsiveContainer width="100%" height={Math.max(400, topicChartData.length * 50)} minHeight={400}>
+                            <div 
+                                ref={topicChartRef}
+                                style={{ 
+                                    width: '100%',
+                                    height: `${Math.max(400, topicChartData.length * 50)}px`,
+                                    minHeight: `${Math.max(400, topicChartData.length * 50)}px`,
+                                    minWidth: '100%',
+                                    position: 'relative',
+                                    overflow: 'visible'
+                                }}
+                            >
+                                <ResponsiveContainer 
+                                    width={isMobile && containerWidth > 0 ? containerWidth : "100%"} 
+                                    height={Math.max(400, topicChartData.length * 50)} 
+                                    minHeight={400}
+                                >
                                 <BarChart
                                     data={topicChartData}
                                     layout="vertical"
@@ -528,7 +621,7 @@ export default function CrossExamSubjectAnalysis({ exams, yearFrom, yearTo, sele
                                             />
                                         ))}
                                 </BarChart>
-                            </ResponsiveContainer>
+                                </ResponsiveContainer>
                             </div>
                         ) : (
                             <p className="text-gray-500 text-center py-8">No topic data available for {selectedSubject}</p>
