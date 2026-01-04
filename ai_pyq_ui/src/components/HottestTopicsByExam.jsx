@@ -1,5 +1,5 @@
 // src/components/HottestTopicsByExam.jsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, LabelList } from "recharts";
 import { motion } from "framer-motion";
 import { buildApiUrl } from "../config/apiConfig";
@@ -11,6 +11,68 @@ export default function HottestTopicsByExam({ exam, yearFrom, yearTo }) {
     const [examCoverage, setExamCoverage] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const chartRef = useRef(null);
+    const [isMobile, setIsMobile] = useState(false);
+    const [containerWidth, setContainerWidth] = useState(0);
+
+    // Detect mobile and container width
+    useEffect(() => {
+        const checkMobile = () => {
+            const mobile = window.innerWidth < 768;
+            setIsMobile(mobile);
+            // Set initial width immediately, accounting for padding (32px on each side = 64px total)
+            const initialWidth = window.innerWidth - 64;
+            setContainerWidth(initialWidth > 0 ? initialWidth : window.innerWidth);
+        };
+        
+        // Set immediately
+        checkMobile();
+        
+        // Also set after a small delay to ensure DOM is ready
+        const timer = setTimeout(checkMobile, 0);
+        
+        window.addEventListener('resize', checkMobile);
+        
+        return () => {
+            window.removeEventListener('resize', checkMobile);
+            clearTimeout(timer);
+        };
+    }, []);
+
+    // Update container width when chart refs are available
+    useEffect(() => {
+        const updateWidth = () => {
+            if (chartRef.current) {
+                const rect = chartRef.current.getBoundingClientRect();
+                const width = rect.width || chartRef.current.offsetWidth || chartRef.current.clientWidth;
+                if (width > 0) {
+                    setContainerWidth(width);
+                } else {
+                    // Fallback to window width minus padding
+                    const fallbackWidth = window.innerWidth - 64; // Account for padding
+                    setContainerWidth(fallbackWidth);
+                }
+            } else {
+                // Fallback to window width minus padding
+                const fallbackWidth = window.innerWidth - 64;
+                setContainerWidth(fallbackWidth);
+            }
+        };
+        
+        updateWidth();
+        const timer1 = setTimeout(updateWidth, 50);
+        const timer2 = setTimeout(updateWidth, 200);
+        const timer3 = setTimeout(updateWidth, 500);
+        
+        window.addEventListener('resize', updateWidth);
+        
+        return () => {
+            window.removeEventListener('resize', updateWidth);
+            clearTimeout(timer1);
+            clearTimeout(timer2);
+            clearTimeout(timer3);
+        };
+    }, [examHotTopics.length]);
 
     // Fetch exam hot topics
     useEffect(() => {
@@ -134,7 +196,21 @@ export default function HottestTopicsByExam({ exam, yearFrom, yearTo }) {
                     </div>
 
                     {examHotTopics.length > 0 ? (
-                        <ResponsiveContainer width="100%" height={examHotTopicsHeight}>
+                        <div 
+                            ref={chartRef}
+                            style={{ 
+                                width: '100%',
+                                height: `${examHotTopicsHeight}px`,
+                                minHeight: `${examHotTopicsHeight}px`,
+                                minWidth: '100%',
+                                position: 'relative',
+                                overflow: 'visible'
+                            }}
+                        >
+                            <ResponsiveContainer 
+                                width={isMobile && containerWidth > 0 ? containerWidth : "100%"} 
+                                height={examHotTopicsHeight}
+                            >
                             <BarChart
                                 data={examHotTopics}
                                 layout="vertical"
@@ -194,7 +270,8 @@ export default function HottestTopicsByExam({ exam, yearFrom, yearTo }) {
                                     />
                                 </Bar>
                             </BarChart>
-                        </ResponsiveContainer>
+                            </ResponsiveContainer>
+                        </div>
                     ) : (
                         <p className="text-gray-500 text-center py-8">No hot topics available</p>
                     )}
