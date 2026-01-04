@@ -3,8 +3,10 @@ import { getUserData } from "../utils/auth";
 import ExplanationWindow from "./ExplanationWindow";
 import SaveNoteButton from "./SaveNoteButton";
 import { useProgressTracking } from "../hooks/useProgressTracking";
+import { useMobileDetection } from "../utils/useMobileDetection";
 
 export default function ResultsList({ results, onExplanationWindowChange }) {
+    const isMobile = useMobileDetection();
     const [visibleAnswers, setVisibleAnswers] = useState({});
     const [loadingExplain, setLoadingExplain] = useState({});
     const [isAdmin, setIsAdmin] = useState(false);
@@ -481,22 +483,23 @@ export default function ResultsList({ results, onExplanationWindowChange }) {
                             {renderQuestionText(item)}
 
                             {/* Meta Info */}
-                            <div className="question-meta">
+                            <div className={`question-meta ${isMobile ? 'flex-wrap gap-2' : ''}`}>
                                 {item.exam && (
-                                    <span className="flex items-center gap-1">
-                                        <span className="w-2.5 h-2.5 bg-blue-500 rounded-full"></span>
-                                        {item.exam}
+                                    <span className={`flex items-center gap-1 ${isMobile ? 'text-xs' : ''} whitespace-nowrap`}>
+                                        <span className="w-2.5 h-2.5 bg-blue-500 rounded-full flex-shrink-0"></span>
+                                        <span className="truncate max-w-[80px] md:max-w-none">{item.exam}</span>
                                     </span>
                                 )}
                                 {item.year && (
-                                    <span className="flex items-center gap-1">
-                                        📅 {item.year}
+                                    <span className={`flex items-center gap-1 ${isMobile ? 'text-xs' : ''} whitespace-nowrap`}>
+                                        <span className={isMobile ? 'text-xs' : ''}>📅</span>
+                                        <span>{item.year}</span>
                                     </span>
                                 )}
                                 {/* Developer/Admin: Question ID for debugging - only visible for admin users */}
                                 {isAdmin && item.id && (
                                     <span 
-                                        className="flex items-center gap-1 text-[11px] text-gray-400 font-mono cursor-help opacity-70 hover:opacity-100 transition-opacity" 
+                                        className={`flex items-center gap-1 text-[11px] text-gray-400 font-mono cursor-help opacity-70 hover:opacity-100 transition-opacity ${isMobile ? 'hidden' : ''}`}
                                         title={`Question ID (Admin)\nCSV ID: ${item.id}`}
                                     >
                                         <span className="text-gray-500">🔍</span>
@@ -507,21 +510,21 @@ export default function ResultsList({ results, onExplanationWindowChange }) {
                                 {/* Show/Hide Answer Button */}
                                 <button
                                     onClick={() => toggleAnswer(id)}
-                                    className="info-layer-btn info-layer-btn-answer"
+                                    className={`info-layer-btn info-layer-btn-answer ${isMobile ? 'px-2 py-0.5 text-[11px] gap-1 flex-shrink-0' : ''}`}
                                     title={showAns ? "Hide the correct answer" : "Show the correct answer"}
                                 >
-                                    <span className="info-layer-icon">{showAns ? "👁️" : "👁️‍🗨️"}</span>
-                                    <span>{showAns ? "Hide Answer" : "Show Answer"}</span>
+                                    <span className={`info-layer-icon flex-shrink-0 ${isMobile ? 'text-[10px]' : ''}`}>{showAns ? "👁️" : "👁️‍🗨️"}</span>
+                                    <span className={`flex-shrink-0 ${isMobile ? 'whitespace-nowrap' : ''}`}>{isMobile ? (showAns ? "Hide" : "Answer") : (showAns ? "Hide Answer" : "Show Answer")}</span>
                                 </button>
 
                                 {/* Explain Concept Button */}
                                 <button
                                     onClick={() => handleExplainConcept(item)}
-                                    className="info-layer-btn info-layer-btn-active"
+                                    className={`info-layer-btn info-layer-btn-active ${isMobile ? 'px-2 py-0.5 text-[11px] gap-1 flex-shrink-0' : ''}`}
                                     title="Get detailed explanation of the question and related concepts"
                                 >
-                                    <span className="info-layer-icon">💡</span>
-                                    <span>Explain Concept</span>
+                                    <span className={`info-layer-icon flex-shrink-0 ${isMobile ? 'text-[10px]' : ''}`}>💡</span>
+                                    <span className={`flex-shrink-0 ${isMobile ? 'whitespace-nowrap' : ''}`}>{isMobile ? "Explain" : "Explain Concept"}</span>
                                 </button>
 
                                 {/* Save Question Button */}
@@ -530,7 +533,7 @@ export default function ResultsList({ results, onExplanationWindowChange }) {
                                     questionData={item}
                                     size="small"
                                     showLabel={true}
-                                    className="info-layer-btn"
+                                    className={`info-layer-btn ${isMobile ? 'px-2 py-0.5 text-[11px] gap-1' : ''}`}
                                     onSaveSuccess={() => {
                                         // Optional: Show toast notification
                                         console.log("Question saved successfully");

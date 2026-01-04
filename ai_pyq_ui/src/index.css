@@ -162,6 +162,13 @@ body.explanation-window-open .results-parent-container {
     @apply text-[13px] text-gray-500 mb-3 flex gap-3 items-center;
 }
 
+/* Mobile-specific adjustments for question-meta */
+@media (max-width: 767px) {
+    .question-meta {
+        @apply gap-2;
+    }
+}
+
 /* ===== Options Styling ===== */
 .option-list {
     @apply flex flex-col gap-1 mb-3;
@@ -249,6 +256,23 @@ body.explanation-window-open .results-parent-container {
     display: inline-block;
     width: 13px;
     text-align: center;
+}
+
+/* Mobile-specific fixes for info-layer buttons to prevent overlap */
+@media (max-width: 767px) {
+    .info-layer-btn {
+        flex-shrink: 0;
+        min-width: fit-content;
+    }
+    
+    .info-layer-btn .info-layer-icon {
+        flex-shrink: 0;
+    }
+    
+    .info-layer-btn span:not(.info-layer-icon) {
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
 }
 
 /* ===== Compact Spacing ===== */

@@ -239,7 +239,7 @@ export default function ExplanationWindow({
             />
 
             {/* Explanation Window */}
-            <div className={`explanation-window ${isMinimized ? 'explanation-window-minimized' : ''} z-30 md:z-20`}>
+            <div className={`explanation-window ${isMinimized ? 'explanation-window-minimized' : ''} z-30 md:z-40`}>
                 {/* Header */}
                 <div className="explanation-header" style={getHeaderStyle()}>
                     <h3 className="explanation-title">{getTitle()}</h3>
