@@ -345,7 +345,7 @@ export default function SearchPage() {
                                     value={query}
                                     onChange={(e) => setQuery(e.target.value)}
                                     placeholder={isMobile ? "Search PYQs or topics..." : "Search PYQs or topics (e.g. Article 15, Fundamental Rights...)"}
-                                    className={`${isMobile ? 'w-full' : 'flex-1'} border-2 border-gray-300 rounded-xl p-3.5 ${isMobile ? 'text-base' : 'text-sm'} focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all shadow-sm`}
+                                    className={`${isMobile ? 'w-full' : 'flex-1'} border-2 border-gray-300 rounded-xl p-3.5 ${isMobile ? 'text-base' : 'text-base md:text-lg'} focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-300 transition-all shadow-sm`}
                                     onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                                 />
                                 <button
@@ -357,7 +357,7 @@ export default function SearchPage() {
                                     disabled={loading}
                                     className={`${isMobile ? 'w-full' : 'px-6'} py-3.5 rounded-xl text-white font-semibold ${isMobile ? 'text-base' : 'text-sm'} shadow-md transition-all ${loading
                                             ? "bg-gray-400 cursor-not-allowed"
-                                            : "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 active:scale-95"
+                                            : "bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 active:scale-95"
                                         }`}
                                 >
                                     {loading ? "Searching..." : "Search"}
