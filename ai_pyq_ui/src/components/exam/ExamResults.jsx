@@ -4,10 +4,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import SolutionViewer from "./SolutionViewer";
 import { buildApiUrl } from "../../config/apiConfig";
+import { useMobileDetection } from "../../utils/useMobileDetection";
 
 export default function ExamResults() {
     const navigate = useNavigate();
     const { attemptId } = useParams();
+    const isMobile = useMobileDetection();
     const [analysis, setAnalysis] = useState(null);
     const [solutions, setSolutions] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -18,6 +20,8 @@ export default function ExamResults() {
     const [examSetName, setExamSetName] = useState("");
     const [activeWeaknessTab, setActiveWeaknessTab] = useState("weak"); // "weak" or "not_attempted"
     const [examLanguage, setExamLanguage] = useState("en"); // Language used during exam
+    const [activeMainTab, setActiveMainTab] = useState("analysis"); // "analysis", "solutions", "leaderboard"
+    const [solutionsFilter, setSolutionsFilter] = useState("all"); // "all", "overtime", "unattempted"
 
     useEffect(() => {
         const fetchAnalysis = async () => {
@@ -189,6 +193,143 @@ export default function ExamResults() {
         setShowSolutionViewer(true);
     };
 
+    // Compute unattempted areas from solutions data (more accurate than backend)
+    // This ensures subjects with partial attempts are still shown
+    const computeUnattemptedAreas = () => {
+        if (!solutions) return [];
+        
+        // Group unattempted questions by subject
+        const unattemptedBySubject = {};
+        solutions.forEach((solution, index) => {
+            // A question is unattempted if it has no selected_option
+            if (!solution.selected_option) {
+                const subject = solution.subject || "General";
+                if (!unattemptedBySubject[subject]) {
+                    unattemptedBySubject[subject] = [];
+                }
+                // Store actual question number (index + 1) instead of question_id
+                unattemptedBySubject[subject].push({
+                    question_id: solution.question_id,
+                    question_number: index + 1
+                });
+            }
+        });
+        
+        // Convert to array format matching backend structure
+        return Object.entries(unattemptedBySubject).map(([subject, questionData]) => ({
+            subject,
+            question_ids: questionData.map(q => q.question_number), // Use question numbers for display
+            question_data: questionData // Keep full data for navigation
+        }));
+    };
+
+    // Get all unattempted question IDs (computed from solutions)
+    const getUnattemptedQuestionIds = () => {
+        if (!solutions) return [];
+        return solutions
+            .filter(s => !s.selected_option)
+            .map(s => s.question_id);
+    };
+
+    const unattemptedQuestionIds = getUnattemptedQuestionIds();
+    const computedUnattemptedAreas = computeUnattemptedAreas();
+
+    // Convert weak areas question IDs to actual question numbers
+    const convertWeakAreasToQuestionNumbers = () => {
+        if (!analysis?.weak_areas?.weak_chapters || !solutions) {
+            return analysis?.weak_areas?.weak_chapters || [];
+        }
+        
+        return analysis.weak_areas.weak_chapters.map(chapter => {
+            // Map each question_id to its actual question number in the exam
+            const questionData = chapter.question_ids.map(qId => {
+                const solutionIndex = solutions.findIndex(s => s.question_id === qId);
+                return {
+                    question_id: qId,
+                    question_number: solutionIndex >= 0 ? solutionIndex + 1 : qId // Fallback to qId if not found
+                };
+            });
+            
+            return {
+                ...chapter,
+                question_ids: questionData.map(q => q.question_number), // Use question numbers for display
+                question_data: questionData // Keep full data for navigation
+            };
+        });
+    };
+
+    const weakAreasWithQuestionNumbers = convertWeakAreasToQuestionNumbers();
+
+    // Calculate solutions filter counts
+    const getSolutionsFilterCounts = () => {
+        if (!solutions) return { all: 0, overtime: 0, unattempted: 0 };
+        
+        const avgTimePerQuestion = analysis?.overall_performance?.total_questions 
+            ? (analysis.exam_set?.duration_minutes * 60 / analysis.overall_performance.total_questions)
+            : 60; // Default 60 seconds per question
+        
+        const overtime = solutions.filter(s => (s.time_spent_seconds || 0) > avgTimePerQuestion * 1.5).length;
+        // Use the same unattempted question IDs from backend analysis
+        const unattempted = solutions.filter(s => unattemptedQuestionIds.includes(s.question_id)).length;
+        
+        return {
+            all: solutions.length,
+            overtime,
+            unattempted
+        };
+    };
+
+    const filterCounts = getSolutionsFilterCounts();
+
+    // Filter solutions based on selected filter, preserving original order and indices
+    const getFilteredSolutions = () => {
+        if (!solutions) return [];
+        
+        const avgTimePerQuestion = analysis?.overall_performance?.total_questions 
+            ? (analysis.exam_set?.duration_minutes * 60 / analysis.overall_performance.total_questions)
+            : 60; // Default 60 seconds per question
+        
+        let filtered = [];
+        switch (solutionsFilter) {
+            case "overtime":
+                filtered = solutions.filter(s => (s.time_spent_seconds || 0) > avgTimePerQuestion * 1.5);
+                break;
+            case "unattempted":
+                // Use the same unattempted question IDs to match "Not Attempted Areas"
+                filtered = solutions.filter(s => unattemptedQuestionIds.includes(s.question_id));
+                break;
+            default:
+                filtered = solutions;
+        }
+        
+        // Preserve original indices for correct question numbering
+        return filtered.map(solution => {
+            const originalIndex = solutions.findIndex(s => s.question_id === solution.question_id);
+            return {
+                ...solution,
+                originalIndex: originalIndex >= 0 ? originalIndex : 0
+            };
+        });
+    };
+
+    // Group solutions by subject, preserving original question numbers
+    const groupSolutionsBySubject = (solutionsList) => {
+        const grouped = {};
+        solutionsList.forEach((solution) => {
+            const subject = solution.subject || "General";
+            if (!grouped[subject]) {
+                grouped[subject] = [];
+            }
+            // Preserve the original index from the full solutions array
+            const originalIndex = solutions.findIndex(s => s.question_id === solution.question_id);
+            grouped[subject].push({ 
+                ...solution, 
+                originalIndex: originalIndex >= 0 ? originalIndex : solution.originalIndex || 0
+            });
+        });
+        return grouped;
+    };
+
     if (loading) {
         return (
             <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -239,51 +380,186 @@ export default function ExamResults() {
         <div className="min-h-screen bg-gray-50">
             {/* Header */}
             <div className="bg-white border-b border-gray-200 py-4 px-6">
-                <div className="max-w-7xl mx-auto flex items-center justify-between">
-                    <div>
-                        <h1 className="text-2xl font-bold text-gray-900">
-                            Exam Results{examSetName ? ` - ${examSetName}` : ''}
-                        </h1>
-                    </div>
-                    <div className="flex items-center gap-4">
-                        <button
-                            onClick={handleReattempt}
-                            className="px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
-                        >
-                            Reattempt This Test
-                        </button>
-                        <button
-                            onClick={() => {
-                                // Restore filter state from localStorage
-                                const testType = localStorage.getItem("examMode_testType") || "exam";
-                                const exam = localStorage.getItem("examMode_exam") || "";
-                                const subject = localStorage.getItem("examMode_subject") || "";
-                                
-                                // Build URL with filter params
-                                const params = new URLSearchParams();
-                                if (testType) params.set("testType", testType);
-                                if (exam) params.set("exam", exam);
-                                if (subject) params.set("subject", subject);
-                                
-                                navigate(`/exam-mode?${params.toString()}`);
-                            }}
-                            className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition-colors"
-                        >
-                            Go to Tests
-                        </button>
-                        <button
-                            onClick={() => setShowSolutionViewer(true)}
-                            className="px-4 py-2 bg-teal-600 text-white rounded-lg font-semibold hover:bg-teal-700 transition-colors"
-                        >
-                            Solutions
-                        </button>
+                <div className="max-w-7xl mx-auto">
+                    <div className="flex items-center justify-between flex-wrap gap-4">
+                        <div className="flex items-center gap-3">
+                            {/* Mobile: Back Button */}
+                            {isMobile && (
+                                <button
+                                    onClick={() => {
+                                        // Restore filter state from localStorage
+                                        const testType = localStorage.getItem("examMode_testType") || "exam";
+                                        const exam = localStorage.getItem("examMode_exam") || "";
+                                        const subject = localStorage.getItem("examMode_subject") || "";
+                                        
+                                        // Build URL with filter params
+                                        const params = new URLSearchParams();
+                                        if (testType) params.set("testType", testType);
+                                        if (exam) params.set("exam", exam);
+                                        if (subject) params.set("subject", subject);
+                                        
+                                        navigate(`/exam-mode?${params.toString()}`);
+                                    }}
+                                    className="flex-shrink-0 p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                                    title="Go back to Practice"
+                                >
+                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                </button>
+                            )}
+                            <h1 className="text-xl md:text-2xl font-bold text-gray-900">
+                                {isMobile ? "Results" : `Exam Results${examSetName ? ` - ${examSetName.length > 30 ? examSetName.substring(0, 30) + '...' : examSetName}` : ''}`}
+                            </h1>
+                        </div>
+                        {/* Desktop: Show buttons in header */}
+                        <div className="hidden md:flex items-center gap-4">
+                            <button
+                                onClick={handleReattempt}
+                                className="px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors whitespace-nowrap"
+                            >
+                                Reattempt This Test
+                            </button>
+                            <button
+                                onClick={() => {
+                                    // Restore filter state from localStorage
+                                    const testType = localStorage.getItem("examMode_testType") || "exam";
+                                    const exam = localStorage.getItem("examMode_exam") || "";
+                                    const subject = localStorage.getItem("examMode_subject") || "";
+                                    
+                                    // Build URL with filter params
+                                    const params = new URLSearchParams();
+                                    if (testType) params.set("testType", testType);
+                                    if (exam) params.set("exam", exam);
+                                    if (subject) params.set("subject", subject);
+                                    
+                                    navigate(`/exam-mode?${params.toString()}`);
+                                }}
+                                className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition-colors whitespace-nowrap"
+                            >
+                                Go to Tests
+                            </button>
+                            <button
+                                onClick={() => {
+                                    setActiveMainTab("solutions");
+                                    setShowSolutionViewer(true);
+                                }}
+                                className="px-4 py-2 bg-teal-600 text-white rounded-lg font-semibold hover:bg-teal-700 transition-colors whitespace-nowrap"
+                            >
+                                Solutions
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
 
+            {/* Mobile: Tab Navigation */}
+            {isMobile && (
+                <div className="bg-white border-b border-gray-200">
+                    <div className="max-w-7xl mx-auto px-6">
+                        <div className="flex border-b border-gray-200">
+                            <button
+                                onClick={() => setActiveMainTab("analysis")}
+                                className={`flex-1 px-4 py-3 font-semibold text-sm transition-colors relative ${
+                                    activeMainTab === "analysis"
+                                        ? "text-gray-900"
+                                        : "text-gray-500"
+                                }`}
+                            >
+                                Analysis
+                                {activeMainTab === "analysis" && (
+                                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gray-900"></div>
+                                )}
+                            </button>
+                            <button
+                                onClick={() => setActiveMainTab("solutions")}
+                                className={`flex-1 px-4 py-3 font-semibold text-sm transition-colors relative ${
+                                    activeMainTab === "solutions"
+                                        ? "text-gray-900"
+                                        : "text-gray-500"
+                                }`}
+                            >
+                                Solutions
+                                {activeMainTab === "solutions" && (
+                                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gray-900"></div>
+                                )}
+                            </button>
+                            <button
+                                onClick={() => setActiveMainTab("leaderboard")}
+                                className={`flex-1 px-4 py-3 font-semibold text-sm transition-colors relative ${
+                                    activeMainTab === "leaderboard"
+                                        ? "text-gray-900"
+                                        : "text-gray-500"
+                                }`}
+                            >
+                                Leaderboard
+                                {activeMainTab === "leaderboard" && (
+                                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gray-900"></div>
+                                )}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Desktop: Tab Navigation (if needed) */}
+            {!isMobile && (
+                <div className="bg-white border-b border-gray-200">
+                    <div className="max-w-7xl mx-auto px-6">
+                        <div className="flex border-b border-gray-200">
+                            <button
+                                onClick={() => setActiveMainTab("analysis")}
+                                className={`px-6 py-3 font-semibold text-sm transition-colors relative ${
+                                    activeMainTab === "analysis"
+                                        ? "text-gray-900"
+                                        : "text-gray-500 hover:text-gray-700"
+                                }`}
+                            >
+                                Analysis
+                                {activeMainTab === "analysis" && (
+                                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gray-900"></div>
+                                )}
+                            </button>
+                            <button
+                                onClick={() => {
+                                    setActiveMainTab("solutions");
+                                    setShowSolutionViewer(true);
+                                }}
+                                className={`px-6 py-3 font-semibold text-sm transition-colors relative ${
+                                    activeMainTab === "solutions"
+                                        ? "text-gray-900"
+                                        : "text-gray-500 hover:text-gray-700"
+                                }`}
+                            >
+                                Solutions
+                                {activeMainTab === "solutions" && (
+                                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gray-900"></div>
+                                )}
+                            </button>
+                            <button
+                                onClick={() => setActiveMainTab("leaderboard")}
+                                className={`px-6 py-3 font-semibold text-sm transition-colors relative ${
+                                    activeMainTab === "leaderboard"
+                                        ? "text-gray-900"
+                                        : "text-gray-500 hover:text-gray-700"
+                                }`}
+                            >
+                                Leaderboard
+                                {activeMainTab === "leaderboard" && (
+                                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gray-900"></div>
+                                )}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             <div className="max-w-7xl mx-auto px-6 py-8">
-                {/* Overall Performance Summary */}
-                <div className="mb-8">
+                {/* Tab Content */}
+                {activeMainTab === "analysis" && (
+                    <>
+                        {/* Overall Performance Summary */}
+                        <div className="mb-8">
                     <h2 className="text-xl font-bold text-gray-900 mb-4">Overall Performance Summary</h2>
                     <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                         <motion.div
@@ -579,22 +855,22 @@ export default function ExamResults() {
                         {/* Weak Areas Tab */}
                         {activeWeaknessTab === "weak" && (
                             <div>
-                                {analysis.weak_areas.weak_chapters && analysis.weak_areas.weak_chapters.length > 0 ? (
+                                {weakAreasWithQuestionNumbers && weakAreasWithQuestionNumbers.length > 0 ? (
                                     <div className="space-y-3">
-                                        {analysis.weak_areas.weak_chapters.map((chapter, idx) => (
+                                        {weakAreasWithQuestionNumbers.map((chapter, idx) => (
                                             <div key={idx} className="border border-gray-200 rounded-lg p-3 hover:bg-gray-50 transition-colors">
                                                 <div className="flex items-center justify-between">
                                                     <span className="font-semibold text-gray-900 flex-shrink-0 min-w-[200px]">
                                                         {chapter.subject}
                                                     </span>
                                                     <div className="flex flex-wrap gap-2 items-center flex-1 justify-end">
-                                                        {chapter.question_ids.map((qId) => (
+                                                        {chapter.question_data.map((qData) => (
                                                             <button
-                                                                key={qId}
-                                                                onClick={() => handleViewSolution(qId)}
+                                                                key={qData.question_id}
+                                                                onClick={() => handleViewSolution(qData.question_id)}
                                                                 className="px-2 py-1 bg-red-100 text-red-700 rounded text-sm font-medium hover:bg-red-200 transition-colors"
                                                             >
-                                                                {qId}
+                                                                {qData.question_number}
                                                             </button>
                                                         ))}
                                                     </div>
@@ -613,22 +889,22 @@ export default function ExamResults() {
                         {/* Not Attempted Areas Tab */}
                         {activeWeaknessTab === "not_attempted" && (
                             <div>
-                                {analysis.weak_areas.not_attempted_areas && analysis.weak_areas.not_attempted_areas.length > 0 ? (
+                                {computedUnattemptedAreas && computedUnattemptedAreas.length > 0 ? (
                                     <div className="space-y-3">
-                                        {analysis.weak_areas.not_attempted_areas.map((area, idx) => (
+                                        {computedUnattemptedAreas.map((area, idx) => (
                                             <div key={idx} className="border border-gray-200 rounded-lg p-3 hover:bg-gray-50 transition-colors">
                                                 <div className="flex items-center justify-between">
                                                     <span className="font-semibold text-gray-900 flex-shrink-0 min-w-[200px]">
                                                         {area.subject}
                                                     </span>
                                                     <div className="flex flex-wrap gap-2 items-center flex-1 justify-end">
-                                                        {area.question_ids.map((qId) => (
+                                                        {area.question_data.map((qData) => (
                                                             <button
-                                                                key={qId}
-                                                                onClick={() => handleViewSolution(qId)}
+                                                                key={qData.question_id}
+                                                                onClick={() => handleViewSolution(qData.question_id)}
                                                                 className="px-2 py-1 bg-yellow-100 text-yellow-700 rounded text-sm font-medium hover:bg-yellow-200 transition-colors"
                                                             >
-                                                                {qId}
+                                                                {qData.question_number}
                                                             </button>
                                                         ))}
                                                     </div>
@@ -645,6 +921,125 @@ export default function ExamResults() {
                         )}
                     </div>
                 </div>
+                    </>
+                )}
+
+                {/* Solutions Tab Content */}
+                {activeMainTab === "solutions" && solutions && (
+                    <div>
+                        {/* Filter Buttons */}
+                        <div className="mb-6 flex gap-3 flex-wrap">
+                            <button
+                                onClick={() => setSolutionsFilter("all")}
+                                className={`px-4 py-2 rounded-lg font-semibold text-sm transition-colors ${
+                                    solutionsFilter === "all"
+                                        ? "bg-blue-600 text-white"
+                                        : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                                }`}
+                            >
+                                All ({filterCounts.all})
+                            </button>
+                            <button
+                                onClick={() => setSolutionsFilter("overtime")}
+                                className={`px-4 py-2 rounded-lg font-semibold text-sm transition-colors ${
+                                    solutionsFilter === "overtime"
+                                        ? "bg-blue-600 text-white"
+                                        : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                                }`}
+                            >
+                                Overtime ({filterCounts.overtime})
+                            </button>
+                            <button
+                                onClick={() => setSolutionsFilter("unattempted")}
+                                className={`px-4 py-2 rounded-lg font-semibold text-sm transition-colors ${
+                                    solutionsFilter === "unattempted"
+                                        ? "bg-blue-600 text-white"
+                                        : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                                }`}
+                            >
+                                Unattempted ({filterCounts.unattempted})
+                            </button>
+                        </div>
+
+                        {/* Solutions by Subject */}
+                        {(() => {
+                            const filteredSolutions = getFilteredSolutions();
+                            const groupedSolutions = groupSolutionsBySubject(filteredSolutions);
+                            
+                            return Object.entries(groupedSolutions).map(([subject, subjectSolutions]) => (
+                                <div key={subject} className="mb-8">
+                                    <div className="mb-4">
+                                        <h2 className="text-lg font-bold text-gray-900">{subject.toUpperCase()}</h2>
+                                        <p className="text-sm text-gray-600">{subjectSolutions.length} Questions</p>
+                                    </div>
+                                    
+                                    <div className="space-y-3">
+                                        {subjectSolutions.map((solution, idx) => {
+                                            const questionNumber = solution.originalIndex + 1;
+                                            const isCorrect = solution.is_correct;
+                                            
+                                            return (
+                                                <div
+                                                    key={solution.question_id}
+                                                    onClick={() => handleViewSolution(solution.question_id)}
+                                                    className="bg-white rounded-lg p-4 border border-gray-200 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+                                                >
+                                                    <div className="flex items-start gap-4">
+                                                        <div className="flex-shrink-0 w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-sm font-semibold text-gray-700">
+                                                            {questionNumber}
+                                                        </div>
+                                                        <div className="flex-1 min-w-0">
+                                                            <div className="flex items-center gap-2 mb-2 flex-wrap">
+                                                                {solution.time_spent_seconds > 0 && (
+                                                                    <span className="text-xs text-gray-500 flex items-center gap-1">
+                                                                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                                        </svg>
+                                                                        {Math.floor(solution.time_spent_seconds / 60)}:{(solution.time_spent_seconds % 60).toString().padStart(2, '0')}
+                                                                    </span>
+                                                                )}
+                                                                {solution.percentage_correct !== undefined && (
+                                                                    <span className="text-xs text-gray-600">
+                                                                        {solution.percentage_correct}% got it right
+                                                                    </span>
+                                                                )}
+                                                            </div>
+                                                            <p className="text-sm text-gray-800 line-clamp-2">
+                                                                {solution.question_text}
+                                                            </p>
+                                                        </div>
+                                                        <button
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
+                                                                // Bookmark functionality can be added here
+                                                            }}
+                                                            className="flex-shrink-0 text-gray-400 hover:text-gray-600 transition-colors"
+                                                        >
+                                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                                                            </svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            ));
+                        })()}
+                    </div>
+                )}
+
+                {/* Leaderboard Tab Content */}
+                {activeMainTab === "leaderboard" && (
+                    <div className="bg-white rounded-xl shadow-lg p-6">
+                        <h2 className="text-xl font-bold text-gray-900 mb-4">Leaderboard</h2>
+                        <div className="text-center py-12 text-gray-500">
+                            <p className="text-lg mb-2">Leaderboard feature coming soon!</p>
+                            <p className="text-sm">Check back later to see how you rank among all participants.</p>
+                        </div>
+                    </div>
+                )}
             </div>
 
             {/* Solution Viewer */}

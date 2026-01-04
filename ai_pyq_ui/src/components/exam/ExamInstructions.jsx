@@ -4,10 +4,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { getUserData } from "../../utils/auth";
 import { buildApiUrl } from "../../config/apiConfig";
+import { useMobileDetection } from "../../utils/useMobileDetection";
 
 export default function ExamInstructions() {
     const navigate = useNavigate();
     const { examSetId } = useParams();
+    const isMobile = useMobileDetection();
     const [examSet, setExamSet] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
@@ -195,8 +197,8 @@ export default function ExamInstructions() {
 
             {/* Main Content Area - Flex layout with fixed header and footer */}
             <div className="flex-1 flex overflow-hidden mt-16 mb-20">
-                {/* Left Content - 80% width, starts from extreme left */}
-                <div className="w-4/5 flex flex-col">
+                {/* Left Content - 80% width on desktop, 100% on mobile */}
+                <div className="w-full md:w-4/5 flex flex-col">
                     {/* Scrollable content card */}
                     <div className={`flex-1 overflow-y-auto pl-6 pr-4 py-6 ${currentPage === "instructions" ? "scrollbar-hide" : ""}`}>
                         <motion.div
@@ -397,8 +399,8 @@ export default function ExamInstructions() {
                     </div>
                 </div>
 
-                {/* Right Sidebar - User Profile - 20% width */}
-                <div className="w-1/5 flex-shrink-0 px-6 py-6">
+                {/* Right Sidebar - User Profile - 20% width (Hidden on mobile) */}
+                <div className="hidden md:block w-1/5 flex-shrink-0 px-6 py-6">
                     <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200 h-fit sticky top-6">
                         <div className="text-center">
                             <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full mx-auto mb-3 flex items-center justify-center text-white font-bold text-2xl shadow-lg">
@@ -410,8 +412,8 @@ export default function ExamInstructions() {
                 </div>
             </div>
 
-            {/* Bottom Navigation Bar - Fixed at bottom of viewport, 80% width matching content card */}
-            <div className="fixed bottom-0 left-0 bg-white border-t-2 border-gray-200 shadow-lg z-50 flex-shrink-0" style={{ width: '80%' }}>
+            {/* Bottom Navigation Bar - Fixed at bottom of viewport, 80% width on desktop, 100% on mobile */}
+            <div className="fixed bottom-0 left-0 bg-white border-t-2 border-gray-200 shadow-lg z-50 flex-shrink-0 w-full md:w-4/5">
                 <div className="w-full px-6 py-4">
                     <div className="flex justify-between items-center">
                         {currentPage === "symbols" ? (
