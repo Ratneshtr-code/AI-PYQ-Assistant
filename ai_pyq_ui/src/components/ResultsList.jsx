@@ -470,17 +470,19 @@ export default function ResultsList({ results, onExplanationWindowChange }) {
                         >
                             {/* Solved Indicator - Subtle like LeetCode */}
                             {isQuestionSolved && (
-                                <div className="absolute top-3 right-3 flex items-center gap-1.5" title="You've solved this question">
-                                    <span className="text-xs text-gray-400 font-normal">Solved</span>
-                                    <div className="w-4 h-4 border border-green-300 rounded-full flex items-center justify-center bg-transparent">
-                                        <svg className="w-2.5 h-2.5 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div className={`${isMobile ? 'absolute top-2 right-2' : 'absolute top-3 right-3'} flex items-center gap-1.5 z-10`} title="You've solved this question">
+                                    {!isMobile && <span className="text-xs text-gray-400 font-normal">Solved</span>}
+                                    <div className={`${isMobile ? 'w-5 h-5' : 'w-4 h-4'} border border-green-300 rounded-full flex items-center justify-center bg-transparent`}>
+                                        <svg className={`${isMobile ? 'w-3 h-3' : 'w-2.5 h-2.5'} text-green-300`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                                         </svg>
                                     </div>
                                 </div>
                             )}
                             {/* Question */}
-                            {renderQuestionText(item)}
+                            <div className={isMobile && isQuestionSolved ? 'pr-12' : ''}>
+                                {renderQuestionText(item)}
+                            </div>
 
                             {/* Meta Info */}
                             <div className={`question-meta ${isMobile ? 'flex-wrap gap-2' : ''}`}>

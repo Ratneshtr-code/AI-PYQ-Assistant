@@ -24,6 +24,7 @@ export default function SearchPage() {
     const [allResults, setAllResults] = useState([]);
     const [explanationWindowOpen, setExplanationWindowOpen] = useState(false);
     const [explanationWindowMinimized, setExplanationWindowMinimized] = useState(false);
+    const [chartFilterExam, setChartFilterExam] = useState(""); // Filter from chart card click
     const location = useLocation();
 
     const {
@@ -160,30 +161,75 @@ export default function SearchPage() {
             return;
         }
         
+        setCurrentPage(1); // Reset to page 1 on new search
+        setChartFilterExam(""); // Clear chart filter on new search
+        
+        // Fetch first page immediately to show results quickly
         await doSearch(query, 1, { exam, language });
 
+        // Fetch remaining pages in background for "All Exams" filter
         if (exam === "") {
-            const allFetched = [];
-            let currentPage = 1;
-            let morePages = true;
-            while (morePages) {
-                const response = await fetch(buildApiUrl("search"), {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ query, page: currentPage, exam, language }),
-                });
-                const data = await response.json();
-                allFetched.push(...(data.results || []));
-                if (data.results.length < (data.page_size || 10)) morePages = false;
-                else currentPage++;
-            }
-            setAllResults(allFetched);
+            // Use setTimeout to allow UI to render first page quickly
+            setTimeout(async () => {
+                const allFetched = [];
+                let fetchPage = 1;
+                let morePages = true;
+                while (morePages) {
+                    const response = await fetch(buildApiUrl("search"), {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ query, page: fetchPage, exam, language }),
+                    });
+                    const data = await response.json();
+                    allFetched.push(...(data.results || []));
+                    if (data.results.length < (data.page_size || 10)) morePages = false;
+                    else fetchPage++;
+                }
+                setAllResults(allFetched);
+            }, 100); // Small delay to let first page render
         } else {
             setAllResults([]);
         }
     }, [query, exam, language, loading, doSearch, apiUrl]);
 
-    const handlePageChange = (p) => doSearch(query, p, { exam, language });
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const handlePageChange = (p) => {
+        // If chart filter is active and "All Exams" is selected, handle pagination client-side
+        if (chartFilterExam && exam === "" && allResults.length > 0) {
+            setCurrentPage(p);
+            return;
+        }
+        setCurrentPage(p);
+        doSearch(query, p, { exam, language });
+    };
+
+    const handleChartExamClick = (examName) => {
+        setChartFilterExam(examName);
+        setCurrentPage(1); // Reset to page 1 when filtering
+    };
+
+    // Filter results based on chart selection (only when "All Exams" is selected)
+    const getFilteredResults = () => {
+        if (!chartFilterExam || exam !== "") return results;
+        // Filter from allResults when showing all exams
+        if (allResults.length > 0) {
+            const filtered = allResults.filter(r => (r.exam || "Unknown") === chartFilterExam);
+            // Return paginated results
+            const startIndex = (currentPage - 1) * pageSize;
+            const endIndex = startIndex + pageSize;
+            return filtered.slice(startIndex, endIndex);
+        }
+        return results.filter(r => (r.exam || "Unknown") === chartFilterExam);
+    };
+
+    const getFilteredTotalMatches = () => {
+        if (!chartFilterExam || exam !== "") return totalMatches;
+        if (allResults.length > 0) {
+            return allResults.filter(r => (r.exam || "Unknown") === chartFilterExam).length;
+        }
+        return results.filter(r => (r.exam || "Unknown") === chartFilterExam).length;
+    };
 
     return (
         <div className="flex min-h-screen bg-gray-50 text-gray-800">
@@ -218,7 +264,10 @@ export default function SearchPage() {
                         </label>
                         <select
                             value={exam}
-                            onChange={(e) => setExam(e.target.value)}
+                            onChange={(e) => {
+                                setExam(e.target.value);
+                                setChartFilterExam(""); // Clear chart filter when exam dropdown changes
+                            }}
                             className="border border-gray-300 rounded-lg px-2 py-1.5 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all w-full shadow-sm"
                         >
                             <option value="">All Exams</option>
@@ -244,7 +293,10 @@ export default function SearchPage() {
                                     </label>
                                     <select
                                         value={exam}
-                                        onChange={(e) => setExam(e.target.value)}
+                                        onChange={(e) => {
+                                            setExam(e.target.value);
+                                            setChartFilterExam(""); // Clear chart filter when exam dropdown changes
+                                        }}
                                         className="border border-gray-300 rounded-lg px-3 py-2.5 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all w-full shadow-sm"
                                     >
                                         <option value="">All Exams</option>
@@ -324,13 +376,24 @@ export default function SearchPage() {
                         </p>
                     ) : (
                         <>
-                            {exam === "" && page === 1 && allResults.length > 0 && (
-                                <div className={`mx-auto space-y-6 ${explanationWindowOpen && !explanationWindowMinimized ? 'results-container-shifted' : ''}`} style={{ maxWidth: '48rem', width: '100%' }}>
-                                    <ResultsChart results={allResults} />
+                            {exam === "" && page === 1 && (allResults.length > 0 || results.length > 0) && (
+                                <div 
+                                    className={`${isMobile ? 'w-full px-1' : 'mx-auto'} space-y-6 ${explanationWindowOpen && !explanationWindowMinimized ? 'results-container-shifted' : ''}`} 
+                                    style={{ 
+                                        maxWidth: isMobile ? '100%' : '48rem', 
+                                        width: '100%',
+                                        display: 'block'
+                                    }}
+                                >
+                                    <ResultsChart 
+                                        results={allResults.length > 0 ? allResults : results} 
+                                        onExamClick={handleChartExamClick}
+                                        selectedExam={chartFilterExam}
+                                    />
                                 </div>
                             )}
                             <ResultsList 
-                                results={results} 
+                                results={chartFilterExam ? getFilteredResults() : results} 
                                 onExplanationWindowChange={(isOpen, isMinimized) => {
                                     setExplanationWindowOpen(isOpen);
                                     setExplanationWindowMinimized(isMinimized);
@@ -338,8 +401,8 @@ export default function SearchPage() {
                             />
                             <div className={`${explanationWindowOpen && !explanationWindowMinimized ? 'results-container-shifted' : ''}`} style={{ maxWidth: explanationWindowOpen && !explanationWindowMinimized ? '48rem' : '100%', width: '100%', marginLeft: 'auto', marginRight: explanationWindowOpen && !explanationWindowMinimized ? '440px' : 'auto' }}>
                                 <Pagination
-                                    page={page}
-                                    totalMatches={totalMatches}
+                                    page={chartFilterExam && exam === "" ? currentPage : page}
+                                    totalMatches={chartFilterExam && exam === "" ? getFilteredTotalMatches() : totalMatches}
                                     pageSize={pageSize}
                                     onPageChange={handlePageChange}
                                 />
