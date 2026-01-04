@@ -29,7 +29,7 @@ const LOCAL_PORT = '8000';
 const PRODUCTION_API_URL = ''; // Set this when deploying to production
 
 // Detect if running in Capacitor (mobile app)
-const isCapacitor = () => {
+export const isCapacitor = () => {
   return typeof window !== 'undefined' && 
          window.Capacitor !== undefined;
 };

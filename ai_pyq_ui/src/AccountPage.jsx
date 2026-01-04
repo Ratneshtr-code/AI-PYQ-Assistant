@@ -8,7 +8,7 @@ import EditProfileModal from "./components/EditProfileModal";
 import TransactionModal from "./components/TransactionModal";
 import { getCurrentUser, getUserData, authenticatedFetch, setUserData } from "./utils/auth";
 import { useProgressTracking } from "./hooks/useProgressTracking";
-import { buildApiUrl } from "./config/apiConfig";
+import { buildApiUrl, isCapacitor } from "./config/apiConfig";
 import { useMobileDetection } from "./utils/useMobileDetection";
 
 // API URLs are now handled by buildApiUrl from apiConfig
@@ -135,8 +135,17 @@ export default function AccountPage() {
         // Fetch notes count
         const fetchNotesCount = async () => {
             try {
-                const response = await authenticatedFetch("/notes/stats");
+                const notesUrl = buildApiUrl("notes/stats");
+                const response = await authenticatedFetch(notesUrl);
                 if (response.ok) {
+                    // Check if response is JSON before parsing
+                    const contentType = response.headers.get("content-type");
+                    if (!contentType || !contentType.includes("application/json")) {
+                        const text = await response.text();
+                        console.error(`AccountPage: Notes stats expected JSON but got ${contentType || 'unknown type'}. Response preview:`, text.substring(0, 200));
+                        setNotesCount(null);
+                        return;
+                    }
                     const data = await response.json();
                     setNotesCount(data.total || 0);
                 } else {
@@ -145,7 +154,7 @@ export default function AccountPage() {
                 }
             } catch (err) {
                 // Endpoint might not exist, set to null to hide count
-                console.error("Failed to fetch notes count:", err);
+                console.error("AccountPage: Failed to fetch notes count:", err);
                 setNotesCount(null);
             }
         };
@@ -179,19 +188,31 @@ export default function AccountPage() {
         // Fetch active subscription plan template ID
         const fetchActiveSubscription = async () => {
             try {
-                const res = await authenticatedFetch("/payment/active-subscription");
+                const activeSubUrl = buildApiUrl("payment/active-subscription");
+                const res = await authenticatedFetch(activeSubUrl);
                 if (res.ok) {
+                    // Check if response is JSON before parsing
+                    const contentType = res.headers.get("content-type");
+                    if (!contentType || !contentType.includes("application/json")) {
+                        const text = await res.text();
+                        console.error(`AccountPage: Expected JSON but got ${contentType || 'unknown type'}. Response preview:`, text.substring(0, 200));
+                        setActivePlanTemplateId(null);
+                        return;
+                    }
                     const data = await res.json();
                     if (data.is_active && data.active_plan_template_id) {
+                        console.log("AccountPage: Active subscription found, plan template ID:", data.active_plan_template_id);
                         setActivePlanTemplateId(data.active_plan_template_id);
                     } else {
+                        console.log("AccountPage: No active subscription found");
                         setActivePlanTemplateId(null);
                     }
                 } else {
+                    console.log(`AccountPage: Active subscription endpoint returned status: ${res.status}`);
                     setActivePlanTemplateId(null);
                 }
             } catch (err) {
-                console.error("Failed to fetch active subscription:", err);
+                console.error("AccountPage: Failed to fetch active subscription:", err);
                 setActivePlanTemplateId(null);
             }
         };
@@ -919,7 +940,7 @@ export default function AccountPage() {
             <Sidebar exam="" setExam={() => {}} examsList={examsList} onOpenSecondarySidebar={() => {}} />
             
             <main className="flex-1 md:ml-64">
-                <div className="max-w-7xl mx-auto px-2 md:px-4 lg:px-8 py-4 md:py-6 lg:py-8">
+                <div className={`max-w-7xl mx-auto ${isCapacitor() ? 'px-2 py-3' : 'px-2 md:px-4 lg:px-8 py-4 md:py-6 lg:py-8'}`}>
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -953,11 +974,11 @@ export default function AccountPage() {
                         )}
                         
                         {/* Two Column Layout */}
-                        <div className="grid grid-cols-1 lg:grid-cols-10 gap-4 md:gap-6">
+                        <div className={`grid grid-cols-1 lg:grid-cols-10 ${isCapacitor() ? 'gap-3' : 'gap-4 md:gap-6'}`}>
                             {/* Left Section (25-30%) */}
                             <div className="lg:col-span-3">
                                 {/* Combined User Account Card */}
-                                <div className="bg-white rounded-lg border border-gray-200 p-4 md:p-6 shadow-sm lg:p-6 relative">
+                                <div className={`bg-white rounded-lg border border-gray-200 shadow-sm lg:p-6 relative ${isCapacitor() ? 'p-3' : 'p-4 md:p-6'}`}>
                                     {/* Edit Profile Icon - Mobile Only */}
                                     <button
                                         onClick={() => setIsEditProfileOpen(true)}
@@ -970,10 +991,14 @@ export default function AccountPage() {
                                     </button>
                                     
                                     {/* User Profile Section */}
-                                    <div className="flex flex-row md:flex-row items-center md:items-start gap-4 mb-5">
+                                    <div className={`flex flex-row md:flex-row items-center md:items-start gap-4 ${isCapacitor() ? 'mb-3' : 'mb-5'}`}>
                                         <div className="relative">
                                             <div
-                                                className="w-20 h-20 md:w-24 md:h-24 lg:w-20 lg:h-20 rounded-full flex items-center justify-center text-white font-semibold text-xl md:text-2xl lg:text-xl flex-shrink-0 shadow-sm"
+                                                className={`rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0 shadow-sm ${
+                                                    isCapacitor() 
+                                                        ? 'w-16 h-16 text-lg' 
+                                                        : 'w-20 h-20 md:w-24 md:h-24 lg:w-20 lg:h-20 text-xl md:text-2xl lg:text-xl'
+                                                }`}
                                                 style={{ 
                                                     backgroundColor: localStorage.getItem("avatarColor") || "#14b8a6" 
                                                 }}
@@ -982,8 +1007,17 @@ export default function AccountPage() {
                                             </div>
                                         </div>
                                         <div className="flex-1 min-w-0 text-left md:text-left">
-                                            <p className="text-lg md:text-xl lg:text-xl font-semibold text-gray-900 truncate">{fullName || "Not set"}</p>
-                                            <p className="text-xs md:text-sm lg:text-sm text-gray-500 truncate mt-0.5">@{username || "username"}</p>
+                                            <p className={`font-semibold text-gray-900 truncate ${isCapacitor() ? 'text-base' : 'text-lg md:text-xl lg:text-xl'}`}>{fullName || "Not set"}</p>
+                                            <p className={`text-gray-500 truncate mt-0.5 ${isCapacitor() ? 'text-xs' : 'text-xs md:text-sm lg:text-sm'}`}>@{username || "username"}</p>
+                                            {/* Quick Stats for Android */}
+                                            {isCapacitor() && notesCount !== null && (
+                                                <div className="flex items-center gap-3 mt-2">
+                                                    <span className="text-xs text-gray-500 flex items-center gap-1">
+                                                        <span>📝</span>
+                                                        <span>{notesCount} notes</span>
+                                                    </span>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                     {/* Edit Profile Button - Desktop Only */}
@@ -995,10 +1029,10 @@ export default function AccountPage() {
                                     </button>
                                     
                                     {/* Divider */}
-                                    <div className="border-t border-gray-200 my-5"></div>
+                                    <div className={`border-t border-gray-200 ${isCapacitor() ? 'my-3' : 'my-5'}`}></div>
                                     
                                     {/* Premium/Upgrade Status Section */}
-                                    <div className="mb-5">
+                                    <div className={isCapacitor() ? 'mb-3' : 'mb-5'}>
                                         {(() => {
                                             // Re-check subscription status directly from localStorage for most accurate status
                                             const cachedData = getUserData();
@@ -1039,20 +1073,22 @@ export default function AccountPage() {
                                             // (end date might not be set for some subscription types)
                                             if (isUserPremium) {
                                                 return (
-                                                    <div className="text-center">
-                                                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 text-white rounded-md font-medium text-sm mb-2">
-                                                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                                    <div className={isCapacitor() ? "text-center" : "text-center"}>
+                                                        <div className={`inline-flex items-center gap-2 bg-emerald-600 text-white rounded-md font-medium mb-2 ${
+                                                            isCapacitor() ? 'px-3 py-1.5 text-xs' : 'px-4 py-2 text-sm'
+                                                        }`}>
+                                                            <svg className={isCapacitor() ? "w-3 h-3" : "w-4 h-4"} fill="currentColor" viewBox="0 0 20 20">
                                                                 <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                                                             </svg>
                                                             <span>Premium</span>
                                                         </div>
                                                         {diffDays !== null && diffDays > 0 && (
-                                                            <p className="text-xs text-gray-500 mt-2">
+                                                            <p className={`text-gray-500 ${isCapacitor() ? 'text-[10px] mt-1' : 'text-xs mt-2'}`}>
                                                                 Expires in {diffDays} {diffDays === 1 ? "day" : "days"}
                                                             </p>
                                                         )}
                                                         {subscriptionEndDate && !isSubscriptionActive && (
-                                                            <p className="text-xs text-orange-600 mt-2">
+                                                            <p className={`text-orange-600 ${isCapacitor() ? 'text-[10px] mt-1' : 'text-xs mt-2'}`}>
                                                                 Subscription expired
                                                             </p>
                                                         )}
@@ -1061,10 +1097,12 @@ export default function AccountPage() {
                                             } else {
                                                 return (
                                                     <div className="text-center">
-                                                        <p className="text-sm text-gray-600 mb-3 font-medium">Free Plan</p>
+                                                        <p className={`text-gray-600 font-medium ${isCapacitor() ? 'text-xs mb-2' : 'text-sm mb-3'}`}>Free Plan</p>
                                                         <button
                                                             onClick={() => navigate("/subscription")}
-                                                            className="w-full px-4 py-2.5 bg-gray-900 text-white rounded-md hover:bg-gray-800 transition-colors text-sm font-medium"
+                                                            className={`w-full bg-gray-900 text-white rounded-md hover:bg-gray-800 transition-colors font-medium ${
+                                                                isCapacitor() ? 'px-3 py-2 text-xs' : 'px-4 py-2.5 text-sm'
+                                                            }`}
                                                         >
                                                             Upgrade to Premium
                                                         </button>
@@ -1103,26 +1141,39 @@ export default function AccountPage() {
                                     <div className="border-t border-gray-200 my-5"></div>
                                     
                                     {/* Language Preference Section */}
-                                    <div className="mb-5">
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    <div className={isCapacitor() ? 'mb-3' : 'mb-5'}>
+                                        <label className={`block font-medium text-gray-700 ${isCapacitor() ? 'text-xs mb-1.5' : 'text-sm mb-2'}`}>
                                             Language Mode
                                         </label>
-                                        <select
-                                            value={language}
-                                            onChange={(e) => handleLanguageChange(e.target.value)}
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-gray-900 transition-all bg-white text-sm"
-                                            disabled={languagesLoading}
-                                        >
-                                            {languagesLoading ? (
-                                                <option>Loading languages...</option>
-                                            ) : (
-                                                supportedLanguages.map((lang) => (
-                                                    <option key={lang.code} value={lang.code}>
-                                                        {lang.name}
-                                                    </option>
-                                                ))
-                                            )}
-                                        </select>
+                                        <div className="relative p-[2px] bg-gradient-to-r from-amber-400 via-purple-500 to-pink-500 rounded-md shadow-lg">
+                                            <select
+                                                value={language}
+                                                onChange={(e) => handleLanguageChange(e.target.value)}
+                                                className={`w-full border-2 border-transparent rounded-md focus:ring-2 focus:ring-purple-400 focus:border-purple-400 transition-all bg-white text-gray-900 font-medium shadow-lg hover:shadow-xl cursor-pointer appearance-none ${
+                                                    isCapacitor() ? 'px-2.5 py-2 text-xs' : 'px-3 py-2.5 text-sm'
+                                                }`}
+                                                style={{
+                                                    WebkitAppearance: 'none',
+                                                    MozAppearance: 'none'
+                                                }}
+                                                disabled={languagesLoading}
+                                            >
+                                                {languagesLoading ? (
+                                                    <option className="bg-white text-gray-900">Loading languages...</option>
+                                                ) : (
+                                                    supportedLanguages.map((lang) => (
+                                                        <option key={lang.code} value={lang.code} className="bg-white text-gray-900">
+                                                            {lang.name}
+                                                        </option>
+                                                    ))
+                                                )}
+                                            </select>
+                                            <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none" style={{ top: '2px', bottom: '2px', right: '2px' }}>
+                                                <svg className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                                </svg>
+                                            </div>
+                                        </div>
                                     </div>
                                     
                                     {/* Divider - Hidden on mobile */}
@@ -1160,13 +1211,15 @@ export default function AccountPage() {
                             <div className="lg:col-span-7 space-y-6">
 
                                 {/* Progress Overview Section */}
-                                <div className="bg-white rounded-xl border border-gray-200 p-4 md:p-6 shadow-sm">
-                                    <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-4 gap-3 md:gap-0">
-                                        <h2 className="text-xl font-semibold text-gray-900">Progress Overview</h2>
+                                <div className={`bg-white rounded-xl border border-gray-200 shadow-sm ${isCapacitor() ? 'p-3' : 'p-4 md:p-6'}`}>
+                                    <div className={`flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-0 ${isCapacitor() ? 'mb-3' : 'mb-4'}`}>
+                                        <h2 className={`font-semibold text-gray-900 ${isCapacitor() ? 'text-lg' : 'text-xl'}`}>Progress Overview</h2>
                                         <select
                                             value={selectedExam}
                                             onChange={(e) => setSelectedExam(e.target.value)}
-                                            className="w-full md:w-auto px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                            className={`w-full md:w-auto border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 ${
+                                                isCapacitor() ? 'px-2 py-1 text-xs' : 'px-3 py-1.5 text-sm'
+                                            }`}
                                         >
                                             <option value="">Select Exam</option>
                                             {examsList.map((exam) => (
@@ -1189,29 +1242,31 @@ export default function AccountPage() {
                                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
                                                     {/* Circular Progress Chart */}
                                                     <div className="flex items-center justify-center">
-                                                        <div className="relative w-48 h-48">
-                                                            <svg className="transform -rotate-90 w-48 h-48">
+                                                        <div className={`relative ${isCapacitor() ? 'w-32 h-32' : 'w-48 h-48'}`}>
+                                                            <svg className={`transform -rotate-90 ${isCapacitor() ? 'w-32 h-32' : 'w-48 h-48'}`}>
                                                                 <circle
                                                                     cx="50%"
                                                                     cy="50%"
-                                                                    r="70"
+                                                                    r={isCapacitor() ? "45" : "70"}
                                                                     stroke="currentColor"
-                                                                    strokeWidth="10"
+                                                                    strokeWidth={isCapacitor() ? "8" : "10"}
                                                                     fill="none"
                                                                     className="text-gray-200"
                                                                 />
                                                                 <motion.circle
                                                                     cx="50%"
                                                                     cy="50%"
-                                                                    r="70"
+                                                                    r={isCapacitor() ? "45" : "70"}
                                                                     stroke="url(#gradient)"
-                                                                    strokeWidth="10"
+                                                                    strokeWidth={isCapacitor() ? "8" : "10"}
                                                                     fill="none"
                                                                     strokeLinecap="round"
-                                                                    strokeDasharray={439.82}
-                                                                    initial={{ strokeDashoffset: 439.82 }}
+                                                                    strokeDasharray={isCapacitor() ? 282.74 : 439.82}
+                                                                    initial={{ strokeDashoffset: isCapacitor() ? 282.74 : 439.82 }}
                                                                     animate={{ 
-                                                                        strokeDashoffset: 439.82 - (progressOverviewData.progress_percentage / 100) * 439.82 
+                                                                        strokeDashoffset: isCapacitor() 
+                                                                            ? 282.74 - (progressOverviewData.progress_percentage / 100) * 282.74
+                                                                            : 439.82 - (progressOverviewData.progress_percentage / 100) * 439.82 
                                                                     }}
                                                                     transition={{ duration: 1, ease: "easeOut" }}
                                                                 />
@@ -1225,37 +1280,37 @@ export default function AccountPage() {
                                                             </svg>
                                                             <div className="absolute inset-0 flex items-center justify-center">
                                                                 <div className="text-center">
-                                                                    <div className="text-3xl font-bold text-gray-900">
+                                                                    <div className={`font-bold text-gray-900 ${isCapacitor() ? 'text-2xl' : 'text-3xl'}`}>
                                                                         {progressOverviewData.progress_percentage.toFixed(0)}%
                                                                     </div>
-                                                                    <div className="text-sm text-gray-500 mt-1">Complete</div>
+                                                                    <div className={`text-gray-500 mt-1 ${isCapacitor() ? 'text-xs' : 'text-sm'}`}>Complete</div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     {/* Statistics Cards */}
-                                                    <div className="grid grid-cols-2 gap-3">
-                                                        <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4">
-                                                            <div className="text-xs text-gray-600 mb-1">Questions Solved</div>
-                                                            <div className="text-2xl font-bold text-gray-900">
+                                                    <div className={`grid grid-cols-2 ${isCapacitor() ? 'gap-2' : 'gap-3'}`}>
+                                                        <div className={`bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg ${isCapacitor() ? 'p-2.5' : 'p-4'}`}>
+                                                            <div className={`text-gray-600 mb-1 ${isCapacitor() ? 'text-[10px]' : 'text-xs'}`}>Questions Solved</div>
+                                                            <div className={`font-bold text-gray-900 ${isCapacitor() ? 'text-lg' : 'text-2xl'}`}>
                                                                 {progressOverviewData.solved_count} / {progressOverviewData.total_questions}
                                                             </div>
                                                         </div>
-                                                        <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4">
-                                                            <div className="text-xs text-gray-600 mb-1">Weightage Progress</div>
-                                                            <div className="text-2xl font-bold text-gray-900">
+                                                        <div className={`bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg ${isCapacitor() ? 'p-2.5' : 'p-4'}`}>
+                                                            <div className={`text-gray-600 mb-1 ${isCapacitor() ? 'text-[10px]' : 'text-xs'}`}>Weightage Progress</div>
+                                                            <div className={`font-bold text-gray-900 ${isCapacitor() ? 'text-lg' : 'text-2xl'}`}>
                                                                 {progressOverviewData.weightage_progress.toFixed(1)}%
                                                             </div>
                                                         </div>
-                                                        <div className="bg-gradient-to-r from-orange-50 to-amber-50 rounded-lg p-4">
-                                                            <div className="text-xs text-gray-600 mb-1">Remaining</div>
-                                                            <div className="text-2xl font-bold text-gray-900">
+                                                        <div className={`bg-gradient-to-r from-orange-50 to-amber-50 rounded-lg ${isCapacitor() ? 'p-2.5' : 'p-4'}`}>
+                                                            <div className={`text-gray-600 mb-1 ${isCapacitor() ? 'text-[10px]' : 'text-xs'}`}>Remaining</div>
+                                                            <div className={`font-bold text-gray-900 ${isCapacitor() ? 'text-lg' : 'text-2xl'}`}>
                                                                 {progressOverviewData.total_questions - progressOverviewData.solved_count}
                                                             </div>
                                                         </div>
-                                                        <div className="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-lg p-4">
-                                                            <div className="text-xs text-gray-600 mb-1">Subjects</div>
-                                                            <div className="text-2xl font-bold text-gray-900">
+                                                        <div className={`bg-gradient-to-r from-indigo-50 to-blue-50 rounded-lg ${isCapacitor() ? 'p-2.5' : 'p-4'}`}>
+                                                            <div className={`text-gray-600 mb-1 ${isCapacitor() ? 'text-[10px]' : 'text-xs'}`}>Subjects</div>
+                                                            <div className={`font-bold text-gray-900 ${isCapacitor() ? 'text-lg' : 'text-2xl'}`}>
                                                                 {progressOverviewData.subjects?.filter(s => s.solved_count > 0).length || 0} / {progressOverviewData.subjects?.length || 0}
                                                             </div>
                                                         </div>
@@ -1276,8 +1331,8 @@ export default function AccountPage() {
                                 </div>
                                 
                                 {/* Tabs Section */}
-                                <div className="bg-white rounded-xl border border-gray-200 p-3 md:p-4 shadow-sm">
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3">
+                                <div className={`bg-white rounded-xl border border-gray-200 shadow-sm ${isCapacitor() ? 'p-2.5' : 'p-3 md:p-4'}`}>
+                                    <div className={`grid grid-cols-1 md:grid-cols-2 ${isCapacitor() ? 'gap-2' : 'gap-2 md:gap-3'}`}>
                                         <motion.button
                                             whileHover={{ scale: 1.02 }}
                                             whileTap={{ scale: 0.98 }}
@@ -1285,25 +1340,31 @@ export default function AccountPage() {
                                                 setActiveTab("notes");
                                                 navigate("/my-notes");
                                             }}
-                                            className={`p-4 rounded-xl border-2 transition-all ${
+                                            className={`rounded-xl border-2 transition-all ${
+                                                isCapacitor() ? 'p-2.5' : 'p-4'
+                                            } ${
                                                 activeTab === "notes"
                                                     ? "border-blue-500 bg-blue-50 shadow-md"
                                                     : "border-gray-200 bg-white hover:border-gray-300"
                                             }`}
                                         >
-                                            <div className="flex items-center gap-3">
-                                                <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-2xl ${
+                                            <div className={`flex items-center ${isCapacitor() ? 'gap-2' : 'gap-3'}`}>
+                                                <div className={`rounded-lg flex items-center justify-center ${
+                                                    isCapacitor() ? 'w-10 h-10 text-lg' : 'w-12 h-12 text-2xl'
+                                                } ${
                                                     activeTab === "notes" ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-600"
                                                 }`}>
                                                     📝
                                                 </div>
                                                 <div className="text-left">
-                                                    <h3 className={`text-lg font-bold mb-1 ${
+                                                    <h3 className={`font-bold mb-1 ${
+                                                        isCapacitor() ? 'text-sm' : 'text-lg'
+                                                    } ${
                                                         activeTab === "notes" ? "text-blue-700" : "text-gray-900"
                                                     }`}>
                                                         My Notes
                                                     </h3>
-                                                    <p className="text-sm text-gray-600">
+                                                    <p className={`text-gray-600 ${isCapacitor() ? 'text-xs' : 'text-sm'}`}>
                                                         View and manage your saved notes
                                                     </p>
                                                 </div>
@@ -1317,25 +1378,31 @@ export default function AccountPage() {
                                                 setActiveTab("progress");
                                                 navigate("/my-progress");
                                             }}
-                                            className={`p-4 rounded-xl border-2 transition-all ${
+                                            className={`rounded-xl border-2 transition-all ${
+                                                isCapacitor() ? 'p-2.5' : 'p-4'
+                                            } ${
                                                 activeTab === "progress"
                                                     ? "border-blue-500 bg-blue-50 shadow-md"
                                                     : "border-gray-200 bg-white hover:border-gray-300"
                                             }`}
                                         >
-                                            <div className="flex items-center gap-3">
-                                                <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-2xl ${
+                                            <div className={`flex items-center ${isCapacitor() ? 'gap-2' : 'gap-3'}`}>
+                                                <div className={`rounded-lg flex items-center justify-center ${
+                                                    isCapacitor() ? 'w-10 h-10 text-lg' : 'w-12 h-12 text-2xl'
+                                                } ${
                                                     activeTab === "progress" ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-600"
                                                 }`}>
                                                     📊
                                                 </div>
                                                 <div className="text-left">
-                                                    <h3 className={`text-lg font-bold mb-1 ${
+                                                    <h3 className={`font-bold mb-1 ${
+                                                        isCapacitor() ? 'text-sm' : 'text-lg'
+                                                    } ${
                                                         activeTab === "progress" ? "text-blue-700" : "text-gray-900"
                                                     }`}>
                                                         My Progress
                                                     </h3>
-                                                    <p className="text-sm text-gray-600">
+                                                    <p className={`text-gray-600 ${isCapacitor() ? 'text-xs' : 'text-sm'}`}>
                                                         Track your learning progress and analytics
                                                     </p>
                                                 </div>
@@ -1345,24 +1412,24 @@ export default function AccountPage() {
                                 </div>
                                 
                                 {/* Subscription Plans Section */}
-                                <div className="bg-white rounded-xl border border-gray-200 p-4 md:p-6 shadow-sm">
-                                    <h2 className="text-lg md:text-xl font-semibold text-gray-900 mb-3 md:mb-4">Subscription Plans</h2>
+                                <div className={`bg-white rounded-xl border border-gray-200 shadow-sm ${isCapacitor() ? 'p-3' : 'p-4 md:p-6'}`}>
+                                    <h2 className={`font-semibold text-gray-900 ${isCapacitor() ? 'text-base mb-2' : 'text-lg md:text-xl mb-3 md:mb-4'}`}>Subscription Plans</h2>
                                     {plansLoading ? (
                                         <div className="flex items-center justify-center py-8">
                                             <div className="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
                                         </div>
                                     ) : (
-                                        <div className={`grid grid-cols-1 gap-3 md:gap-4 ${availablePlans.filter(p => p.plan_type === "premium").length > 0 ? (availablePlans.filter(p => p.plan_type === "premium").length === 1 ? "md:grid-cols-2" : "md:grid-cols-3") : "md:grid-cols-2"}`}>
+                                        <div className={`grid grid-cols-1 ${isCapacitor() ? 'gap-2' : 'gap-3 md:gap-4'} ${availablePlans.filter(p => p.plan_type === "premium").length > 0 ? (availablePlans.filter(p => p.plan_type === "premium").length === 1 ? "md:grid-cols-2" : "md:grid-cols-3") : "md:grid-cols-2"} ${isCapacitor() ? 'overflow-x-auto' : ''}`}>
                                             {/* Free Plan */}
-                                            <div className="bg-white rounded-xl border-2 border-gray-200 p-3 md:p-4 shadow-sm">
-                                                <div className="mb-4">
-                                                    <h3 className="text-xl font-bold text-gray-900 mb-2">Free</h3>
-                                                    <div className="flex items-baseline">
-                                                        <span className="text-3xl font-bold text-gray-900">₹0</span>
-                                                        <span className="text-gray-600 ml-2 text-sm">/month</span>
-                                                    </div>
-                                                </div>
-                                                <ul className="space-y-2 mb-4 text-sm">
+                                            <div className={`bg-white rounded-xl border-2 border-gray-200 shadow-sm ${isCapacitor() ? 'p-2.5' : 'p-3 md:p-4'}`}>
+                                                        <div className={isCapacitor() ? 'mb-3' : 'mb-4'}>
+                                                            <h3 className={`font-bold text-gray-900 ${isCapacitor() ? 'text-lg mb-1' : 'text-xl mb-2'}`}>Free</h3>
+                                                            <div className="flex items-baseline">
+                                                                <span className={`font-bold text-gray-900 ${isCapacitor() ? 'text-2xl' : 'text-3xl'}`}>₹0</span>
+                                                                <span className={`text-gray-600 ml-2 ${isCapacitor() ? 'text-xs' : 'text-sm'}`}>/month</span>
+                                                            </div>
+                                                        </div>
+                                                        <ul className={`space-y-2 ${isCapacitor() ? 'mb-3 text-xs' : 'mb-4 text-sm'}`}>
                                                     <li className="flex items-start">
                                                         <span className="text-green-500 mr-2">✓</span>
                                                         <span className="text-gray-700">Basic PYQ search</span>
@@ -1406,40 +1473,81 @@ export default function AccountPage() {
                                             </div>
 
                                             {/* Premium Plans */}
-                                            {availablePlans.filter(p => p.plan_type === "premium").map((plan) => {
+                                            {availablePlans.filter(p => p.plan_type === "premium").map((plan, planIndex, filteredPlans) => {
                                                 // Check both activePlanTemplateId and user's subscription status
                                                 const cachedData = getUserData();
                                                 const userSubscriptionPlan = (cachedData?.subscription_plan || subscriptionPlan || "free").toLowerCase();
-                                                const isUserPremium = userSubscriptionPlan === "premium";
+                                                const isUserPremium = userSubscriptionPlan === "premium" || 
+                                                                     userSubscriptionPlan.includes("premium") ||
+                                                                     cachedData?.hasPremium === true ||
+                                                                     localStorage.getItem("hasPremium") === "true";
                                                 const subscriptionEndDate = cachedData?.subscription_end_date || userData?.subscription_end_date;
                                                 const isSubscriptionActive = subscriptionEndDate ? new Date(subscriptionEndDate) > new Date() : false;
                                                 
-                                                // Plan is active if either activePlanTemplateId matches OR user has premium subscription
-                                                const isActivePlan = (activePlanTemplateId !== null && plan.id === activePlanTemplateId) || 
-                                                                     (isUserPremium && isSubscriptionActive);
+                                                const isAndroid = isCapacitor();
+                                                
+                                                // PRIMARY: Plan is active if activePlanTemplateId matches this specific plan.id
+                                                // This ensures only the latest/current subscription plan is marked as active
+                                                let isActivePlan = false;
+                                                
+                                                if (activePlanTemplateId !== null && plan.id === activePlanTemplateId) {
+                                                    // Exact match - this is the active plan
+                                                    isActivePlan = true;
+                                                } else if (isUserPremium && isSubscriptionActive) {
+                                                    // Fallback: User has premium and subscription is active
+                                                    // On Android, only mark as active if activePlanTemplateId is not set
+                                                    // AND this is the first premium plan (to avoid marking all plans)
+                                                    if (isAndroid) {
+                                                        // On Android, only use fallback if activePlanTemplateId is null
+                                                        // and mark only the first premium plan to avoid marking all
+                                                        if (activePlanTemplateId === null && planIndex === 0) {
+                                                            isActivePlan = true;
+                                                        }
+                                                    } else {
+                                                        // Desktop: use the same logic as before
+                                                        isActivePlan = true;
+                                                    }
+                                                }
+                                                
+                                                // Debug logging for Android
+                                                if (isAndroid) {
+                                                    console.log("AccountPage: Subscription check (Android):", {
+                                                        planId: plan.id,
+                                                        planIndex,
+                                                        activePlanTemplateId,
+                                                        userSubscriptionPlan,
+                                                        isUserPremium,
+                                                        subscriptionEndDate,
+                                                        isSubscriptionActive,
+                                                        isActivePlan,
+                                                        match: activePlanTemplateId === plan.id
+                                                    });
+                                                }
                                                 
                                                 return (
                                                     <div
                                                         key={plan.id}
                                                         className={`relative bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border-2 ${
                                                             isActivePlan ? "border-emerald-500" : "border-blue-500"
-                                                        } p-3 md:p-4 shadow-lg`}
+                                                        } ${isCapacitor() ? 'p-2.5' : 'p-3 md:p-4'} shadow-lg`}
                                                     >
                                                         {isActivePlan && (
-                                                            <div className="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                                                            <div className={`absolute top-2 right-2 bg-green-500 text-white font-bold rounded-full ${
+                                                                isCapacitor() ? 'text-[10px] px-1.5 py-0.5' : 'text-xs px-2 py-1'
+                                                            }`}>
                                                                 Active
                                                             </div>
                                                         )}
-                                                        <div className="mb-4">
-                                                            <h3 className="text-xl font-bold text-gray-900 mb-2">{plan.name}</h3>
+                                                        <div className={isCapacitor() ? 'mb-3' : 'mb-4'}>
+                                                            <h3 className={`font-bold text-gray-900 ${isCapacitor() ? 'text-lg mb-1' : 'text-xl mb-2'}`}>{plan.name}</h3>
                                                             <div className="flex items-baseline">
-                                                                <span className="text-3xl font-bold text-gray-900">₹{plan.price}</span>
-                                                                <span className="text-gray-600 ml-2 text-sm">
+                                                                <span className={`font-bold text-gray-900 ${isCapacitor() ? 'text-2xl' : 'text-3xl'}`}>₹{plan.price}</span>
+                                                                <span className={`text-gray-600 ml-2 ${isCapacitor() ? 'text-xs' : 'text-sm'}`}>
                                                                     /{plan.duration_months === 1 ? "month" : `${plan.duration_months} months`}
                                                                 </span>
                                                             </div>
                                                         </div>
-                                                        <ul className="space-y-2 mb-4 text-sm">
+                                                        <ul className={`space-y-2 ${isCapacitor() ? 'mb-3 text-xs' : 'mb-4 text-sm'}`}>
                                                             <li className="flex items-start">
                                                                 <span className="text-green-500 mr-2">✓</span>
                                                                 <span className="text-gray-700">Everything in Free</span>
@@ -1464,14 +1572,18 @@ export default function AccountPage() {
                                                         {isActivePlan ? (
                                                             <button
                                                                 disabled
-                                                                className="w-full py-2 px-4 bg-green-500 text-white rounded-lg cursor-not-allowed text-sm font-semibold"
+                                                                className={`w-full bg-green-500 text-white rounded-lg cursor-not-allowed font-semibold ${
+                                                                    isCapacitor() ? 'py-1.5 px-3 text-xs' : 'py-2 px-4 text-sm'
+                                                                }`}
                                                             >
                                                                 Premium Active ✓
                                                             </button>
                                                         ) : (
                                                             <button
                                                                 onClick={() => navigate("/subscription")}
-                                                                className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-semibold"
+                                                                className={`w-full bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold ${
+                                                                    isCapacitor() ? 'py-1.5 px-3 text-xs' : 'py-2 px-4 text-sm'
+                                                                }`}
                                                             >
                                                                 Upgrade to {plan.name}
                                                             </button>
@@ -1484,22 +1596,26 @@ export default function AccountPage() {
                                 </div>
                                 
                                 {/* Feedback Section */}
-                                <div className="bg-white rounded-xl border border-gray-200 p-4 md:p-6 shadow-sm">
-                                    <h2 className="text-lg md:text-xl font-semibold text-gray-900 mb-3 md:mb-4">Feedback</h2>
-                                    <p className="text-sm text-gray-600 mb-4">
+                                <div className={`bg-white rounded-xl border border-gray-200 shadow-sm ${isCapacitor() ? 'p-3' : 'p-4 md:p-6'}`}>
+                                    <h2 className={`font-semibold text-gray-900 ${isCapacitor() ? 'text-base mb-2' : 'text-lg md:text-xl mb-3 md:mb-4'}`}>Feedback</h2>
+                                    <p className={`text-gray-600 ${isCapacitor() ? 'text-xs mb-3' : 'text-sm mb-4'}`}>
                                         We'd love to hear your thoughts and suggestions
                                     </p>
                                     <textarea
                                         value={feedback}
                                         onChange={(e) => setFeedback(e.target.value)}
                                         placeholder="Share your feedback, suggestions, or report issues..."
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 resize-none"
-                                        rows={4}
+                                        className={`w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 resize-none ${
+                                            isCapacitor() ? 'px-3 py-2 text-xs' : 'px-4 py-3'
+                                        }`}
+                                        rows={isCapacitor() ? 3 : 4}
                                     />
                                     <button
                                         onClick={handleSubmitFeedback}
                                         disabled={isSubmittingFeedback || !feedback.trim()}
-                                        className="mt-3 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+                                        className={`mt-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed ${
+                                            isCapacitor() ? 'px-3 py-1.5 text-xs' : 'px-4 py-2'
+                                        }`}
                                     >
                                         {isSubmittingFeedback ? "Submitting..." : "Submit Feedback"}
                                     </button>
@@ -1508,22 +1624,26 @@ export default function AccountPage() {
                         </div>
                         
                         {/* Transaction and Delete Account - Mobile Only, at bottom of page */}
-                        <div className="lg:hidden mt-6 space-y-4">
-                            <div className="bg-purple-100 rounded-lg border-2 border-purple-300 p-4 shadow-sm">
-                                <h3 className="text-sm font-semibold text-purple-800 mb-2">Transactions</h3>
+                        <div className={`lg:hidden ${isCapacitor() ? 'mt-4 space-y-2' : 'mt-6 space-y-4'}`}>
+                            <div className={`bg-purple-100 rounded-lg border-2 border-purple-300 shadow-sm ${isCapacitor() ? 'p-3' : 'p-4'}`}>
+                                <h3 className={`font-semibold text-purple-800 ${isCapacitor() ? 'text-xs mb-1.5' : 'text-sm mb-2'}`}>Transactions</h3>
                                 <button
                                     onClick={() => setIsTransactionModalOpen(true)}
-                                    className="w-full px-4 py-2 bg-white border-2 border-purple-400 rounded-md hover:bg-purple-200 transition-colors text-purple-800 text-sm font-medium"
+                                    className={`w-full bg-white border-2 border-purple-400 rounded-md hover:bg-purple-200 transition-colors text-purple-800 font-medium ${
+                                        isCapacitor() ? 'px-3 py-1.5 text-xs' : 'px-4 py-2 text-sm'
+                                    }`}
                                 >
                                     View Transactions
                                 </button>
                             </div>
                             
-                            <div className="bg-red-100 rounded-lg border-2 border-red-300 p-4 shadow-sm">
-                                <h3 className="text-sm font-semibold text-red-800 mb-2">Account</h3>
+                            <div className={`bg-red-100 rounded-lg border-2 border-red-300 shadow-sm ${isCapacitor() ? 'p-3' : 'p-4'}`}>
+                                <h3 className={`font-semibold text-red-800 ${isCapacitor() ? 'text-xs mb-1.5' : 'text-sm mb-2'}`}>Account</h3>
                                 <button
                                     onClick={() => setShowDeleteConfirm(true)}
-                                    className="w-full px-4 py-2 bg-white border-2 border-red-400 rounded-md hover:bg-red-200 transition-colors text-red-700 text-sm font-medium"
+                                    className={`w-full bg-white border-2 border-red-400 rounded-md hover:bg-red-200 transition-colors text-red-700 font-medium ${
+                                        isCapacitor() ? 'px-3 py-1.5 text-xs' : 'px-4 py-2 text-sm'
+                                    }`}
                                 >
                                     Delete Account
                                 </button>

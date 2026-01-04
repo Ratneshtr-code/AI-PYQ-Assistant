@@ -2,6 +2,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { authenticatedFetch, getUserData } from "../utils/auth";
+import { isCapacitor, buildApiUrl } from "../config/apiConfig";
 
 export default function TransactionModal({ isOpen, onClose }) {
     const [transactions, setTransactions] = useState([]);
@@ -12,15 +13,26 @@ export default function TransactionModal({ isOpen, onClose }) {
         setLoading(true);
         setError("");
         const allTransactions = [];
+        const isAndroid = isCapacitor();
         
-        console.log("TransactionModal: Starting to fetch transactions...");
+        console.log(`TransactionModal: Starting to fetch transactions... (Android: ${isAndroid})`);
         
         try {
             // PRIMARY: Fetch user orders from the database (this is the main source)
             try {
-                const ordersResponse = await authenticatedFetch("/payment/user-orders");
+                const ordersUrl = buildApiUrl("payment/user-orders");
+                console.log(`TransactionModal: Fetching from URL: ${ordersUrl}`);
+                const ordersResponse = await authenticatedFetch(ordersUrl);
                 if (ordersResponse.ok) {
-                    const orders = await ordersResponse.json();
+                    // Check if response is JSON before parsing
+                    const contentType = ordersResponse.headers.get("content-type");
+                    if (!contentType || !contentType.includes("application/json")) {
+                        const text = await ordersResponse.text();
+                        console.error(`TransactionModal: Expected JSON but got ${contentType || 'unknown type'}. Response preview:`, text.substring(0, 200));
+                        // Don't throw - just skip this endpoint
+                        console.log("TransactionModal: Skipping user-orders endpoint due to non-JSON response");
+                    } else {
+                        const orders = await ordersResponse.json();
                     if (Array.isArray(orders) && orders.length > 0) {
                         orders.forEach(order => {
                             allTransactions.push({
@@ -39,20 +51,39 @@ export default function TransactionModal({ isOpen, onClose }) {
                                 currency: order.currency || "INR"
                             });
                         });
-                        console.log("Found orders from /payment/user-orders:", orders.length);
+                        console.log(`TransactionModal: Found orders from /payment/user-orders: ${orders.length}`);
+                    } else {
+                        console.log("TransactionModal: No orders found in response or empty array");
                     }
-                } else if (ordersResponse.status !== 404) {
-                    console.log("User orders endpoint returned:", ordersResponse.status);
+                    }
+                } else {
+                    console.error(`TransactionModal: User orders endpoint returned status: ${ordersResponse.status}`);
+                    if (isAndroid) {
+                        console.log("TransactionModal: On Android - this may be a connectivity issue");
+                    }
                 }
             } catch (err) {
-                console.log("User orders endpoint error:", err);
+                console.error("TransactionModal: User orders endpoint error:", err);
+                if (isAndroid) {
+                    console.error("TransactionModal: Android error details:", err.message, err.stack);
+                }
             }
             
             // Try to fetch from transactions endpoint (if it exists) - secondary source
             try {
-                const response = await authenticatedFetch("/payment/transactions");
+                const transactionsUrl = buildApiUrl("payment/transactions");
+                console.log(`TransactionModal: Fetching from URL: ${transactionsUrl}`);
+                const response = await authenticatedFetch(transactionsUrl);
                 if (response.ok) {
-                    const data = await response.json();
+                    // Check if response is JSON before parsing
+                    const contentType = response.headers.get("content-type");
+                    if (!contentType || !contentType.includes("application/json")) {
+                        const text = await response.text();
+                        console.error(`TransactionModal: Expected JSON but got ${contentType || 'unknown type'}. Response preview:`, text.substring(0, 200));
+                        // Don't throw - just skip this endpoint
+                        console.log("TransactionModal: Skipping transactions endpoint due to non-JSON response");
+                    } else {
+                        const data = await response.json();
                     const transactions = data.transactions || data || [];
                     if (Array.isArray(transactions)) {
                         transactions.forEach(transaction => {
@@ -65,30 +96,41 @@ export default function TransactionModal({ isOpen, onClose }) {
                                 allTransactions.push(transaction);
                             }
                         });
-                        console.log("Found transactions from /payment/transactions:", transactions.length);
+                        console.log(`TransactionModal: Found transactions from /payment/transactions: ${transactions.length}`);
+                    }
                     }
                 } else if (response.status !== 404) {
-                    console.log("Transactions endpoint returned:", response.status);
+                    console.error(`TransactionModal: Transactions endpoint returned status: ${response.status}`);
                 }
             } catch (err) {
                 // Endpoint doesn't exist (404) - this is expected, ignore
                 if (err.message && !err.message.includes("404")) {
-                    console.log("Transactions endpoint error:", err);
+                    console.error("TransactionModal: Transactions endpoint error:", err);
                 }
             }
             
             // Also try to fetch active subscription which might contain transaction info (fallback)
             try {
-                const activeSubResponse = await authenticatedFetch("/payment/active-subscription");
+                const activeSubUrl = buildApiUrl("payment/active-subscription");
+                console.log(`TransactionModal: Fetching from URL: ${activeSubUrl}`);
+                const activeSubResponse = await authenticatedFetch(activeSubUrl);
                 if (activeSubResponse.ok) {
-                    const activeSubData = await activeSubResponse.json();
-                    console.log("Active subscription data:", activeSubData);
-                    
-                    // Handle different response structures
-                    const subscription = activeSubData.subscription || activeSubData;
-                    
-                    // If user has active subscription, create a transaction entry from it
-                    if (activeSubData.is_active) {
+                    // Check if response is JSON before parsing
+                    const contentType = activeSubResponse.headers.get("content-type");
+                    if (!contentType || !contentType.includes("application/json")) {
+                        const text = await activeSubResponse.text();
+                        console.error(`TransactionModal: Expected JSON but got ${contentType || 'unknown type'}. Response preview:`, text.substring(0, 200));
+                        // Don't throw - just skip this endpoint
+                        console.log("TransactionModal: Skipping active-subscription endpoint due to non-JSON response");
+                    } else {
+                        const activeSubData = await activeSubResponse.json();
+                        console.log("TransactionModal: Active subscription data:", activeSubData);
+                        
+                        // Handle different response structures
+                        const subscription = activeSubData.subscription || activeSubData;
+                        
+                        // If user has active subscription, create a transaction entry from it
+                        if (activeSubData.is_active) {
                         // Try to find order_id from various possible fields
                         const orderId = subscription.order_id || 
                                        subscription.payment_order_id || 
@@ -147,12 +189,15 @@ export default function TransactionModal({ isOpen, onClose }) {
                                 subscription_end_date: subscription.subscription_end_date || subscription.end_date || activeSubData.subscription_end_date
                             };
                             allTransactions.push(transaction);
-                            console.log("Created transaction from active subscription:", transaction);
+                            console.log("TransactionModal: Created transaction from active subscription:", transaction);
                         }
                     }
+                    }
+                } else {
+                    console.log(`TransactionModal: Active subscription endpoint returned status: ${activeSubResponse.status}`);
                 }
             } catch (err) {
-                console.log("Active subscription endpoint not available or failed:", err);
+                console.error("TransactionModal: Active subscription endpoint not available or failed:", err);
             }
             
             
@@ -163,7 +208,7 @@ export default function TransactionModal({ isOpen, onClose }) {
                 return dateB - dateA;
             });
             
-            console.log("TransactionModal: Total transactions found:", allTransactions.length);
+            console.log(`TransactionModal: Total transactions found: ${allTransactions.length} (Android: ${isAndroid})`);
             setTransactions(allTransactions);
             
             if (allTransactions.length === 0) {
@@ -172,10 +217,22 @@ export default function TransactionModal({ isOpen, onClose }) {
                 const userData = getUserData();
                 console.log("TransactionModal: User data:", userData);
                 console.log("TransactionModal: User subscription plan:", userData?.subscription_plan);
+                
+                // On Android, if user has premium but no transactions, show helpful message
+                if (isAndroid) {
+                    const isPremium = userData?.subscription_plan === "premium" || 
+                                      localStorage.getItem("hasPremium") === "true";
+                    if (isPremium) {
+                        console.log("TransactionModal: User has premium but no transactions found - this may be normal for test/admin subscriptions");
+                    }
+                }
             }
         } catch (err) {
             console.error("TransactionModal: Failed to fetch transactions:", err);
-            setError("Failed to load transactions. Please try again.");
+            const errorMsg = isAndroid 
+                ? "Failed to load transactions. Please check your connection and try again."
+                : "Failed to load transactions. Please try again.";
+            setError(errorMsg);
             setTransactions([]);
         } finally {
             setLoading(false);
