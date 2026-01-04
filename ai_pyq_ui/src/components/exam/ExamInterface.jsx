@@ -625,7 +625,7 @@ export default function ExamInterface() {
                                         <span className="text-lg font-bold">📝</span>
                                     </div>
                                     <div className="min-w-0 flex-1">
-                                        <h1 className="text-sm font-bold truncate">AI PYQ Assistant</h1>
+                                        <h1 className="text-base font-bold truncate">AI PYQ Assistant</h1>
                                         <p className="text-xs text-blue-100 opacity-95 truncate">
                                             {examData?.exam_set?.exam_type === "pyp" ? "PYQ Test" :
                                              examData?.exam_set?.exam_type === "mock_test" ? "Mock Test" :
@@ -759,53 +759,78 @@ export default function ExamInterface() {
                     <div className="flex-1 overflow-y-auto p-3 md:p-6 pb-20 md:pb-24" style={{ fontSize: `${fontSize}px` }}>
                         {currentQuestion && (
                             <div>
-                                <div className="mb-4 flex items-center justify-between">
-                                    <h2 className="text-2xl font-bold text-gray-900">
+                                <div className={`mb-4 flex ${isMobile ? 'flex-col gap-2' : 'items-center justify-between'}`}>
+                                    <h2 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold text-gray-900`}>
                                         Question No. {currentQuestionIndex + 1}
                                     </h2>
-                                    <div className="flex items-center gap-4 text-sm">
-                                        <span className="text-green-600 font-semibold">
-                                            Marks +{examData.exam_set.marks_per_question}
+                                    <div className={`flex items-center ${isMobile ? 'gap-2.5 flex-wrap text-xs' : 'gap-4 text-sm'}`}>
+                                        <span className="text-green-600 font-semibold whitespace-nowrap">
+                                            {isMobile ? (
+                                                <span className="flex items-center gap-1">
+                                                    <span className="text-gray-600">Marks:</span>
+                                                    <span className="text-green-600">+{examData.exam_set.marks_per_question}</span>
+                                                </span>
+                                            ) : (
+                                                `Marks +${examData.exam_set.marks_per_question}`
+                                            )}
                                         </span>
-                                        <span className="text-red-600 font-semibold">
-                                            -{examData.exam_set.negative_marking}
+                                        <span className="text-red-600 font-semibold whitespace-nowrap">
+                                            {isMobile ? (
+                                                <span className="flex items-center gap-1">
+                                                    <span className="text-gray-600">Neg:</span>
+                                                    <span className="text-red-600">-{examData.exam_set.negative_marking}</span>
+                                                </span>
+                                            ) : (
+                                                `-${examData.exam_set.negative_marking}`
+                                            )}
                                         </span>
-                                        <span className="text-gray-600">
-                                            Time {formatTime(timeSpentOnQuestion)}
+                                        <span className="text-gray-600 whitespace-nowrap">
+                                            {isMobile ? (
+                                                <span className="flex items-center gap-1">
+                                                    <span className="text-gray-600">Time:</span>
+                                                    <span>{formatTime(timeSpentOnQuestion)}</span>
+                                                </span>
+                                            ) : (
+                                                `Time ${formatTime(timeSpentOnQuestion)}`
+                                            )}
                                         </span>
-                                        <select 
-                                            className="px-2 py-1 border border-gray-300 rounded text-sm"
-                                            value={examLanguage === "hi" ? "Hindi" : "English"}
-                                            disabled
-                                            title="Language selected in instructions (can be changed per question in future)"
-                                        >
-                                            <option value="English">English</option>
-                                            <option value="Hindi">Hindi</option>
-                                        </select>
-                                        <SaveNoteButton
-                                            noteType="question"
-                                            questionData={{
-                                                id: currentQuestion.question_id,
-                                                question_id: currentQuestion.question_id,
-                                                json_question_id: currentQuestion.question_id,
-                                                question_text: currentQuestion.question_text,
-                                                option_a: currentQuestion.option_a,
-                                                option_b: currentQuestion.option_b,
-                                                option_c: currentQuestion.option_c,
-                                                option_d: currentQuestion.option_d,
-                                                correct_option: currentQuestion.correct_option,
-                                                exam: examData?.exam_set?.exam_name || "",
-                                                year: currentQuestion.year || "",
-                                                subject: currentQuestion.subject || "",
-                                                topic: currentQuestion.topic || "",
-                                            }}
-                                            size="small"
-                                            showLabel={true}
-                                            className="px-2 py-1 text-sm"
-                                        />
-                                        <button className="px-2 py-1 text-blue-600 hover:underline text-sm">
-                                            ▲ Report
-                                        </button>
+                                        {!isMobile && (
+                                            <>
+                                                <select 
+                                                    className="px-2 py-1 border border-gray-300 rounded text-sm"
+                                                    value={examLanguage === "hi" ? "Hindi" : "English"}
+                                                    disabled
+                                                    title="Language selected in instructions (can be changed per question in future)"
+                                                >
+                                                    <option value="English">English</option>
+                                                    <option value="Hindi">Hindi</option>
+                                                </select>
+                                                <SaveNoteButton
+                                                    noteType="question"
+                                                    questionData={{
+                                                        id: currentQuestion.question_id,
+                                                        question_id: currentQuestion.question_id,
+                                                        json_question_id: currentQuestion.question_id,
+                                                        question_text: currentQuestion.question_text,
+                                                        option_a: currentQuestion.option_a,
+                                                        option_b: currentQuestion.option_b,
+                                                        option_c: currentQuestion.option_c,
+                                                        option_d: currentQuestion.option_d,
+                                                        correct_option: currentQuestion.correct_option,
+                                                        exam: examData?.exam_set?.exam_name || "",
+                                                        year: currentQuestion.year || "",
+                                                        subject: currentQuestion.subject || "",
+                                                        topic: currentQuestion.topic || "",
+                                                    }}
+                                                    size="small"
+                                                    showLabel={true}
+                                                    className="px-2 py-1 text-sm"
+                                                />
+                                                <button className="px-2 py-1 text-blue-600 hover:underline text-sm">
+                                                    ▲ Report
+                                                </button>
+                                            </>
+                                        )}
                                     </div>
                                 </div>
 
@@ -869,13 +894,13 @@ export default function ExamInterface() {
                                     <div className="flex gap-2">
                                         <button
                                             onClick={handleMarkForReviewAndNext}
-                                            className="flex-1 px-3 py-2 bg-blue-100 text-blue-700 rounded-lg font-semibold hover:bg-blue-200 transition-colors text-xs"
+                                            className="flex-1 px-3 py-2 bg-blue-100 text-blue-700 rounded-lg font-semibold hover:bg-blue-200 transition-colors text-sm"
                                         >
                                             Mark & Next
                                         </button>
                                         <button
                                             onClick={handleClearResponse}
-                                            className="flex-1 px-3 py-2 bg-gray-100 text-gray-700 rounded-lg font-semibold hover:bg-gray-200 transition-colors text-xs"
+                                            className="flex-1 px-3 py-2 bg-gray-100 text-gray-700 rounded-lg font-semibold hover:bg-gray-200 transition-colors text-sm"
                                         >
                                             Clear
                                         </button>
