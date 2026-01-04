@@ -6,11 +6,13 @@ import { buildApiUrl } from "./config/apiConfig";
 import Sidebar from "./components/Sidebar";
 import MyProgress from "./components/MyProgress";
 import { useLanguage } from "./contexts/LanguageContext";
+import { useMobileDetection } from "./utils/useMobileDetection";
 
 export default function AIRoadmapPage() {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
     const { language } = useLanguage(); // Get language from context
+    const isMobile = useMobileDetection();
     const [exam, setExam] = useState("");
     const [examsList, setExamsList] = useState([]);
     const [roadmapData, setRoadmapData] = useState(null);
@@ -362,7 +364,7 @@ export default function AIRoadmapPage() {
                                     whileHover={{ backgroundColor: "rgba(59, 130, 246, 0.1)" }}
                                     whileTap={{ scale: 0.98 }}
                                     onClick={() => setActiveSubPage("roadmap-strategy")}
-                                    className={`flex-1 px-8 py-5 text-left transition-all relative ${
+                                    className={`flex-1 ${isMobile ? 'px-3 py-3' : 'px-8 py-5'} text-left transition-all relative ${
                                         activeSubPage === "roadmap-strategy"
                                             ? "bg-blue-50"
                                             : "bg-gray-100 hover:bg-gray-200"
@@ -376,23 +378,25 @@ export default function AIRoadmapPage() {
                                             transition={{ type: "spring", stiffness: 500, damping: 30 }}
                                         />
                                     )}
-                                    <div className="flex items-center gap-4">
-                                        <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-2xl transition-colors ${
+                                    <div className={`flex ${isMobile ? 'flex-col items-center gap-2' : 'items-center gap-4'}`}>
+                                        <div className={`${isMobile ? 'w-10 h-10' : 'w-12 h-12'} rounded-lg flex items-center justify-center ${isMobile ? 'text-xl' : 'text-2xl'} transition-colors ${
                                             activeSubPage === "roadmap-strategy" 
                                                 ? "bg-blue-500 text-white" 
                                                 : "bg-gray-100 text-gray-500"
                                         }`}>
                                             🎯
                                         </div>
-                                        <div>
-                                            <h3 className={`text-lg font-bold mb-1 ${
+                                        <div className={isMobile ? 'text-center' : ''}>
+                                            <h3 className={`${isMobile ? 'text-sm' : 'text-lg'} font-bold ${isMobile ? '' : 'mb-1'} whitespace-nowrap ${
                                                 activeSubPage === "roadmap-strategy" ? "text-blue-700" : "text-gray-700"
                                             }`}>
-                                                Roadmap Strategy
+                                                {isMobile ? "Strategy" : "Roadmap Strategy"}
                                             </h3>
-                                            <p className="text-sm text-gray-500">
-                                                Prioritize high-impact topics
-                                            </p>
+                                            {!isMobile && (
+                                                <p className="text-sm text-gray-500">
+                                                    Prioritize high-impact topics
+                                                </p>
+                                            )}
                                         </div>
                                     </div>
                                 </motion.button>
@@ -403,7 +407,7 @@ export default function AIRoadmapPage() {
                                     whileHover={{ backgroundColor: "rgba(59, 130, 246, 0.1)" }}
                                     whileTap={{ scale: 0.98 }}
                                     onClick={() => setActiveSubPage("my-progress")}
-                                    className={`flex-1 px-8 py-5 text-left transition-all relative ${
+                                    className={`flex-1 ${isMobile ? 'px-3 py-3' : 'px-8 py-5'} text-left transition-all relative ${
                                         activeSubPage === "my-progress"
                                             ? "bg-blue-50"
                                             : "bg-gray-100 hover:bg-gray-200"
@@ -417,23 +421,25 @@ export default function AIRoadmapPage() {
                                             transition={{ type: "spring", stiffness: 500, damping: 30 }}
                                         />
                                     )}
-                                    <div className="flex items-center gap-4">
-                                        <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-2xl transition-colors ${
+                                    <div className={`flex ${isMobile ? 'flex-col items-center gap-2' : 'items-center gap-4'}`}>
+                                        <div className={`${isMobile ? 'w-10 h-10' : 'w-12 h-12'} rounded-lg flex items-center justify-center ${isMobile ? 'text-xl' : 'text-2xl'} transition-colors ${
                                             activeSubPage === "my-progress" 
                                                 ? "bg-blue-500 text-white" 
                                                 : "bg-gray-100 text-gray-500"
                                         }`}>
                                             📊
                                         </div>
-                                        <div>
-                                            <h3 className={`text-lg font-bold mb-1 ${
+                                        <div className={isMobile ? 'text-center' : ''}>
+                                            <h3 className={`${isMobile ? 'text-sm' : 'text-lg'} font-bold ${isMobile ? '' : 'mb-1'} whitespace-nowrap ${
                                                 activeSubPage === "my-progress" ? "text-blue-700" : "text-gray-700"
                                             }`}>
                                                 My Progress
                                             </h3>
-                                            <p className="text-sm text-gray-500">
-                                                Track your advancement
-                                            </p>
+                                            {!isMobile && (
+                                                <p className="text-sm text-gray-500">
+                                                    Track your advancement
+                                                </p>
+                                            )}
                                         </div>
                                     </div>
                                 </motion.button>
