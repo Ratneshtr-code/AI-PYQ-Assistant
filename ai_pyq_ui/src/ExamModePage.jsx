@@ -532,7 +532,7 @@ export default function ExamModePage() {
                     {/* Header */}
                     <div className="mb-6">
                         <h1 className="text-2xl font-bold text-gray-900 mb-2">
-                            Test Series
+                            Practice Tests
                         </h1>
                         <p className="text-gray-600 text-lg">
                             Practice with full-length mock tests and previous year papers
@@ -893,20 +893,12 @@ export default function ExamModePage() {
                                                             </button>
                                                         </>
                                                     ) : isInProgress ? (
-                                                        <>
-                                                            <button
-                                                                onClick={() => handleContinueExam(attempt.attempt_id)}
-                                                                className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-[1.02] active:scale-[0.98]"
-                                                            >
-                                                                Continue Exam
-                                                            </button>
-                                                            <button
-                                                                onClick={() => handleViewResults(attempt.attempt_id)}
-                                                                className="w-full bg-gray-200 text-gray-700 py-2 rounded-lg font-semibold hover:bg-gray-300 transition-all duration-300 text-sm"
-                                                            >
-                                                                View Progress
-                                                            </button>
-                                                        </>
+                                                        <button
+                                                            onClick={() => handleContinueExam(attempt.attempt_id)}
+                                                            className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-[1.02] active:scale-[0.98]"
+                                                        >
+                                                            Continue Exam
+                                                        </button>
                                                     ) : (
                                                         <button
                                                             onClick={() => handleStartExam(examSet.id)}
