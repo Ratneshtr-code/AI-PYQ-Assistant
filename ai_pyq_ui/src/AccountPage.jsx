@@ -9,12 +9,14 @@ import TransactionModal from "./components/TransactionModal";
 import { getCurrentUser, getUserData, authenticatedFetch, setUserData } from "./utils/auth";
 import { useProgressTracking } from "./hooks/useProgressTracking";
 import { buildApiUrl } from "./config/apiConfig";
+import { useMobileDetection } from "./utils/useMobileDetection";
 
 // API URLs are now handled by buildApiUrl from apiConfig
 
 export default function AccountPage() {
     const navigate = useNavigate();
     const location = useLocation();
+    const isMobile = useMobileDetection();
     const [examsList, setExamsList] = useState([]);
     const [userIsAdmin, setUserIsAdmin] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -922,9 +924,21 @@ export default function AccountPage() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                     >
-                        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 md:mb-6">
-                            👤 My Account
-                        </h1>
+                        {/* Header with Back Button - Mobile Only */}
+                        <div className="flex items-center gap-3 mb-4 md:mb-6 lg:mb-0">
+                            <button
+                                onClick={() => navigate(-1)}
+                                className="lg:hidden p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors"
+                                aria-label="Go back"
+                            >
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                </svg>
+                            </button>
+                            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900">
+                                👤 My Account
+                            </h1>
+                        </div>
 
                         {successMessage && (
                             <div className="mb-6 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg">
@@ -943,34 +957,48 @@ export default function AccountPage() {
                             {/* Left Section (25-30%) */}
                             <div className="lg:col-span-3">
                                 {/* Combined User Account Card */}
-                                <div className="bg-white rounded-xl border border-gray-200 p-4 md:p-6 shadow-sm">
-                                    {/* User Profile Section */}
-                                    <div className="flex flex-col md:flex-row items-center md:items-start gap-4 mb-4 md:mb-6">
-                                        <div
-                                            className="w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center text-white font-semibold text-2xl md:text-3xl flex-shrink-0"
-                                            style={{ 
-                                                backgroundColor: localStorage.getItem("avatarColor") || "#14b8a6" 
-                                            }}
-                                        >
-                                            {localStorage.getItem("avatarInitials") || getUserInitials()}
-                                        </div>
-                                        <div className="flex-1 min-w-0 text-center md:text-left">
-                                            <p className="text-xl md:text-2xl font-semibold text-gray-900 truncate">{fullName || "Not set"}</p>
-                                            <p className="text-xs md:text-sm text-gray-500 truncate">@{username || "username"}</p>
-                                        </div>
-                                    </div>
+                                <div className="bg-white rounded-lg border border-gray-200 p-4 md:p-6 shadow-sm lg:p-6 relative">
+                                    {/* Edit Profile Icon - Mobile Only */}
                                     <button
                                         onClick={() => setIsEditProfileOpen(true)}
-                                        className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors mb-6"
+                                        className="lg:hidden absolute top-4 right-4 p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors"
+                                        aria-label="Edit Profile"
+                                    >
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                        </svg>
+                                    </button>
+                                    
+                                    {/* User Profile Section */}
+                                    <div className="flex flex-row md:flex-row items-center md:items-start gap-4 mb-5">
+                                        <div className="relative">
+                                            <div
+                                                className="w-20 h-20 md:w-24 md:h-24 lg:w-20 lg:h-20 rounded-full flex items-center justify-center text-white font-semibold text-xl md:text-2xl lg:text-xl flex-shrink-0 shadow-sm"
+                                                style={{ 
+                                                    backgroundColor: localStorage.getItem("avatarColor") || "#14b8a6" 
+                                                }}
+                                            >
+                                                {localStorage.getItem("avatarInitials") || getUserInitials()}
+                                            </div>
+                                        </div>
+                                        <div className="flex-1 min-w-0 text-left md:text-left">
+                                            <p className="text-lg md:text-xl lg:text-xl font-semibold text-gray-900 truncate">{fullName || "Not set"}</p>
+                                            <p className="text-xs md:text-sm lg:text-sm text-gray-500 truncate mt-0.5">@{username || "username"}</p>
+                                        </div>
+                                    </div>
+                                    {/* Edit Profile Button - Desktop Only */}
+                                    <button
+                                        onClick={() => setIsEditProfileOpen(true)}
+                                        className="hidden lg:block w-full px-4 py-2.5 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors text-sm font-medium mb-5"
                                     >
                                         Edit Profile
                                     </button>
                                     
                                     {/* Divider */}
-                                    <div className="border-t border-gray-200 my-6"></div>
+                                    <div className="border-t border-gray-200 my-5"></div>
                                     
                                     {/* Premium/Upgrade Status Section */}
-                                    <div className="mb-6">
+                                    <div className="mb-5">
                                         {(() => {
                                             // Re-check subscription status directly from localStorage for most accurate status
                                             const cachedData = getUserData();
@@ -1012,11 +1040,14 @@ export default function AccountPage() {
                                             if (isUserPremium) {
                                                 return (
                                                     <div className="text-center">
-                                                        <span className="px-4 py-2 bg-emerald-100 text-emerald-700 rounded-lg font-semibold text-sm inline-block mb-2">
-                                                            Premium
-                                                        </span>
+                                                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 text-white rounded-md font-medium text-sm mb-2">
+                                                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                                                <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                                            </svg>
+                                                            <span>Premium</span>
+                                                        </div>
                                                         {diffDays !== null && diffDays > 0 && (
-                                                            <p className="text-xs text-gray-600 mt-2">
+                                                            <p className="text-xs text-gray-500 mt-2">
                                                                 Expires in {diffDays} {diffDays === 1 ? "day" : "days"}
                                                             </p>
                                                         )}
@@ -1030,10 +1061,10 @@ export default function AccountPage() {
                                             } else {
                                                 return (
                                                     <div className="text-center">
-                                                        <p className="text-sm text-gray-600 mb-3">Free Plan</p>
+                                                        <p className="text-sm text-gray-600 mb-3 font-medium">Free Plan</p>
                                                         <button
                                                             onClick={() => navigate("/subscription")}
-                                                            className="w-full px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-colors text-sm font-medium"
+                                                            className="w-full px-4 py-2.5 bg-gray-900 text-white rounded-md hover:bg-gray-800 transition-colors text-sm font-medium"
                                                         >
                                                             Upgrade to Premium
                                                         </button>
@@ -1047,19 +1078,19 @@ export default function AccountPage() {
                                     {userIsAdmin && (
                                         <>
                                             {/* Divider */}
-                                            <div className="border-t border-gray-200 my-6"></div>
-                                            <div className="mb-6">
+                                            <div className="border-t border-gray-200 my-5"></div>
+                                            <div className="mb-5">
                                                 <h3 className="text-sm font-semibold text-gray-900 mb-3">Admin Tools</h3>
                                                 <div className="space-y-2">
                                                     <button
                                                         onClick={() => navigate("/admin")}
-                                                        className="w-full px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors text-sm font-medium"
+                                                        className="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors text-sm font-medium"
                                                     >
                                                         Admin Panel
                                                     </button>
                                                     <button
                                                         onClick={() => navigate("/admin/subscription-management")}
-                                                        className="w-full px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors text-sm font-medium"
+                                                        className="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors text-sm font-medium"
                                                     >
                                                         Subscription Management
                                                     </button>
@@ -1069,17 +1100,17 @@ export default function AccountPage() {
                                     )}
                                     
                                     {/* Divider */}
-                                    <div className="border-t border-gray-200 my-6"></div>
+                                    <div className="border-t border-gray-200 my-5"></div>
                                     
                                     {/* Language Preference Section */}
-                                    <div className="mb-6">
+                                    <div className="mb-5">
                                         <label className="block text-sm font-medium text-gray-700 mb-2">
-                                            Language Mode:
+                                            Language Mode
                                         </label>
                                         <select
                                             value={language}
                                             onChange={(e) => handleLanguageChange(e.target.value)}
-                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-gray-900 transition-all bg-white text-sm"
                                             disabled={languagesLoading}
                                         >
                                             {languagesLoading ? (
@@ -1094,27 +1125,34 @@ export default function AccountPage() {
                                         </select>
                                     </div>
                                     
-                                    {/* Divider */}
-                                    <div className="border-t border-gray-200 my-6"></div>
+                                    {/* Divider - Hidden on mobile */}
+                                    <div className="hidden lg:block border-t border-gray-200 my-5"></div>
                                     
-                                    {/* Transaction Button */}
-                                    <button
-                                        onClick={() => setIsTransactionModalOpen(true)}
-                                        className="w-full px-4 py-2 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors text-purple-600 font-medium mb-4"
-                                    >
-                                        Transaction
-                                    </button>
+                                    {/* Transaction Section - Hidden on mobile */}
+                                    <div className="hidden lg:block">
+                                        <h3 className="text-sm font-medium text-gray-700 mb-2">Transactions</h3>
+                                        <button
+                                            onClick={() => setIsTransactionModalOpen(true)}
+                                            className="w-full px-4 py-2 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors text-gray-700 text-sm font-medium"
+                                        >
+                                            View Transactions
+                                        </button>
+                                    </div>
                                     
-                                    {/* Divider */}
-                                    <div className="border-t border-gray-200 my-6"></div>
+                                    {/* Divider - Hidden on mobile */}
+                                    <div className="hidden lg:block border-t border-gray-200 my-5"></div>
                                     
-                                    {/* Delete Account Button */}
-                                    <button
-                                        onClick={() => setShowDeleteConfirm(true)}
-                                        className="w-full px-4 py-2 bg-white border border-gray-200 rounded-lg hover:bg-red-50 transition-colors text-red-600 font-medium"
-                                    >
-                                        Delete Account
-                                    </button>
+                                    {/* Delete Account Section - Hidden on mobile */}
+                                    <div className="hidden lg:block">
+                                        <h3 className="text-sm font-medium text-gray-700 mb-2">Account</h3>
+                                        <button
+                                            onClick={() => setShowDeleteConfirm(true)}
+                                            className="w-full px-4 py-2 bg-white border border-red-300 rounded-md hover:bg-red-50 transition-colors text-red-600 text-sm font-medium"
+                                        >
+                                            Delete Account
+                                        </button>
+                                    </div>
+                                    
                                 </div>
                             </div>
                             
@@ -1369,7 +1407,16 @@ export default function AccountPage() {
 
                                             {/* Premium Plans */}
                                             {availablePlans.filter(p => p.plan_type === "premium").map((plan) => {
-                                                const isActivePlan = activePlanTemplateId !== null && plan.id === activePlanTemplateId;
+                                                // Check both activePlanTemplateId and user's subscription status
+                                                const cachedData = getUserData();
+                                                const userSubscriptionPlan = (cachedData?.subscription_plan || subscriptionPlan || "free").toLowerCase();
+                                                const isUserPremium = userSubscriptionPlan === "premium";
+                                                const subscriptionEndDate = cachedData?.subscription_end_date || userData?.subscription_end_date;
+                                                const isSubscriptionActive = subscriptionEndDate ? new Date(subscriptionEndDate) > new Date() : false;
+                                                
+                                                // Plan is active if either activePlanTemplateId matches OR user has premium subscription
+                                                const isActivePlan = (activePlanTemplateId !== null && plan.id === activePlanTemplateId) || 
+                                                                     (isUserPremium && isSubscriptionActive);
                                                 
                                                 return (
                                                     <div
@@ -1457,6 +1504,29 @@ export default function AccountPage() {
                                         {isSubmittingFeedback ? "Submitting..." : "Submit Feedback"}
                                     </button>
                                 </div>
+                            </div>
+                        </div>
+                        
+                        {/* Transaction and Delete Account - Mobile Only, at bottom of page */}
+                        <div className="lg:hidden mt-6 space-y-4">
+                            <div className="bg-purple-100 rounded-lg border-2 border-purple-300 p-4 shadow-sm">
+                                <h3 className="text-sm font-semibold text-purple-800 mb-2">Transactions</h3>
+                                <button
+                                    onClick={() => setIsTransactionModalOpen(true)}
+                                    className="w-full px-4 py-2 bg-white border-2 border-purple-400 rounded-md hover:bg-purple-200 transition-colors text-purple-800 text-sm font-medium"
+                                >
+                                    View Transactions
+                                </button>
+                            </div>
+                            
+                            <div className="bg-red-100 rounded-lg border-2 border-red-300 p-4 shadow-sm">
+                                <h3 className="text-sm font-semibold text-red-800 mb-2">Account</h3>
+                                <button
+                                    onClick={() => setShowDeleteConfirm(true)}
+                                    className="w-full px-4 py-2 bg-white border-2 border-red-400 rounded-md hover:bg-red-200 transition-colors text-red-700 text-sm font-medium"
+                                >
+                                    Delete Account
+                                </button>
                             </div>
                         </div>
                     </motion.div>

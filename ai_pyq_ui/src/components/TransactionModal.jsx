@@ -1,23 +1,19 @@
 // src/components/TransactionModal.jsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { authenticatedFetch, getUserData } from "../utils/auth";
 
 export default function TransactionModal({ isOpen, onClose }) {
     const [transactions, setTransactions] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
-    useEffect(() => {
-        if (isOpen) {
-            fetchTransactions();
-        }
-    }, [isOpen]);
-
-    const fetchTransactions = async () => {
+    const fetchTransactions = useCallback(async () => {
         setLoading(true);
         setError("");
         const allTransactions = [];
+        
+        console.log("TransactionModal: Starting to fetch transactions...");
         
         try {
             // PRIMARY: Fetch user orders from the database (this is the main source)
@@ -167,19 +163,42 @@ export default function TransactionModal({ isOpen, onClose }) {
                 return dateB - dateA;
             });
             
+            console.log("TransactionModal: Total transactions found:", allTransactions.length);
             setTransactions(allTransactions);
             
             if (allTransactions.length === 0) {
-                console.log("No transactions found from any endpoint");
+                console.log("TransactionModal: No transactions found from any endpoint");
+                // Try to get user data to see if they have premium
+                const userData = getUserData();
+                console.log("TransactionModal: User data:", userData);
+                console.log("TransactionModal: User subscription plan:", userData?.subscription_plan);
             }
         } catch (err) {
-            console.error("Failed to fetch transactions:", err);
-            setError("Failed to load transactions");
+            console.error("TransactionModal: Failed to fetch transactions:", err);
+            setError("Failed to load transactions. Please try again.");
             setTransactions([]);
         } finally {
             setLoading(false);
         }
-    };
+    }, []);
+
+    useEffect(() => {
+        if (isOpen) {
+            // Reset state when modal opens
+            setTransactions([]);
+            setError("");
+            // Small delay to ensure modal is fully rendered before fetching
+            const timer = setTimeout(() => {
+                fetchTransactions();
+            }, 100);
+            return () => clearTimeout(timer);
+        } else {
+            // Reset when modal closes
+            setTransactions([]);
+            setLoading(false);
+            setError("");
+        }
+    }, [isOpen, fetchTransactions]);
 
     const formatDate = (dateString) => {
         if (!dateString) return "N/A";
@@ -206,13 +225,18 @@ export default function TransactionModal({ isOpen, onClose }) {
 
     return (
         <AnimatePresence>
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={onClose}>
+            <div 
+                className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[9999]" 
+                onClick={onClose}
+                style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
+            >
                 <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     onClick={(e) => e.stopPropagation()}
-                    className="bg-white rounded-xl shadow-xl max-w-2xl w-full mx-4 p-6 max-h-[80vh] overflow-y-auto"
+                    className="bg-white rounded-xl shadow-xl max-w-2xl w-full mx-4 p-4 md:p-6 max-h-[90vh] md:max-h-[80vh] overflow-y-auto"
+                    style={{ position: 'relative', zIndex: 10000 }}
                 >
                     <div className="flex items-center justify-between mb-4">
                         <h2 className="text-xl font-semibold text-gray-900">Transaction History</h2>
