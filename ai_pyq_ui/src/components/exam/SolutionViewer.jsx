@@ -4,9 +4,11 @@ import { motion } from "framer-motion";
 import { formatMarkdown } from "../../utils/formatMarkdown";
 import { useLanguage } from "../../contexts/LanguageContext";
 import { buildApiUrl } from "../../config/apiConfig";
+import { useMobileDetection } from "../../utils/useMobileDetection";
 
 export default function SolutionViewer({ solutions, currentQuestionId, onClose, onNavigate, examLanguage }) {
     const { language: globalLanguage } = useLanguage();
+    const isMobile = useMobileDetection();
     const [currentIndex, setCurrentIndex] = useState(0);
     const [explanation, setExplanation] = useState(null);
     const [loadingExplanation, setLoadingExplanation] = useState(false);
@@ -339,30 +341,45 @@ export default function SolutionViewer({ solutions, currentQuestionId, onClose, 
                 className="bg-white rounded-xl shadow-2xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-hidden flex flex-col"
             >
                 {/* Header */}
-                <div className="p-6 border-b border-gray-200 flex items-center justify-between bg-gray-50">
-                    <div className="flex items-center gap-4">
-                        <h2 className="text-xl font-bold text-gray-900">
+                <div className={`${isMobile ? 'p-3' : 'p-6'} border-b border-gray-200 flex items-center justify-between bg-gray-50`}>
+                    <div className={`flex items-center ${isMobile ? 'gap-2 flex-1 min-w-0' : 'gap-4'}`}>
+                        <h2 className={`${isMobile ? 'text-sm' : 'text-xl'} font-bold text-gray-900 truncate`}>
                             {currentQuestion.subject || "Question"}
                         </h2>
-                        <select 
-                            className="px-3 py-1 border border-gray-300 rounded text-sm"
-                            value={selectedLanguage === "hi" ? "Hindi" : "English"}
-                            onChange={(e) => {
-                                const newLang = e.target.value === "Hindi" ? "hi" : "en";
-                                setSelectedLanguage(newLang);
-                            }}
-                        >
-                            <option value="English">English</option>
-                            <option value="Hindi">Hindi</option>
-                        </select>
+                        {!isMobile && (
+                            <select 
+                                className="px-3 py-1 border border-gray-300 rounded text-sm"
+                                value={selectedLanguage === "hi" ? "Hindi" : "English"}
+                                onChange={(e) => {
+                                    const newLang = e.target.value === "Hindi" ? "hi" : "en";
+                                    setSelectedLanguage(newLang);
+                                }}
+                            >
+                                <option value="English">English</option>
+                                <option value="Hindi">Hindi</option>
+                            </select>
+                        )}
                     </div>
-                    <div className="flex items-center gap-4">
-                        <span className="text-sm text-gray-600">
-                            Question {currentIndex + 1} of {solutions.length}
+                    <div className={`flex items-center ${isMobile ? 'gap-2 flex-shrink-0' : 'gap-4'}`}>
+                        <span className={`${isMobile ? 'text-xs' : 'text-sm'} text-gray-600 whitespace-nowrap`}>
+                            {isMobile ? `Q ${currentIndex + 1}/${solutions.length}` : `Question ${currentIndex + 1} of ${solutions.length}`}
                         </span>
+                        {isMobile && (
+                            <select 
+                                className="px-2 py-1 border border-gray-300 rounded text-xs flex-shrink-0"
+                                value={selectedLanguage === "hi" ? "Hindi" : "English"}
+                                onChange={(e) => {
+                                    const newLang = e.target.value === "Hindi" ? "hi" : "en";
+                                    setSelectedLanguage(newLang);
+                                }}
+                            >
+                                <option value="English">English</option>
+                                <option value="Hindi">Hindi</option>
+                            </select>
+                        )}
                         <button
                             onClick={onClose}
-                            className="text-gray-500 hover:text-gray-700 text-2xl"
+                            className={`text-gray-500 hover:text-gray-700 ${isMobile ? 'text-xl' : 'text-2xl'} flex-shrink-0`}
                         >
                             ×
                         </button>
