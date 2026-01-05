@@ -38,6 +38,7 @@ export default function TopicWisePYQPage() {
     const [explanationWindowOpen, setExplanationWindowOpen] = useState(false);
     const [explanationWindowMinimized, setExplanationWindowMinimized] = useState(false);
     const [primarySidebarCollapsed, setPrimarySidebarCollapsed] = useState(false);
+    const [filterPaneExpanded, setFilterPaneExpanded] = useState(false); // Collapsed by default on mobile
     const { language } = useLanguage(); // Get language from context
 
     // Check if coming from AI Roadmap
@@ -288,6 +289,10 @@ export default function TopicWisePYQPage() {
         setExplanationWindowMinimized(isMinimized);
     };
 
+    const handleFilterPaneToggle = () => {
+        setFilterPaneExpanded(prev => !prev);
+    };
+
     return (
         <div className="flex min-h-screen bg-gray-50 text-gray-800">
             {/* 🧭 Sidebar */}
@@ -323,6 +328,9 @@ export default function TopicWisePYQPage() {
                         showExam={true}
                         showTopic={true}
                         showYearRange={false}
+                        isMobile={isMobile}
+                        isExpanded={filterPaneExpanded}
+                        onToggleExpand={handleFilterPaneToggle}
                     />
                 </div>
 
