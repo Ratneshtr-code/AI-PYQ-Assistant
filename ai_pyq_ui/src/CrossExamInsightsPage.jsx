@@ -8,9 +8,11 @@ import SubjectCards from "./components/SubjectCards";
 import CrossExamSubjectAnalysis from "./components/CrossExamSubjectAnalysis";
 import CrossExamHotTopics from "./components/CrossExamHotTopics";
 import { useLanguage } from "./contexts/LanguageContext";
+import { useMobileDetection } from "./utils/useMobileDetection";
 
 export default function CrossExamInsightsPage() {
     const { language } = useLanguage(); // Get language from context
+    const isMobile = useMobileDetection();
     const [exams, setExams] = useState([]);
     const [examsList, setExamsList] = useState([]);
     const [yearFrom, setYearFrom] = useState(null);
@@ -21,6 +23,7 @@ export default function CrossExamInsightsPage() {
     const [activeSubPage, setActiveSubPage] = useState(null);
     const [primarySidebarCollapsed, setPrimarySidebarCollapsed] = useState(false);
     const [maxExams, setMaxExams] = useState(3); // Default to 3, will be updated from config
+    const [filterPaneExpanded, setFilterPaneExpanded] = useState(false); // Collapsed by default on mobile
 
     useEffect(() => {
         // Fetch UI config for max exam comparison
@@ -157,6 +160,10 @@ export default function CrossExamInsightsPage() {
         setActiveSubPage(null);
     };
 
+    const handleFilterPaneToggle = () => {
+        setFilterPaneExpanded(prev => !prev);
+    };
+
     const renderContent = () => {
         if (!activeSubPage) return null;
         
@@ -206,24 +213,29 @@ export default function CrossExamInsightsPage() {
                     primarySidebarCollapsed ? "md:ml-16" : "md:ml-64"
                 }`}
             >
-                {/* Filter Bar */}
-                <div className="w-full relative z-10">
-                    <FilterBar
-                        exams={exams}
-                        onAddExam={handleAddExam}
-                        onRemoveExam={handleRemoveExam}
-                        maxExams={maxExams}
-                        examsList={examsList}
-                        yearFrom={yearFrom}
-                        setYearFrom={setYearFrom}
-                        yearTo={yearTo}
-                        setYearTo={setYearTo}
-                        availableYears={availableYears}
-                        showSubject={false}
-                        showExam={true}
-                        multipleExamsMode={true}
-                    />
-                </div>
+                {/* Filter Bar - Only show in content view, not in cards view */}
+                {viewMode === "content" && (
+                    <div className="w-full relative z-10">
+                        <FilterBar
+                            exams={exams}
+                            onAddExam={handleAddExam}
+                            onRemoveExam={handleRemoveExam}
+                            maxExams={maxExams}
+                            examsList={examsList}
+                            yearFrom={yearFrom}
+                            setYearFrom={setYearFrom}
+                            yearTo={yearTo}
+                            setYearTo={setYearTo}
+                            availableYears={availableYears}
+                            showSubject={false}
+                            showExam={true}
+                            multipleExamsMode={true}
+                            isMobile={isMobile}
+                            isExpanded={(activeSubPage === "subject-cards" || activeSubPage === "subject-analysis" || activeSubPage === "hot-topics") ? filterPaneExpanded : true}
+                            onToggleExpand={(activeSubPage === "subject-cards" || activeSubPage === "subject-analysis" || activeSubPage === "hot-topics") ? handleFilterPaneToggle : undefined}
+                        />
+                    </div>
+                )}
 
                 {/* Content Area */}
                 <div className="w-full max-w-7xl mx-auto px-2 md:px-4 lg:px-8 py-4 md:py-6 lg:py-8 space-y-4 relative z-0">
