@@ -10,9 +10,11 @@ import HottestTopicsByExam from "./components/HottestTopicsByExam";
 import HottestTopicsBySubject from "./components/HottestTopicsBySubject";
 import { getCurrentUser, isAuthenticated } from "./utils/auth";
 import { useLanguage } from "./contexts/LanguageContext";
+import { useMobileDetection } from "./utils/useMobileDetection";
 
 export default function ExamDashboardPage() {
     const { language } = useLanguage(); // Get language from context
+    const isMobile = useMobileDetection();
     const [exam, setExam] = useState("");
     const [subject, setSubject] = useState("");
     const [yearFrom, setYearFrom] = useState(null);
@@ -23,6 +25,7 @@ export default function ExamDashboardPage() {
     const [viewMode, setViewMode] = useState("cards"); // "cards" or "content"
     const [activeSubPage, setActiveSubPage] = useState(null);
     const [primarySidebarCollapsed, setPrimarySidebarCollapsed] = useState(false);
+    const [filterPaneExpanded, setFilterPaneExpanded] = useState(false); // Collapsed by default on mobile
 
     // Check and sync user authentication state (important for Google OAuth)
     useEffect(() => {
@@ -190,6 +193,10 @@ export default function ExamDashboardPage() {
         setActiveSubPage(null);
     };
 
+    const handleFilterPaneToggle = () => {
+        setFilterPaneExpanded(prev => !prev);
+    };
+
     const renderContent = () => {
         if (!activeSubPage) return null;
         
@@ -240,24 +247,29 @@ export default function ExamDashboardPage() {
                     primarySidebarCollapsed ? "md:ml-16" : "md:ml-64"
                 }`}
             >
-                {/* Filter Bar */}
-                <div className="w-full relative z-10">
-                    <FilterBar
-                        exam={exam}
-                        setExam={setExam}
-                        examsList={examsList}
-                        subject={subject}
-                        setSubject={setSubject}
-                        subjectsList={subjectsList}
-                        yearFrom={yearFrom}
-                        setYearFrom={setYearFrom}
-                        yearTo={yearTo}
-                        setYearTo={setYearTo}
-                        availableYears={availableYears}
-                        showSubject={viewMode === "content" && (activeSubPage === "subject-analysis" || activeSubPage === "hottest-topics-by-subject")}
-                        showExam={viewMode === "content" && (activeSubPage === "exam-analysis" || activeSubPage === "hottest-topics-by-exam" || activeSubPage === "hottest-topics-by-subject")}
-                    />
-                </div>
+                {/* Filter Bar - Only show in content view, not in cards view */}
+                {viewMode === "content" && (
+                    <div className="w-full relative z-10">
+                        <FilterBar
+                            exam={exam}
+                            setExam={setExam}
+                            examsList={examsList}
+                            subject={subject}
+                            setSubject={setSubject}
+                            subjectsList={subjectsList}
+                            yearFrom={yearFrom}
+                            setYearFrom={setYearFrom}
+                            yearTo={yearTo}
+                            setYearTo={setYearTo}
+                            availableYears={availableYears}
+                            showSubject={viewMode === "content" && (activeSubPage === "subject-analysis" || activeSubPage === "hottest-topics-by-subject")}
+                            showExam={viewMode === "content" && (activeSubPage === "exam-analysis" || activeSubPage === "hottest-topics-by-exam" || activeSubPage === "hottest-topics-by-subject")}
+                            isMobile={isMobile}
+                            isExpanded={activeSubPage === "exam-analysis" ? filterPaneExpanded : true}
+                            onToggleExpand={activeSubPage === "exam-analysis" ? handleFilterPaneToggle : undefined}
+                        />
+                    </div>
+                )}
 
                 {/* Content Area */}
                 <div className="w-full max-w-7xl mx-auto px-2 md:px-4 lg:px-8 py-4 md:py-6 lg:py-8 space-y-4 relative z-0">
