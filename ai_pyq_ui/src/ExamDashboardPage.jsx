@@ -265,8 +265,8 @@ export default function ExamDashboardPage() {
                             showSubject={viewMode === "content" && (activeSubPage === "subject-analysis" || activeSubPage === "hottest-topics-by-subject")}
                             showExam={viewMode === "content" && (activeSubPage === "exam-analysis" || activeSubPage === "hottest-topics-by-exam" || activeSubPage === "hottest-topics-by-subject")}
                             isMobile={isMobile}
-                            isExpanded={(activeSubPage === "exam-analysis" || activeSubPage === "subject-analysis" || activeSubPage === "hottest-topics-by-exam") ? filterPaneExpanded : true}
-                            onToggleExpand={(activeSubPage === "exam-analysis" || activeSubPage === "subject-analysis" || activeSubPage === "hottest-topics-by-exam") ? handleFilterPaneToggle : undefined}
+                            isExpanded={(activeSubPage === "exam-analysis" || activeSubPage === "subject-analysis" || activeSubPage === "hottest-topics-by-exam" || activeSubPage === "hottest-topics-by-subject") ? filterPaneExpanded : true}
+                            onToggleExpand={(activeSubPage === "exam-analysis" || activeSubPage === "subject-analysis" || activeSubPage === "hottest-topics-by-exam" || activeSubPage === "hottest-topics-by-subject") ? handleFilterPaneToggle : undefined}
                         />
                     </div>
                 )}
