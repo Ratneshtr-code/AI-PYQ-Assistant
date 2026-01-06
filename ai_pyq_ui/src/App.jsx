@@ -27,6 +27,18 @@ import ExamInstructions from "./components/exam/ExamInstructions";
 import ExamInterface from "./components/exam/ExamInterface";
 import ExamResults from "./components/exam/ExamResults";
 import SolutionViewer from "./components/exam/SolutionViewer";
+import HomePage from "./HomePage";
+import ExamPage from "./ExamPage";
+import ExamInfoPage from "./ExamInfoPage";
+import ExamRoadmapPage from "./ExamRoadmapPage";
+import ExamMyProgressPage from "./ExamMyProgressPage";
+import ExamSubjectDistributionPage from "./ExamSubjectDistributionPage";
+import ExamTopicDistributionPage from "./ExamTopicDistributionPage";
+import ExamHottestTopicsPage from "./ExamHottestTopicsPage";
+import ExamPYQPage from "./ExamPYQPage";
+import ExamMockPage from "./ExamMockPage";
+import ExamSubjectTestPage from "./ExamSubjectTestPage";
+import ExamMyTestsPage from "./ExamMyTestsPage";
 import ToastContainer, { useToast } from "./components/ToastContainer";
 import "./index.css";
 
@@ -162,6 +174,61 @@ function AppContent() {
                     element={
                         <ProtectedRoute>
                             <SolutionViewer />
+                        </ProtectedRoute>
+                    } 
+                />
+                {/* Home and Exam Pages */}
+                <Route path="/home" element={<HomePage />} />
+                <Route path="/home/:examName" element={<ExamPage />} />
+                <Route path="/home/:examName/info" element={<ExamInfoPage />} />
+                <Route 
+                    path="/home/:examName/roadmap" 
+                    element={
+                        <PremiumProtectedRoute>
+                            <ExamRoadmapPage />
+                        </PremiumProtectedRoute>
+                    } 
+                />
+                <Route 
+                    path="/home/:examName/my-progress" 
+                    element={
+                        <ProtectedRoute>
+                            <ExamMyProgressPage />
+                        </ProtectedRoute>
+                    } 
+                />
+                <Route path="/home/:examName/subject-distribution" element={<ExamSubjectDistributionPage />} />
+                <Route path="/home/:examName/topic-distribution" element={<ExamTopicDistributionPage />} />
+                <Route path="/home/:examName/hottest-topics" element={<ExamHottestTopicsPage />} />
+                <Route 
+                    path="/home/:examName/pyq" 
+                    element={
+                        <ProtectedRoute>
+                            <ExamPYQPage />
+                        </ProtectedRoute>
+                    } 
+                />
+                <Route 
+                    path="/home/:examName/mock" 
+                    element={
+                        <ProtectedRoute>
+                            <ExamMockPage />
+                        </ProtectedRoute>
+                    } 
+                />
+                <Route 
+                    path="/home/:examName/subject-test" 
+                    element={
+                        <ProtectedRoute>
+                            <ExamSubjectTestPage />
+                        </ProtectedRoute>
+                    } 
+                />
+                <Route 
+                    path="/home/:examName/my-tests" 
+                    element={
+                        <ProtectedRoute>
+                            <ExamMyTestsPage />
                         </ProtectedRoute>
                     } 
                 />

@@ -1,0 +1,16 @@
+{
+  "notifications": [
+    {
+      "id": 1,
+      "title": "New PYQ Papers Added",
+      "message": "We've added 50+ new previous year question papers for UPSC 2024. Start practicing now!",
+      "expiry_date": "2026-12-31"
+    },
+	{
+      "id": 2,
+      "title": "Exma comming soon",
+      "message": "Exam date has relaeased on 25th March 2026",
+      "expiry_date": "2026-12-31"
+    }
+  ]
+}

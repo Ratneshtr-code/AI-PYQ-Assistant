@@ -53,6 +53,7 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
     const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
     const userMenuButtonRef = useRef(null);
 
+    const isHome = location.pathname.startsWith("/home");
     const isDashboard = location.pathname.includes("exam-dashboard");
     const isCrossExam = location.pathname.includes("cross-exam-insights");
     const isAIRoadmap = location.pathname.includes("ai-roadmap");
@@ -507,6 +508,23 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
 
                 {/* Navigation Buttons */}
                 <div className="space-y-1">
+                    {/* Home - Always visible */}
+                    <button
+                        onClick={() => {
+                            navigate("/home");
+                            setIsMobileOpen(false);
+                        }}
+                        className={`w-full text-left py-2 px-3 rounded-lg transition text-sm flex items-center gap-2 ${
+                            isHome
+                                ? "bg-blue-50 text-blue-700 font-medium"
+                                : "text-gray-700 hover:bg-gray-50 font-normal"
+                        }`}
+                        title="Home"
+                    >
+                        <span className="text-lg flex-shrink-0">🏠</span>
+                        {!isCollapsed && <span>Home</span>}
+                    </button>
+
                     {/* Smart Roadmap - Only visible to logged-in users */}
                     {(localStorage.getItem("isLoggedIn") === "true" || isLoggedIn) && (
                         <button

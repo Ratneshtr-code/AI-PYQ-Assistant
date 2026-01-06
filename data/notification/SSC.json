@@ -1,0 +1,16 @@
+{
+  "notifications": [
+    {
+      "id": 1,
+      "title": "SSC CGL 2025 Notification",
+      "message": "SSC CGL 2025 notification is out! Check the exam pattern and syllabus in the Info section.",
+      "expiry_date": "2025-08-31"
+    },
+    {
+      "id": 2,
+      "title": "New Practice Tests",
+      "message": "50+ new practice tests added for SSC CGL, CHSL, and MTS. Start your preparation today!",
+      "expiry_date": "2025-12-31"
+    }
+  ]
+}

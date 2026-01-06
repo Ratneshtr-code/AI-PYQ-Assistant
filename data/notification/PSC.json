@@ -1,0 +1,10 @@
+{
+  "notifications": [
+    {
+      "id": 1,
+      "title": "State PSC Updates",
+      "message": "Multiple state PSC notifications are live. Check the latest updates in the Info section.",
+      "expiry_date": "2026-12-31"
+    }
+  ]
+}

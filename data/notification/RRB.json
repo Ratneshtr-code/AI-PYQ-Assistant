@@ -1,0 +1,10 @@
+{
+  "notifications": [
+    {
+      "id": 1,
+      "title": "RRB NTPC Exam Date",
+      "message": "RRB NTPC 2025 exam dates have been announced. Prepare with our comprehensive test series.",
+      "expiry_date": "2025-07-31"
+    }
+  ]
+}
