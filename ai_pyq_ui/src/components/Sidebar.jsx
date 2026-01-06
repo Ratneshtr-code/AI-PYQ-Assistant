@@ -546,6 +546,59 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
 
                     <button
                         onClick={() => {
+                            navigate("/exam-mode");
+                            setIsMobileOpen(false);
+                        }}
+                        className={`w-full text-left py-2 px-3 rounded-lg transition text-sm flex items-center gap-2 ${
+                            location.pathname.includes("exam-mode")
+                                ? "bg-blue-50 text-blue-700 font-medium"
+                                : "text-gray-700 hover:bg-gray-50 font-normal"
+                        }`}
+                        title="Practice"
+                    >
+                        <span className="text-lg flex-shrink-0">📝</span>
+                        {!isCollapsed && <span>Practice</span>}
+                    </button>
+
+                    <button
+                        onClick={() => {
+                            navigate("/topic-wise-pyq");
+                            setIsMobileOpen(false);
+                        }}
+                        className={`w-full text-left py-2 px-3 rounded-lg transition text-sm flex items-center gap-2 ${
+                            location.pathname.includes("topic-wise-pyq")
+                                ? "bg-blue-50 text-blue-700 font-medium"
+                                : "text-gray-700 hover:bg-gray-50 font-normal"
+                        }`}
+                        title="Topic-wise PYQ"
+                    >
+                        <span className="text-lg flex-shrink-0">📑</span>
+                        {!isCollapsed && <span>Topic-wise PYQ</span>}
+                    </button>
+
+                    <button
+                        onClick={() => {
+                            navigate("/search");
+                            setIsMobileOpen(false);
+                        }}
+                        className={`w-full text-left py-2 px-3 rounded-lg transition text-sm flex items-center gap-2 ${
+                            isSearchPage
+                                ? "bg-blue-50 text-blue-700 font-medium"
+                                : "text-gray-700 hover:bg-gray-50 font-normal"
+                        }`}
+                        title="PYQ Semantic Search"
+                    >
+                        <span className="text-lg flex-shrink-0">🧠</span>
+                        {!isCollapsed && <span>PYQ Semantic Search</span>}
+                    </button>
+
+                    {/* Divider */}
+                    <div className="pt-6 pb-2 px-3">
+                        <div className="border-t border-gray-200"></div>
+                    </div>
+
+                    <button
+                        onClick={() => {
                             navigate("/exam-dashboard");
                             setIsMobileOpen(false); // Close mobile drawer on navigation
                             if (onOpenSecondarySidebar) {
@@ -576,58 +629,10 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                                 ? "bg-blue-50 text-blue-700 font-medium"
                                 : "text-gray-700 hover:bg-gray-50 font-normal"
                         }`}
-                        title="Cross-Exam Insights"
+                        title="Compare Exams"
                     >
                         <span className="text-lg flex-shrink-0">🔍</span>
-                        {!isCollapsed && <span>Cross-Exam Insights</span>}
-                    </button>
-
-                    <button
-                        onClick={() => {
-                            navigate("/topic-wise-pyq");
-                            setIsMobileOpen(false);
-                        }}
-                        className={`w-full text-left py-2 px-3 rounded-lg transition text-sm flex items-center gap-2 ${
-                            location.pathname.includes("topic-wise-pyq")
-                                ? "bg-blue-50 text-blue-700 font-medium"
-                                : "text-gray-700 hover:bg-gray-50 font-normal"
-                        }`}
-                        title="Topic-wise PYQ"
-                    >
-                        <span className="text-lg flex-shrink-0">📑</span>
-                        {!isCollapsed && <span>Topic-wise PYQ</span>}
-                    </button>
-
-                    <button
-                        onClick={() => {
-                            navigate("/exam-mode");
-                            setIsMobileOpen(false);
-                        }}
-                        className={`w-full text-left py-2 px-3 rounded-lg transition text-sm flex items-center gap-2 ${
-                            location.pathname.includes("exam-mode")
-                                ? "bg-blue-50 text-blue-700 font-medium"
-                                : "text-gray-700 hover:bg-gray-50 font-normal"
-                        }`}
-                        title="Practice"
-                    >
-                        <span className="text-lg flex-shrink-0">📝</span>
-                        {!isCollapsed && <span>Practice</span>}
-                    </button>
-
-                    <button
-                        onClick={() => {
-                            navigate("/search");
-                            setIsMobileOpen(false);
-                        }}
-                        className={`w-full text-left py-2 px-3 rounded-lg transition text-sm flex items-center gap-2 ${
-                            isSearchPage
-                                ? "bg-blue-50 text-blue-700 font-medium"
-                                : "text-gray-700 hover:bg-gray-50 font-normal"
-                        }`}
-                        title="PYQ Semantic Search"
-                    >
-                        <span className="text-lg flex-shrink-0">🧠</span>
-                        {!isCollapsed && <span>PYQ Semantic Search</span>}
+                        {!isCollapsed && <span>Compare Exams</span>}
                     </button>
 
                     {/* Divider with spacing - Only visible to logged-in users */}
