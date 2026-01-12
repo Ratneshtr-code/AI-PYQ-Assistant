@@ -592,6 +592,22 @@ export default function Sidebar({ exam, setExam, examsList, onOpenSecondarySideb
                         {!isCollapsed && <span>PYQ Semantic Search</span>}
                     </button>
 
+                    <button
+                        onClick={() => {
+                            navigate("/conceptmap");
+                            setIsMobileOpen(false);
+                        }}
+                        className={`w-full text-left py-2 px-3 rounded-lg transition text-sm flex items-center gap-2 ${
+                            location.pathname.includes("conceptmap")
+                                ? "bg-blue-50 text-blue-700 font-medium"
+                                : "text-gray-700 hover:bg-gray-50 font-normal"
+                        }`}
+                        title="ConceptMap"
+                    >
+                        <span className="text-lg flex-shrink-0">🗺️</span>
+                        {!isCollapsed && <span>ConceptMap</span>}
+                    </button>
+
                     {/* Divider */}
                     <div className="pt-6 pb-2 px-3">
                         <div className="border-t border-gray-200"></div>

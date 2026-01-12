@@ -1,0 +1,41 @@
+{
+  "id": "your-topic-id",
+  "subject": "geography",
+  "title": "Your Topic Title",
+  "description": "Brief description of your topic",
+  "visualType": "map",
+  "mapType": "regional-shading",
+  "data": {
+    "center": [20.5937, 78.9629],
+    "zoom": 5,
+    "legend": {
+      "title": "Your Category Name",
+      "items": [
+        {
+          "label": "Region 1",
+          "color": "#FF69B4",
+          "description": "Description of region 1"
+        },
+        {
+          "label": "Region 2",
+          "color": "#00008B",
+          "description": "Description of region 2"
+        }
+      ]
+    },
+    "regions": [
+      {
+        "id": "region-id",
+        "name": "Region Name",
+        "color": "#FF69B4",
+        "states": ["state-id-1", "state-id-2"],
+        "info": {
+          "description": "Region description",
+          "characteristics": "Key characteristics",
+          "biodiversity": "Biodiversity info"
+        }
+      }
+    ]
+  }
+}
+

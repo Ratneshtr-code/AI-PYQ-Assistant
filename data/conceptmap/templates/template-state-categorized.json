@@ -1,0 +1,54 @@
+{
+  "id": "your-topic-id",
+  "subject": "geography",
+  "title": "Your Topic Title",
+  "description": "Brief description of your topic",
+  "visualType": "map",
+  "mapType": "state-categorized",
+  "data": {
+    "center": [20.5937, 78.9629],
+    "zoom": 5,
+    "legend": {
+      "title": "Your Category Name",
+      "items": [
+        {
+          "label": "States with Content",
+          "color": "#F97316",
+          "description": "Click on colored states to see items"
+        },
+        {
+          "label": "States without Content",
+          "color": "#E5E7EB",
+          "description": "Grey states have no items"
+        }
+      ]
+    },
+    "states": [
+      {
+        "id": "state-id",
+        "name": "State Name",
+        "color": "#F97316",
+        "hasContent": true,
+        "items": [
+          {
+            "id": "item-1",
+            "name": "Item Name",
+            "icon": "📍",
+            "info": {
+              "description": "Item description",
+              "additional": "Any additional info"
+            }
+          }
+        ]
+      }
+    ],
+    "emptyStates": [
+      {
+        "id": "state-id",
+        "name": "State Name",
+        "color": "#E5E7EB"
+      }
+    ]
+  }
+}
+
