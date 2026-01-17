@@ -1,0 +1,369 @@
+{
+  "id": "history-roadmap",
+  "subject": "history",
+  "title": "Indian Modern History - Learning Path",
+  "description": "Strategic roadmap for studying Indian Modern History (1857-1885) for government exams",
+  "version": "1.0",
+  "lastUpdated": "2024-01-17",
+  "learningPath": {
+    "overview": "This learning path covers the foundational period of Modern Indian History, starting with the Revolt of 1857 and continuing through the crucial transitional period of 1857-1885. Follow the topics in order for best understanding.",
+    "estimatedTime": "15-20 hours",
+    "difficulty": "Medium to High",
+    "examImportance": "Very High - Core topic for all government exams"
+  },
+  "topics": [
+    {
+      "id": "revolt-1857-overview",
+      "order": 1,
+      "mainTopic": "The Revolt of 1857",
+      "category": "Major Event",
+      "status": "available",
+      "estimatedTime": "4-5 hours",
+      "importance": "Critical",
+      "description": "First War of Independence - causes, events, leaders, and impact",
+      "prerequisites": [],
+      "subTopics": [
+        {
+          "id": "revolt-1857-causes",
+          "title": "Causes & Background",
+          "visualType": "flowchart",
+          "order": 1,
+          "description": "Political, Economic, Social, Religious, and Military causes"
+        },
+        {
+          "id": "revolt-1857-timeline",
+          "title": "Timeline of Events",
+          "visualType": "timeline",
+          "order": 2,
+          "description": "Chronological sequence from outbreak to suppression"
+        },
+        {
+          "id": "revolt-1857-leaders",
+          "title": "Key Leaders & Regions",
+          "visualType": "table",
+          "order": 3,
+          "description": "Profiles of major leaders and regional centers"
+        },
+        {
+          "id": "revolt-1857-impact",
+          "title": "Impact & Consequences",
+          "visualType": "mindmap",
+          "order": 4,
+          "description": "Political, administrative, military, and social consequences"
+        }
+      ],
+      "keyTakeaways": [
+        "Multiple causes from different spheres",
+        "Lack of coordination among rebels",
+        "End of Company rule, beginning of Crown administration",
+        "Sparked nationalist consciousness"
+      ],
+      "connections": ["events-1858-1885-overview"]
+    },
+    {
+      "id": "events-1858-1885-overview",
+      "order": 2,
+      "mainTopic": "Events from 1857-1885",
+      "category": "Period Study",
+      "status": "available",
+      "estimatedTime": "10-12 hours",
+      "importance": "Critical",
+      "description": "Transitional period - administrative, economic, social reforms and rise of nationalism",
+      "prerequisites": ["revolt-1857-overview"],
+      "subTopics": [
+        {
+          "id": "events-1858-1885-reforms",
+          "title": "Administrative Reforms",
+          "visualType": "timeline",
+          "order": 1,
+          "description": "Major administrative and constitutional changes"
+        },
+        {
+          "id": "events-1858-1885-economic",
+          "title": "Economic Policies & Acts",
+          "visualType": "table",
+          "order": 2,
+          "description": "Economic exploitation, drain of wealth, infrastructure"
+        },
+        {
+          "id": "events-1858-1885-acts",
+          "title": "Major Acts & Legislation",
+          "visualType": "table",
+          "order": 3,
+          "description": "Important laws and their impact"
+        },
+        {
+          "id": "events-1858-1885-social",
+          "title": "Social & Educational Reforms",
+          "visualType": "timeline",
+          "order": 4,
+          "description": "Reform movements and educational developments"
+        },
+        {
+          "id": "events-1858-1885-nationalism",
+          "title": "Rise of Nationalism",
+          "visualType": "flowchart",
+          "order": 5,
+          "description": "Factors and organizations leading to INC formation"
+        },
+        {
+          "id": "events-1858-1885-overview",
+          "title": "Chronological Overview",
+          "visualType": "timeline",
+          "order": 6,
+          "description": "Master timeline connecting all aspects"
+        }
+      ],
+      "keyTakeaways": [
+        "Crown rule established systematic exploitation",
+        "Economic drain and deindustrialization",
+        "Social reform movements flourished",
+        "Political consciousness emerged",
+        "Formation of INC marked organized resistance"
+      ],
+      "connections": []
+    }
+  ],
+  "networkGraph": {
+    "nodes": [
+      {
+        "id": "revolt-1857-overview",
+        "label": "Revolt of 1857",
+        "type": "major-event",
+        "x": 100,
+        "y": 200,
+        "color": "#EF4444",
+        "size": "large"
+      },
+      {
+        "id": "revolt-1857-causes",
+        "label": "Causes",
+        "type": "subtopic",
+        "parent": "revolt-1857-overview",
+        "x": 50,
+        "y": 150,
+        "color": "#F87171",
+        "size": "medium"
+      },
+      {
+        "id": "revolt-1857-timeline",
+        "label": "Timeline",
+        "type": "subtopic",
+        "parent": "revolt-1857-overview",
+        "x": 150,
+        "y": 150,
+        "color": "#F87171",
+        "size": "medium"
+      },
+      {
+        "id": "revolt-1857-leaders",
+        "label": "Leaders",
+        "type": "subtopic",
+        "parent": "revolt-1857-overview",
+        "x": 50,
+        "y": 250,
+        "color": "#F87171",
+        "size": "medium"
+      },
+      {
+        "id": "revolt-1857-impact",
+        "label": "Impact",
+        "type": "subtopic",
+        "parent": "revolt-1857-overview",
+        "x": 150,
+        "y": 250,
+        "color": "#F87171",
+        "size": "medium"
+      },
+      {
+        "id": "events-1858-1885-overview",
+        "label": "Events 1857-1885",
+        "type": "period-study",
+        "x": 400,
+        "y": 200,
+        "color": "#3B82F6",
+        "size": "large"
+      },
+      {
+        "id": "events-1858-1885-reforms",
+        "label": "Admin Reforms",
+        "type": "subtopic",
+        "parent": "events-1858-1885-overview",
+        "x": 300,
+        "y": 100,
+        "color": "#60A5FA",
+        "size": "small"
+      },
+      {
+        "id": "events-1858-1885-economic",
+        "label": "Economic Policies",
+        "type": "subtopic",
+        "parent": "events-1858-1885-overview",
+        "x": 500,
+        "y": 100,
+        "color": "#60A5FA",
+        "size": "small"
+      },
+      {
+        "id": "events-1858-1885-acts",
+        "label": "Major Acts",
+        "type": "subtopic",
+        "parent": "events-1858-1885-overview",
+        "x": 300,
+        "y": 200,
+        "color": "#60A5FA",
+        "size": "small"
+      },
+      {
+        "id": "events-1858-1885-social",
+        "label": "Social Reforms",
+        "type": "subtopic",
+        "parent": "events-1858-1885-overview",
+        "x": 500,
+        "y": 200,
+        "color": "#60A5FA",
+        "size": "small"
+      },
+      {
+        "id": "events-1858-1885-nationalism",
+        "label": "Nationalism",
+        "type": "subtopic",
+        "parent": "events-1858-1885-overview",
+        "x": 300,
+        "y": 300,
+        "color": "#60A5FA",
+        "size": "small"
+      },
+      {
+        "id": "events-1858-1885-overview-timeline",
+        "label": "Master Timeline",
+        "type": "subtopic",
+        "parent": "events-1858-1885-overview",
+        "x": 500,
+        "y": 300,
+        "color": "#60A5FA",
+        "size": "small"
+      }
+    ],
+    "edges": [
+      {
+        "source": "revolt-1857-overview",
+        "target": "revolt-1857-causes",
+        "type": "contains",
+        "label": ""
+      },
+      {
+        "source": "revolt-1857-overview",
+        "target": "revolt-1857-timeline",
+        "type": "contains",
+        "label": ""
+      },
+      {
+        "source": "revolt-1857-overview",
+        "target": "revolt-1857-leaders",
+        "type": "contains",
+        "label": ""
+      },
+      {
+        "source": "revolt-1857-overview",
+        "target": "revolt-1857-impact",
+        "type": "contains",
+        "label": ""
+      },
+      {
+        "source": "revolt-1857-overview",
+        "target": "events-1858-1885-overview",
+        "type": "leads-to",
+        "label": "Led to Crown Rule"
+      },
+      {
+        "source": "events-1858-1885-overview",
+        "target": "events-1858-1885-reforms",
+        "type": "contains",
+        "label": ""
+      },
+      {
+        "source": "events-1858-1885-overview",
+        "target": "events-1858-1885-economic",
+        "type": "contains",
+        "label": ""
+      },
+      {
+        "source": "events-1858-1885-overview",
+        "target": "events-1858-1885-acts",
+        "type": "contains",
+        "label": ""
+      },
+      {
+        "source": "events-1858-1885-overview",
+        "target": "events-1858-1885-social",
+        "type": "contains",
+        "label": ""
+      },
+      {
+        "source": "events-1858-1885-overview",
+        "target": "events-1858-1885-nationalism",
+        "type": "contains",
+        "label": ""
+      },
+      {
+        "source": "events-1858-1885-overview",
+        "target": "events-1858-1885-overview-timeline",
+        "type": "contains",
+        "label": ""
+      },
+      {
+        "source": "revolt-1857-impact",
+        "target": "events-1858-1885-reforms",
+        "type": "influenced",
+        "label": "Reforms after revolt"
+      },
+      {
+        "source": "events-1858-1885-economic",
+        "target": "events-1858-1885-nationalism",
+        "type": "influenced",
+        "label": "Economic exploitation led to nationalism"
+      },
+      {
+        "source": "events-1858-1885-social",
+        "target": "events-1858-1885-nationalism",
+        "type": "influenced",
+        "label": "Reform movements contributed"
+      }
+    ]
+  },
+  "studyTips": [
+    "Start with Revolt of 1857 causes - understanding WHY is crucial",
+    "Timeline helps memorize sequence - use dates as anchors",
+    "Leader profiles are high-frequency exam questions",
+    "Connect revolt's impact to subsequent reforms",
+    "Economic exploitation is key to understanding nationalist rise",
+    "Acts and legislation - focus on provisions and significance",
+    "Social reforms show parallel awakening",
+    "Formation of INC (1885) is logical conclusion of this period"
+  ],
+  "examStrategy": {
+    "frequentTopics": [
+      "Causes of 1857 Revolt",
+      "Leaders of 1857",
+      "Impact of 1857",
+      "Government of India Act 1858",
+      "Indian Councils Act 1861",
+      "Vernacular Press Act",
+      "Ilbert Bill Controversy",
+      "Formation of INC"
+    ],
+    "mustKnow": [
+      "Dates: 1857, 1858, 1861, 1878, 1883, 1885",
+      "Key leaders: Bahadur Shah Zafar, Rani Lakshmibai, Nana Sahib, Tatya Tope",
+      "Viceroys: Canning, Lawrence, Mayo, Lytton, Ripon",
+      "Major acts and their provisions"
+    ],
+    "connections": [
+      "Link 1857 causes to later reforms",
+      "Connect economic drain to nationalist consciousness",
+      "Relate repressive laws to INC formation"
+    ]
+  }
+}
+

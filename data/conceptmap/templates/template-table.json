@@ -1,0 +1,43 @@
+{
+  "id": "template-table",
+  "subject": "SUBJECT_ID",
+  "title": "Topic Title Here",
+  "description": "Brief description of the topic (1-2 sentences)",
+  "visualType": "table",
+  "metadata": {
+    "examRelevance": "high|medium|low",
+    "relatedTopics": ["related-topic-id-1", "related-topic-id-2"],
+    "tags": ["tag1", "tag2", "tag3"]
+  },
+  "data": {
+    "categories": [
+      { "id": "category1", "label": "Category 1" },
+      { "id": "category2", "label": "Category 2" }
+    ],
+    "columns": [
+      { "key": "column1", "label": "Column 1 Name" },
+      { "key": "column2", "label": "Column 2 Name" },
+      { "key": "column3", "label": "Column 3 Name" }
+    ],
+    "rows": [
+      {
+        "id": "row-1",
+        "category": "category1",
+        "column1": "Value 1",
+        "column2": "Value 2",
+        "column3": "Value 3",
+        "details": {
+          "description": "Detailed description when expanded",
+          "points": [
+            "Additional point 1",
+            "Additional point 2",
+            "Additional point 3"
+          ],
+          "impact": "Impact or significance"
+        }
+      }
+    ],
+    "summary": "Overall summary of the table content (optional)"
+  }
+}
+

@@ -1,0 +1,57 @@
+{
+  "id": "template-timeline",
+  "subject": "SUBJECT_ID",
+  "title": "Topic Title Here",
+  "description": "Brief description of the topic (1-2 sentences)",
+  "visualType": "timeline",
+  "metadata": {
+    "examRelevance": "high|medium|low",
+    "relatedTopics": ["related-topic-id-1", "related-topic-id-2"],
+    "tags": ["tag1", "tag2", "tag3"]
+  },
+  "data": {
+    "startYear": 1800,
+    "endYear": 1900,
+    "legend": [
+      { "type": "political", "label": "Political Events" },
+      { "type": "economic", "label": "Economic Events" },
+      { "type": "social", "label": "Social Events" },
+      { "type": "military", "label": "Military Events" }
+    ],
+    "phases": [
+      {
+        "id": "phase-1",
+        "name": "Phase 1 Name",
+        "period": "1800-1850",
+        "description": "Description of this phase"
+      },
+      {
+        "id": "phase-2",
+        "name": "Phase 2 Name",
+        "period": "1850-1900",
+        "description": "Description of this phase"
+      }
+    ],
+    "events": [
+      {
+        "id": "event-1",
+        "year": "1857",
+        "title": "Event Title",
+        "description": "Brief one-line description",
+        "type": "political",
+        "phase": "phase-1",
+        "icon": "📅",
+        "details": {
+          "points": [
+            "Key point 1",
+            "Key point 2",
+            "Key point 3"
+          ],
+          "significance": "Why this event is important"
+        },
+        "tags": ["relevant", "tags"]
+      }
+    ]
+  }
+}
+

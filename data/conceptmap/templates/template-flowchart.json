@@ -1,0 +1,72 @@
+{
+  "id": "template-flowchart",
+  "subject": "SUBJECT_ID",
+  "title": "Topic Title Here",
+  "description": "Brief description of the topic (1-2 sentences)",
+  "visualType": "flowchart",
+  "metadata": {
+    "examRelevance": "high|medium|low",
+    "relatedTopics": ["related-topic-id-1", "related-topic-id-2"],
+    "tags": ["tag1", "tag2", "tag3"]
+  },
+  "data": {
+    "legend": [
+      { "type": "cause", "label": "Root Causes" },
+      { "type": "effect", "label": "Effects" },
+      { "type": "intermediate", "label": "Contributing Factors" }
+    ],
+    "categories": [
+      {
+        "id": "category-1",
+        "label": "Category 1 Name",
+        "color": "#EF4444",
+        "icon": "🎯",
+        "description": "Description of this category",
+        "items": [
+          {
+            "id": "item-1",
+            "label": "Item Name",
+            "subtitle": "Brief subtitle (optional)",
+            "type": "cause",
+            "details": {
+              "description": "Detailed description",
+              "points": [
+                "Key point 1",
+                "Key point 2",
+                "Key point 3"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "category-2",
+        "label": "Category 2 Name",
+        "color": "#F59E0B",
+        "icon": "💰",
+        "description": "Description of this category",
+        "items": [
+          {
+            "id": "item-2",
+            "label": "Another Item",
+            "type": "intermediate",
+            "details": {
+              "points": [
+                "Point 1",
+                "Point 2"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "connections": [
+      {
+        "from": "Item A",
+        "relationship": "leads to",
+        "to": "Item B"
+      }
+    ]
+  }
+}
+

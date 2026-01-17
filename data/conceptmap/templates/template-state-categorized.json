@@ -14,12 +14,7 @@
         {
           "label": "States with Content",
           "color": "#F97316",
-          "description": "Click on colored states to see items"
-        },
-        {
-          "label": "States without Content",
-          "color": "#E5E7EB",
-          "description": "Grey states have no items"
+          "description": "States with items are colored"
         }
       ]
     },
@@ -40,13 +35,6 @@
             }
           }
         ]
-      }
-    ],
-    "emptyStates": [
-      {
-        "id": "state-id",
-        "name": "State Name",
-        "color": "#E5E7EB"
       }
     ]
   }

@@ -48,6 +48,11 @@ def get_topics_dir_path() -> Path:
     return get_conceptmap_data_path() / "topics"
 
 
+def get_roadmaps_dir_path() -> Path:
+    """Get the path to the roadmaps directory"""
+    return get_conceptmap_data_path() / "roadmaps"
+
+
 # ============================================================================
 # IN-MEMORY CACHE FOR SUBJECT.JSON
 # ============================================================================
@@ -506,3 +511,43 @@ async def refresh_cache():
         "new_subjects_count": new_cache_size,
         "subjects_added": new_cache_size - old_cache_size
     }
+
+
+@router.get("/roadmap/{subject}")
+async def get_subject_roadmap(subject: str) -> Dict[str, Any]:
+    """
+    Get learning path/roadmap for a specific subject.
+    Roadmap includes topic order, network graph, study tips.
+    
+    Args:
+        subject: Subject ID (e.g., "history", "geography")
+    
+    Returns:
+        Roadmap data with learning path and network graph
+    """
+    try:
+        roadmaps_dir = get_roadmaps_dir_path()
+        roadmap_file = roadmaps_dir / f"{subject}-roadmap.json"
+        
+        if not roadmap_file.exists():
+            raise HTTPException(
+                status_code=404,
+                detail=f"Roadmap for subject '{subject}' not found"
+            )
+        
+        with open(roadmap_file, 'r', encoding='utf-8') as f:
+            roadmap_data = json.load(f)
+            return roadmap_data
+    
+    except HTTPException:
+        raise
+    except json.JSONDecodeError as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Error parsing roadmap file: {str(e)}"
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Error loading roadmap: {str(e)}"
+        )

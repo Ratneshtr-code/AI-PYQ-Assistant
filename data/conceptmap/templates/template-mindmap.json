@@ -1,0 +1,75 @@
+{
+  "id": "template-mindmap",
+  "subject": "SUBJECT_ID",
+  "title": "Topic Title Here",
+  "description": "Brief description of the topic (1-2 sentences)",
+  "visualType": "mindmap",
+  "metadata": {
+    "examRelevance": "high|medium|low",
+    "relatedTopics": ["related-topic-id-1", "related-topic-id-2"],
+    "tags": ["tag1", "tag2", "tag3"]
+  },
+  "data": {
+    "legend": [
+      { "depth": 1, "label": "Immediate Effects" },
+      { "depth": 2, "label": "Medium-term Changes" },
+      { "depth": 3, "label": "Long-term Impact" }
+    ],
+    "central": {
+      "label": "Central Concept",
+      "icon": "💥",
+      "subtitle": "Brief description",
+      "details": "Detailed explanation of central concept"
+    },
+    "branches": [
+      {
+        "id": "branch-1",
+        "label": "Branch 1 Name",
+        "icon": "🏛️",
+        "description": "Branch description",
+        "depth": 1,
+        "items": [
+          {
+            "id": "item-1",
+            "label": "Item Name",
+            "icon": "📋",
+            "subtitle": "Brief subtitle (optional)",
+            "details": {
+              "description": "Detailed description",
+              "points": [
+                "Key point 1",
+                "Key point 2",
+                "Key point 3"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "branch-2",
+        "label": "Branch 2 Name",
+        "icon": "⚔️",
+        "description": "Branch description",
+        "depth": 2,
+        "items": [
+          {
+            "id": "item-2",
+            "label": "Another Item",
+            "details": {
+              "points": [
+                "Point 1",
+                "Point 2"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "summary": [
+      "Key takeaway 1",
+      "Key takeaway 2",
+      "Key takeaway 3"
+    ]
+  }
+}
+

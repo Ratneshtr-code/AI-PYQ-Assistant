@@ -311,7 +311,11 @@ export default function ConceptMapPage() {
                         >
                             {/* Content Renderer - Full Height */}
                             <div className="flex-1 min-h-0 rounded-lg overflow-hidden shadow-xl border border-gray-200/50 bg-white m-4">
-                                <ContentRenderer topic={selectedTopic} selectedSubject={selectedSubject} />
+                                <ContentRenderer 
+                                    topic={selectedTopic} 
+                                    selectedSubject={selectedSubject}
+                                    onTopicSelect={handleTopicSelect}
+                                />
                             </div>
                         </motion.div>
                     ) : (
