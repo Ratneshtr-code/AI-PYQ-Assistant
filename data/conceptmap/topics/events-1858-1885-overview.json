@@ -1,0 +1,364 @@
+{
+  "id": "events-1858-1885-overview",
+  "subject": "history",
+  "title": "Chronological Overview (1858-1885)",
+  "description": "Master timeline connecting all major events, reforms, and developments",
+  "visualType": "timeline",
+  "metadata": {
+    "examRelevance": "high",
+    "relatedTopics": ["revolt-1857-impact", "events-1858-1885-reforms", "events-1858-1885-economic", "events-1858-1885-social", "events-1858-1885-nationalism", "events-1858-1885-acts"],
+    "tags": ["1858-1885", "overview", "chronology", "modern-history"]
+  },
+  "data": {
+    "startYear": 1858,
+    "endYear": 1885,
+    "legend": [
+      { "type": "political", "label": "Political/Constitutional" },
+      { "type": "economic", "label": "Economic/Fiscal" },
+      { "type": "social", "label": "Social/Cultural" },
+      { "type": "major", "label": "Major Events" }
+    ],
+    "events": [
+      {
+        "id": "overview-1858-transfer",
+        "year": "1858",
+        "title": "Transfer of Power to Crown",
+        "description": "Company rule ends, British Raj begins",
+        "type": "major",
+        "icon": "👑",
+        "details": {
+          "points": [
+            "Government of India Act (2 Aug 1858)",
+            "Queen Victoria's Proclamation (1 Nov 1858)",
+            "Lord Canning first Viceroy (1858-1862)",
+            "Secretary of State for India created",
+            "End of East India Company as ruling power"
+          ],
+          "significance": "Fundamental restructuring of governance"
+        },
+        "tags": ["Crown rule", "Victoria", "Canning"]
+      },
+      {
+        "id": "overview-1860-codes",
+        "year": "1860-62",
+        "title": "Legal & Administrative Codification",
+        "description": "Modern legal system established",
+        "type": "political",
+        "icon": "⚖️",
+        "details": {
+          "points": [
+            "Indian Penal Code (1860)",
+            "Code of Criminal Procedure (1861)",
+            "Income Tax introduced (1860)",
+            "Paper Currency Act (1861)",
+            "High Courts Act (1861)",
+            "Police Act (1861)",
+            "Indian Councils Act (1861)"
+          ],
+          "significance": "Foundation of modern legal and administrative system"
+        }
+      },
+      {
+        "id": "overview-1860s-reforms",
+        "year": "1860s",
+        "title": "Social Reform Movements Active",
+        "description": "Brahmo Samaj expansion, Widow Remarriage movement",
+        "type": "social",
+        "icon": "🕉️",
+        "details": {
+          "points": [
+            "Keshab Chandra Sen leads Brahmo Samaj",
+            "Indigo Rebellion in Bengal (1859-60)",
+            "Widow Remarriage movement grows",
+            "Universities established (1857 Act)",
+            "English education expands"
+          ],
+          "significance": "Social awakening and reform"
+        }
+      },
+      {
+        "id": "overview-1862-lawrence",
+        "year": "1862",
+        "title": "Financial Decentralization Begins",
+        "description": "Lawrence Resolution on provincial finances",
+        "type": "economic",
+        "icon": "💰",
+        "details": {
+          "points": [
+            "Viceroy: Lord John Lawrence (1864-1869)",
+            "Lawrence Resolution (1862)",
+            "Some financial powers to provinces",
+            "Beginning of fiscal devolution"
+          ],
+          "significance": "First step towards provincial autonomy"
+        }
+      },
+      {
+        "id": "overview-1865-forests",
+        "year": "1865",
+        "title": "Forest Act & Tribal Alienation",
+        "description": "Government control over forests",
+        "type": "economic",
+        "icon": "🌳",
+        "details": {
+          "points": [
+            "Indian Forest Act (1865)",
+            "Traditional forest rights curtailed",
+            "Tribal communities affected",
+            "Forests exploited for British needs"
+          ],
+          "significance": "Beginning of systematic forest exploitation"
+        }
+      },
+      {
+        "id": "overview-1867-prarthana",
+        "year": "1867",
+        "title": "Prarthana Samaj & Economic Nationalism",
+        "description": "Reform movement in Maharashtra; Drain Theory",
+        "type": "social",
+        "icon": "🙏",
+        "details": {
+          "points": [
+            "Prarthana Samaj founded in Bombay",
+            "Dadabhai Naoroji's Drain Theory (1867)",
+            "Economic awareness grows",
+            "M.G. Ranade active in reforms"
+          ],
+          "significance": "Reform and economic nationalism combine"
+        }
+      },
+      {
+        "id": "overview-1870-mayo",
+        "year": "1870",
+        "title": "Mayo's Administrative Reforms",
+        "description": "Further decentralization and Indianization attempt",
+        "type": "political",
+        "icon": "📊",
+        "details": {
+          "points": [
+            "Viceroy: Lord Mayo (1869-1872)",
+            "Financial decentralization extended",
+            "Statutory Civil Service created (failed)",
+            "Poona Sarvajanik Sabha founded (1870)"
+          ],
+          "significance": "Strengthened provincial administration"
+        }
+      },
+      {
+        "id": "overview-1872-marriage",
+        "year": "1872",
+        "title": "Civil Marriage & Social Issues",
+        "description": "Native Marriage Act passed",
+        "type": "social",
+        "icon": "💑",
+        "details": {
+          "points": [
+            "Native Marriage Act (Special Marriage Act)",
+            "Inter-caste/inter-religious marriages legalized",
+            "Used mainly by reformers",
+            "Orthodox opposition strong"
+          ],
+          "significance": "Legal framework for breaking social barriers"
+        }
+      },
+      {
+        "id": "overview-1875-arya-aligarh",
+        "year": "1875",
+        "title": "Arya Samaj & Aligarh Movement",
+        "description": "Two important movements begin",
+        "type": "social",
+        "icon": "🎓",
+        "details": {
+          "points": [
+            "Arya Samaj founded by Dayanand Saraswati",
+            "Aligarh Movement begins - Sir Syed Ahmed Khan",
+            "MAO College at Aligarh founded",
+            "Hindu and Muslim reform movements parallel"
+          ],
+          "significance": "Religious reform and modern education"
+        }
+      },
+      {
+        "id": "overview-1876-lytton",
+        "year": "1876-80",
+        "title": "Lytton's Reactionary Period",
+        "description": "Repressive policies and Great Famine",
+        "type": "major",
+        "icon": "⚠️",
+        "details": {
+          "points": [
+            "Viceroy: Lord Lytton (1876-1880)",
+            "Great Famine (1876-78): 5-10 million deaths",
+            "Delhi Durbar during famine (1877)",
+            "Queen Victoria proclaimed Empress of India",
+            "Dramatic Performances Act (1876)",
+            "Vernacular Press Act (1878) - repressive",
+            "Arms Act (1878) - discriminatory",
+            "Age limit for Civil Service reduced",
+            "Widespread resentment"
+          ],
+          "significance": "Repressive period that united Indians in opposition"
+        },
+        "tags": ["Lytton", "famine", "repression"]
+      },
+      {
+        "id": "overview-1876-inc-prep",
+        "year": "1876",
+        "title": "Indian Association Founded",
+        "description": "Most important pre-Congress organization",
+        "type": "political",
+        "icon": "🏛️",
+        "details": {
+          "points": [
+            "Founded by Surendranath Banerjee, Ananda Mohan Bose",
+            "Aimed at all-India unity",
+            "Branches in many towns",
+            "Organized national conferences (1878, 1883)",
+            "Prepared ground for Indian National Congress"
+          ],
+          "significance": "Direct precursor to INC"
+        }
+      },
+      {
+        "id": "overview-1878-press",
+        "year": "1878",
+        "title": "Vernacular Press Act Controversy",
+        "description": "Repressive law united Indian opinion",
+        "type": "major",
+        "icon": "📰",
+        "details": {
+          "points": [
+            "Gagged Indian language newspapers",
+            "English papers exempt",
+            "Strong protests across India",
+            "Indian Association led agitation",
+            "Showed power of united opposition",
+            "Repealed in 1881 by Ripon"
+          ],
+          "significance": "United Indians; showed effectiveness of protest"
+        }
+      },
+      {
+        "id": "overview-1879-theosophy",
+        "year": "1879-80",
+        "title": "Theosophical Society & Cultural Pride",
+        "description": "Western appreciation of Indian culture",
+        "type": "social",
+        "icon": "🌟",
+        "details": {
+          "points": [
+            "Theosophical Society came to India",
+            "Headquarters at Adyar, Madras (1882)",
+            "Annie Besant joined later",
+            "Emphasized ancient Indian wisdom",
+            "Famine Commission set up (1880)",
+            "Gave Indians cultural confidence"
+          ],
+          "significance": "Reinforced Indian cultural pride"
+        }
+      },
+      {
+        "id": "overview-1880-ripon",
+        "year": "1880-84",
+        "title": "Ripon's Liberal Administration",
+        "description": "Progressive policies but limited by European opposition",
+        "type": "political",
+        "icon": "✨",
+        "details": {
+          "points": [
+            "Viceroy: Lord Ripon (1880-1884) - 'Ripon the Good'",
+            "Repealed Vernacular Press Act (1881)",
+            "Local Self-Government Resolution (1882)",
+            "Factories Act (1881) - first labor law",
+            "Ilbert Bill controversy (1883) - exposed racism",
+            "Bill diluted after European opposition",
+            "Created political expectations",
+            "Showed limits of British liberalism"
+          ],
+          "significance": "Liberal policies but also exposed British racism through Ilbert Bill"
+        },
+        "tags": ["Ripon", "liberal", "Ilbert Bill"]
+      },
+      {
+        "id": "overview-1883-ilbert",
+        "year": "1883",
+        "title": "Ilbert Bill Controversy",
+        "description": "Racist opposition united Indians",
+        "type": "major",
+        "icon": "⚖️",
+        "details": {
+          "points": [
+            "Proposed to allow Indian judges to try Europeans",
+            "Violent opposition from European community",
+            "Exposed racist face of British",
+            "Bill passed but diluted",
+            "Indians' self-respect hurt",
+            "Realized need for political organization",
+            "Direct stimulus to political awakening",
+            "National Conference held in Calcutta"
+          ],
+          "significance": "Turning point - exposed racism, accelerated nationalist movement"
+        }
+      },
+      {
+        "id": "overview-1884-universities",
+        "year": "1884",
+        "title": "Universities Act & Control",
+        "description": "Government tightens control over education",
+        "type": "political",
+        "icon": "🎓",
+        "details": {
+          "points": [
+            "Indian Universities Act (1884)",
+            "Increased government control",
+            "Aimed at controlling educated class",
+            "Madras Mahajana Sabha founded (1884)",
+            "Fear of educated Indians becoming revolutionary"
+          ],
+          "significance": "Showed British fear of educated middle class"
+        }
+      },
+      {
+        "id": "overview-1885-inc",
+        "year": "1885",
+        "title": "Formation of Indian National Congress",
+        "description": "Historic founding of all-India political organization",
+        "type": "major",
+        "icon": "🇮🇳",
+        "details": {
+          "points": [
+            "First session: Bombay, 28-31 Dec 1885",
+            "72 delegates attended",
+            "W.C. Bonnerjee first President",
+            "A.O. Hume played key role",
+            "Supported by Viceroy Dufferin",
+            "Demands: expansion of councils, civil service reforms",
+            "Moderate approach initially",
+            "Represented educated middle class",
+            "Beginning of organized nationalist movement"
+          ],
+          "significance": "Culmination of political awakening; beginning of freedom struggle"
+        },
+        "tags": ["INC", "Congress", "nationalism", "milestone"]
+      },
+      {
+        "id": "overview-1885-bengal",
+        "year": "1885",
+        "title": "Bengal Tenancy Act",
+        "description": "Limited relief to tenants",
+        "type": "economic",
+        "icon": "🌾",
+        "details": {
+          "points": [
+            "Some protection against eviction",
+            "Occupancy rights for 12-year tenants",
+            "But many loopholes",
+            "Inadequate to solve agrarian distress"
+          ],
+          "significance": "Token agrarian reform"
+        }
+      }
+    ]
+  }
+}
+

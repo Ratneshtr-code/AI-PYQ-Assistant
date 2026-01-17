@@ -1,26 +1,24 @@
 // src/ConceptMapPage.jsx
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { buildApiUrl } from "./config/apiConfig";
-import Sidebar from "./components/Sidebar";
 import SubjectSelector from "./components/conceptmap/SubjectSelector";
 import TopicList from "./components/conceptmap/TopicList";
-import VisualRenderer from "./components/conceptmap/VisualRenderer";
-import InfoPopup from "./components/conceptmap/InfoPopup";
+import ContentRenderer from "./components/conceptmap/ContentRenderer";
 import { useMobileDetection } from "./utils/useMobileDetection";
 
 export default function ConceptMapPage() {
     const isMobile = useMobileDetection();
-    const [examsList, setExamsList] = useState([]);
+    const navigate = useNavigate();
     const [subjects, setSubjects] = useState([]);
     const [topics, setTopics] = useState([]);
     const [selectedSubject, setSelectedSubject] = useState(null);
     const [selectedTopic, setSelectedTopic] = useState(null);
     const [loadingSubjects, setLoadingSubjects] = useState(true);
     const [loadingTopics, setLoadingTopics] = useState(false);
-    const [popupData, setPopupData] = useState(null);
-    const [popupPosition, setPopupPosition] = useState(null);
-    const [primarySidebarCollapsed, setPrimarySidebarCollapsed] = useState(false);
+    const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+    const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
     // Fetch subjects on mount
     useEffect(() => {
@@ -50,30 +48,19 @@ export default function ConceptMapPage() {
         };
 
         fetchSubjects();
-
-        // Fetch exams list for sidebar
-        const fetchExams = async () => {
-            try {
-                const url = buildApiUrl("filters");
-                const res = await fetch(url, {
-                    credentials: "include",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accept": "application/json",
-                    },
-                });
-
-                if (res.ok) {
-                    const data = await res.json();
-                    setExamsList(data.exams || []);
-                }
-            } catch (err) {
-                console.error("Error fetching exams:", err);
-            }
-        };
-
-        fetchExams();
     }, []);
+
+    // Auto-select Geography subject on mount
+    useEffect(() => {
+        if (subjects.length > 0 && !selectedSubject) {
+            const geographySubject = subjects.find(
+                sub => sub.id?.toLowerCase() === 'geography' || sub.name?.toLowerCase() === 'geography'
+            );
+            if (geographySubject) {
+                setSelectedSubject(geographySubject.id);
+            }
+        }
+    }, [subjects, selectedSubject]);
 
     // Fetch topics when subject is selected
     useEffect(() => {
@@ -114,13 +101,21 @@ export default function ConceptMapPage() {
         fetchTopics();
     }, [selectedSubject]);
 
+
     const handleSubjectSelect = (subjectId) => {
         setSelectedSubject(subjectId);
         setSelectedTopic(null);
     };
 
     const handleTopicSelect = async (topic) => {
-        // Fetch full topic details including data
+        // Topic already has path from topics list, but fetch full details for consistency
+        // If topic already has path, use it directly
+        if (topic.path) {
+            setSelectedTopic(topic);
+            return;
+        }
+
+        // Otherwise fetch topic details to get path for static content
         try {
             const url = buildApiUrl(`conceptmap/topic/${topic.id}?subject=${selectedSubject}`);
             const res = await fetch(url, {
@@ -145,133 +140,208 @@ export default function ConceptMapPage() {
         }
     };
 
-    const handleElementClick = (data) => {
-        setPopupData(data);
-        // Center popup on screen
-        setPopupPosition({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
-    };
-
-    const handleClosePopup = () => {
-        setPopupData(null);
-        setPopupPosition(null);
-    };
-
     return (
-        <div className="flex min-h-screen bg-gray-50 text-gray-800">
-            {/* Primary Sidebar */}
-            <Sidebar
-                exam={""}
-                setExam={() => {}}
-                examsList={examsList}
-                onOpenSecondarySidebar={() => {}}
-                onCollapseChange={(isCollapsed) => {
-                    setPrimarySidebarCollapsed(isCollapsed);
-                }}
-            />
+        <div className="flex flex-col min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+            {/* Top Bar with Home Navigation */}
+            <div className="bg-white/80 backdrop-blur-sm border-b border-gray-200/50 shadow-sm z-10">
+                <div className="flex items-center justify-between px-4 md:px-6 py-3">
+                    {/* Home Navigation Button */}
+                    <motion.button
+                        onClick={() => navigate("/home")}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors group"
+                        title="Back to Home"
+                    >
+                        <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center flex-shrink-0 shadow-md group-hover:shadow-lg transition-shadow">
+                            <span className="text-white font-bold text-sm">AI</span>
+                        </div>
+                        <span className="text-sm font-semibold text-gray-700 hidden md:block group-hover:text-gray-900 transition-colors">
+                            AI PYQ Assistant
+                        </span>
+                    </motion.button>
 
-            {/* Main Content */}
-            <main
-                className={`flex-1 flex flex-col transition-all duration-300 min-h-screen ${
-                    primarySidebarCollapsed ? "md:ml-16" : "md:ml-64"
-                }`}
-            >
-                {/* Header */}
-                <div className="bg-white border-b border-gray-200 px-4 md:px-8 py-4">
+                    {/* Page Title */}
                     <motion.div
-                        initial={{ opacity: 0, y: -20 }}
+                        initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.3 }}
+                        className="flex-1 text-center"
                     >
-                        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                        <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                             🗺️ ConceptMap
                         </h1>
-                        <p className="text-sm md:text-base text-gray-600">
-                            Visual-based learning platform for interactive concept exploration
+                        <p className="text-xs md:text-sm text-gray-600 hidden md:block">
+                            Static content learning platform for concept exploration
                         </p>
                     </motion.div>
-                </div>
 
-                {/* Three-Panel Layout */}
-                <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
-                    {/* Left Panel - Subject Selector */}
-                    <div className="w-full md:w-64 bg-white border-r border-gray-200 flex-shrink-0">
+                    {/* Mobile Menu Toggle */}
+                    <button
+                        onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
+                        className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                        aria-label="Toggle menu"
+                    >
+                        <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+
+                    {/* Desktop Spacer for balance */}
+                    <div className="hidden md:block w-[180px]"></div>
+                </div>
+            </div>
+
+            {/* Mobile Sidebar Backdrop */}
+            {mobileSidebarOpen && (
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    onClick={() => setMobileSidebarOpen(false)}
+                    className="md:hidden fixed inset-0 bg-black/50 z-40"
+                />
+            )}
+
+            {/* Main Content Area */}
+            <div className="flex-1 flex overflow-hidden">
+                {/* Slim Unified Sidebar */}
+                <motion.aside
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ 
+                        x: 0, 
+                        opacity: 1,
+                        ...(isMobile && {
+                            x: mobileSidebarOpen ? 0 : -280
+                        })
+                    }}
+                    transition={{ duration: 0.3 }}
+                    className={`bg-white/95 backdrop-blur-sm border-r border-gray-200/50 shadow-xl flex flex-col transition-all duration-300 ${
+                        sidebarCollapsed && !isMobile ? "w-16" : "w-[280px]"
+                    } ${isMobile ? "fixed left-0 top-0 h-full z-50" : "flex-shrink-0"}`}
+                >
+                    {/* Mobile Close Button */}
+                    {isMobile && (
+                        <button
+                            onClick={() => setMobileSidebarOpen(false)}
+                            className="md:hidden absolute top-4 right-4 p-2 rounded-lg hover:bg-gray-100 transition-colors z-20"
+                            aria-label="Close menu"
+                        >
+                            <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    )}
+
+                    {/* Desktop Collapse Toggle Button */}
+                    <button
+                        onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+                        className="hidden md:flex absolute -right-3 top-4 w-6 h-6 bg-white border border-gray-200 rounded-full shadow-md items-center justify-center hover:bg-gray-50 transition-colors z-20"
+                        title={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+                    >
+                        <svg
+                            className={`w-4 h-4 text-gray-600 transition-transform ${sidebarCollapsed ? "rotate-180" : ""}`}
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+
+                    {/* Subjects Section */}
+                    <div className="pt-12 md:pt-0 relative" style={{ zIndex: 10 }}>
                         {loadingSubjects ? (
-                            <div className="h-full flex items-center justify-center">
+                            <div className="h-full flex items-center justify-center p-4">
                                 <div className="text-center">
                                     <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mb-3"></div>
                                     <p className="text-gray-600 text-sm">Loading subjects...</p>
                                 </div>
                             </div>
                         ) : (
-                            <SubjectSelector
-                                subjects={subjects}
-                                selectedSubject={selectedSubject}
-                                onSelectSubject={handleSubjectSelect}
-                            />
-                        )}
-                    </div>
-
-                    {/* Middle Panel - Topic List */}
-                    <div className="w-full md:w-80 bg-gray-50 border-r border-gray-200 flex-shrink-0">
-                        <TopicList
-                            topics={topics}
-                            selectedTopic={selectedTopic}
-                            onSelectTopic={handleTopicSelect}
-                            loading={loadingTopics}
-                        />
-                    </div>
-
-                    {/* Right Panel - Visual Area */}
-                    <div className="flex-1 bg-white p-4 md:p-8 overflow-auto">
-                        {selectedTopic ? (
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 0.3 }}
-                                className="h-full min-h-[600px]"
-                            >
-                                <div className="mb-4">
-                                    <h2 className="text-xl font-bold text-gray-900 mb-1">
-                                        {selectedTopic.title}
+                            <div className="p-3 relative">
+                                {(!sidebarCollapsed || isMobile) && (
+                                    <h2 className="text-sm font-semibold text-gray-700 mb-3 px-2 uppercase tracking-wide">
+                                        Subjects
                                     </h2>
-                                    {selectedTopic.description && (
-                                        <p className="text-sm text-gray-600">
-                                            {selectedTopic.description}
-                                        </p>
-                                    )}
-                                </div>
-                                <div className="h-[calc(100%-80px)]">
-                                    <VisualRenderer
-                                        visualType={selectedTopic.visualType}
-                                        topicData={selectedTopic.data}
-                                        onElementClick={handleElementClick}
-                                    />
-                                </div>
-                            </motion.div>
-                        ) : (
-                            <div className="h-full flex items-center justify-center">
-                                <div className="text-center">
-                                    <div className="text-6xl mb-4">🗺️</div>
-                                    <h3 className="text-xl font-semibold text-gray-700 mb-2">
-                                        Select a Topic
-                                    </h3>
-                                    <p className="text-gray-500">
-                                        Choose a subject and topic to view the interactive visualization
-                                    </p>
-                                </div>
+                                )}
+                                <SubjectSelector
+                                    subjects={subjects}
+                                    selectedSubject={selectedSubject}
+                                    onSelectSubject={(id) => {
+                                        handleSubjectSelect(id);
+                                        if (isMobile) setMobileSidebarOpen(false);
+                                    }}
+                                    isCollapsed={sidebarCollapsed && !isMobile}
+                                />
                             </div>
                         )}
                     </div>
-                </div>
-            </main>
 
-            {/* Info Popup */}
-            <InfoPopup
-                isOpen={!!popupData}
-                onClose={handleClosePopup}
-                data={popupData}
-                position={popupPosition}
-            />
+                    {/* Topics Section - Appears immediately below Subjects */}
+                    <div className="flex-1 overflow-y-auto relative" style={{ zIndex: 1 }}>
+                        {(!sidebarCollapsed || isMobile) && (
+                            <div className="px-3 pt-2 pb-2">
+                                <h2 className="text-sm font-semibold text-gray-700 mb-3 px-2 uppercase tracking-wide">
+                                    Topics
+                                </h2>
+                            </div>
+                        )}
+                        <TopicList
+                            topics={topics}
+                            selectedTopic={selectedTopic}
+                            onSelectTopic={(topic) => {
+                                handleTopicSelect(topic);
+                                if (isMobile) setMobileSidebarOpen(false);
+                            }}
+                            loading={loadingTopics}
+                            isCollapsed={sidebarCollapsed && !isMobile}
+                        />
+                    </div>
+                </motion.aside>
+
+                {/* Main Content Area - Full Width */}
+                <div className="flex-1 flex flex-col overflow-hidden bg-gradient-to-br from-blue-50/50 to-indigo-50/50">
+                    {selectedTopic ? (
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.98 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.4 }}
+                            className="flex-1 flex flex-col overflow-hidden"
+                        >
+                            {/* Content Renderer - Full Height */}
+                            <div className="flex-1 min-h-0 rounded-lg overflow-hidden shadow-xl border border-gray-200/50 bg-white m-4">
+                                <ContentRenderer topic={selectedTopic} selectedSubject={selectedSubject} />
+                            </div>
+                        </motion.div>
+                    ) : (
+                        <div className="flex-1 flex items-center justify-center p-4 md:p-8">
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5 }}
+                                className="text-center max-w-md"
+                            >
+                                <div className="text-5xl md:text-7xl mb-4 md:mb-6 animate-pulse">🗺️</div>
+                                <h3 className="text-xl md:text-2xl font-semibold text-gray-700 mb-2 md:mb-3">
+                                    Select a Topic
+                                </h3>
+                                <p className="text-gray-500 text-sm md:text-lg">
+                                    {isMobile ? "Tap the menu to get started" : "Choose a subject and topic to view the static content"}
+                                </p>
+                                {isMobile && (
+                                    <button
+                                        onClick={() => setMobileSidebarOpen(true)}
+                                        className="mt-4 px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg shadow-md hover:shadow-lg transition-all"
+                                    >
+                                        Open Menu
+                                    </button>
+                                )}
+                            </motion.div>
+                        </div>
+                    )}
+                </div>
+            </div>
         </div>
     );
 }

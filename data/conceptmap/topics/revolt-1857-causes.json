@@ -1,0 +1,333 @@
+{
+  "id": "revolt-1857-causes",
+  "subject": "history",
+  "title": "Revolt of 1857: Causes & Background",
+  "description": "Comprehensive analysis of the multiple causes that led to the First War of Independence",
+  "visualType": "flowchart",
+  "metadata": {
+    "examRelevance": "high",
+    "relatedTopics": ["revolt-1857-timeline", "revolt-1857-leaders", "revolt-1857-impact"],
+    "tags": ["1857", "revolt", "causes", "modern-history"]
+  },
+  "data": {
+    "legend": [
+      { "type": "cause", "label": "Root Causes" },
+      { "type": "intermediate", "label": "Contributing Factors" }
+    ],
+    "categories": [
+      {
+        "id": "political",
+        "label": "Political Causes",
+        "color": "#EF4444",
+        "icon": "🏛️",
+        "description": "British expansionist policies and annexations",
+        "items": [
+          {
+            "id": "doctrine-lapse",
+            "label": "Doctrine of Lapse",
+            "subtitle": "By Lord Dalhousie (1848-1856)",
+            "type": "cause",
+            "details": {
+              "description": "Policy of annexing princely states if the ruler died without a natural heir",
+              "points": [
+                "Satara (1848) - First state annexed",
+                "Jaipur and Sambalpur (1849)",
+                "Baghat (1850)",
+                "Udaipur (1852)",
+                "Jhansi (1853) - Rani Lakshmibai's case",
+                "Nagpur (1854)",
+                "Awadh annexed in 1856 on grounds of misgovernance"
+              ]
+            }
+          },
+          {
+            "id": "subsidiary-alliance",
+            "label": "Subsidiary Alliance",
+            "subtitle": "By Lord Wellesley (1798)",
+            "type": "cause",
+            "details": {
+              "description": "Forced Indian rulers to accept British protection and maintain British troops",
+              "points": [
+                "Rulers lost military independence",
+                "Heavy financial burden on states",
+                "British Resident in each state",
+                "Prevented rulers from having independent foreign relations"
+              ]
+            }
+          },
+          {
+            "id": "annexation-awadh",
+            "label": "Annexation of Awadh",
+            "subtitle": "1856 - Critical trigger",
+            "type": "cause",
+            "details": {
+              "description": "Awadh annexed on pretext of misgovernance, deeply hurt Nawab Wajid Ali Shah",
+              "points": [
+                "Awadh was Britain's loyal ally",
+                "Large number of sepoys from Awadh",
+                "Nobles, officials, and soldiers lost their livelihood",
+                "Created widespread resentment in army"
+              ]
+            }
+          },
+          {
+            "id": "displacement-rulers",
+            "label": "Displacement of Ruling Class",
+            "type": "cause",
+            "details": {
+              "points": [
+                "Pensioned off rulers lost their authority",
+                "Nana Sahib's pension discontinued",
+                "Bahadur Shah Zafar - last Mughal emperor reduced to figurehead",
+                "Traditional power structures dismantled"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "economic",
+        "label": "Economic Causes",
+        "color": "#F59E0B",
+        "icon": "💰",
+        "description": "Economic exploitation and destruction of Indian economy",
+        "items": [
+          {
+            "id": "deindustrialization",
+            "label": "Destruction of Indian Industries",
+            "type": "cause",
+            "details": {
+              "description": "Systematic destruction of Indian handicrafts and manufacturing",
+              "points": [
+                "Indian textiles replaced by British machine-made goods",
+                "Heavy export duties on Indian goods",
+                "Free entry of British goods in India",
+                "Weavers and artisans reduced to poverty",
+                "Drain of wealth from India to Britain"
+              ]
+            }
+          },
+          {
+            "id": "land-revenue",
+            "label": "Heavy Land Revenue Policies",
+            "type": "cause",
+            "details": {
+              "points": [
+                "Permanent Settlement (1793) - 90% revenue demand",
+                "Ryotwari and Mahalwari systems - inflexible",
+                "Peasants forced to take loans at high interest",
+                "Failure to pay led to loss of land",
+                "Frequent famines ignored by authorities"
+              ]
+            }
+          },
+          {
+            "id": "economic-drain",
+            "label": "Economic Drain",
+            "type": "cause",
+            "details": {
+              "points": [
+                "Home charges - payments to Britain",
+                "Salaries of British officials in India",
+                "Interest on loans",
+                "Military expenditure for British wars",
+                "Cost of maintaining British army in India"
+              ]
+            }
+          },
+          {
+            "id": "commercialization",
+            "label": "Forced Commercialization",
+            "type": "cause",
+            "details": {
+              "points": [
+                "Farmers forced to grow indigo, opium, cotton",
+                "Food crop production reduced",
+                "Market fluctuations affected farmers",
+                "Middlemen exploitation increased"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "social-religious",
+        "label": "Social & Religious Causes",
+        "color": "#3B82F6",
+        "icon": "🕉️",
+        "description": "Interference in Indian social and religious practices",
+        "items": [
+          {
+            "id": "social-reforms",
+            "label": "Western Education & Reforms",
+            "type": "cause",
+            "details": {
+              "description": "Perceived attack on traditional customs and religion",
+              "points": [
+                "Abolition of Sati (1829)",
+                "Hindu Widow Remarriage Act (1856)",
+                "Christian missionary activities",
+                "English education system introduced",
+                "Fear of forced conversion to Christianity"
+              ]
+            }
+          },
+          {
+            "id": "religious-interference",
+            "label": "Religious Interference",
+            "type": "cause",
+            "details": {
+              "points": [
+                "Religious Disabilities Act (1856) - inheritance rights for converts",
+                "Attacks on temples and mosques reported",
+                "British officers' disrespect for Indian religions",
+                "Rumours of Bible being taught in schools",
+                "Support for Christian missionaries"
+              ]
+            }
+          },
+          {
+            "id": "social-discrimination",
+            "label": "Racial Discrimination",
+            "type": "cause",
+            "details": {
+              "points": [
+                "Indians barred from high posts",
+                "Racial abuse by British officials",
+                "Social segregation in clubs and public spaces",
+                "Lower wages for same work",
+                "Doctrine of racial superiority"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "military",
+        "label": "Military Causes",
+        "color": "#8B5CF6",
+        "icon": "⚔️",
+        "description": "Grievances of Indian sepoys in British army",
+        "items": [
+          {
+            "id": "service-conditions",
+            "label": "Poor Service Conditions",
+            "type": "cause",
+            "details": {
+              "points": [
+                "Low pay compared to British soldiers",
+                "No promotion to officer ranks",
+                "Harsh punishments and racial abuse",
+                "General Service Enlistment Act (1856) - overseas service mandatory",
+                "Loss of caste due to overseas travel"
+              ]
+            }
+          },
+          {
+            "id": "greased-cartridges",
+            "label": "Greased Cartridges Incident",
+            "subtitle": "Immediate trigger - January 1857",
+            "type": "cause",
+            "details": {
+              "description": "New Enfield rifle cartridges allegedly greased with cow and pig fat",
+              "points": [
+                "Cartridges had to be bitten before loading",
+                "Cow fat offensive to Hindus",
+                "Pig fat offensive to Muslims",
+                "Seen as deliberate attempt to break caste",
+                "Introduced in January 1857 at Dum Dum arsenal",
+                "Mangal Pandey's resistance at Barrackpore (March 1857)"
+              ]
+            }
+          },
+          {
+            "id": "british-ratio",
+            "label": "Declining British-Indian Ratio",
+            "type": "intermediate",
+            "details": {
+              "points": [
+                "Indian sepoys: 2,38,000",
+                "British troops: 45,000",
+                "Ratio approximately 5:1",
+                "After Crimean War, British troops reduced",
+                "Gave confidence to sepoys"
+              ]
+            }
+          },
+          {
+            "id": "awadh-sepoys",
+            "label": "Awadh Sepoys' Anger",
+            "type": "cause",
+            "details": {
+              "points": [
+                "Large number of sepoys from Awadh",
+                "Their families affected by annexation",
+                "Loss of land and privileges",
+                "Personal stake in revolt"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "administrative",
+        "label": "Administrative Causes",
+        "color": "#10B981",
+        "icon": "📋",
+        "description": "Failures in British administration",
+        "items": [
+          {
+            "id": "corrupt-officials",
+            "label": "Corruption & Misgovernance",
+            "type": "cause",
+            "details": {
+              "points": [
+                "Corrupt British and Indian officials",
+                "Delay in justice delivery",
+                "Expensive and complex legal system",
+                "Favoritism in appointments",
+                "Neglect of public welfare"
+              ]
+            }
+          },
+          {
+            "id": "absentee-landlords",
+            "label": "Absentee Landlordism",
+            "type": "cause",
+            "details": {
+              "points": [
+                "Zamindars living in cities",
+                "Exploitation by intermediaries",
+                "No concern for peasant welfare",
+                "Rack-renting prevalent"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "connections": [
+      {
+        "from": "Doctrine of Lapse",
+        "relationship": "led to",
+        "to": "Displacement of traditional rulers"
+      },
+      {
+        "from": "Annexation of Awadh",
+        "relationship": "angered",
+        "to": "Sepoys and nobles"
+      },
+      {
+        "from": "Economic exploitation",
+        "relationship": "caused",
+        "to": "Widespread poverty"
+      },
+      {
+        "from": "Greased Cartridges",
+        "relationship": "triggered",
+        "to": "Immediate outbreak of revolt"
+      }
+    ]
+  }
+}
+

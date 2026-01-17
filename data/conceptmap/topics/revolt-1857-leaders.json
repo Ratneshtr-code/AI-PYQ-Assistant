@@ -1,0 +1,300 @@
+{
+  "id": "revolt-1857-leaders",
+  "subject": "history",
+  "title": "Revolt of 1857: Key Leaders & Regional Centers",
+  "description": "Comprehensive table of leaders, their regions, contributions, and fates",
+  "visualType": "table",
+  "metadata": {
+    "examRelevance": "high",
+    "relatedTopics": ["revolt-1857-causes", "revolt-1857-timeline", "revolt-1857-impact"],
+    "tags": ["1857", "revolt", "leaders", "modern-history"]
+  },
+  "data": {
+    "categories": [
+      { "id": "royalty", "label": "Royalty & Nobility" },
+      { "id": "military", "label": "Military Leaders" },
+      { "id": "civilian", "label": "Civilian Leaders" }
+    ],
+    "columns": [
+      { "key": "name", "label": "Leader Name" },
+      { "key": "region", "label": "Region/Center" },
+      { "key": "title", "label": "Title/Background" },
+      { "key": "contribution", "label": "Key Contribution" },
+      { "key": "fate", "label": "Fate/End" }
+    ],
+    "rows": [
+      {
+        "id": "bahadur-shah",
+        "category": "royalty",
+        "name": "Bahadur Shah Zafar II",
+        "region": "Delhi",
+        "title": "Last Mughal Emperor (1837-1857)",
+        "contribution": "Symbolic head of revolt; provided legitimacy",
+        "fate": "Exiled to Rangoon; died 1862",
+        "details": {
+          "description": "82-year-old reluctant leader who became symbol of Indian unity",
+          "points": [
+            "Initially hesitant to lead revolt",
+            "Declared Emperor of India on 11 May 1857",
+            "Provided moral and symbolic leadership",
+            "Tried by British after fall of Delhi",
+            "Sons murdered by Captain Hodson",
+            "Famous poet (Urdu, Persian); wrote poems in exile",
+            "Death marked end of Mughal dynasty"
+          ],
+          "impact": "His symbolic presence united diverse rebel groups under one banner"
+        }
+      },
+      {
+        "id": "rani-lakshmibai",
+        "category": "royalty",
+        "name": "Rani Lakshmibai",
+        "region": "Jhansi (UP)",
+        "title": "Queen of Jhansi; widow of Maharaja Gangadhar Rao",
+        "contribution": "Led defense of Jhansi; guerrilla warfare",
+        "fate": "Died fighting at Gwalior, 18 Jun 1858",
+        "details": {
+          "description": "Most iconic woman warrior of the revolt, aged 29 at death",
+          "points": [
+            "Born as Manikarnika (Manu); married at 14",
+            "Husband died 1853; British denied adoption rights",
+            "Initially tried to remain neutral",
+            "Defended Jhansi fort for 2 weeks",
+            "Escaped with adopted son on horseback",
+            "Joined Tatya Tope; captured Gwalior",
+            "Fought dressed as man in Battle of Kotah-ki-Serai",
+            "British soldiers praised her courage"
+          ],
+          "impact": "Became symbol of resistance; inspired future freedom fighters"
+        }
+      },
+      {
+        "id": "nana-sahib",
+        "category": "royalty",
+        "name": "Nana Sahib (Dhondu Pant)",
+        "region": "Kanpur (UP)",
+        "title": "Adopted son of Peshwa Baji Rao II",
+        "contribution": "Led Kanpur uprising; proclaimed Peshwa",
+        "fate": "Escaped to Nepal; fate unknown",
+        "details": {
+          "description": "Maratha leader who sought restoration of Peshwa position",
+          "points": [
+            "British stopped his pension after Baji Rao II's death",
+            "Personal grievance against Doctrine of Lapse",
+            "Led successful siege of British entrenchment",
+            "Controversially associated with Satichaura Ghat massacre",
+            "British blamed him for Bibighar massacre (likely done by subordinates)",
+            "Escaped after British recapture; went to Nepal",
+            "British never confirmed his capture or death",
+            "Some reports claim he died in Nepal jungle"
+          ],
+          "impact": "Represented Maratha aspiration for independence"
+        }
+      },
+      {
+        "id": "tantia-tope",
+        "category": "military",
+        "name": "Tatya Tope (Ramchandra Pandurang)",
+        "region": "Central India (Kanpur-Gwalior)",
+        "title": "General of Nana Sahib",
+        "contribution": "Brilliant military strategist; guerrilla warfare",
+        "fate": "Captured 7 Apr 1859; hanged 18 Apr 1859",
+        "details": {
+          "description": "Most capable military commander of the revolt",
+          "points": [
+            "Close aide of Nana Sahib",
+            "Excellent military tactician and strategist",
+            "Conducted guerrilla warfare for a year after main revolt",
+            "Relieved Gwalior with Rani Lakshmibai",
+            "Defeated British at multiple battles",
+            "Betrayed by Scindia's forces",
+            "Maintained resistance longer than any other leader",
+            "British respected his military abilities"
+          ],
+          "impact": "Demonstrated Indian capability in military leadership"
+        }
+      },
+      {
+        "id": "begum-hazrat-mahal",
+        "category": "royalty",
+        "name": "Begum Hazrat Mahal",
+        "region": "Lucknow (Awadh)",
+        "title": "Wife of Nawab Wajid Ali Shah",
+        "contribution": "Led Awadh rebellion after husband's exile",
+        "fate": "Escaped to Nepal; died 1879",
+        "details": {
+          "description": "Powerful woman leader who ruled Awadh during revolt",
+          "points": [
+            "Also known as Begum of Awadh",
+            "Took charge after husband exiled to Calcutta",
+            "Proclaimed her son Birjis Qadr as Nawab",
+            "Led fierce resistance in Lucknow",
+            "Organized administration and army",
+            "Issued proclamation against British policies",
+            "Escaped to Nepal after fall of Lucknow",
+            "British offered pardon but she refused"
+          ],
+          "impact": "Showed women's leadership in political and military spheres"
+        }
+      },
+      {
+        "id": "kunwar-singh",
+        "category": "royalty",
+        "name": "Kunwar Singh",
+        "region": "Bihar (Jagdishpur)",
+        "title": "Raja of Jagdishpur; Zamindar",
+        "contribution": "Led revolt in Bihar; fought at age 80",
+        "fate": "Died 26 Apr 1858 of wounds",
+        "details": {
+          "description": "Octogenarian warrior who achieved remarkable victories",
+          "points": [
+            "Born 1777; was 80 years old during revolt",
+            "Affected by oppressive land revenue policies",
+            "Led successful campaign in Bihar and UP",
+            "Defeated British at Battle of Arrah (1857)",
+            "Arm injured in battle; amputated own arm",
+            "Won battle at Jagdishpur just before death",
+            "Died of injuries on 26 April 1858",
+            "One of few who died fighting till the end"
+          ],
+          "impact": "Proved age no barrier to resistance; inspired Bihar region"
+        }
+      },
+      {
+        "id": "khan-bahadur-khan",
+        "category": "royalty",
+        "name": "Khan Bahadur Khan",
+        "region": "Bareilly (Rohilkhand)",
+        "title": "Grandson of Hafiz Rahmat Khan",
+        "contribution": "Proclaimed independence; organized administration",
+        "fate": "Hanged 1860",
+        "details": {
+          "description": "Attempted to establish alternative government in Rohilkhand",
+          "points": [
+            "Descendant of Rohilla rulers",
+            "Proclaimed Nawab of Rohilkhand",
+            "Established civil administration in Bareilly",
+            "Organized revenue collection and courts",
+            "Allied with Nana Sahib",
+            "Fled after British recapture",
+            "Captured and executed in 1860"
+          ],
+          "impact": "Showed rebels' attempt at governance, not just military resistance"
+        }
+      },
+      {
+        "id": "ahmadullah-shah",
+        "category": "civilian",
+        "name": "Ahmadullah Shah (Maulvi of Faizabad)",
+        "region": "Awadh (Faizabad-Lucknow)",
+        "title": "Religious leader; Maulvi",
+        "contribution": "Mobilized masses through religious appeals",
+        "fate": "Killed in battle, Jun 1858",
+        "details": {
+          "description": "Powerful religious leader who gave revolt a jihad character",
+          "points": [
+            "Also known as Danka Shah",
+            "Toured villages spreading anti-British message",
+            "Declared revolt as religious duty",
+            "United Hindus and Muslims",
+            "British saw him as dangerous agitator",
+            "Led forces in Awadh region",
+            "Killed by British-backed Raja of Powayan",
+            "Had widespread popular support"
+          ],
+          "impact": "Demonstrated religious dimension of revolt"
+        }
+      },
+      {
+        "id": "mangal-pandey",
+        "category": "military",
+        "name": "Mangal Pandey",
+        "region": "Barrackpore (Bengal)",
+        "title": "Sepoy, 34th Bengal Native Infantry",
+        "contribution": "First to openly rebel; attacked officers",
+        "fate": "Hanged 8 Apr 1857",
+        "details": {
+          "description": "Soldier whose act of defiance sparked the revolt",
+          "points": [
+            "Born in Nagwa, UP; Brahmin caste",
+            "Refused greased cartridges",
+            "Attacked Sergeant-Major and Adjutant on 29 March",
+            "Called fellow sepoys to join revolt",
+            "Tried to shoot himself but survived",
+            "Court-martialed and hanged",
+            "Regiment disbanded as punishment",
+            "British used 'Pandy' as derogatory term for rebels"
+          ],
+          "impact": "His martyrdom inspired sepoys across India; symbol of resistance"
+        }
+      },
+      {
+        "id": "bakht-khan",
+        "category": "military",
+        "name": "Bakht Khan",
+        "region": "Delhi",
+        "title": "Subedar, Bareilly Brigade",
+        "contribution": "Commander-in-Chief of rebel forces at Delhi",
+        "fate": "Escaped to Nepal; died 1859",
+        "details": {
+          "description": "Experienced military commander who led Delhi defense",
+          "points": [
+            "Previously served in EIC army",
+            "Led Bareilly contingent to Delhi",
+            "Appointed Commander of rebel forces by Bahadur Shah",
+            "Organized defense of Delhi during siege",
+            "Conflict with princes over strategy",
+            "Fought till Delhi fell",
+            "Escaped to Nepal; died there"
+          ],
+          "impact": "Provided military expertise to untrained rebel forces"
+        }
+      },
+      {
+        "id": "rao-tula-ram",
+        "category": "royalty",
+        "name": "Rao Tula Ram",
+        "region": "Haryana (Rewari)",
+        "title": "Raja of Rewari",
+        "contribution": "Led revolt in Haryana region",
+        "fate": "Died in exile 1863",
+        "details": {
+          "description": "Leader who organized peasant resistance in Haryana",
+          "points": [
+            "Organized revolt in Rewari, Gurgaon, Rohtak",
+            "Defeated British at Narnaul",
+            "Allied with Rao Gopal Dev",
+            "British suppressed revolt brutally",
+            "Escaped to Afghanistan",
+            "Died in exile"
+          ],
+          "impact": "Extended revolt to areas near British capital"
+        }
+      },
+      {
+        "id": "birjis-qadr",
+        "category": "royalty",
+        "name": "Birjis Qadr",
+        "region": "Lucknow (Awadh)",
+        "title": "Son of Wajid Ali Shah; proclaimed Nawab",
+        "contribution": "Symbolic ruler under mother's regency",
+        "fate": "Escaped to Nepal; died 1893",
+        "details": {
+          "description": "Young prince who became nominal ruler during revolt",
+          "points": [
+            "Only 11-12 years old during revolt",
+            "Mother Begum Hazrat Mahal ruled as regent",
+            "Proclaimed Nawab after revolt began",
+            "Provided legitimacy to Awadh rebellion",
+            "Escaped with mother to Nepal",
+            "British never allowed return",
+            "Died in Kathmandu"
+          ],
+          "impact": "Represented continuity of Awadh royal house"
+        }
+      }
+    ],
+    "summary": "The revolt saw diverse leadership from royalty, military commanders, and religious figures. Women like Rani Lakshmibai and Begum Hazrat Mahal played crucial roles. Most leaders either died fighting, were executed, or died in exile. Their sacrifice inspired future freedom movements."
+  }
+}
+

@@ -1,0 +1,365 @@
+{
+  "id": "events-1858-1885-acts",
+  "subject": "history",
+  "title": "Major Acts & Legislation (1858-1885)",
+  "description": "Comprehensive table of important acts, their provisions, and implications",
+  "visualType": "table",
+  "metadata": {
+    "examRelevance": "high",
+    "relatedTopics": ["events-1858-1885-reforms", "events-1858-1885-economic"],
+    "tags": ["1858-1885", "acts", "legislation", "modern-history"]
+  },
+  "data": {
+    "categories": [
+      { "id": "constitutional", "label": "Constitutional/Political" },
+      { "id": "administrative", "label": "Administrative" },
+      { "id": "social", "label": "Social/Legal" },
+      { "id": "economic", "label": "Economic/Fiscal" },
+      { "id": "repressive", "label": "Repressive Laws" }
+    ],
+    "columns": [
+      { "key": "year", "label": "Year" },
+      { "key": "act", "label": "Act/Law" },
+      { "key": "provisions", "label": "Key Provisions" },
+      { "key": "significance", "label": "Significance/Impact" }
+    ],
+    "rows": [
+      {
+        "id": "govt-india-act-1858",
+        "category": "constitutional",
+        "year": "1858",
+        "act": "Government of India Act, 1858",
+        "provisions": "End of Company rule; Crown control; Secretary of State created; Viceroy appointed",
+        "significance": "Fundamental restructuring - British Raj established",
+        "details": {
+          "description": "Most important constitutional change in 19th century India",
+          "points": [
+            "East India Company's rule terminated",
+            "Powers transferred to British Crown",
+            "Secretary of State for India in British Cabinet",
+            "Council of India (15 members) to assist Secretary",
+            "Governor-General became Viceroy",
+            "Company's Court of Directors and Board of Control abolished",
+            "Sovereignty vested in British Crown",
+            "Queen Victoria became Empress (proclaimed 1877)"
+          ],
+          "impact": "India became direct colony of Britain; Company's commercial character ended"
+        }
+      },
+      {
+        "id": "indian-councils-act-1861",
+        "category": "constitutional",
+        "year": "1861",
+        "act": "Indian Councils Act, 1861",
+        "provisions": "Legislative councils expanded; some non-officials included; portfolio system introduced",
+        "significance": "Beginning of representative institutions in India",
+        "details": {
+          "description": "First step towards inclusion of Indians in legislation",
+          "points": [
+            "Viceroy's Executive Council enlarged for legislation",
+            "6-12 additional members for legislative purposes",
+            "Some non-official Indians nominated",
+            "Provincial legislative councils for Bengal, Bombay, Madras",
+            "Portfolio system: each executive council member given department",
+            "Viceroy could veto, overrule council",
+            "Power to make laws for peace and good government",
+            "Indians: Raja Dinkar Rao (Central Provinces), Raja of Benares"
+          ],
+          "impact": "Token representation but historic beginning; precedent set for Indian participation"
+        }
+      },
+      {
+        "id": "high-courts-act-1861",
+        "category": "administrative",
+        "year": "1861",
+        "act": "Indian High Courts Act, 1861",
+        "provisions": "High Courts established at Calcutta, Bombay, Madras replacing Supreme Courts",
+        "significance": "Unified judicial system created",
+        "details": {
+          "points": [
+            "Replaced Supreme Courts (Crown) and Sadar Courts (Company)",
+            "Unified jurisdiction: Original and Appellate",
+            "Chief Justice and judges",
+            "Indian judges also appointed alongside British",
+            "English as language of courts at higher levels",
+            "Standardized judicial procedures",
+            "Foundation of modern Indian judiciary"
+          ],
+          "impact": "Modern judicial system established; continues with modifications today"
+        }
+      },
+      {
+        "id": "police-act-1861",
+        "category": "administrative",
+        "year": "1861",
+        "act": "Police Act, 1861",
+        "provisions": "Modern police force established; IG at state level; Superintendent at district level",
+        "significance": "Created police structure for law and order",
+        "details": {
+          "points": [
+            "Inspector General (IG) at provincial level",
+            "Deputy Inspector General for ranges",
+            "Superintendent of Police (SP) at district level",
+            "Village chowkidars at bottom",
+            "British officers at top, Indians in lower ranks",
+            "Centralized and hierarchical structure",
+            "Main purpose: protect British rule, suppress dissent",
+            "Often used against nationalist activities"
+          ],
+          "impact": "Police system continues largely same; criticized for being repressive rather than service-oriented"
+        }
+      },
+      {
+        "id": "criminal-procedure-code-1861",
+        "category": "social",
+        "year": "1861",
+        "act": "Code of Criminal Procedure, 1861",
+        "provisions": "Codified criminal procedure law; investigation, trial, punishment procedures",
+        "significance": "Standardized criminal justice system",
+        "details": {
+          "points": [
+            "Consolidated criminal procedure law",
+            "Investigation, inquiry, trial, appeal procedures",
+            "Rights of accused defined",
+            "Powers of police, magistrates specified",
+            "Replaced varied systems of different presidencies",
+            "Modified several times later (1872, 1882, 1898)"
+          ],
+          "impact": "Foundation of criminal justice administration in India"
+        }
+      },
+      {
+        "id": "indian-penal-code-1860",
+        "category": "social",
+        "year": "1860",
+        "act": "Indian Penal Code (IPC), 1860",
+        "provisions": "Comprehensive criminal law code; defined offences and punishments",
+        "significance": "Standardized criminal law across India",
+        "details": {
+          "points": [
+            "Drafted by first Law Commission under Macaulay (1834-1838)",
+            "Came into force in 1862",
+            "Defined crimes and punishments",
+            "Covered offenses against state, human body, property",
+            "Based on English law but adapted to Indian conditions",
+            "Replaced varied Muslim and Hindu laws partially",
+            "Age of consent for girls fixed at 10 (raised to 12 in 1891)",
+            "Sati declared illegal (already abolished 1829)"
+          ],
+          "impact": "Still in force with amendments; cornerstone of Indian criminal law"
+        }
+      },
+      {
+        "id": "paper-currency-act-1861",
+        "category": "economic",
+        "year": "1861",
+        "act": "Paper Currency Act, 1861",
+        "provisions": "Government issued paper currency introduced",
+        "significance": "Unified currency system created",
+        "details": {
+          "points": [
+            "First government-issued paper currency",
+            "Denominations: Rs. 10, 20, 50, 100, 1000",
+            "Backed by gold, silver, securities",
+            "Currency circles initially separate",
+            "Unified currency system gradually",
+            "Facilitated trade and commerce",
+            "Reduced cost of metallic currency"
+          ],
+          "impact": "Foundation of modern currency and banking system"
+        }
+      },
+      {
+        "id": "native-marriage-act-1872",
+        "category": "social",
+        "year": "1872",
+        "act": "Native Marriage Act (Special Marriage Act), 1872",
+        "provisions": "Civil marriages outside caste/religion legalized",
+        "significance": "Enabled inter-caste and inter-religious marriages",
+        "details": {
+          "points": [
+            "Also known as Civil Marriage Act",
+            "Couples could marry without religious ceremony",
+            "Civil registration of marriage",
+            "No caste or religion barrier",
+            "Mainly used by Brahmo Samaj members",
+            "Strongly opposed by orthodox society",
+            "Very few marriages initially",
+            "Minimum age: 18 for boys, 14 for girls"
+          ],
+          "impact": "Legally broke caste/religious barriers; symbolically very important"
+        }
+      },
+      {
+        "id": "forest-act-1865",
+        "category": "economic",
+        "year": "1865",
+        "act": "Indian Forest Act, 1865",
+        "provisions": "Forests declared government property; restrictions on access",
+        "significance": "Alienated forest-dwelling communities",
+        "details": {
+          "points": [
+            "Declared forests as government property",
+            "Extended and strengthened by 1878 Act",
+            "Reserved forests: no access without permission",
+            "Protected forests: restricted access",
+            "Village forests: under government control",
+            "Traditional rights curtailed",
+            "Shifting cultivation banned",
+            "Forests exploited for British needs"
+          ],
+          "impact": "Destroyed livelihood of tribals and forest dwellers; ecological damage"
+        }
+      },
+      {
+        "id": "dramatic-performances-act",
+        "category": "repressive",
+        "year": "1876",
+        "act": "Dramatic Performances Act, 1876",
+        "provisions": "Government could ban plays considered seditious",
+        "significance": "Controlled cultural expression",
+        "details": {
+          "points": [
+            "Empowered government to ban dramas",
+            "Aimed at controlling political plays",
+            "Bengali and Marathi theaters active in nationalist themes",
+            "Plays showing British in bad light banned",
+            "Magistrate could prohibit performances",
+            "Penalty for violation"
+          ],
+          "impact": "Curtailed freedom of expression; showed British fear of cultural resistance"
+        }
+      },
+      {
+        "id": "vernacular-press-act",
+        "category": "repressive",
+        "year": "1878",
+        "act": "Vernacular Press Act, 1878",
+        "provisions": "Magistrate could demand security from vernacular newspapers; could ban without trial",
+        "significance": "Gagged Indian press; united Indian opinion against it",
+        "details": {
+          "description": "Most repressive press law in 19th century",
+          "points": [
+            "Passed by Lord Lytton",
+            "Applied only to vernacular (Indian language) newspapers",
+            "English newspapers exempt",
+            "Magistrate could demand security deposit",
+            "Could confiscate press and equipment",
+            "No trial or appeal",
+            "Clearly discriminatory",
+            "Strong opposition across India",
+            "Indian Association led agitation",
+            "Repealed in 1881 by Lord Ripon"
+          ],
+          "impact": "Backfired - united Indians; showed power of united protest; many papers switched to English to escape"
+        }
+      },
+      {
+        "id": "arms-act-1878",
+        "category": "repressive",
+        "year": "1878",
+        "act": "Arms Act, 1878",
+        "provisions": "Indians required license to possess arms; Europeans exempt",
+        "significance": "Disarmed Indians; symbol of racial discrimination",
+        "details": {
+          "points": [
+            "Indians needed license to possess arms",
+            "Europeans, Anglo-Indians, government officials exempt",
+            "Clearly discriminatory on racial grounds",
+            "After 1857, British didn't trust Indians with weapons",
+            "Made Indians defenseless",
+            "Hurt Indian pride",
+            "Symbol of racial humiliation",
+            "Strongly resented by Indians"
+          ],
+          "impact": "Created resentment; symbol of British distrust and racial discrimination"
+        }
+      },
+      {
+        "id": "forest-act-1878",
+        "category": "economic",
+        "year": "1878",
+        "act": "Indian Forest Act, 1878",
+        "provisions": "Strengthened 1865 Act; three categories of forests created",
+        "significance": "Systematic forest control and exploitation",
+        "details": {
+          "points": [
+            "Three categories: Reserved, Protected, Village forests",
+            "Reserved: complete government control, no access",
+            "Protected: restricted access with permits",
+            "Village: nominal community control but govt supervision",
+            "Traditional rights eroded",
+            "Forests treated as revenue source",
+            "Timber for railways priority",
+            "Tribal customs ignored"
+          ],
+          "impact": "Systematic exploitation of forests; tribal rebellions followed in many areas"
+        }
+      },
+      {
+        "id": "factories-act-1881",
+        "category": "social",
+        "year": "1881",
+        "act": "Factories Act, 1881",
+        "provisions": "First labor welfare legislation; limited child labor",
+        "significance": "Beginning of labor legislation in India",
+        "details": {
+          "points": [
+            "Applied to factories with 100+ workers using power",
+            "Children below 7 years: employment banned",
+            "Children 7-12: work limited to 9 hours",
+            "One day weekly off for children",
+            "Factory inspectors appointed",
+            "Very limited in scope",
+            "Mainly in response to British factory owners' pressure",
+            "Indian mill owners wanted cheap child labor"
+          ],
+          "impact": "Token legislation; inadequate but historic beginning of labor welfare laws"
+        }
+      },
+      {
+        "id": "universities-act-1884",
+        "category": "administrative",
+        "year": "1884",
+        "act": "Indian Universities Act, 1884",
+        "provisions": "Increased government control over universities; Senate reduced; officials increased",
+        "significance": "Attempt to control educated class",
+        "details": {
+          "points": [
+            "Senate made smaller",
+            "Official element increased",
+            "Government approval needed for regulations",
+            "Teaching functions emphasized",
+            "Standards raised",
+            "Aimed at controlling educated middle class",
+            "Fear of educated Indians becoming revolutionary",
+            "Affiliating system continued"
+          ],
+          "impact": "Centralized control; showed British fear of growing educated class; some improvement in standards"
+        }
+      },
+      {
+        "id": "bengal-tenancy-act",
+        "category": "economic",
+        "year": "1885",
+        "act": "Bengal Tenancy Act, 1885",
+        "provisions": "Some protection to tenants against eviction",
+        "significance": "Limited relief to peasants",
+        "details": {
+          "points": [
+            "Gave occupancy rights to 12-year tenants",
+            "Protection against eviction",
+            "Rent couldn't be raised arbitrarily",
+            "But left many loopholes",
+            "Zamindars found ways to circumvent",
+            "Didn't solve fundamental problem",
+            "Peasant indebtedness continued"
+          ],
+          "impact": "Token reform; inadequate to solve agrarian distress"
+        }
+      }
+    ],
+    "summary": "The period saw important constitutional changes (end of Company rule, legislative councils), administrative reforms (police, judiciary), some social legislation (marriage, child labor), but also repressive laws (press, arms, forest acts). While some beneficial changes occurred, most legislation served British interests. Repressive laws united Indians in opposition and contributed to rise of nationalism."
+  }
+}
+

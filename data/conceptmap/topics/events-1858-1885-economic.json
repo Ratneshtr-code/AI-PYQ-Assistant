@@ -1,0 +1,315 @@
+{
+  "id": "events-1858-1885-economic",
+  "subject": "history",
+  "title": "Economic Policies & Acts (1858-1885)",
+  "description": "Major economic policies, fiscal measures, and their impact on Indian economy",
+  "visualType": "table",
+  "metadata": {
+    "examRelevance": "high",
+    "relatedTopics": ["revolt-1857-impact", "events-1858-1885-reforms"],
+    "tags": ["1858-1885", "economy", "policies", "modern-history"]
+  },
+  "data": {
+    "categories": [
+      { "id": "fiscal", "label": "Fiscal & Revenue" },
+      { "id": "trade", "label": "Trade & Industry" },
+      { "id": "infrastructure", "label": "Infrastructure" },
+      { "id": "agriculture", "label": "Agriculture & Land" }
+    ],
+    "columns": [
+      { "key": "year", "label": "Year" },
+      { "key": "policy", "label": "Policy/Act/Event" },
+      { "key": "description", "label": "Key Features" },
+      { "key": "impact", "label": "Impact on India" }
+    ],
+    "rows": [
+      {
+        "id": "paper-currency",
+        "category": "fiscal",
+        "year": "1861",
+        "policy": "Paper Currency Act",
+        "description": "Introduction of paper currency in India",
+        "impact": "Unified currency system; facilitated trade; but benefited British trade more",
+        "details": {
+          "points": [
+            "First paper currency issued by Government",
+            "Denominations: Rs. 10, 20, 50, 100, 1000",
+            "Backed by gold and silver reserves",
+            "Helped monetize economy",
+            "Reduced cost of currency management",
+            "Facilitated long-distance trade"
+          ],
+          "impact": "Modern banking and currency system foundation laid"
+        }
+      },
+      {
+        "id": "income-tax",
+        "category": "fiscal",
+        "year": "1860",
+        "policy": "Income Tax Introduction",
+        "description": "First income tax imposed by James Wilson",
+        "impact": "Heavy burden on middle class; revenue for British treasury",
+        "details": {
+          "points": [
+            "Introduced to meet post-revolt expenses",
+            "Applied to incomes above Rs. 200 per year",
+            "Rate: 2% on incomes Rs. 200-500, up to 8% on higher incomes",
+            "Strong opposition from Indians",
+            "Abolished in 1865 due to protest",
+            "Reintroduced in 1867, then again abolished",
+            "Permanently reintroduced in 1886"
+          ],
+          "impact": "Indians paid for cost of suppressing their own revolt"
+        }
+      },
+      {
+        "id": "railway-expansion",
+        "category": "infrastructure",
+        "year": "1860-1885",
+        "policy": "Massive Railway Expansion",
+        "description": "Railway network expanded from 288 to 14,500 miles",
+        "impact": "Facilitated British trade and troop movement; some benefit to Indian trade",
+        "details": {
+          "points": [
+            "First railway (Bombay-Thane) started 1853",
+            "Accelerated after 1857 for military purposes",
+            "Guaranteed interest system: 5% return to British investors",
+            "Entirely paid by Indian revenues",
+            "Employed British engineers and imported British materials",
+            "Connected ports to interior (drain of resources)",
+            "Some positive: market integration, mobility, employment"
+          ],
+          "impact": "Served British commercial and military interests primarily; drain of Indian wealth"
+        }
+      },
+      {
+        "id": "telegraph",
+        "category": "infrastructure",
+        "year": "1850s-1880s",
+        "policy": "Telegraph Network Expansion",
+        "description": "Telegraph lines expanded across India",
+        "impact": "Improved communication for British administration and trade",
+        "details": {
+          "points": [
+            "First line: Calcutta-Diamond Harbour (1851)",
+            "Rapid expansion after 1857 revolt",
+            "Military and administrative priority",
+            "Improved news dissemination",
+            "Cost borne by India",
+            "Later benefited Indian business and society"
+          ],
+          "impact": "Modernized communication but primarily for British benefit"
+        }
+      },
+      {
+        "id": "import-duties",
+        "category": "trade",
+        "year": "1859-1882",
+        "policy": "Abolition of Import Duties",
+        "description": "Import duties on British goods gradually abolished",
+        "impact": "Destroyed Indian industries; flooding of British manufactured goods",
+        "details": {
+          "points": [
+            "Import duties on British textiles reduced progressively",
+            "By 1882, most import duties abolished",
+            "Free trade policy benefited British manufacturers",
+            "Indian textiles couldn't compete",
+            "Weavers and artisans lost livelihood",
+            "India became dumping ground for British goods",
+            "Excise duties imposed on Indian goods to favor imports"
+          ],
+          "impact": "Deindustrialization of India; millions of artisans unemployed"
+        }
+      },
+      {
+        "id": "cotton-duties",
+        "category": "trade",
+        "year": "1859-1896",
+        "policy": "Cotton Duties Controversy",
+        "description": "Excise duties on Indian cotton to protect Manchester",
+        "impact": "Indian cotton industry handicapped to favor British imports",
+        "details": {
+          "points": [
+            "Import duty on British cotton abolished",
+            "Excise duty imposed on Indian mill-made cloth",
+            "Justified as revenue measure",
+            "Real purpose: protect Manchester textile industry",
+            "Indian mill owners protested strongly",
+            "Became major nationalist issue",
+            "Duties modified after prolonged agitation"
+          ],
+          "impact": "Clear case of subordination of Indian interests to British"
+        }
+      },
+      {
+        "id": "indigo-cultivation",
+        "category": "agriculture",
+        "year": "1860s",
+        "policy": "Indigo Cultivation & Revolts",
+        "description": "Forced indigo cultivation and peasant resistance",
+        "impact": "Peasant exploitation exposed; beginning of agrarian movements",
+        "details": {
+          "points": [
+            "European planters forced peasants to grow indigo",
+            "Tinkathia system: 3/20 land for indigo",
+            "Low prices, advances at high interest",
+            "Physical coercion common",
+            "Bengal peasants revolted in 1859-60",
+            "Intelligentsia supported peasants",
+            "Indigo Commission (1860) partially favored peasants",
+            "Led to decline of indigo cultivation"
+          ],
+          "impact": "First organized peasant resistance in modern era; exposed colonial exploitation"
+        }
+      },
+      {
+        "id": "permanent-settlement",
+        "category": "agriculture",
+        "year": "Continued",
+        "policy": "Continuation of Land Revenue Systems",
+        "description": "Permanent Settlement, Ryotwari, Mahalwari continued",
+        "impact": "Heavy revenue burden; peasant indebtedness increased",
+        "details": {
+          "points": [
+            "No major change in land revenue policy",
+            "Revenue demand remained high (50-60% of produce)",
+            "Zamindari system created absentee landlords",
+            "Ryotwari made peasants deal with government directly",
+            "Rigid collection regardless of harvest quality",
+            "Led to peasant indebtedness",
+            "Moneylenders exploited peasants",
+            "Land alienation increased"
+          ],
+          "impact": "Agrarian distress continued and intensified"
+        }
+      },
+      {
+        "id": "famine-1876-78",
+        "category": "agriculture",
+        "year": "1876-1878",
+        "policy": "Great Famine & Lytton's Response",
+        "description": "Worst famine; callous British response",
+        "impact": "5-10 million deaths; exposed British neglect of Indian welfare",
+        "details": {
+          "points": [
+            "Affected South and West India severely",
+            "5-10 million deaths estimated",
+            "Lord Lytton refused to stop grain exports",
+            "Organized Delhi Durbar instead of relief (1877)",
+            "Proclaimed Queen Victoria as Empress of India during famine",
+            "Inadequate relief measures",
+            "Laissez-faire policy followed",
+            "Famine Commission (1880) later set up"
+          ],
+          "impact": "Exposed British priorities; drain of resources even during famine"
+        }
+      },
+      {
+        "id": "famine-commission",
+        "category": "agriculture",
+        "year": "1880",
+        "policy": "Famine Commission (Strachey Commission)",
+        "description": "Inquiry into famine causes and relief measures",
+        "impact": "Some recommendations but inadequate implementation",
+        "details": {
+          "points": [
+            "Set up by Lord Ripon after 1876-78 famine",
+            "Richard Strachey headed commission",
+            "Identified heavy land revenue as cause",
+            "Recommended: railway expansion, irrigation, forest conservation",
+            "Suggested Famine Codes for relief",
+            "But didn't address root cause: drain of wealth",
+            "Implementation remained inadequate"
+          ],
+          "impact": "Acknowledged problem but British unwilling to change exploitative system"
+        }
+      },
+      {
+        "id": "forests-act",
+        "category": "agriculture",
+        "year": "1865, 1878",
+        "policy": "Indian Forest Acts",
+        "description": "Government control over forests; tribals displaced",
+        "impact": "Traditional forest rights curtailed; tribal economy destroyed",
+        "details": {
+          "points": [
+            "Declared forests as government property",
+            "Reserved forests: no access without permission",
+            "Protected forests: restricted access",
+            "Village forests: under government control",
+            "Tribals and forest-dwellers lost livelihood",
+            "Shifting cultivation banned",
+            "Forests exploited for British needs (timber, railways)",
+            "Local needs ignored"
+          ],
+          "impact": "Alienation of forest-dwelling communities; ecological exploitation"
+        }
+      },
+      {
+        "id": "commercialization",
+        "category": "agriculture",
+        "year": "1860s-1880s",
+        "policy": "Commercialization of Agriculture",
+        "description": "Shift from food crops to cash crops",
+        "impact": "Food security compromised; vulnerability to market fluctuations",
+        "details": {
+          "points": [
+            "Peasants forced/induced to grow: cotton, jute, indigo, opium, tea",
+            "For export to Britain and world market",
+            "Food crop production declined",
+            "Made farmers vulnerable to price fluctuations",
+            "Famines became more frequent and severe",
+            "Middlemen exploited farmers",
+            "Capital-intensive crops needed credit",
+            "Increased peasant indebtedness"
+          ],
+          "impact": "Food insecurity; greater exploitation; famines intensified"
+        }
+      },
+      {
+        "id": "drain-theory",
+        "category": "fiscal",
+        "year": "Ongoing",
+        "policy": "Economic Drain of Wealth",
+        "description": "Continuous transfer of wealth from India to Britain",
+        "impact": "India's poverty and Britain's prosperity were interconnected",
+        "details": {
+          "points": [
+            "Home charges: payments to British government",
+            "Salaries and pensions of British officials",
+            "Interest on loans taken for India",
+            "Profits of British companies",
+            "Cost of British Army in India",
+            "Payments for stores purchased in Britain",
+            "Dadabhai Naoroji estimated £30-40 million annual drain",
+            "R.C. Dutt documented systematic exploitation"
+          ],
+          "impact": "India impoverished; wealth transfer enriched Britain"
+        }
+      },
+      {
+        "id": "opium-trade",
+        "category": "trade",
+        "year": "Continued",
+        "policy": "Opium Trade with China",
+        "description": "India used to produce opium for Chinese market",
+        "impact": "Large revenue for British; Indian land used for drug production",
+        "details": {
+          "points": [
+            "Opium grown in Bihar and Malwa",
+            "Monopoly controlled by British",
+            "Exported to China despite Chinese opposition",
+            "Led to Opium Wars (1839-42, 1856-60)",
+            "Major source of revenue for British India government",
+            "Best agricultural land used for opium, not food",
+            "Peasants forced to grow at low prices",
+            "Morally indefensible trade"
+          ],
+          "impact": "Indian resources used for immoral drug trade; contributed to China's suffering"
+        }
+      }
+    ],
+    "summary": "The period 1858-1885 saw systematic economic exploitation of India through: drain of wealth, deindustrialization, heavy taxation, commercialization of agriculture, and infrastructure built primarily for British interests. While some modern infrastructure was created, the overall impact was impoverishment of India and enrichment of Britain. Economic nationalism began emerging in response to visible exploitation."
+  }
+}
+

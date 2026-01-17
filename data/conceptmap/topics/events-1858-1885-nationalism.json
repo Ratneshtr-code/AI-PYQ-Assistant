@@ -1,0 +1,446 @@
+{
+  "id": "events-1858-1885-nationalism",
+  "subject": "history",
+  "title": "Rise of Nationalism (1858-1885)",
+  "description": "Emergence of political consciousness and nationalist organizations",
+  "visualType": "flowchart",
+  "metadata": {
+    "examRelevance": "high",
+    "relatedTopics": ["revolt-1857-impact", "events-1858-1885-reforms", "events-1858-1885-social"],
+    "tags": ["1858-1885", "nationalism", "political-movements", "modern-history"]
+  },
+  "data": {
+    "legend": [
+      { "type": "cause", "label": "Causes/Factors" },
+      { "type": "event", "label": "Key Events" },
+      { "type": "intermediate", "label": "Organizations/Movements" }
+    ],
+    "categories": [
+      {
+        "id": "factors",
+        "label": "Factors Behind Rise of Nationalism",
+        "color": "#3B82F6",
+        "icon": "🌱",
+        "description": "Multiple factors contributed to growth of nationalist consciousness",
+        "items": [
+          {
+            "id": "economic-exploitation",
+            "label": "Economic Exploitation",
+            "type": "cause",
+            "details": {
+              "description": "Drain of wealth and deindustrialization created awareness",
+              "points": [
+                "Dadabhai Naoroji's Drain Theory (1867)",
+                "R.C. Dutt's 'Economic History of India' exposed exploitation",
+                "Visible poverty contrasted with British prosperity",
+                "Destruction of Indian industries evident",
+                "Heavy taxation burden",
+                "Famines and economic distress"
+              ]
+            }
+          },
+          {
+            "id": "western-education",
+            "label": "Impact of Western Education",
+            "type": "cause",
+            "details": {
+              "description": "English education introduced liberal ideas of freedom, equality, democracy",
+              "points": [
+                "English educated middle class emerged",
+                "Exposed to ideas of liberty, nationalism, democracy",
+                "Read about French Revolution, American Independence",
+                "Learned about constitutional rights",
+                "Could critically analyze British rule",
+                "Used English to unite across regions"
+              ]
+            }
+          },
+          {
+            "id": "racial-discrimination",
+            "label": "Racial Discrimination",
+            "type": "cause",
+            "details": {
+              "description": "Ilbert Bill controversy and racist attitudes united Indians",
+              "points": [
+                "Indians barred from high posts despite Queen's promise",
+                "Social segregation in clubs, railways",
+                "Ilbert Bill controversy (1883) exposed racism",
+                "Unequal treatment in courts and administration",
+                "Hurt Indian self-respect",
+                "Created sense of common identity against British"
+              ]
+            }
+          },
+          {
+            "id": "press-literature",
+            "label": "Role of Press & Literature",
+            "type": "cause",
+            "details": {
+              "points": [
+                "Indian-owned newspapers criticized British",
+                "Vernacular press spread ideas to masses",
+                "Nationalist literature inspired people",
+                "Bankim Chandra's 'Anandamath' (Vande Mataram)",
+                "Bharatendu Harishchandra's plays",
+                "Newspapers: Hindu, Bengalee, Amrita Bazar Patrika, Kesari"
+              ]
+            }
+          },
+          {
+            "id": "administrative-unity",
+            "label": "Administrative Unity",
+            "type": "cause",
+            "details": {
+              "points": [
+                "British rule unified India administratively",
+                "Common legal system",
+                "Railways and telegraph connected regions",
+                "Postal system facilitated communication",
+                "English became link language",
+                "Created sense of common identity"
+              ]
+            }
+          },
+          {
+            "id": "socio-religious-movements",
+            "label": "Socio-Religious Reform Movements",
+            "type": "cause",
+            "details": {
+              "points": [
+                "Brahmo Samaj, Arya Samaj created awareness",
+                "Challenged superstitions, encouraged rational thinking",
+                "Created pride in Indian heritage",
+                "Leaders became politically active later",
+                "Youth mobilized through reform movements",
+                "Spread modern ideas"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "organizations",
+        "label": "Early Political Organizations",
+        "color": "#EF4444",
+        "icon": "🏛️",
+        "description": "Precursors to Indian National Congress",
+        "items": [
+          {
+            "id": "british-indian-association",
+            "label": "British Indian Association",
+            "subtitle": "Bengal, 1851",
+            "type": "intermediate",
+            "details": {
+              "description": "First major political organization",
+              "points": [
+                "Formed by merger of Landholders' Society and Bengal British India Society",
+                "Represented interests of zamindars",
+                "Submitted petitions to Parliament",
+                "Limited to elite class",
+                "Demanded legislative reforms",
+                "Predecessor of later associations"
+              ]
+            }
+          },
+          {
+            "id": "bombay-association",
+            "label": "Bombay Association",
+            "subtitle": "1852",
+            "type": "intermediate",
+            "details": {
+              "points": [
+                "Founded by leading citizens of Bombay",
+                "Represented mercantile and professional classes",
+                "Sent petitions to British Parliament",
+                "Demanded representation in government",
+                "Moderate in approach"
+              ]
+            }
+          },
+          {
+            "id": "madras-native-association",
+            "label": "Madras Native Association",
+            "subtitle": "1852",
+            "type": "intermediate",
+            "details": {
+              "points": [
+                "Represented interests of Madras Presidency",
+                "Focused on local issues",
+                "Submitted representations to government",
+                "Limited membership"
+              ]
+            }
+          },
+          {
+            "id": "poona-sarvajanik-sabha",
+            "label": "Poona Sarvajanik Sabha",
+            "subtitle": "1870, M.G. Ranade, G.V. Joshi",
+            "type": "intermediate",
+            "details": {
+              "description": "One of most important pre-Congress organizations",
+              "points": [
+                "Founded by M.G. Ranade and others",
+                "Claimed to represent all classes (Sarvajanik)",
+                "Submitted detailed representations on economic issues",
+                "Evidence before various commissions",
+                "Fought against unjust taxation",
+                "Bridge between elite and masses",
+                "Active during famines for relief work"
+              ]
+            }
+          },
+          {
+            "id": "indian-association",
+            "label": "Indian Association (Bengal)",
+            "subtitle": "1876, Surendranath Banerjee, Ananda Mohan Bose",
+            "type": "intermediate",
+            "details": {
+              "description": "Most important organization before INC; truly nationalist",
+              "points": [
+                "Founded by Surendranath Banerjee (called 'Indian Burke')",
+                "Aimed at uniting Indians across regions",
+                "Branches in many towns",
+                "Sent delegates to England",
+                "Organized National Conferences",
+                "Opposed Vernacular Press Act (1878)",
+                "Fought for civil service reforms",
+                "Demanded inclusion of Indians in administration",
+                "Merged with Indian National Congress later"
+              ]
+            }
+          },
+          {
+            "id": "bombay-presidency-association",
+            "label": "Bombay Presidency Association",
+            "subtitle": "1885, Pherozeshah Mehta, K.T. Telang",
+            "type": "intermediate",
+            "details": {
+              "points": [
+                "Led by prominent Bombay leaders",
+                "More elite in character",
+                "Active in local issues",
+                "Supported formation of INC"
+              ]
+            }
+          },
+          {
+            "id": "madras-mahajana-sabha",
+            "label": "Madras Mahajana Sabha",
+            "subtitle": "1884, G. Subramania Iyer",
+            "type": "intermediate",
+            "details": {
+              "points": [
+                "Represented interests of Madras",
+                "Founded by G. Subramania Iyer",
+                "Started 'The Hindu' newspaper",
+                "Prepared ground for INC"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "key-events",
+        "label": "Key Nationalist Events",
+        "color": "#F59E0B",
+        "icon": "⚡",
+        "description": "Important events that shaped nationalist consciousness",
+        "items": [
+          {
+            "id": "ilbert-bill",
+            "label": "Ilbert Bill Controversy (1883)",
+            "type": "event",
+            "details": {
+              "description": "Exposed racism; united Indians",
+              "points": [
+                "Bill proposed equality in judiciary",
+                "Europeans opposed violently",
+                "Showed racist face of British community",
+                "Bill diluted after European protest",
+                "Indians realized need for political organization",
+                "Indians' self-respect hurt",
+                "Direct stimulus to political awakening"
+              ]
+            }
+          },
+          {
+            "id": "vernacular-press-act",
+            "label": "Vernacular Press Act (1878)",
+            "type": "event",
+            "details": {
+              "description": "Repressive act united Indian opinion",
+              "points": [
+                "Gagged Indian language newspapers",
+                "English papers exempt",
+                "Clearly discriminatory",
+                "Strong protests across India",
+                "Indian Association led agitation",
+                "Repealed in 1881 by Ripon",
+                "Showed power of united protest"
+              ]
+            }
+          },
+          {
+            "id": "national-conferences",
+            "label": "National Conferences",
+            "subtitle": "1878, 1883",
+            "type": "event",
+            "details": {
+              "description": "Indian Association organized all-India meetings",
+              "points": [
+                "First National Conference: Calcutta, 1883",
+                "Delegates from different provinces",
+                "Discussed national issues",
+                "Demanded civil service reforms",
+                "Protested against arms act",
+                "Rehearsal for Indian National Congress",
+                "Showed feasibility of all-India organization"
+              ]
+            }
+          },
+          {
+            "id": "ripon-reforms",
+            "label": "Ripon's Liberal Policies",
+            "subtitle": "1880-1884",
+            "type": "event",
+            "details": {
+              "description": "Created hope but also showed British unwillingness to go far",
+              "points": [
+                "Repealed Vernacular Press Act",
+                "Local Self-Government reforms",
+                "Attempted Ilbert Bill",
+                "Called 'Ripon the Good'",
+                "But couldn't overcome European opposition",
+                "Showed limits of British liberalism",
+                "Created political expectations"
+              ]
+            }
+          },
+          {
+            "id": "lytton-policies",
+            "label": "Lytton's Reactionary Policies",
+            "subtitle": "1876-1880",
+            "type": "event",
+            "details": {
+              "description": "Repressive measures angered Indians",
+              "points": [
+                "Vernacular Press Act (1878)",
+                "Arms Act (1878)",
+                "Callous during Great Famine (1876-78)",
+                "Expensive Delhi Durbar during famine",
+                "Reduced age limit for civil service (1878)",
+                "Second Afghan War burden on India",
+                "Created widespread resentment"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "inc-formation",
+        "label": "Formation of Indian National Congress",
+        "color": "#10B981",
+        "icon": "🇮🇳",
+        "description": "Culmination of nationalist movement",
+        "items": [
+          {
+            "id": "hume-role",
+            "label": "A.O. Hume's Initiative",
+            "type": "intermediate",
+            "details": {
+              "description": "Retired British official proposed all-India organization",
+              "points": [
+                "Allan Octavian Hume, retired ICS officer",
+                "Sympathetic to Indian aspirations",
+                "Wrote to graduates proposing organization",
+                "Wanted to provide safety valve for discontent",
+                "Got support from Viceroy Dufferin",
+                "British hoped to control and moderate demands",
+                "But INC eventually became revolutionary"
+              ]
+            }
+          },
+          {
+            "id": "inc-first-session",
+            "label": "First Session - Bombay, Dec 1885",
+            "subtitle": "72 delegates",
+            "type": "event",
+            "details": {
+              "description": "Historic first meeting of Indian National Congress",
+              "points": [
+                "Held at Gokuldas Tejpal Sanskrit College, Bombay",
+                "28-31 December 1885",
+                "72 delegates attended",
+                "W.C. Bonnerjee was first president",
+                "Demands: expansion of councils, civil service reforms, reduction of military expenditure",
+                "Moderate in approach",
+                "Pledged loyalty to British Crown",
+                "Represented educated middle class",
+                "Marked beginning of organized nationalist movement"
+              ]
+            }
+          },
+          {
+            "id": "early-leaders",
+            "label": "Early Congress Leaders",
+            "type": "intermediate",
+            "details": {
+              "points": [
+                "Dadabhai Naoroji (Grand Old Man of India)",
+                "Pherozeshah Mehta (Lion of Bombay)",
+                "Gopal Krishna Gokhale",
+                "Surendranath Banerjee",
+                "M.G. Ranade",
+                "W.C. Bonnerjee",
+                "Dinshaw Wacha",
+                "Ananda Mohan Bose"
+              ]
+            }
+          },
+          {
+            "id": "inc-methodology",
+            "label": "Early Congress Methodology",
+            "subtitle": "Moderate Phase (1885-1905)",
+            "type": "intermediate",
+            "details": {
+              "description": "Constitutional methods, petitions, prayers",
+              "points": [
+                "Faith in British sense of justice",
+                "Constitutional agitation",
+                "Petitions, resolutions, meetings",
+                "Educate Indians about their rights",
+                "Influence British public opinion",
+                "Annual sessions in different cities",
+                "Discussed political, economic, administrative issues",
+                "Represented mainly educated elite initially"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "connections": [
+      {
+        "from": "Economic Exploitation & Drain Theory",
+        "relationship": "created",
+        "to": "Political Consciousness"
+      },
+      {
+        "from": "Ilbert Bill Controversy",
+        "relationship": "accelerated",
+        "to": "Formation of INC"
+      },
+      {
+        "from": "Early Political Organizations",
+        "relationship": "merged into",
+        "to": "Indian National Congress"
+      },
+      {
+        "from": "Western Education",
+        "relationship": "produced",
+        "to": "Nationalist Leaders"
+      }
+    ]
+  }
+}
+

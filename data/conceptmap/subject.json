@@ -1,0 +1,53 @@
+{
+  "history": [
+    {
+      "id": 1,
+      "topic": "Revolt of 1857",
+      "path": "revolt-1857.png"
+    },
+    {
+      "id": 2,
+      "topic": "Leaders of 1857",
+      "path": "leaders-1857.png"
+    }
+  ],
+  "geography": [
+    {
+      "id": 1,
+      "topic": "Tiger Reserves of India",
+      "path": "tiger-reserves.png"
+    },
+    {
+      "id": 2,
+      "topic": "Ramsar Sites of India",
+      "path": "ramsar_site.png"
+    }
+  ],
+  "polity": [
+    {
+      "id": 1,
+      "topic": "Fundamental Rights",
+      "path": "fundamental-rights.png"
+    }
+  ],
+  "economy": [
+    {
+      "id": 1,
+      "topic": "Money Supply",
+      "path": "money-supply.png"
+    }
+  ],
+  "science": [
+    {
+      "id": 1,
+      "topic": "Atmosphere Layers",
+      "path": "atmosphere-layers.png"
+    },
+    {
+      "id": 2,
+      "topic": "Biogeographic Zones",
+      "path": "biogeographic-zones.png"
+    }
+  ]
+}
+

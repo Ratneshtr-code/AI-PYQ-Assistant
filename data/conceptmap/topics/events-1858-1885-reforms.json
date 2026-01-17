@@ -1,0 +1,289 @@
+{
+  "id": "events-1858-1885-reforms",
+  "subject": "history",
+  "title": "Administrative Reforms (1858-1885)",
+  "description": "Major administrative and constitutional reforms following the 1857 revolt",
+  "visualType": "timeline",
+  "metadata": {
+    "examRelevance": "high",
+    "relatedTopics": ["revolt-1857-impact", "events-1858-1885-acts"],
+    "tags": ["1858-1885", "reforms", "administration", "modern-history"]
+  },
+  "data": {
+    "startYear": 1858,
+    "endYear": 1885,
+    "legend": [
+      { "type": "political", "label": "Political Reforms" },
+      { "type": "administrative", "label": "Administrative Changes" },
+      { "type": "policy", "label": "Policy Decisions" }
+    ],
+    "events": [
+      {
+        "id": "govt-india-act",
+        "year": "1858",
+        "title": "Government of India Act, 1858",
+        "description": "End of Company rule, Crown takes control",
+        "type": "political",
+        "icon": "👑",
+        "details": {
+          "points": [
+            "Passed on 2 August 1858 by British Parliament",
+            "East India Company abolished as ruling power",
+            "Power transferred to British Crown",
+            "Queen Victoria became sovereign of India",
+            "Secretary of State for India created (member of British Cabinet)",
+            "15-member Council of India to assist Secretary",
+            "Governor-General became Viceroy (representative of Crown)",
+            "Lord Canning was first Viceroy (1858-1862)"
+          ],
+          "significance": "Fundamental restructuring - marked beginning of British Raj"
+        }
+      },
+      {
+        "id": "victoria-proclamation",
+        "year": "1858",
+        "title": "Queen Victoria's Proclamation",
+        "description": "Royal promises to Indian people",
+        "type": "policy",
+        "icon": "📜",
+        "details": {
+          "points": [
+            "Announced on 1 November 1858 in Allahabad",
+            "Called 'Magna Carta of Indian people'",
+            "Promised no further annexations",
+            "Treaty obligations with princes to be respected",
+            "Religious toleration guaranteed",
+            "Equal treatment under law regardless of race/religion",
+            "Indians to be freely admitted to government offices",
+            "Amnesty to rebels (except murderers)"
+          ],
+          "significance": "Set policy framework for Crown administration"
+        },
+        "tags": ["Queen Victoria", "policy", "proclamation"]
+      },
+      {
+        "id": "indian-councils-act",
+        "year": "1861",
+        "title": "Indian Councils Act, 1861",
+        "description": "Expansion of legislative councils",
+        "type": "political",
+        "icon": "🏛️",
+        "details": {
+          "points": [
+            "Viceroy's Executive Council expanded for legislative purposes",
+            "Additional members (6-12) appointed for legislation",
+            "Some non-official Indians nominated",
+            "Called 'Imperial Legislative Council'",
+            "Portfolio system introduced in Executive Council",
+            "Viceroy could overrule council",
+            "Provincial legislative councils created (Bengal, Madras, Bombay)",
+            "Power to make laws for peace and good governance"
+          ],
+          "significance": "Beginning of legislative process in India; very limited Indian participation"
+        },
+        "tags": ["legislation", "councils", "representation"]
+      },
+      {
+        "id": "police-reforms",
+        "year": "1861",
+        "title": "Police Act, 1861",
+        "description": "Establishment of modern police system",
+        "type": "administrative",
+        "icon": "👮",
+        "details": {
+          "points": [
+            "Modern police force established",
+            "British-Indian ratio maintained in police",
+            "Inspector General at provincial level",
+            "Superintendent at district level",
+            "Village chowkidar system continued",
+            "Main purpose: law and order, protect British rule",
+            "Indians in lower ranks, British in higher positions"
+          ],
+          "significance": "Created police structure that continues with modifications today"
+        }
+      },
+      {
+        "id": "high-courts",
+        "year": "1861",
+        "title": "Indian High Courts Act, 1861",
+        "description": "Establishment of High Courts",
+        "type": "administrative",
+        "icon": "⚖️",
+        "details": {
+          "points": [
+            "High Courts established at Calcutta, Bombay, Madras (1862)",
+            "Replaced Supreme Courts and Sadar Courts",
+            "Original and appellate jurisdiction",
+            "Crown law and Company's regulations unified",
+            "British and Indian judges appointed",
+            "English became court language at higher levels"
+          ],
+          "significance": "Unified judicial system; foundation of modern Indian judiciary"
+        }
+      },
+      {
+        "id": "lawrence-resolution",
+        "year": "1862",
+        "title": "Lawrence Resolution",
+        "description": "Financial decentralization initiated",
+        "type": "administrative",
+        "icon": "💰",
+        "details": {
+          "points": [
+            "Viceroy Lord John Lawrence",
+            "Provinces given some financial powers",
+            "Certain expenditure heads transferred to provinces",
+            "Provinces could impose taxes on specific items",
+            "Beginning of fiscal decentralization",
+            "But central government retained control"
+          ],
+          "significance": "First step towards provincial autonomy"
+        }
+      },
+      {
+        "id": "mayo-decentralization",
+        "year": "1870",
+        "title": "Mayo's Decentralization",
+        "description": "Further financial devolution to provinces",
+        "type": "administrative",
+        "icon": "📊",
+        "details": {
+          "points": [
+            "Viceroy Lord Mayo extended financial powers",
+            "Provincial governments made responsible for specific services",
+            "Given fixed grants and power to tax",
+            "Encouraged provincial self-reliance",
+            "Police, jails, education, medical services provincialised",
+            "Provinces could keep surplus revenue"
+          ],
+          "significance": "Strengthened provincial administration"
+        }
+      },
+      {
+        "id": "statutory-civil-service",
+        "year": "1870",
+        "title": "Statutory Civil Service",
+        "description": "Attempt at Indianization of civil service",
+        "type": "administrative",
+        "icon": "📝",
+        "details": {
+          "points": [
+            "Created to recruit Indians without examination",
+            "Could nominate Indians to covenanted posts",
+            "But very few Indians actually recruited",
+            "Strong opposition from existing British officers",
+            "Scheme largely failed",
+            "Indians continued in subordinate positions"
+          ],
+          "significance": "Tokenism; failed to achieve real Indianization"
+        }
+      },
+      {
+        "id": "vernacular-press-act",
+        "year": "1878",
+        "title": "Vernacular Press Act",
+        "description": "Repressive law to control Indian newspapers",
+        "type": "policy",
+        "icon": "📰",
+        "details": {
+          "points": [
+            "Passed by Lord Lytton (1876-1880)",
+            "Aimed at controlling Indian-language newspapers",
+            "Magistrate could demand security deposit",
+            "Could ban newspapers without trial",
+            "English newspapers exempt",
+            "Clearly discriminatory",
+            "Aroused strong opposition",
+            "Repealed in 1881 by Lord Ripon"
+          ],
+          "significance": "Showed British fear of growing nationalist press; united Indians against repression"
+        },
+        "tags": ["press", "repression", "Lord Lytton"]
+      },
+      {
+        "id": "arms-act",
+        "year": "1878",
+        "title": "Arms Act, 1878",
+        "description": "Disarmament of Indians",
+        "type": "policy",
+        "icon": "🔫",
+        "details": {
+          "points": [
+            "Indians required license to possess arms",
+            "Europeans and officials exempt",
+            "Made Indians defenseless",
+            "After 1857, British didn't trust Indians with weapons",
+            "Hurt Indian pride and sense of masculinity",
+            "Symbol of racial discrimination"
+          ],
+          "significance": "Humiliating law showing British distrust of Indians"
+        }
+      },
+      {
+        "id": "local-self-govt",
+        "year": "1882",
+        "title": "Local Self-Government Resolution",
+        "description": "Ripon's reforms for local governance",
+        "type": "administrative",
+        "icon": "🏘️",
+        "details": {
+          "points": [
+            "Introduced by Lord Ripon (1880-1884)",
+            "Called 'Father of Local Self-Government'",
+            "Local boards for district and municipal administration",
+            "Elected majority with nominated chairman",
+            "Powers over local taxation, education, health, roads",
+            "Training ground for democratic governance",
+            "But limited financial resources",
+            "British officials retained control"
+          ],
+          "significance": "Beginning of democratic institutions; training for future self-governance"
+        },
+        "tags": ["Lord Ripon", "democracy", "local bodies"]
+      },
+      {
+        "id": "ilbert-bill",
+        "year": "1883",
+        "title": "Ilbert Bill Controversy",
+        "description": "Attempt to remove racial discrimination in judiciary",
+        "type": "policy",
+        "icon": "⚖️",
+        "details": {
+          "points": [
+            "Proposed by Viceroy Ripon and Law Member C.P. Ilbert",
+            "Would allow Indian judges to try European defendants",
+            "Aimed at removing racial discrimination",
+            "Europeans strongly opposed - racist campaign",
+            "Europeans united to oppose the bill",
+            "Bill passed but heavily diluted (1884)",
+            "Jury with European majority made mandatory",
+            "Exposed racist attitudes of British community"
+          ],
+          "significance": "Awakened Indians to racial discrimination; promoted national consciousness"
+        },
+        "tags": ["racial discrimination", "Ilbert Bill", "controversy"]
+      },
+      {
+        "id": "universities-act",
+        "year": "1884",
+        "title": "Indian Universities Act",
+        "description": "Government control over universities increased",
+        "type": "policy",
+        "icon": "🎓",
+        "details": {
+          "points": [
+            "Increased government control over universities",
+            "Senate made smaller, official element increased",
+            "Government approval needed for regulations",
+            "Aimed at controlling educated class",
+            "Teaching function emphasized",
+            "Affiliating system continued"
+          ],
+          "significance": "Attempt to control growing educated middle class"
+        }
+      }
+    ]
+  }
+}
+

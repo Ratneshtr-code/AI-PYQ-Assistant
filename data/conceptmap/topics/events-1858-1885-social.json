@@ -1,0 +1,346 @@
+{
+  "id": "events-1858-1885-social",
+  "subject": "history",
+  "title": "Social & Educational Reforms (1858-1885)",
+  "description": "Parallel tracks of British reforms and Indian social reform movements",
+  "visualType": "timeline",
+  "metadata": {
+    "examRelevance": "high",
+    "relatedTopics": ["events-1858-1885-reforms", "events-1858-1885-nationalism"],
+    "tags": ["1858-1885", "social-reforms", "education", "modern-history"]
+  },
+  "data": {
+    "startYear": 1858,
+    "endYear": 1885,
+    "legend": [
+      { "type": "social", "label": "Social Reforms" },
+      { "type": "educational", "label": "Educational Developments" },
+      { "type": "cultural", "label": "Cultural & Religious Movements" }
+    ],
+    "events": [
+      {
+        "id": "cautious-policy",
+        "year": "1858",
+        "title": "Policy of Non-Interference",
+        "description": "British adopt cautious approach after 1857",
+        "type": "social",
+        "icon": "⚠️",
+        "details": {
+          "points": [
+            "Queen's Proclamation promised no interference in religion/customs",
+            "Government withdrew from active social reform",
+            "Missionary activities discouraged from official support",
+            "British became conservative in social matters",
+            "Responsibility shifted to Indians themselves",
+            "But this also meant status quo in social evils"
+          ],
+          "significance": "Indians had to lead their own social reforms"
+        },
+        "tags": ["policy", "non-interference"]
+      },
+      {
+        "id": "universities-established",
+        "year": "1857",
+        "title": "Universities Act & Establishment",
+        "description": "Calcutta, Bombay, Madras universities founded",
+        "type": "educational",
+        "icon": "🎓",
+        "details": {
+          "points": [
+            "Act passed just before 1857 revolt",
+            "Three universities established in 1857",
+            "Modeled on London University",
+            "Mainly examining bodies initially",
+            "Affiliated colleges system",
+            "English medium of instruction",
+            "Created English-educated middle class",
+            "Helped spread modern ideas"
+          ],
+          "significance": "Foundation of modern higher education system"
+        },
+        "tags": ["universities", "education", "English education"]
+      },
+      {
+        "id": "brahmo-samaj",
+        "year": "1860s-70s",
+        "title": "Brahmo Samaj Expansion",
+        "description": "Keshab Chandra Sen expands Brahmo movement",
+        "type": "cultural",
+        "icon": "🕉️",
+        "details": {
+          "points": [
+            "Founded by Raja Ram Mohan Roy (1828)",
+            "Revived by Debendranath Tagore",
+            "Keshab Chandra Sen made it popular (1860s)",
+            "Opposed idol worship, caste system, superstitions",
+            "Supported women's rights, widow remarriage",
+            "Started girls' schools",
+            "Split in 1866: Adi Brahmo Samaj vs Brahmo Samaj of India",
+            "Influenced Bengali intelligentsia"
+          ],
+          "significance": "Major socio-religious reform movement in Bengal"
+        },
+        "tags": ["Brahmo Samaj", "Bengal", "reform"]
+      },
+      {
+        "id": "prarthana-samaj",
+        "year": "1867",
+        "title": "Prarthana Samaj Founded",
+        "description": "Social reform movement in Maharashtra",
+        "type": "cultural",
+        "icon": "🙏",
+        "details": {
+          "points": [
+            "Founded in Bombay by Dr. Atmaram Pandurang",
+            "Influenced by Brahmo Samaj but adapted to Maharashtra",
+            "M.G. Ranade joined and strengthened it",
+            "Opposed caste system, child marriage, purdah",
+            "Supported widow remarriage, women's education",
+            "More moderate than Brahmo Samaj",
+            "Worked within Hindu fold",
+            "Started schools and libraries"
+          ],
+          "significance": "Spread reform ideas in Western India"
+        },
+        "tags": ["Prarthana Samaj", "Maharashtra", "Ranade"]
+      },
+      {
+        "id": "widow-remarriage",
+        "year": "1860s-70s",
+        "title": "Widow Remarriage Movement Grows",
+        "description": "Despite Act of 1856, social resistance remained strong",
+        "type": "social",
+        "icon": "👰",
+        "details": {
+          "points": [
+            "Widow Remarriage Act passed in 1856 by Ishwar Chandra Vidyasagara's efforts",
+            "But social acceptance very slow",
+            "Reformers faced ostracism for supporting remarriages",
+            "Vishnu Shastri Pandit married widow (Maharashtra)",
+            "Keshab Chandra Sen and others organized remarriages",
+            "Orthodox opposition strong",
+            "Very few actual remarriages till 1880s",
+            "Reformers themselves often hesitant"
+          ],
+          "significance": "Showed gap between legal reform and social change"
+        }
+      },
+      {
+        "id": "wood-dispatch",
+        "year": "1854",
+        "title": "Wood's Despatch Implementation",
+        "description": "Educational policy of 1854 being implemented",
+        "type": "educational",
+        "icon": "📚",
+        "details": {
+          "points": [
+            "Proposed system from primary to university",
+            "Departments of Education in provinces",
+            "Grants-in-aid to private institutions",
+            "Teacher training schools",
+            "Vernacular education emphasized at lower levels",
+            "English at higher levels",
+            "Universities established as per recommendation",
+            "But inadequate funding limited implementation"
+          ],
+          "significance": "Blueprint for Indian education system"
+        }
+      },
+      {
+        "id": "aligarh-movement",
+        "year": "1875",
+        "title": "Aligarh Movement Begins",
+        "description": "Sir Syed Ahmed Khan starts modern education for Muslims",
+        "type": "educational",
+        "icon": "🏫",
+        "details": {
+          "points": [
+            "Sir Syed Ahmed Khan founded Mohammedan Anglo-Oriental College at Aligarh",
+            "Aimed at modern education for Muslims",
+            "British pattern with Islamic theology",
+            "Wanted to bridge gap between Muslims and British",
+            "Opposed Indian National Congress initially",
+            "Later became Aligarh Muslim University (1920)",
+            "Created Muslim middle class",
+            "Controversial for political impact later"
+          ],
+          "significance": "Brought Muslims into modern education; but also reinforced separate identity"
+        },
+        "tags": ["Aligarh", "Muslim education", "Sir Syed"]
+      },
+      {
+        "id": "arya-samaj",
+        "year": "1875",
+        "title": "Arya Samaj Founded",
+        "description": "Swami Dayanand Saraswati starts reform movement",
+        "type": "cultural",
+        "icon": "🔥",
+        "details": {
+          "points": [
+            "Founded by Swami Dayanand Saraswati in Bombay",
+            "Headquarters shifted to Punjab",
+            "Slogan: 'Back to the Vedas'",
+            "Opposed idol worship, ritualism, caste by birth",
+            "Supported women's education, widow remarriage",
+            "Started Shuddhi movement (reconversion to Hinduism)",
+            "Established DAV schools and colleges",
+            "More aggressive than Brahmo Samaj",
+            "Created sense of Hindu identity"
+          ],
+          "significance": "Major reform movement in North India; had political implications"
+        },
+        "tags": ["Arya Samaj", "Dayanand Saraswati", "Punjab"]
+      },
+      {
+        "id": "women-education",
+        "year": "1870s-80s",
+        "title": "Women's Education Movement",
+        "description": "Gradual progress in girls' education",
+        "type": "educational",
+        "icon": "👩‍🎓",
+        "details": {
+          "points": [
+            "Bethune School (Calcutta, 1849) pioneer for girls",
+            "Pandita Ramabai championed women's education",
+            "Reformers started girls' schools",
+            "Orthodox opposition strong initially",
+            "By 1880s, slowly gaining acceptance in urban areas",
+            "Rural areas largely untouched",
+            "Christian missionaries active in women's education",
+            "First women graduates in 1880s"
+          ],
+          "significance": "Beginning of women's empowerment through education"
+        }
+      },
+      {
+        "id": "ramakrishna-mission-prep",
+        "year": "1870s-80s",
+        "title": "Ramakrishna's Teachings Spread",
+        "description": "Ramakrishna Paramhansa teaches spiritual universalism",
+        "type": "cultural",
+        "icon": "🕉️",
+        "details": {
+          "points": [
+            "Ramakrishna Paramhansa (1836-1886) at Dakshineswar",
+            "Taught unity of all religions",
+            "Experimented with different religious paths",
+            "Emphasized spiritual experience over rituals",
+            "Simple, devotional approach",
+            "Attracted educated Bengali youth",
+            "Vivekananda became chief disciple",
+            "Foundation for later Ramakrishna Mission (1897)"
+          ],
+          "significance": "Provided spiritual foundation for Hindu renaissance"
+        },
+        "tags": ["Ramakrishna", "spirituality", "Bengal"]
+      },
+      {
+        "id": "theosophical-society",
+        "year": "1879",
+        "title": "Theosophical Society in India",
+        "description": "Annie Besant and Olcott bring Theosophy to India",
+        "type": "cultural",
+        "icon": "🌟",
+        "details": {
+          "points": [
+            "Founded in USA (1875) by Madame Blavatsky and Colonel Olcott",
+            "Headquarters shifted to Adyar, Madras (1882)",
+            "Annie Besant became president (1893)",
+            "Believed in universal brotherhood",
+            "Drew from Hindu and Buddhist philosophy",
+            "Emphasized ancient Indian wisdom",
+            "Started Central Hindu College, Banaras (1898)",
+            "Gave Indians pride in their heritage"
+          ],
+          "significance": "Reinforced Indian cultural pride; Annie Besant later active in nationalist politics"
+        },
+        "tags": ["Theosophy", "Annie Besant", "cultural pride"]
+      },
+      {
+        "id": "vernacular-literature",
+        "year": "1860s-1880s",
+        "title": "Growth of Vernacular Literature",
+        "description": "Regional languages flourish with modern themes",
+        "type": "cultural",
+        "icon": "📖",
+        "details": {
+          "points": [
+            "Bengali: Bankim Chandra, Michael Madhusudan Dutt",
+            "Marathi: Vishnushastri Chiplunkar",
+            "Hindi: Bharatendu Harishchandra",
+            "Urdu: Altaf Hussain Hali, Shibli Nomani",
+            "Tamil, Telugu, Kannada also developed",
+            "Novels, plays, poetry with social themes",
+            "Nationalist sentiment expressed",
+            "Created reading public"
+          ],
+          "significance": "Spread of modern ideas in regional languages; cultural renaissance"
+        }
+      },
+      {
+        "id": "native-marriage-act",
+        "year": "1872",
+        "title": "Native Marriage Act (Civil Marriage Act)",
+        "description": "Inter-caste and inter-religious marriages legalized",
+        "type": "social",
+        "icon": "💑",
+        "details": {
+          "points": [
+            "Also known as Special Marriage Act",
+            "Enabled marriages outside caste/religion",
+            "Civil registration of marriage",
+            "No religious ceremony required",
+            "Mainly used by Brahmo Samaj members",
+            "Orthodox society opposed",
+            "Very few marriages under this Act initially",
+            "Symbolically important"
+          ],
+          "significance": "Legal framework for breaking caste/religious barriers in marriage"
+        }
+      },
+      {
+        "id": "indian-press",
+        "year": "1860s-1880s",
+        "title": "Growth of Indian Press",
+        "description": "Vernacular newspapers spread nationalist ideas",
+        "type": "cultural",
+        "icon": "📰",
+        "details": {
+          "points": [
+            "Bengali: Amrita Bazar Patrika, Bengalee",
+            "Marathi: Kesari, Mahratta (by Tilak)",
+            "English: Hindu, Indian Mirror",
+            "Criticized British policies",
+            "Spread nationalist consciousness",
+            "Vernacular Press Act (1878) tried to suppress",
+            "Act repealed (1881) after protest",
+            "Press became voice of Indian opinion"
+          ],
+          "significance": "Media became tool for nationalist awakening"
+        }
+      },
+      {
+        "id": "age-of-consent",
+        "year": "1860-1885",
+        "title": "Child Marriage Issue Emerges",
+        "description": "Debate on age of consent and child marriage",
+        "type": "social",
+        "icon": "👧",
+        "details": {
+          "points": [
+            "Child marriage widespread practice",
+            "Age of Consent Act in IPC (1860): age 10 for girls",
+            "Reformers demanded raising age",
+            "Orthodox society strongly opposed",
+            "Became major social issue",
+            "Age of Consent controversy continued",
+            "Finally raised to 12 in 1891 (after Phulmonee case)",
+            "But social change very slow"
+          ],
+          "significance": "Highlighted clash between reform and tradition"
+        }
+      }
+    ]
+  }
+}
+

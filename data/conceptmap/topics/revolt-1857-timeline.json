@@ -1,0 +1,445 @@
+{
+  "id": "revolt-1857-timeline",
+  "subject": "history",
+  "title": "Revolt of 1857: Timeline of Events",
+  "description": "Chronological progression of the First War of Independence from outbreak to suppression",
+  "visualType": "timeline",
+  "metadata": {
+    "examRelevance": "high",
+    "relatedTopics": ["revolt-1857-causes", "revolt-1857-leaders", "revolt-1857-impact"],
+    "tags": ["1857", "revolt", "timeline", "modern-history"]
+  },
+  "data": {
+    "startYear": 1857,
+    "endYear": 1858,
+    "legend": [
+      { "type": "major", "label": "Major Events" },
+      { "type": "military", "label": "Military Actions" },
+      { "type": "political", "label": "Political Developments" }
+    ],
+    "phases": [
+      {
+        "id": "outbreak",
+        "name": "Outbreak Phase",
+        "period": "January - May 1857",
+        "description": "Initial incidents and spread of revolt"
+      },
+      {
+        "id": "spread",
+        "name": "Spread & Consolidation",
+        "period": "May - July 1857",
+        "description": "Revolt spreads across North India"
+      },
+      {
+        "id": "suppression",
+        "name": "British Counter-Offensive",
+        "period": "August 1857 - June 1858",
+        "description": "British regain control gradually"
+      }
+    ],
+    "events": [
+      {
+        "id": "dum-dum",
+        "year": "Jan 1857",
+        "title": "Dum Dum Arsenal Incident",
+        "description": "Greased cartridges introduced at Dum Dum arsenal near Calcutta",
+        "type": "major",
+        "phase": "outbreak",
+        "icon": "📦",
+        "details": {
+          "points": [
+            "New Enfield rifle cartridges allegedly greased with cow and pig fat",
+            "Sepoys refused to use them",
+            "Rumours spread rapidly across army units"
+          ],
+          "significance": "First spark that led to the revolt"
+        }
+      },
+      {
+        "id": "mangal-pandey",
+        "year": "29 Mar 1857",
+        "title": "Mangal Pandey's Rebellion",
+        "description": "Sepoy Mangal Pandey attacked British officers at Barrackpore",
+        "type": "major",
+        "phase": "outbreak",
+        "icon": "⚔️",
+        "details": {
+          "points": [
+            "34th Native Infantry at Barrackpore",
+            "Fired at Sergeant-Major and Adjutant",
+            "Called upon fellow sepoys to join",
+            "Arrested and hanged on 8 April 1857",
+            "34th Regiment disbanded"
+          ],
+          "significance": "First open act of defiance, became symbol of resistance"
+        },
+        "tags": ["Barrackpore", "Mangal Pandey", "martyrdom"]
+      },
+      {
+        "id": "meerut-outbreak",
+        "year": "10 May 1857",
+        "title": "Meerut Outbreak",
+        "description": "85 sepoys imprisoned for refusing cartridges; revolt breaks out",
+        "type": "major",
+        "phase": "outbreak",
+        "icon": "🔥",
+        "details": {
+          "points": [
+            "85 cavalry men refused to use cartridges on 24 April",
+            "Court-martialed and sentenced to 10 years imprisonment",
+            "Humiliated in public on parade ground",
+            "On 10 May evening, sepoys revolted",
+            "Killed British officers and released prisoners",
+            "Marched to Delhi overnight (40 miles)"
+          ],
+          "significance": "Marked the beginning of the organized revolt"
+        },
+        "tags": ["Meerut", "outbreak", "sepoys"]
+      },
+      {
+        "id": "delhi-capture",
+        "year": "11 May 1857",
+        "title": "Capture of Delhi",
+        "description": "Rebels reach Delhi and proclaim Bahadur Shah Zafar as Emperor",
+        "type": "major",
+        "phase": "outbreak",
+        "icon": "👑",
+        "details": {
+          "points": [
+            "Meerut sepoys reached Delhi on 11 May morning",
+            "Local garrison joined the revolt",
+            "Captured Red Fort and Delhi",
+            "Proclaimed Bahadur Shah Zafar II as Emperor of India",
+            "Reluctant emperor became symbol of revolt",
+            "Delhi became center of rebellion"
+          ],
+          "significance": "Gave legitimacy and leadership to the revolt"
+        },
+        "tags": ["Delhi", "Bahadur Shah Zafar", "symbolic"]
+      },
+      {
+        "id": "kanpur-revolt",
+        "year": "5 Jun 1857",
+        "title": "Kanpur Uprising",
+        "description": "Nana Sahib leads revolt in Kanpur",
+        "type": "major",
+        "phase": "spread",
+        "icon": "🏴",
+        "details": {
+          "points": [
+            "Sepoys in Kanpur rebelled",
+            "Nana Sahib (adopted son of Peshwa Baji Rao II) became leader",
+            "British under General Wheeler besieged in entrenchment",
+            "Wheeler surrendered on 27 June",
+            "Satichaura Ghat massacre",
+            "Bibighar massacre on 15 July"
+          ],
+          "significance": "Brutal incidents hardened British resolve for revenge"
+        },
+        "tags": ["Kanpur", "Nana Sahib", "massacre"]
+      },
+      {
+        "id": "jhansi-revolt",
+        "year": "8 Jun 1857",
+        "title": "Jhansi Joins Revolt",
+        "description": "Rani Lakshmibai forced to take over Jhansi administration",
+        "type": "major",
+        "phase": "spread",
+        "icon": "👸",
+        "details": {
+          "points": [
+            "Jhansi troops mutinied",
+            "Killed British officers and families",
+            "Rani Lakshmibai took over administration",
+            "Initially tried to maintain order",
+            "Later joined revolt when British attacked"
+          ],
+          "significance": "Emergence of iconic woman leader"
+        },
+        "tags": ["Jhansi", "Rani Lakshmibai", "women leaders"]
+      },
+      {
+        "id": "lucknow-siege",
+        "year": "30 Jun 1857",
+        "title": "Siege of Lucknow Begins",
+        "description": "British residency in Lucknow besieged by rebels",
+        "type": "military",
+        "phase": "spread",
+        "icon": "🏰",
+        "details": {
+          "points": [
+            "Sir Henry Lawrence led British defense",
+            "2,000 people besieged in Residency",
+            "Lawrence killed on 4 July",
+            "Siege lasted 87 days",
+            "First relief by Havelock and Outram in September",
+            "Final relief by Colin Campbell in November"
+          ],
+          "significance": "One of longest sieges, symbol of British resistance"
+        },
+        "tags": ["Lucknow", "siege", "British resistance"]
+      },
+      {
+        "id": "bareilly-revolt",
+        "year": "Jun 1857",
+        "title": "Bareilly Uprising",
+        "description": "Khan Bahadur Khan proclaimed ruler of Bareilly",
+        "type": "political",
+        "phase": "spread",
+        "icon": "🏴",
+        "details": {
+          "points": [
+            "Sepoys mutinied in Bareilly",
+            "Khan Bahadur Khan, grandson of former Rohilkhand ruler, took charge",
+            "Proclaimed independence from British",
+            "Organized civil administration"
+          ],
+          "significance": "Showed attempt at alternative governance"
+        },
+        "tags": ["Bareilly", "Rohilkhand", "Khan Bahadur Khan"]
+      },
+      {
+        "id": "delhi-siege",
+        "year": "Jul-Sep 1857",
+        "title": "Siege of Delhi",
+        "description": "British forces besiege Delhi for 4 months",
+        "type": "military",
+        "phase": "suppression",
+        "icon": "⚔️",
+        "details": {
+          "points": [
+            "British forces reached Ridge outside Delhi in June",
+            "Siege lasted from June to September",
+            "Fierce fighting on the Ridge",
+            "John Nicholson led final assault",
+            "Delhi recaptured on 20 September 1857",
+            "Bahadur Shah Zafar captured"
+          ],
+          "significance": "Turning point - British regain symbolic capital"
+        },
+        "tags": ["Delhi", "siege", "turning point"]
+      },
+      {
+        "id": "kanpur-recapture",
+        "year": "16 Jul 1857",
+        "title": "Recapture of Kanpur",
+        "description": "General Havelock recaptures Kanpur",
+        "type": "military",
+        "phase": "suppression",
+        "icon": "⚔️",
+        "details": {
+          "points": [
+            "General Henry Havelock led British forces",
+            "Defeated Nana Sahib at Battle of Fatehpur",
+            "Recaptured Kanpur on 16 July",
+            "Discovery of Bibighar massacre victims",
+            "Brutal reprisals by British",
+            "Nana Sahib escaped to Nepal"
+          ],
+          "significance": "Beginning of brutal British revenge"
+        },
+        "tags": ["Kanpur", "Havelock", "retribution"]
+      },
+      {
+        "id": "lucknow-relief",
+        "year": "25 Sep 1857",
+        "title": "First Relief of Lucknow",
+        "description": "Havelock and Outram reach besieged residency",
+        "type": "military",
+        "phase": "suppression",
+        "icon": "🛡️",
+        "details": {
+          "points": [
+            "Havelock and Outram fought through to Residency",
+            "Could not evacuate due to heavy casualties",
+            "Became besieged themselves",
+            "Final relief came in November"
+          ],
+          "significance": "Temporary relief but not end of siege"
+        },
+        "tags": ["Lucknow", "Havelock", "Outram"]
+      },
+      {
+        "id": "bahadur-shah-trial",
+        "year": "Oct 1857",
+        "title": "Trial of Bahadur Shah Zafar",
+        "description": "Last Mughal emperor tried for rebellion",
+        "type": "political",
+        "phase": "suppression",
+        "icon": "⚖️",
+        "details": {
+          "points": [
+            "Captured after fall of Delhi",
+            "Tried for rebellion and murder",
+            "Found guilty",
+            "Exiled to Rangoon, Burma",
+            "Sons shot dead by Captain Hodson",
+            "Died in Rangoon in 1862"
+          ],
+          "significance": "End of Mughal dynasty"
+        },
+        "tags": ["Bahadur Shah Zafar", "trial", "exile"]
+      },
+      {
+        "id": "lucknow-relief-final",
+        "year": "16 Nov 1857",
+        "title": "Final Relief of Lucknow",
+        "description": "Colin Campbell evacuates Lucknow residency",
+        "type": "military",
+        "phase": "suppression",
+        "icon": "🛡️",
+        "details": {
+          "points": [
+            "Sir Colin Campbell led relief force",
+            "Evacuated women, children and wounded",
+            "Did not recapture city immediately",
+            "Final recapture came in March 1858"
+          ],
+          "significance": "End of longest siege of revolt"
+        },
+        "tags": ["Lucknow", "Colin Campbell", "evacuation"]
+      },
+      {
+        "id": "gwalior-capture",
+        "year": "Dec 1857",
+        "title": "Capture of Gwalior",
+        "description": "Tatya Tope and Rani Lakshmibai capture Gwalior",
+        "type": "major",
+        "phase": "suppression",
+        "icon": "🏴",
+        "details": {
+          "points": [
+            "Tatya Tope and Rani of Jhansi captured Gwalior",
+            "Maharaja Scindia fled",
+            "Proclaimed Nana Sahib as Peshwa",
+            "Last major victory of rebels",
+            "British recaptured in June 1858"
+          ],
+          "significance": "Last gasp of organized revolt"
+        },
+        "tags": ["Gwalior", "Tatya Tope", "Rani Lakshmibai"]
+      },
+      {
+        "id": "jhansi-fall",
+        "year": "4 Apr 1858",
+        "title": "Fall of Jhansi",
+        "description": "British capture Jhansi after fierce resistance",
+        "type": "military",
+        "phase": "suppression",
+        "icon": "⚔️",
+        "details": {
+          "points": [
+            "Sir Hugh Rose besieged Jhansi",
+            "Rani Lakshmibai led defense",
+            "Fierce resistance for two weeks",
+            "Jhansi fell on 4 April",
+            "Rani escaped to Kalpi",
+            "Joined Tatya Tope"
+          ],
+          "significance": "Fall of key rebel stronghold"
+        },
+        "tags": ["Jhansi", "Rani Lakshmibai", "resistance"]
+      },
+      {
+        "id": "lucknow-recapture",
+        "year": "21 Mar 1858",
+        "title": "Final Recapture of Lucknow",
+        "description": "British retake Lucknow city after prolonged campaign",
+        "type": "military",
+        "phase": "suppression",
+        "icon": "⚔️",
+        "details": {
+          "points": [
+            "Campaign led by Colin Campbell",
+            "House-to-house fighting",
+            "Begum Hazrat Mahal fled to Nepal",
+            "End of rebel control in Awadh capital"
+          ],
+          "significance": "Major blow to rebel morale"
+        },
+        "tags": ["Lucknow", "recapture", "Begum Hazrat Mahal"]
+      },
+      {
+        "id": "rani-death",
+        "year": "18 Jun 1858",
+        "title": "Death of Rani Lakshmibai",
+        "description": "Rani of Jhansi dies fighting British at Gwalior",
+        "type": "major",
+        "phase": "suppression",
+        "icon": "💔",
+        "details": {
+          "points": [
+            "Fought in Battle of Kotah-ki-Serai near Gwalior",
+            "Dressed as man, led cavalry charge",
+            "Wounded by British cavalry",
+            "Died on battlefield on 18 June 1858",
+            "Aged only 29",
+            "Cremated by her loyal follower"
+          ],
+          "significance": "Martyrdom of iconic rebel leader"
+        },
+        "tags": ["Rani Lakshmibai", "martyrdom", "iconic"]
+      },
+      {
+        "id": "gwalior-recapture",
+        "year": "19 Jun 1858",
+        "title": "Recapture of Gwalior",
+        "description": "British retake Gwalior, rebel leaders scatter",
+        "type": "military",
+        "phase": "suppression",
+        "icon": "⚔️",
+        "details": {
+          "points": [
+            "Day after Rani's death",
+            "Hugh Rose recaptured Gwalior",
+            "Tatya Tope fled",
+            "End of organized rebel resistance"
+          ],
+          "significance": "Effective end of revolt"
+        },
+        "tags": ["Gwalior", "recapture"]
+      },
+      {
+        "id": "proclamation-peace",
+        "year": "8 Jul 1858",
+        "title": "Peace Proclamation",
+        "description": "Lord Canning issues peace proclamation",
+        "type": "political",
+        "phase": "suppression",
+        "icon": "📜",
+        "details": {
+          "points": [
+            "Amnesty to rebels (except murderers)",
+            "Promised no annexations",
+            "Respect for Indian customs and religions",
+            "Known as 'Clemency Canning'",
+            "Some British wanted harsher punishment"
+          ],
+          "significance": "Official end of conflict, beginning of reconciliation"
+        },
+        "tags": ["peace", "Lord Canning", "amnesty"]
+      },
+      {
+        "id": "tatya-tope-capture",
+        "year": "7 Apr 1859",
+        "title": "Capture of Tatya Tope",
+        "description": "Last major rebel leader captured and executed",
+        "type": "major",
+        "phase": "suppression",
+        "icon": "⚔️",
+        "details": {
+          "points": [
+            "Captured by British with help of traitor",
+            "Tried for rebellion and murder",
+            "Hanged on 18 April 1859 at Shivpuri",
+            "One of most capable military leaders",
+            "Guerrilla warfare against British for year"
+          ],
+          "significance": "Last major leader captured, definitive end of revolt"
+        },
+        "tags": ["Tatya Tope", "execution", "end"]
+      }
+    ]
+  }
+}
+

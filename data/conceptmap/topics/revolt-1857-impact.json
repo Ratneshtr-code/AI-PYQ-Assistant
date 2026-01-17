@@ -1,0 +1,413 @@
+{
+  "id": "revolt-1857-impact",
+  "subject": "history",
+  "title": "Revolt of 1857: Impact & Consequences",
+  "description": "Comprehensive analysis of immediate and long-term consequences of the First War of Independence",
+  "visualType": "mindmap",
+  "metadata": {
+    "examRelevance": "high",
+    "relatedTopics": ["revolt-1857-causes", "revolt-1857-timeline", "revolt-1857-leaders", "events-1858-1885-reforms"],
+    "tags": ["1857", "revolt", "impact", "consequences", "modern-history"]
+  },
+  "data": {
+    "legend": [
+      { "depth": 1, "label": "Immediate Effects (1858-1860)" },
+      { "depth": 2, "label": "Medium-term Changes (1860-1880)" },
+      { "depth": 3, "label": "Long-term Impact (Beyond 1880)" }
+    ],
+    "central": {
+      "label": "Impact of Revolt of 1857",
+      "icon": "💥",
+      "subtitle": "Watershed moment in Indian history",
+      "details": "The revolt fundamentally transformed British rule in India, marking the end of Company rule and beginning of Crown administration. It exposed weaknesses on both sides and set the stage for future nationalist movements."
+    },
+    "branches": [
+      {
+        "id": "political",
+        "label": "Political Consequences",
+        "icon": "🏛️",
+        "description": "Fundamental restructuring of governance",
+        "depth": 1,
+        "items": [
+          {
+            "id": "end-eic",
+            "label": "End of East India Company Rule",
+            "icon": "🏢",
+            "subtitle": "Government of India Act, 1858",
+            "details": {
+              "description": "Company rule ended, British Crown took direct control",
+              "points": [
+                "Act passed on 2 August 1858",
+                "Queen Victoria became Empress of India",
+                "Secretary of State for India created in British Cabinet",
+                "Governor-General became Viceroy",
+                "Court of Directors and Board of Control abolished",
+                "15-member Council of India created to advise Secretary"
+              ]
+            }
+          },
+          {
+            "id": "victoria-proclamation",
+            "label": "Queen Victoria's Proclamation (1858)",
+            "icon": "👑",
+            "subtitle": "Magna Carta of Indian people",
+            "details": {
+              "description": "Announced on 1 November 1858 in Allahabad by Lord Canning",
+              "points": [
+                "No further annexations - respect treaty obligations",
+                "Rights of princes guaranteed",
+                "Equal treatment under law regardless of religion/caste",
+                "Indians to be employed in government",
+                "Religious toleration - no interference",
+                "Amnesty to rebels (except murderers)",
+                "Doctrine of Lapse abandoned"
+              ]
+            }
+          },
+          {
+            "id": "end-mughal",
+            "label": "End of Mughal Dynasty",
+            "icon": "🕌",
+            "subtitle": "Symbolic closure of medieval era",
+            "details": {
+              "description": "Bahadur Shah Zafar's exile marked end of Mughal rule",
+              "points": [
+                "Last Mughal emperor exiled to Rangoon",
+                "Title abolished - no successor allowed",
+                "Red Fort ceased to be royal residence",
+                "Mughal territories directly under British",
+                "Delhi lost its symbolic importance temporarily"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "administrative",
+        "label": "Administrative Changes",
+        "icon": "📋",
+        "description": "Restructuring of government machinery",
+        "depth": 1,
+        "items": [
+          {
+            "id": "centralization",
+            "label": "Centralization of Power",
+            "icon": "⚙️",
+            "details": {
+              "points": [
+                "Viceroy given more powers",
+                "Portfolio system introduced",
+                "Executive Council expanded",
+                "Legislative councils established (1861)",
+                "But real power remained with British officials"
+              ]
+            }
+          },
+          {
+            "id": "civil-service",
+            "label": "Civil Service Reorganization",
+            "icon": "📝",
+            "details": {
+              "points": [
+                "Indianization promised but limited",
+                "Examinations held in England only",
+                "Age limit reduced (favored British candidates)",
+                "Higher posts reserved for British (Covenanted Service)",
+                "Indians in lower posts (Uncovenanted Service)"
+              ]
+            }
+          },
+          {
+            "id": "princely-states",
+            "label": "Policy towards Princely States",
+            "icon": "👑",
+            "subtitle": "From annexation to alliance",
+            "details": {
+              "description": "British sought to make princes their allies",
+              "points": [
+                "Doctrine of Lapse abandoned",
+                "Adoption of heirs allowed",
+                "Princes given titles and honors",
+                "Internal autonomy granted",
+                "British paramountcy established",
+                "Subsidiary Alliance continued",
+                "Princes became 'natural leaders' supporting British"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "military",
+        "label": "Military Reorganization",
+        "icon": "⚔️",
+        "description": "Fundamental restructuring to prevent future revolts",
+        "depth": 1,
+        "items": [
+          {
+            "id": "army-ratio",
+            "label": "Changed British-Indian Ratio",
+            "icon": "👥",
+            "subtitle": "Ensuring British numerical superiority",
+            "details": {
+              "description": "Ratio changed from 1:5 to 1:2 in favor of British",
+              "points": [
+                "European troops increased substantially",
+                "Key positions given to Europeans",
+                "Artillery entirely in European hands",
+                "European troops stationed in strategic locations",
+                "One European regiment per three Indian regiments"
+              ]
+            }
+          },
+          {
+            "id": "caste-mixing",
+            "label": "Divide and Rule in Army",
+            "icon": "🔀",
+            "subtitle": "Preventing unity among soldiers",
+            "details": {
+              "description": "Policy to prevent future joint action",
+              "points": [
+                "Different castes mixed in same regiment",
+                "Sikhs, Gurkhas, Pathans favored ('martial races' theory)",
+                "Brahmins and high caste Hindus reduced",
+                "Muslims reduced in Bengal Army",
+                "Regional/linguistic mixing enforced",
+                "Bengal Army reduced, Bombay/Madras armies increased"
+              ]
+            }
+          },
+          {
+            "id": "loyalty-rewards",
+            "label": "Rewards for Loyalty",
+            "icon": "🎖️",
+            "details": {
+              "points": [
+                "Sikhs rewarded for supporting British",
+                "Gurkhas given special status",
+                "Kashmir given to Gulab Singh for support",
+                "Loyal princes honored with titles",
+                "Land grants to loyal individuals"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "economic",
+        "label": "Economic Impact",
+        "icon": "💰",
+        "description": "Fiscal and economic consequences",
+        "depth": 2,
+        "items": [
+          {
+            "id": "financial-burden",
+            "label": "Heavy Financial Cost",
+            "icon": "💸",
+            "details": {
+              "description": "Revolt suppression cost India heavily",
+              "points": [
+                "Cost of suppression: £36 million",
+                "India made to pay entire cost",
+                "Public debt increased dramatically",
+                "Taxes raised to meet expenses",
+                "Railways accelerated for military purposes",
+                "Telegraph lines expanded"
+              ]
+            }
+          },
+          {
+            "id": "land-policy",
+            "label": "Modified Land Revenue Policy",
+            "icon": "🌾",
+            "details": {
+              "points": [
+                "Some relief to peasants initially",
+                "Taluqdars of Awadh recognized as landlords",
+                "But overall exploitation continued",
+                "Commercialization of agriculture increased",
+                "Peasant indebtedness grew"
+              ]
+            }
+          },
+          {
+            "id": "infrastructure",
+            "label": "Infrastructure Development",
+            "icon": "🚂",
+            "subtitle": "For military and commercial purposes",
+            "details": {
+              "points": [
+                "Railways expanded rapidly (military utility proven)",
+                "Telegraph network established",
+                "Roads improved",
+                "Postal system expanded",
+                "But primary motive was British interest, not Indian welfare"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "social-cultural",
+        "label": "Social & Cultural Impact",
+        "icon": "🎭",
+        "description": "Changes in social policies and attitudes",
+        "depth": 2,
+        "items": [
+          {
+            "id": "religious-policy",
+            "label": "Policy of Religious Neutrality",
+            "icon": "🕉️",
+            "subtitle": "Non-interference promised",
+            "details": {
+              "description": "British became cautious about social reforms",
+              "points": [
+                "Missionary activities discouraged from government support",
+                "No interference in religious customs declared",
+                "But this was also used to maintain status quo",
+                "Conservative elements strengthened",
+                "Social reform movements slowed temporarily",
+                "Indians had to lead reform movements themselves"
+              ]
+            }
+          },
+          {
+            "id": "racial-divide",
+            "label": "Increased Racial Divide",
+            "icon": "🚧",
+            "subtitle": "Hardening of attitudes",
+            "details": {
+              "description": "Mutual suspicion and hatred increased",
+              "points": [
+                "British became more racist and distant",
+                "Exclusive European clubs and areas",
+                "Social mixing reduced",
+                "Indians barred from civil and military high posts",
+                "Sense of racial superiority intensified",
+                "Indians developed anti-British feelings"
+              ]
+            }
+          },
+          {
+            "id": "education-policy",
+            "label": "Cautious Education Policy",
+            "icon": "📚",
+            "details": {
+              "points": [
+                "Western education slowed initially",
+                "Fear of creating educated dissidents",
+                "But demand from Indians continued",
+                "Universities established (1857 Act passed just before revolt)",
+                "English education eventually expanded"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "nationalist",
+        "label": "Rise of Nationalism",
+        "icon": "🇮🇳",
+        "description": "Seeds of future freedom movement",
+        "depth": 3,
+        "items": [
+          {
+            "id": "national-consciousness",
+            "label": "Growth of National Consciousness",
+            "icon": "💭",
+            "subtitle": "Unity in diversity recognized",
+            "details": {
+              "description": "First Pan-Indian resistance inspired future generations",
+              "points": [
+                "Hindus and Muslims fought together",
+                "Various regions participated",
+                "Inspired future freedom fighters",
+                "Proved Indians could unite against British",
+                "Leaders became martyrs and symbols",
+                "Memory kept alive in folk songs and literature"
+              ]
+            }
+          },
+          {
+            "id": "political-awakening",
+            "label": "Political Awakening",
+            "icon": "⚡",
+            "subtitle": "Beginning of organized politics",
+            "details": {
+              "points": [
+                "Educated middle class began questioning British rule",
+                "Newspapers and literature spread anti-British views",
+                "Political associations formed (1860s-1870s)",
+                "Indians demanded greater participation in governance",
+                "Led to formation of Indian National Congress (1885)"
+              ]
+            }
+          },
+          {
+            "id": "martyrs-inspiration",
+            "label": "Legacy of Martyrs",
+            "icon": "🔥",
+            "subtitle": "Heroes of future generations",
+            "details": {
+              "points": [
+                "Rani Lakshmibai became icon of courage",
+                "Mangal Pandey remembered as first martyr",
+                "Tatya Tope's guerrilla tactics studied",
+                "Bahadur Shah Zafar's poetry inspired patriots",
+                "Freedom fighters drew inspiration from 1857",
+                "1857 called 'First War of Independence' by nationalists"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "british-attitude",
+        "label": "Changed British Perspective",
+        "icon": "🔍",
+        "description": "Lessons learned by British",
+        "depth": 2,
+        "items": [
+          {
+            "id": "respect-tradition",
+            "label": "Respect for Indian Traditions",
+            "icon": "🙏",
+            "subtitle": "Pragmatic caution",
+            "details": {
+              "points": [
+                "Realized danger of rapid social change",
+                "Became conservative in reform approach",
+                "Stopped supporting social reforms actively",
+                "Used traditional institutions to rule",
+                "Policy of 'masterly inactivity' in social sphere"
+              ]
+            }
+          },
+          {
+            "id": "military-lessons",
+            "label": "Military Lessons Learned",
+            "icon": "📖",
+            "details": {
+              "points": [
+                "Need for better intelligence",
+                "Importance of divide and rule",
+                "Strategic importance of railways and telegraphs",
+                "Need to keep army divided",
+                "Value of loyal allies (princes)"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "summary": [
+      "The revolt ended Company rule and brought India under Crown administration",
+      "Political centralization increased but with policy of appeasement towards princes",
+      "Military reorganization ensured British numerical superiority and prevented unity",
+      "Racial divide deepened, social reforms slowed, but nationalism began to emerge",
+      "Heavy economic burden fell on India while infrastructure developed for British needs",
+      "Seeds of future freedom movement were sown through martyrs' sacrifice and unified resistance"
+    ]
+  }
+}
+
