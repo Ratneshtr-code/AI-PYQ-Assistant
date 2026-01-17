@@ -1,27 +1,103 @@
 {
   "id": "history-roadmap",
   "subject": "history",
-  "title": "Indian Modern History - Learning Path",
-  "description": "Strategic roadmap for studying Indian Modern History (1857-1885) for government exams",
-  "version": "1.0",
+  "title": "Indian Modern History - Complete Learning Path",
+  "description": "Comprehensive strategic roadmap for studying Indian Modern History for government exams (SSC, UPSC, State PCS)",
+  "version": "2.0",
   "lastUpdated": "2024-01-17",
   "learningPath": {
-    "overview": "This learning path covers the foundational period of Modern Indian History, starting with the Revolt of 1857 and continuing through the crucial transitional period of 1857-1885. Follow the topics in order for best understanding.",
-    "estimatedTime": "15-20 hours",
+    "overview": "This complete learning path covers Indian Modern History from European arrival to the era of Militant Nationalism. Follow topics in order for comprehensive understanding and excellent exam preparation.",
+    "estimatedTime": "60-80 hours for complete mastery",
     "difficulty": "Medium to High",
-    "examImportance": "Very High - Core topic for all government exams"
+    "examImportance": "Very High - Core topic for all government exams (SSC, UPSC, UPPCS, other PCS)"
   },
   "topics": [
     {
-      "id": "revolt-1857-overview",
+      "id": "european-arrival",
       "order": 1,
+      "mainTopic": "Arrival of European Powers in India",
+      "category": "Foundation",
+      "status": "available",
+      "estimatedTime": "5-6 hours",
+      "importance": "High",
+      "description": "How and why Europeans came to India; their establishment and competition",
+      "prerequisites": [],
+      "subTopics": [
+        {
+          "id": "european-arrival-factors",
+          "title": "Factors Leading to European Arrival",
+          "visualType": "flowchart",
+          "order": 1,
+          "description": "Economic, political, religious, technological factors"
+        },
+        {
+          "id": "european-arrival-timeline",
+          "title": "Timeline of Arrivals",
+          "visualType": "timeline",
+          "order": 2,
+          "description": "Chronological discovery and establishment (1498-1757)"
+        },
+        {
+          "id": "european-powers-comparison",
+          "title": "Comparison of European Powers",
+          "visualType": "table",
+          "order": 3,
+          "description": "Portuguese, Dutch, English, French, Danish - comparative analysis"
+        }
+      ],
+      "keyTakeaways": [
+        "Vasco da Gama first reached India (1498)",
+        "Trade motivated European arrival",
+        "English eventually became dominant",
+        "Battle of Plassey (1757) marked political power beginning"
+      ],
+      "connections": ["administrative-till-1857"]
+    },
+    {
+      "id": "administrative-till-1857",
+      "order": 2,
+      "mainTopic": "Administrative Organisation till 1857",
+      "category": "Constitutional Development",
+      "status": "available",
+      "estimatedTime": "8-10 hours",
+      "importance": "Very High",
+      "description": "British administrative structure and constitutional acts before 1857",
+      "prerequisites": ["european-arrival"],
+      "subTopics": [
+        {
+          "id": "british-presidencies",
+          "title": "British Presidencies",
+          "visualType": "table",
+          "order": 1,
+          "description": "Bengal, Madras, Bombay presidencies comparison"
+        },
+        {
+          "id": "constitutional-acts-timeline",
+          "title": "Constitutional Acts (1773-1853)",
+          "visualType": "timeline",
+          "order": 2,
+          "description": "All major Acts: Regulating Act 1773, Pitt's India Act 1784, Charter Acts 1793/1813/1833/1853"
+        }
+      ],
+      "keyTakeaways": [
+        "Regulating Act 1773 - first parliamentary control",
+        "Pitt's India Act 1784 - dual government",
+        "Charter Act 1833 - company became purely administrative",
+        "Charter Act 1853 - competitive exams introduced",
+        "Foundation for British administrative control"
+      ],
+      "connections": ["revolt-1857-overview"]
+    },
+    {
+      "id": "revolt-1857-overview",
+      "order": 3,
       "mainTopic": "The Revolt of 1857",
       "category": "Major Event",
       "status": "available",
       "estimatedTime": "4-5 hours",
       "importance": "Critical",
       "description": "First War of Independence - causes, events, leaders, and impact",
-      "prerequisites": [],
+      "prerequisites": ["administrative-till-1857"],
       "subTopics": [
         {
           "id": "revolt-1857-causes",
@@ -62,8 +138,8 @@
     },
     {
       "id": "events-1858-1885-overview",
-      "order": 2,
-      "mainTopic": "Events from 1857-1885",
+      "order": 4,
+      "mainTopic": "Events from 1858-1885",
       "category": "Period Study",
       "status": "available",
       "estimatedTime": "10-12 hours",
@@ -73,10 +149,10 @@
       "subTopics": [
         {
           "id": "events-1858-1885-reforms",
-          "title": "Administrative Reforms",
+          "title": "Administrative Reforms (includes Labor Laws)",
           "visualType": "timeline",
           "order": 1,
-          "description": "Major administrative and constitutional changes"
+          "description": "Major administrative changes including Indian Factory Act 1881"
         },
         {
           "id": "events-1858-1885-economic",
@@ -121,105 +197,267 @@
         "Political consciousness emerged",
         "Formation of INC marked organized resistance"
       ],
+      "connections": ["congress-establishment"]
+    },
+    {
+      "id": "congress-establishment",
+      "order": 5,
+      "mainTopic": "From Establishment to Split of Congress (1885-1907)",
+      "category": "Nationalist Movement",
+      "status": "available",
+      "estimatedTime": "6-8 hours",
+      "importance": "Very High",
+      "description": "Formation of INC, early moderate phase, and eventual split",
+      "prerequisites": ["events-1858-1885-overview"],
+      "subTopics": [
+        {
+          "id": "pre-inc-associations",
+          "title": "Political Associations Before INC",
+          "visualType": "timeline",
+          "order": 1,
+          "description": "Early organizations: Zamindari Association, Indian Association, etc."
+        },
+        {
+          "id": "inc-establishment",
+          "title": "Establishment of INC (1885)",
+          "visualType": "flowchart",
+          "order": 2,
+          "description": "Formation, aims, objectives, moderate phase"
+        }
+      ],
+      "keyTakeaways": [
+        "INC founded 28 December 1885, Bombay",
+        "A.O. Hume founder; W.C. Bonnerjee first President",
+        "Moderate phase (1885-1905)",
+        "Methods: Petitions, Prayers, Protests",
+        "Leaders: Dadabhai, Gokhale, Pherozeshah, Surendranath"
+      ],
+      "connections": ["militant-nationalism"]
+    },
+    {
+      "id": "militant-nationalism",
+      "order": 6,
+      "mainTopic": "Era of Militant Nationalism (1905-1920)",
+      "category": "Nationalist Movement",
+      "status": "available",
+      "estimatedTime": "15-18 hours",
+      "importance": "Critical",
+      "description": "Bengal Partition, Swadeshi Movement, Surat Split, rise of extremism, Home Rule Movement",
+      "prerequisites": ["congress-establishment"],
+      "subTopics": [
+        {
+          "id": "swadeshi-boycott-movement",
+          "title": "Swadeshi & Boycott Movement",
+          "visualType": "mindmap",
+          "order": 1,
+          "description": "Economic resistance, national education, mass mobilization"
+        },
+        {
+          "id": "inc-surat-split-1907",
+          "title": "Surat Split (1907)",
+          "visualType": "table",
+          "order": 2,
+          "description": "Moderates vs Extremists division, comparison, eventual reunion"
+        },
+        {
+          "id": "morley-minto-reforms-1909",
+          "title": "Morley-Minto Reforms (1909)",
+          "visualType": "flowchart",
+          "order": 3,
+          "description": "Indian Councils Act 1909, separate electorates introduced"
+        },
+        {
+          "id": "home-rule-movement",
+          "title": "Home Rule League Movement (1916-1918)",
+          "visualType": "timeline",
+          "order": 4,
+          "description": "Tilak and Besant's leagues, Lucknow Pact, Montagu Declaration"
+        }
+      ],
+      "keyTakeaways": [
+        "Bengal Partition (1905) sparked mass movement",
+        "Birth of Swadeshi and Boycott as weapons",
+        "Lal-Bal-Pal: extremist trio",
+        "Separate electorates (1909) - communal poison",
+        "Surat Split (1907) weakened Congress temporarily",
+        "Home Rule Movement prepared ground for Gandhi",
+        "Congress reunited at Lucknow (1916)"
+      ],
       "connections": []
     }
   ],
   "networkGraph": {
     "nodes": [
       {
+        "id": "european-arrival",
+        "label": "European Arrival",
+        "type": "foundation",
+        "x": 100,
+        "y": 100,
+        "color": "#8B5CF6",
+        "size": "large"
+      },
+      {
+        "id": "administrative-till-1857",
+        "label": "Admin till 1857",
+        "type": "foundation",
+        "x": 250,
+        "y": 100,
+        "color": "#06B6D4",
+        "size": "large"
+      },
+      {
         "id": "revolt-1857-overview",
         "label": "Revolt of 1857",
         "type": "major-event",
-        "x": 100,
-        "y": 200,
+        "x": 400,
+        "y": 100,
         "color": "#EF4444",
         "size": "large"
+      },
+      {
+        "id": "events-1858-1885-overview",
+        "label": "Events 1858-1885",
+        "type": "period-study",
+        "x": 550,
+        "y": 100,
+        "color": "#3B82F6",
+        "size": "large"
+      },
+      {
+        "id": "congress-establishment",
+        "label": "Congress (1885-1907)",
+        "type": "nationalist-movement",
+        "x": 700,
+        "y": 100,
+        "color": "#10B981",
+        "size": "large"
+      },
+      {
+        "id": "militant-nationalism",
+        "label": "Militant Nationalism",
+        "type": "nationalist-movement",
+        "x": 850,
+        "y": 100,
+        "color": "#F59E0B",
+        "size": "large"
+      },
+      {
+        "id": "european-arrival-factors",
+        "label": "Factors",
+        "type": "subtopic",
+        "parent": "european-arrival",
+        "x": 50,
+        "y": 200,
+        "color": "#A78BFA",
+        "size": "small"
+      },
+      {
+        "id": "european-arrival-timeline",
+        "label": "Timeline",
+        "type": "subtopic",
+        "parent": "european-arrival",
+        "x": 100,
+        "y": 200,
+        "color": "#A78BFA",
+        "size": "small"
+      },
+      {
+        "id": "european-powers-comparison",
+        "label": "Comparison",
+        "type": "subtopic",
+        "parent": "european-arrival",
+        "x": 150,
+        "y": 200,
+        "color": "#A78BFA",
+        "size": "small"
+      },
+      {
+        "id": "british-presidencies",
+        "label": "Presidencies",
+        "type": "subtopic",
+        "parent": "administrative-till-1857",
+        "x": 200,
+        "y": 200,
+        "color": "#67E8F9",
+        "size": "small"
+      },
+      {
+        "id": "constitutional-acts-timeline",
+        "label": "Acts 1773-1853",
+        "type": "subtopic",
+        "parent": "administrative-till-1857",
+        "x": 300,
+        "y": 200,
+        "color": "#67E8F9",
+        "size": "small"
       },
       {
         "id": "revolt-1857-causes",
         "label": "Causes",
         "type": "subtopic",
         "parent": "revolt-1857-overview",
-        "x": 50,
-        "y": 150,
+        "x": 350,
+        "y": 200,
         "color": "#F87171",
-        "size": "medium"
+        "size": "small"
       },
       {
         "id": "revolt-1857-timeline",
         "label": "Timeline",
         "type": "subtopic",
         "parent": "revolt-1857-overview",
-        "x": 150,
-        "y": 150,
+        "x": 400,
+        "y": 200,
         "color": "#F87171",
-        "size": "medium"
+        "size": "small"
       },
       {
         "id": "revolt-1857-leaders",
         "label": "Leaders",
         "type": "subtopic",
         "parent": "revolt-1857-overview",
-        "x": 50,
-        "y": 250,
+        "x": 450,
+        "y": 200,
         "color": "#F87171",
-        "size": "medium"
+        "size": "small"
       },
       {
         "id": "revolt-1857-impact",
         "label": "Impact",
         "type": "subtopic",
         "parent": "revolt-1857-overview",
-        "x": 150,
+        "x": 400,
         "y": 250,
         "color": "#F87171",
-        "size": "medium"
-      },
-      {
-        "id": "events-1858-1885-overview",
-        "label": "Events 1857-1885",
-        "type": "period-study",
-        "x": 400,
-        "y": 200,
-        "color": "#3B82F6",
-        "size": "large"
+        "size": "small"
       },
       {
         "id": "events-1858-1885-reforms",
-        "label": "Admin Reforms",
+        "label": "Reforms",
         "type": "subtopic",
         "parent": "events-1858-1885-overview",
-        "x": 300,
-        "y": 100,
+        "x": 500,
+        "y": 200,
         "color": "#60A5FA",
         "size": "small"
       },
       {
         "id": "events-1858-1885-economic",
-        "label": "Economic Policies",
+        "label": "Economic",
         "type": "subtopic",
         "parent": "events-1858-1885-overview",
-        "x": 500,
-        "y": 100,
-        "color": "#60A5FA",
-        "size": "small"
-      },
-      {
-        "id": "events-1858-1885-acts",
-        "label": "Major Acts",
-        "type": "subtopic",
-        "parent": "events-1858-1885-overview",
-        "x": 300,
+        "x": 550,
         "y": 200,
         "color": "#60A5FA",
         "size": "small"
       },
       {
         "id": "events-1858-1885-social",
-        "label": "Social Reforms",
+        "label": "Social",
         "type": "subtopic",
         "parent": "events-1858-1885-overview",
-        "x": 500,
+        "x": 600,
         "y": 200,
         "color": "#60A5FA",
         "size": "small"
@@ -229,141 +467,219 @@
         "label": "Nationalism",
         "type": "subtopic",
         "parent": "events-1858-1885-overview",
-        "x": 300,
-        "y": 300,
+        "x": 550,
+        "y": 250,
         "color": "#60A5FA",
         "size": "small"
       },
       {
-        "id": "events-1858-1885-overview-timeline",
-        "label": "Master Timeline",
+        "id": "pre-inc-associations",
+        "label": "Pre-INC",
         "type": "subtopic",
-        "parent": "events-1858-1885-overview",
-        "x": 500,
-        "y": 300,
-        "color": "#60A5FA",
+        "parent": "congress-establishment",
+        "x": 650,
+        "y": 200,
+        "color": "#6EE7B7",
+        "size": "small"
+      },
+      {
+        "id": "inc-establishment",
+        "label": "INC 1885",
+        "type": "subtopic",
+        "parent": "congress-establishment",
+        "x": 750,
+        "y": 200,
+        "color": "#6EE7B7",
+        "size": "small"
+      },
+      {
+        "id": "swadeshi-boycott-movement",
+        "label": "Swadeshi",
+        "type": "subtopic",
+        "parent": "militant-nationalism",
+        "x": 850,
+        "y": 200,
+        "color": "#FCD34D",
+        "size": "small"
+      },
+      {
+        "id": "inc-surat-split-1907",
+        "label": "Surat Split",
+        "type": "subtopic",
+        "parent": "militant-nationalism",
+        "x": 800,
+        "y": 250,
+        "color": "#FCD34D",
+        "size": "small"
+      },
+      {
+        "id": "morley-minto-reforms-1909",
+        "label": "Morley-Minto",
+        "type": "subtopic",
+        "parent": "militant-nationalism",
+        "x": 850,
+        "y": 250,
+        "color": "#FCD34D",
+        "size": "small"
+      },
+      {
+        "id": "home-rule-movement",
+        "label": "Home Rule",
+        "type": "subtopic",
+        "parent": "militant-nationalism",
+        "x": 900,
+        "y": 250,
+        "color": "#FCD34D",
         "size": "small"
       }
     ],
     "edges": [
       {
-        "source": "revolt-1857-overview",
-        "target": "revolt-1857-causes",
-        "type": "contains",
-        "label": ""
+        "source": "european-arrival",
+        "target": "administrative-till-1857",
+        "type": "leads-to",
+        "label": "Established Administration"
       },
       {
-        "source": "revolt-1857-overview",
-        "target": "revolt-1857-timeline",
-        "type": "contains",
-        "label": ""
-      },
-      {
-        "source": "revolt-1857-overview",
-        "target": "revolt-1857-leaders",
-        "type": "contains",
-        "label": ""
-      },
-      {
-        "source": "revolt-1857-overview",
-        "target": "revolt-1857-impact",
-        "type": "contains",
-        "label": ""
+        "source": "administrative-till-1857",
+        "target": "revolt-1857-overview",
+        "type": "leads-to",
+        "label": "Exploitation Led to Revolt"
       },
       {
         "source": "revolt-1857-overview",
         "target": "events-1858-1885-overview",
         "type": "leads-to",
-        "label": "Led to Crown Rule"
+        "label": "Crown Rule Began"
       },
       {
         "source": "events-1858-1885-overview",
-        "target": "events-1858-1885-reforms",
-        "type": "contains",
-        "label": ""
+        "target": "congress-establishment",
+        "type": "leads-to",
+        "label": "Political Consciousness"
       },
       {
-        "source": "events-1858-1885-overview",
-        "target": "events-1858-1885-economic",
-        "type": "contains",
-        "label": ""
+        "source": "congress-establishment",
+        "target": "militant-nationalism",
+        "type": "leads-to",
+        "label": "Moderate Methods Failed"
       },
       {
-        "source": "events-1858-1885-overview",
-        "target": "events-1858-1885-acts",
-        "type": "contains",
-        "label": ""
+        "source": "bengal-partition-1905",
+        "target": "swadeshi-boycott-movement",
+        "type": "triggered",
+        "label": "Anti-Partition"
       },
       {
-        "source": "events-1858-1885-overview",
-        "target": "events-1858-1885-social",
-        "type": "contains",
-        "label": ""
+        "source": "bengal-partition-1905",
+        "target": "muslim-league-1906",
+        "type": "contributed",
+        "label": "Communal Divide"
       },
       {
-        "source": "events-1858-1885-overview",
-        "target": "events-1858-1885-nationalism",
-        "type": "contains",
-        "label": ""
-      },
-      {
-        "source": "events-1858-1885-overview",
-        "target": "events-1858-1885-overview-timeline",
-        "type": "contains",
-        "label": ""
-      },
-      {
-        "source": "revolt-1857-impact",
-        "target": "events-1858-1885-reforms",
+        "source": "swadeshi-boycott-movement",
+        "target": "inc-surat-split-1907",
         "type": "influenced",
-        "label": "Reforms after revolt"
+        "label": "Moderate-Extremist Conflict"
       },
       {
-        "source": "events-1858-1885-economic",
-        "target": "events-1858-1885-nationalism",
-        "type": "influenced",
-        "label": "Economic exploitation led to nationalism"
+        "source": "muslim-league-1906",
+        "target": "morley-minto-reforms-1909",
+        "type": "demanded",
+        "label": "Separate Electorates"
       },
       {
-        "source": "events-1858-1885-social",
-        "target": "events-1858-1885-nationalism",
-        "type": "influenced",
-        "label": "Reform movements contributed"
+        "source": "inc-surat-split-1907",
+        "target": "home-rule-movement",
+        "type": "reunited",
+        "label": "Unity Restored"
       }
     ]
   },
   "studyTips": [
-    "Start with Revolt of 1857 causes - understanding WHY is crucial",
-    "Timeline helps memorize sequence - use dates as anchors",
-    "Leader profiles are high-frequency exam questions",
-    "Connect revolt's impact to subsequent reforms",
-    "Economic exploitation is key to understanding nationalist rise",
-    "Acts and legislation - focus on provisions and significance",
-    "Social reforms show parallel awakening",
-    "Formation of INC (1885) is logical conclusion of this period"
+    "Study chronologically - understanding historical flow is crucial",
+    "European arrival sets context for everything that follows",
+    "Constitutional Acts (1773-1853) are high-frequency exam questions",
+    "Revolt of 1857 is foundational - master causes, events, leaders, impact",
+    "Connect economic exploitation to nationalist awakening",
+    "Bengal Partition (1905) is watershed - triggered militant nationalism",
+    "Compare Moderates vs Extremists - table format helps memorization",
+    "Separate electorates (1909) led to Partition - understand this causation",
+    "Home Rule Movement bridged Congress split and Gandhi era",
+    "Use visual notes for timeline questions - dates are crucial",
+    "Practice connecting events - 'cause and effect' questions common"
   ],
   "examStrategy": {
     "frequentTopics": [
+      "Vasco da Gama's arrival (1498)",
+      "Battle of Plassey (1757)",
+      "Regulating Act 1773",
+      "Pitt's India Act 1784",
+      "Charter Acts (especially 1833, 1853)",
       "Causes of 1857 Revolt",
-      "Leaders of 1857",
+      "Leaders of 1857 (region-wise)",
       "Impact of 1857",
       "Government of India Act 1858",
-      "Indian Councils Act 1861",
-      "Vernacular Press Act",
-      "Ilbert Bill Controversy",
-      "Formation of INC"
+      "Formation of INC (1885)",
+      "Moderate leaders and methods",
+      "Bengal Partition (1905)",
+      "Swadeshi Movement",
+      "Lal-Bal-Pal trio",
+      "Surat Split (1907)",
+      "Separate electorates (1909)",
+      "Home Rule Movement (1916-1918)"
     ],
-    "mustKnow": [
-      "Dates: 1857, 1858, 1861, 1878, 1883, 1885",
-      "Key leaders: Bahadur Shah Zafar, Rani Lakshmibai, Nana Sahib, Tatya Tope",
-      "Viceroys: Canning, Lawrence, Mayo, Lytton, Ripon",
-      "Major acts and their provisions"
+    "mustKnowDates": [
+      "1498 - Vasco da Gama",
+      "1600 - English East India Company",
+      "1757 - Battle of Plassey",
+      "1773 - Regulating Act",
+      "1784 - Pitt's India Act",
+      "1857 - Revolt begins",
+      "1858 - Crown takes over",
+      "1885 - INC formation",
+      "1905 - Bengal Partition",
+      "1906 - Muslim League",
+      "1907 - Surat Split",
+      "1909 - Morley-Minto Reforms",
+      "1916 - Home Rule Movement"
+    ],
+    "importantPersonalities": [
+      "Vasco da Gama (Portuguese explorer)",
+      "Robert Clive (Plassey victory)",
+      "Warren Hastings (first Governor-General)",
+      "Lord Cornwallis (reforms)",
+      "Lord Dalhousie (Doctrine of Lapse)",
+      "Bahadur Shah Zafar, Rani Lakshmibai, Nana Sahib, Tatya Tope (1857 leaders)",
+      "Lord Canning (first Viceroy)",
+      "A.O. Hume (INC founder)",
+      "Dadabhai Naoroji, Gokhale, Pherozeshah Mehta (Moderates)",
+      "Bal Gangadhar Tilak, Lala Lajpat Rai, Bipin Chandra Pal (Extremists)",
+      "Lord Curzon (Bengal Partition)",
+      "Annie Besant (Home Rule)",
+      "Aga Khan III (Muslim League)"
+    ],
+    "comparisonTables": [
+      "European Powers (Portuguese vs Dutch vs English vs French)",
+      "Three Presidencies (Bengal vs Madras vs Bombay)",
+      "Moderates vs Extremists",
+      "Tilak's League vs Besant's League"
     ],
     "connections": [
-      "Link 1857 causes to later reforms",
-      "Connect economic drain to nationalist consciousness",
-      "Relate repressive laws to INC formation"
+      "European trade motives → Exploitation → Economic drain → Nationalism",
+      "Constitutional Acts progression → Increasing British control → Revolt of 1857",
+      "1857 Impact → Crown Rule → Systematic exploitation → INC formation",
+      "Bengal Partition → Swadeshi Movement → Rise of Extremism → Surat Split",
+      "Separate Electorates → Communal politics → Muslim League growth → Partition 1947"
     ]
+  },
+  "revisionStrategy": {
+    "week1": "European Arrival + Administrative Organization till 1857",
+    "week2": "Revolt of 1857 (all aspects)",
+    "week3": "Events 1858-1885 (all sub-topics)",
+    "week4": "Congress Formation and Early Phase",
+    "week5": "Militant Nationalism Era (all sub-topics)",
+    "week6": "Complete revision with timeline focus",
+    "week7": "Practice questions and mock tests"
   }
 }
-

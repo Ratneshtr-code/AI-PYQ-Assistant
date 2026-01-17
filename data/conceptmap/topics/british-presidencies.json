@@ -1,0 +1,74 @@
+{
+  "id": "british-presidencies",
+  "subject": "history",
+  "title": "British Presidencies in India",
+  "description": "Three major presidencies: Bengal, Madras, and Bombay - their formation, administration, and characteristics",
+  "visualType": "table",
+  "metadata": {
+    "examRelevance": "high",
+    "relatedTopics": ["constitutional-acts-timeline", "european-arrival-timeline"],
+    "tags": ["presidencies", "administration", "Bengal", "Madras", "Bombay"]
+  },
+  "data": {
+    "columns": [
+      { "key": "presidency", "label": "Presidency", "width": "15%" },
+      { "key": "formation", "label": "Formation & Early History", "width": "20%" },
+      { "key": "territory", "label": "Territory & Extent", "width": "20%" },
+      { "key": "administration", "label": "Administrative Structure", "width": "25%" },
+      { "key": "importance", "label": "Importance & Characteristics", "width": "20%" }
+    ],
+    "rows": [
+      {
+        "id": "bengal",
+        "presidency": "🏛️ BENGAL PRESIDENCY",
+        "formation": "• Calcutta founded (1690)\n• Fort William built (1696-1702)\n• Made Presidency (1699)\n• Became Supreme Presidency (1773)\n• Included Bihar, Orissa, Assam",
+        "territory": "Initial: Calcutta and surrounding\n\nExpanded to include:\n• Bengal\n• Bihar\n• Orissa\n• Assam\n• Delhi\n• United Provinces\n• Punjab (after 1849)\n• North-West Frontier\n• Central Provinces\n\nLargest presidency",
+        "administration": "Governor-General:\n• Supreme authority over all India\n• Resided in Calcutta\n• Council of 4 members (later 3)\n• Controlled other presidencies\n• Made laws for whole India\n\nLocal Administration:\n• Collectors and magistrates\n• Permanent Settlement (1793)\n• Zamindari system\n• Civil and criminal courts",
+        "importance": "Most Important:\n• Capital of British India\n• Seat of Governor-General\n• Richest province\n• Center of British power\n• Battle of Plassey (1757)\n• Diwani rights (1765)\n• Permanent Settlement experiment\n• Center of Indian Renaissance\n• Calcutta - intellectual capital"
+      },
+      {
+        "id": "madras",
+        "presidency": "🏛️ MADRAS PRESIDENCY",
+        "formation": "• Fort St. George built (1644)\n• First British fortress in India\n• Established as Presidency (1640s)\n• Francis Day founded (1639)\n• Subordinate to Bengal (from 1773)",
+        "territory": "Initial: Madras city\n\nExpanded to include:\n• Tamil Nadu (most parts)\n• Parts of Andhra Pradesh\n• Parts of Kerala\n• Parts of Karnataka\n• Parts of Orissa\n• Coromandel Coast\n\nSecond largest presidency",
+        "administration": "Governor:\n• Head of presidency\n• Subordinate to Governor-General\n• Own council\n• Limited legislative powers\n\nLocal Administration:\n• Ryotwari system (1820)\n• Direct settlement with peasants\n• Thomas Munro's system\n• District collectors\n• Village administration retained",
+        "importance": "Strategic Importance:\n• First fortified settlement\n• Gateway to South India\n• Carnatic Wars fought here\n• Defeated Tipu Sultan\n• Defeated French influence\n• Major textile trade center\n• Ryotwari system model\n• Important port city\n• Resistant to British annexation initially"
+      },
+      {
+        "id": "bombay",
+        "presidency": "🏛️ BOMBAY PRESIDENCY",
+        "formation": "• Acquired from Portuguese (1668)\n• Catherine of Braganza's dowry\n• Given to EIC (1668)\n• Made Presidency (1687)\n• Subordinate to Bengal (from 1773)",
+        "territory": "Initial: Bombay island\n\nExpanded to include:\n• Maharashtra (most parts)\n• Gujarat\n• Parts of Karnataka\n• Parts of Madhya Pradesh\n• Sindh (after 1843)\n• Aden (1839-1932)\n\nThird presidency",
+        "administration": "Governor:\n• Head of presidency\n• Subordinate to Governor-General\n• Own council\n• Limited legislative powers\n\nLocal Administration:\n• Ryotwari system in some areas\n• Mahalwari in Gujarat\n• Mixed systems\n• Strong merchant influence\n• Port administration",
+        "importance": "Commercial Hub:\n• Natural deep-water harbor\n• Western gateway to India\n• Center of cotton trade\n• Opium trade to China\n• Parsee business community\n• Defeated Marathas (1818)\n• Strategic military base\n• Modern planned city\n• Commercial and industrial center"
+      }
+    ],
+    "additionalInfo": {
+      "title": "Key Differences & Common Features",
+      "comparison": [
+        {
+          "aspect": "Supreme Authority",
+          "detail": "Bengal was supreme; Governor-General controlled Madras and Bombay through correspondence"
+        },
+        {
+          "aspect": "Land Revenue Systems",
+          "detail": "Bengal: Zamindari (Permanent Settlement) | Madras & Parts of Bombay: Ryotwari | Parts of Bombay: Mahalwari"
+        },
+        {
+          "aspect": "Legislative Powers",
+          "detail": "Bengal: Could legislate for whole India | Madras & Bombay: Limited to their territories"
+        },
+        {
+          "aspect": "Military Organization",
+          "detail": "Each had separate armies initially; unified after 1857"
+        },
+        {
+          "aspect": "Judicial System",
+          "detail": "Supreme Courts in all three presidencies; Bengal Supreme Court (1774), Madras (1800), Bombay (1823)"
+        }
+      ],
+      "examTip": "Remember chronological order of formation: Madras (first, 1639) → Bengal (1690, but became supreme 1773) → Bombay (1668 acquired, 1687 presidency). Bengal was the most important as it housed the Governor-General and controlled other presidencies after Regulating Act 1773."
+    }
+  }
+}
+

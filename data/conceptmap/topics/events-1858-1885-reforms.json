@@ -1,7 +1,7 @@
 {
   "id": "events-1858-1885-reforms",
   "subject": "history",
-  "title": "Administrative Reforms (1858-1885)",
+  "title": "Administrative Reforms after 1858",
   "description": "Major administrative and constitutional reforms following the 1857 revolt",
   "visualType": "timeline",
   "metadata": {
@@ -263,6 +263,28 @@
           "significance": "Awakened Indians to racial discrimination; promoted national consciousness"
         },
         "tags": ["racial discrimination", "Ilbert Bill", "controversy"]
+      },
+      {
+        "id": "factories-act-1881",
+        "year": "1881",
+        "title": "Indian Factories Act, 1881",
+        "description": "First labor welfare legislation in India",
+        "type": "administrative",
+        "icon": "🏭",
+        "details": {
+          "points": [
+            "Applied to factories with 100+ workers using power",
+            "Children below 7 years: employment banned",
+            "Children 7-12 years: work limited to 9 hours per day",
+            "One day weekly off mandatory for children",
+            "Factory inspectors appointed for enforcement",
+            "Very limited in scope initially",
+            "Mainly in response to pressure from British factory owners",
+            "Indian mill owners wanted cheap child labor"
+          ],
+          "significance": "Historic beginning of labor welfare legislation; though inadequate, set precedent"
+        },
+        "tags": ["labor", "factory", "children", "welfare"]
       },
       {
         "id": "universities-act",

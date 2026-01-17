@@ -1,0 +1,510 @@
+{
+  "id": "swadeshi-boycott-movement",
+  "subject": "history",
+  "title": "Swadeshi and Boycott Movement (1905-1908)",
+  "description": "Mass movement for Indian goods and boycott of British products following Bengal Partition",
+  "visualType": "mindmap",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["bengal-partition-1905", "militant-nationalism", "inc-surat-split"],
+    "tags": ["Swadeshi", "Boycott", "1905-1908", "mass-movement", "economic-nationalism"]
+  },
+  "data": {
+    "root": {
+      "id": "swadeshi-boycott",
+      "label": "Swadeshi & Boycott Movement",
+      "subtitle": "(1905-1908)",
+      "icon": "🇮🇳",
+      "info": {
+        "description": "First major mass movement; economic resistance to British rule",
+        "period": "Peak: 1905-1908; Continued till 1911",
+        "trigger": "Bengal Partition (1905)",
+        "significance": "Transformed freedom struggle from elite to mass movement"
+      }
+    },
+    "branches": [
+      {
+        "id": "swadeshi-aspect",
+        "label": "SWADESHI (Positive Program)",
+        "subtitle": "Use Indian, Promote Indian",
+        "color": "#10B981",
+        "icon": "✊",
+        "info": {
+          "description": "Positive economic nationalism - promote Indian products and industries"
+        },
+        "leaves": [
+          {
+            "id": "swadeshi-meaning",
+            "label": "Meaning & Philosophy",
+            "info": {
+              "definition": "'Swadeshi' = Of one's own country",
+              "concept": [
+                "Economic self-reliance",
+                "Promote Indian industries",
+                "Reduce dependence on foreign goods",
+                "Revival of indigenous industries",
+                "Economic nationalism"
+              ],
+              "slogan": "'Be Indian, Buy Indian'"
+            }
+          },
+          {
+            "id": "swadeshi-industries",
+            "label": "Industrial Development",
+            "info": {
+              "newIndustries": [
+                "Textile mills established",
+                "Swadeshi Cotton Mills (started/expanded)",
+                "Tata Iron and Steel Company (TISCO, 1907)",
+                "Bengal Chemical & Pharmaceutical (Acharya P.C. Ray, 1893, got boost)",
+                "Soap, match, tannery industries",
+                "Paper and sugar mills"
+              ],
+              "growth": "Indian industries received huge boost",
+              "investment": "Indian capitalists invested in industries",
+              "employment": "Created employment opportunities"
+            }
+          },
+          {
+            "id": "swadeshi-stores",
+            "label": "Swadeshi Stores",
+            "info": {
+              "description": "Exclusive Indian goods shops",
+              "examples": [
+                "Swadeshi stores opened across India",
+                "Sold only Indian-made products",
+                "Calcutta had numerous Swadeshi bazaars",
+                "Students managed some stores",
+                "Popularized Indian goods"
+              ]
+            }
+          },
+          {
+            "id": "swadeshi-textiles",
+            "label": "Khadi & Hand-Spun Cloth",
+            "info": {
+              "promotion": [
+                "Charkha (spinning wheel) promoted",
+                "Hand-woven cloth popularized",
+                "Traditional weaving revived",
+                "Wearing Swadeshi cloth became patriotic act",
+                "Public pledges to use Swadeshi cloth"
+              ],
+              "impact": "Laid foundation for Gandhi's later Khadi movement"
+            }
+          },
+          {
+            "id": "swadeshi-exhibitions",
+            "label": "Exhibitions & Fairs",
+            "info": {
+              "activities": [
+                "Swadeshi exhibitions organized",
+                "Display of Indian products",
+                "Awareness campaigns",
+                "Competitions for best Swadeshi products",
+                "Cultural programs promoting nationalism"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "boycott-aspect",
+        "label": "BOYCOTT (Negative Program)",
+        "subtitle": "Reject British goods & institutions",
+        "color": "#EF4444",
+        "icon": "🚫",
+        "info": {
+          "description": "Negative resistance - boycott British goods, services, and institutions"
+        },
+        "leaves": [
+          {
+            "id": "boycott-goods",
+            "label": "Boycott of British Goods",
+            "info": {
+              "methods": [
+                "Picketing of shops selling foreign goods",
+                "Public bonfires of British cloth",
+                "Social boycott of users of foreign goods",
+                "Students pledged to boycott foreign items",
+                "British goods imports declined sharply"
+              ],
+              "impact": [
+                "British textile exports to India fell by 25% (1905-1908)",
+                "Lancashire cloth particularly affected",
+                "British commercial interests severely hit",
+                "Forced British to consider reversal"
+              ]
+            }
+          },
+          {
+            "id": "boycott-education",
+            "label": "Boycott of Government Schools",
+            "info": {
+              "rationale": "Reject British-controlled education system",
+              "action": [
+                "Students left government schools and colleges",
+                "Particularly in Bengal",
+                "Teachers resigned from government institutions",
+                "Large-scale student participation"
+              ]
+            }
+          },
+          {
+            "id": "boycott-services",
+            "label": "Boycott of Government Service",
+            "info": {
+              "activities": [
+                "Some resigned from government jobs",
+                "Lawyers boycotted courts",
+                "Refuse cooperation with British administration",
+                "Limited success - economic hardship prevented mass resignation"
+              ],
+              "limitation": "Not widely successful due to economic dependence"
+            }
+          },
+          {
+            "id": "boycott-institutions",
+            "label": "Boycott of British Institutions",
+            "info": {
+              "targets": [
+                "Titles and honors refused",
+                "British social functions boycotted",
+                "Legislative councils (partial)",
+                "British-organized events"
+              ]
+            }
+          },
+          {
+            "id": "boycott-methods",
+            "label": "Methods of Enforcement",
+            "info": {
+              "enforcement": [
+                "Picketing shops",
+                "Social pressure and peer pressure",
+                "Public shaming of violators",
+                "Volunteer corps organized",
+                "Women participated actively",
+                "Students formed monitoring groups"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "national-education",
+        "label": "NATIONAL EDUCATION",
+        "subtitle": "Alternative education system",
+        "color": "#3B82F6",
+        "icon": "🎓",
+        "info": {
+          "description": "Creating alternative Indian-controlled education to replace British system"
+        },
+        "leaves": [
+          {
+            "id": "nat-edu-philosophy",
+            "label": "Philosophy & Purpose",
+            "info": {
+              "objectives": [
+                "Education free from British control",
+                "Curriculum suited to Indian needs",
+                "Promote Indian culture and values",
+                "Develop patriotism and self-respect",
+                "Technical and vocational education",
+                "Instruction in vernacular languages"
+              ],
+              "vision": "Creating citizens for free India, not clerks for British"
+            }
+          },
+          {
+            "id": "nat-edu-institutions",
+            "label": "National Institutions Established",
+            "info": {
+              "majorInstitutions": [
+                {
+                  "name": "Bengal National College (1906)",
+                  "location": "Calcutta",
+                  "founder": "Aurobindo Ghosh was principal",
+                  "significance": "First major national college"
+                },
+                {
+                  "name": "Bengal Technical Institute (1906)",
+                  "purpose": "Technical education"
+                },
+                {
+                  "name": "National Council of Education (1906)",
+                  "role": "Coordinate national education efforts"
+                },
+                {
+                  "name": "Hundreds of national schools",
+                  "spread": "Across Bengal and other provinces"
+                }
+              ],
+              "teachers": "Many qualified teachers joined voluntarily"
+            }
+          },
+          {
+            "id": "nat-edu-challenges",
+            "label": "Challenges Faced",
+            "info": {
+              "difficulties": [
+                "Lack of funds (depended on public donations)",
+                "No government recognition or degrees",
+                "Students feared career prospects",
+                "Difficult to sustain long-term",
+                "British repression",
+                "Parent concerns about future"
+              ],
+              "eventual": "Many institutions closed or struggled after movement waned"
+            }
+          },
+          {
+            "id": "nat-edu-significance",
+            "label": "Legacy & Impact",
+            "info": {
+              "achievements": [
+                "Demonstrated feasibility of Indian-run education",
+                "Trained patriotic youth",
+                "Alternative model created",
+                "Inspired later institutions (Jamia Millia, Kashi Vidyapeeth)",
+                "Questioned British monopoly on education"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "leadership-spread",
+        "label": "LEADERSHIP & SPREAD",
+        "subtitle": "Leaders and geographical extent",
+        "color": "#F59E0B",
+        "icon": "👥",
+        "info": {
+          "description": "Leadership and how movement spread across India"
+        },
+        "leaves": [
+          {
+            "id": "bengal-leaders",
+            "label": "Bengal Leadership",
+            "info": {
+              "leaders": [
+                "Bipin Chandra Pal",
+                "Aurobindo Ghosh",
+                "Rabindranath Tagore",
+                "Surendranath Banerjee",
+                "Ashwini Kumar Dutt",
+                "Liaquat Hussain (Muslim leader)"
+              ],
+              "role": "Bengal was epicenter of movement"
+            }
+          },
+          {
+            "id": "all-india-leaders",
+            "label": "All-India Leaders",
+            "info": {
+              "leaders": [
+                "Bal Gangadhar Tilak (Maharashtra)",
+                "Lala Lajpat Rai (Punjab)",
+                "Ajit Singh (Punjab)",
+                "Syed Haider Raza (Delhi)"
+              ],
+              "trio": "Lal-Bal-Pal became face of militant nationalism"
+            }
+          },
+          {
+            "id": "spread-provinces",
+            "label": "Spread to Other Provinces",
+            "info": {
+              "regions": [
+                {
+                  "region": "Maharashtra",
+                  "leader": "Tilak",
+                  "activities": "Ganapati and Shivaji festivals for mobilization"
+                },
+                {
+                  "region": "Punjab",
+                  "leaders": "Lajpat Rai, Ajit Singh",
+                  "activities": "Anti-Colonization Act agitation"
+                },
+                {
+                  "region": "Madras",
+                  "activities": "Swadeshi shops, textile mills"
+                },
+                {
+                  "region": "Bombay",
+                  "activities": "Boycott campaigns, Swadeshi industries"
+                },
+                {
+                  "region": "Delhi, UP",
+                  "activities": "Limited participation"
+                }
+              ],
+              "strongest": "Movement strongest in Bengal, Maharashtra, Punjab"
+            }
+          },
+          {
+            "id": "mass-participation",
+            "label": "Mass Participation",
+            "info": {
+              "participants": [
+                "Students - most enthusiastic",
+                "Middle class professionals",
+                "Some merchants and traders",
+                "Women participated actively",
+                "Peasants - limited involvement",
+                "Working class - minimal"
+              ],
+              "significance": "First movement with significant mass base (though still limited)"
+            }
+          }
+        ]
+      },
+      {
+        "id": "british-repression",
+        "label": "BRITISH REPRESSION",
+        "subtitle": "Government counter-measures",
+        "color": "#7C3AED",
+        "icon": "⚔️",
+        "info": {
+          "description": "Harsh British response to suppress movement"
+        },
+        "leaves": [
+          {
+            "id": "repressive-laws",
+            "label": "Repressive Laws",
+            "info": {
+              "laws": [
+                "Seditious Meetings Act (1907)",
+                "Newspapers Act (1908)",
+                "Explosive Substances Act (1908)",
+                "Criminal Law Amendment Act",
+                "Prevention of Seditious Meetings Act"
+              ],
+              "purpose": "Curtail freedom of speech, assembly, press"
+            }
+          },
+          {
+            "id": "arrests-deportations",
+            "label": "Arrests & Deportations",
+            "info": {
+              "actions": [
+                "Lala Lajpat Rai deported (1907)",
+                "Ajit Singh deported (1907)",
+                "Tilak arrested and imprisoned 6 years (1908)",
+                "Bipin Chandra Pal arrested",
+                "Aurobindo Ghosh arrested (Alipore Bomb Case)",
+                "Mass arrests of students and activists"
+              ]
+            }
+          },
+          {
+            "id": "police-violence",
+            "label": "Police Violence",
+            "info": {
+              "methods": [
+                "Lathi charges on peaceful processions",
+                "Firing on protesters",
+                "Raids on national schools",
+                "Surveillance and harassment",
+                "Torture of prisoners"
+              ]
+            }
+          },
+          {
+            "id": "divide-strategy",
+            "label": "Divide and Rule",
+            "info": {
+              "tactics": [
+                "Encouraged communal divisions",
+                "Supported Muslim League formation (1906)",
+                "Separate electorates announced (1909)",
+                "Favored Muslim leaders opposing Congress",
+                "Created moderate-extremist split in Congress"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "decline-legacy",
+        "label": "DECLINE & LEGACY",
+        "subtitle": "Why movement declined and its impact",
+        "color": "#64748B",
+        "icon": "📊",
+        "info": {
+          "description": "Factors causing decline and long-term significance"
+        },
+        "leaves": [
+          {
+            "id": "decline-reasons",
+            "label": "Reasons for Decline",
+            "info": {
+              "factors": [
+                "Severe British repression crushed leadership",
+                "Surat Split (1907) divided Congress",
+                "Moderate-Extremist conflict weakened movement",
+                "Lack of central coordination",
+                "Limited mass base (urban-centric)",
+                "Peasants not actively involved",
+                "Economic hardships for participants",
+                "Leadership imprisoned or exiled",
+                "Movement couldn't sustain after 1908",
+                "Partition annulled (1911) - major demand achieved"
+              ],
+              "timeline": "Peak: 1905-1906; Declined: 1907-1908; Ended: by 1910-11"
+            }
+          },
+          {
+            "id": "limitations",
+            "label": "Limitations",
+            "info": {
+              "weaknesses": [
+                "Mainly urban middle-class movement",
+                "Limited reach to villages and peasants",
+                "Couldn't overcome communal divide",
+                "No clear long-term strategy",
+                "Over-dependence on few leaders",
+                "Economic boycott hurt Indians too",
+                "No alternative to British administration envisaged"
+              ]
+            }
+          },
+          {
+            "id": "achievements",
+            "label": "Achievements & Significance",
+            "info": {
+              "successes": [
+                "First major mass political movement in India",
+                "Demonstrated power of economic boycott",
+                "Partition eventually annulled (1911)",
+                "Gave huge boost to Indian industries",
+                "Created nationalist consciousness among masses",
+                "Women's active participation",
+                "Inspired future movements (Gandhi's Non-Cooperation)",
+                "Swadeshi became integral to freedom struggle",
+                "Proved potential of mass movements"
+              ]
+            }
+          },
+          {
+            "id": "long-term-impact",
+            "label": "Long-Term Impact",
+            "info": {
+              "legacy": [
+                "Model for Gandhi's later mass movements",
+                "Swadeshi ideal continued throughout freedom struggle",
+                "Economic nationalism became central to Congress",
+                "Inspired revolutionary movements",
+                "Created generation of militant nationalists",
+                "Showed British rule could be challenged",
+                "Transformed freedom struggle permanently"
+              ],
+              "gandhiConnection": "Gandhi adopted and refined Swadeshi-Boycott methods"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+

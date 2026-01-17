@@ -1,0 +1,219 @@
+{
+  "id": "inc-surat-split-1907",
+  "subject": "history",
+  "title": "Surat Split of Indian National Congress (1907)",
+  "description": "Division of Congress into Moderates and Extremists factions at Surat session",
+  "visualType": "table",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["inc-establishment", "swadeshi-boycott-movement", "bengal-partition-1905"],
+    "tags": ["Surat-Split", "1907", "Moderates", "Extremists", "Congress", "conflict"]
+  },
+  "data": {
+    "introContext": {
+      "title": "Background to Split",
+      "description": "Growing differences between old and new leaders of Congress",
+      "timeline": "Tensions building since Bengal Partition (1905); culminated at Surat (1907)",
+      "trigger": "Swadeshi Movement showed effectiveness of aggressive methods; moderates uncomfortable"
+    },
+    "columns": [
+      { "key": "aspect", "label": "Aspect", "width": "15%" },
+      { "key": "moderates", "label": "MODERATES (Old Guard)", "width": "42%" },
+      { "key": "extremists", "label": "EXTREMISTS (New Party)", "width": "43%" }
+    ],
+    "rows": [
+      {
+        "id": "names",
+        "aspect": "📛 NAMES USED",
+        "moderates": "• Moderates\n• Liberals\n• Old Guard\n• Constitutionalists\n• 'Mendicants' (by critics)",
+        "extremists": "• Extremists\n• Militants\n• Nationalists\n• Radicals\n• New Party\n• Hot Party (by British)"
+      },
+      {
+        "id": "leaders",
+        "aspect": "👥 KEY LEADERS",
+        "moderates": "• Gopal Krishna Gokhale (Leader)\n• Pherozeshah Mehta\n• Surendranath Banerjee\n• Romesh Chandra Dutt\n• Dinshaw Wacha\n• W.C. Bonnerjee\n• M.G. Ranade",
+        "extremists": "• Bal Gangadhar Tilak (Leader)\n• Lala Lajpat Rai\n• Bipin Chandra Pal\n• Aurobindo Ghosh\n• Rajnarayan Bose\n• Ashwini Kumar Dutt\n\nFamous Trio: LAL-BAL-PAL"
+      },
+      {
+        "id": "ideology",
+        "aspect": "💭 IDEOLOGY & PHILOSOPHY",
+        "moderates": "• Faith in British justice\n• Gradual reforms possible\n• Constitutional methods only\n• British rule brought some benefits\n• Not demanding independence\n• Patient, evolutionary approach\n• Believed in British liberalism",
+        "extremists": "• No faith in British justice\n• Self-reliance (Swaraj)\n• British rule exploitative - no benefits\n• Demanding Swaraj (self-rule)\n• Aggressive, revolutionary approach\n• 'Swaraj is my birthright' (Tilak)\n• British only understand force"
+      },
+      {
+        "id": "objectives",
+        "aspect": "🎯 POLITICAL OBJECTIVES",
+        "moderates": "• Constitutional reforms\n• Greater Indian representation\n• Indianization of services\n• Dominion status within British Empire\n• Self-government eventually\n• Loyalty to British Crown",
+        "extremists": "• Complete Swaraj (self-rule)\n• End British exploitation\n• Political freedom\n• Economic independence\n• Cultural revival\n• Not satisfied with reforms only"
+      },
+      {
+        "id": "methods",
+        "aspect": "🛠️ METHODS & TACTICS",
+        "moderates": "• Petitions and prayers\n• Memorials to Parliament\n• Deputations to England\n• Passing resolutions\n• Constitutional agitation\n• Propaganda through speeches\n• Three P's: Petitions, Prayers, Protests\n\nPurely constitutional",
+        "extremists": "• Swadeshi (use Indian goods)\n• Boycott of British goods\n• Passive resistance\n• Non-cooperation\n• Mass mobilization\n• Strikes and demonstrations\n• National education\n• Cultural revival (festivals)\n• Four pillars: Swadeshi, Boycott, National Education, Passive Resistance\n\nExtra-constitutional but non-violent"
+      },
+      {
+        "id": "social-base",
+        "aspect": "🎓 SOCIAL BASE",
+        "moderates": "• English-educated elite\n• Lawyers, teachers, journalists\n• Urban upper/middle class\n• Landlords and businessmen\n• Limited following\n• Westernized Indians",
+        "extremists": "• Broader middle class\n• Lower middle class\n• Students (huge support)\n• Some artisans and traders\n• Attempted mass base\n• More traditional Indians\n• Used vernacular languages"
+      },
+      {
+        "id": "education",
+        "aspect": "📚 EDUCATION & BACKGROUND",
+        "moderates": "• English education\n• Influenced by Western liberalism\n• Studied British constitutional history\n• Admired British institutions\n• Rational, scientific outlook",
+        "extremists": "• Mix of English and traditional education\n• Influenced by Indian history and culture\n• Emphasized ancient Indian glory\n• Hindu revivalist appeal\n• Emotional, nationalist outlook"
+      },
+      {
+        "id": "culture",
+        "aspect": "🎭 APPROACH TO CULTURE",
+        "moderates": "• Westernized approach\n• Secular outlook\n• Reform traditional practices\n• Social reforms priority\n• Less emphasis on religion",
+        "extremists": "• Revive Indian culture\n• Hindu symbols and festivals\n• Tilak's Ganapati festivals\n• Shivaji festivals\n• Use of religious symbols\n• (Critics: Hindu bias, alienated Muslims)"
+      },
+      {
+        "id": "assessment",
+        "aspect": "⚖️ ASSESSMENT OF BRITISH RULE",
+        "moderates": "• Mixed assessment\n• Some positive aspects:\n  - Unity\n  - Modern education\n  - Railways\n  - Rule of law\n• Reforms can improve it",
+        "extremists": "• Totally negative\n• Exploitative and oppressive\n• Drain of wealth\n• De-industrialization\n• Poverty and famines\n• Cultural destruction\n• Must end completely"
+      },
+      {
+        "id": "timeline",
+        "aspect": "⏱️ TIMELINE EXPECTATION",
+        "moderates": "• Patient, long-term approach\n• Gradual evolution over generations\n• Prepare India slowly\n• Education and reforms first\n• No hurry",
+        "extremists": "• Immediate action needed\n• Present generation must fight\n• Can't wait for British benevolence\n• Time for struggle is NOW\n• Urgent nationalist mobilization"
+      }
+    ],
+    "splitEvent": {
+      "title": "The Surat Session (1907) - Actual Split",
+      "date": "December 1907",
+      "place": "Surat, Gujarat",
+      "context": {
+        "previousSession": "Calcutta (1906) - both factions cooperated; adopted Swaraj, Swadeshi, Boycott, National Education",
+        "tension": "Moderates regretted radical resolutions; wanted to reverse",
+        "presidency": "Dispute over who should be President for Surat session"
+      },
+      "controversies": [
+        {
+          "issue": "Presidential Candidate",
+          "moderates": "Wanted Rash Behari Ghosh (moderate)",
+          "extremists": "Wanted Lala Lajpat Rai (extremist)",
+          "outcome": "Moderates prevailed; Rash Behari Ghosh made President"
+        },
+        {
+          "issue": "Congress Constitution",
+          "moderates": "Wanted to amend constitution to restrict radical methods",
+          "extremists": "Opposed any restrictions",
+          "tension": "Fundamental disagreement on Congress direction"
+        },
+        {
+          "issue": "Resolutions",
+          "moderates": "Wanted to dilute radical resolutions of Calcutta session",
+          "extremists": "Wanted to continue aggressive policies",
+          "conflict": "Irreconcilable differences"
+        }
+      ],
+      "actualSplit": {
+        "incident": "Chaos in the session",
+        "description": [
+          "Heated arguments between factions",
+          "Tilak rose to speak; moderates opposed",
+          "Shoe throwing incident (by Shivakumar)",
+          "Physical scuffles broke out",
+          "Police called to restore order",
+          "Session abandoned in chaos",
+          "Congress formally split"
+        ],
+        "aftermath": [
+          "Moderates held separate session, elected Rash Behari Ghosh",
+          "Extremists walked out",
+          "Two separate Congress organizations briefly",
+          "Moderates retained control of official Congress organization"
+        ]
+      }
+    },
+    "aftermathConsequences": {
+      "title": "Aftermath of Split (1907-1916)",
+      "moderatesPosition": [
+        "Retained official Congress organization",
+        "Controlled Congress funds and infrastructure",
+        "British preferred dealing with moderates",
+        "Continued constitutional methods",
+        "Participated in Morley-Minto Reforms",
+        "Weak mass support"
+      ],
+      "extremistsPosition": [
+        "Lost organizational control",
+        "Faced severe British repression",
+        "Tilak imprisoned 6 years (1908-1914)",
+        "Lala Lajpat Rai deported",
+        "Movement suppressed",
+        "Revolutionary terrorism increased",
+        "Strong mass appeal but disorganized"
+      ],
+      "britishReaction": [
+        "Divide and rule succeeded",
+        "Crushed extremist leadership",
+        "Repressive laws passed",
+        "Granted minor reforms to moderates",
+        "Weakened nationalist movement"
+      ],
+      "reunification": {
+        "date": "Lucknow Session, 1916",
+        "leaders": "Annie Besant, Tilak (returned from prison)",
+        "circumstances": [
+          "World War I context",
+          "Moderate methods proved ineffective",
+          "Need for unity realized",
+          "Tilak returned from jail",
+          "Home Rule Movement brought unity"
+        ],
+        "outcome": "Congress reunited; extremists' methods gained acceptance"
+      }
+    },
+    "historicalSignificance": {
+      "title": "Historical Significance & Assessment",
+      "negativeImpact": [
+        "Weakened nationalist movement at crucial time",
+        "British exploited division successfully",
+        "Lost momentum of Swadeshi movement",
+        "Leadership imprisoned or suppressed",
+        "Moderate methods proved inadequate",
+        "Nine years of weakened Congress (1907-1916)"
+      ],
+      "positiveAspect": [
+        "Clarified ideological positions",
+        "Showed limitations of moderate methods",
+        "Extremist methods eventually accepted",
+        "Prepared ground for Gandhi's mass movements",
+        "Lesson in need for unity",
+        "After reunion (1916), Congress adopted more radical program"
+      ],
+      "lessons": [
+        "Unity essential for nationalist movement",
+        "Purely constitutional methods inadequate against colonial power",
+        "Mass mobilization necessary",
+        "Need to balance different approaches",
+        "British exploit divisions"
+      ]
+    },
+    "examTips": {
+      "mustRemember": [
+        "Surat Split: December 1907",
+        "Moderates vs Extremists division",
+        "Lal-Bal-Pal: Extremist trio",
+        "Gokhale: Moderate leader",
+        "Main issue: Methods and objectives",
+        "Reunited: 1916 (Lucknow)",
+        "Split weakened movement; reunion strengthened"
+      ],
+      "comparisonTip": "Remember 3 P's for Moderates (Petitions, Prayers, Protests) vs 4 pillars for Extremists (Swadeshi, Boycott, National Education, Passive Resistance)",
+      "examQuestions": [
+        "Compare Moderates and Extremists",
+        "Causes and consequences of Surat Split",
+        "Role of Lal-Bal-Pal",
+        "Why did Congress split in 1907?"
+      ]
+    }
+  }
+}
+

@@ -1,0 +1,301 @@
+{
+  "id": "european-arrival-factors",
+  "subject": "history",
+  "title": "Factors Leading to European Arrival in India",
+  "description": "Political, economic, religious, and geographical factors that led Europeans to India",
+  "visualType": "flowchart",
+  "metadata": {
+    "examRelevance": "high",
+    "relatedTopics": ["european-arrival-timeline", "european-powers-comparison"],
+    "tags": ["european-arrival", "trade", "exploration", "modern-history"]
+  },
+  "data": {
+    "legend": [
+      { "type": "cause", "label": "Primary Factors" },
+      { "type": "intermediate", "label": "Contributing Factors" }
+    ],
+    "categories": [
+      {
+        "id": "economic",
+        "label": "Economic Factors",
+        "color": "#F59E0B",
+        "icon": "💰",
+        "description": "Trade and commercial motivations",
+        "items": [
+          {
+            "id": "spice-trade",
+            "label": "Lucrative Spice Trade",
+            "subtitle": "Primary motivation",
+            "type": "cause",
+            "details": {
+              "description": "Indian spices were in huge demand in Europe",
+              "points": [
+                "Pepper, cinnamon, cloves, nutmeg highly valued",
+                "Used for food preservation and flavor",
+                "Medical purposes - believed to have healing properties",
+                "Luxury items for wealthy Europeans",
+                "Spices worth their weight in gold",
+                "Arab and Venetian middlemen charged high prices"
+              ]
+            }
+          },
+          {
+            "id": "indian-textiles",
+            "label": "Indian Textiles & Cotton",
+            "type": "cause",
+            "details": {
+              "description": "Superior quality Indian textiles attracted Europeans",
+              "points": [
+                "Muslin, calico, chintz famous worldwide",
+                "Superior weaving techniques",
+                "Natural dyes and printing",
+                "High demand in European markets",
+                "Indian textiles cheaper and better than European"
+              ]
+            }
+          },
+          {
+            "id": "precious-goods",
+            "label": "Gold, Gems & Luxury Goods",
+            "type": "cause",
+            "details": {
+              "points": [
+                "India known as 'Golden Sparrow'",
+                "Diamonds, precious stones abundant",
+                "Indigo, silk, sugar in demand",
+                "Wealth accumulation opportunity",
+                "No precious metals found in Europe"
+              ]
+            }
+          },
+          {
+            "id": "monopoly-breaking",
+            "label": "Breaking Arab-Venetian Monopoly",
+            "subtitle": "Direct trade route needed",
+            "type": "intermediate",
+            "details": {
+              "description": "Europeans wanted to bypass expensive middlemen",
+              "points": [
+                "Arabs controlled land routes",
+                "Venetians monopolized Mediterranean trade",
+                "Prices inflated 10-20 times",
+                "Need for direct sea route to India",
+                "Avoid Ottoman Turkish territories"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "political",
+        "label": "Political Factors",
+        "color": "#EF4444",
+        "icon": "🏛️",
+        "description": "Power struggle and colonization ambitions",
+        "items": [
+          {
+            "id": "european-rivalry",
+            "label": "Inter-European Rivalry",
+            "type": "cause",
+            "details": {
+              "description": "Competition among European powers",
+              "points": [
+                "Portugal vs Spain competition",
+                "Rise of England, France, Netherlands",
+                "Mercantilism - state-sponsored trade",
+                "National prestige through colonies",
+                "Military and naval supremacy",
+                "Treaty of Tordesillas (1494) divided world"
+              ]
+            }
+          },
+          {
+            "id": "colonial-expansion",
+            "label": "Colonial Expansion Policy",
+            "type": "cause",
+            "details": {
+              "points": [
+                "Mercantile capitalism promoting colonization",
+                "Chartered companies given monopoly rights",
+                "State support for overseas ventures",
+                "Establishing trading posts worldwide",
+                "Control over trade routes"
+              ]
+            }
+          },
+          {
+            "id": "political-instability-india",
+            "label": "Political Instability in India",
+            "subtitle": "After 16th century",
+            "type": "intermediate",
+            "details": {
+              "description": "Decline of central authority helped Europeans",
+              "points": [
+                "Mughal Empire declining (post-Aurangzeb)",
+                "Regional powers competing",
+                "No united resistance possible",
+                "Local rulers focused on internal conflicts",
+                "Europeans exploited divisions"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "religious",
+        "label": "Religious Factors",
+        "color": "#3B82F6",
+        "icon": "✝️",
+        "description": "Spread of Christianity and crusading zeal",
+        "items": [
+          {
+            "id": "spread-christianity",
+            "label": "Spread of Christianity",
+            "type": "cause",
+            "details": {
+              "description": "Religious zeal to convert non-Christians",
+              "points": [
+                "Counter-Reformation movement",
+                "Missionary activities encouraged",
+                "Portuguese particularly zealous",
+                "Pope's blessing for expeditions",
+                "Jesuit missions established",
+                "Competition with Islam"
+              ]
+            }
+          },
+          {
+            "id": "crusading-spirit",
+            "label": "Crusading Spirit",
+            "type": "intermediate",
+            "details": {
+              "points": [
+                "Legacy of Crusades against Muslims",
+                "Desire to spread 'true faith'",
+                "Religious justification for colonization",
+                "God, Glory, and Gold motto"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "technological",
+        "label": "Technological & Scientific Factors",
+        "color": "#10B981",
+        "icon": "🧭",
+        "description": "Advances in navigation and shipbuilding",
+        "items": [
+          {
+            "id": "navigation-improvements",
+            "label": "Navigational Improvements",
+            "type": "cause",
+            "details": {
+              "description": "Technical advances made long sea voyages possible",
+              "points": [
+                "Compass improved navigation",
+                "Astrolabe for latitude measurement",
+                "Better maps and charts",
+                "Knowledge of trade winds and currents",
+                "Mathematical calculations for sea routes",
+                "Portuguese nautical expertise"
+              ]
+            }
+          },
+          {
+            "id": "shipbuilding",
+            "label": "Advanced Shipbuilding",
+            "type": "cause",
+            "details": {
+              "points": [
+                "Caravel - fast, maneuverable ships",
+                "Multiple masts and sails",
+                "Larger cargo capacity",
+                "Ships equipped with cannons",
+                "Better preservation of food and water",
+                "Suitable for long ocean voyages"
+              ]
+            }
+          },
+          {
+            "id": "geographical-knowledge",
+            "label": "Geographical Knowledge",
+            "type": "intermediate",
+            "details": {
+              "points": [
+                "Renaissance spirit of inquiry",
+                "Study of Ptolemy's geography",
+                "Belief in spherical earth",
+                "Travel accounts (Marco Polo)",
+                "Arabic geographical knowledge",
+                "Scientific curiosity"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "individual",
+        "label": "Individual Enterprise",
+        "color": "#8B5CF6",
+        "icon": "🧑‍✈️",
+        "description": "Role of explorers and adventurers",
+        "items": [
+          {
+            "id": "explorers",
+            "label": "Brave Explorers & Navigators",
+            "type": "intermediate",
+            "details": {
+              "description": "Courageous individuals who led expeditions",
+              "points": [
+                "Prince Henry the Navigator (Portugal)",
+                "Vasco da Gama - found sea route to India",
+                "Christopher Columbus - reached Americas",
+                "Ferdinand Magellan - circumnavigated",
+                "Spirit of adventure and discovery",
+                "Personal fame and fortune"
+              ]
+            }
+          },
+          {
+            "id": "merchant-adventurers",
+            "label": "Merchant Adventurers",
+            "type": "intermediate",
+            "details": {
+              "points": [
+                "Wealthy merchants funded expeditions",
+                "Joint-stock companies formed",
+                "Risk-taking for high profits",
+                "Entrepreneurial spirit",
+                "Private enterprise with state support"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "connections": [
+      {
+        "from": "Breaking Arab-Venetian Monopoly",
+        "relationship": "required",
+        "to": "Navigational Improvements"
+      },
+      {
+        "from": "Lucrative Spice Trade",
+        "relationship": "motivated",
+        "to": "Discovery of Sea Routes"
+      },
+      {
+        "from": "Inter-European Rivalry",
+        "relationship": "accelerated",
+        "to": "Colonial Expansion"
+      },
+      {
+        "from": "Political Instability in India",
+        "relationship": "facilitated",
+        "to": "European Establishment"
+      }
+    ]
+  }
+}
+

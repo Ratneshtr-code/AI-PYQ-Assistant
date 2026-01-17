@@ -1,0 +1,477 @@
+{
+  "id": "home-rule-movement",
+  "subject": "history",
+  "title": "Home Rule League Movement (1916-1918)",
+  "description": "Movement for self-government led by Annie Besant and Bal Gangadhar Tilak",
+  "visualType": "timeline",
+  "metadata": {
+    "examRelevance": "high",
+    "relatedTopics": ["inc-surat-split", "morley-minto-reforms", "montagu-chelmsford"],
+    "tags": ["Home-Rule", "Annie-Besant", "Tilak", "1916-1918", "self-government"]
+  },
+  "data": {
+    "startYear": 1914,
+    "endYear": 1920,
+    "legend": [
+      { "type": "background", "label": "Background Events" },
+      { "type": "major", "label": "Home Rule Movement" },
+      { "type": "achievement", "label": "Achievements" },
+      { "type": "decline", "label": "Decline Phase" }
+    ],
+    "events": [
+      {
+        "id": "context",
+        "year": "1914-1916",
+        "title": "Background & Context",
+        "description": "Conditions leading to Home Rule Movement",
+        "type": "background",
+        "icon": "📋",
+        "details": {
+          "worldWar": {
+            "event": "World War I began (1914)",
+            "indianRole": "India contributed heavily - men, money, resources",
+            "expectation": "Indians expected self-government in return",
+            "disappointment": "British gave nothing; only repression continued"
+          },
+          "congressWeakness": {
+            "suratSplit": "Congress split (1907) weakened it",
+            "extremistsSuppr": "Extremist leaders imprisoned or suppressed",
+            "moderatesFailed": "Moderate methods proved ineffective",
+            "need": "Need for organized national movement again"
+          },
+          "tilakReturn": {
+            "imprisonment": "Tilak imprisoned 1908-1914 (Mandalay)",
+            "return": "Released in June 1914",
+            "impact": "Brought new energy to nationalist movement"
+          },
+          "annieBesantRole": {
+            "background": "Irish lady, Theosophist, settled in India",
+            "activities": "Active in social and educational work",
+            "newspapers": "Published 'New India' and 'Commonweal'",
+            "nationalism": "Became passionate Indian nationalist"
+          },
+          "irishInfluence": {
+            "inspiration": "Irish Home Rule Movement",
+            "model": "Similar demand for self-government within British Empire",
+            "terminology": "'Home Rule' borrowed from Irish movement"
+          }
+        },
+        "tags": ["World War I", "Tilak return", "context"]
+      },
+      {
+        "id": "besant-league",
+        "year": "September 1916",
+        "title": "Annie Besant's Home Rule League",
+        "description": "First Home Rule League established",
+        "type": "major",
+        "icon": "👩",
+        "details": {
+          "founder": "Dr. Annie Besant",
+          "established": "September 1916, Madras",
+          "headquarters": "Adyar, Madras (Chennai)",
+          "coverage": {
+            "areas": "Rest of India (except Maharashtra, Karnataka, Central Provinces, Berar)",
+            "reason": "Tilak would cover these areas with his league"
+          },
+          "structure": {
+            "president": "Annie Besant",
+            "secretary": "George Arundale",
+            "members": "Prominent leaders from Madras and other regions"
+          },
+          "keyFigures": [
+            "Annie Besant",
+            "C.P. Ramaswamy Aiyar",
+            "S. Subramania Iyer",
+            "B.P. Wadia",
+            "Joseph Baptista"
+          ],
+          "activities": [
+            "Extensive propaganda campaign",
+            "Published 'New India' newspaper",
+            "Public meetings and lectures",
+            "Pamphlets and literature distribution",
+            "Toured extensively",
+            "Used innovative publicity methods"
+          ],
+          "membership": "Rapid growth; thousands joined",
+          "slogan": "Home Rule is my birthright (adapted from Tilak)"
+        },
+        "tags": ["Annie Besant", "Madras", "first league"]
+      },
+      {
+        "id": "tilak-league",
+        "year": "April 1916",
+        "title": "Tilak's Home Rule League",
+        "description": "Second Home Rule League established (actually earlier)",
+        "type": "major",
+        "icon": "👨",
+        "details": {
+          "founder": "Bal Gangadhar Tilak",
+          "established": "April 1916 (though announced after Besant's)",
+          "headquarters": "Poona (Pune)",
+          "coverage": {
+            "areas": "Maharashtra, Karnataka, Central Provinces, Berar",
+            "reason": "Tilak's traditional base of support"
+          },
+          "structure": {
+            "president": "Joseph Baptista (but Tilak was real leader)",
+            "secretary": "N.C. Kelkar",
+            "members": "Mainly from Maharashtra"
+          },
+          "keyFigures": [
+            "Bal Gangadhar Tilak (main leader)",
+            "Joseph Baptista",
+            "N.C. Kelkar",
+            "S.A. Brelvi",
+            "Jinnah (briefly associated)"
+          ],
+          "activities": [
+            "Propaganda through newspapers",
+            "Published 'Maratha' (English) and 'Kesari' (Marathi)",
+            "Public meetings",
+            "Lectures and speeches",
+            "Utilized Ganapati and Shivaji festivals",
+            "Mass mobilization"
+          ],
+          "slogan": "Swaraj is my birthright and I shall have it!",
+          "membership": "About 1400 branches; 32,000 members at peak"
+        },
+        "tags": ["Tilak", "Maharashtra", "second league"]
+      },
+      {
+        "id": "lucknow-pact",
+        "year": "December 1916",
+        "title": "Congress-League Lucknow Pact",
+        "description": "Hindu-Muslim unity; Congress reunification",
+        "type": "achievement",
+        "icon": "🤝",
+        "details": {
+          "venue": "Lucknow Session of Congress",
+          "date": "December 1916",
+          "significance": "Multiple historic achievements",
+          "events": [
+            {
+              "achievement": "Congress Reunification",
+              "description": "Moderates and Extremists reunited after 9 years",
+              "impact": "Strengthened Congress; both factions worked together",
+              "leaders": "Annie Besant, Tilak played key roles in unity"
+            },
+            {
+              "achievement": "Congress-Muslim League Pact",
+              "description": "Congress and Muslim League reached agreement",
+              "terms": [
+                "Congress accepted separate electorates for Muslims (temporary measure)",
+                "Muslim League adopted goal of self-government",
+                "Both agreed to demand Home Rule",
+                "Provincial autonomy demanded",
+                "Expansion of legislative councils"
+              ],
+              "architects": "Jinnah (Muslim League) and Tilak (Congress) - key negotiators",
+              "significance": "Brief period of Hindu-Muslim political unity"
+            }
+          ],
+          "commonDemand": "Both organizations demanded Home Rule/Self-Government within British Empire",
+          "impact": "Strengthened Home Rule Movement; showed united Indian front",
+          "jinnah": "Muhammad Ali Jinnah called 'Ambassador of Hindu-Muslim Unity'"
+        },
+        "tags": ["Lucknow Pact", "reunion", "unity"]
+      },
+      {
+        "id": "demands-methods",
+        "year": "1916-1917",
+        "title": "Demands and Methods",
+        "description": "What Home Rule Leagues wanted and how they worked",
+        "type": "major",
+        "icon": "🎯",
+        "details": {
+          "mainDemand": {
+            "primary": "Self-government (Home Rule) for India within British Empire",
+            "model": "Similar to self-governing dominions like Canada, Australia",
+            "clarification": "Not complete independence; dominion status"
+          },
+          "otherDemands": [
+            "Responsible government in India",
+            "Indians to control Indian administration",
+            "Expanded legislative councils with real powers",
+            "Indian majority in councils",
+            "Repeal of repressive laws",
+            "Freedom of press and speech",
+            "Release of political prisoners"
+          ],
+          "methods": [
+            {
+              "method": "Massive Propaganda",
+              "details": [
+                "Extensive use of newspapers",
+                "Public lectures and meetings",
+                "Pamphlets and literature in vernacular languages",
+                "Posters and handbills",
+                "House-to-house campaigns"
+              ]
+            },
+            {
+              "method": "Political Education",
+              "details": [
+                "Educated masses about political rights",
+                "Explained concept of self-government",
+                "Created political awareness",
+                "Discussion groups and study circles"
+              ]
+            },
+            {
+              "method": "Constitutional Agitation",
+              "details": [
+                "Petitions to British Government",
+                "Resolutions in meetings",
+                "Delegations to officials",
+                "Constitutional and peaceful methods"
+              ]
+            },
+            {
+              "method": "Mass Mobilization",
+              "details": [
+                "Toured extensively across India",
+                "Reached smaller towns and villages",
+                "Recruited members actively",
+                "Created local committees",
+                "Women encouraged to participate"
+              ]
+            }
+          ],
+          "innovativeTactics": [
+            "Used visual symbols and slogans effectively",
+            "Adapted Irish Home Rule movement tactics",
+            "Combined moderate methods with mass appeal",
+            "Utilized festivals for political mobilization"
+          ]
+        },
+        "tags": ["demands", "methods", "propaganda"]
+      },
+      {
+        "id": "british-repression",
+        "year": "1917",
+        "title": "British Repression",
+        "description": "Government crackdown on Home Rule Movement",
+        "type": "background",
+        "icon": "⚔️",
+        "details": {
+          "concern": "British alarmed by rapid growth and mass appeal",
+          "measures": [
+            {
+              "action": "Annie Besant Arrested",
+              "date": "June 1917",
+              "place": "Interned at Ootacamund (Ooty)",
+              "reaction": "Huge public outcry; made her more popular",
+              "associates": "Her associates B.P. Wadia and G.S. Arundale also interned"
+            },
+            {
+              "action": "Tilak's Movement Targeted",
+              "methods": "Surveillance, restrictions, propaganda against him"
+            },
+            {
+              "action": "Newspapers Suppressed",
+              "impact": "'New India' and other newspapers faced restrictions",
+              "censorship": "Heavy censorship imposed"
+            },
+            {
+              "action": "Meetings Banned",
+              "description": "Public meetings restricted or banned in many areas"
+            },
+            {
+              "action": "Leaders Harassed",
+              "methods": "Arrests, surveillance, travel restrictions"
+            }
+          ],
+          "backfire": {
+            "result": "Repression increased sympathy for movement",
+            "besantPopularity": "Annie Besant became even more popular",
+            "support": "Moderates like Jinnah, Chintamani opposed government action",
+            "pressure": "Even British liberals in England criticized repression"
+          }
+        },
+        "tags": ["repression", "Besant arrest", "British response"]
+      },
+      {
+        "id": "peak-success",
+        "year": "1917",
+        "title": "Peak of Movement & Achievements",
+        "description": "Height of Home Rule Movement's success",
+        "type": "achievement",
+        "icon": "🏆",
+        "details": {
+          "membership": {
+            "besantLeague": "About 28,000 members",
+            "tilakLeague": "About 32,000 members",
+            "total": "Around 60,000 active members",
+            "branches": "Hundreds of branches across India",
+            "supporters": "Lakhs of sympathizers"
+          },
+          "spread": {
+            "geographic": "Pan-India presence",
+            "social": "Reached urban middle class, students, professionals",
+            "women": "Significant women's participation",
+            "youth": "Strong student support"
+          },
+          "achievements": [
+            {
+              "achievement": "Montagu Declaration (August 1917)",
+              "significance": "British announced goal of responsible government for India",
+              "statement": "Progressive realization of responsible government in India",
+              "impact": "First time British officially accepted Indian self-government as goal",
+              "credit": "Largely due to Home Rule Movement pressure"
+            },
+            {
+              "achievement": "Politicization of Masses",
+              "impact": "Created unprecedented political awareness",
+              "reach": "Penetrated beyond elite to middle classes"
+            },
+            {
+              "achievement": "Annie Besant Released",
+              "date": "September 1917",
+              "reason": "Public pressure forced release",
+              "triumph": "Victory for movement"
+            },
+            {
+              "achievement": "Congress Presidency for Besant",
+              "session": "Calcutta Session, December 1917",
+              "significance": "First woman President of Congress",
+              "recognition": "Recognition of her role"
+            },
+            {
+              "achievement": "Prepared Ground for Gandhi",
+              "impact": "Created mass base and political consciousness",
+              "transition": "Made Gandhi's later mass movements possible"
+            }
+          ]
+        },
+        "tags": ["peak", "Montagu Declaration", "success"]
+      },
+      {
+        "id": "decline",
+        "year": "1918-1920",
+        "title": "Decline of Movement",
+        "description": "Why and how Home Rule Movement declined",
+        "type": "decline",
+        "icon": "📉",
+        "details": {
+          "reasons": [
+            {
+              "reason": "Montagu Declaration (1917)",
+              "impact": "Major demand seemingly accepted; took wind out of sails",
+              "reality": "Though vague, it satisfied many moderates"
+            },
+            {
+              "reason": "Montagu-Chelmsford Reforms (1919)",
+              "impact": "Reforms announced; divided opinion",
+              "effect": "Some satisfied; others wanted more"
+            },
+            {
+              "reason": "Internal Differences",
+              "issues": [
+                "Tilak and Besant developed differences",
+                "Disagreements on future course",
+                "Personal and ideological conflicts",
+                "Organizational coordination problems"
+              ]
+            },
+            {
+              "reason": "Gandhi's Entry",
+              "event": "Gandhi emerged as mass leader (1919 onwards)",
+              "transition": "Non-Cooperation Movement (1920) absorbed activists",
+              "methods": "Gandhi's methods more radical and appealing"
+            },
+            {
+              "reason": "Tilak's Death",
+              "date": "August 1920",
+              "impact": "Lost charismatic leader; Tilak's league weakened"
+            },
+            {
+              "reason": "World War I Ended (1918)",
+              "context": "Changed political situation",
+              "expectations": "Post-war expectations not met"
+            },
+            {
+              "reason": "Limited Goals",
+              "issue": "Dominion status demand seemed inadequate",
+              "comparison": "Gandhi demanded more radical changes"
+            },
+            {
+              "reason": "Incorporation into Congress",
+              "development": "Home Rule Leagues merged into Congress activities",
+              "transformation": "Congress itself adopted more radical program"
+            }
+          ],
+          "transition": {
+            "from": "Home Rule Movement (constitutional, dominion status)",
+            "to": "Non-Cooperation Movement (mass agitation, complete independence later)",
+            "continuity": "But Home Rule Movement prepared masses for Gandhi's leadership"
+          }
+        },
+        "tags": ["decline", "reasons", "transition to Gandhi"]
+      }
+    ],
+    "overallAssessment": {
+      "title": "Historical Significance & Assessment",
+      "achievements": [
+        "Revived nationalist movement after Surat Split doldrums",
+        "Created mass political consciousness",
+        "Reunited Congress (Moderates-Extremists)",
+        "Forced Montagu Declaration - British acceptance of self-government goal",
+        "First woman President of Congress (Annie Besant)",
+        "Prepared ground for Gandhi's mass movements",
+        "Demonstrated potential of mass mobilization",
+        "Used innovative propaganda methods",
+        "Brought politics to smaller towns and middle classes"
+      ],
+      "limitations": [
+        "Limited to urban areas and middle class",
+        "Did not mobilize peasants or workers effectively",
+        "Demand limited to dominion status (not independence)",
+        "Constitutional methods only (no mass civil disobedience)",
+        "Internal differences weakened movement",
+        "Could not sustain beyond 1918-19",
+        "Overshadowed by Gandhi's more radical methods"
+      ],
+      "legacy": [
+        "Bridge between early nationalist phase and Gandhian mass movement",
+        "Proved mass movements possible in India",
+        "Created organizational experience",
+        "Popularized concept of self-rule",
+        "Annie Besant's role inspired women's participation",
+        "Set stage for Non-Cooperation Movement"
+      ],
+      "comparison": {
+        "withModerateEra": "More aggressive, mass-based than Moderate petitions",
+        "withGandhiEra": "Less radical, more constitutional than Gandhi's methods",
+        "position": "Transition phase between two eras"
+      }
+    },
+    "examTips": {
+      "mustRemember": [
+        "Two Home Rule Leagues: (1) Tilak's (April 1916, Maharashtra) (2) Besant's (Sep 1916, Madras)",
+        "Inspired by Irish Home Rule Movement",
+        "Main demand: Self-government/Dominion status (not complete independence)",
+        "Peak: 1917",
+        "Major achievement: Montagu Declaration (Aug 1917)",
+        "Annie Besant: First woman Congress President (1917)",
+        "Decline: After 1918 due to Montagu-Chelmsford Reforms, Gandhi's emergence",
+        "Significance: Prepared ground for Gandhi's mass movements"
+      ],
+      "keyDates": [
+        "April 1916: Tilak's league",
+        "September 1916: Besant's league",
+        "December 1916: Lucknow Pact",
+        "June 1917: Besant arrested",
+        "August 1917: Montagu Declaration",
+        "December 1917: Besant Congress President"
+      ],
+      "examQuestions": [
+        "Discuss Home Rule Movement and its significance",
+        "Roles of Tilak and Annie Besant in Home Rule Movement",
+        "Why did Home Rule Movement decline?",
+        "How did Home Rule Movement prepare ground for Gandhian era?"
+      ]
+    }
+  }
+}
+

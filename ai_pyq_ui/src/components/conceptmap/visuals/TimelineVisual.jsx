@@ -158,20 +158,129 @@ export default function TimelineVisual({ topicData }) {
                                                                         {typeof event.details === 'string' ? (
                                                                             <p className="text-gray-700 text-sm">{event.details}</p>
                                                                         ) : (
-                                                                            <div className="space-y-2">
-                                                                                {event.details.points && (
-                                                                                    <ul className="list-disc list-inside space-y-1 text-sm text-gray-700">
-                                                                                        {event.details.points.map((point, i) => (
-                                                                                            <li key={i}>{point}</li>
-                                                                                        ))}
-                                                                                    </ul>
-                                                                                )}
-                                                                                {event.details.significance && (
-                                                                                    <div className="mt-2 p-2 bg-yellow-50 rounded border border-yellow-200">
-                                                                                        <p className="text-xs font-semibold text-yellow-800 mb-1">Significance:</p>
-                                                                                        <p className="text-sm text-yellow-900">{event.details.significance}</p>
-                                                                                    </div>
-                                                                                )}
+                                                                            <div className="space-y-3">
+                                                                                {/* Render all detail fields dynamically */}
+                                                                                {Object.entries(event.details).map(([key, value]) => {
+                                                                                    // Skip null/undefined values
+                                                                                    if (value === null || value === undefined) return null;
+                                                                                    
+                                                                                    // Define styling for specific field types
+                                                                                    const fieldConfig = {
+                                                                                        founder: { icon: '👤', bg: 'bg-blue-50', border: 'border-blue-200', text: 'text-blue-800', content: 'text-blue-900', label: 'Founder' },
+                                                                                        founders: { icon: '👥', bg: 'bg-blue-50', border: 'border-blue-200', text: 'text-blue-800', content: 'text-blue-900', label: 'Founders' },
+                                                                                        place: { icon: '📍', bg: 'bg-green-50', border: 'border-green-200', text: 'text-green-800', content: 'text-green-900', label: 'Place' },
+                                                                                        objectives: { icon: '🎯', bg: 'bg-purple-50', border: 'border-purple-200', text: 'text-purple-800', content: 'text-purple-900', label: 'Objectives' },
+                                                                                        activities: { icon: '⚡', bg: 'bg-orange-50', border: 'border-orange-200', text: 'text-orange-800', content: 'text-orange-900', label: 'Activities' },
+                                                                                        achievements: { icon: '🏆', bg: 'bg-green-50', border: 'border-green-200', text: 'text-green-800', content: 'text-green-900', label: 'Achievements' },
+                                                                                        significance: { icon: '⭐', bg: 'bg-yellow-50', border: 'border-yellow-200', text: 'text-yellow-800', content: 'text-yellow-900', label: 'Significance' },
+                                                                                        limitation: { icon: '⚠️', bg: 'bg-red-50', border: 'border-red-200', text: 'text-red-800', content: 'text-red-900', label: 'Limitation' },
+                                                                                        limitations: { icon: '⚠️', bg: 'bg-red-50', border: 'border-red-200', text: 'text-red-800', content: 'text-red-900', label: 'Limitations' },
+                                                                                        members: { icon: '👥', bg: 'bg-indigo-50', border: 'border-indigo-200', text: 'text-indigo-800', content: 'text-indigo-900', label: 'Members' },
+                                                                                        leaders: { icon: '👔', bg: 'bg-blue-50', border: 'border-blue-200', text: 'text-blue-800', content: 'text-blue-900', label: 'Leaders' },
+                                                                                        context: { icon: '📖', bg: 'bg-blue-50', border: 'border-blue-200', text: 'text-blue-800', content: 'text-blue-900', label: 'Context' },
+                                                                                        mainProvisions: { icon: '✓', bg: 'bg-green-50', border: 'border-green-200', text: 'text-green-800', content: 'text-green-900', label: 'Main Provisions' },
+                                                                                        keyPoint: { icon: '🔑', bg: 'bg-purple-50', border: 'border-purple-200', text: 'text-purple-800', content: 'text-purple-900', label: 'Key Point' },
+                                                                                        examNote: { icon: '💡', bg: 'bg-pink-50', border: 'border-pink-200', text: 'text-pink-800', content: 'text-pink-900', label: 'Exam Note' },
+                                                                                        examImportant: { icon: '🎓', bg: 'bg-pink-50', border: 'border-pink-200', text: 'text-pink-800', content: 'text-pink-900', label: 'Important for Exams' },
+                                                                                        uniqueness: { icon: '✨', bg: 'bg-cyan-50', border: 'border-cyan-200', text: 'text-cyan-800', content: 'text-cyan-900', label: 'Unique Feature' },
+                                                                                        formation: { icon: '🔨', bg: 'bg-gray-50', border: 'border-gray-300', text: 'text-gray-800', content: 'text-gray-900', label: 'Formation' },
+                                                                                        character: { icon: '📋', bg: 'bg-gray-50', border: 'border-gray-300', text: 'text-gray-800', content: 'text-gray-900', label: 'Character' },
+                                                                                        connection: { icon: '🔗', bg: 'bg-teal-50', border: 'border-teal-200', text: 'text-teal-800', content: 'text-teal-900', label: 'Connection' },
+                                                                                        note: { icon: '📝', bg: 'bg-gray-50', border: 'border-gray-300', text: 'text-gray-800', content: 'text-gray-900', label: 'Note' },
+                                                                                    };
+                                                                                    
+                                                                                    const config = fieldConfig[key] || { 
+                                                                                        icon: '📌', 
+                                                                                        bg: 'bg-gray-50', 
+                                                                                        border: 'border-gray-300', 
+                                                                                        text: 'text-gray-800', 
+                                                                                        content: 'text-gray-900',
+                                                                                        label: key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')
+                                                                                    };
+                                                                                    
+                                                                                    // Render based on value type
+                                                                                    if (typeof value === 'string') {
+                                                                                        return (
+                                                                                            <div key={key} className={`p-3 ${config.bg} rounded border ${config.border}`}>
+                                                                                                <p className={`text-xs font-semibold ${config.text} mb-1`}>
+                                                                                                    {config.icon} {config.label}
+                                                                                                </p>
+                                                                                                <p className={`text-sm ${config.content}`}>{value}</p>
+                                                                                            </div>
+                                                                                        );
+                                                                                    } else if (Array.isArray(value)) {
+                                                                                        // Check if array contains objects or primitives
+                                                                                        const hasObjects = value.length > 0 && typeof value[0] === 'object';
+                                                                                        
+                                                                                        return (
+                                                                                            <div key={key} className={`p-3 ${config.bg} rounded border ${config.border}`}>
+                                                                                                <p className={`text-xs font-semibold ${config.text} mb-2`}>
+                                                                                                    {config.icon} {config.label}
+                                                                                                </p>
+                                                                                                {hasObjects ? (
+                                                                                                    // Array of objects - render each as a card
+                                                                                                    <div className="space-y-2">
+                                                                                                        {value.map((item, i) => (
+                                                                                                            <div key={i} className="p-2 bg-white bg-opacity-50 rounded border border-gray-200">
+                                                                                                                {Object.entries(item).map(([objKey, objValue]) => (
+                                                                                                                    <div key={objKey} className="mb-1 last:mb-0">
+                                                                                                                        <strong className="text-xs capitalize text-gray-700">
+                                                                                                                            {objKey.replace(/([A-Z])/g, ' $1').trim()}:
+                                                                                                                        </strong>
+                                                                                                                        {Array.isArray(objValue) ? (
+                                                                                                                            <ul className="list-disc list-inside ml-3 text-xs text-gray-600">
+                                                                                                                                {objValue.map((subItem, idx) => (
+                                                                                                                                    <li key={idx}>{subItem}</li>
+                                                                                                                                ))}
+                                                                                                                            </ul>
+                                                                                                                        ) : (
+                                                                                                                            <span className="text-xs text-gray-600 ml-1">{objValue}</span>
+                                                                                                                        )}
+                                                                                                                    </div>
+                                                                                                                ))}
+                                                                                                            </div>
+                                                                                                        ))}
+                                                                                                    </div>
+                                                                                                ) : (
+                                                                                                    // Array of primitives - render as list
+                                                                                                    <ul className={`list-disc list-inside space-y-1 text-sm ${config.content}`}>
+                                                                                                        {value.map((item, i) => (
+                                                                                                            <li key={i}>{item}</li>
+                                                                                                        ))}
+                                                                                                    </ul>
+                                                                                                )}
+                                                                                            </div>
+                                                                                        );
+                                                                                    } else if (typeof value === 'object') {
+                                                                                        // Nested object - render recursively
+                                                                                        return (
+                                                                                            <div key={key} className={`p-3 ${config.bg} rounded border ${config.border}`}>
+                                                                                                <p className={`text-xs font-semibold ${config.text} mb-2`}>
+                                                                                                    {config.icon} {config.label}
+                                                                                                </p>
+                                                                                                <div className={`space-y-1 text-sm ${config.content}`}>
+                                                                                                    {Object.entries(value).map(([subKey, subValue]) => (
+                                                                                                        <div key={subKey}>
+                                                                                                            <strong className="capitalize">
+                                                                                                                {subKey.replace(/([A-Z])/g, ' $1').trim()}:
+                                                                                                            </strong>{' '}
+                                                                                                            {Array.isArray(subValue) ? (
+                                                                                                                <ul className="list-disc list-inside ml-4 mt-1 space-y-0.5">
+                                                                                                                    {subValue.map((item, idx) => (
+                                                                                                                        <li key={idx}>{item}</li>
+                                                                                                                    ))}
+                                                                                                                </ul>
+                                                                                                            ) : (
+                                                                                                                <span>{subValue}</span>
+                                                                                                            )}
+                                                                                                        </div>
+                                                                                                    ))}
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        );
+                                                                                    }
+                                                                                    return null;
+                                                                                })}
                                                                             </div>
                                                                         )}
                                                                     </motion.div>

@@ -1,0 +1,254 @@
+{
+  "id": "constitutional-acts-timeline",
+  "subject": "history",
+  "title": "Constitutional, Administrative & Judicial Development (1773-1853)",
+  "description": "Major Acts that shaped British administration in India before 1857",
+  "visualType": "timeline",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["british-presidencies", "revolt-1857-causes"],
+    "tags": ["constitutional-acts", "administration", "reforms", "governance", "acts"]
+  },
+  "data": {
+    "startYear": 1773,
+    "endYear": 1853,
+    "legend": [
+      { "type": "major", "label": "Major Constitutional Acts" },
+      { "type": "judicial", "label": "Judicial Reforms" },
+      { "type": "administrative", "label": "Administrative Changes" }
+    ],
+    "events": [
+      {
+        "id": "regulating-act-1773",
+        "year": "1773",
+        "title": "The Regulating Act of 1773",
+        "description": "First step towards parliamentary control over EIC",
+        "type": "major",
+        "icon": "📜",
+        "details": {
+          "context": {
+            "background": "EIC's mismanagement and corruption in Bengal after Battle of Plassey (1757) and Diwani rights (1765) led British Parliament to intervene",
+            "trigger": "Great Bengal Famine (1770), financial crisis of EIC, misrule reports"
+          },
+          "mainProvisions": [
+            "Designation of Governor-General: Governor of Bengal made Governor-General (Warren Hastings was first)",
+            "Executive Council: 4-member Council created to assist Governor-General",
+            "Supreme Court: Established in Calcutta (1774) with Chief Justice and 3 judges",
+            "Control over Presidencies: Madras and Bombay subordinated to Bengal",
+            "Court of Directors: Tenure increased to 4 years; 1/4th to retire annually",
+            "Shareholders' Rights: Voting qualification increased to £1,000 stock",
+            "Restrictions on Employees: EIC servants prohibited from private trade",
+            "Accountability: Company required to submit reports to Parliament"
+          ],
+          "significance": "First Parliamentary intervention; recognized Company's administrative functions; laid foundation for centralized administration",
+          "limitations": [
+            "Governor-General not given veto power",
+            "Council could override Governor-General decisions",
+            "Supreme Court jurisdiction unclear, conflicted with native laws",
+            "No provision for coordination between Governor-General and Council"
+          ]
+        },
+        "tags": ["Regulating Act", "Warren Hastings", "Supreme Court", "milestone"]
+      },
+      {
+        "id": "pitts-act-1784",
+        "year": "1784",
+        "title": "Pitt's India Act of 1784",
+        "description": "Established dual government system (Board of Control + Court of Directors)",
+        "type": "major",
+        "icon": "⚖️",
+        "details": {
+          "context": {
+            "background": "Defects of Regulating Act 1773; conflicts between Governor-General and Council; need for more parliamentary control",
+            "proposer": "William Pitt the Younger (British Prime Minister)"
+          },
+          "mainProvisions": [
+            "Board of Control: Created (6 members including 2 Cabinet ministers) to control political affairs",
+            "Dual Control: Company controlled commercial affairs; Board of Control supervised political affairs",
+            "Governor-General's Powers: Strengthened; could override Council in special cases",
+            "Presidencies: Governor-General given authority to control other presidencies",
+            "Secret Committee: 3-member committee of Directors to handle confidential matters",
+            "Declaration of War: Required permission from Crown",
+            "Territorial Expansion: Prohibited without approval",
+            "Civil Servants: System of civil service established"
+          ],
+          "significance": "Established dual government; brought political administration under British Crown while retaining commercial functions with Company; system lasted till 1858",
+          "keyPoint": "This system of dual control continued until 1858 when Company rule ended"
+        },
+        "tags": ["Pitt's Act", "Board of Control", "Dual Government", "milestone"]
+      },
+      {
+        "id": "act-1786",
+        "year": "1786",
+        "title": "The Act of 1786",
+        "description": "Strengthened Governor-General's position (Cornwallis Code)",
+        "type": "administrative",
+        "icon": "👑",
+        "details": {
+          "context": {
+            "background": "Lord Cornwallis appointed as Governor-General; demanded more powers",
+            "reason": "Strengthen executive authority; reduce Council interference"
+          },
+          "mainProvisions": [
+            "Governor-General's Authority: Given power to override Council in special cases",
+            "Commander-in-Chief: Governor-General could be Commander-in-Chief simultaneously",
+            "Emergency Powers: Special powers during emergencies",
+            "Council's Role: Reduced interference in executive decisions",
+            "Board of Control: Authority enhanced"
+          ],
+          "significance": "Strengthened executive; enabled efficient administration; Cornwallis implemented major judicial and administrative reforms",
+          "relatedReforms": {
+            "title": "Cornwallis Reforms (1786-1793)",
+            "reforms": [
+              "Permanent Settlement (1793) - land revenue system",
+              "Separation of judiciary from executive",
+              "District administration reorganized",
+              "Police system reformed",
+              "Civil services system started",
+              "Exclusion of Indians from higher posts"
+            ]
+          }
+        },
+        "tags": ["Cornwallis", "executive powers", "1786"]
+      },
+      {
+        "id": "charter-act-1793",
+        "year": "1793",
+        "title": "The Charter Act of 1793",
+        "description": "Renewed Company's monopoly for 20 years; strengthened Board of Control",
+        "type": "major",
+        "icon": "📋",
+        "details": {
+          "context": {
+            "background": "Company's charter needed renewal; Parliament assessed Company's performance",
+            "duration": "Extended Company's charter for another 20 years"
+          },
+          "mainProvisions": [
+            "Charter Extension: Company's commercial monopoly extended for 20 years",
+            "Board of Control: Powers substantially increased over Company",
+            "Governor-General: Powers further strengthened",
+            "Civil Servants: Regulations for selection and payment",
+            "Financial Control: Company required to pay £500,000 annually to British government",
+            "Legislative Authority: Governor-General's government could make regulations",
+            "Presidencies: Control system refined",
+            "Accountability: Increased reporting to Parliament"
+          ],
+          "significance": "Enhanced Board of Control's authority; made Company more accountable to Parliament; laid foundation for separation of executive and judicial functions",
+          "note": "This Act did not introduce major constitutional changes but consolidated previous reforms"
+        },
+        "tags": ["Charter Act", "1793", "Board of Control"]
+      },
+      {
+        "id": "charter-act-1813",
+        "year": "1813",
+        "title": "The Charter Act of 1813",
+        "description": "End of Company's trade monopoly; Christian missionaries allowed",
+        "type": "major",
+        "icon": "⛪",
+        "details": {
+          "context": {
+            "background": "British industrialists demanded free trade with India; missionaries wanted access; Indian trade too profitable to remain monopoly",
+            "resistance": "Company resisted but Parliament imposed changes"
+          },
+          "mainProvisions": [
+            "Trade Monopoly Ended: Company's trade monopoly with India abolished (except China tea trade)",
+            "Free Trade: British subjects allowed to trade with India with license",
+            "Christian Missionaries: Permitted to preach in India",
+            "Indian Education: £1 lakh annually for education of Indians in British territories",
+            "Charter Extension: Extended for another 20 years",
+            "Company's Position: Retained territorial control",
+            "Local Governments: Powers of provincial governments defined",
+            "Financial Separation: Commercial and territorial revenues to be kept separate"
+          ],
+          "significance": "Watershed moment - Company became administrative body rather than trading company; beginning of free trade era; opening to missionary activities",
+          "impact": "Led to influx of British merchants, rise of modern education, spread of Christianity, and British cultural influence"
+        },
+        "tags": ["Charter Act", "1813", "trade monopoly", "missionaries", "education", "milestone"]
+      },
+      {
+        "id": "charter-act-1833",
+        "year": "1833",
+        "title": "The Charter Act of 1833",
+        "description": "Complete end of Company's commercial activities; administrative centralization",
+        "type": "major",
+        "icon": "🏛️",
+        "details": {
+          "context": {
+            "background": "Industrial Revolution in Britain; demand for completely free trade; Company's commercial role questioned",
+            "significance": "Most comprehensive administrative reform till date"
+          },
+          "mainProvisions": [
+            "Commercial Activities Ended: Company ceased to be commercial entity entirely",
+            "China Trade: Even China tea trade monopoly abolished",
+            "Administrative Body: Company became purely administrative agent of British Crown",
+            "Governor-General of India: Title changed from 'Governor-General of Bengal' to 'Governor-General of India'",
+            "Centralized Legislature: Governor-General's government became legislative authority for entire India",
+            "Law Member: 4th member (Law Member) added to Governor-General's Council",
+            "Equality in Employment: Indians not to be debarred from any office on grounds of religion, color, birth, descent",
+            "Civil Services: Open competition recommended (not implemented)",
+            "Slavery: Attempted to abolish slavery",
+            "Charter: Extended for 20 years"
+          ],
+          "significance": "Company transformed into administrative agent of Crown; centralization of legislation; first official recognition of Indians' right to hold office (though rarely implemented)",
+          "notablePoints": [
+            "Lord William Bentinck was Governor-General when Act passed",
+            "First Law Member: Lord Macaulay (1834)",
+            "Beginning of centralized law-making for all of India",
+            "Company's commercial chapter closed forever"
+          ]
+        },
+        "tags": ["Charter Act", "1833", "commercial end", "Law Member", "Macaulay", "milestone"]
+      },
+      {
+        "id": "charter-act-1853",
+        "year": "1853",
+        "title": "The Charter Act of 1853",
+        "description": "Last Charter Act; introduction of competitive exams for civil services; legislative reforms",
+        "type": "major",
+        "icon": "🎓",
+        "details": {
+          "context": {
+            "background": "Growing criticism of Company rule; need for professional administration; demand for legislative reforms",
+            "importance": "Last Charter Act before 1857 Revolt"
+          },
+          "mainProvisions": [
+            "No Time Limit: Charter extended without time limit (till Parliament decided otherwise)",
+            "Competitive Exams: Open competitive examination for Indian Civil Services introduced",
+            "Law Member: Made full member of Governor-General's Council (earlier only for legislative work)",
+            "Legislative Council: Separate legislative council created (6 additional members)",
+            "Provincial Representation: Provincial governments to be represented in legislative council",
+            "Legislative Process: Procedure similar to British Parliament",
+            "Governor-General's Authority: Executive and legislative functions separated",
+            "Local Governments: Lieutenant Governors for Bengal, Bombay, Madras",
+            "Patronage Ended: Directors' patronage in appointments abolished"
+          ],
+          "significance": "Introduced competitive merit-based civil service; separated legislative and executive functions; laid foundation for parliamentary system in India",
+          "historicalContext": {
+            "note": "Last major reform before 1857 Revolt",
+            "aftermath": "After revolt, Company rule ended completely (Government of India Act 1858)"
+          },
+          "examImportant": [
+            "Only Charter Act without time limit",
+            "First to introduce competitive exams (Macaulay Committee recommendation implemented)",
+            "Created embryo of parliamentary system",
+            "Most progressive Charter Act"
+          ]
+        },
+        "tags": ["Charter Act", "1853", "civil services", "competitive exam", "legislative council", "milestone"]
+      }
+    ],
+    "summary": {
+      "title": "Evolution Pattern",
+      "progression": [
+        "1773: Parliamentary control begins → Governor-General system",
+        "1784: Dual government established → Board of Control + Company",
+        "1813: Trade monopoly ends → Educational provision",
+        "1833: Commercial activities end → Purely administrative",
+        "1853: Modern administration → Competitive exams, Legislative reforms",
+        "1858: Company rule ends → Crown takes over (after 1857 Revolt)"
+      ],
+      "examStrategy": "Remember in chronological order; focus on what was NEW in each Act; understand the progression from commercial company to administrative agent to Crown rule"
+    }
+  }
+}
+

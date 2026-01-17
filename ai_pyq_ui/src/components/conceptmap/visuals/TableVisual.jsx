@@ -1,5 +1,5 @@
 // components/conceptmap/visuals/TableVisual.jsx
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function TableVisual({ topicData }) {
@@ -61,6 +61,9 @@ export default function TableVisual({ topicData }) {
         };
         return colors[category] || "bg-gray-50 border-gray-200";
     };
+
+    // Check if any row has details - if yes, show Details column
+    const hasDetailsColumn = rows.some(row => row.details);
 
     return (
         <div className="w-full h-full bg-gradient-to-br from-gray-50 to-blue-50 overflow-auto">
@@ -128,14 +131,15 @@ export default function TableVisual({ topicData }) {
                                             </div>
                                         </th>
                                     ))}
-                                    <th className="px-6 py-4 text-center text-sm font-semibold w-20">Details</th>
+                                    {hasDetailsColumn && (
+                                        <th className="px-6 py-4 text-center text-sm font-semibold w-20">Details</th>
+                                    )}
                                 </tr>
                             </thead>
                             <tbody>
                                 {filteredRows.map((row, idx) => (
-                                    <>
+                                    <Fragment key={row.id}>
                                         <motion.tr
-                                            key={row.id}
                                             initial={{ opacity: 0 }}
                                             animate={{ opacity: 1 }}
                                             transition={{ delay: idx * 0.03 }}
@@ -144,25 +148,27 @@ export default function TableVisual({ topicData }) {
                                             }`}
                                         >
                                             {columns.map((col) => (
-                                                <td key={col.key} className="px-6 py-4 text-sm text-gray-800">
+                                                <td key={col.key} className="px-6 py-4 text-sm text-gray-800 whitespace-pre-line">
                                                     {col.render ? col.render(row[col.key]) : row[col.key]}
                                                 </td>
                                             ))}
-                                            <td className="px-6 py-4 text-center">
-                                                {row.details && (
-                                                    <button
-                                                        onClick={() => setExpandedRow(expandedRow === row.id ? null : row.id)}
-                                                        className="text-blue-500 hover:text-blue-700 font-medium text-sm"
-                                                    >
-                                                        {expandedRow === row.id ? "Hide" : "Show"}
-                                                    </button>
-                                                )}
-                                            </td>
+                                            {hasDetailsColumn && (
+                                                <td className="px-6 py-4 text-center">
+                                                    {row.details && (
+                                                        <button
+                                                            onClick={() => setExpandedRow(expandedRow === row.id ? null : row.id)}
+                                                            className="text-blue-500 hover:text-blue-700 font-medium text-sm"
+                                                        >
+                                                            {expandedRow === row.id ? "Hide" : "Show"}
+                                                        </button>
+                                                    )}
+                                                </td>
+                                            )}
                                         </motion.tr>
                                         {/* Expanded Details Row */}
                                         {expandedRow === row.id && row.details && (
-                                            <tr key={`${row.id}-details`}>
-                                                <td colSpan={columns.length + 1} className="px-6 py-4 bg-blue-50 border-b border-blue-200">
+                                            <tr>
+                                                <td colSpan={columns.length + (hasDetailsColumn ? 1 : 0)} className="px-6 py-4 bg-blue-50 border-b border-blue-200">
                                                     <AnimatePresence>
                                                         <motion.div
                                                             initial={{ opacity: 0, height: 0 }}
@@ -203,11 +209,11 @@ export default function TableVisual({ topicData }) {
                                                 </td>
                                             </tr>
                                         )}
-                                    </>
+                                    </Fragment>
                                 ))}
                                 {filteredRows.length === 0 && (
                                     <tr>
-                                        <td colSpan={columns.length + 1} className="px-6 py-8 text-center text-gray-500">
+                                        <td colSpan={columns.length + (hasDetailsColumn ? 1 : 0)} className="px-6 py-8 text-center text-gray-500">
                                             No data available for this filter
                                         </td>
                                     </tr>
@@ -231,7 +237,7 @@ export default function TableVisual({ topicData }) {
                                 {columns.map((col) => (
                                     <div key={col.key} className="mb-3 last:mb-0">
                                         <span className="text-xs font-semibold text-gray-600 uppercase">{col.label}</span>
-                                        <p className="text-sm text-gray-800 mt-1">
+                                        <p className="text-sm text-gray-800 mt-1 whitespace-pre-line">
                                             {col.render ? col.render(row[col.key]) : row[col.key]}
                                         </p>
                                     </div>
@@ -292,8 +298,62 @@ export default function TableVisual({ topicData }) {
                 {/* Summary */}
                 {data.summary && (
                     <div className="mt-6 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
-                        <h3 className="text-sm font-semibold text-yellow-800 mb-2">Summary</h3>
-                        <p className="text-sm text-yellow-900">{data.summary}</p>
+                        <h3 className="text-sm font-semibold text-yellow-800 mb-2">
+                            {typeof data.summary === 'string' ? 'Summary' : data.summary.title || 'Summary'}
+                        </h3>
+                        {typeof data.summary === 'string' ? (
+                            <p className="text-sm text-yellow-900">{data.summary}</p>
+                        ) : (
+                            <div className="space-y-2">
+                                {data.summary.points && (
+                                    <ul className="list-disc list-inside space-y-1 text-sm text-yellow-900">
+                                        {data.summary.points.map((point, idx) => (
+                                            <li key={idx}>{point}</li>
+                                        ))}
+                                    </ul>
+                                )}
+                                {data.summary.examTip && (
+                                    <div className="mt-3 p-2 bg-yellow-100 rounded border border-yellow-300">
+                                        <p className="text-xs font-semibold text-yellow-800 mb-1">💡 Exam Tip:</p>
+                                        <p className="text-xs text-yellow-900">{data.summary.examTip}</p>
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                    </div>
+                )}
+
+                {/* Additional Info */}
+                {data.additionalInfo && (
+                    <div className="mt-6 space-y-4">
+                        {/* Comparison Section */}
+                        {data.additionalInfo.comparison && data.additionalInfo.comparison.length > 0 && (
+                            <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                                <h3 className="text-sm font-semibold text-blue-800 mb-3">
+                                    {data.additionalInfo.title || 'Key Differences & Common Features'}
+                                </h3>
+                                <div className="space-y-3">
+                                    {data.additionalInfo.comparison.map((item, idx) => (
+                                        <div key={idx} className="p-3 bg-white rounded border border-blue-200">
+                                            <p className="text-sm font-semibold text-blue-900 mb-1">
+                                                {item.aspect}
+                                            </p>
+                                            <p className="text-sm text-blue-800">
+                                                {item.detail}
+                                            </p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Exam Tip from Additional Info */}
+                        {data.additionalInfo.examTip && (
+                            <div className="p-4 bg-green-50 rounded-lg border border-green-200">
+                                <p className="text-xs font-semibold text-green-800 mb-2">💡 Exam Tip:</p>
+                                <p className="text-sm text-green-900">{data.additionalInfo.examTip}</p>
+                            </div>
+                        )}
                     </div>
                 )}
             </div>

@@ -1,0 +1,318 @@
+{
+  "id": "inc-establishment",
+  "subject": "history",
+  "title": "Establishment of Indian National Congress (1885)",
+  "description": "Formation, aims, objectives, and early phase of INC (1885-1905)",
+  "visualType": "flowchart",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["pre-inc-associations", "inc-moderate-phase", "inc-surat-split"],
+    "tags": ["INC", "Congress", "1885", "foundation", "moderates"]
+  },
+  "data": {
+    "legend": [
+      { "type": "foundation", "label": "Foundation Events" },
+      { "type": "objective", "label": "Aims & Objectives" },
+      { "type": "method", "label": "Methods & Activities" }
+    ],
+    "mainFlow": {
+      "title": "Foundation of Indian National Congress",
+      "stages": [
+        {
+          "id": "background",
+          "type": "foundation",
+          "label": "Background & Context (1880s)",
+          "color": "#3B82F6",
+          "description": "Conditions that led to INC formation",
+          "details": {
+            "politicalContext": [
+              "Growing educated middle class",
+              "Regional associations active but uncoordinated",
+              "Need for all-India organization",
+              "Ilbert Bill controversy (1883-84) exposed racial discrimination",
+              "British repressive policies (Vernacular Press Act, Arms Act)"
+            ],
+            "socialContext": [
+              "English education created awareness",
+              "Ideas of liberty, equality, nationalism spread",
+              "Western political thought influenced Indians",
+              "Indian Renaissance in full swing"
+            ],
+            "economicContext": [
+              "Drain of wealth from India",
+              "De-industrialization",
+              "Heavy taxation on peasants",
+              "Economic exploitation by British"
+            ]
+          }
+        },
+        {
+          "id": "immediate-trigger",
+          "type": "foundation",
+          "label": "Immediate Trigger",
+          "color": "#10B981",
+          "description": "Events directly leading to formation",
+          "details": {
+            "events": [
+              "Ripon's reforms and their reversal",
+              "Ilbert Bill controversy awakened Indians",
+              "Indian Association's National Conference (1883) showed possibility",
+              "Need felt for permanent organization",
+              "A.O. Hume's initiative to channel discontent"
+            ]
+          }
+        },
+        {
+          "id": "formation",
+          "type": "foundation",
+          "label": "Formation Details",
+          "color": "#F59E0B",
+          "icon": "⭐",
+          "description": "How and when INC was formed",
+          "details": {
+            "date": "28 December 1885",
+            "place": "Gokuldas Tejpal Sanskrit College, Bombay",
+            "founder": {
+              "name": "Allan Octavian Hume",
+              "role": "Retired British civil servant",
+              "motivation": [
+                "Safety valve theory (traditional view): Channel Indian discontent peacefully",
+                "Prevent another revolt like 1857",
+                "Create platform for British-Indian dialogue",
+                "Genuine sympathy for Indians (alternative view)"
+              ]
+            },
+            "firstSession": {
+              "president": "Womesh Chandra Bonnerjee (W.C. Bonnerjee)",
+              "delegates": "72 delegates",
+              "representation": "Mostly from Bombay and Poona area",
+              "composition": "Lawyers, journalists, teachers, businessmen - educated middle class",
+              "originalName": "Originally planned as 'Indian National Union'"
+            },
+            "keyFigures": [
+              "A.O. Hume - Principal founder",
+              "Dadabhai Naoroji",
+              "Dinshaw Wacha",
+              "Pherozeshah Mehta",
+              "Surendranath Banerjee",
+              "Badruddin Tyabji",
+              "Gopal Krishna Gokhale",
+              "W.C. Bonnerjee"
+            ]
+          }
+        }
+      ]
+    },
+    "objectives": {
+      "title": "Aims and Objectives of INC",
+      "primaryAims": [
+        {
+          "id": "unity",
+          "label": "Promote National Unity",
+          "icon": "🤝",
+          "description": "Unite Indians across regions, religions, castes",
+          "details": [
+            "Develop bonds of national unity",
+            "Overcome regional, religious, caste divisions",
+            "Create common national consciousness",
+            "Annual sessions in different cities to spread nationwide",
+            "All India representation"
+          ],
+          "significance": "Most important objective - India never had unified political movement before"
+        },
+        {
+          "id": "political-platform",
+          "label": "Provide Political Platform",
+          "icon": "🏛️",
+          "description": "Common forum to voice Indian grievances",
+          "details": [
+            "Platform for educated Indians to express views",
+            "Channel for political demands",
+            "Represent Indian interests to British Government",
+            "Consolidated voice stronger than regional associations",
+            "Regular annual sessions for continuity"
+          ]
+        },
+        {
+          "id": "political-consciousness",
+          "label": "Awaken Political Consciousness",
+          "icon": "💡",
+          "description": "Educate Indians about political rights",
+          "details": [
+            "Spread political awareness among masses",
+            "Educate about rights and liberties",
+            "Promote democratic values",
+            "Train people in political work",
+            "Develop public opinion on national issues"
+          ]
+        },
+        {
+          "id": "reforms",
+          "label": "Demand Constitutional Reforms",
+          "icon": "📜",
+          "description": "Expand Indian participation in governance",
+          "details": [
+            "Greater Indian representation in councils",
+            "Indianization of civil services",
+            "Expansion of legislative councils",
+            "Indian members in executive councils",
+            "Simultaneous ICS exams in India and England",
+            "Reduce age limit for ICS"
+          ]
+        },
+        {
+          "id": "economic-welfare",
+          "label": "Promote Economic Welfare",
+          "icon": "💰",
+          "description": "Address economic exploitation",
+          "details": [
+            "Reduce land revenue burden",
+            "Oppose discriminatory tariff policies",
+            "Promote Indian industries",
+            "Address drain of wealth",
+            "Improve living conditions of peasants",
+            "Economic development of India"
+          ]
+        }
+      ]
+    },
+    "earlyPhase": {
+      "title": "Early Phase: Moderate Era (1885-1905)",
+      "characteristics": {
+        "leadership": {
+          "label": "Moderate Leaders",
+          "leaders": [
+            "Dadabhai Naoroji - Grand Old Man of India",
+            "Gopal Krishna Gokhale",
+            "Pherozeshah Mehta",
+            "Surendranath Banerjee",
+            "Mahadev Govind Ranade",
+            "Badruddin Tyabji",
+            "Romesh Chandra Dutt",
+            "W.C. Bonnerjee"
+          ],
+          "profile": "English-educated, lawyers, teachers, journalists; believed in British sense of justice"
+        },
+        "ideology": {
+          "label": "Moderate Ideology",
+          "beliefs": [
+            "Faith in British justice and fairness",
+            "Believed reforms possible through constitutional means",
+            "Gradual progress towards self-government",
+            "British rule beneficial in some aspects",
+            "Not demanding independence - only reforms",
+            "Loyalty to British Crown"
+          ]
+        },
+        "methods": {
+          "label": "Constitutional Methods",
+          "approaches": [
+            "Petitions, memorials to British authorities",
+            "Passing resolutions in Congress sessions",
+            "Sending deputations to England",
+            "Propaganda through newspapers and speeches",
+            "Educating public opinion",
+            "Constitutional agitation only",
+            "Three P's: Petitions, Prayers, Protests"
+          ],
+          "limitation": "Critics called them 'political mendicants' for begging approach"
+        }
+      },
+      "majorDemands": [
+        {
+          "category": "Administrative",
+          "demands": [
+            "Indianization of services",
+            "Simultaneous ICS exams in India",
+            "Reduce military expenditure",
+            "Separate judiciary from executive",
+            "Jury system"
+          ]
+        },
+        {
+          "category": "Constitutional",
+          "demands": [
+            "Expand legislative councils",
+            "Indian majority in councils",
+            "Indians in Viceroy's Executive Council",
+            "Elected representation",
+            "Control over budget by Indians"
+          ]
+        },
+        {
+          "category": "Economic",
+          "demands": [
+            "Reduce land revenue",
+            "Abolish salt tax",
+            "Reduce home charges (India's contribution to England)",
+            "Protect Indian industries",
+            "Development of indigenous industries",
+            "Drain of wealth theory propagated"
+          ]
+        },
+        {
+          "category": "Social",
+          "demands": [
+            "Repeal Arms Act",
+            "Freedom of press and speech",
+            "Right to assembly",
+            "End racial discrimination",
+            "Trial by jury"
+          ]
+        }
+      ],
+      "achievements": [
+        "Created all-India political consciousness",
+        "United Indians across regions",
+        "Exposed economic exploitation (Drain Theory - Dadabhai Naoroji)",
+        "Trained people in political work",
+        "Established Congress as national organization",
+        "Some reforms achieved: Legislative Councils Act 1892, 1909",
+        "Built organizational structure",
+        "Prepared ground for stronger agitation later"
+      ],
+      "limitations": [
+        "Limited to educated elite",
+        "No mass base or involvement",
+        "Methods ineffective against repressive British",
+        "Did not demand independence",
+        "Ignored peasants and workers' issues",
+        "Too loyal to British",
+        "Slow progress frustrated younger generation",
+        "British mostly ignored their demands"
+      ]
+    },
+    "significance": {
+      "title": "Historical Significance of INC Formation",
+      "points": [
+        "First organized all-India nationalist movement",
+        "Provided common platform transcending regional, religious differences",
+        "Beginning of modern Indian nationalism",
+        "Trained generations of political leaders",
+        "Created institutional framework for freedom struggle",
+        "Evolved from moderate to militant to mass movement",
+        "Eventually led India to independence (1947)",
+        "World's oldest existing political party still governing India"
+      ]
+    },
+    "examTips": {
+      "mustRemember": [
+        "Date: 28 December 1885, Place: Bombay",
+        "Founder: A.O. Hume (British)",
+        "First President: W.C. Bonnerjee",
+        "72 delegates in first session",
+        "Moderate phase: 1885-1905",
+        "Three P's: Petitions, Prayers, Protests",
+        "Safety Valve Theory",
+        "Leaders: Dadabhai, Gokhale, Pherozeshah, Surendranath"
+      ],
+      "commonConfusions": [
+        "Hume founded INC but was British (not Indian)",
+        "INC initially did NOT demand independence",
+        "Moderates were NOT failures - they created foundation",
+        "First session in Bombay (NOT Calcutta)"
+      ]
+    }
+  }
+}
+

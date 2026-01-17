@@ -1,0 +1,81 @@
+{
+  "id": "european-powers-comparison",
+  "subject": "history",
+  "title": "European Powers in India: Comparative Analysis",
+  "description": "Comparison of Portuguese, Dutch, English, French, and Danish presence in India",
+  "visualType": "table",
+  "metadata": {
+    "examRelevance": "high",
+    "relatedTopics": ["european-arrival-timeline", "european-arrival-factors"],
+    "tags": ["european-powers", "comparison", "modern-history"]
+  },
+  "data": {
+    "columns": [
+      { "key": "power", "label": "Power", "width": "15%" },
+      { "key": "arrival", "label": "Arrival & Key Dates", "width": "17%" },
+      { "key": "main_settlements", "label": "Main Settlements", "width": "15%" },
+      { "key": "key_figures", "label": "Key Figures", "width": "15%" },
+      { "key": "strengths", "label": "Strengths", "width": "18%" },
+      { "key": "decline_reasons", "label": "Decline/Exit", "width": "20%" }
+    ],
+    "rows": [
+      {
+        "id": "portuguese",
+        "power": "🇵🇹 PORTUGUESE",
+        "arrival": "• First to arrive (1498)\n• Vasco da Gama reached Calicut\n• Captured Goa (1510)\n• Peak: 1510-1580",
+        "main_settlements": "• Goa (capital)\n• Diu (1535)\n• Daman (1531)\n• Cochin (1503)\n• Bassein\n• Salsette",
+        "key_figures": "• Vasco da Gama (explorer)\n• Alfonso de Albuquerque (conqueror)\n• Francisco de Almeida (first Viceroy)",
+        "strengths": "• Superior naval power\n• Monopolized spice trade initially\n• Cartaz system (naval permits)\n• Religious zeal\n• Strategic forts\n• Early mover advantage",
+        "decline_reasons": "• Small country, limited resources\n• Brutal religious policies\n• Competition from Dutch/English\n• Union with Spain (1580-1640)\n• Focused on Brazil\n• Defeated by Marathas (1739)\n• Lost territories gradually\n• Goa liberated by India (1961)"
+      },
+      {
+        "id": "dutch",
+        "power": "🇳🇱 DUTCH",
+        "arrival": "• Arrived 1595-1602\n• VOC formed (1602)\n• First factory: Masulipatnam (1605)\n• Peak: 1620-1660",
+        "main_settlements": "• Pulicat (Tamil Nadu)\n• Surat\n• Chinsura (Bengal)\n• Cochin\n• Nagapatnam\n• Karikal",
+        "key_figures": "• Cornelis de Houtman (first voyage)\n• Pieter van den Broecke\n• VOC Directors (Heeren XVII)",
+        "strengths": "• World's first joint-stock company\n• Strong corporate structure\n• Excellent naval power\n• Financial innovations\n• Focused on spice islands\n• Efficient trading network",
+        "decline_reasons": "• Focused mainly on Indonesia\n• Expensive Anglo-Dutch wars\n• Defeated by English (Battle of Bedara 1759)\n• Limited interest in territorial expansion\n• Sold settlements to English (1825)\n• VOC dissolved (1799)\n• Treaty of Java (1824) - left India"
+      },
+      {
+        "id": "english",
+        "power": "🇬🇧 ENGLISH (British)",
+        "arrival": "• EIC formed (1600)\n• First voyage (1601)\n• Surat factory (1613)\n• Peak: 1757 onwards",
+        "main_settlements": "• Bombay (from 1668)\n• Calcutta (1690)\n• Madras (1639)\n• Surat (1613)\n• Three Presidencies\n• Eventually whole India",
+        "key_figures": "• Captain William Hawkins\n• Sir Thomas Roe\n• Job Charnock\n• Robert Clive\n• Warren Hastings\n• Dalhousie",
+        "strengths": "• Strong royal support\n• Excellent diplomacy\n• Military organization\n• Divide and rule policy\n• Financial backing\n• Industrial Revolution support\n• Naval supremacy",
+        "decline_reasons": "• Did not decline; became dominant\n• Defeated French (1757-1763)\n• Conquered most of India\n• Ruled till 1947\n• Indian independence (1947)"
+      },
+      {
+        "id": "french",
+        "power": "🇫🇷 FRENCH",
+        "arrival": "• Company formed (1664)\n• First factory: Surat (1668)\n• Pondicherry (1673)\n• Peak: 1742-1754",
+        "main_settlements": "• Pondicherry (capital)\n• Chandannagar (Bengal)\n• Mahe (Kerala)\n• Karaikal\n• Yanam\n• Masaulipatnam",
+        "key_figures": "• Colbert (founder)\n• François Martin\n• François Dupleix\n• Count de Lally\n• Bussy",
+        "strengths": "• Brilliant military strategy (Dupleix)\n• Subsidiary alliance system\n• Strong fortifications\n• Quality products\n• Native army training\n• Diplomatic skills",
+        "decline_reasons": "• Frequent wars with England\n• Carnatic Wars (lost all three)\n• Battle of Wandiwash (1760) - decisive defeat\n• Treaty of Paris (1763) - lost political power\n• Company dissolved (1769)\n• Napoleon's defeat\n• Kept 5 settlements till 1954\n• Merged with India (1954)"
+      },
+      {
+        "id": "danish",
+        "power": "🇩🇰 DANISH (Danes)",
+        "arrival": "• Arrived (1620)\n• Company formed (1616)\n• Factory: Tranquebar (1620)\n• Peak: 1620-1670",
+        "main_settlements": "• Tranquebar (Tamil Nadu)\n• Serampore (Bengal)\n• Nicobar Islands",
+        "key_figures": "• Admiral Ove Gjedde\n• Danish East India Company officials",
+        "strengths": "• Peaceful trade\n• Good quality products\n• No aggressive expansion\n• Maritime expertise",
+        "decline_reasons": "• Small country, limited resources\n• Could not compete with larger powers\n• Lack of strong royal support\n• Focused on trade only\n• Sold Tranquebar to British (1845)\n• Sold Serampore to British (1839)\n• Minor role overall\n• Completely withdrew by 1845"
+      }
+    ],
+    "summary": {
+      "title": "Key Takeaways",
+      "points": [
+        "Portuguese: First to arrive, but couldn't sustain due to limited resources and competition",
+        "Dutch: Strong commercially but focused on Indonesia; didn't compete for Indian territories",
+        "English: Eventually became dominant; superior organization, diplomacy, and military",
+        "French: Strongest competitor to English; brilliant military strategy but lost in Carnatic Wars",
+        "Danish: Minor role; peaceful traders; couldn't compete with major powers"
+      ],
+      "examTip": "Remember chronological order: Portuguese (1498) → Dutch (1602) → English (1600 charter, 1608 arrival) → French (1664) → Danish (1620). English ultimately succeeded due to strong organization, Industrial Revolution backing, and military superiority."
+    }
+  }
+}
+

@@ -1,0 +1,323 @@
+{
+  "id": "european-arrival-timeline",
+  "subject": "history",
+  "title": "European Arrival in India: Timeline",
+  "description": "Chronological discovery of sea routes and establishment of European powers in India",
+  "visualType": "timeline",
+  "metadata": {
+    "examRelevance": "high",
+    "relatedTopics": ["european-arrival-factors", "european-powers-comparison"],
+    "tags": ["european-arrival", "timeline", "exploration", "modern-history"]
+  },
+  "data": {
+    "startYear": 1453,
+    "endYear": 1757,
+    "legend": [
+      { "type": "major", "label": "Major Discoveries" },
+      { "type": "political", "label": "Establishment Events" },
+      { "type": "military", "label": "Military/Conflict" }
+    ],
+    "events": [
+      {
+        "id": "fall-constantinople",
+        "year": "1453",
+        "title": "Fall of Constantinople",
+        "description": "Ottoman Turks captured Constantinople, blocking land route",
+        "type": "major",
+        "icon": "🏰",
+        "details": {
+          "points": [
+            "Byzantine Empire fell to Ottoman Turks",
+            "Traditional land route to India blocked",
+            "Increased urgency to find sea route",
+            "Spice prices skyrocketed in Europe",
+            "Sparked Age of Exploration"
+          ],
+          "significance": "Triggered European search for alternative routes to India"
+        },
+        "tags": ["Constantinople", "Ottoman", "catalyst"]
+      },
+      {
+        "id": "cape-good-hope",
+        "year": "1488",
+        "title": "Discovery of Cape of Good Hope",
+        "description": "Bartholomew Diaz reached southern tip of Africa",
+        "type": "major",
+        "icon": "🗺️",
+        "details": {
+          "points": [
+            "Portuguese explorer Bartholomew Diaz",
+            "Reached and rounded Cape of Good Hope",
+            "Proved sea route to India possible",
+            "Opened path around Africa",
+            "Initially called 'Cape of Storms'",
+            "Renamed by Portuguese King John II"
+          ],
+          "significance": "Proved feasibility of reaching India by sea via African route"
+        },
+        "tags": ["Diaz", "Portugal", "Africa"]
+      },
+      {
+        "id": "vasco-da-gama",
+        "year": "1498",
+        "title": "Vasco da Gama Reaches India",
+        "description": "First European to reach India by sea via Cape of Good Hope",
+        "type": "major",
+        "icon": "⛵",
+        "details": {
+          "points": [
+            "Portuguese explorer Vasco da Gama",
+            "Left Lisbon on 8 July 1497",
+            "Reached Calicut (Kozhikode) on 20 May 1498",
+            "Guided by Arab navigator Ahmad ibn Majid",
+            "Welcomed by Zamorin (ruler of Calicut)",
+            "Established direct sea trade route",
+            "Returned to Portugal with spices in 1499",
+            "Made huge profits (60 times investment)"
+          ],
+          "significance": "Historic moment - opened direct sea route to India; beginning of European colonialism"
+        },
+        "tags": ["Vasco da Gama", "Portugal", "Calicut", "milestone"]
+      },
+      {
+        "id": "portuguese-cochin",
+        "year": "1500-1503",
+        "title": "Portuguese Establish Factories",
+        "description": "First trading posts established on Indian coast",
+        "type": "political",
+        "icon": "🏭",
+        "details": {
+          "points": [
+            "Pedro Alvares Cabral arrived in 1500",
+            "Factory established at Cochin (1503)",
+            "Cannanore factory also established",
+            "Friendly relations with local rulers initially",
+            "Competition with Arab traders",
+            "Portuguese naval superiority"
+          ],
+          "significance": "First permanent European presence in India"
+        },
+        "tags": ["factories", "Cochin", "Cabral"]
+      },
+      {
+        "id": "albuquerque-goa",
+        "year": "1510",
+        "title": "Portuguese Capture Goa",
+        "description": "Alfonso de Albuquerque captured Goa from Sultan of Bijapur",
+        "type": "military",
+        "icon": "⚔️",
+        "details": {
+          "points": [
+            "Governor Alfonso de Albuquerque",
+            "Captured from Sultan Yusuf Adil Shah of Bijapur",
+            "Made capital of Portuguese India",
+            "Strategic location for trade control",
+            "Built forts and churches",
+            "Encouraged intermarriage with locals",
+            "Remained Portuguese till 1961"
+          ],
+          "significance": "Established Portuguese territorial control; Goa became Asian headquarters"
+        },
+        "tags": ["Goa", "Albuquerque", "conquest"]
+      },
+      {
+        "id": "portuguese-diu-daman",
+        "year": "1535",
+        "title": "Portuguese Acquire Diu & Daman",
+        "description": "Extended control on western coast",
+        "type": "political",
+        "icon": "🏰",
+        "details": {
+          "points": [
+            "Diu acquired from Gujarat Sultan",
+            "Daman acquired in 1531",
+            "Strategic naval bases",
+            "Controlled Arabian Sea trade",
+            "Built strong fortifications"
+          ],
+          "significance": "Consolidated Portuguese control over western Indian Ocean trade"
+        }
+      },
+      {
+        "id": "dutch-arrival",
+        "year": "1595-1602",
+        "title": "Dutch Enter Indian Trade",
+        "description": "Dutch expeditions and formation of VOC",
+        "type": "political",
+        "icon": "🇳🇱",
+        "details": {
+          "points": [
+            "First Dutch voyage by Cornelis de Houtman (1595)",
+            "United East India Company (VOC) formed in 1602",
+            "World's first joint-stock company",
+            "Given monopoly of Dutch trade east of Cape",
+            "Focused initially on Indonesia (Spice Islands)",
+            "Later established factories in India"
+          ],
+          "significance": "Introduced corporate structure; challenged Portuguese monopoly"
+        },
+        "tags": ["Dutch", "VOC", "company"]
+      },
+      {
+        "id": "english-charter",
+        "year": "1600",
+        "title": "English East India Company Formed",
+        "description": "Queen Elizabeth I granted charter",
+        "type": "political",
+        "icon": "🇬🇧",
+        "details": {
+          "points": [
+            "Charter granted on 31 December 1600",
+            "Officially: 'Governor and Company of Merchants of London Trading into the East Indies'",
+            "15-year monopoly on English trade with East",
+            "Initially 217 shareholders",
+            "Started with £72,000 capital",
+            "First voyage led by James Lancaster (1601)"
+          ],
+          "significance": "Beginning of English involvement in India; eventually became ruling power"
+        },
+        "tags": ["English", "EIC", "charter", "milestone"]
+      },
+      {
+        "id": "english-surat",
+        "year": "1608-1613",
+        "title": "English Establish Surat Factory",
+        "description": "First English factory in India",
+        "type": "political",
+        "icon": "🏭",
+        "details": {
+          "points": [
+            "Captain William Hawkins visited Jahangir's court (1608)",
+            "Failed to get trading rights initially",
+            "Sir Thomas Roe as James I's ambassador (1615-1619)",
+            "Impressed Jahangir with English products",
+            "Got firman (royal order) for trade",
+            "Surat became first English factory (1613)",
+            "Gateway to Mughal markets"
+          ],
+          "significance": "Established English foothold in Mughal India; beginning of diplomatic relations"
+        },
+        "tags": ["Surat", "Hawkins", "Thomas Roe", "Jahangir"]
+      },
+      {
+        "id": "french-formation",
+        "year": "1664",
+        "title": "French East India Company Formed",
+        "description": "Compagnie des Indes Orientales established",
+        "type": "political",
+        "icon": "🇫🇷",
+        "details": {
+          "points": [
+            "Formed by Jean-Baptiste Colbert",
+            "Finance Minister under Louis XIV",
+            "State-sponsored company",
+            "Given monopoly of French trade with East",
+            "Initially less successful than English/Dutch",
+            "First factory at Surat (1668)"
+          ],
+          "significance": "France enters competition for Indian trade"
+        },
+        "tags": ["French", "Colbert", "company"]
+      },
+      {
+        "id": "english-bombay",
+        "year": "1668",
+        "title": "English Acquire Bombay",
+        "description": "Portuguese princess's dowry to Charles II",
+        "type": "political",
+        "icon": "🏝️",
+        "details": {
+          "points": [
+            "Part of Catherine of Braganza's dowry",
+            "Marriage to Charles II of England",
+            "Given to East India Company in 1668",
+            "Annual rent of £10",
+            "Developed into major port city",
+            "Shifted headquarters from Surat to Bombay (1687)"
+          ],
+          "significance": "Gave English strategic island fortress; became presidency capital"
+        },
+        "tags": ["Bombay", "dowry", "presidency"]
+      },
+      {
+        "id": "french-pondicherry",
+        "year": "1673",
+        "title": "French Establish Pondicherry",
+        "description": "François Martin founded Pondicherry",
+        "type": "political",
+        "icon": "🏰",
+        "details": {
+          "points": [
+            "François Martin founded settlement",
+            "Granted by Sultan of Bijapur",
+            "Became capital of French India",
+            "Developed into prosperous town",
+            "François Dupleix later made it powerful"
+          ],
+          "significance": "Became center of French power in India"
+        },
+        "tags": ["Pondicherry", "French", "capital"]
+      },
+      {
+        "id": "english-calcutta",
+        "year": "1690",
+        "title": "English Found Calcutta",
+        "description": "Job Charnock established settlement",
+        "type": "political",
+        "icon": "🏙️",
+        "details": {
+          "points": [
+            "Founded by Job Charnock",
+            "Three villages: Sutanuti, Govindpur, Kalikata",
+            "Strategic location on Hooghly River",
+            "Fort William built (1696-1702)",
+            "Became capital of Bengal Presidency",
+            "Later capital of British India"
+          ],
+          "significance": "Became most important English settlement; future capital of British India"
+        },
+        "tags": ["Calcutta", "Charnock", "Bengal", "milestone"]
+      },
+      {
+        "id": "english-madras",
+        "year": "1639",
+        "title": "English Establish Madras",
+        "description": "Francis Day obtained grant for Madras",
+        "type": "political",
+        "icon": "🏰",
+        "details": {
+          "points": [
+            "Francis Day and Andrew Cogan obtained land",
+            "From local ruler Damarla Venkatadri Nayaka",
+            "Fort St. George built (1644)",
+            "First fortress in India",
+            "Became Madras Presidency capital",
+            "Attracted weavers and merchants"
+          ],
+          "significance": "First fortified English settlement; important presidency"
+        },
+        "tags": ["Madras", "Fort St. George", "presidency"]
+      },
+      {
+        "id": "battle-plassey",
+        "year": "1757",
+        "title": "Battle of Plassey",
+        "description": "English victory over Nawab of Bengal; beginning of political power",
+        "type": "military",
+        "icon": "⚔️",
+        "details": {
+          "points": [
+            "Robert Clive defeated Siraj-ud-Daulah",
+            "Mir Jafar betrayed Nawab",
+            "Marked beginning of British political power",
+            "From traders to rulers transition",
+            "Bengal's wealth at British disposal"
+          ],
+          "significance": "Watershed moment - transformed English from traders to political power"
+        },
+        "tags": ["Plassey", "Clive", "Bengal", "milestone"]
+      }
+    ]
+  }
+}
+

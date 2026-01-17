@@ -1,0 +1,345 @@
+{
+  "id": "morley-minto-reforms-1909",
+  "subject": "history",
+  "title": "Morley-Minto Reforms / Indian Councils Act of 1909",
+  "description": "Constitutional reforms introducing separate electorates and expanded councils",
+  "visualType": "flowchart",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["muslim-league-1906", "inc-surat-split", "bengal-partition-1905"],
+    "tags": ["Morley-Minto", "1909", "reforms", "separate-electorates", "councils"]
+  },
+  "data": {
+    "legend": [
+      { "type": "background", "label": "Background" },
+      { "type": "provision", "label": "Main Provisions" },
+      { "type": "positive", "label": "Positive Aspects" },
+      { "type": "negative", "label": "Negative Aspects" }
+    ],
+    "stages": [
+      {
+        "id": "context",
+        "type": "background",
+        "label": "Background & Context",
+        "color": "#3B82F6",
+        "description": "Why reforms were introduced",
+        "details": {
+          "architects": {
+            "morley": "Lord Morley - Secretary of State for India (in London)",
+            "minto": "Lord Minto - Viceroy of India (in India)",
+            "collaboration": "Jointly designed these reforms"
+          },
+          "circumstances": [
+            "Rising nationalist movement after Bengal Partition (1905)",
+            "Swadeshi and Boycott Movement showed Indian strength",
+            "Extremist movement growing",
+            "Surat Split (1907) - Congress divided but nationalism strong",
+            "Revolutionary terrorism emerging",
+            "British need to appease moderate Indians",
+            "Muslim League's demands after Simla Deputation (1906)"
+          ],
+          "objectives": {
+            "stated": "Increase Indian participation in governance; respond to nationalist demands",
+            "unstated": [
+              "Divide Hindus and Muslims through separate electorates",
+              "Appease moderates; isolate extremists",
+              "Show reforms without real power transfer",
+              "Counter nationalist movement",
+              "Create loyal Muslim leadership"
+            ]
+          }
+        }
+      },
+      {
+        "id": "main-act",
+        "type": "provision",
+        "label": "Indian Councils Act, 1909",
+        "color": "#10B981",
+        "icon": "📜",
+        "description": "Official legal framework",
+        "details": {
+          "enactment": {
+            "passedBy": "British Parliament",
+            "date": "May 1909",
+            "implemented": "From 1909-1910",
+            "officialTitle": "Indian Councils Act, 1909"
+          },
+          "basicPrinciple": "Expanded legislative councils; introduced limited representation"
+        }
+      },
+      {
+        "id": "provisions-central",
+        "type": "provision",
+        "label": "Central Legislative Council",
+        "color": "#F59E0B",
+        "description": "Changes at central level",
+        "details": {
+          "expansion": {
+            "before": "16 members",
+            "after": "60 members (maximum)",
+            "increase": "Significant expansion"
+          },
+          "composition": {
+            "official": "Official members (government servants) reduced but still majority",
+            "nominated": "Some nominated non-official members",
+            "elected": "Some indirectly elected members",
+            "balance": "Official majority maintained in Imperial Council"
+          },
+          "indianMembers": {
+            "number": "27 elected members (out of 60)",
+            "method": "Indirect election through provincial councils, chambers of commerce, etc.",
+            "significance": "First time elected Indian members in central legislature"
+          },
+          "powers": {
+            "legislative": "Could discuss budget (but not vote on it)",
+            "questions": "Could ask questions and supplementaries",
+            "debates": "Discuss matters of public interest",
+            "resolutions": "Could move resolutions (non-binding)",
+            "limitations": [
+              "No power over budget",
+              "Viceroy had veto power",
+              "Official majority ensured government control",
+              "No control over executive"
+            ]
+          }
+        }
+      },
+      {
+        "id": "provisions-provincial",
+        "type": "provision",
+        "label": "Provincial Legislative Councils",
+        "color": "#8B5CF6",
+        "description": "Changes at provincial level",
+        "details": {
+          "expansion": "Significantly enlarged",
+          "examples": {
+            "bengal": "50 members (from 25)",
+            "madras": "50 members",
+            "bombay": "48 members",
+            "unitedProvinces": "48 members"
+          },
+          "nonOfficialMajority": {
+            "introduction": "Non-official majority in provincial councils",
+            "significance": "First time non-officials outnumbered officials",
+            "limitation": "But nominated officials + nominated non-officials could form majority"
+          },
+          "election": {
+            "method": "Indirect election",
+            "electors": [
+              "Municipal councils",
+              "District boards",
+              "Landholders",
+              "Chambers of commerce",
+              "Universities"
+            ]
+          },
+          "powers": "Similar to central council - advisory, no real power"
+        }
+      },
+      {
+        "id": "separate-electorates",
+        "type": "negative",
+        "label": "Separate Electorates (Most Controversial)",
+        "color": "#EF4444",
+        "icon": "⚠️",
+        "description": "Communal representation system",
+        "details": {
+          "introduction": "Separate electorates for Muslims",
+          "meaning": {
+            "definition": "Muslims would elect Muslim representatives from Muslim constituencies",
+            "mechanism": "Separate voter lists for Muslims",
+            "seats": "Fixed number of seats reserved for Muslims"
+          },
+          "muslimPrivileges": [
+            "Separate Muslim electorates",
+            "Weightage: Muslim seats MORE than their population proportion",
+            "Example: If Muslims 20% population, got 30% seats",
+            "Muslims could also vote in general constituencies (double voting initially)"
+          ],
+          "muslimLeagueSuccess": "Muslim League's main demand fulfilled",
+          "impact": {
+            "immediate": "Formalized communal politics legally",
+            "longTerm": [
+              "Created permanent Hindu-Muslim political divide",
+              "Encouraged communal thinking",
+              "Muslims began seeing themselves as separate political entity",
+              "Foundation for Two-Nation Theory",
+              "Led to Pakistan movement eventually",
+              "Congress strongly opposed but couldn't prevent"
+            ],
+            "congressReaction": "Vehemently opposed as 'vivisection of nation'"
+          },
+          "britishMotives": {
+            "divideAndRule": "Classic divide and rule policy",
+            "weakenCongress": "Counter Hindu-majority Congress",
+            "loyalMuslims": "Create loyal Muslim elite",
+            "communalism": "Promote communal rather than national politics"
+          },
+          "historicalSignificance": "Single most important and disastrous provision; poisoned Indian politics permanently"
+        }
+      },
+      {
+        "id": "other-provisions",
+        "type": "provision",
+        "label": "Other Important Provisions",
+        "color": "#06B6D4",
+        "description": "Additional features",
+        "details": {
+          "indianExecutive": {
+            "provision": "One Indian member in Viceroy's Executive Council",
+            "first": "Satyendra Prasad Sinha (1909) - first Indian",
+            "portfolio": "Usually Law Member",
+            "significance": "Symbolic; limited real power"
+          },
+          "provinceExecutive": {
+            "provision": "One Indian in Governor's Executive Council in Bombay and Madras",
+            "note": "Bengal excluded (punishment for nationalism)"
+          },
+          "specialConstituencies": {
+            "landlords": "Separate representation for zamindars",
+            "universities": "University graduates constituency",
+            "commerce": "Chambers of commerce representation",
+            "purpose": "Ensure elite, propertied class representation"
+          }
+        }
+      }
+    ],
+    "assessment": {
+      "title": "Assessment: Positive and Negative Aspects",
+      "positive": [
+        {
+          "aspect": "Representation Principle Accepted",
+          "description": "Acknowledged principle of election and Indian representation",
+          "significance": "Important precedent; couldn't be reversed"
+        },
+        {
+          "aspect": "Indian Participation Increased",
+          "description": "More Indians in councils; platform to voice concerns",
+          "achievement": "Indians could question government policies publicly"
+        },
+        {
+          "aspect": "Legislative Experience",
+          "description": "Trained Indians in legislative procedures",
+          "preparation": "Experience useful for future self-government"
+        },
+        {
+          "aspect": "First Elected Members",
+          "description": "Introduction of (indirect) election",
+          "milestone": "Beginning of representative institutions"
+        },
+        {
+          "aspect": "Non-Official Majority (Provincial)",
+          "description": "Provincial councils had non-official majority",
+          "symbolism": "Symbolic importance"
+        }
+      ],
+      "negative": [
+        {
+          "aspect": "Separate Electorates (Fatal Flaw)",
+          "description": "Introduced communal politics permanently",
+          "impact": "Most damaging provision; led to Partition eventually",
+          "rating": "MOST CRITICIZED aspect"
+        },
+        {
+          "aspect": "No Real Power",
+          "description": "Councils had no control over executive or budget",
+          "reality": "Advisory bodies only; government controlled everything"
+        },
+        {
+          "aspect": "Official Control Retained",
+          "description": "Viceroy had veto; official majority in central; could overrule councils",
+          "limitation": "No responsible government"
+        },
+        {
+          "aspect": "Limited Franchise",
+          "description": "Only tiny elite could vote (about 0.1% population)",
+          "qualification": "High property/education qualifications",
+          "exclusion": "Vast majority excluded"
+        },
+        {
+          "aspect": "Indirect Election",
+          "description": "Not direct popular election",
+          "mechanism": "Elected through intermediary bodies",
+          "limitation": "Not truly representative"
+        },
+        {
+          "aspect": "Divide and Rule Success",
+          "description": "Successfully divided Hindus and Muslims politically",
+          "consequence": "Weakened nationalist movement"
+        },
+        {
+          "aspect": "Inadequate Reforms",
+          "description": "Did not satisfy nationalist demands",
+          "demand": "Congress wanted dominion status/self-government",
+          "given": "Minor expansion of councils without power"
+        }
+      ]
+    },
+    "reactions": {
+      "title": "Indian Reactions",
+      "moderates": {
+        "reaction": "Welcomed as step forward (but inadequate)",
+        "leaders": "Gokhale said 'disappointing' but participated",
+        "action": "Accepted and worked within system"
+      },
+      "extremists": {
+        "reaction": "Totally rejected as inadequate and divisive",
+        "tilak": "Called it 'unworthy of acceptance'",
+        "action": "Refused to participate; criticized separate electorates"
+      },
+      "muslimLeague": {
+        "reaction": "Greatly pleased; major victory",
+        "achievement": "Got separate electorates - main demand fulfilled",
+        "loyalty": "Strengthened pro-British stance initially"
+      },
+      "congress": {
+        "official": "Criticized separate electorates strongly",
+        "action": "Continued agitation for self-government",
+        "participation": "Moderate leaders participated in councils"
+      }
+    },
+    "significance": {
+      "title": "Historical Significance",
+      "constitutional": [
+        "Precedent for elected representation",
+        "Foundation for future reforms (1919, 1935)",
+        "Principle of Indian participation in governance accepted",
+        "Step towards self-government (though very small)"
+      ],
+      "political": [
+        "Formalized communal politics through separate electorates",
+        "Weakened Hindu-Muslim unity",
+        "Strengthened Muslim League",
+        "Created foundation for Pakistan demand",
+        "British divide and rule succeeded"
+      ],
+      "limitations": [
+        "No responsible government",
+        "Executive not accountable to legislature",
+        "Inadequate to satisfy nationalist aspirations",
+        "Proved moderates' faith in British misplaced"
+      ],
+      "legacy": ["Remembered more for communal poison than democratic advance"]
+    },
+    "examTips": {
+      "mustRemember": [
+        "Indian Councils Act 1909 = Morley-Minto Reforms",
+        "Morley: Secretary of State; Minto: Viceroy",
+        "Most important: Separate electorates for Muslims",
+        "Separate electorates = communal politics legalized",
+        "Muslim League got its demand; Congress opposed",
+        "Councils expanded but no real power",
+        "First Indian in Viceroy's Executive Council: S.P. Sinha (1909)",
+        "Non-official majority in provincial councils",
+        "Led to eventual Partition (long-term impact)"
+      ],
+      "examQuestions": [
+        "Discuss Morley-Minto Reforms and their impact",
+        "Why were separate electorates introduced? Assess their impact",
+        "Were Morley-Minto Reforms a step forward or divide-and-rule policy?"
+      ],
+      "balancedAnswer": "Acknowledge both: constitutional advance (representation) + communal poison (separate electorates). Conclude: separate electorates' negative impact far outweighed positive aspects."
+    }
+  }
+}
+

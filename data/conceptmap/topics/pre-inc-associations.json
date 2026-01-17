@@ -1,0 +1,222 @@
+{
+  "id": "pre-inc-associations",
+  "subject": "history",
+  "title": "Political Associations Before Indian National Congress",
+  "description": "Early nationalist organizations and their role in awakening political consciousness",
+  "visualType": "timeline",
+  "metadata": {
+    "examRelevance": "high",
+    "relatedTopics": ["inc-establishment", "events-1858-1885-nationalism"],
+    "tags": ["political-associations", "pre-INC", "nationalism", "organizations"]
+  },
+  "data": {
+    "startYear": 1838,
+    "endYear": 1884,
+    "legend": [
+      { "type": "regional", "label": "Regional Organizations" },
+      { "type": "national", "label": "National Scope" },
+      { "type": "influential", "label": "Highly Influential" }
+    ],
+    "events": [
+      {
+        "id": "zamindari-association",
+        "year": "1838",
+        "title": "Zamindari Association (Landholders' Society)",
+        "description": "First political association in India",
+        "type": "regional",
+        "icon": "🏛️",
+        "details": {
+          "founder": "Dwarkanath Tagore and others",
+          "place": "Calcutta, Bengal",
+          "objectives": [
+            "Protect interests of zamindars",
+            "Opposed zamindari taxation",
+            "Represent grievances to British authorities",
+            "Mainly landlord interests"
+          ],
+          "significance": "Historic - first organized political association; though limited to landlord class",
+          "limitation": "Represented only landed aristocracy, not common people",
+          "members": "Wealthy zamindars and landlords"
+        },
+        "tags": ["first association", "zamindars", "Bengal"]
+      },
+      {
+        "id": "british-indian-association",
+        "year": "1851",
+        "title": "British Indian Association",
+        "description": "Merged landholders' and educated middle class interests",
+        "type": "regional",
+        "icon": "🤝",
+        "details": {
+          "formation": "Merged Zamindari Association and Bengal British India Society",
+          "place": "Calcutta, Bengal",
+          "leaders": "Radhakant Deb, Debendranath Tagore, Ram Gopal Ghosh",
+          "objectives": [
+            "Voice grievances of Indians",
+            "Represent to British Parliament and Government",
+            "Constitutional reforms demanded",
+            "Education and social reforms",
+            "Judicial reforms"
+          ],
+          "activities": [
+            "Submitted memorandum to British Parliament (1853)",
+            "Opposed Charter Act 1853 provisions",
+            "Demanded Indian representation in legislative councils",
+            "Published regular reports and proceedings"
+          ],
+          "significance": "First association to combine landlords and educated middle class; made submissions to Parliament"
+        },
+        "tags": ["Bengal", "constitutional reforms", "memorandum"]
+      },
+      {
+        "id": "poona-sarvajanik-sabha",
+        "year": "1870",
+        "title": "Poona Sarvajanik Sabha",
+        "description": "First organization claiming to represent common people",
+        "type": "regional",
+        "icon": "👥",
+        "details": {
+          "founders": "Mahadev Govind Ranade, Ganesh Vasudeo Joshi (Sarvajanik Kaka), S.H. Chiplunkar",
+          "place": "Poona (Pune), Maharashtra",
+          "uniqueness": "First to claim to represent ALL classes including peasants",
+          "objectives": [
+            "Represent interests of common people, especially peasants",
+            "Voice grievances of farmers",
+            "Demand reforms in revenue administration",
+            "Promote education and social reforms",
+            "Political awareness among masses"
+          ],
+          "activities": [
+            "Opposed Vernacular Press Act (1878)",
+            "Demanded ryot representation in legislative councils",
+            "Submitted memorandum on famine relief",
+            "Opposed Arms Act (1878)",
+            "Published journals and pamphlets"
+          ],
+          "significance": "Pioneer in claiming to represent peasants and common people; model for later associations",
+          "examNote": "Remember: 'Sarvajanik' means 'public' or 'for all people'"
+        },
+        "tags": ["Pune", "Ranade", "peasants", "Sarvajanik"]
+      },
+      {
+        "id": "indian-association",
+        "year": "1876",
+        "title": "The Indian Association (Indian National Association)",
+        "description": "Most important pre-Congress organization; precursor to INC",
+        "type": "influential",
+        "icon": "⭐",
+        "details": {
+          "founders": "Surendranath Banerjee, Ananda Mohan Bose",
+          "place": "Calcutta, Bengal",
+          "context": "Founded in reaction to age restrictions for ICS examination",
+          "objectives": [
+            "Create strong public opinion on political questions",
+            "Unify Indian people on common political programme",
+            "Promote friendly relations among all classes",
+            "Lower age limit for ICS examination",
+            "Indianization of administration",
+            "Demand elected representation",
+            "Economic reforms"
+          ],
+          "activities": [
+            "Organized National Conference (1883) - first all-India gathering",
+            "Agitation against Vernacular Press Act (1878)",
+            "Campaign against Ilbert Bill controversy",
+            "Toured extensively throughout India",
+            "Established branches in different provinces",
+            "Published newspaper 'The Bengalee'",
+            "Sent delegates to England"
+          ],
+          "achievements": [
+            "First organization with truly national outlook",
+            "Held first 'National Conference' (1883)",
+            "Successfully mobilized public opinion",
+            "Established inter-provincial links",
+            "Model for later Congress organization"
+          ],
+          "significance": "Most important pre-Congress body; pioneered all-India political movement; Surendranath called 'Indian Burke'",
+          "examImportant": "This was the MOST IMPORTANT pre-INC organization; laid foundation for INC"
+        },
+        "tags": ["Surendranath Banerjee", "National Conference", "all-India", "milestone"]
+      },
+      {
+        "id": "madras-mahajan-sabha",
+        "year": "1884",
+        "title": "Madras Mahajan Sabha",
+        "description": "Leading organization in Madras Presidency",
+        "type": "regional",
+        "icon": "🏛️",
+        "details": {
+          "founders": "P. Rangaiah Naidu, G. Subramania Iyer, M. Viraraghavachari, P. Ananda Charlu",
+          "place": "Madras (Chennai)",
+          "objectives": [
+            "Demand greater Indian representation in government",
+            "Oppose racial discrimination",
+            "Promote education and social reforms",
+            "Voice Madras Presidency grievances",
+            "Economic development"
+          ],
+          "activities": [
+            "Opposed unjust taxation",
+            "Demanded administrative reforms",
+            "Published 'The Hindu' newspaper (1878)",
+            "Sent delegates to National Conference",
+            "Participated in INC formation (1885)"
+          ],
+          "significance": "Leading voice of South India; many founding members became INC leaders",
+          "connection": "Merged activities with INC after 1885"
+        },
+        "tags": ["Madras", "South India", "The Hindu"]
+      },
+      {
+        "id": "bombay-presidency-association",
+        "year": "1885",
+        "title": "Bombay Presidency Association",
+        "description": "Elite organization in Bombay",
+        "type": "regional",
+        "icon": "🏛️",
+        "details": {
+          "founders": "Pherozeshah Mehta, K.T. Telang, Badruddin Tyabji",
+          "place": "Bombay (Mumbai)",
+          "character": "Moderate, elite organization",
+          "objectives": [
+            "Political reforms and representation",
+            "Voice Bombay Presidency interests",
+            "Economic development",
+            "Education reforms"
+          ],
+          "activities": [
+            "Constitutional agitation",
+            "Participated in forming INC",
+            "Represented commercial interests"
+          ],
+          "significance": "Leaders became prominent in INC; Pherozeshah Mehta was key figure",
+          "note": "Formed same year as INC; leaders actively participated in Congress"
+        },
+        "tags": ["Bombay", "Pherozeshah Mehta", "elite"]
+      }
+    ],
+    "summary": {
+      "title": "Common Features & Limitations",
+      "commonObjectives": [
+        "Greater Indian representation in administration",
+        "Constitutional and administrative reforms",
+        "Voice Indian grievances to British authorities",
+        "Promote education and social reforms",
+        "Oppose discriminatory laws and policies"
+      ],
+      "limitations": [
+        "Mostly regional in scope (except Indian Association)",
+        "Limited to educated middle class and elite",
+        "Moderate methods - petitions, memoranda",
+        "No mass base or popular support",
+        "Lacked coordination among different regions",
+        "Did not demand independence or self-rule"
+      ],
+      "significance": "These associations created foundation for organized nationalist movement; trained leaders; developed methods of political agitation; awakened political consciousness",
+      "transition": "Indian National Congress (1885) unified these regional efforts into national movement",
+      "examTip": "Remember chronology and MOST IMPORTANT: Indian Association (1876) by Surendranath Banerjee - precursor to INC, held National Conference 1883"
+    }
+  }
+}
+

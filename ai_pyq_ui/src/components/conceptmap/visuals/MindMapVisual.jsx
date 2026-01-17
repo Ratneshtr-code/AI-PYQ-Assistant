@@ -15,7 +15,7 @@ export default function MindMapVisual({ topicData }) {
     }
 
     const { data } = topicData;
-    const central = data.central || {};
+    const central = data.root || data.central || {};
     const branches = data.branches || [];
 
     const getBranchColor = (depth) => {
@@ -84,14 +84,31 @@ export default function MindMapVisual({ topicData }) {
 
                                 {/* Central Node Details */}
                                 <AnimatePresence>
-                                    {selectedNode === "central" && central.details && (
+                                    {selectedNode === "central" && central.info && (
                                         <motion.div
                                             initial={{ opacity: 0, y: -10 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             exit={{ opacity: 0, y: -10 }}
                                             className="absolute top-full mt-4 left-1/2 transform -translate-x-1/2 w-96 p-4 bg-white rounded-lg shadow-xl border border-gray-200 z-10"
                                         >
-                                            <p className="text-sm text-gray-700">{central.details}</p>
+                                            {typeof central.info === 'string' ? (
+                                                <p className="text-sm text-gray-700">{central.info}</p>
+                                            ) : (
+                                                <div className="space-y-2 text-sm text-gray-700">
+                                                    {central.info.description && (
+                                                        <p><strong>Description:</strong> {central.info.description}</p>
+                                                    )}
+                                                    {central.info.period && (
+                                                        <p><strong>Period:</strong> {central.info.period}</p>
+                                                    )}
+                                                    {central.info.trigger && (
+                                                        <p><strong>Trigger:</strong> {central.info.trigger}</p>
+                                                    )}
+                                                    {central.info.significance && (
+                                                        <p><strong>Significance:</strong> {central.info.significance}</p>
+                                                    )}
+                                                </div>
+                                            )}
                                         </motion.div>
                                     )}
                                 </AnimatePresence>
@@ -121,11 +138,37 @@ export default function MindMapVisual({ topicData }) {
                                         }
                                     >
                                         <div className="flex items-start justify-between gap-3">
-                                            <div className="flex items-center gap-2">
-                                                {branch.icon && <span className="text-2xl">{branch.icon}</span>}
-                                                <h4 className="text-lg font-bold">{branch.label}</h4>
+                                            <div className="flex-1">
+                                                <div className="flex items-center gap-2">
+                                                    {branch.icon && <span className="text-2xl">{branch.icon}</span>}
+                                                    <h4 className="text-lg font-bold">{branch.label}</h4>
+                                                </div>
+                                                {branch.subtitle && (
+                                                    <p className="text-sm mt-1 opacity-90">{branch.subtitle}</p>
+                                                )}
+                                                {branch.info && branch.info.description && (
+                                                    <p className="text-xs mt-2 opacity-80">{branch.info.description}</p>
+                                                )}
                                             </div>
-                                            {branch.items && (
+                                            {branch.leaves && (
+                                                <svg
+                                                    className={`w-5 h-5 transition-transform flex-shrink-0 ${
+                                                        expandedBranch === branch.id ? "rotate-180" : ""
+                                                    }`}
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth={2}
+                                                        d="M19 9l-7 7-7-7"
+                                                    />
+                                                </svg>
+                                            )}
+                                            {/* Support old format with items */}
+                                            {!branch.leaves && branch.items && (
                                                 <svg
                                                     className={`w-5 h-5 transition-transform flex-shrink-0 ${
                                                         expandedBranch === branch.id ? "rotate-180" : ""
@@ -143,80 +186,119 @@ export default function MindMapVisual({ topicData }) {
                                                 </svg>
                                             )}
                                         </div>
-                                        {branch.description && (
-                                            <p className="text-sm mt-2 opacity-90">{branch.description}</p>
-                                        )}
                                     </motion.div>
 
-                                    {/* Branch Items */}
+                                    {/* Branch Leaves (new format) or Items (old format) */}
                                     <AnimatePresence>
                                         {(expandedBranch === branch.id || expandedBranch === null) &&
-                                            branch.items && (
+                                            (branch.leaves || branch.items) && (
                                                 <motion.div
                                                     initial={{ opacity: 0, height: 0 }}
                                                     animate={{ opacity: 1, height: "auto" }}
                                                     exit={{ opacity: 0, height: 0 }}
                                                     className="mt-4 space-y-3"
                                                 >
-                                                    {branch.items.map((item, itemIdx) => (
+                                                    {(branch.leaves || branch.items).map((leaf, leafIdx) => {
+                                                        // Support both 'info' (new format) and 'details' (old format)
+                                                        const leafInfo = leaf.info || leaf.details;
+                                                        
+                                                        return (
                                                         <motion.div
-                                                            key={item.id || itemIdx}
+                                                            key={leaf.id || leafIdx}
                                                             initial={{ opacity: 0, x: -20 }}
                                                             animate={{ opacity: 1, x: 0 }}
-                                                            transition={{ delay: itemIdx * 0.05 }}
+                                                            transition={{ delay: leafIdx * 0.05 }}
                                                             whileHover={{ scale: 1.03 }}
                                                             className={`p-4 bg-white rounded-lg shadow-md border-l-4 ${colorScheme.border} cursor-pointer`}
                                                             onClick={() =>
                                                                 setSelectedNode(
-                                                                    selectedNode === item.id ? null : item.id
+                                                                    selectedNode === leaf.id ? null : leaf.id
                                                                 )
                                                             }
                                                         >
                                                             <div className="flex items-start gap-2">
-                                                                {item.icon && (
-                                                                    <span className="text-lg">{item.icon}</span>
+                                                                {leaf.icon && (
+                                                                    <span className="text-lg">{leaf.icon}</span>
                                                                 )}
                                                                 <div className="flex-1">
                                                                     <h5 className={`font-semibold ${colorScheme.text}`}>
-                                                                        {item.label}
+                                                                        {leaf.label}
                                                                     </h5>
-                                                                    {item.subtitle && (
+                                                                    {leaf.subtitle && (
                                                                         <p className="text-xs text-gray-600 mt-1">
-                                                                            {item.subtitle}
+                                                                            {leaf.subtitle}
                                                                         </p>
                                                                     )}
 
-                                                                    {/* Item Details */}
+                                                                    {/* Leaf Info/Details */}
                                                                     <AnimatePresence>
-                                                                        {selectedNode === item.id && item.details && (
+                                                                        {selectedNode === leaf.id && leafInfo && (
                                                                             <motion.div
                                                                                 initial={{ opacity: 0, height: 0 }}
                                                                                 animate={{ opacity: 1, height: "auto" }}
                                                                                 exit={{ opacity: 0, height: 0 }}
-                                                                                className="mt-2 pt-2 border-t border-gray-200"
+                                                                                className="mt-3 pt-3 border-t border-gray-200"
                                                                             >
-                                                                                {typeof item.details === "string" ? (
+                                                                                {typeof leafInfo === "string" ? (
                                                                                     <p className="text-sm text-gray-700">
-                                                                                        {item.details}
+                                                                                        {leafInfo}
                                                                                     </p>
                                                                                 ) : (
                                                                                     <div className="space-y-2">
-                                                                                        {item.details.description && (
-                                                                                            <p className="text-sm text-gray-700">
-                                                                                                {item.details.description}
-                                                                                            </p>
-                                                                                        )}
-                                                                                        {item.details.points && (
-                                                                                            <ul className="list-disc list-inside space-y-1 text-sm text-gray-700">
-                                                                                                {item.details.points.map(
-                                                                                                    (point, i) => (
-                                                                                                        <li key={i}>
-                                                                                                            {point}
-                                                                                                        </li>
-                                                                                                    )
-                                                                                                )}
-                                                                                            </ul>
-                                                                                        )}
+                                                                                        {/* Render all info/details fields dynamically */}
+                                                                                        {Object.entries(leafInfo).map(([key, value]) => {
+                                                                                            if (value === null || value === undefined) return null;
+                                                                                            
+                                                                                            // Skip already displayed fields
+                                                                                            if (key === 'label' || key === 'subtitle') return null;
+                                                                                            
+                                                                                            const label = key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1');
+                                                                                            
+                                                                                            if (typeof value === 'string') {
+                                                                                                return (
+                                                                                                    <div key={key} className="text-sm">
+                                                                                                        <strong className="text-gray-800">{label}:</strong>
+                                                                                                        <span className="text-gray-700 ml-1">{value}</span>
+                                                                                                    </div>
+                                                                                                );
+                                                                                            } else if (Array.isArray(value)) {
+                                                                                                return (
+                                                                                                    <div key={key} className="text-sm">
+                                                                                                        <strong className="text-gray-800 block mb-1">{label}:</strong>
+                                                                                                        <ul className="list-disc list-inside space-y-0.5 text-gray-700 ml-2">
+                                                                                                            {value.map((item, i) => (
+                                                                                                                <li key={i}>{item}</li>
+                                                                                                            ))}
+                                                                                                        </ul>
+                                                                                                    </div>
+                                                                                                );
+                                                                                            } else if (typeof value === 'object') {
+                                                                                                return (
+                                                                                                    <div key={key} className="text-sm">
+                                                                                                        <strong className="text-gray-800 block mb-1">{label}:</strong>
+                                                                                                        <div className="ml-2 space-y-1">
+                                                                                                            {Object.entries(value).map(([subKey, subValue]) => (
+                                                                                                                <div key={subKey}>
+                                                                                                                    <span className="text-gray-700 font-medium">
+                                                                                                                        {subKey.replace(/([A-Z])/g, ' $1').trim()}:
+                                                                                                                    </span>
+                                                                                                                    {Array.isArray(subValue) ? (
+                                                                                                                        <ul className="list-disc list-inside ml-2 text-gray-600">
+                                                                                                                            {subValue.map((item, idx) => (
+                                                                                                                                <li key={idx}>{item}</li>
+                                                                                                                            ))}
+                                                                                                                        </ul>
+                                                                                                                    ) : (
+                                                                                                                        <span className="text-gray-600 ml-1">{subValue}</span>
+                                                                                                                    )}
+                                                                                                                </div>
+                                                                                                            ))}
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                );
+                                                                                            }
+                                                                                            return null;
+                                                                                        })}
                                                                                     </div>
                                                                                 )}
                                                                             </motion.div>
@@ -225,7 +307,8 @@ export default function MindMapVisual({ topicData }) {
                                                                 </div>
                                                             </div>
                                                         </motion.div>
-                                                    ))}
+                                                        );
+                                                    })}
                                                 </motion.div>
                                             )}
                                     </AnimatePresence>
