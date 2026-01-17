@@ -1,0 +1,505 @@
+{
+  "id": "wwi-impact-india",
+  "subject": "history",
+  "title": "World War I Impact on India (1914-1918)",
+  "description": "How WWI affected India politically, economically, and socially",
+  "visualType": "flowchart",
+  "metadata": {
+    "examRelevance": "high",
+    "relatedTopics": ["revolutionary-movements-1908-1917", "home-rule-movement", "early-gandhian-phase"],
+    "tags": ["WWI", "World-War-I", "1914-1918", "impact", "India"]
+  },
+  "data": {
+    "legend": [
+      { "type": "political", "label": "Political Impact" },
+      { "type": "economic", "label": "Economic Impact" },
+      { "type": "military", "label": "Military Contribution" }
+    ],
+    "categories": [
+      {
+        "id": "indian-contribution",
+        "label": "India's Contribution to British War Effort",
+        "color": "#8B5CF6",
+        "icon": "⚔️",
+        "description": "Massive Indian contribution in men, money, and materials",
+        "items": [
+          {
+            "id": "military-contribution",
+            "label": "Military Contribution",
+            "subtitle": "Over 1.5 million Indian soldiers",
+            "type": "military",
+            "details": {
+              "description": "Largest volunteer army from any colony",
+              "statistics": [
+                "1.3 million Indian soldiers served in WWI",
+                "1,00,000+ Indian soldiers died",
+                "1,70,000+ Indians wounded",
+                "Served on multiple fronts worldwide"
+              ],
+              "fronts": {
+                "westernFront": "France and Belgium - trenches of Europe",
+                "middleEast": "Mesopotamia (Iraq), Palestine, Egypt, Gallipoli",
+                "africa": "East Africa, German colonies",
+                "china": "Tsingtao siege",
+                "other": "Aden, Persia (Iran), Afghanistan frontier"
+              },
+              "units": [
+                "Indian Expeditionary Forces deployed globally",
+                "Indian cavalry and infantry regiments",
+                "Indian sappers and miners",
+                "Indian Army Service Corps",
+                "Indian medical units"
+              ],
+              "honors": [
+                "11 Victoria Crosses awarded to Indians",
+                "First VC: Khudadad Khan (Oct 1914)",
+                "Indian troops praised for bravery",
+                "Fought despite racial discrimination"
+              ]
+            }
+          },
+          {
+            "id": "financial-contribution",
+            "label": "Financial Contribution",
+            "subtitle": "£100+ million from India",
+            "type": "economic",
+            "details": {
+              "directCosts": [
+                "Government of India bore costs of Indian troops abroad",
+                "War loans raised in India",
+                "Special war taxation imposed",
+                "Estimated £100-146 million direct war expenditure"
+              ],
+              "loans": [
+                "War Loans raised from Indian princes and wealthy",
+                "Gold and silver collected",
+                "Rulers donated large sums",
+                "Mysore Maharaja donated aircraft"
+              ],
+              "donations": [
+                "Princes donated horses, camels, vehicles",
+                "Indian Red Cross contributions",
+                "Comfort funds for soldiers",
+                "Ambulances and hospitals donated"
+              ],
+              "burden": "Entire cost of Indian Army abroad borne by India; Britain paid nothing"
+            }
+          },
+          {
+            "id": "material-contribution",
+            "label": "Material & Resource Contribution",
+            "type": "economic",
+            "details": {
+              "supplies": [
+                "Food grains exported to Britain and allies",
+                "Raw materials: jute, cotton, leather, rubber",
+                "Manufactured goods: tents, uniforms, boots, saddles",
+                "Horses and mules for cavalry and transport",
+                "Railway materials and equipment"
+              ],
+              "factories": [
+                "Indian factories converted to war production",
+                "Munitions factories established",
+                "Textile mills produced military clothing",
+                "Steel and iron for war equipment"
+              ],
+              "impact": "Severe shortages in India due to exports; famines and inflation"
+            }
+          }
+        ]
+      },
+      {
+        "id": "economic-impact",
+        "label": "Economic Impact on India",
+        "color": "#F59E0B",
+        "icon": "💰",
+        "description": "Severe economic hardships and some industrial growth",
+        "items": [
+          {
+            "id": "negative-economic",
+            "label": "Negative Economic Effects",
+            "type": "economic",
+            "details": {
+              "inflation": [
+                "Prices doubled (1914-1918)",
+                "Essential commodities scarce and expensive",
+                "Real wages declined sharply",
+                "Middle class and poor suffered severely"
+              ],
+              "taxation": [
+                "Income tax rates increased",
+                "Customs duties raised",
+                "New war taxes imposed",
+                "Additional burden on already poor population"
+              ],
+              "shortages": [
+                "Food shortages due to exports",
+                "Kerosene and cloth scarce",
+                "Import of manufactured goods reduced",
+                "Black market thrived"
+              ],
+              "famines": [
+                "Widespread food scarcity",
+                "Influenza pandemic (1918-19) killed 12-13 million Indians",
+                "War and pandemic together devastated population"
+              ]
+            }
+          },
+          {
+            "id": "positive-economic",
+            "label": "Positive Economic Effects (Limited)",
+            "type": "economic",
+            "details": {
+              "industrialization": [
+                "Indian industries grew due to reduced British imports",
+                "Tata Iron and Steel Company (TISCO) expanded",
+                "Textile mills flourished",
+                "Sugar, paper, match industries developed",
+                "Chemical and engineering industries began"
+              ],
+              "protection": [
+                "Natural protection from European competition",
+                "Shipping difficulties reduced imports",
+                "Indian capitalists invested in industries",
+                "Government contracts for war supplies"
+              ],
+              "limitation": "Growth limited to few industries; benefits accrued to industrialists, not masses"
+            }
+          }
+        ]
+      },
+      {
+        "id": "political-impact",
+        "label": "Political Impact & Expectations",
+        "color": "#EF4444",
+        "icon": "🏛️",
+        "description": "Raised political consciousness and expectations of self-government",
+        "items": [
+          {
+            "id": "indian-loyalty",
+            "label": "Initial Indian Response - Loyalty",
+            "type": "political",
+            "details": {
+              "congressSupport": [
+                "Congress supported British war effort",
+                "Moderates loyal to Empire",
+                "Gandhi recruited soldiers for British",
+                "Princes donated generously",
+                "Indians fought loyally despite discrimination"
+              ],
+              "reasons": [
+                "Faith in British justice and gratitude",
+                "Expectation of reward after war",
+                "Belief that supporting democracy vs autocracy (Germany)",
+                "Gandhi's argument: help in hour of need"
+              ]
+            }
+          },
+          {
+            "id": "rising-expectations",
+            "label": "Rising Political Expectations",
+            "subtitle": "Indians expected self-government as reward",
+            "type": "political",
+            "details": {
+              "logic": [
+                "India contributed massively to war",
+                "Fought for democracy and freedom in Europe",
+                "Legitimately expected same freedoms for India",
+                "Britain's war propaganda about self-determination",
+                "Wilson's Fourteen Points (self-determination of nations)",
+                "Dominion status demanded"
+              ],
+              "movements": [
+                "Home Rule Movement (1916-1918) gained strength",
+                "Tilak and Annie Besant's leagues",
+                "Congress-Muslim League unity (Lucknow Pact 1916)",
+                "Political consciousness heightened"
+              ]
+            }
+          },
+          {
+            "id": "montagu-declaration",
+            "label": "Montagu Declaration (August 20, 1917)",
+            "subtitle": "British promised reforms",
+            "type": "political",
+            "details": {
+              "declaration": "'The policy of His Majesty's Government is that of the increasing association of Indians in every branch of the administration and the gradual development of self-governing institutions with a view to the progressive realization of responsible government in India as an integral part of the British Empire'",
+              "by": "Edwin Montagu, Secretary of State for India",
+              "significance": [
+                "First time 'responsible government' mentioned",
+                "Vague promise; no timeline",
+                "'Gradual' and 'progressive' were escape clauses",
+                "Raised expectations but no immediate action"
+              ],
+              "aftermath": "Led to Montagu-Chelmsford Reforms (1919) which proved inadequate"
+            }
+          },
+          {
+            "id": "betrayal-feeling",
+            "label": "Post-War Betrayal & Disillusionment",
+            "subtitle": "British rewards fell far short of expectations",
+            "type": "political",
+            "details": {
+              "inadequateReforms": [
+                "Montagu-Chelmsford Reforms (1919) very limited",
+                "No real power transfer; dyarchy system flawed",
+                "Congress rejected as inadequate"
+              ],
+              "repression": [
+                "Rowlatt Act (1919) - repressive, not reforms",
+                "Continuation of wartime restrictions",
+                "Jallianwala Bagh Massacre (April 1919)",
+                "Brutal repression instead of gratitude"
+              ],
+              "backlash": [
+                "Indian disillusionment complete",
+                "Faith in British justice shattered",
+                "Prepared ground for Non-Cooperation Movement (1920)",
+                "Gandhi's emergence as mass leader"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "revolutionary-impact",
+        "label": "Impact on Revolutionary Movement",
+        "color": "#DC2626",
+        "icon": "🔥",
+        "description": "Revolutionaries saw WWI as opportunity",
+        "items": [
+          {
+            "id": "revolutionary-opportunity",
+            "label": "Revolutionary Attempts During WWI",
+            "type": "political",
+            "details": {
+              "strategy": "'Britain's difficulty is India's opportunity'",
+              "activities": [
+                "Ghadar Party uprising attempt (1915)",
+                "Hindu-German Conspiracy (1914-1917)",
+                "Silk Letter Conspiracy (1916)",
+                "Berlin Committee sought German support",
+                "Attempted arms imports from Germany"
+              ],
+              "outcome": [
+                "All major conspiracies failed",
+                "British intelligence and naval control too strong",
+                "Defence of India Act (1915) crushed movements",
+                "Mass arrests and executions (Lahore Conspiracy trials)",
+                "Revolutionary terrorism effectively ended by 1917"
+              ]
+            }
+          },
+          {
+            "id": "repression-strengthened",
+            "label": "Wartime Repression Strengthened",
+            "type": "political",
+            "details": {
+              "laws": [
+                "Defence of India Act (1915) - draconian powers",
+                "Detention without trial",
+                "Censorship of press",
+                "Special tribunals without jury",
+                "Suspension of normal legal rights"
+              ],
+              "impact": "Wartime emergency laws continued after war (Rowlatt Act); set precedent for repression"
+            }
+          }
+        ]
+      },
+      {
+        "id": "social-impact",
+        "label": "Social & Psychological Impact",
+        "color": "#10B981",
+        "icon": "👥",
+        "description": "Changed Indian society and mindset",
+        "items": [
+          {
+            "id": "social-changes",
+            "label": "Social Changes",
+            "type": "political",
+            "details": {
+              "exposure": [
+                "Indian soldiers saw world beyond India",
+                "Witnessed European society and modernity",
+                "Realized Europeans not superior",
+                "European soldiers also killed and suffered",
+                "Racial myths shattered"
+              ],
+              "communalHarmony": [
+                "Hindus and Muslims fought together",
+                "Lucknow Pact (1916) showed unity possible",
+                "Common suffering created bonds",
+                "Communal harmony before post-war divide-and-rule"
+              ],
+              "women": [
+                "Some women involved in home front activities",
+                "Annie Besant's Home Rule Movement",
+                "Nursing and medical services",
+                "Limited but notable participation"
+              ]
+            }
+          },
+          {
+            "id": "psychological-impact",
+            "label": "Psychological Impact",
+            "type": "political",
+            "details": {
+              "confidence": [
+                "Indians proved equal to any army",
+                "Self-confidence increased",
+                "Military training and experience",
+                "Organizational skills developed"
+              ],
+              "disillusionment": [
+                "Realized British promises hollow",
+                "Racial discrimination persisted despite sacrifice",
+                "Betrayal felt deeply",
+                "Led to anger and militancy"
+              ],
+              "newIdeologies": [
+                "Socialist and communist ideas spread",
+                "Russian Revolution (1917) inspired Indians",
+                "Self-determination principle known widely",
+                "Questioning of imperialism globally"
+              ]
+            }
+          },
+          {
+            "id": "pandemic",
+            "label": "Influenza Pandemic (1918-1919)",
+            "subtitle": "Catastrophic impact on India",
+            "type": "economic",
+            "details": {
+              "statistics": [
+                "12-13 million Indians died (conservative estimate)",
+                "About 5-6% of India's population",
+                "One of worst pandemics in history",
+                "Combined with war strain and famine"
+              ],
+              "causes": [
+                "Returning soldiers brought virus",
+                "Malnutrition due to war shortages made population vulnerable",
+                "Poor medical facilities",
+                "Government focused on war, not public health"
+              ],
+              "impact": [
+                "Unprecedented human tragedy",
+                "Deepened resentment against British",
+                "British seen as uncaring and exploitative",
+                "Added to post-war anger"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "international-impact",
+        "label": "International Context & New World Order",
+        "color": "#06B6D4",
+        "icon": "🌍",
+        "description": "WWI changed global politics",
+        "items": [
+          {
+            "id": "new-world",
+            "label": "Post-War New World Order",
+            "type": "political",
+            "details": {
+              "globalChanges": [
+                "European empires weakened",
+                "USA and USSR emerged as new powers",
+                "League of Nations created (1920)",
+                "Self-determination principle accepted for Europe",
+                "Colonial question raised internationally"
+              ],
+              "indianContext": [
+                "India's war contribution gave moral authority",
+                "Indians demanded same rights as Europeans",
+                "International platform to raise colonial issue",
+                "Growing anti-colonial sentiment globally"
+              ]
+            }
+          },
+          {
+            "id": "russian-revolution",
+            "label": "Impact of Russian Revolution (1917)",
+            "type": "political",
+            "details": {
+              "inspiration": [
+                "Successful revolution against autocracy",
+                "Socialist alternative to capitalism and imperialism",
+                "Lenin's anti-imperialist stance",
+                "Communist ideology spread to India"
+              ],
+              "indianInfluence": [
+                "Socialist ideas in freedom struggle",
+                "M.N. Roy and communist movement",
+                "Workers' and peasants' movements inspired",
+                "International communist support for Indian freedom"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "connections": [
+      {
+        "from": "Massive Indian contribution in WWI",
+        "relationship": "raised",
+        "to": "Expectations of self-government"
+      },
+      {
+        "from": "British inadequate reforms post-WWI",
+        "relationship": "led to",
+        "to": "Disillusionment and Non-Cooperation Movement"
+      },
+      {
+        "from": "WWI exposure to world",
+        "relationship": "shattered",
+        "to": "Myth of British superiority"
+      },
+      {
+        "from": "Wartime repression (Defence of India Act)",
+        "relationship": "continued as",
+        "to": "Rowlatt Act (1919)"
+      }
+    ],
+    "assessment": {
+      "title": "Overall Assessment of WWI's Impact on India",
+      "transformative": [
+        "WWI was watershed moment for Indian freedom struggle",
+        "Changed relationship between Britain and India fundamentally",
+        "Indians' expectations raised; British response inadequate",
+        "Set stage for Gandhian mass movements"
+      ],
+      "keyOutcomes": [
+        "1.3 million Indians served; 1,00,000+ died; 1,70,000+ wounded",
+        "£100+ million financial burden on India",
+        "Massive economic hardship; prices doubled",
+        "Influenza pandemic killed 12-13 million Indians",
+        "Political consciousness and expectations raised",
+        "Montagu Declaration (1917) promised reforms",
+        "But Rowlatt Act (1919) and Jallianwala Bagh Massacre betrayed trust",
+        "Complete disillusionment led to Non-Cooperation Movement (1920)",
+        "Gandhi emerged as mass leader",
+        "End of faith in British justice",
+        "Beginning of aggressive mass nationalism"
+      ],
+      "significance": "WWI created conditions for transition from moderate constitutionalism to Gandhian mass movements. Indian sacrifice in WWI + British betrayal post-war = explosive combination that fueled freedom struggle."
+    },
+    "examTips": {
+      "mustRemember": [
+        "1.3 million Indian soldiers in WWI; 1,00,000+ died",
+        "India's massive financial contribution (£100+ million)",
+        "Montagu Declaration (August 20, 1917) - promised responsible government",
+        "Influenza pandemic (1918-19) - 12-13 million Indians died",
+        "WWI raised expectations; inadequate British response created anger",
+        "Defence of India Act (1915) - wartime repression",
+        "Ghadar uprising failed (1915)",
+        "Led to Non-Cooperation Movement (1920)"
+      ],
+      "keyConnection": "WWI sacrifice + British betrayal = Gandhian mass movements"
+    }
+  }
+}
+

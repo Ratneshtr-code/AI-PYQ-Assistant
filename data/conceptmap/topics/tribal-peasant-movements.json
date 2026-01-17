@@ -1,0 +1,95 @@
+{
+  "id": "tribal-peasant-movements",
+  "subject": "history",
+  "title": "Tribal & Peasant Movements (19th-20th Century)",
+  "description": "Uprisings against British exploitation; land revenue; forest laws",
+  "visualType": "table",
+  "metadata": {
+    "examRelevance": "medium-high",
+    "relatedTopics": ["revolt-1857-overview", "civil-disobedience-movement-1930-34"],
+    "tags": ["tribal-uprisings", "peasant-movements", "Santhal", "Moplah", "Indigo"]
+  },
+  "data": {
+    "columns": [
+      {"key": "movement", "label": "Movement/Uprising", "width": "18%"},
+      {"key": "year", "label": "Year", "width": "12%"},
+      {"key": "place", "label": "Place", "width": "15%"},
+      {"key": "causes", "label": "Causes & Demands", "width": "28%"},
+      {"key": "outcome", "label": "Outcome & Significance", "width": "27%"}
+    ],
+    "rows": [
+      {
+        "id": "santhal",
+        "movement": "SANTHAL REBELLION",
+        "year": "1855-56",
+        "place": "Bengal, Bihar, Jharkhand",
+        "causes": "Leaders: Sidhu, Kanhu (brothers)\n\nCauses:\n• Oppression by zamindars, moneylenders\n• Land alienation\n• Heavy taxation\n• Forest rights denied",
+        "outcome": "Suppressed brutally (10,000+ killed)\n\nSignificance: Largest tribal uprising before 1857; showed tribal resistance to colonial exploitation\n\nKey Exam Points: Sidhu-Kanhu; 1855-56; Pre-1857"
+      },
+      {
+        "id": "indigo",
+        "movement": "INDIGO REBELLION",
+        "year": "1859-60",
+        "place": "Bengal",
+        "causes": "Causes:\n• Forced indigo cultivation (Tinkathia system)\n• Below-market prices\n• Beatings, torture by planters\n• Debt bondage\n\nInspired: Dinabandhu Mitra's play 'Nil Darpan' (1860)",
+        "outcome": "Limited success: Some relief; Indigo Commission (1860)\n\nLater: Gandhi's Champaran Satyagraha (1917) continued fight\n\nKey Exam Points: Tinkathia system; Nil Darpan play; Led to Champaran"
+      },
+      {
+        "id": "pabna",
+        "movement": "PABNA AGRARIAN RIOTS",
+        "year": "1873-76",
+        "place": "Bengal (Pabna district)",
+        "causes": "Causes:\n• Zamindars' illegal rent increases\n• Oppression\n• Peasants formed Agrarian League",
+        "outcome": "Impact: Tenant Protection Act; showed peasants could organize\n\nKey Exam Points: Bengal; against zamindars; 1873"
+      },
+      {
+        "id": "deccan",
+        "movement": "DECCAN RIOTS",
+        "year": "1875",
+        "place": "Maharashtra (Pune, Ahmednagar)",
+        "causes": "Causes:\n• Moneylenders' exploitation\n• Debt burden\n• Famine (1876-77)\n• Peasants burned debt bonds",
+        "outcome": "Result: Deccan Agriculturists' Relief Act (1879) - limited moneylender powers\n\nKey Exam Points: 1875; Maharashtra; anti-moneylender; Debt Relief Act"
+      },
+      {
+        "id": "moplah",
+        "movement": "MOPLAH REBELLION",
+        "year": "1921",
+        "place": "Kerala (Malabar)",
+        "causes": "Context: During Khilafat-NCM (1920-21)\n\nCauses:\n• Landlord (mostly Hindu) oppression\n• Muslim tenants (Moplahs) exploited\n• Religious + agrarian grievances mixed",
+        "outcome": "Turned violent: Hindu-Muslim riots; 10,000+ killed; British suppressed brutally\n\nImpact: Damaged Hindu-Muslim unity; Congress embarrassed\n\nKey Exam Points: 1921; Kerala; religious+agrarian; hurt Hindu-Muslim unity"
+      },
+      {
+        "id": "bardoli",
+        "movement": "BARDOLI SATYAGRAHA",
+        "year": "1928",
+        "place": "Gujarat",
+        "causes": "Leader: Vallabhbhai Patel\n\nCause: 22% tax increase despite crop failure\n\nMethod: Gandhian no-tax campaign",
+        "outcome": "Success: Tax reduced; Patel earned title 'Sardar'\n\nSignificance: Successful peasant satyagraha; template for future\n\nKey Exam Points: 1928; Patel = 'Sardar'; No-tax; Success"
+      },
+      {
+        "id": "tebhaga",
+        "movement": "TEBHAGA MOVEMENT",
+        "year": "1946-47",
+        "place": "Bengal",
+        "causes": "Demand: Sharecroppers' share from 1/2 to 2/3 (Tebhaga = 2/3)\n\nLed by: Kisan Sabha; Communist influence",
+        "outcome": "Suppressed; Some reforms later\n\nKey Exam Points: 1946; Bengal; 2/3 share demand; Communist-led"
+      },
+      {
+        "id": "telangana",
+        "movement": "TELANGANA MOVEMENT",
+        "year": "1946-51",
+        "place": "Hyderabad (Telangana)",
+        "causes": "Against: Nizam & landlords' exploitation\n\nLed by: Communist Party\n\nDemand: Land to tillers",
+        "outcome": "Armed struggle; Suppressed after police action (1948)\n\nKey Exam Points: 1946-51; Communist-led; Hyderabad; Land redistribution"
+      }
+    ],
+    "characteristics": {
+      "common": "• Against British/zamindars/moneylenders\n• Land rights, forest rights, taxation\n• Often localized; limited coordination\n• Brutally suppressed\n• Some influenced by national movement (Gandhian methods)",
+      "significance": "Showed rural discontent; British economicexploitation affected everyone; Peasants/tribals active in freedom struggle"
+    },
+    "examTips": {
+      "critical": "Santhal (1855) - Sidhu-Kanhu; Indigo (1859) - Nil Darpan → Champaran (1917); Moplah (1921) - hurt unity; Bardoli (1928) - Patel = 'Sardar'"
+    }
+  }
+}
+

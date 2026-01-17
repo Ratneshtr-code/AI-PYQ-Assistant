@@ -1,0 +1,98 @@
+{
+  "id": "provincial-elections-1937-wwii",
+  "subject": "history",
+  "title": "Provincial Elections 1937 & World War II Developments (1937-1939)",
+  "description": "Congress ministries; Resignation crisis; WWII declared without consulting India",
+  "visualType": "timeline",
+  "metadata": {
+    "examRelevance": "high",
+    "relatedTopics": ["government-of-india-act-1935", "quit-india-movement"],
+    "tags": ["Elections-1937", "Congress-Ministries", "WWII", "Resignation"]
+  },
+  "data": {
+    "startYear": 1937,
+    "endYear": 1939,
+    "events": [
+      {
+        "id": "elections",
+        "year": "Jan-Feb 1937",
+        "title": "Provincial Elections",
+        "icon": "🗳️",
+        "details": {
+          "result": "Congress won clear majority in 5 provinces (Madras, UP, CP, Bihar, Orissa);\nlargest party in 4 others (Bombay, NWFP, Assam, Bengal)",
+          "muslim": "Muslim League performed poorly;\nwon only 109 of 482 Muslim seats (22%)",
+          "significance": "Congress victory showed mass support;\nMuslim League's weakness exposed"
+        }
+      },
+      {
+        "id": "ministry-formation",
+        "year": "Jul 1937",
+        "title": "Congress Ministries Formed",
+        "icon": "🏛️",
+        "details": {
+          "provinces": "Congress formed ministries in 8 provinces (including coalition in NWFP, Assam)",
+          "delay": "Initially hesitated (worried about Governor's powers);\nformed after assurances",
+          "ministers": "**CMs:**\nGovind Ballabh Pant (UP),\n B.G. Kher (Bombay),\n C. Rajagopalachari (Madras), etc.",
+          "performance": "Worked well within limitations;\nprison reforms, education, debt relief"
+        }
+      },
+      {
+        "id": "jinnah-concerns",
+        "year": "1937-39",
+        "title": "Jinnah & Muslim League's Concerns",
+        "icon": "☪️",
+        "details": {
+          "allegations": "Jinnah alleged 'Congress atrocities' on Muslims in Congress-ruled provinces",
+          "issues": "Vande Mataram song, Hindu symbols, alleged discrimination",
+          "congress": "Congress denied; said ministries secular",
+          "impact": "Growing Muslim alienation;\nJinnah strengthened position;\nseeds of Pakistan demand"
+        }
+      },
+      {
+        "id": "wwii-declared",
+        "year": "Sep 3, 1939",
+        "title": "World War II - India Declared at War WITHOUT Consultation",
+        "icon": "⚔️",
+        "details": {
+          "declared": "Viceroy Linlithgow declared India at war with Germany (Sep 3, 1939) **WITHOUT** consulting any Indian leader or legislature",
+          "outrage": "Congress outraged: 'India dragged into war without consent'",
+          "demand": "**Congress demanded:**\n(1) Clear British war aims\n(2) Commitment to Indian independence\n(3) Immediate power transfer"
+        }
+      },
+      {
+        "id": "august-offer",
+        "year": "Oct 1939",
+        "title": "Viceroy's Vague Response",
+        "icon": "📜",
+        "details": {
+          "offer": "**Viceroy offered:**\n(1) Dominion status (eventually)\n(2) Indians in War Advisory Council\n(3) Constitutional development after war",
+          "inadequate": "No timeline, no immediate transfer, vague promises",
+          "congress": "Congress rejected as inadequate and insulting"
+        }
+      },
+      {
+        "id": "resignation",
+        "year": "Oct-Dec 1939",
+        "title": "All Congress Ministries Resign",
+        "icon": "🚪",
+        "details": {
+          "decision": "Congress Working Committee directed all ministries to resign (protest against being dragged into war)",
+          "timing": "**October-December 1939:\n** All 8 Congress ministries resigned",
+          "governors": "Governor's rule imposed in all Congress provinces",
+          "jinnah": "Jinnah celebrated 'Day of Deliverance' (Dec 22, 1939) - end of 'Congress tyranny'",
+          "impact": "Congress lost power;\nJinnah exploited situation;\nMuslim League strengthened"
+        }
+      }
+    ],
+    "assessment": {
+      "congressMinistries": "Performed reasonably; prison reforms, education, debt relief; but Governor's powers limited effectiveness",
+      "resignation": "Strategic blunder? Lost power and goodwill; Jinnah exploited; British had free hand during war",
+      "wwiiImpact": "Set stage for Quit India Movement (1942); Also strengthened Muslim League's position"
+    },
+    "examTips": {
+      "dates": "Elections: 1937; Ministries formed: July 1937; WWII: Sep 3, 1939; Resignations: Oct-Dec 1939; Day of Deliverance: Dec 22, 1939",
+      "critical": "India declared at war WITHOUT consultation = Major grievance → Quit India; Congress resignation = Muslim League opportunity"
+    }
+  }
+}
+

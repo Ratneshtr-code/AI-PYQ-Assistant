@@ -62,6 +62,143 @@ export default function TableVisual({ topicData }) {
         return colors[category] || "bg-gray-50 border-gray-200";
     };
 
+    // Helper function to parse markdown bold (**text**) and render as bold
+    const parseMarkdownBold = (text) => {
+        if (!text || typeof text !== 'string') {
+            return text;
+        }
+        
+        const parts = [];
+        const regex = /\*\*(.+?)\*\*/g;
+        let match;
+        let lastIndex = 0;
+
+        while ((match = regex.exec(text)) !== null) {
+            // Add text before the bold
+            if (match.index > lastIndex) {
+                parts.push({ type: 'text', content: text.substring(lastIndex, match.index) });
+            }
+            // Add bold text
+            parts.push({ type: 'bold', content: match[1] });
+            lastIndex = regex.lastIndex;
+        }
+
+        // Add remaining text
+        if (lastIndex < text.length) {
+            parts.push({ type: 'text', content: text.substring(lastIndex) });
+        }
+
+        // If no matches, return text as-is wrapped in span
+        if (parts.length === 0) {
+            return <span>{text}</span>;
+        }
+
+        return (
+            <>
+                {parts.map((part, idx) => 
+                    part.type === 'bold' ? (
+                        <strong key={idx} className="font-bold">{part.content}</strong>
+                    ) : (
+                        <span key={idx}>{part.content}</span>
+                    )
+                )}
+            </>
+        );
+    };
+
+    // Function to render cell content with color-coded sub-headers
+    const renderCellContent = (content, isFirstColumn = false) => {
+        // Handle non-string content (React elements, numbers, etc.)
+        if (!content) {
+            return content;
+        }
+        
+        // Convert to string if not already
+        const contentStr = typeof content === 'string' ? content : String(content);
+        
+        if (!contentStr || contentStr.trim() === '') {
+            return content;
+        }
+
+        // Color mapping for sub-headers (order matters - more specific first)
+        // Only text colors, no background colors
+        const headerColors = {
+            'Key Exam Points:': 'text-purple-700 font-semibold',
+            'Limited success:': 'text-amber-700 font-semibold',
+            'Turned violent:': 'text-red-700 font-semibold',
+            'Suppressed brutally': 'text-rose-700 font-semibold',
+            'Significance:': 'text-blue-700 font-semibold',
+            'Causes:': 'text-red-700 font-semibold',
+            'Leaders:': 'text-indigo-700 font-semibold',
+            'Leader:': 'text-indigo-700 font-semibold',
+            'Impact:': 'text-green-700 font-semibold',
+            'Result:': 'text-orange-700 font-semibold',
+            'Success:': 'text-emerald-700 font-semibold',
+            'Suppressed:': 'text-rose-700 font-semibold',
+            'Later:': 'text-teal-700 font-semibold',
+            'Context:': 'text-slate-700 font-semibold',
+            'Demand:': 'text-cyan-700 font-semibold',
+            'Against:': 'text-pink-700 font-semibold',
+            'Led by:': 'text-violet-700 font-semibold',
+            'Method:': 'text-sky-700 font-semibold',
+            'Inspired:': 'text-fuchsia-700 font-semibold',
+            'Cause:': 'text-red-700 font-semibold',
+        };
+
+        // Split content by newlines and process each line
+        const lines = contentStr.split('\n');
+        
+        return (
+            <div className="space-y-1.5">
+                {lines.map((line, lineIdx) => {
+                    const trimmedLine = line.trim();
+                    
+                    // Check if line starts with any of our color-coded headers
+                    let headerMatch = null;
+                    
+                    for (const [header, className] of Object.entries(headerColors)) {
+                        if (trimmedLine.startsWith(header)) {
+                            headerMatch = { header, className };
+                            break;
+                        }
+                    }
+
+                    if (headerMatch) {
+                        const { header, className } = headerMatch;
+                        const restOfLine = trimmedLine.replace(header, '').trim();
+                        return (
+                            <div key={lineIdx} className="flex flex-wrap items-start gap-1">
+                                <span className={className}>{parseMarkdownBold(header)}</span>
+                                {restOfLine && <span className="text-gray-800">{parseMarkdownBold(restOfLine)}</span>}
+                            </div>
+                        );
+                    }
+
+                    // Regular line - check for bullet points
+                    if (trimmedLine.startsWith('•')) {
+                        return (
+                            <div key={lineIdx} className="text-gray-800 pl-2">
+                                {parseMarkdownBold(line)}
+                            </div>
+                        );
+                    }
+
+                    // Empty line
+                    if (trimmedLine === '') {
+                        return <div key={lineIdx} className="h-1"></div>;
+                    }
+
+                    // Regular text line
+                    return (
+                        <div key={lineIdx} className="text-gray-800">
+                            {parseMarkdownBold(line)}
+                        </div>
+                    );
+                })}
+            </div>
+        );
+    };
+
     // Check if any row has details - if yes, show Details column
     const hasDetailsColumn = rows.some(row => row.details);
 
@@ -147,9 +284,16 @@ export default function TableVisual({ topicData }) {
                                                 row.category ? getCategoryColor(row.category) : ""
                                             }`}
                                         >
-                                            {columns.map((col) => (
-                                                <td key={col.key} className="px-6 py-4 text-sm text-gray-800 whitespace-pre-line">
-                                                    {col.render ? col.render(row[col.key]) : row[col.key]}
+                                            {columns.map((col, colIdx) => (
+                                                <td 
+                                                    key={col.key} 
+                                                    className={`px-6 py-4 text-sm whitespace-pre-line ${
+                                                        colIdx === 0 
+                                                            ? 'font-bold text-gray-900 bg-gradient-to-r from-gray-50 to-blue-50 border-r-2 border-blue-200' 
+                                                            : 'text-gray-800'
+                                                    }`}
+                                                >
+                                                    {col.render ? col.render(row[col.key]) : renderCellContent(row[col.key], colIdx === 0)}
                                                 </td>
                                             ))}
                                             {hasDetailsColumn && (
@@ -234,12 +378,18 @@ export default function TableVisual({ topicData }) {
                                     row.category ? getCategoryColor(row.category) : "bg-white border-gray-200"
                                 }`}
                             >
-                                {columns.map((col) => (
-                                    <div key={col.key} className="mb-3 last:mb-0">
+                                {columns.map((col, colIdx) => (
+                                    <div key={col.key} className={`mb-3 last:mb-0 ${
+                                        colIdx === 0 ? 'pb-2 border-b-2 border-blue-200' : ''
+                                    }`}>
                                         <span className="text-xs font-semibold text-gray-600 uppercase">{col.label}</span>
-                                        <p className="text-sm text-gray-800 mt-1 whitespace-pre-line">
-                                            {col.render ? col.render(row[col.key]) : row[col.key]}
-                                        </p>
+                                        <div className={`text-sm mt-1 ${
+                                            colIdx === 0 
+                                                ? 'font-bold text-gray-900 bg-gradient-to-r from-gray-50 to-blue-50 p-2 rounded' 
+                                                : ''
+                                        }`}>
+                                            {col.render ? col.render(row[col.key]) : renderCellContent(row[col.key], colIdx === 0)}
+                                        </div>
                                     </div>
                                 ))}
                                 {row.details && (

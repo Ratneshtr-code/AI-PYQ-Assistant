@@ -1,0 +1,453 @@
+{
+  "id": "khilafat-movement",
+  "subject": "history",
+  "title": "Khilafat Movement (1919-1924)",
+  "description": "Muslim movement for Turkish Caliph; Gandhi's Hindu-Muslim unity strategy",
+  "visualType": "flowchart",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["rowlatt-jallianwala-timeline", "non-cooperation-movement", "wwi-impact-india"],
+    "tags": ["Khilafat", "1919-1924", "Gandhi", "Hindu-Muslim-unity", "Ali-Brothers"]
+  },
+  "data": {
+    "legend": [
+      { "type": "background", "label": "Background & Origins" },
+      { "type": "development", "label": "Movement Development" },
+      { "type": "decline", "label": "Decline & End" }
+    ],
+    "categories": [
+      {
+        "id": "origins",
+        "label": "Origins & Background",
+        "color": "#3B82F6",
+        "icon": "🌍",
+        "description": "How Khilafat issue arose",
+        "items": [
+          {
+            "id": "khilafat-meaning",
+            "label": "What is Khilafat?",
+            "type": "background",
+            "details": {
+              "definition": [
+                "Khilafat = Caliphate (Islamic institution)",
+                "Caliph = Khalifa = Successor of Prophet Muhammad",
+                "Spiritual and temporal leader of Sunni Muslims worldwide",
+                "Ottoman Sultan of Turkey held Caliphate since 1517"
+              ],
+              "significance": [
+                "For Indian Muslims: Turkish Sultan was Caliph (Amir-ul-Momineen)",
+                "Religious and sentimental attachment",
+                "Symbolic head of Islamic world",
+                "Not direct political authority but spiritual leadership"
+              ],
+              "reality": "By 20th century, Caliph's actual power minimal; mostly symbolic; but emotionally important for Muslims"
+            }
+          },
+          {
+            "id": "wwi-context",
+            "label": "World War I Context",
+            "type": "background",
+            "details": {
+              "war": [
+                "WWI (1914-1918): Britain vs Germany/Austria/Ottoman Turkey",
+                "Ottoman Turkey sided with Germany (Central Powers)",
+                "Indian Muslims conflicted: loyal to British Empire but Turkey had Caliph",
+                "British propaganda said war not against Caliph/Islam",
+                "Muslims fought for Britain despite Turkey being enemy"
+              ],
+              "promise": [
+                "British promised not to harm Caliph or dismember Turkey",
+                "Lloyd George (British PM) promised in 1918: Turkey not to be deprived of rich and renowned lands of Asia Minor and Thrace",
+                "Indian Muslims fought loyally based on these promises"
+              ]
+            }
+          },
+          {
+            "id": "post-war-betrayal",
+            "label": "Post-War Betrayal",
+            "subtitle": "British broke promises",
+            "type": "background",
+            "details": {
+              "defeat": [
+                "Turkey defeated (1918); Ottoman Empire collapsed",
+                "Allied Powers (Britain, France, Italy) occupied Turkey",
+                "Sultan-Caliph reduced to puppet",
+                "Turkish territories divided among victors"
+              ],
+              "treatyOfSevres": "Treaty of Sèvres (August 10, 1920): Ottoman Empire dismembered; Turkey reduced to small area in Anatolia; Holy places (Mecca, Medina, Jerusalem) taken away; European powers controlled Turkish territories; Caliph's authority reduced to nothing",
+              "muslimAngre": [
+                "Indian Muslims felt betrayed",
+                "British promises broken",
+                "Caliph humiliated",
+                "Saw it as attack on Islam"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "movement-development",
+        "label": "Khilafat Movement Organization",
+        "color": "#F59E0B",
+        "icon": "✊",
+        "description": "How movement developed in India",
+        "items": [
+          {
+            "id": "early-organization",
+            "label": "Early Organization (1919)",
+            "type": "development",
+            "details": {
+              "formation": [
+                "Khilafat Committee formed: March 1919, Bombay",
+                "All-India Khilafat Conference: November 1919, Delhi",
+                "Leaders: Ali Brothers (Maulana Mohammad Ali, Maulana Shaukat Ali), Maulana Abul Kalam Azad, Hakim Ajmal Khan, Hasrat Mohani"
+              ],
+              "demands": [
+                "Restore Caliph's authority",
+                "Keep Ottoman Turkey intact",
+                "Control of holy places to Caliph",
+                "No humiliation of Turkey"
+              ],
+              "methods": [
+                "Initially: Constitutional methods - petitions, memorials, delegations",
+                "Sent delegation to Viceroy",
+                "Appealed to British government"
+              ]
+            }
+          },
+          {
+            "id": "gandhi-entry",
+            "label": "Gandhi's Entry & Strategy",
+            "subtitle": "Linking Khilafat with Indian freedom",
+            "type": "development",
+            "details": {
+              "gandhiMotivation": [
+                "Gandhi saw Khilafat as opportunity for Hindu-Muslim unity",
+                "Muslims aggrieved over Khilafat; Hindus over Rowlatt-Jallianwala",
+                "Combined grievances could create powerful mass movement",
+                "Believed supporting Muslims in just cause was religious duty (Hindu dharma)"
+              ],
+              "strategy": [
+                "Gandhi joined Khilafat cause wholeheartedly (1919)",
+                "Became President of All-India Khilafat Committee",
+                "Advised Muslims to adopt non-violent non-cooperation",
+                "Linked Khilafat with Punjab wrongs (Jallianwala Bagh) and Swaraj",
+                "Proposed combined Khilafat-Non-Cooperation Movement"
+              ],
+              "gandhiLogic": [
+                "'Wrongs done to Punjab and Khilafat are not separate issues'",
+                "'Supporting Muslims in their religious cause will unite Hindus and Muslims'",
+                "'United struggle against British'",
+                "'Swaraj in one year if unity maintained'"
+              ]
+            }
+          },
+          {
+            "id": "ali-brothers",
+            "label": "Ali Brothers - Key Leaders",
+            "type": "development",
+            "details": {
+              "mohammadAli": "**Maulana Mohammad Ali Jauhar**: Educated at Oxford; journalist; edited 'Comrade' and 'Hamdard'; Most prominent Khilafat leader; fiery orator; Imprisoned 1915-1919 for pro-Turkey views during WWI",
+              "shaukatAli": "**Maulana Shaukat Ali**: Brother of Mohammad Ali; equally committed to cause; Worked closely with Gandhi",
+              "characteristics": [
+                "Initially pro-British; became militants",
+                "Excellent organizers and speakers",
+                "Commanded mass Muslim following",
+                "Partnership with Gandhi exemplified Hindu-Muslim unity",
+                "Later differences emerged"
+              ]
+            }
+          },
+          {
+            "id": "khilafat-conference-1919",
+            "label": "All-India Khilafat Conference (Nov 1919)",
+            "type": "development",
+            "details": {
+              "where": "Delhi, November 23-24, 1919",
+              "attendance": "Thousands of Muslims; Gandhi prominent",
+              "decisions": [
+                "Demanded restoration of Caliph's authority",
+                "Threatened non-cooperation if demands not met",
+                "Gandhi proposed non-violent non-cooperation",
+                "Collected funds ('Tilak Swaraj Fund' merged with Khilafat Fund)",
+                "Planned nationwide agitation"
+              ],
+              "significance": "First major joint Hindu-Muslim political conference"
+            }
+          },
+          {
+            "id": "khilafat-day",
+            "label": "Khilafat Day (October 17, 1919)",
+            "type": "development",
+            "details": {
+              "observance": [
+                "All-India Khilafat Day observed (October 17, 1919)",
+                "Hartals, processions, public meetings",
+                "Both Hindus and Muslims participated",
+                "Demonstrated unity and mass support",
+                "Peaceful and disciplined"
+              ],
+              "significance": "Showed potential of united Hindu-Muslim action"
+            }
+          },
+          {
+            "id": "delegation-to-england",
+            "label": "Khilafat Delegation to England (1920)",
+            "type": "development",
+            "details": {
+              "mission": [
+                "Delegation led by Mohammad Ali went to England (March 1920)",
+                "Demanded justice for Turkey and Caliph",
+                "Met British leaders including Prime Minister",
+                "British refused to change policy on Turkey"
+              ],
+              "outcome": [
+                "Delegation returned disappointed",
+                "Constitutional methods exhausted",
+                "Prepared ground for Non-Cooperation"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "non-cooperation-link",
+        "label": "Merger with Non-Cooperation Movement",
+        "color": "#10B981",
+        "icon": "🤝",
+        "description": "Khilafat merged with wider freedom struggle",
+        "items": [
+          {
+            "id": "calcutta-session",
+            "label": "Calcutta Special Congress Session (Sep 1920)",
+            "type": "development",
+            "details": {
+              "decision": [
+                "Congress approved Non-Cooperation resolution",
+                "Khilafat issue included along with Punjab wrongs",
+                "'Three Wrongs': Khilafat, Punjab, Swaraj",
+                "Hindu-Muslim unity formalized"
+              ],
+              "opposition": "Some Congress moderates opposed; C.R. Das, Lajpat Rai had reservations; but Gandhi prevailed"
+            }
+          },
+          {
+            "id": "nagpur-session",
+            "label": "Nagpur Congress Session (Dec 1920)",
+            "type": "development",
+            "details": {
+              "confirmation": [
+                "Non-Cooperation formally launched",
+                "Khilafat-Non-Cooperation merged completely",
+                "Congress goal changed from self-government within Empire to Swaraj (complete self-rule)",
+                "Mass movement began"
+              ],
+              "unity": "Peak of Hindu-Muslim cooperation; Ali Brothers and Gandhi toured together"
+            }
+          },
+          {
+            "id": "mass-movement",
+            "label": "Combined Mass Movement (1920-1922)",
+            "type": "development",
+            "details": {
+              "characteristics": [
+                "Unprecedented Hindu-Muslim unity",
+                "Muslims and Hindus protested together",
+                "Gandhi and Ali Brothers held joint rallies",
+                "Khilafat volunteers and Congress volunteers worked together",
+                "Common enemy: British imperialism"
+              ],
+              "activities": [
+                "Boycott of British goods, institutions, titles",
+                "Non-cooperation with government",
+                "Hartals and demonstrations",
+                "Massive public participation"
+              ],
+              "scale": "Largest mass movement till then; millions participated"
+            }
+          }
+        ]
+      },
+      {
+        "id": "decline",
+        "label": "Decline & End of Khilafat Movement",
+        "color": "#EF4444",
+        "icon": "📉",
+        "description": "Why and how movement collapsed",
+        "items": [
+          {
+            "id": "chauri-chaura",
+            "label": "Chauri Chaura Incident (Feb 4, 1922)",
+            "type": "decline",
+            "details": {
+              "incident": [
+                "Violent incident at Chauri Chaura (UP)",
+                "Mob burned police station; 22 policemen killed",
+                "Gandhi shocked by violence",
+                "Called off entire Non-Cooperation Movement (Feb 12, 1922)"
+              ],
+              "impact": [
+                "Khilafat movement also stopped abruptly",
+                "Muslims confused and disappointed",
+                "Some felt Gandhi abandoned them midway",
+                "Unity momentum lost"
+              ]
+            }
+          },
+          {
+            "id": "turkey-development",
+            "label": "Developments in Turkey",
+            "subtitle": "Turks themselves abolished Caliphate",
+            "type": "decline",
+            "details": {
+              "kemalRevolution": [
+                "Mustafa Kemal Ataturk led Turkish nationalist revolution",
+                "Defeated Allied occupation forces",
+                "Treaty of Lausanne (1923) replaced Treaty of Sèvres",
+                "Turkey became modern secular republic"
+              ],
+              "abolition": [
+                "Turkish Grand National Assembly abolished Sultanate (Nov 1, 1922)",
+                "Abolished Caliphate itself (March 3, 1924)",
+                "Sultan-Caliph expelled from Turkey",
+                "Turkey became secular state"
+              ],
+              "irony": [
+                "Indians fighting for Caliphate; Turks themselves abolished it",
+                "Turks chose nationalism over religious institution",
+                "Khilafat issue became irrelevant overnight",
+                "Indian Muslims had no more cause to fight"
+              ]
+            }
+          },
+          {
+            "id": "communal-tensions",
+            "label": "Re-emergence of Communal Tensions",
+            "type": "decline",
+            "details": {
+              "breakdown": [
+                "After 1922, Hindu-Muslim unity broke down rapidly",
+                "Communal riots increased from 1923 onwards",
+                "Moplah Rebellion (1921) in Kerala had communal overtones",
+                "Mutual distrust resurfaced"
+              ],
+              "reasons": [
+                "Khilafat issue dead; no common cause",
+                "British divide-and-rule policies resumed",
+                "Separate electorates strengthened communal politics",
+                "Extremist elements on both sides grew",
+                "Economic competition for jobs and resources",
+                "Cow slaughter and music-before-mosque issues flared up"
+              ],
+              "aftermath": [
+                "Hindu Mahasabha and Muslim League became more aggressive",
+                "Path toward communalism and eventual Partition",
+                "Golden period of unity (1920-22) proved short-lived"
+              ]
+            }
+          },
+          {
+            "id": "ali-brothers-disillusionment",
+            "label": "Ali Brothers' Disillusionment",
+            "type": "decline",
+            "details": {
+              "differences": [
+                "Ali Brothers felt Gandhi betrayed them by calling off movement",
+                "Differences over method and timing",
+                "Mohammad Ali later joined Muslim League",
+                "Attended Round Table Conference (1930)",
+                "Shifted toward communal politics"
+              ],
+              "mohammadAliDeath": "Died 1931 in London; buried in Jerusalem (as per wish, not to be buried under British India)",
+              "legacy": "Brief unity period remembered nostalgically; but couldn't be sustained"
+            }
+          }
+        ]
+      }
+    ],
+    "assessment": {
+      "title": "Assessment of Khilafat Movement",
+      "achievements": [
+        "Created unprecedented Hindu-Muslim unity (1920-1922)",
+        "Brought Muslims into mainstream nationalist movement",
+        "Demonstrated power of mass mobilization",
+        "Trained millions in political action",
+        "Made Congress truly all-India and multi-religious",
+        "Showed potential of non-violent mass struggle"
+      ],
+      "failures": [
+        "Unity proved temporary and artificial",
+        "Based on religious issue, not secular nationalism",
+        "When Khilafat issue died, unity collapsed",
+        "Led to communalism and eventual Partition",
+        "Gandhi's religious appeal had unintended consequences",
+        "Strengthened religious identity in politics"
+      ],
+      "controversy": {
+        "critics": [
+          "Some say Gandhi wrong to bring religion into politics",
+          "Communalized politics by supporting religious cause",
+          "Set precedent for religious mobilization",
+          "Short-term unity at cost of long-term communalism"
+        ],
+        "defenders": [
+          "Gandhi had noble intention: supporting Muslims in just cause",
+          "Unity was genuine even if temporary",
+          "Showed what could be achieved with cooperation",
+          "Blame should go to British divide-and-rule, not Gandhi"
+        ]
+      },
+      "historicalSignificance": [
+        "Peak of Hindu-Muslim cooperation in freedom struggle",
+        "After this, communalism grew steadily",
+        "1920-22 remains golden period of unity",
+        "Lesson: religious issues make poor foundation for political unity",
+        "Showed limits of religious mobilization",
+        "Path to Partition can be traced partly to Khilafat aftermath"
+      ]
+    },
+    "connections": [
+      {
+        "from": "WWI defeat of Turkey",
+        "relationship": "created",
+        "to": "Khilafat grievance among Indian Muslims"
+      },
+      {
+        "from": "Khilafat movement",
+        "relationship": "merged with",
+        "to": "Non-Cooperation Movement (1920-22)"
+      },
+      {
+        "from": "Turkey abolished Caliphate (1924)",
+        "relationship": "ended",
+        "to": "Khilafat issue and movement"
+      },
+      {
+        "from": "Khilafat movement's collapse",
+        "relationship": "led to",
+        "to": "Re-emergence of communal tensions"
+      }
+    ],
+    "examTips": {
+      "mustRemember": [
+        "Khilafat = Movement to restore authority of Turkish Caliph",
+        "Post-WWI: Treaty of Sèvres (1920) humiliated Turkey and Caliph",
+        "Leaders: Ali Brothers (Mohammad Ali, Shaukat Ali), Maulana Azad",
+        "Gandhi joined to create Hindu-Muslim unity",
+        "Merged with Non-Cooperation Movement (1920-22)",
+        "Peak Hindu-Muslim unity period (1920-22)",
+        "Ended when Turkey itself abolished Caliphate (March 3, 1924)",
+        "Also ended due to Chauri Chaura (Gandhi called off NCM)",
+        "Short-term unity; long-term communalism followed",
+        "Controversy: Did Gandhi communalize politics?"
+      ],
+      "keyDates": [
+        "1919 - Khilafat Committee formed",
+        "1920 - Merged with Non-Cooperation",
+        "1922 - Chauri Chaura; movement called off",
+        "1924 - Turkey abolished Caliphate; issue dead"
+      ]
+    }
+  }
+}
+

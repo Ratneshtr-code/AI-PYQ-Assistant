@@ -1,0 +1,63 @@
+{
+  "id": "political-developments-1928-29",
+  "subject": "history",
+  "title": "Political Developments (1928-1929) - Path to Purna Swaraj",
+  "description": "Nehru Report, Jinnah's 14 Points, Lahore Congress - demand for complete independence",
+  "visualType": "table",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["simon-commission-1927", "civil-disobedience-movement"],
+    "tags": ["Nehru-Report", "Jinnah-14-Points", "Purna-Swaraj", "1928-1929"]
+  },
+  "data": {
+    "columns": [
+      { "key": "aspect", "label": "Aspect", "width": "20%" },
+      { "key": "nehruReport", "label": "NEHRU REPORT (Aug 1928)", "width": "40%" },
+      { "key": "jinnah14Points", "label": "JINNAH'S 14 POINTS (Mar 1929)", "width": "40%" }
+    ],
+    "rows": [
+      {
+        "id": "context",
+        "aspect": "📋 CONTEXT",
+        "nehruReport": "• Response to Simon Commission all-white insult\n• All Parties Conference (Feb 1928) decided Indians will draft own constitution\n• Motilal Nehru Committee formed\n• Task: Draft constitution acceptable to all parties",
+        "jinnah14Points": "• Muslim League's response to Nehru Report\n• Jinnah felt Muslim interests not protected\n• Counter-proposal with Muslim safeguards\n• Last attempt at Hindu-Muslim compromise"
+      },
+      {
+        "id": "committee",
+        "aspect": "👥 COMMITTEE/AUTHOR",
+        "nehruReport": "Committee Chairman: Motilal Nehru\n\nMembers:\n• Tej Bahadur Sapru\n• Subhash Bose\n• Jawaharlal Nehru\n• M.S. Aney\n• Mangal Singh\n• Ali Imam\n• Shuaib Qureshi",
+        "jinnah14Points": "Author: Muhammad Ali Jinnah\n\n• Drafted by Jinnah alone\n• Presented to Muslim League session (Delhi, March 1929)\n• Represented Muslim League's demands"
+      },
+      {
+        "id": "proposals",
+        "aspect": "🎯 KEY PROPOSALS",
+        "nehruReport": "Constitutional Structure:\n• Dominion Status (not independence)\n• Federal system with strong center\n• Responsible government\n• Bicameral legislature\n• Adult suffrage\n• Joint electorates (no separate electorates)\n• Linguistic provinces\n• Fundamental rights guaranteed\n\nRejected:\n• Separate electorates for Muslims\n• Reservation of seats beyond population proportion",
+        "jinnah14Points": "Muslim Safeguards (14 Points):\n1. Federal constitution with residuary powers to provinces\n2. Provincial autonomy\n3. All legislatures with adequate Muslim representation\n4. 1/3 Muslim representation in Central Legislature\n5. Separate electorates (till better relations)\n6. No change in Muslim majority provinces without consent\n7. Religious freedom\n8. 1/3 Muslim ministers in Cabinet\n9. No Bill affecting community if 3/4 oppose\n10. Sindh separation from Bombay\n11. Reforms in NWFP & Balochistan\n12. Muslim representation in services\n13. Constitutional safeguards for minorities\n14. No constitutional change without states' consent"
+      },
+      {
+        "id": "reaction",
+        "aspect": "⚖️ RECEPTION",
+        "nehruReport": "Congress: Accepted with reservations\n\nMuslim League: Rejected\n• Jinnah opposed no separate electorates\n• Felt Muslim interests not protected\n• Demanded 1/3 representation at center\n\nYouth: Dissatisfied\n• Jawaharlal Nehru, Subhash Bose wanted complete independence, not Dominion Status",
+        "jinnah14Points": "Congress: Rejected\n• Felt excessive communal demands\n• Couldn't accept separate electorates\n• Federal structure would weaken center\n\nMuslim League: Adopted\n• Became Muslim League's official position\n• Basis for future Pakistan demand\n\nBritish: Ignored both"
+      },
+      {
+        "id": "significance",
+        "aspect": "⭐ SIGNIFICANCE",
+        "nehruReport": "Positive:\n• Showed Indian capacity for constitutional thinking\n• Alternative to Simon Report\n• United effort initially\n\nNegative:\n• Failed to satisfy Muslims\n• Exposed Hindu-Muslim differences\n• Dominion Status demand already outdated\n• Within year, Congress adopted Purna Swaraj",
+        "jinnah14Points": "• Last compromise attempt by Jinnah (before becoming communal)\n• Showed growing Muslim separatism\n• Foundation for Pakistan demand\n• Jinnah shifted from nationalist to communalist\n• Marked end of Hindu-Muslim political unity\n• Path to Partition visible"
+      }
+    ],
+    "additionalInfo": {
+      "lahoreCongress": {
+        "title": "Lahore Congress Session (Dec 1929) - PURNA SWARAJ",
+        "date": "December 31, 1929",
+        "president": "Jawaharlal Nehru (youngest president, 40 years old)",
+        "decision": "• Rejected Nehru Report\n• Adopted PURNA SWARAJ (Complete Independence) as goal\n• Replaced 'Dominion Status' with 'Complete Independence'\n• January 26, 1930 declared as Independence Day\n• Decision to launch Civil Disobedience Movement\n• Tricolor flag unfurled on banks of Ravi",
+        "independence": "January 26, 1930 - First Independence Day celebrated across India with pledge of Purna Swaraj (later became Republic Day)"
+      },
+      "timeline": "Simon Commission (1927) → Nehru Report (Aug 1928) → Jinnah's 14 Points (Mar 1929) → Lahore Congress (Dec 1929) → Purna Swaraj → Civil Disobedience (1930)",
+      "examTip": "Remember: Nehru Report = Motilal Nehru; Lahore Congress = Jawaharlal Nehru (President); Jinnah's 14 Points = 1/3 representation, separate electorates"
+    }
+  }
+}
+

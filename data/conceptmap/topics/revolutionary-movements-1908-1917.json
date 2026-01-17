@@ -1,0 +1,577 @@
+{
+  "id": "revolutionary-movements-1908-1917",
+  "subject": "history",
+  "title": "Revolutionary Movements (1908-1917)",
+  "description": "State-wise revolutionary terrorist movements during the pre-Gandhian phase",
+  "visualType": "flowchart",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["inc-surat-split-1907", "morley-minto-reforms-1909", "home-rule-movement"],
+    "tags": ["revolutionary-terrorism", "1908-1917", "pre-Gandhi", "militant-nationalism"]
+  },
+  "data": {
+    "legend": [
+      { "type": "organization", "label": "Revolutionary Organizations" },
+      { "type": "activity", "label": "Key Activities" },
+      { "type": "ideology", "label": "Ideology & Methods" }
+    ],
+    "categories": [
+      {
+        "id": "bengal-revolutionary",
+        "label": "Bengal Revolutionary Movement",
+        "color": "#EF4444",
+        "icon": "🔥",
+        "description": "Most active and organized revolutionary center",
+        "items": [
+          {
+            "id": "anushilan-samiti",
+            "label": "Anushilan Samiti",
+            "subtitle": "Founded 1902, became militant after 1905",
+            "type": "organization",
+            "details": {
+              "description": "Revolutionary secret society promoting physical culture and armed resistance",
+              "leadership": [
+                "Founded by Barindra Kumar Ghosh (Aurobindo's brother)",
+                "P. Mitra - founding member",
+                "Later split into Dhaka and Calcutta groups"
+              ],
+              "activities": [
+                "Physical training and arms practice",
+                "Bomb-making workshops",
+                "Political assassinations",
+                "Robberies to fund activities (Dacoit raids)"
+              ],
+              "branches": {
+                "dhaka": "Dhaka Anushilan - led by Pulin Behari Das",
+                "calcutta": "Calcutta Anushilan - Jatin Das, Bagha Jatin"
+              }
+            }
+          },
+          {
+            "id": "jugantar",
+            "label": "Jugantar Group",
+            "subtitle": "Newspaper-based revolutionary organization",
+            "type": "organization",
+            "details": {
+              "description": "Revolutionary group centered around Jugantar newspaper",
+              "founders": [
+                "Barindra Kumar Ghosh",
+                "Abhinash Bhattacharya",
+                "Bhupendranath Datta (Vivekananda's brother)"
+              ],
+              "newspaper": "Jugantar - openly advocated revolution",
+              "activities": [
+                "Published revolutionary literature",
+                "Advocated armed resistance",
+                "Connected to Alipore Bomb Conspiracy",
+                "Inspired youth to join revolutionary movement"
+              ]
+            }
+          },
+          {
+            "id": "alipore-bomb",
+            "label": "Alipore Bomb Conspiracy (1908)",
+            "subtitle": "First major revolutionary trial",
+            "type": "activity",
+            "details": {
+              "incident": "Attempted assassination of Magistrate Kingsford (failed)",
+              "date": "April 30, 1908, Muzaffarpur",
+              "perpetrators": [
+                "Khudiram Bose (18 years old)",
+                "Prafulla Chaki"
+              ],
+              "outcome": [
+                "Bomb thrown at wrong carriage",
+                "Two British ladies killed (Kennedy family)",
+                "Prafulla Chaki shot himself",
+                "Khudiram Bose arrested and hanged (Aug 11, 1908)",
+                "Became youngest martyr - huge public sympathy"
+              ],
+              "trial": {
+                "name": "Alipore Bomb Case (1908-1909)",
+                "accused": "Aurobindo Ghosh, Barindra Ghosh, and 34 others",
+                "prosecution": "By Eardley Norton",
+                "defense": "C.R. Das defended Aurobindo brilliantly",
+                "outcome": "Aurobindo acquitted; Barindra sentenced to death (commuted to life)",
+                "approver": "Naren Goswami turned approver (betrayed revolutionaries)"
+              },
+              "significance": "Exposed extent of revolutionary organization; massive crackdown followed"
+            }
+          },
+          {
+            "id": "bengal-incidents",
+            "label": "Other Major Bengal Incidents",
+            "type": "activity",
+            "details": {
+              "incidents": [
+                {
+                  "event": "Murder of Curzon Wyllie",
+                  "date": "July 1, 1909, London",
+                  "by": "Madan Lal Dhingra",
+                  "details": "Shot Curzon Wyllie (political aide-de-camp to Secretary of State); hanged Aug 17, 1909"
+                },
+                {
+                  "event": "Murder of Inspector Shamsul Alam",
+                  "date": "January 24, 1910",
+                  "by": "Students of Dhaka Anushilan",
+                  "details": "Killed for being police informer"
+                },
+                {
+                  "event": "Attempted assassination of Viceroy Hardinge",
+                  "date": "December 23, 1912, Delhi",
+                  "by": "Rash Behari Bose and Basanta Kumar Biswas",
+                  "details": "Bomb thrown at Viceroy's procession during Delhi Durbar; Hardinge injured"
+                },
+                {
+                  "event": "Rodda Arms Robbery",
+                  "date": "August 26, 1914",
+                  "by": "Jugantar members",
+                  "details": "Attempt to loot arms from Rodda & Co., Calcutta"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "maharashtra-revolutionary",
+        "label": "Maharashtra Revolutionary Movement",
+        "color": "#F59E0B",
+        "icon": "⚔️",
+        "description": "Influenced by Tilak's militant nationalism",
+        "items": [
+          {
+            "id": "abhinav-bharat",
+            "label": "Abhinav Bharat Society",
+            "subtitle": "Founded 1904 by V.D. Savarkar",
+            "type": "organization",
+            "details": {
+              "founder": "Vinayak Damodar Savarkar (in London)",
+              "philosophy": [
+                "Complete independence from British",
+                "Armed revolution only way",
+                "Hindu nationalism",
+                "Rejected constitutional methods"
+              ],
+              "activities": [
+                "Training in bomb-making and guerrilla warfare",
+                "Sent literature from London to India",
+                "Celebrated 1857 revolt (Savarkar wrote 'The Indian War of Independence, 1857')",
+                "Distributed revolutionary pamphlets"
+              ],
+              "members": [
+                "V.D. Savarkar (leader)",
+                "Ganesh Damodar Savarkar (brother)",
+                "Vinayak Chapekar, Damodar Chapekar"
+              ]
+            }
+          },
+          {
+            "id": "maharashtra-incidents",
+            "label": "Major Maharashtra Incidents",
+            "type": "activity",
+            "details": {
+              "incidents": [
+                {
+                  "event": "Murder of Plague Commissioner Rand",
+                  "date": "June 22, 1897, Pune",
+                  "by": "Chapekar Brothers (Damodar, Balkrishna, Vasudeo)",
+                  "context": "Revenge for Rand's oppressive plague control measures",
+                  "outcome": "Brothers executed; early act of revolutionary terrorism"
+                },
+                {
+                  "event": "Murder of Collector Jackson",
+                  "date": "December 21, 1909, Nasik",
+                  "by": "Anant Laxman Kanhere (influenced by Savarkar)",
+                  "context": "Jackson was harsh on nationalists",
+                  "outcome": "Kanhere hanged; Savarkar arrested in London (1910)"
+                },
+                {
+                  "event": "Nashik Conspiracy Case",
+                  "date": "1910",
+                  "accused": "V.D. Savarkar and others",
+                  "outcome": "Savarkar sentenced to two life terms (50 years) in Andaman Cellular Jail"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "punjab-revolutionary",
+        "label": "Punjab Revolutionary Movement",
+        "color": "#8B5CF6",
+        "icon": "💪",
+        "description": "Strong revolutionary tradition, later linked to Ghadar",
+        "items": [
+          {
+            "id": "punjab-context",
+            "label": "Background & Context",
+            "type": "ideology",
+            "details": {
+              "factors": [
+                "Lala Lajpat Rai's leadership and deportation (1907)",
+                "Anti-Colonization Act agitation",
+                "Martial races recruitment - military tradition",
+                "Large Punjabi diaspora in Canada, USA",
+                "Influence of Sikh tradition of resistance"
+              ]
+            }
+          },
+          {
+            "id": "ghadar-party",
+            "label": "Ghadar Party (1913)",
+            "subtitle": "Overseas revolutionary organization",
+            "type": "organization",
+            "details": {
+              "founded": {
+                "year": "1913",
+                "place": "San Francisco, USA",
+                "founders": [
+                  "Lala Har Dayal (key founder)",
+                  "Sohan Singh Bhakna (first president)",
+                  "Kartar Singh Sarabha"
+                ]
+              },
+              "meaning": "'Ghadar' means mutiny/rebellion",
+              "ideology": [
+                "Complete independence",
+                "Armed revolution inspired by 1857",
+                "Socialist inclinations",
+                "Against British imperialism"
+              ],
+              "activities": [
+                "Published 'Ghadar' newspaper in Urdu, Punjabi, Hindi",
+                "Sent revolutionaries to India",
+                "Established contacts with Indian soldiers",
+                "Planned armed uprising in India"
+              ],
+              "ghadarMovement": {
+                "year": "1914-1915",
+                "plan": "Return to India and incite mutiny among Indian soldiers",
+                "wwI": "World War I seen as opportunity",
+                "participants": "About 8,000 Ghadarites returned to India",
+                "outcome": "Failed due to British intelligence; mass arrests",
+                "trials": "Lahore Conspiracy Case trials (1915-1916); 42 hanged"
+              }
+            }
+          },
+          {
+            "id": "punjab-incidents",
+            "label": "Key Punjab Incidents",
+            "type": "activity",
+            "details": {
+              "incidents": [
+                {
+                  "event": "Murder of William Hutt Curzon Wyllie",
+                  "date": "1909, London",
+                  "by": "Madan Lal Dhingra (Punjabi revolutionary)",
+                  "connection": "Connected to India House (revolutionary center in London)"
+                },
+                {
+                  "event": "Ghadar Movement Uprising Attempt",
+                  "date": "February 21, 1915 (planned)",
+                  "plan": "Simultaneous mutiny in military regiments across North India",
+                  "failure": "Rash Behari Bose coordinated but British knew via informers",
+                  "outcome": "Mass arrests and trials"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "international-links",
+        "label": "International Revolutionary Links",
+        "color": "#10B981",
+        "icon": "🌍",
+        "description": "Foreign-based revolutionary activities",
+        "items": [
+          {
+            "id": "india-house-london",
+            "label": "India House, London",
+            "subtitle": "Revolutionary center in Britain",
+            "type": "organization",
+            "details": {
+              "description": "Hostel and revolutionary center for Indian students in London",
+              "founder": "Shyamaji Krishnavarma (1905)",
+              "leaders": [
+                "V.D. Savarkar (key activist)",
+                "Har Dayal",
+                "Madame Cama"
+              ],
+              "activities": [
+                "Published 'The Indian Sociologist'",
+                "Training ground for revolutionaries",
+                "Political discussions and planning",
+                "Sent revolutionary literature to India"
+              ],
+              "closure": "Closed by British after Curzon Wyllie murder (1909)"
+            }
+          },
+          {
+            "id": "berlin-committee",
+            "label": "Berlin Committee/Indian Independence Committee",
+            "subtitle": "Seeking German support during WWI",
+            "type": "organization",
+            "details": {
+              "formed": "1914, Berlin, Germany",
+              "context": "World War I - 'enemy's enemy is friend' strategy",
+              "leaders": [
+                "Virendranath Chattopadhyaya (Sarojini Naidu's brother)",
+                "Bhupendranath Dutta",
+                "Har Dayal (moved from USA)",
+                "Champakraman Pillai",
+                "Barkatullah"
+              ],
+              "objectives": [
+                "Seek German arms and support",
+                "Plan armed uprising in India",
+                "Coordinate with Ghadar Party",
+                "Exploit British weakness during WWI"
+              ],
+              "activities": [
+                "Hindu-German Conspiracy (1914-1917)",
+                "Attempted to send arms to India via ships",
+                "Connected with Afghan Emir for invasion plans",
+                "Most failed due to British intelligence"
+              ]
+            }
+          },
+          {
+            "id": "silk-letter-conspiracy",
+            "label": "Silk Letter Conspiracy (1916)",
+            "subtitle": "Deobandi scholars' plot with Turkish Caliphate",
+            "type": "activity",
+            "details": {
+              "leaders": [
+                "Maulana Mahmud Hasan (Deobandi scholar)",
+                "Maulana Obaidullah Sindhi",
+                "Raja Mahendra Pratap"
+              ],
+              "plan": [
+                "Provisional Government of India formed in Kabul (1915)",
+                "Sought Turkish and Afghan support",
+                "Plan to invade India from Northwest",
+                "Messages written on silk cloth (hence 'Silk Letter')"
+              ],
+              "discovery": "British intercepted silk letters (1916)",
+              "outcome": [
+                "Maulana Mahmud Hasan arrested in Mecca",
+                "Imprisoned in Malta (1916-1920)",
+                "Plan completely failed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "ideology-methods",
+        "label": "Revolutionary Ideology & Methods",
+        "color": "#06B6D4",
+        "icon": "💡",
+        "description": "Philosophy and tactics of revolutionary movement",
+        "items": [
+          {
+            "id": "revolutionary-ideology",
+            "label": "Ideological Foundation",
+            "type": "ideology",
+            "details": {
+              "sources": [
+                "1857 Revolt as inspiration",
+                "Italian (Mazzini, Garibaldi) and Russian revolutionaries",
+                "French Revolution ideals",
+                "Irish revolutionary methods",
+                "Swami Vivekananda's call for fearless youth"
+              ],
+              "beliefs": [
+                "Constitutional methods futile",
+                "Armed revolution only path to freedom",
+                "Individual sacrifice (martyrdom) necessary",
+                "Terrorism as propaganda by deed",
+                "Complete independence (Purna Swaraj) - no reforms",
+                "No faith in British justice or goodwill"
+              ],
+              "writings": [
+                "Bhagavad Gita as guide (karma yoga)",
+                "Bankim Chandra's 'Anandamath' (Vande Mataram)",
+                "Savarkar's '1857 War of Independence'",
+                "Revolutionary pamphlets and newspapers"
+              ]
+            }
+          },
+          {
+            "id": "revolutionary-methods",
+            "label": "Methods & Tactics",
+            "type": "ideology",
+            "details": {
+              "tactics": [
+                "Political assassinations (targeting British officials)",
+                "Bomb attacks on British symbols",
+                "Armed robberies (to fund activities)",
+                "Secret societies and oath-taking",
+                "Guerrilla warfare training",
+                "Underground newspapers and literature"
+              ],
+              "targets": [
+                "British officials (judges, magistrates, police)",
+                "Indian collaborators (informers, loyalists)",
+                "Symbols of British power (buildings, processions)"
+              ],
+              "organization": [
+                "Secret cells and compartmentalization",
+                "Hidden bomb-making factories",
+                "Safe houses and hideouts",
+                "Code words and encrypted communication"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "british-response",
+        "label": "British Repressive Response",
+        "color": "#DC2626",
+        "icon": "⚖️",
+        "description": "Government measures to crush revolutionary movement",
+        "items": [
+          {
+            "id": "repressive-laws",
+            "label": "Repressive Legislation",
+            "type": "activity",
+            "details": {
+              "laws": [
+                {
+                  "name": "Explosive Substances Act (1908)",
+                  "purpose": "Punish bomb-making and possession of explosives",
+                  "penalty": "Death or transportation for life"
+                },
+                {
+                  "name": "Newspapers (Incitement to Offences) Act (1908)",
+                  "purpose": "Suppress revolutionary newspapers",
+                  "impact": "Many newspapers banned; editors imprisoned"
+                },
+                {
+                  "name": "Indian Press Act (1910)",
+                  "purpose": "Control press freedom",
+                  "provisions": "Deposits forfeited for seditious content"
+                },
+                {
+                  "name": "Criminal Law Amendment Act (1908, 1913)",
+                  "purpose": "Special powers for sedition trials",
+                  "features": "Trial without jury; restricted appeal"
+                },
+                {
+                  "name": "Defence of India Act (1915)",
+                  "context": "During World War I",
+                  "purpose": "Detention without trial; special tribunals",
+                  "impact": "Crushed Ghadar movement"
+                }
+              ]
+            }
+          },
+          {
+            "id": "british-actions",
+            "label": "Direct Repressive Actions",
+            "type": "activity",
+            "details": {
+              "measures": [
+                "Mass arrests and detentions",
+                "Deportations (Lala Lajpat Rai, Ajit Singh to Burma 1907)",
+                "Transportation to Cellular Jail, Andaman (Kalapani)",
+                "Extensive police surveillance and spy network",
+                "Rewards for informers",
+                "Collective punishments of villages",
+                "Public hangings to terrorize population"
+              ],
+              "trials": [
+                "Alipore Bomb Conspiracy (1908-09)",
+                "Nashik Conspiracy Case (1910)",
+                "Delhi Conspiracy Case (1912)",
+                "Lahore Conspiracy Cases (1915-16)",
+                "Hundreds of revolutionaries executed or imprisoned"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "connections": [
+      {
+        "from": "Surat Split weakened Congress",
+        "relationship": "led to",
+        "to": "Rise of revolutionary terrorism"
+      },
+      {
+        "from": "Morley-Minto Reforms inadequate",
+        "relationship": "convinced",
+        "to": "Revolutionaries that constitutional methods futile"
+      },
+      {
+        "from": "British repression",
+        "relationship": "failed to stop",
+        "to": "Revolutionary ideology spread"
+      },
+      {
+        "from": "World War I",
+        "relationship": "provided opportunity for",
+        "to": "International revolutionary conspiracies"
+      }
+    ],
+    "assessment": {
+      "title": "Assessment of Revolutionary Movement (1908-1917)",
+      "achievements": [
+        "Kept freedom struggle alive during Congress weakness (1907-1916)",
+        "Created nationalist consciousness among youth",
+        "Demonstrated that Indians willing to sacrifice for freedom",
+        "Forced British to take Indian demands seriously",
+        "Influenced later freedom struggle (revolutionaries joined mainstream)",
+        "Created martyrs who inspired generations"
+      ],
+      "limitations": [
+        "Limited to urban educated youth; no mass base",
+        "Isolated acts without coordination",
+        "Alienated masses due to violence",
+        "British repression crushed movement easily",
+        "No clear political program or alternative",
+        "Sometimes killed innocent people accidentally",
+        "Could not sustain against British might"
+      ],
+      "significance": [
+        "Bridge between moderate and Gandhian phases",
+        "Showed inadequacy of both constitutional methods and terrorism",
+        "Prepared youth for future mass struggles",
+        "Created political awareness",
+        "Forced British reforms (though inadequate)",
+        "Many revolutionaries later joined Gandhi's movement"
+      ]
+    },
+    "examTips": {
+      "mustRemember": [
+        "Alipore Bomb Case (1908) - Aurobindo acquitted; Khudiram hanged",
+        "Ghadar Party (1913) - San Francisco; Har Dayal, Sohan Singh Bhakna",
+        "Anushilan Samiti and Jugantar - Bengal revolutionary groups",
+        "V.D. Savarkar - Abhinav Bharat, transported to Andaman",
+        "Madan Lal Dhingra - killed Curzon Wyllie (1909)",
+        "Delhi Conspiracy (1912) - bomb on Viceroy Hardinge",
+        "Silk Letter Conspiracy (1916) - Maulana Mahmud Hasan"
+      ],
+      "keyDates": [
+        "1908 - Khudiram Bose hanged; Alipore Bomb Case; Explosive Substances Act",
+        "1909 - Madan Lal Dhingra hanged; Curzon Wyllie murdered",
+        "1910 - Savarkar transported to Andaman",
+        "1912 - Bomb on Viceroy Hardinge (Delhi Conspiracy)",
+        "1913 - Ghadar Party founded",
+        "1915 - Ghadar uprising failed; Defence of India Act",
+        "1916 - Silk Letter Conspiracy exposed"
+      ],
+      "comparisonTopics": [
+        "Revolutionary vs Constitutional methods",
+        "Bengal vs Maharashtra vs Punjab revolutionary movements",
+        "Anushilan Samiti vs Jugantar",
+        "Revolutionary terrorism vs Gandhian non-violence (later)"
+      ]
+    }
+  }
+}
+

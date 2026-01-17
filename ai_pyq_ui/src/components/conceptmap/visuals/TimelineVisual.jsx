@@ -42,6 +42,46 @@ export default function TimelineVisual({ topicData }) {
         return colors[type] || "bg-gray-500 border-gray-600";
     };
 
+    // Helper function to parse markdown bold (**text**) and render as bold
+    const parseMarkdownBold = (text) => {
+        if (!text || typeof text !== 'string') {
+            return text;
+        }
+        
+        const parts = [];
+        const regex = /\*\*(.+?)\*\*/g;
+        let match;
+        let lastIndex = 0;
+
+        while ((match = regex.exec(text)) !== null) {
+            if (match.index > lastIndex) {
+                parts.push({ type: 'text', content: text.substring(lastIndex, match.index) });
+            }
+            parts.push({ type: 'bold', content: match[1] });
+            lastIndex = regex.lastIndex;
+        }
+
+        if (lastIndex < text.length) {
+            parts.push({ type: 'text', content: text.substring(lastIndex) });
+        }
+
+        if (parts.length === 0) {
+            return <span>{text}</span>;
+        }
+
+        return (
+            <>
+                {parts.map((part, idx) => 
+                    part.type === 'bold' ? (
+                        <strong key={idx} className="font-bold">{part.content}</strong>
+                    ) : (
+                        <span key={idx}>{part.content}</span>
+                    )
+                )}
+            </>
+        );
+    };
+
     return (
         <div className="w-full h-full bg-gradient-to-br from-gray-50 to-blue-50 overflow-auto">
             <div className="p-6 md:p-8">
@@ -115,7 +155,7 @@ export default function TimelineVisual({ topicData }) {
                                     className="relative"
                                 >
                                     {/* Timeline Line */}
-                                    <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-400 to-blue-200"></div>
+                                    <div className="absolute left-14 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-400 to-blue-200"></div>
 
                                     {/* Events */}
                                     <div className="space-y-6">
@@ -125,11 +165,11 @@ export default function TimelineVisual({ topicData }) {
                                                 initial={{ opacity: 0, x: -20 }}
                                                 animate={{ opacity: 1, x: 0 }}
                                                 transition={{ delay: idx * 0.05 }}
-                                                className="relative pl-20"
+                                                className="relative pl-28"
                                             >
                                                 {/* Year Badge */}
-                                                <div className="absolute left-0 top-0 w-16 text-center">
-                                                    <div className={`inline-block px-3 py-1 rounded-full text-white text-sm font-bold ${getEventColor(event.type)}`}>
+                                                <div className="absolute left-0 top-0 w-28 flex items-center justify-center">
+                                                    <div className={`px-3 py-3 rounded-full text-white text-xs font-bold leading-tight ${getEventColor(event.type)} break-words text-center`} style={{ maxWidth: '112px', lineHeight: '1.4', maxHeight: '4em', overflow: 'hidden', minHeight: '40px' }}>
                                                         {event.year}
                                                     </div>
                                                 </div>
@@ -187,6 +227,49 @@ export default function TimelineVisual({ topicData }) {
                                                                                         character: { icon: '📋', bg: 'bg-gray-50', border: 'border-gray-300', text: 'text-gray-800', content: 'text-gray-900', label: 'Character' },
                                                                                         connection: { icon: '🔗', bg: 'bg-teal-50', border: 'border-teal-200', text: 'text-teal-800', content: 'text-teal-900', label: 'Connection' },
                                                                                         note: { icon: '📝', bg: 'bg-gray-50', border: 'border-gray-300', text: 'text-gray-800', content: 'text-gray-900', label: 'Note' },
+                                                                                        offer: { icon: '📋', bg: 'bg-indigo-50', border: 'border-indigo-200', text: 'text-indigo-800', content: 'text-indigo-900', label: 'Offer' },
+                                                                                        congress: { icon: '🟠', bg: 'bg-orange-50', border: 'border-orange-200', text: 'text-orange-800', content: 'text-orange-900', label: 'Congress' },
+                                                                                        league: { icon: '🟢', bg: 'bg-green-50', border: 'border-green-200', text: 'text-green-800', content: 'text-green-900', label: 'League' },
+                                                                                        impact: { icon: '💥', bg: 'bg-red-50', border: 'border-red-200', text: 'text-red-800', content: 'text-red-900', label: 'Impact' },
+                                                                                        exam: { icon: '🎓', bg: 'bg-purple-50', border: 'border-purple-200', text: 'text-purple-800', content: 'text-purple-900', label: 'Exam Points' },
+                                                                                        where: { icon: '📍', bg: 'bg-emerald-50', border: 'border-emerald-200', text: 'text-emerald-800', content: 'text-emerald-900', label: 'Where' },
+                                                                                        resolution: { icon: '📜', bg: 'bg-blue-50', border: 'border-blue-200', text: 'text-blue-800', content: 'text-blue-900', label: 'Resolution' },
+                                                                                        twoNationTheory: { icon: '🌍', bg: 'bg-cyan-50', border: 'border-cyan-200', text: 'text-cyan-800', content: 'text-cyan-900', label: 'Two-Nation Theory' },
+                                                                                        slogan: { icon: '📢', bg: 'bg-yellow-50', border: 'border-yellow-200', text: 'text-yellow-800', content: 'text-yellow-900', label: 'Slogan' },
+                                                                                        arrests: { icon: '🔒', bg: 'bg-red-50', border: 'border-red-200', text: 'text-red-800', content: 'text-red-900', label: 'Arrests' },
+                                                                                        movement: { icon: '✊', bg: 'bg-orange-50', border: 'border-orange-200', text: 'text-orange-800', content: 'text-orange-900', label: 'Movement' },
+                                                                                        repression: { icon: '⚔️', bg: 'bg-red-50', border: 'border-red-200', text: 'text-red-800', content: 'text-red-900', label: 'Repression' },
+                                                                                        accused: { icon: '⚖️', bg: 'bg-purple-50', border: 'border-purple-200', text: 'text-purple-800', content: 'text-purple-900', label: 'Accused' },
+                                                                                        charges: { icon: '📋', bg: 'bg-red-50', border: 'border-red-200', text: 'text-red-800', content: 'text-red-900', label: 'Charges' },
+                                                                                        reaction: { icon: '👥', bg: 'bg-blue-50', border: 'border-blue-200', text: 'text-blue-800', content: 'text-blue-900', label: 'Reaction' },
+                                                                                        communal: { icon: '🤝', bg: 'bg-teal-50', border: 'border-teal-200', text: 'text-teal-800', content: 'text-teal-900', label: 'Communal Unity' },
+                                                                                        outcome: { icon: '✅', bg: 'bg-green-50', border: 'border-green-200', text: 'text-green-800', content: 'text-green-900', label: 'Outcome' },
+                                                                                        event: { icon: '📅', bg: 'bg-indigo-50', border: 'border-indigo-200', text: 'text-indigo-800', content: 'text-indigo-900', label: 'Event' },
+                                                                                        support: { icon: '🙌', bg: 'bg-green-50', border: 'border-green-200', text: 'text-green-800', content: 'text-green-900', label: 'Support' },
+                                                                                        suppressed: { icon: '🛑', bg: 'bg-red-50', border: 'border-red-200', text: 'text-red-800', content: 'text-red-900', label: 'Suppressed' },
+                                                                                        members: { icon: '👥', bg: 'bg-indigo-50', border: 'border-indigo-200', text: 'text-indigo-800', content: 'text-indigo-900', label: 'Members' },
+                                                                                        plan: { icon: '📐', bg: 'bg-blue-50', border: 'border-blue-200', text: 'text-blue-800', content: 'text-blue-900', label: 'Plan' },
+                                                                                        initial: { icon: '🟢', bg: 'bg-green-50', border: 'border-green-200', text: 'text-green-800', content: 'text-green-900', label: 'Initial Acceptance' },
+                                                                                        breakdown: { icon: '💔', bg: 'bg-red-50', border: 'border-red-200', text: 'text-red-800', content: 'text-red-900', label: 'Breakdown' },
+                                                                                        result: { icon: '📊', bg: 'bg-gray-50', border: 'border-gray-200', text: 'text-gray-800', content: 'text-gray-900', label: 'Result' },
+                                                                                        call: { icon: '📢', bg: 'bg-orange-50', border: 'border-orange-200', text: 'text-orange-800', content: 'text-orange-900', label: 'Call' },
+                                                                                        calcutta: { icon: '🔥', bg: 'bg-red-50', border: 'border-red-200', text: 'text-red-800', content: 'text-red-900', label: 'Calcutta Killings' },
+                                                                                        spread: { icon: '🌊', bg: 'bg-orange-50', border: 'border-orange-200', text: 'text-orange-800', content: 'text-orange-900', label: 'Spread' },
+                                                                                        deaths: { icon: '💔', bg: 'bg-red-50', border: 'border-red-200', text: 'text-red-800', content: 'text-red-900', label: 'Deaths' },
+                                                                                        formation: { icon: '🏛️', bg: 'bg-blue-50', border: 'border-blue-200', text: 'text-blue-800', content: 'text-blue-900', label: 'Formation' },
+                                                                                        conflict: { icon: '⚔️', bg: 'bg-red-50', border: 'border-red-200', text: 'text-red-800', content: 'text-red-900', label: 'Conflict' },
+                                                                                        reality: { icon: '👁️', bg: 'bg-gray-50', border: 'border-gray-200', text: 'text-gray-800', content: 'text-gray-900', label: 'Reality' },
+                                                                                        announcement: { icon: '📢', bg: 'bg-blue-50', border: 'border-blue-200', text: 'text-blue-800', content: 'text-blue-900', label: 'Announcement' },
+                                                                                        deadline: { icon: '⏰', bg: 'bg-yellow-50', border: 'border-yellow-200', text: 'text-yellow-800', content: 'text-yellow-900', label: 'Deadline' },
+                                                                                        acceptance: { icon: '✅', bg: 'bg-green-50', border: 'border-green-200', text: 'text-green-800', content: 'text-green-900', label: 'Acceptance' },
+                                                                                        date: { icon: '📅', bg: 'bg-blue-50', border: 'border-blue-200', text: 'text-blue-800', content: 'text-blue-900', label: 'Date' },
+                                                                                        british: { icon: '🇬🇧', bg: 'bg-blue-50', border: 'border-blue-200', text: 'text-blue-800', content: 'text-blue-900', label: 'British Action' },
+                                                                                        provisions: { icon: '📋', bg: 'bg-indigo-50', border: 'border-indigo-200', text: 'text-indigo-800', content: 'text-indigo-900', label: 'Provisions' },
+                                                                                        pakistan: { icon: '🇵🇰', bg: 'bg-green-50', border: 'border-green-200', text: 'text-green-800', content: 'text-green-900', label: 'Pakistan' },
+                                                                                        india: { icon: '🇮🇳', bg: 'bg-orange-50', border: 'border-orange-200', text: 'text-orange-800', content: 'text-orange-900', label: 'India' },
+                                                                                        violence: { icon: '💔', bg: 'bg-red-50', border: 'border-red-200', text: 'text-red-800', content: 'text-red-900', label: 'Violence' },
+                                                                                        punjab: { icon: '🗺️', bg: 'bg-yellow-50', border: 'border-yellow-200', text: 'text-yellow-800', content: 'text-yellow-900', label: 'Punjab & Bengal' },
+                                                                                        tragedy: { icon: '😢', bg: 'bg-gray-50', border: 'border-gray-200', text: 'text-gray-800', content: 'text-gray-900', label: 'Tragedy' },
                                                                                     };
                                                                                     
                                                                                     const config = fieldConfig[key] || { 
@@ -200,12 +283,24 @@ export default function TimelineVisual({ topicData }) {
                                                                                     
                                                                                     // Render based on value type
                                                                                     if (typeof value === 'string') {
+                                                                                        // Split by newlines and render each line with markdown parsing
+                                                                                        const lines = value.split('\n');
                                                                                         return (
                                                                                             <div key={key} className={`p-3 ${config.bg} rounded border ${config.border}`}>
-                                                                                                <p className={`text-xs font-semibold ${config.text} mb-1`}>
+                                                                                                <p className={`text-xs font-semibold ${config.text} mb-2`}>
                                                                                                     {config.icon} {config.label}
                                                                                                 </p>
-                                                                                                <p className={`text-sm ${config.content}`}>{value}</p>
+                                                                                                <div className={`text-sm ${config.content} space-y-1.5`}>
+                                                                                                    {lines.map((line, lineIdx) => (
+                                                                                                        line.trim() === '' ? (
+                                                                                                            <div key={lineIdx} className="h-1"></div>
+                                                                                                        ) : (
+                                                                                                            <div key={lineIdx} className="leading-relaxed">
+                                                                                                                {parseMarkdownBold(line)}
+                                                                                                            </div>
+                                                                                                        )
+                                                                                                    ))}
+                                                                                                </div>
                                                                                             </div>
                                                                                         );
                                                                                     } else if (Array.isArray(value)) {

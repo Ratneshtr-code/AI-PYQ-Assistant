@@ -1,0 +1,141 @@
+{
+  "id": "governor-generals-viceroys",
+  "subject": "history",
+  "title": "Governor-Generals & Viceroys of India - Quick Reference",
+  "description": "Key administrators and their major policies/events",
+  "visualType": "table",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["administrative-till-1857", "revolt-1857-overview", "events-1858-1885-overview"],
+    "tags": ["Governor-General", "Viceroy", "administrators", "policies"]
+  },
+  "data": {
+    "columns": [
+      {"key": "name", "label": "Name & Tenure", "width": "20%"},
+      {"key": "title", "label": "Title", "width": "15%"},
+      {"key": "majorEvents", "label": "Major Events/Policies/Acts", "width": "40%"},
+      {"key": "examPoints", "label": "Exam Critical Points", "width": "25%"}
+    ],
+    "rows": [
+      {
+        "id": "warren-hastings",
+        "name": "**Warren Hastings**\n\n1773-1785",
+        "title": "First Governor-General of Bengal",
+        "majorEvents": "• Regulating Act 1773 (first GG appointed)\n• Rohilla War (1774)\n• First Anglo-Maratha War (1775-82)\n• Second Anglo-Mysore War (1780-84)\n• Founded Asiatic Society of Bengal (1784)\n• Impeachment trial in England (1788-95)",
+        "examPoints": "**FIRST Governor-General**\n\nRegulating Act 1773\n\nDual Government ended\n\nImpeached (acquitted)"
+      },
+      {
+        "id": "cornwallis",
+        "name": "**Lord Cornwallis**\n\n1786-1793\n\n1805 (2nd term, died)",
+        "title": "Governor-General",
+        "majorEvents": "• Permanent Settlement (1793) - Bengal land revenue\n• Cornwallis Code (1793) - civil service reforms\n• Third Anglo-Mysore War (1790-92) - Tipu defeated\n• Police system reorganized\n• Separation of judiciary from executive",
+        "examPoints": "**Permanent Settlement 1793**\n\nCornwallis Code\n\nTipu defeated\n\nCivil service reforms"
+      },
+      {
+        "id": "wellesley",
+        "name": "**Lord Wellesley**\n\n1798-1805",
+        "title": "Governor-General",
+        "majorEvents": "• Subsidiary Alliance System (1798)\n• Fourth Anglo-Mysore War (1799) - Tipu killed\n• Second Anglo-Maratha War (1803-05)\n• Expanded British territory massively\n• Fort William College founded (1800)",
+        "examPoints": "**Subsidiary Alliance**\n\nTipu Sultan killed (1799)\n\nExpansionist policy\n\n'Napoleon of India'"
+      },
+      {
+        "id": "dalhousie",
+        "name": "**Lord Dalhousie**\n\n1848-1856",
+        "title": "Governor-General",
+        "majorEvents": "• **Doctrine of Lapse** - annexed Satara, Jhansi, Nagpur, etc.\n• Awadh annexed (1856) - on grounds of misrule\n• Second Anglo-Sikh War (1848-49) - Punjab annexed\n• Railways introduced (1853)\n• Telegraph, postal reforms\n• Widow Remarriage Act (1856)\n• Wood's Despatch on Education (1854)",
+        "examPoints": "**Doctrine of Lapse**\n\nAwadh annexation (1856)\n\nPunjab annexed\n\nRailways, Telegraph\n\n→ Led to 1857 Revolt"
+      },
+      {
+        "id": "canning",
+        "name": "**Lord Canning**\n\n1856-1862",
+        "title": "Last GG\n\nFirst Viceroy (1858)",
+        "majorEvents": "• Revolt of 1857 occurred during his tenure\n• Suppressed revolt\n• Government of India Act 1858 - Company rule ended\n• Became first Viceroy (Queen's rule began)\n• Indian Councils Act 1861\n• Called 'Clemency Canning' for lenient post-revolt policy",
+        "examPoints": "**Last GG, First Viceroy**\n\n1857 Revolt during tenure\n\nCrown rule began (1858)\n\nClemency Canning"
+      },
+      {
+        "id": "ripon",
+        "name": "**Lord Ripon**\n\n1880-1884",
+        "title": "Viceroy",
+        "majorEvents": "• Local Self-Government Resolution (1882) - 'Father of Local Self-Govt'\n• First Factory Act (1881)\n• Ilbert Bill controversy (1883) - failed\n• First regular Census (1881)\n• Vernacular Press Act repealed\n• Most liberal/popular Viceroy",
+        "examPoints": "**'Father of Local Self-Govt'**\n\nFactory Act 1881\n\nIlbert Bill controversy\n\nMost liberal Viceroy"
+      },
+      {
+        "id": "curzon",
+        "name": "**Lord Curzon**\n\n1899-1905",
+        "title": "Viceroy",
+        "majorEvents": "• **Partition of Bengal (1905)** - sparked mass movement\n• Universities Act (1904) - controlled education\n• Indian Councils Act (1909) - during his time\n• Police Commission (1902)\n• Ancient Monuments Preservation Act (1904)\n• Tibet Expedition (1904)\n• Most controversial Viceroy",
+        "examPoints": "**Bengal Partition (1905)**\n\nSparked Swadeshi Movement\n\nAnti-national policies\n\nForced to resign"
+      },
+      {
+        "id": "minto",
+        "name": "**Lord Minto II**\n\n1905-1910",
+        "title": "Viceroy",
+        "majorEvents": "• **Morley-Minto Reforms (1909)** - separate electorates\n• Muslim League founded (1906) during his tenure\n• Supported separate electorates for Muslims\n• Repression of revolutionary terrorism",
+        "examPoints": "**Morley-Minto Reforms 1909**\n\nSeparate electorates started\n\nMuslim League formed"
+      },
+      {
+        "id": "hardinge",
+        "name": "**Lord Hardinge**\n\n1910-1916",
+        "title": "Viceroy",
+        "majorEvents": "• Delhi Durbar (1911) - capital shifted Delhi to Calcutta\n• Bengal Partition annulled (1911)\n• Delhi Conspiracy (1912) - bomb thrown at him\n• WWI began during tenure (1914)",
+        "examPoints": "**Capital shifted to Delhi**\n\nBengal Partition annulled\n\nBomb attack (1912)"
+      },
+      {
+        "id": "chelmsford",
+        "name": "**Lord Chelmsford**\n\n1916-1921",
+        "title": "Viceroy",
+        "majorEvents": "• **Montagu-Chelmsford Reforms (1919)** - Dyarchy\n• Rowlatt Act (1919)\n• Jallianwala Bagh Massacre (1919) during his tenure\n• Non-Cooperation Movement launched (1920)\n• Montagu Declaration (1917)",
+        "examPoints": "**Montagu-Chelmsford Reforms**\n\nRowlatt Act & Jallianwala\n\nDyarchy introduced"
+      },
+      {
+        "id": "reading",
+        "name": "**Lord Reading**\n\n1921-1926",
+        "title": "Viceroy",
+        "majorEvents": "• Chauri Chaura (1922) - NCM suspended\n• Gandhi arrested and tried (1922)\n• Moplah Rebellion (1921)\n• Prince of Wales visit (1921)\n• Communist Party formed (1925)",
+        "examPoints": "Gandhi's trial (1922)\n\nChauri Chaura during tenure"
+      },
+      {
+        "id": "irwin",
+        "name": "**Lord Irwin**\n\n1926-1931",
+        "title": "Viceroy",
+        "majorEvents": "• Simon Commission (1927-30)\n• Civil Disobedience Movement (1930)\n• Dandi March (1930)\n• **Gandhi-Irwin Pact (1931)**\n• First Round Table Conference (1930)\n• Bhagat Singh hanged (1931)",
+        "examPoints": "**Gandhi-Irwin Pact (1931)**\n\nSimon Commission period\n\nDandi March during tenure"
+      },
+      {
+        "id": "willingdon",
+        "name": "**Lord Willingdon**\n\n1931-1936",
+        "title": "Viceroy",
+        "majorEvents": "• Second CDM (1932) - crushed harshly\n• Communal Award (1932)\n• Poona Pact (1932)\n• Government of India Act 1935 passed\n• Severe repression of Congress",
+        "examPoints": "Poona Pact (1932)\n\nGOI Act 1935 passed\n\nHarsh on Congress"
+      },
+      {
+        "id": "linlithgow",
+        "name": "**Lord Linlithgow**\n\n1936-1944",
+        "title": "Viceroy",
+        "majorEvents": "• Provincial Elections (1937) - Congress ministries\n• WWII declared (1939) - without consulting Indians\n• Congress ministries resigned (1939)\n• August Offer (1940)\n• Pakistan Resolution (1940)\n• Cripps Mission (1942)\n• **Quit India Movement (1942)** - crushed brutally\n• Bengal Famine (1943)",
+        "examPoints": "**Longest tenure (8 years)**\n\nWWII declared (1939)\n\nQuit India crushed (1942)"
+      },
+      {
+        "id": "wavell",
+        "name": "**Lord Wavell**\n\n1943-1947",
+        "title": "Viceroy",
+        "majorEvents": "• Wavell Plan & Simla Conference (1945) - failed\n• INA Trials (1945-46)\n• Cabinet Mission (1946) - failed\n• Interim Government formed (1946)\n• Direct Action Day (1946) - Calcutta riots\n• Failed to solve Hindu-Muslim problem",
+        "examPoints": "Cabinet Mission (1946)\n\nInterim Government\n\nFailed to prevent partition"
+      },
+      {
+        "id": "mountbatten",
+        "name": "**Lord Mountbatten**\n\n1947-1948",
+        "title": "Last Viceroy\n\nFirst GG of Independent India",
+        "majorEvents": "• **Mountbatten Plan (June 3, 1947)** - Partition plan\n• Indian Independence Act (July 18, 1947)\n• **Independence & Partition (Aug 14-15, 1947)**\n• Radcliffe Line - boundary drawn\n• Integration of princely states\n• Remained GG till June 1948 (C. Rajagopalachari succeeded)",
+        "examPoints": "**Last Viceroy**\n\nMountbatten Plan (Jun 3)\n\nIndependence (Aug 15, 1947)\n\nPartition executed"
+      }
+    ],
+    "examTips": {
+      "critical": "**First GG**: Warren Hastings; **Last GG/First Viceroy**: Canning; **Last Viceroy**: Mountbatten",
+      "policies": "Doctrine of Lapse (Dalhousie); Subsidiary Alliance (Wellesley); Permanent Settlement (Cornwallis)",
+      "reforms": "Morley-Minto (1909); Montagu-Chelmsford (1919); GOI Act (1935)",
+      "massacres": "Jallianwala Bagh (Chelmsford); Quit India repression (Linlithgow)"
+    }
+  }
+}
+

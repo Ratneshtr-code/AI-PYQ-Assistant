@@ -1,0 +1,441 @@
+{
+  "id": "revolutionary-timeline-1908-1917",
+  "subject": "history",
+  "title": "Revolutionary Activities Timeline (1908-1917)",
+  "description": "Chronological sequence of major revolutionary incidents and government responses",
+  "visualType": "timeline",
+  "metadata": {
+    "examRelevance": "high",
+    "relatedTopics": ["revolutionary-movements-1908-1917", "inc-surat-split-1907", "home-rule-movement"],
+    "tags": ["revolutionary", "timeline", "1908-1917", "terrorism"]
+  },
+  "data": {
+    "startYear": 1908,
+    "endYear": 1917,
+    "legend": [
+      { "type": "incident", "label": "Revolutionary Incidents" },
+      { "type": "repression", "label": "British Repression" },
+      { "type": "organization", "label": "Organizational Developments" }
+    ],
+    "phases": [
+      {
+        "id": "peak-revolutionary",
+        "name": "Peak Revolutionary Activity",
+        "period": "1908-1910",
+        "description": "Height of revolutionary terrorism in Bengal and Maharashtra"
+      },
+      {
+        "id": "international-phase",
+        "name": "International Revolutionary Phase",
+        "period": "1911-1914",
+        "description": "Focus shifts to overseas revolutionary activities"
+      },
+      {
+        "id": "wwi-conspiracies",
+        "name": "World War I Conspiracies",
+        "period": "1914-1917",
+        "description": "Revolutionary attempts to exploit British involvement in WWI"
+      }
+    ],
+    "events": [
+      {
+        "id": "explosive-act",
+        "year": "Jun 1908",
+        "title": "Explosive Substances Act",
+        "description": "British pass harsh law against bomb-making",
+        "type": "repression",
+        "phase": "peak-revolutionary",
+        "icon": "📜",
+        "details": {
+          "points": [
+            "Passed after series of bomb incidents",
+            "Made possession or manufacture of explosives punishable by death",
+            "Gave police extensive search powers",
+            "First major anti-terrorist legislation"
+          ],
+          "significance": "Marked beginning of systematic legal repression"
+        }
+      },
+      {
+        "id": "alipore-bomb",
+        "year": "Apr 30, 1908",
+        "title": "Muzaffarpur Bomb (Alipore Bomb Conspiracy)",
+        "description": "Khudiram Bose and Prafulla Chaki attempt to kill Magistrate Kingsford",
+        "type": "incident",
+        "phase": "peak-revolutionary",
+        "icon": "💣",
+        "details": {
+          "points": [
+            "Target: Magistrate Kingsford (harsh on nationalists)",
+            "Bomb thrown at wrong carriage",
+            "Two British ladies (Kennedy family) killed",
+            "Prafulla Chaki shot himself to avoid arrest",
+            "Khudiram Bose (18) arrested, tried, hanged (Aug 11, 1908)",
+            "Massive public sympathy for Khudiram",
+            "Led to Alipore Bomb Conspiracy Case"
+          ],
+          "significance": "Youngest martyr; exposed revolutionary network in Bengal",
+          "trial": "34 accused including Aurobindo Ghosh; C.R. Das defended; Aurobindo acquitted"
+        },
+        "tags": ["Khudiram", "Bengal", "martyrdom"]
+      },
+      {
+        "id": "newspapers-act",
+        "year": "Jun 1908",
+        "title": "Newspapers (Incitement to Offences) Act",
+        "description": "Law to suppress revolutionary newspapers",
+        "type": "repression",
+        "phase": "peak-revolutionary",
+        "icon": "📰",
+        "details": {
+          "points": [
+            "Targeted revolutionary publications like Jugantar, Sandhya",
+            "Allowed confiscation of printing presses",
+            "Editors could be imprisoned without trial",
+            "Many newspapers shut down or went underground"
+          ],
+          "significance": "Curtailed revolutionary propaganda"
+        }
+      },
+      {
+        "id": "curzon-wyllie-murder",
+        "year": "Jul 1, 1909",
+        "title": "Murder of Curzon Wyllie",
+        "description": "Madan Lal Dhingra assassinates British official in London",
+        "type": "incident",
+        "phase": "peak-revolutionary",
+        "icon": "⚔️",
+        "details": {
+          "points": [
+            "Location: Imperial Institute, London",
+            "Victim: Sir William Hutt Curzon Wyllie (Political ADC to Secretary of State)",
+            "Assassin: Madan Lal Dhingra (Punjabi revolutionary, India House member)",
+            "Also killed: Dr. Cawas Lalcaca (Parsi doctor who tried to intervene)",
+            "Dhingra caught on spot",
+            "Refused to apologize; gave defiant statement",
+            "Hanged on August 17, 1909, Pentonville Prison, London"
+          ],
+          "statement": "Dhingra's famous statement: I believe the only lesson required in India is to learn to die, and the only way to teach it is by dying ourselves",
+          "significance": "Revolutionary terrorism reached London; shocked British establishment",
+          "aftermath": "India House closed; Savarkar and others became suspects"
+        },
+        "tags": ["London", "Dhingra", "martyrdom", "India House"]
+      },
+      {
+        "id": "jackson-murder",
+        "year": "Dec 21, 1909",
+        "title": "Murder of Collector Jackson",
+        "description": "Anant Laxman Kanhere kills Nasik Collector during play",
+        "type": "incident",
+        "phase": "peak-revolutionary",
+        "icon": "🎭",
+        "details": {
+          "points": [
+            "Location: Vijayanand Theatre, Nasik (during play performance)",
+            "Victim: Arthur Mason Tippetts Jackson (District Collector)",
+            "Assassin: Anant Laxman Kanhere (inspired by Savarkar's teachings)",
+            "Jackson was harsh on nationalists and demeaning towards Indians",
+            "Kanhere shot Jackson at point-blank range",
+            "Made no attempt to escape",
+            "Tried and hanged on April 19, 1910"
+          ],
+          "connection": "V.D. Savarkar implicated; arrested in London (March 1910)",
+          "significance": "Led to Savarkar's arrest and Nashik Conspiracy Case"
+        },
+        "tags": ["Maharashtra", "Savarkar", "Kanhere"]
+      },
+      {
+        "id": "savarkar-arrest",
+        "year": "Mar 1910",
+        "title": "V.D. Savarkar Arrested in London",
+        "description": "Revolutionary leader arrested and brought to India for trial",
+        "type": "repression",
+        "phase": "peak-revolutionary",
+        "icon": "⛓️",
+        "details": {
+          "points": [
+            "Arrested in London in connection with Jackson murder",
+            "Attempted dramatic escape while ship docked at Marseilles, France (July 1910)",
+            "Swam to French shore but captured and returned (international controversy)",
+            "Tried in India for Nashik Conspiracy Case",
+            "Sentenced to two life imprisonments (50 years total)",
+            "Transported to Cellular Jail, Andaman (Kalapani)",
+            "Remained imprisoned till 1921; restrictions till 1937"
+          ],
+          "significance": "Removed most influential revolutionary ideologue; dampened Maharashtra revolutionary movement"
+        },
+        "tags": ["Savarkar", "Andaman", "Nashik Conspiracy"]
+      },
+      {
+        "id": "indian-press-act",
+        "year": "1910",
+        "title": "Indian Press Act",
+        "description": "Strengthened control over vernacular press",
+        "type": "repression",
+        "phase": "peak-revolutionary",
+        "icon": "📜",
+        "details": {
+          "points": [
+            "Required newspapers to deposit security",
+            "Security forfeited if seditious content published",
+            "Local government could ban newspapers",
+            "Particularly targeted revolutionary publications"
+          ],
+          "significance": "Further restricted revolutionary propaganda"
+        }
+      },
+      {
+        "id": "delhi-conspiracy",
+        "year": "Dec 23, 1912",
+        "title": "Delhi Conspiracy - Bomb on Viceroy Hardinge",
+        "description": "Attempt to assassinate Viceroy during Delhi Durbar entry",
+        "type": "incident",
+        "phase": "international-phase",
+        "icon": "💥",
+        "details": {
+          "points": [
+            "Occasion: Viceroy Hardinge's state entry into new capital Delhi",
+            "Delhi Durbar celebration (capital shift from Calcutta to Delhi)",
+            "Bomb thrown at Viceroy's howdah (elephant seat)",
+            "Conspirators: Rash Behari Bose (mastermind), Basanta Kumar Biswas (thrower)",
+            "Viceroy seriously injured but survived",
+            "Attendant killed, Vicereine injured",
+            "Basanta Kumar Biswas arrested and hanged (May 1915)",
+            "Rash Behari Bose escaped; remained underground"
+          ],
+          "significance": "Boldest attack on highest British authority in India; showed revolutionary reach",
+          "aftermath": "Massive manhunt; many arrested; revolutionary movement severely weakened"
+        },
+        "tags": ["Delhi", "Hardinge", "Rash Behari Bose"]
+      },
+      {
+        "id": "ghadar-party",
+        "year": "1913",
+        "title": "Ghadar Party Founded",
+        "description": "Revolutionary organization formed in San Francisco by Indian immigrants",
+        "type": "organization",
+        "phase": "international-phase",
+        "icon": "🌍",
+        "details": {
+          "points": [
+            "Founded in San Francisco, California, USA",
+            "Key founders: Lala Har Dayal, Sohan Singh Bhakna, Kartar Singh Sarabha",
+            "Membership: Mainly Punjabi Sikh immigrants (also some Muslims, Hindus)",
+            "Newspaper: 'Ghadar' (meaning Mutiny) in Urdu, Punjabi, Hindi",
+            "Ideology: Complete independence through armed revolution",
+            "Slogan: 'Angrezi Raj ka Dushman' (Enemy of British Rule)",
+            "Commemorated 1857 Revolt",
+            "Collected funds and arms for uprising in India"
+          ],
+          "significance": "First organized overseas revolutionary movement; international dimension to freedom struggle"
+        },
+        "tags": ["Ghadar", "USA", "Punjabi revolutionaries"]
+      },
+      {
+        "id": "wwi-outbreak",
+        "year": "Aug 1914",
+        "title": "World War I Begins",
+        "description": "Revolutionaries see British vulnerability as opportunity",
+        "type": "organization",
+        "phase": "wwi-conspiracies",
+        "icon": "⚔️",
+        "details": {
+          "points": [
+            "Britain declares war on Germany (August 4, 1914)",
+            "India automatically at war (as British colony)",
+            "British forces stretched thin globally",
+            "Revolutionaries adopted 'enemy's enemy is friend' policy",
+            "Sought German, Turkish, and Afghan support",
+            "Ghadar Party members decided to return to India",
+            "Plan: Incite mutiny in Indian Army"
+          ],
+          "significance": "WWI seen as golden opportunity for revolution; led to multiple conspiracies"
+        }
+      },
+      {
+        "id": "ghadar-uprising",
+        "year": "Feb 21, 1915",
+        "title": "Ghadar Uprising Attempt",
+        "description": "Planned simultaneous mutiny in Punjab military regiments fails",
+        "type": "incident",
+        "phase": "wwi-conspiracies",
+        "icon": "💥",
+        "details": {
+          "points": [
+            "About 8,000 Ghadarites returned to India (1914-1915)",
+            "Plan: Simultaneous mutiny in multiple regiments (Feb 21, 1915)",
+            "Coordinated by Rash Behari Bose and Ghadar Party",
+            "Target regiments: 23rd Cavalry (Lahore), 26th Punjab Regiment, others",
+            "Plan exposed through informer Kirpal Singh",
+            "British arrested leaders before D-day",
+            "Some minor incidents but no major uprising",
+            "Date postponed but momentum lost"
+          ],
+          "failure": "British intelligence too strong; lack of coordination; some Indian soldiers loyal",
+          "significance": "Most ambitious revolutionary conspiracy but complete failure"
+        },
+        "tags": ["Ghadar", "Punjab", "mutiny attempt"]
+      },
+      {
+        "id": "defence-india-act",
+        "year": "Mar 1915",
+        "title": "Defence of India Act",
+        "description": "Draconian wartime law to crush revolutionary movement",
+        "type": "repression",
+        "phase": "wwi-conspiracies",
+        "icon": "⚖️",
+        "details": {
+          "points": [
+            "Passed during World War I emergency",
+            "Provisions: Detention without trial, special tribunals, no jury trials",
+            "Provincial governments given extensive powers",
+            "Suspended normal legal rights",
+            "Used extensively against Ghadar revolutionaries",
+            "Thousands arrested and detained",
+            "Remained in force till 1919"
+          ],
+          "significance": "Crushed Ghadar movement; most repressive law till then"
+        }
+      },
+      {
+        "id": "lahore-conspiracy",
+        "year": "1915-1916",
+        "title": "Lahore Conspiracy Case Trials",
+        "description": "Mass trials of Ghadar revolutionaries",
+        "type": "repression",
+        "phase": "wwi-conspiracies",
+        "icon": "⚖️",
+        "details": {
+          "points": [
+            "Series of trials under Defence of India Act",
+            "Over 300 accused in multiple batches",
+            "Charges: Waging war against King, conspiracy to mutiny",
+            "Trials held without jury in special tribunals",
+            "42 revolutionaries hanged",
+            "114 transported for life",
+            "93 imprisoned for varying terms",
+            "Many others detained without trial"
+          ],
+          "notableMartyrs": [
+            "Kartar Singh Sarabha (19 years old) - hanged Nov 16, 1915",
+            "Vishnu Ganesh Pingle",
+            "Jagat Singh",
+            "Surain Singh"
+          ],
+          "significance": "Decimated Ghadar movement; broke back of revolutionary terrorism"
+        },
+        "tags": ["Ghadar", "trials", "martyrdom", "Sarabha"]
+      },
+      {
+        "id": "hindu-german-conspiracy",
+        "year": "1914-1917",
+        "title": "Hindu-German Conspiracy",
+        "description": "Berlin Committee and Ghadar Party seek German support",
+        "type": "organization",
+        "phase": "wwi-conspiracies",
+        "icon": "🤝",
+        "details": {
+          "points": [
+            "Berlin Committee formed (1914) by Indian revolutionaries in Germany",
+            "Leaders: Virendranath Chattopadhyaya, Har Dayal, Bhupendranath Dutta",
+            "Coordinated with Ghadar Party in USA",
+            "German government provided some financial support and arms",
+            "Plans: Send arms to India, incite rebellion, coordinate with Afghanistan",
+            "Annie Larsen and Maverick ships sent with arms (intercepted)",
+            "Attempted to create mutiny among Indian POWs in Germany",
+            "Most plans failed due to British intelligence and naval blockade"
+          ],
+          "significance": "Showed international reach but ultimately futile; alienated some Indians"
+        },
+        "tags": ["Germany", "Berlin Committee", "WWI"]
+      },
+      {
+        "id": "silk-letter",
+        "year": "1916",
+        "title": "Silk Letter Conspiracy Exposed",
+        "description": "Deobandi scholars' plan with Turkey and Afghanistan revealed",
+        "type": "incident",
+        "phase": "wwi-conspiracies",
+        "icon": "📜",
+        "details": {
+          "points": [
+            "Leaders: Maulana Mahmud Hasan, Maulana Obaidullah Sindhi, Raja Mahendra Pratap",
+            "Plan: Provisional Government of India at Kabul (Dec 1, 1915)",
+            "Sought Turkish Caliph and Afghan Emir support for invasion of India",
+            "Communication via letters written on silk (to avoid detection)",
+            "British intelligence intercepted silk letters (1916)",
+            "Maulana Mahmud Hasan arrested in Mecca (on pilgrimage)",
+            "Imprisoned in Malta (1916-1920)",
+            "Plan completely foiled"
+          ],
+          "significance": "Showed even religious scholars involved in anti-British activities; Muslim participation in revolution"
+        },
+        "tags": ["Silk Letter", "Mahmud Hasan", "Afghanistan", "Turkey"]
+      },
+      {
+        "id": "annie-larsen",
+        "year": "1915",
+        "title": "Annie Larsen Arms Shipment Failed",
+        "description": "German arms ship intercepted by British",
+        "type": "incident",
+        "phase": "wwi-conspiracies",
+        "icon": "🚢",
+        "details": {
+          "points": [
+            "German government arranged arms shipment for Ghadar uprising",
+            "Ship: Annie Larsen (with arms) and SS Maverick (to transfer to India)",
+            "8,000 Springfield rifles, 3,000 pistols, ammunition",
+            "Plan: Transfer arms at sea, smuggle into India",
+            "Ships failed to meet at rendezvous",
+            "British intelligence tracked movements",
+            "Arms never reached India",
+            "Participants arrested in USA (San Francisco Hindu-German Conspiracy Trial, 1917-18)"
+          ],
+          "significance": "Showed German support but British naval supremacy prevented success"
+        }
+      },
+      {
+        "id": "rash-behari-escape",
+        "year": "1915",
+        "title": "Rash Behari Bose Escapes to Japan",
+        "description": "Revolutionary mastermind flees India, later leads INA in Japan",
+        "type": "organization",
+        "phase": "wwi-conspiracies",
+        "icon": "✈️",
+        "details": {
+          "points": [
+            "After failure of Ghadar uprising and British manhunt",
+            "Rash Behari Bose escaped to Japan (May 1915)",
+            "Lived in Japan for rest of life",
+            "Married Japanese woman, adopted Japanese name",
+            "Continued revolutionary activities from Japan",
+            "Later instrumental in forming Indian National Army (INA) in Southeast Asia",
+            "Handed over INA leadership to Subhash Chandra Bose (1943)"
+          ],
+          "significance": "Continued revolutionary tradition abroad; link to later INA movement"
+        },
+        "tags": ["Rash Behari Bose", "Japan", "INA connection"]
+      }
+    ],
+    "summary": {
+      "title": "Period Assessment",
+      "overview": "Revolutionary terrorism peaked 1908-1910, then shifted to international conspiracies during WWI (1914-1917). All major attempts crushed by British repression.",
+      "keyCharacteristics": [
+        "Urban educated youth-led movement",
+        "Inspired by 1857 Revolt and international revolutionaries",
+        "Targeted assassinations of British officials",
+        "Secret societies and underground networks",
+        "Sought international support (Germany, Turkey, Afghanistan)",
+        "Completely crushed by 1917 through repression"
+      ],
+      "legacy": [
+        "Created revolutionary martyrs and nationalist consciousness",
+        "Forced British to take Indian aspirations seriously",
+        "Showed limitations of terrorist methods",
+        "Many revolutionaries later joined Gandhi's movement",
+        "INA in WWII had roots in this revolutionary tradition"
+      ]
+    }
+  }
+}
+

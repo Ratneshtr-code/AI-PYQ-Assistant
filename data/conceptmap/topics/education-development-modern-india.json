@@ -1,0 +1,85 @@
+{
+  "id": "education-development-modern-india",
+  "subject": "history",
+  "title": "Development of Modern Education System",
+  "description": "British education policies; Wood's Despatch; Hunter Commission; Universities",
+  "visualType": "timeline",
+  "metadata": {
+    "examRelevance": "medium",
+    "relatedTopics": ["events-1858-1885-social"],
+    "tags": ["education", "Wood-Despatch", "universities", "Macaulay"]
+  },
+  "data": {
+    "startYear": 1813,
+    "endYear": 1904,
+    "events": [
+      {
+        "id": "charter-1813",
+        "year": "1813",
+        "title": "Charter Act 1813",
+        "icon": "📜",
+        "details": {"provision": "₹1 lakh annually for education", "significance": "First official allocation for education"}
+      },
+      {
+        "id": "macaulay",
+        "year": "1835",
+        "title": "Macaulay's Minute",
+        "icon": "📝",
+        "details": {
+          "decision": "English as medium of instruction (over Sanskrit/Arabic)",
+          "rationale": "Create 'class of Indians' loyal to British; clerks for administration",
+          "quote": "'Indian in blood & colour, but English in taste, opinions, morals and intellect'",
+          "exam": "**MOST ASKED**: Macaulay = English education; Downward Filtration Theory"
+        }
+      },
+      {
+        "id": "woods-despatch",
+        "year": "1854",
+        "title": "Wood's Despatch (Magna Carta of English Education)",
+        "icon": "📋",
+        "details": {
+          "provisions": "• Universities at Calcutta, Bombay, Madras (1857)\n• Department of Public Instruction in provinces\n• Grants-in-aid to private schools\n• Teachers' training\n• Vernacular primary; English higher education\n• Women's education encouraged",
+          "exam": "**'Magna Carta of English Education'**\n\nFirst systematic education policy\n\n3 universities (1857)"
+        }
+      },
+      {
+        "id": "universities",
+        "year": "1857",
+        "title": "Universities Established",
+        "icon": "🎓",
+        "details": {"founded": "Calcutta, Bombay, Madras universities (1857) - on London University model", "exam": "3 presidency universities: 1857"}
+      },
+      {
+        "id": "hunter",
+        "year": "1882",
+        "title": "Hunter Commission",
+        "icon": "👥",
+        "details": {
+          "focus": "Primary & secondary education (university ignored)",
+          "recommendation": "Provincial control; vernacular medium for primary; women's education",
+          "limited": "Didn't address university education"
+        }
+      },
+      {
+        "id": "curzon",
+        "year": "1902-04",
+        "title": "Curzon's Education Policy",
+        "icon": "🚫",
+        "details": {
+          "universities-act": "Indian Universities Act (1904): Govt control over universities; reduced elected members",
+          "purpose": "Control nationalist influence in colleges",
+          "reaction": "Strongly opposed by nationalists; seen as curbing intellectual freedom"
+        }
+      }
+    ],
+    "assessment": {
+      "positive": "Created educated middle class; English created pan-India communication; Modern scientific knowledge",
+      "negative": "Neglected masses; vernacular ignored; Created clerks not leaders; Elite-centric; Traditional education destroyed",
+      "nationalist": "National education movement (Tilak, Gandhi) created alternative schools rejecting British system"
+    },
+    "examTips": {
+      "critical": "**Wood's Despatch (1854)** = Magna Carta of English Education; **Macaulay (1835)** = English medium; **Hunter (1882)** = Primary education focus; **Universities (1857)** = Calcutta, Bombay, Madras"
+    }
+  }
+}
+

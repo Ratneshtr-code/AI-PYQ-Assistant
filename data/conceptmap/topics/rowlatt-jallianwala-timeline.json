@@ -1,0 +1,520 @@
+{
+  "id": "rowlatt-jallianwala-timeline",
+  "subject": "history",
+  "title": "From Rowlatt Act to Jallianwala Bagh Massacre (1919)",
+  "description": "Timeline of repression that shattered Indian faith in British justice",
+  "visualType": "timeline",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["montagu-chelmsford-reforms-1919", "non-cooperation-movement", "khilafat-movement"],
+    "tags": ["Rowlatt-Act", "Jallianwala-Bagh", "1919", "Gandhi", "Satyagraha"]
+  },
+  "data": {
+    "startYear": 1918,
+    "endYear": 1919,
+    "legend": [
+      { "type": "repression", "label": "British Repression" },
+      { "type": "protest", "label": "Indian Protest" },
+      { "type": "violence", "label": "Violence & Massacre" }
+    ],
+    "phases": [
+      {
+        "id": "rowlatt-committee",
+        "name": "Rowlatt Committee Phase",
+        "period": "December 1917 - March 1919",
+        "description": "From committee formation to Act passage"
+      },
+      {
+        "id": "satyagraha-phase",
+        "name": "Satyagraha Movement",
+        "period": "March - April 1919",
+        "description": "Gandhi's nationwide resistance against Rowlatt Act"
+      },
+      {
+        "id": "massacre-aftermath",
+        "name": "Jallianwala Bagh & Aftermath",
+        "period": "April - December 1919",
+        "description": "Massacre and its consequences"
+      }
+    ],
+    "events": [
+      {
+        "id": "rowlatt-committee-formation",
+        "year": "Dec 1917",
+        "title": "Rowlatt Committee Appointed",
+        "description": "Committee to investigate 'revolutionary conspiracies'",
+        "type": "repression",
+        "phase": "rowlatt-committee",
+        "icon": "📋",
+        "details": {
+          "points": [
+            "Justice Sidney Rowlatt (British judge) headed committee",
+            "Purpose: Investigate 'revolutionary conspiracies' and recommend legislation",
+            "Context: Revolutionary terrorism had been crushed by Defence of India Act (1915)",
+            "WWI ending; British wanted to make wartime repressive powers permanent",
+            "Committee had no Indian members",
+            "Indians not consulted"
+          ],
+          "significance": "First step toward permanent repressive legislation"
+        }
+      },
+      {
+        "id": "rowlatt-report",
+        "year": "Jul 1918",
+        "title": "Rowlatt Committee Report Published",
+        "description": "Recommended continuation of wartime powers",
+        "type": "repression",
+        "phase": "rowlatt-committee",
+        "icon": "📜",
+        "details": {
+          "points": [
+            "Report submitted July 1918",
+            "Recommended draconian powers against 'sedition'",
+            "Proposed detention without trial",
+            "Trials without jury for political cases",
+            "Restriction on press freedom",
+            "Powers to search and arrest without warrant"
+          ],
+          "indianReaction": "Outrage among Indians; seen as continuation of wartime repression after war ended"
+        }
+      },
+      {
+        "id": "rowlatt-bills-introduced",
+        "year": "Feb 6, 1919",
+        "title": "Rowlatt Bills Introduced in Imperial Legislative Council",
+        "description": "Two bills based on Rowlatt Committee recommendations",
+        "type": "repression",
+        "phase": "rowlatt-committee",
+        "icon": "⚖️",
+        "details": {
+          "points": [
+            "Two bills introduced by Viceroy Lord Chelmsford",
+            "Bill I: Against revolutionary conspiracies",
+            "Bill II: Against seditious activities",
+            "Provisions: Detention up to 2 years without trial; Trial without jury; Restrictions on movement and press",
+            "All Indian members of Council opposed",
+            "C. Sankaran Nair (Indian member) resigned in protest",
+            "British members used majority to pass"
+          ],
+          "opposition": "Unanimously opposed by all Indian members; protests across India"
+        }
+      },
+      {
+        "id": "rowlatt-act-passed",
+        "year": "Mar 18, 1919",
+        "title": "Rowlatt Act Passed (Black Act)",
+        "description": "Draconian law passed despite total Indian opposition",
+        "type": "repression",
+        "phase": "rowlatt-committee",
+        "icon": "📜",
+        "details": {
+          "points": [
+            "Passed by Imperial Legislative Council (March 18, 1919)",
+            "Bill I became Rowlatt Act (Bill II dropped)",
+            "All Indian members voted against; walked out in protest",
+            "British members used majority to pass",
+            "Called 'Black Act' by Indians",
+            "Gandhi called it 'instrument of oppression'"
+          ],
+          "provisions": [
+            "Detention without trial for up to 2 years",
+            "Trial of political cases by special tribunals without jury",
+            "Trials in camera (secret, closed doors)",
+            "Restrictions on press",
+            "Provincial governments empowered to search and arrest without warrant",
+            "No right to appeal"
+          ],
+          "significance": "Betrayed Indian expectations after WWI sacrifice; showed British unwillingness to trust Indians even after loyalty in war"
+        },
+        "tags": ["Black Act", "repression"]
+      },
+      {
+        "id": "gandhi-announces-satyagraha",
+        "year": "Feb 24, 1919",
+        "title": "Gandhi Announces Satyagraha",
+        "description": "First all-India Satyagraha called against Rowlatt Bills",
+        "type": "protest",
+        "phase": "satyagraha-phase",
+        "icon": "✊",
+        "details": {
+          "points": [
+            "Even before Act passed, Gandhi announced resistance",
+            "Called for nationwide Satyagraha (civil disobedience)",
+            "Satyagraha Sabha formed to coordinate",
+            "Gandhi's first all-India political movement",
+            "Pledged to disobey 'unjust and tyrannical' law non-violently",
+            "Appeal to Viceroy to withdraw bills"
+          ],
+          "significance": "Gandhi's entry into all-India politics; first mass resistance movement under Gandhi"
+        }
+      },
+      {
+        "id": "hartal-march-30",
+        "year": "Mar 30, 1919",
+        "title": "First Hartal (Nationwide Strike) - Delhi & Punjab",
+        "description": "Gandhi calls hartal; partially observed",
+        "type": "protest",
+        "phase": "satyagraha-phase",
+        "icon": "🛑",
+        "details": {
+          "points": [
+            "Gandhi called for nationwide hartal (strike) on March 30",
+            "Shops closed, people fasted and prayed",
+            "Mass meetings held",
+            "Observed mainly in Delhi and Punjab",
+            "Some violence in Delhi; clashes with police",
+            "British nervous about scale of protest"
+          ],
+          "delhi": "Processions and hartals; some violence led to police firing"
+        }
+      },
+      {
+        "id": "punjab-repression",
+        "year": "Apr 1919",
+        "title": "Repression in Punjab Begins",
+        "description": "Arrests of popular leaders; situation tense",
+        "type": "repression",
+        "phase": "satyagraha-phase",
+        "icon": "⛓️",
+        "details": {
+          "points": [
+            "Punjab saw strong protests against Rowlatt Act",
+            "Dr. Saifuddin Kitchlew and Dr. Satyapal (popular local leaders) arrested (April 10)",
+            "Both Hindu (Satyapal) and Muslim (Kitchlew) leaders united in protest",
+            "Their arrest sparked massive protests in Amritsar",
+            "Lieutenant Governor Michael O'Dwyer ordered harsh repression",
+            "Punjab under martial law-like conditions"
+          ],
+          "significance": "Arrests of popular leaders inflamed Punjab; set stage for massacre"
+        },
+        "tags": ["Punjab", "Kitchlew", "Satyapal"]
+      },
+      {
+        "id": "hartal-april-6",
+        "year": "Apr 6, 1919",
+        "title": "Second All-India Hartal (April 6)",
+        "description": "More successful nationwide strike; Gandhi's leadership solidified",
+        "type": "protest",
+        "phase": "satyagraha-phase",
+        "icon": "🇮🇳",
+        "details": {
+          "points": [
+            "Originally planned for March 30 but rescheduled to April 6 for better coordination",
+            "Near-total hartal across India",
+            "Shops closed, work stopped, people gathered for prayers",
+            "Hindu-Muslim unity in protests",
+            "Unprecedented scale of peaceful mass protest",
+            "British alarmed by Gandhi's ability to mobilize masses"
+          ],
+          "success": "Demonstrated Gandhi's mass appeal; first successful all-India movement",
+          "issue": "Some places saw violence; Gandhi worried about loss of non-violence"
+        }
+      },
+      {
+        "id": "violence-delhi-punjab",
+        "year": "Apr 9-10, 1919",
+        "title": "Violence in Delhi, Punjab, and Ahmedabad",
+        "description": "Protests turned violent in some places",
+        "type": "violence",
+        "phase": "satyagraha-phase",
+        "icon": "🔥",
+        "details": {
+          "points": [
+            "Delhi: Clashes between protesters and police; police firing",
+            "Punjab (Amritsar, Lahore): Violent protests after arrests of Kitchlew and Satyapal",
+            "Ahmedabad: Mill workers' protests turned violent; police firing killed 28",
+            "Telegraph lines cut, railway stations attacked in Punjab",
+            "British banks and buildings targeted",
+            "Several Europeans killed in mob violence (Punjab)"
+          ],
+          "gandhiReaction": "Gandhi deeply disturbed; felt he made 'Himalayan miscalculation' in launching mass movement without adequate preparation in non-violence"
+        }
+      },
+      {
+        "id": "gandhi-arrested",
+        "year": "Apr 10, 1919",
+        "title": "Gandhi Arrested, Prevented from Entering Delhi",
+        "description": "Gandhi arrested while traveling to Delhi; released after few days",
+        "type": "repression",
+        "phase": "satyagraha-phase",
+        "icon": "⛓️",
+        "details": {
+          "points": [
+            "Gandhi traveling from Bombay to Delhi",
+            "Arrested at Palwal (near Delhi) on April 10",
+            "Taken back to Bombay and released",
+            "Prevented from going to Punjab or Delhi",
+            "British wanted to prevent his leadership in tense areas"
+          ],
+          "aftermath": "Gandhi's absence from Punjab meant no moderating influence during critical period"
+        }
+      },
+      {
+        "id": "martial-law-punjab",
+        "year": "Apr 11, 1919",
+        "title": "Martial Law Declared in Punjab",
+        "description": "General Dyer takes command; repression intensified",
+        "type": "repression",
+        "phase": "massacre-aftermath",
+        "icon": "⚔️",
+        "details": {
+          "points": [
+            "Martial law declared in parts of Punjab including Amritsar",
+            "Brigadier General Reginald Dyer sent to Amritsar",
+            "Dyer given extraordinary powers",
+            "Ban on public meetings and processions",
+            "Shoot-on-sight orders for violators",
+            "Lieutenant Governor Michael O'Dwyer fully backed Dyer",
+            "Situation tense; British feared another 1857"
+          ],
+          "dyer": "Dyer was hardline officer who believed in maximum force; contempt for Indians"
+        },
+        "tags": ["Martial Law", "Dyer"]
+      },
+      {
+        "id": "jallianwala-bagh-massacre",
+        "year": "Apr 13, 1919",
+        "title": "JALLIANWALA BAGH MASSACRE",
+        "description": "British troops fire on unarmed gathering; hundreds killed",
+        "type": "violence",
+        "phase": "massacre-aftermath",
+        "icon": "💔",
+        "details": {
+          "date": "April 13, 1919 (Baisakhi day - important Sikh festival)",
+          "place": "Jallianwala Bagh, Amritsar, Punjab",
+          "context": [
+            "Public meeting called to protest Rowlatt Act and arrest of Kitchlew-Satyapal",
+            "Baisakhi fair also happening; many villagers in Amritsar",
+            "Jallianwala Bagh: Enclosed park/garden with narrow exits",
+            "About 10,000-20,000 people gathered (including women and children)"
+          ],
+          "massacre": [
+            "General Dyer arrived with 50 Gurkha and Balochi soldiers",
+            "Blocked main exit",
+            "WITHOUT WARNING, ordered troops to fire",
+            "Fired for 10-15 minutes continuously",
+            "1,650 rounds fired into densest parts of crowd",
+            "People trapped; no escape routes",
+            "Many jumped into well (120+ bodies found in well)",
+            "Firing stopped only when ammunition exhausted",
+            "No medical help provided; wounded left to die"
+          ],
+          "casualties": {
+            "official": "379 killed, 1,200 wounded (British official figures)",
+            "congress": "1,000+ killed, 1,500+ wounded (Congress estimate)",
+            "reality": "Actual toll likely 1,000-1,500 killed; many more wounded"
+          },
+          "dyerJustification": [
+            "Claimed he wanted to teach Indians a 'moral lesson'",
+            "Said he wanted to create 'moral and widespread effect'",
+            "Wanted to terrorize Indians into submission",
+            "No regret; said he would have used machine guns if available",
+            "Admitted he didn't warn crowd or ask to disperse"
+          ],
+          "significance": "Most brutal atrocity in Indian freedom struggle; shattered any remaining faith in British justice"
+        },
+        "tags": ["massacre", "Jallianwala Bagh", "Dyer", "Amritsar"]
+      },
+      {
+        "id": "crawling-order",
+        "year": "Apr 15-19, 1919",
+        "title": "Humiliating 'Crawling Order' & Martial Law Brutalities",
+        "description": "Series of humiliating orders in Punjab",
+        "type": "repression",
+        "phase": "massacre-aftermath",
+        "icon": "😡",
+        "details": {
+          "crawlingOrder": [
+            "Lane where European woman (Miss Sherwood) was attacked",
+            "Dyer ordered all Indians passing through to crawl on bellies",
+            "'Crawling Order' enforced for several days",
+            "Extreme humiliation and racial hatred displayed"
+          ],
+          "otherAtrocities": [
+            "Public floggings for minor offenses",
+            "Forced salaam (salute) to all Europeans",
+            "Collective fines on villages",
+            "Aerial bombing of villages",
+            "Mass arrests and torture",
+            "Whole villages punished collectively"
+          ],
+          "purpose": "Terrorize Punjab into submission; demonstrate British racial superiority",
+          "impact": "Deep humiliation and resentment; radicalized even moderates"
+        }
+      },
+      {
+        "id": "gandhi-suspends-satyagraha",
+        "year": "Apr 18, 1919",
+        "title": "Gandhi Suspends Satyagraha",
+        "description": "Gandhi calls off movement due to violence",
+        "type": "protest",
+        "phase": "massacre-aftermath",
+        "icon": "🛑",
+        "details": {
+          "points": [
+            "Gandhi learned of violence in Delhi, Punjab, Ahmedabad",
+            "Announced suspension of Satyagraha (April 18)",
+            "Admitted 'Himalayan miscalculation'",
+            "Felt people not ready for mass civil disobedience",
+            "Needed more preparation in non-violence",
+            "Undertook fast as penance"
+          ],
+          "criticism": "Some criticized Gandhi for calling off movement; but he maintained non-violence non-negotiable",
+          "significance": "Gandhi learned lessons; next movement (Non-Cooperation 1920) had better organization and discipline"
+        }
+      },
+      {
+        "id": "hunter-committee",
+        "year": "Oct 1919",
+        "title": "Hunter Committee Appointed",
+        "description": "Official inquiry into Punjab disturbances",
+        "type": "repression",
+        "phase": "massacre-aftermath",
+        "icon": "📋",
+        "details": {
+          "points": [
+            "Government appointed Disorders Inquiry Committee (Hunter Committee)",
+            "Lord Hunter (Scottish judge) chaired",
+            "Mixed British and Indian members",
+            "Task: Inquire into Punjab disturbances and Jallianwala Bagh",
+            "Hearings held Oct 1919 - March 1920"
+          ],
+          "findings": [
+            "Majority report (British members): Dyer exceeded authority but acted in good faith",
+            "Minority report (Indian members): Condemned Dyer and O'Dwyer strongly",
+            "Indian members called it 'calculated massacre'",
+            "Recommended Dyer's dismissal"
+          ],
+          "dyer": "Dyer dismissed from service but no criminal prosecution; got pension"
+        }
+      },
+      {
+        "id": "house-of-lords-debate",
+        "year": "Jul 1920",
+        "title": "British Parliament Debate - Dyer Defended",
+        "description": "House of Lords supports Dyer; £26,000 raised for him",
+        "type": "repression",
+        "phase": "massacre-aftermath",
+        "icon": "🇬🇧",
+        "details": {
+          "points": [
+            "Hunter Committee report debated in British Parliament",
+            "House of Commons: Condemned Dyer (but no prosecution)",
+            "House of Lords: Supported Dyer; called him 'savior of Punjab'",
+            "Morning Post (British newspaper) raised £26,000 for Dyer",
+            "Presented to him as 'reward'",
+            "Dyer hailed as hero by many British",
+            "Kipling praised him"
+          ],
+          "indianReaction": "Outrage in India; British callousness exposed; showed racial attitudes; destroyed moderate faith in British",
+          "significance": "British support for Dyer convinced even moderates that self-rule essential"
+        }
+      },
+      {
+        "id": "tagore-knighthood",
+        "year": "May 1919",
+        "title": "Rabindranath Tagore Renounces Knighthood",
+        "description": "Tagore's powerful protest against massacre",
+        "type": "protest",
+        "phase": "massacre-aftermath",
+        "icon": "📝",
+        "details": {
+          "points": [
+            "Rabindranath Tagore (Nobel laureate, poet) had been knighted (1915)",
+            "Shocked by Jallianwala Bagh Massacre",
+            "Wrote letter to Viceroy renouncing knighthood (May 30, 1919)",
+            "Condemned 'frightfulness' and 'inhumanity'",
+            "Called for atonement"
+          ],
+          "quote": "'The time has come when badges of honour make our shame glaring in the incongruous context of humiliation'",
+          "significance": "Symbolic protest by India's most respected cultural figure; inspired others"
+        },
+        "tags": ["Tagore", "protest", "symbolic"]
+      },
+      {
+        "id": "congress-response",
+        "year": "Dec 1919",
+        "title": "Congress Amritsar Session - Condemns Massacre",
+        "description": "Congress demands accountability; prepares for stronger action",
+        "type": "protest",
+        "phase": "massacre-aftermath",
+        "icon": "🏛️",
+        "details": {
+          "points": [
+            "Congress session held at Amritsar (Dec 1919) - symbolic location",
+            "Passed resolution condemning Punjab atrocities",
+            "Demanded punishment for Dyer and O'Dwyer",
+            "Appointed own inquiry committee (led by Madan Mohan Malaviya, C.R. Das)",
+            "Mood turned against British government",
+            "Prepared ground for Non-Cooperation Movement"
+          ],
+          "significance": "Even moderates radicalized; consensus building for strong action against British"
+        }
+      },
+      {
+        "id": "khilafat-question",
+        "year": "1919",
+        "title": "Khilafat Issue Emerges",
+        "description": "Muslim anger over treatment of Turkish Caliph; Gandhi sees unity opportunity",
+        "type": "protest",
+        "phase": "massacre-aftermath",
+        "icon": "☪️",
+        "details": {
+          "points": [
+            "Post-WWI: Ottoman Turkey defeated; Caliph's position threatened",
+            "Indian Muslims concerned about Caliph (spiritual head)",
+            "British harsh treatment of Turkey angered Muslims",
+            "Khilafat Committee formed (1919)",
+            "Ali Brothers (Maulana Mohammad Ali, Shaukat Ali) led movement",
+            "Gandhi saw opportunity for Hindu-Muslim unity",
+            "Connected Rowlatt-Jallianwala Bagh anger with Khilafat grievance"
+          ],
+          "gandhiStrategy": "Gandhi decided to join Khilafat movement to unite Hindus and Muslims for Non-Cooperation",
+          "significance": "Set stage for combined Khilafat-Non-Cooperation Movement (1920)"
+        },
+        "tags": ["Khilafat", "Hindu-Muslim unity"]
+      }
+    ],
+    "summary": {
+      "title": "Overall Impact and Significance",
+      "devastation": "Rowlatt Act + Jallianwala Bagh Massacre + Crawling Order + British support for Dyer = Complete destruction of Indian faith in British justice",
+      "transformation": [
+        "Moderates became radicals",
+        "Faith in constitutional methods shattered",
+        "Demand shifted from reforms to complete independence",
+        "Even loyalists turned against British",
+        "Prepared psychological ground for mass movements"
+      ],
+      "gandhiEmergence": [
+        "Gandhi emerged as undisputed mass leader",
+        "His Satyagraha method proved powerful (despite violence)",
+        "Learned lessons from 1919; refined methods",
+        "Combined Rowlatt-Jallianwala anger with Khilafat issue",
+        "Launched Non-Cooperation Movement (1920)"
+      ],
+      "legacy": [
+        "Jallianwala Bagh became symbol of British brutality",
+        "Martyrs' blood fueled freedom struggle for decades",
+        "British moral authority destroyed irreversibly",
+        "1919 was turning point - no going back to pre-war trust",
+        "Independence became inevitable from this moment"
+      ]
+    },
+    "examTips": {
+      "mustRemember": [
+        "Rowlatt Act: March 18, 1919 (Black Act)",
+        "Provisions: Detention without trial for 2 years; Trial without jury",
+        "Gandhi's first all-India Satyagraha against Rowlatt Act",
+        "Jallianwala Bagh Massacre: April 13, 1919 (Baisakhi day)",
+        "General Dyer fired 1,650 rounds; 379 official deaths (1,000+ actual)",
+        "Dyer fired without warning for 10 minutes; only stopped when ammunition exhausted",
+        "Crawling Order: Most humiliating punishment",
+        "Tagore renounced knighthood in protest",
+        "Hunter Committee: Dismissed Dyer but no criminal trial",
+        "British Parliament and public supported Dyer; £26,000 raised",
+        "Led to Non-Cooperation Movement (1920)"
+      ]
+    }
+  }
+}
+

@@ -1,0 +1,50 @@
+{
+  "id": "press-literature-national-movement",
+  "subject": "history",
+  "title": "Press, Literature & Nationalist Movement",
+  "description": "Role of newspapers, books, and writers in freedom struggle",
+  "visualType": "table",
+  "metadata": {
+    "examRelevance": "medium-high",
+    "relatedTopics": ["events-1858-1885-nationalism"],
+    "tags": ["press", "newspapers", "literature", "nationalist-writings"]
+  },
+  "data": {
+    "columns": [
+      {"key": "category", "label": "Category", "width": "20%"},
+      {"key": "examples", "label": "Key Examples", "width": "50%"},
+      {"key": "exam", "label": "Exam Points", "width": "30%"}
+    ],
+    "rows": [
+      {
+        "id": "newspapers",
+        "category": "**MAJOR NEWSPAPERS**",
+        "examples": "**Bengali**: Amrita Bazar Patrika (Sisir Kumar Ghosh), Bengalee (Surendranath Banerjee), Sanjivani, Yugantar (revolutionary)\n\n**Hindi**: Kesari & Mahratta (Tilak - Marathi/English), Pratap (Ganesh Shankar Vidyarthi), Independent (Motilal Nehru)\n\n**English**: The Hindu (G. Subramania Iyer), Hindustan Times, Indian Mirror, Bombay Chronicle, Young India (Gandhi), Harijan (Gandhi)\n\n**Urdu**: Comrade & Hamdard (Mohamed Ali), Al-Hilal (Maulana Azad)\n\n**Tamil**: Swadesamitran",
+        "exam": "**Kesari (Tilak)**\n\n**Young India (Gandhi)**\n\n**Comrade (Mohamed Ali)**\n\nAll arrested/banned for 'sedition'"
+      },
+      {
+        "id": "press-acts",
+        "category": "**REPRESSIVE PRESS LAWS**",
+        "examples": "**Vernacular Press Act (1878)**: Lytton; targeted Indian language papers; repealed by Ripon (1881)\n\n**Newspapers Act (1908)**: Against revolutionary papers\n\n**Indian Press Act (1910)**: Security deposits; forfeiture\n\n**Defence of India Act (1915)**: Wartime censorship",
+        "exam": "Vernacular Press Act (1878) = Lytton = Gagging Act\n\nRepealed by Ripon (1881)"
+      },
+      {
+        "id": "books-pamphlets",
+        "category": "**NATIONALIST LITERATURE**",
+        "examples": "**V.D. Savarkar**: 'The Indian War of Independence, 1857' (banned by British)\n\n**Bankim Chandra**: 'Anandamath' (Vande Mataram song)\n\n**Rabindranath Tagore**: 'Gitanjali', 'Gora', 'Ghare-Baire'; wrote national anthem 'Jana Gana Mana'\n\n**Subramanya Bharati**: Tamil nationalist poet\n\n**Mohammad Iqbal**: 'Saare Jahan Se Achha'; also proposed Pakistan idea\n\n**Premchand**: Hindi/Urdu novelist; depicted peasant life",
+        "exam": "**Anandamath = Vande Mataram**\n\n**Tagore = Jana Gana Mana + Nobel (1913)**\n\n**Iqbal = Saare Jahan Se Achha**"
+      },
+      {
+        "id": "role",
+        "category": "**ROLE IN FREEDOM STRUGGLE**",
+        "examples": "• Created national consciousness\n• Exposed British exploitation\n• United people across regions through print\n• Spread revolutionary & reformist ideas\n• Educated masses about political rights\n• British feared press power → repressive laws\n• Many editors jailed for 'sedition'",
+        "exam": "Press = 'Oxygen' of freedom movement\n\nTilak, Gandhi, Azad all editors"
+      }
+    ],
+    "examTips": {
+      "critical": "Remember editor-newspaper pairs: Tilak-Kesari; Gandhi-Young India/Harijan; Mohamed Ali-Comrade; Bankim-Anandamath-Vande Mataram; Tagore-Jana Gana Mana",
+      "acts": "Vernacular Press Act 1878 (Lytton) repealed 1881 (Ripon)"
+    }
+  }
+}
+

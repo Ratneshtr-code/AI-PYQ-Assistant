@@ -1,0 +1,209 @@
+{
+  "id": "last-phase-1940-47",
+  "subject": "history",
+  "title": "Last Phase of British Rule (1940-1947) - Key Events",
+  "description": "Pakistan demand, Quit India, Cripps Mission, Cabinet Mission, Independence & Partition",
+  "visualType": "timeline",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["provincial-elections-1937-wwii", "quit-india-movement", "independence-partition"],
+    "tags": ["1940-1947", "Pakistan", "Quit-India", "Independence", "Partition"]
+  },
+  "data": {
+    "startYear": 1940,
+    "endYear": 1947,
+    "events": [
+      {
+        "id": "pakistan-resolution",
+        "year": "Mar 23, 1940",
+        "title": "Lahore Resolution (Pakistan Demand)",
+        "icon": "🏴",
+        "type": "major",
+        "details": {
+          "where": "**Location**: Iqbal Park, Lahore (Minto Park)\n**Session**: 27th Annual Session of All India Muslim League\n**Date**: March 22-24, 1940",
+          "resolution": "**Moved by**: Fazlul Haq (Bengal Premier)\n**Seconded by**: Choudhry Khaliquzzaman\n**Demand**: Separate independent states for Muslims in:\n• Northwestern zones (Punjab, Sindh, NWFP, Baluchistan)\n• Eastern zones (Bengal, Assam)\n**Note**: Resolution did NOT use word 'Pakistan' explicitly\nBut the demand clearly implied creation of Pakistan",
+          "twoNationTheory": "**Jinnah's Two-Nation Theory**:\n• Hindus and Muslims are two separate nations\n• They have different religions, cultures, languages, traditions\n• They cannot live together in one nation\n• Muslims need separate homeland for their protection\n**Impact**: This theory became basis for Pakistan demand",
+          "significance": "**Historical Importance**:\n• First official demand for separate Muslim state\n• Rejected idea of united India\n• Marked beginning of partition movement\n• Changed course of Indian freedom struggle\n• Made partition almost inevitable"
+        }
+      },
+      {
+        "id": "august-offer",
+        "year": "Aug 1940",
+        "title": "August Offer",
+        "icon": "📜",
+        "type": "policy",
+        "details": {
+          "context": "**Background**:\n• WWII started (Sep 1939) without consulting Indians\n• Congress ministries resigned in protest (Oct 1939)\n• British needed Indian support for war effort\n• Japan advancing in Asia; British position weakening\n• Viceroy Linlithgow made offer to gain Indian cooperation",
+          "offer": "**Viceroy Linlithgow's Proposals (Aug 8, 1940)**:\n**1. Dominion Status**:\n• Promised Dominion Status after war ends\n• But no immediate transfer of power\n**2. Expanded Executive Council**:\n• More Indians in Viceroy's Executive Council\n• But Viceroy retains final authority\n**3. War Advisory Council**:\n• Advisory body for war-related matters\n• No real decision-making power\n**4. Minority Veto**:\n• No new constitution without consent of minorities\n• Effectively gave veto power to Muslims\n**5. Constituent Assembly**:\n• After war, Indians can frame constitution\n• But British would still control process",
+          "congress": "**Congress Reaction**:\n• **Rejected** the offer completely\n• **Reasons**:\n  - Too vague; no immediate transfer of power\n  - 'Post-dated cheque' (promise for future)\n  - No real power sharing during war\n  - Minority veto would block progress\n• **Gandhi's view**: Offer was 'insulting'\n• **Result**: Congress decided to launch Individual Satyagraha",
+          "league": "**Muslim League Reaction**:\n• **Also Rejected** the offer\n• **Reasons**:\n  - Did not explicitly mention Pakistan\n  - Wanted clear commitment to separate Muslim state\n  - Not satisfied with just minority veto\n• **Jinnah's demand**: Explicit recognition of Pakistan demand",
+          "impact": "**Immediate Impact**:\n• Both Congress and League rejected offer\n• **Individual Satyagraha launched** (Oct 1940)\n  - Limited civil disobedience\n  - Selected individuals courted arrest\n  - Vinoba Bhave first satyagrahi\n  - Jawaharlal Nehru second\n• British position weakened further\n• Showed British offers were inadequate"
+        }
+      },
+      {
+        "id": "cripps-mission",
+        "year": "Mar 1942",
+        "title": "Cripps Mission",
+        "icon": "✈️",
+        "type": "policy",
+        "details": {
+          "offer": "**Cripps Proposals (March 22, 1942)**:\n**1. Dominion Status**:\n• After war ends, India gets Dominion Status\n• Full independence within British Commonwealth\n**2. Provinces Can Opt Out**:\n• Any province can refuse to join Indian Union\n• Can form separate dominion\n• **Implied**: Pakistan possible through this provision\n**3. Constitution-Making Body**:\n• Indians can frame their own constitution\n• After war ends\n**4. Defence During War**:\n• Defence remains with British during war\n• No immediate transfer of defence control\n**5. Interim Government**:\n• Indians in Executive Council\n• But Viceroy retains final authority",
+          "congress": "**Congress Reaction**:\n• **Rejected** the proposals\n• **Gandhi's famous quote**: 'Post-dated cheque on a failing bank'\n• **Reasons for rejection**:\n  - No immediate transfer of power\n  - Defence remains with British\n  - Provinces can opt out (partition implied)\n  - No real power during war\n  - Constitution-making delayed till after war\n• **Nehru's view**: Proposals were 'inadequate'\n• **Maulana Azad**: Negotiated but found proposals unacceptable",
+          "league": "**Muslim League Reaction**:\n• **Also Rejected** the proposals\n• **Reasons**:\n  - No explicit mention of Pakistan\n  - Provinces opt-out provision was indirect\n  - Wanted clear commitment to separate state\n  - Jinnah wanted explicit Pakistan recognition\n• **Jinnah's demand**: Direct creation of Pakistan, not through opt-out",
+          "significance": "**Why Mission Failed**:\n• **'Too late, too little'**:\n  - British waited too long\n  - Indians had lost trust\n  - Proposals were too little, too vague\n• **Defence issue**: Major sticking point\n• **Partition implied**: Opt-out provision suggested partition\n• **No immediate power**: Indians wanted power now, not after war",
+          "impact": "**Consequences**:\n• Mission failed completely\n• British position weakened further\n• **Quit India Movement** launched (Aug 1942)\n• Showed British offers were always inadequate\n• Made partition more likely (opt-out provision)"
+        }
+      },
+      {
+        "id": "quit-india",
+        "year": "Aug 8-9, 1942",
+        "title": "Quit India Movement Launched",
+        "icon": "✊",
+        "type": "major",
+        "details": {
+          "context": "**Background**:\n• Cripps Mission failed (March 1942)\n• Japan advancing; British position weak\n• Congress frustrated with British offers\n• Gandhi decided: 'Time for final struggle'\n• All-India Congress Committee (AICC) met in Bombay",
+          "resolution": "**Bombay Session (August 8, 1942)**:\n• **Venue**: Gowalia Tank Maidan, Bombay (now August Kranti Maidan)\n• **Resolution**: 'Quit India' resolution passed\n• **Demand**: Immediate British withdrawal from India\n• **Method**: Mass civil disobedience\n• **Gandhi's speech**: 'Do or Die' - famous call\n• **Vote**: Overwhelmingly passed",
+          "slogan": "**Famous Slogans**:\n• **'Do or Die'** (Gandhi's call)\n• **'Quit India'** (main demand)\n• **'Bharat Chodo'** (Hindi version)\n• **'Karenge ya Marenge'** (We will do or die)",
+          "arrests": "**Mass Arrests (August 9, 1942)**:\n• **Early morning**: British arrested entire Congress leadership\n• **Arrested**:\n  - Mahatma Gandhi, Jawaharlal Nehru, Sardar Patel, Maulana Azad, All top Congress leaders\n• **Strategy**: Decapitate movement by removing leaders\n• **Result**: Movement became leaderless",          
+          "significance": "**Historical Significance**:\n• **Largest mass movement** in Indian freedom struggle\n• **Showed British can't rule** without Indian consent\n• **Proved mass support** for independence\n• **Strengthened demand** for immediate freedom\n• **Exposed British brutality** to world\n• **Made independence inevitable**\n• **Last major movement** before independence",          
+          "exam": "**MOST ASKED IN EXAMS**:\n• **Date**: August 8, 1942 (resolution passed)\n• **Arrests**: August 9, 1942 (early morning)\n• **Venue**: Gowalia Tank Maidan, Bombay\n• **Slogan**: 'Do or Die' (Gandhi)\n• **Resolution**: 'Quit India'\n• **Nature**: Leaderless mass movement\n• **Arrested**: Gandhi, Nehru, Patel, Azad (all leaders)\n• **Repression**: 1,00,000+ arrested, 1,000+ killed\n• **Also called**: August Kranti / August Revolution"
+        }
+      },
+      {
+        "id": "bengal-famine",
+        "year": "1943",
+        "title": "Bengal Famine",
+        "icon": "💔",
+        "type": "economic",
+        "details": {
+          "context": "**Background (1943)**:\n• WWII ongoing; British war policies affected food supply\n• Japanese occupied Burma (main rice supplier)\n• British diverted food to war effort\n• Hoarding by traders and landlords\n• Natural factors: floods, cyclones in Bengal",          
+          "causes": "**Causes of Famine**:\n• **British war policies**:\n  - Food diverted to military\n  - Export restrictions not imposed\n  - Price controls ineffective\n• **Hoarding**:\n  - Traders hoarded grain\n  - Landlords profiteered\n  - Black market flourished\n• **Churchill's refusal**:\n  - Refused grain ships from Australia/Canada\n  - Prioritized war over Indian lives\n  - Racist attitude towards Indians",          
+          "impact": "**Impact**:\n• **Exposed British callousness**:\n  - Showed British didn't care about Indian lives\n  - Strengthened anti-British sentiment\n• **Political impact**:\n  - Increased support for independence\n  - Made British rule morally indefensible\n• **Social impact**:\n  - Mass migration\n  - Social disruption\n  - Long-term trauma"     
+        }
+      },
+      {
+        "id": "ina-trials",
+        "year": "Nov 1945 - Jan 1946",
+        "title": "INA Trials (Red Fort Trials)",
+        "icon": "⚖️",
+        "type": "major",
+        "details": {
+          "context": "**Background**:\n• Subhash Chandra Bose formed INA (Indian National Army)\n• INA fought alongside Japan against British\n• After Japan's defeat, INA soldiers captured\n• British decided to try them for treason\n• Trials held at Red Fort, Delhi",                   
+          "reaction": "**Massive Public Support**:\n• **Nationwide protests**:\n  - Students, workers, peasants demonstrated\n  - 'Release INA heroes' slogans\n  - Processions and meetings\n• **Legal defence**:\n  - Bhulabhai Desai, Nehru, Asaf Ali defended\n  - Famous lawyers volunteered\n• **Public opinion**:\n  - INA seen as freedom fighters\n  - Not traitors but patriots\n  - Massive sympathy",
+          "communal": "**Hindu-Muslim-Sikh Unity**:\n• Three accused from three communities\n• United support across religious lines\n• Showed nationalism transcended communalism\n• Last major show of unity before partition",
+          "outcome": "**Trial Outcome**:\n• **British forced to release**:\n  - Couldn't punish due to public pressure\n  - Feared massive uprising\n  - Reduced sentences\n  - Eventually released\n• **Victory for Indians**:\n  - Public opinion won\n  - British authority challenged",
+          "significance": "**Historical Significance**:\n• **Showed British military loyalty shaken**:\n  - Indian soldiers supported INA\n  - British couldn't rely on Indian army\n• **Made British rule untenable**:\n  - If army supports independence, British can't rule\n  - Realized they must leave\n• **Paved way for independence**:\n  - British confidence shattered\n  - Independence became inevitable"        
+        }
+      },
+      {
+        "id": "naval-mutiny",
+        "year": "Feb 18-23, 1946",
+        "title": "Royal Indian Navy Mutiny",
+        "icon": "⚓",
+        "type": "military",
+        "details": {
+          "context": "**Background**:\n• INA Trials created sympathy for freedom fighters\n• Indian sailors in Royal Indian Navy discontented\n• Poor food, racial discrimination\n• Low pay, bad conditions\n• Inspired by INA heroes",
+          "event": "**The Mutiny (Feb 18, 1946)**:\n• **Started**: HMIS Talwar (Bombay)\n• **Spread to**:\n  - Bombay (main center), Karachi, Calcutta, Other ports\n• **Actions**:\n  - Hoisted Congress, League, Red flags\n  - Took control of ships\n  - Refused British orders\n  - Demanded better conditions + independence",                    
+          "significance": "**Historical Significance**:\n• **Showed armed forces' loyalty gone**:\n  - Navy mutinied\n  - Army sympathy for INA\n  - British couldn't rely on Indian forces\n• **British realized they can't hold India by force**:\n  - If armed forces rebel, British can't rule\n  - Must negotiate transfer of power\n  - Independence became urgent\n• **Last nail in British coffin**:\n  - After INA Trials + Naval Mutiny\n  - British position completely untenable"          
+        }
+      },
+      {
+        "id": "cabinet-mission",
+        "year": "Mar-Jun 1946",
+        "title": "Cabinet Mission",
+        "icon": "🇬🇧",
+        "type": "policy",
+        "details": {          
+          "members": "**Cabinet Mission Members**:\n• **Lord Pethick-Lawrence** (Secretary of State for India)\n• **Sir Stafford Cripps** (President of Board of Trade)\n• **A.V. Alexander** (First Lord of Admiralty)\n• All senior British ministers\n• Arrived in India: March 24, 1946",
+          "plan": "**Cabinet Mission Plan (May 16, 1946)**:\n**1. United India with Weak Center**:\n• India to remain united\n• Center controls: Defence, Foreign Affairs, Communications\n• All other subjects with provinces\n**2. Provinces Grouped**:\n• **Group A**: Hindu-majority provinces (Madras, Bombay, UP, Bihar, CP, Orissa)\n• **Group B**: Muslim-majority NW (Punjab, NWFP, Sindh, Baluchistan)\n• **Group C**: Muslim-majority East (Bengal, Assam)\n**3. Constituent Assembly**:\n• Indians frame constitution\n• Representatives from all groups\n**4. No Pakistan**:\n• Explicitly rejected Pakistan demand\n• But grouping gave Muslims effective control",
+          "initial": "**Initial Acceptance**:\n• **Congress**: Accepted plan initially\n  - Saw it as step towards independence\n  - United India maintained\n• **Muslim League**: Also accepted initially\n  - Grouping gave them power\n  - Saw it as Pakistan in all but name\n• **Both signed**: Agreement seemed possible",
+          "breakdown": "**Why It Broke Down**:\n• **Conflicting interpretations**:\n  - **Congress**: Grouping optional, provinces can opt out\n  - **League**: Grouping compulsory, provinces must stay\n• **Nehru's statement** (July 10, 1946):\n  - Said Congress not bound by grouping\n  - League saw this as betrayal\n• **Jinnah's reaction**:\n  - Withdrew acceptance\n  - Called for 'Direct Action'\n• **Result**: Plan collapsed",
+          "result": "**Final Outcome**:\n• Mission failed\n• **Direct Action Day** called (Aug 16, 1946)\n• Communal violence erupted\n• Partition became inevitable\n• Last chance for united India lost"
+        }
+      },
+      {
+        "id": "direct-action",
+        "year": "Aug 16, 1946",
+        "title": "Direct Action Day - Great Calcutta Killings",
+        "icon": "🔥",
+        "type": "major",
+        "details": {
+          "context": "**Background**:\n• Cabinet Mission Plan broke down\n• Jinnah felt betrayed by Congress\n• League decided to use force\n• Called for 'Direct Action' to achieve Pakistan\n• August 16 declared as Direct Action Day",
+          "call": "**Jinnah's Call**:\n• **'Direct Action'** for Pakistan\n• Muslims should take to streets\n• Show strength and determination\n• Force British to grant Pakistan\n• No more negotiations\n• **Slogan**: 'Lekar rahenge Pakistan' (We will take Pakistan)",
+          "calcutta": "**Great Calcutta Killings (Aug 16, 1946)**:\n• **Date**: August 16, 1946\n• **Location**: Calcutta (now Kolkata)\n• **Nature**: Worst communal riots in Indian history\n• **Deaths**: 4,000+ killed in just 3 days\n• **Violence**:\n  - Mass killings, arson, looting\n• **Both sides**: Hindus and Muslims killed each other\n• **British**: Did little to stop violence"          
+        }
+      },
+      {
+        "id": "interim-govt",
+        "year": "Sep 2, 1946",
+        "title": "Interim Government Formed",
+        "icon": "🏛️",
+        "type": "political",
+        "details": {
+          "context": "**Background**:\n• Cabinet Mission Plan suggested interim government\n• British wanted to transfer power gradually\n• Indians to gain experience in governance\n• Congress agreed to form government\n• League initially refused",
+          "formation": "**Formation (September 2, 1946)**:\n• **Viceroy**: Lord Wavell\n• **Vice President** (PM equivalent): Jawaharlal Nehru\n• **Congress-dominated**:\n  - Most ministers from Congress\n  - Key portfolios with Congress\n  - Sardar Patel (Home)\n  - Rajendra Prasad (Food)\n  - Others\n• **Function**: Run administration till independence",
+          "league": "**Muslim League Joins (October 1946)**:\n• League initially boycotted\n• Later joined (Oct 26, 1946)\n• **But remained uncooperative**:\n  - Obstructed government work\n  - Refused to attend meetings\n  - Created conflicts\n  - Demanded Pakistan",
+          "conflict": "**Constant Friction**:\n• **League obstruction**:\n  - Blocked decisions\n  - Created deadlocks\n  - No cooperation\n• **Congress frustration**:\n  - Couldn't function properly\n  - League sabotaged work\n  - Constant conflicts\n• **No unity**:\n  - Two parallel governments\n  - No joint decisions\n  - Complete breakdown"          
+        }
+      },
+      {
+        "id": "attlee-statement",
+        "year": "Feb 20, 1947",
+        "title": "Attlee's Statement - British to Leave by June 1948",
+        "icon": "📢",
+        "type": "policy",
+        "details": {         
+          "announcement": "**Attlee's Statement (February 20, 1947)**:\n• **PM Clement Attlee** (British Prime Minister)\n• **Announcement**: British will leave India by **June 1948**\n• **Fixed deadline**: 16 months from announcement\n• **Unconditional**: No conditions attached\n• **Transfer power**: To Indians by fixed date\n• **Historic**: First time British set deadline to leave",
+          "deadline": "**Impact of Fixed Deadline**:\n• **Increased urgency**:\n  - Indians had to agree quickly\n  - No time for prolonged negotiations\n  - Forced compromise\n• **Forced Indians to agree**:\n  - Congress and League had to accept partition\n  - No alternative left\n  - Violence made delay dangerous\n• **Accelerated process**:\n  - Independence process speeded up\n  - Mountbatten appointed to execute",
+          "mountbatten": "**Lord Mountbatten Appointed**:\n• **Date**: March 1947\n• **Position**: Last Viceroy of India\n• **Task**: Transfer power by June 1948\n• **Authority**: Full powers to decide\n• **Background**: Royal family member, war hero\n• **Decision**: Advanced independence to August 1947"         
+        }
+      },
+      {
+        "id": "mountbatten-plan",
+        "year": "Jun 3, 1947",
+        "title": "Mountbatten Plan (Partition Plan)",
+        "icon": "✂️",
+        "type": "major",
+        "details": {          
+          "plan": "**Mountbatten Plan (June 3, 1947)**:\n**1. India to be Partitioned**:\n• Two separate countries\n• India (Hindu-majority)\n• Pakistan (Muslim-majority)\n**2. Punjab & Bengal Divided**:\n• Both provinces split\n• Hindu areas to India\n• Muslim areas to Pakistan\n**3. Boundary Commission**:\n• **Sir Cyril Radcliffe** (British lawyer)\n• Draw boundary lines\n• Divide Punjab and Bengal\n**4. Princely States**:\n• Free to join either India or Pakistan\n• Or remain independent\n• **Suzerainty** of British Crown ends\n**5. Two Dominions**:\n• India and Pakistan\n• Both get Dominion Status\n• Within British Commonwealth",
+          "acceptance": "**Acceptance by All Parties**:\n• **Congress**: Accepted (reluctantly)\n  - No choice; violence escalating\n  - Better than civil war\n  - Accepted partition as price for independence\n• **Muslim League**: Accepted (happily)\n  - Got Pakistan\n  - Achieved goal\n  - Jinnah satisfied\n• **Sikhs**: Accepted (unhappily)\n  - Punjab divided\n  - Many Sikhs on wrong side\n  - But no alternative\n• **All agreed**: Partition was only solution",
+          "date": "**Independence Date Advanced**:\n• **Original deadline**: June 1948\n• **New date**: **August 15, 1947**\n• **Advanced by**: 10 months\n• **Reason**:\n  - Violence escalating\n  - Delay dangerous\n  - Better to leave quickly\n• **Mountbatten's decision**:\n  - Chose Aug 15 (Japan surrender anniversary)\n  - Symbolic date",
+          "significance": "**Historical Significance**:\n• **Formal acceptance of partition**:\n  - All parties agreed\n  - Partition became official\n  - No going back\n• **End of British rule**:\n  - British to leave\n  - 200 years of rule ending\n  - Independence coming\n• **Beginning of new era**:\n  - Two new nations\n  - Independence and partition together"
+        }
+      },
+      {
+        "id": "indian-independence-act",
+        "year": "Jul 18, 1947",
+        "title": "Indian Independence Act Passed",
+        "icon": "📜",
+        "type": "policy",
+        "details": {          
+          "british": "**British Parliament Action**:\n• **Date**: July 18, 1947\n• **Act**: Indian Independence Act 1947\n• **Passed by**: British Parliament\n• **Royal Assent**: July 18, 1947\n• **Creates**: Two new dominions\n• **Ends**: British sovereignty over India",
+          "provisions": "**Main Provisions of the Act**:\n**1. Two Dominions**:\n• India (Hindu-majority areas)\n• Pakistan (Muslim-majority areas)\n• Both get Dominion Status\n**2. Constituent Assemblies**:\n• Each dominion gets Constituent Assembly\n• **Sovereign**: Can frame own constitution\n• No British interference\n**3. British Crown's Sovereignty Ends**:\n• British King no longer Emperor of India\n• Sovereignty transferred to Indians\n• Complete independence\n**4. Partition Details**:\n• Punjab and Bengal divided\n• Boundary as per Radcliffe Award\n• Princely states free to join either",
+          "date": "**Effective Date**:\n• **Act comes into effect**: August 15, 1947\n• **From this date**:\n  - British rule ends\n  - Two dominions created\n  - Independence begins\n  - Partition implemented",
+          "significance": "**Historical Significance**:\n• **Legal end of British rule**:\n  - Formally ends British sovereignty\n  - India becomes independent\n  - 200 years of colonial rule over\n• **Creates two nations**:\n  - India and Pakistan\n  - Both independent\n  - Both sovereign\n• **New beginning**:\n  - Indians rule themselves\n  - Can frame own constitution\n  - Complete freedom"         
+        }
+      },
+      {
+        "id": "independence",
+        "year": "Aug 14-15, 1947",
+        "title": "Independence & Partition",
+        "icon": "🇮🇳",
+        "type": "major",
+        "details": {
+          "context": "**Background**:\n• Indian Independence Act passed (July 18)\n• Radcliffe Award announced (Aug 17)\n• Preparations for transfer of power\n• Mixed emotions: joy and sorrow\n• Historic moment approaching",
+          "pakistan": "**Pakistan Created (August 14, 1947)**:\n• **Date**: August 14, 1947\n• **First**: Pakistan created (one day before India)\n• **Governor-General**: Muhammad Ali Jinnah\n• **Prime Minister**: Liaquat Ali Khan\n• **Capital**: Karachi\n• **Territory**: West Pakistan + East Pakistan (Bangladesh)\n• **Celebration**: Muslims celebrated across subcontinent",
+          "india": "**India Independent (August 15, 1947)**:\n• **Date**: August 15, 1947\n• **Historic Day**: Independence achieved\n• **Governor-General**: Lord Mountbatten (till June 1948)\n• **Prime Minister**: Jawaharlal Nehru\n• **Capital**: New Delhi\n• **Nehru's Speech**: 'Tryst with Destiny' at midnight\n• **Celebration**: Tricolor hoisted; Joy across India",         
+          "punjab": "**Punjab & Bengal Divided**:\n• **Radcliffe Line**:\n  - Drawn by Sir Cyril Radcliffe\n  - Divided Punjab and Bengal\n  - Announced August 17, 1947\n• **Punjab**:\n  - West Punjab → Pakistan\n  - East Punjab → India\n  - Massive migration\n• **Bengal**:\n  - East Bengal → Pakistan (later Bangladesh)\n  - West Bengal → India\n  - Division traumatic",          
+          "significance": "**Historical Significance**:\n• **End of British Rule**:\n  - 200 years of colonial rule over\n  - Indians free\n  - Sovereignty regained\n• **Beginning of New Era**:\n  - Two independent nations\n  - Can frame own destiny\n  - New challenges ahead\n• **Price Paid**:\n  - Partition violence\n  - Human tragedy\n  - But freedom achieved"          
+        }
+      }
+    ],
+    "examTips": {
+      "critical_dates": "Mar 23, 1940 (Pakistan demand); Aug 8-9, 1942 (Quit India); Jun 3, 1947 (Mountbatten Plan); Aug 15, 1947 (Independence)",
+      "missions": "Cripps (1942) - Failed; Cabinet (1946) - Failed; Led to partition",
+      "violence": "Direct Action (Aug 16, 1946) made partition inevitable; INA & Naval Mutiny showed British can't hold India"
+    }
+  }
+}
+

@@ -1,0 +1,450 @@
+{
+  "id": "montagu-chelmsford-reforms-1919",
+  "subject": "history",
+  "title": "Montagu-Chelmsford Reforms & Government of India Act 1919",
+  "description": "Post-WWI constitutional reforms introducing dyarchy system",
+  "visualType": "flowchart",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["wwi-impact-india", "rowlatt-act-1919", "non-cooperation-movement"],
+    "tags": ["Montagu-Chelmsford", "GOI-Act-1919", "Dyarchy", "reforms", "1919"]
+  },
+  "data": {
+    "legend": [
+      { "type": "background", "label": "Background & Context" },
+      { "type": "provision", "label": "Main Provisions" },
+      { "type": "positive", "label": "Positive Aspects" },
+      { "type": "negative", "label": "Negative Aspects" }
+    ],
+    "stages": [
+      {
+        "id": "background",
+        "type": "background",
+        "label": "Background & Context",
+        "color": "#3B82F6",
+        "icon": "📋",
+        "description": "Why reforms were introduced post-WWI",
+        "details": {
+          "context": [
+            "India's massive contribution to WWI (1.3 million soldiers, £100+ million)",
+            "Indian expectations of self-government as reward",
+            "Home Rule Movement (1916-1918) created pressure",
+            "Lucknow Pact (1916) showed Hindu-Muslim unity",
+            "Russian Revolution (1917) worried British about unrest",
+            "Montagu Declaration (Aug 20, 1917) promised reforms"
+          ],
+          "montaguDeclaration": {
+            "date": "August 20, 1917",
+            "by": "Edwin Montagu (Secretary of State for India)",
+            "promise": "Progressive realization of responsible government in India as integral part of British Empire",
+            "vague": "No timeline; 'gradual' and 'progressive' were escape clauses",
+            "significance": "First time 'responsible government' mentioned officially"
+          },
+          "process": [
+            "Montagu visited India (1917-1918)",
+            "Consulted with Viceroy Chelmsford",
+            "Montagu-Chelmsford Report published (July 1918)",
+            "Indian leaders consulted",
+            "Bill passed by British Parliament (December 1919)",
+            "Government of India Act 1919 enacted",
+            "Implemented from 1921"
+          ],
+          "indianExpectations": "Dominion status or substantial self-government; Britain offered much less"
+        }
+      },
+      {
+        "id": "central-changes",
+        "type": "provision",
+        "label": "Changes at Central Level",
+        "color": "#10B981",
+        "icon": "🏛️",
+        "description": "Limited changes to central government",
+        "details": {
+          "legislature": {
+            "bicameral": "Introduced bicameral legislature (two houses) for first time",
+            "councilOfState": {
+              "name": "Council of State (Upper House)",
+              "members": "60 members (26 elected, 34 nominated)",
+              "term": "5 years",
+              "qualification": "Higher property/income qualification",
+              "role": "Advisory; could delay bills"
+            },
+            "legislativeAssembly": {
+              "name": "Central Legislative Assembly (Lower House)",
+              "members": "145 members (104 elected, 41 official nominated)",
+              "term": "3 years",
+              "election": "Directly elected (but limited franchise)",
+              "role": "More representative but limited powers"
+            }
+          },
+          "franchise": {
+            "limited": "Only 1% of population could vote (about 10% males)",
+            "qualifications": "High property, income, or educational qualifications",
+            "communalElectorates": "Separate electorates continued (for Muslims, Sikhs, etc.)",
+            "exclusion": "Women, poor, illiterate excluded"
+          },
+          "powers": {
+            "legislative": [
+              "Could make laws on subjects except reserved ones",
+              "Could ask questions and supplementaries",
+              "Could discuss budget (but vote only on 25-30%)",
+              "Could reject non-official bills"
+            ],
+            "limitations": [
+              "Viceroy had veto power over all legislation",
+              "Could certify bills rejected by legislature",
+              "Could issue ordinances",
+              "Defence, foreign affairs, tribal areas exempted",
+              "Governor-General's executive not responsible to legislature"
+            ]
+          },
+          "executive": {
+            "governorGeneralExecutiveCouncil": "8 members (3 must be Indians)",
+            "departments": "Some departments headed by Indians",
+            "accountability": "Executive NOT responsible to legislature (no responsible government)",
+            "viceroy": "Viceroy remained supreme; could overrule council"
+          }
+        }
+      },
+      {
+        "id": "provincial-dyarchy",
+        "type": "provision",
+        "label": "Provincial Level - DYARCHY System",
+        "color": "#F59E0B",
+        "icon": "⚖️",
+        "description": "Most significant feature - dual government in provinces",
+        "details": {
+          "dyarchyMeaning": {
+            "definition": "Dyarchy = Dual Government (Greek: di = two,archy = rule)",
+            "concept": "Provincial subjects divided into two categories: Reserved and Transferred",
+            "rationale": "Gradual training of Indians in self-government",
+            "reality": "Mechanism to maintain British control while appearing to grant power"
+          },
+          "subjectsDivision": {
+            "reservedSubjects": {
+              "category": "RESERVED SUBJECTS",
+              "control": "Under Governor and Executive Council (British officials)",
+              "subjects": [
+                "Law and order (Police)",
+                "Finance and taxation",
+                "Land revenue",
+                "Irrigation",
+                "Famine relief"
+              ],
+              "importance": "All important subjects kept under British control",
+              "officials": "Executive Council: 2 members (both British or Indian loyalists)"
+            },
+            "transferredSubjects": {
+              "category": "TRANSFERRED SUBJECTS",
+              "control": "Under Governor and Indian Ministers (elected)",
+              "subjects": [
+                "Education",
+                "Public health",
+                "Local self-government",
+                "Agriculture",
+                "Public works (some)",
+                "Industries",
+                "Excise"
+              ],
+              "importance": "Less important subjects; no real financial power",
+              "ministers": "Indian Ministers: 2-3 responsible to Legislative Council"
+            }
+          },
+          "provinceGovernor": {
+            "role": "Governor held supreme power",
+            "control": [
+              "Could overrule both reserved and transferred departments",
+              "Controlled finance; ministers dependent on him for funds",
+              "Could veto any decision",
+              "Not bound by ministers' advice",
+              "Special powers for law and order"
+            ],
+            "reality": "Governor could undermine dyarchy anytime"
+          },
+          "provincialLegislature": {
+            "expansion": "Enlarged and made more representative",
+            "example": "Bengal: 139 members (116 elected, 23 nominated)",
+            "majorityNonOfficial": "Non-official majority (about 70% elected)",
+            "powers": [
+              "Could vote on provincial budget",
+              "Could question ministers",
+              "Could reject bills (but Governor could certify)"
+            ],
+            "limitations": [
+              "No control over reserved subjects",
+              "No control over Governor",
+              "Limited financial powers"
+            ]
+          }
+        }
+      },
+      {
+        "id": "other-provisions",
+        "type": "provision",
+        "label": "Other Important Provisions",
+        "color": "#8B5CF6",
+        "description": "Additional features of the Act",
+        "details": {
+          "indianCouncil": {
+            "change": "Secretary of State's Council (in London) reduced",
+            "members": "8-12 members (earlier 10-16)",
+            "indianMembers": "Half members to be Indians",
+            "salary": "Secretary of State now paid from British funds (earlier Indian funds)",
+            "significance": "Reduced drain but Secretary of State still powerful"
+          },
+          "publicServiceCommission": {
+            "established": "High Commissioner for India appointed (in London)",
+            "PSC": "Public Service Commission to be established (for ICS recruitment)",
+            "indianization": "Gradual Indianization of services promised",
+            "reality": "Very slow; British continued to dominate"
+          },
+          "communalRepresentation": {
+            "continued": "Separate electorates continued and extended",
+            "new": "Separate electorates for Sikhs, Anglo-Indians, Europeans, Indian Christians",
+            "weightage": "Muslims given weightage (seats more than population proportion)",
+            "problem": "Further entrenched communal politics"
+          },
+          "franchise": {
+            "limited": "Only 10% males could vote (1% of total population including women)",
+            "basis": "Property, income, tax payment, or education",
+            "universal": "No universal adult suffrage; vast majority excluded"
+          },
+          "reviewClause": {
+            "provision": "Statutory Commission to review reforms after 10 years",
+            "importance": "Built-in review mechanism",
+            "outcome": "Led to Simon Commission (1927) which came 2 years early"
+          }
+        }
+      },
+      {
+        "id": "positive-aspects",
+        "type": "positive",
+        "label": "Positive Aspects",
+        "color": "#059669",
+        "icon": "✅",
+        "description": "Progressive features (relatively)",
+        "details": {
+          "positives": [
+            {
+              "aspect": "First Step Towards Responsible Government",
+              "detail": "Introduced principle of ministerial responsibility (in transferred subjects)",
+              "significance": "Indians became ministers answerable to elected legislature"
+            },
+            {
+              "aspect": "Expansion of Franchise",
+              "detail": "5 million Indians got voting rights (from 1 million earlier)",
+              "limitation": "Still only 10% of adult males; but expansion nonetheless"
+            },
+            {
+              "aspect": "Indian Majority in Legislatures",
+              "detail": "Elected Indian members formed majority in provincial councils",
+              "significance": "Indians could outvote officials and nominated members"
+            },
+            {
+              "aspect": "Bicameral Legislature",
+              "detail": "Introduced two-house system at center",
+              "significance": "More balanced legislation; checks and balances"
+            },
+            {
+              "aspect": "Indians in Executive",
+              "detail": "Indians became ministers in provinces; 3 in Viceroy's Council",
+              "significance": "Executive experience for Indians"
+            },
+            {
+              "aspect": "Control Over Budget (Partial)",
+              "detail": "Provincial councils could vote on provincial budget (minus reserved)",
+              "importance": "Some financial power to elected representatives"
+            },
+            {
+              "aspect": "Reduced Secretary of State's Council",
+              "detail": "Smaller and half Indian members",
+              "saving": "Secretary of State's salary from British funds (small saving)"
+            }
+          ]
+        }
+      },
+      {
+        "id": "negative-aspects",
+        "type": "negative",
+        "label": "Negative Aspects & Criticisms",
+        "color": "#DC2626",
+        "icon": "❌",
+        "description": "Fatal flaws and inadequacies",
+        "details": {
+          "fundamentalFlaws": [
+            {
+              "flaw": "Dyarchy Was Unworkable",
+              "reasons": [
+                "Division into reserved and transferred subjects arbitrary and artificial",
+                "All important subjects reserved; ministers got powerless departments",
+                "Ministers had no funds; finance under reserved",
+                "Governor could interfere in transferred subjects anytime",
+                "Confusion and conflict between two wings",
+                "Ministers blamed for failures but had no real power"
+              ],
+              "reality": "Set up to fail; Indians made scapegoats for failures"
+            },
+            {
+              "flaw": "No Responsible Government",
+              "detail": "Neither Viceroy nor Governors responsible to legislatures",
+              "impact": "Executive could ignore legislature; no real accountability",
+              "comparison": "Britain had responsible government; India denied same"
+            },
+            {
+              "flaw": "Viceroy/Governor Powers Too Vast",
+              "powers": [
+                "Veto over all legislation",
+                "Could certify rejected bills",
+                "Could issue ordinances",
+                "Could overrule councils and ministers",
+                "Special powers for 'emergencies' and 'law and order'"
+              ],
+              "reality": "Autocracy with democratic facade"
+            },
+            {
+              "flaw": "Communal Representation Entrenched",
+              "problem": [
+                "Separate electorates continued and expanded",
+                "Sikhs, Christians, Anglo-Indians also got separate electorates",
+                "Weightage to Muslims",
+                "Further poisoned communal relations",
+                "Made communal politics permanent"
+              ],
+              "congress": "Congress opposed as vivisection of nation"
+            },
+            {
+              "flaw": "Franchise Too Limited",
+              "numbers": "Only 10% males (1% total population) could vote",
+              "exclusion": "90% population excluded from voting",
+              "undemocratic": "Not representative of Indian masses"
+            },
+            {
+              "flaw": "No Power Over Key Subjects",
+              "central": "Defence, foreign affairs completely excluded from legislature",
+              "provincial": "All important subjects reserved under British control",
+              "impact": "Indians given responsibility without power"
+            }
+          ],
+          "congressCriticisms": [
+            "Inadequate and disappointing",
+            "Does not give responsible government",
+            "Dyarchy unworkable and humiliating",
+            "Separate electorates unacceptable",
+            "Does not meet Indian aspirations",
+            "Betrayal after WWI sacrifices"
+          ],
+          "otherCriticisms": {
+            "tilak": "Described reforms as 'Statutory Sedition'",
+            "anniBesant": "Called it 'Unworthy of England to offer, India to accept'",
+            "moderates": "Even moderates disappointed; some accepted reluctantly"
+          }
+        }
+      },
+      {
+        "id": "indian-reactions",
+        "type": "negative",
+        "label": "Indian Reactions & Responses",
+        "color": "#7C3AED",
+        "description": "How Indians responded to the reforms",
+        "details": {
+          "congressSpecialSession": {
+            "when": "August 1918, Bombay",
+            "response": "Rejected Montagu-Chelmsford proposals as inadequate",
+            "demand": "Demanded responsible government immediately",
+            "vote": "Moderates wanted to accept with reservations; rejected after debate"
+          },
+          "congressRegularSession": {
+            "when": "December 1918, Delhi",
+            "resolution": "Reiterated rejection but said will work reforms to expose their inadequacy",
+            "strategy": "Responsive cooperation - participate but criticize"
+          },
+          "muslimLeague": {
+            "response": "Lukewarm; wanted more safeguards for Muslims",
+            "concern": "Worried about Hindu majority in legislatures",
+            "support": "Eventually supported separate electorates"
+          },
+          "moderates": {
+            "response": "Disappointed but willing to work within system",
+            "hope": "Hoped to expand reforms gradually",
+            "reality": "Many gave up politics after dyarchy experience"
+          },
+          "extremists": {
+            "response": "Completely rejected as betrayal",
+            "tilak": "Demanded immediate responsible government",
+            "anger": "After WWI sacrifice, reforms seen as insult"
+          }
+        }
+      },
+      {
+        "id": "rowlatt-act-connection",
+        "type": "negative",
+        "label": "Rowlatt Act - Poison with Reforms",
+        "color": "#991B1B",
+        "icon": "⚠️",
+        "description": "Repressive law alongside reforms",
+        "details": {
+          "timing": {
+            "reforms": "GOI Act 1919 passed December 1919",
+            "rowlatt": "Rowlatt Act passed March 1919 (before reforms)",
+            "insult": "Repression before reforms; killed goodwill"
+          },
+          "impact": [
+            "Rowlatt Act was draconian repression (detention without trial)",
+            "Passed same year as 'reforms'",
+            "Showed British untrustworthiness",
+            "Indians saw reforms as sham",
+            "Rowlatt Act + Jallianwala Bagh Massacre (April 1919) destroyed faith",
+            "Led directly to Non-Cooperation Movement (1920)"
+          ],
+          "gandhiResponse": "Gandhi launched first all-India Satyagraha against Rowlatt Act (April 1919)"
+        }
+      }
+    ],
+    "assessment": {
+      "title": "Historical Assessment",
+      "failure": [
+        "Dyarchy failed completely",
+        "Ministers resigned frequently in frustration",
+        "Proved unworkable as predicted",
+        "Did not satisfy any section of Indian opinion",
+        "Created more bitterness than satisfaction"
+      ],
+      "significance": [
+        "First major constitutional reforms after WWI",
+        "Introduced principle of responsibility (though limited)",
+        "Training ground for Indian politicians (despite flaws)",
+        "Exposed inadequacy of British willingness to share power",
+        "Failure led to demand for complete independence",
+        "Proved moderates' faith in British goodwill misplaced"
+      ],
+      "legacy": [
+        "Indians participated reluctantly to expose flaws",
+        "Experience shaped future constitutional demands",
+        "Congress decided to completely reject and launch Non-Cooperation (1920)",
+        "Simon Commission (1927) came to review; led to 1935 Act",
+        "Dyarchy failure meant 1935 Act had to go further"
+      ]
+    },
+    "examTips": {
+      "mustRemember": [
+        "Government of India Act 1919 = Montagu-Chelmsford Reforms",
+        "Based on Montagu Declaration (Aug 20, 1917)",
+        "Key feature: DYARCHY in provinces (Reserved vs Transferred subjects)",
+        "Reserved: Police, Finance, Revenue (British control)",
+        "Transferred: Education, Health, Agriculture (Indian ministers)",
+        "Bicameral legislature introduced (Council of State + Legislative Assembly)",
+        "Limited franchise: only 10% males could vote",
+        "Separate electorates extended (Sikhs, Christians, etc.)",
+        "No responsible government - executives not accountable",
+        "Dyarchy failed; Congress rejected as inadequate",
+        "Rowlatt Act (1919) alongside reforms poisoned atmosphere"
+      ],
+      "examQuestions": [
+        "Explain dyarchy system and why it failed",
+        "Assess Montagu-Chelmsford Reforms",
+        "Why did Congress reject GOI Act 1919?"
+      ]
+    }
+  }
+}
+

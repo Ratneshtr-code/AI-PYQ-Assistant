@@ -3,11 +3,11 @@
   "subject": "history",
   "title": "Indian Modern History - Complete Learning Path",
   "description": "Comprehensive strategic roadmap for studying Indian Modern History for government exams (SSC, UPSC, State PCS)",
-  "version": "2.0",
-  "lastUpdated": "2024-01-17",
+  "version": "3.0",
+  "lastUpdated": "2026-01-17",
   "learningPath": {
-    "overview": "This complete learning path covers Indian Modern History from European arrival to the era of Militant Nationalism. Follow topics in order for comprehensive understanding and excellent exam preparation.",
-    "estimatedTime": "60-80 hours for complete mastery",
+    "overview": "This complete learning path covers Indian Modern History from European arrival to Independence & Partition (1498-1947). Follow topics in order for comprehensive understanding and excellent exam preparation.",
+    "estimatedTime": "120-150 hours for complete mastery",
     "difficulty": "Medium to High",
     "examImportance": "Very High - Core topic for all government exams (SSC, UPSC, UPPCS, other PCS)"
   },
@@ -283,6 +283,140 @@
         "Home Rule Movement prepared ground for Gandhi",
         "Congress reunited at Lucknow (1916)"
       ],
+      "connections": ["revolutionary-pre-gandhi"]
+    },
+    {
+      "id": "revolutionary-pre-gandhi",
+      "order": 7,
+      "mainTopic": "Freedom Struggle Before Gandhi (1908-1917)",
+      "category": "Revolutionary Movement",
+      "status": "available",
+      "estimatedTime": "8-10 hours",
+      "importance": "Very High",
+      "description": "Revolutionary terrorism; WWI impact; preparation for Gandhi era",
+      "prerequisites": ["militant-nationalism"],
+      "subTopics": [
+        {"id": "revolutionary-movements-1908-1917", "title": "Revolutionary Movements", "visualType": "flowchart", "order": 1},
+        {"id": "revolutionary-timeline-1908-1917", "title": "Revolutionary Activities Timeline", "visualType": "timeline", "order": 2},
+        {"id": "key-revolutionaries-comparison", "title": "Key Revolutionaries", "visualType": "table", "order": 3},
+        {"id": "wwi-impact-india", "title": "World War I Impact", "visualType": "flowchart", "order": 4}
+      ],
+      "keyTakeaways": ["Revolutionary terrorism 1908-1917", "Ghadar Movement", "WWI sacrifice", "British repression"],
+      "connections": ["early-gandhian-phase"]
+    },
+    {
+      "id": "early-gandhian-phase",
+      "order": 8,
+      "mainTopic": "Early Gandhian Phase (1917-1925)",
+      "category": "Gandhian Movement",
+      "status": "available",
+      "estimatedTime": "12-15 hours",
+      "importance": "Critical",
+      "description": "Gandhi's early experiments; Satyagraha; Rowlatt; Jallianwala; Khilafat; Non-Cooperation",
+      "prerequisites": ["revolutionary-pre-gandhi"],
+      "subTopics": [
+        {"id": "gandhi-early-satyagrahas", "title": "Early Satyagrahas (1917-18)", "visualType": "table", "order": 1},
+        {"id": "montagu-chelmsford-reforms-1919", "title": "Montagu-Chelmsford Reforms", "visualType": "flowchart", "order": 2},
+        {"id": "rowlatt-jallianwala-timeline", "title": "Rowlatt to Jallianwala Bagh", "visualType": "timeline", "order": 3},
+        {"id": "khilafat-movement", "title": "Khilafat Movement", "visualType": "flowchart", "order": 4},
+        {"id": "non-cooperation-movement-1920-22", "title": "Non-Cooperation Movement", "visualType": "timeline", "order": 5}
+      ],
+      "keyTakeaways": ["Champaran, Ahmedabad, Kheda", "Jallianwala Bagh (April 13, 1919)", "Khilafat-NCM unity", "Chauri Chaura; NCM suspended"],
+      "connections": ["civil-disobedience-era"]
+    },
+    {
+      "id": "civil-disobedience-era",
+      "order": 9,
+      "mainTopic": "Civil Disobedience Movement Era (1926-1932)",
+      "category": "Gandhian Movement",
+      "status": "available",
+      "estimatedTime": "12-14 hours",
+      "importance": "Critical",
+      "description": "Simon Commission; Nehru Report; Purna Swaraj; Dandi March; Salt Satyagraha; Round Table Conferences",
+      "prerequisites": ["early-gandhian-phase"],
+      "subTopics": [
+        {"id": "simon-commission-1927", "title": "Simon Commission", "visualType": "timeline", "order": 1},
+        {"id": "political-developments-1928-29", "title": "Nehru Report & Purna Swaraj", "visualType": "table", "order": 2},
+        {"id": "civil-disobedience-movement-1930-34", "title": "Civil Disobedience Movement", "visualType": "timeline", "order": 3},
+        {"id": "round-table-conferences", "title": "Round Table Conferences", "visualType": "table", "order": 4}
+      ],
+      "keyTakeaways": ["Simon Go Back", "Purna Swaraj (Dec 31, 1929)", "Dandi March (March 12-April 6, 1930)", "Gandhi-Irwin Pact", "RTCs failed"],
+      "connections": ["events-1933-39"]
+    },
+    {
+      "id": "events-1933-39",
+      "order": 10,
+      "mainTopic": "Events 1933-1939",
+      "category": "Constitutional & Political",
+      "status": "available",
+      "estimatedTime": "8-10 hours",
+      "importance": "High",
+      "description": "GOI Act 1935; Provincial Elections; Congress Ministries; WWII declared",
+      "prerequisites": ["civil-disobedience-era"],
+      "subTopics": [
+        {"id": "government-of-india-act-1935", "title": "Government of India Act 1935", "visualType": "flowchart", "order": 1},
+        {"id": "provincial-elections-1937-wwii", "title": "Provincial Elections & WWII", "visualType": "timeline", "order": 2}
+      ],
+      "keyTakeaways": ["GOI Act 1935 - longest act", "Provincial autonomy", "Congress ministries (1937)", "WWII declared without consultation"],
+      "connections": ["last-phase"]
+    },
+    {
+      "id": "last-phase",
+      "order": 11,
+      "mainTopic": "Last Phase of British Rule (1940-1947)",
+      "category": "Independence & Partition",
+      "status": "available",
+      "estimatedTime": "12-15 hours",
+      "importance": "Critical",
+      "description": "Pakistan demand; Quit India; Cripps Mission; Cabinet Mission; Independence & Partition",
+      "prerequisites": ["events-1933-39"],
+      "subTopics": [
+        {"id": "last-phase-1940-47", "title": "Key Events (1940-1947)", "visualType": "timeline", "order": 1}
+      ],
+      "keyTakeaways": ["Pakistan Resolution (March 23, 1940)", "Quit India (Aug 8-9, 1942)", "INA Trials", "Mountbatten Plan", "Independence (Aug 15, 1947)"],
+      "connections": []
+    },
+    {
+      "id": "other",
+      "order": 12,
+      "mainTopic": "Other",
+      "category": "Reference",
+      "status": "available",
+      "estimatedTime": "19-24 hours",
+      "importance": "High",
+      "description": "Important personalities, social reforms, press & literature, and tribal & peasant movements",
+      "prerequisites": ["last-phase"],
+      "subTopics": [
+        {
+          "id": "governor-generals-viceroys",
+          "title": "Important Individuals & Personalities",
+          "visualType": "table",
+          "order": 1,
+          "description": "Governor-Generals, Viceroys, and their policies"
+        },
+        {
+          "id": "social-reforms-reformers",
+          "title": "Social Reforms & Reformers",
+          "visualType": "table",
+          "order": 2,
+          "description": "Reform movements; Brahmo Samaj; Arya Samaj; Muslim reforms; Anti-caste movements"
+        },
+        {
+          "id": "press-literature-national-movement",
+          "title": "Press, Literature & Nationalist Movement",
+          "visualType": "table",
+          "order": 3,
+          "description": "Role of newspapers, books, and writers in freedom struggle"
+        },
+        {
+          "id": "tribal-peasant-movements",
+          "title": "Tribal & Peasant Movements",
+          "visualType": "table",
+          "order": 4,
+          "description": "Uprisings against exploitation; land revenue; forest laws"
+        }
+      ],
+      "keyTakeaways": ["Reference topics covering personalities, reforms, press, and movements"],
       "connections": []
     }
   ],
@@ -598,51 +732,62 @@
   },
   "studyTips": [
     "Study chronologically - understanding historical flow is crucial",
-    "European arrival sets context for everything that follows",
-    "Constitutional Acts (1773-1853) are high-frequency exam questions",
+    "Dates are CRITICAL - Dandi March, Jallianwala Bagh, Quit India, Independence",
     "Revolt of 1857 is foundational - master causes, events, leaders, impact",
-    "Connect economic exploitation to nationalist awakening",
-    "Bengal Partition (1905) is watershed - triggered militant nationalism",
-    "Compare Moderates vs Extremists - table format helps memorization",
-    "Separate electorates (1909) led to Partition - understand this causation",
-    "Home Rule Movement bridged Congress split and Gandhi era",
-    "Use visual notes for timeline questions - dates are crucial",
-    "Practice connecting events - 'cause and effect' questions common"
+    "Gandhi's movements (NCM, CDM, Quit India) - know differences, dates, outcomes",
+    "Compare: Moderates vs Extremists, NCM vs CDM, Cripps vs Cabinet Mission",
+    "Separate electorates (1909) → Communalism → Pakistan (1947) - crucial causation",
+    "Constitutional Acts: 1773, 1784, 1833, 1858, 1909, 1919, 1935 - progression important",
+    "Governor-Generals/Viceroys - associate each with 2-3 key policies/events",
+    "Social reformers: Raja Ram Mohan Roy, Dayananda, Vivekananda - quick reference",
+    "Revolutionary movements: state-wise organization (Bengal, Maharashtra, Punjab)",
+    "Use visual notes for timeline questions - dates are 50% of marks",
+    "Practice connecting events - 'cause and effect' questions very common",
+    "Exam loves: Comparison tables, Timeline questions, Cause-effect relationships"
   ],
   "examStrategy": {
     "frequentTopics": [
-      "Vasco da Gama's arrival (1498)",
-      "Battle of Plassey (1757)",
-      "Regulating Act 1773",
-      "Pitt's India Act 1784",
-      "Charter Acts (especially 1833, 1853)",
-      "Causes of 1857 Revolt",
-      "Leaders of 1857 (region-wise)",
-      "Impact of 1857",
-      "Government of India Act 1858",
-      "Formation of INC (1885)",
-      "Moderate leaders and methods",
-      "Bengal Partition (1905)",
-      "Swadeshi Movement",
-      "Lal-Bal-Pal trio",
-      "Surat Split (1907)",
-      "Separate electorates (1909)",
-      "Home Rule Movement (1916-1918)"
+      "Revolt of 1857: Causes, Leaders, Events, Impact",
+      "Jallianwala Bagh Massacre (April 13, 1919)",
+      "Non-Cooperation Movement (1920-22): Chauri Chaura",
+      "Simon Commission (1927): 'Simon Go Back'",
+      "Dandi March/Salt Satyagraha (March 12-April 6, 1930)",
+      "Quit India Movement (August 8-9, 1942)",
+      "Pakistan Resolution (March 23, 1940)",
+      "Mountbatten Plan (June 3, 1947)",
+      "Independence & Partition (August 15, 1947)",
+      "Morley-Minto Reforms (1909): Separate Electorates",
+      "Montagu-Chelmsford Reforms (1919): Dyarchy",
+      "Government of India Act 1935: Provincial Autonomy",
+      "Gandhi's Satyagrahas: Champaran, Ahmedabad, Kheda",
+      "Rowlatt Act (1919)",
+      "Cripps Mission (1942) & Cabinet Mission (1946)",
+      "INA Trials (1945-46)",
+      "Social Reformers: Raja Ram Mohan Roy, Dayananda",
+      "Revolutionary terrorism: Bhagat Singh, Khudiram Bose",
+      "Governor-Generals: Dalhousie (Doctrine of Lapse), Curzon (Bengal Partition)"
     ],
     "mustKnowDates": [
-      "1498 - Vasco da Gama",
-      "1600 - English East India Company",
       "1757 - Battle of Plassey",
       "1773 - Regulating Act",
-      "1784 - Pitt's India Act",
-      "1857 - Revolt begins",
-      "1858 - Crown takes over",
+      "1857 - Revolt of 1857",
+      "1858 - Crown Rule begins (GOI Act)",
       "1885 - INC formation",
       "1905 - Bengal Partition",
-      "1906 - Muslim League",
-      "1907 - Surat Split",
-      "1909 - Morley-Minto Reforms",
-      "1916 - Home Rule Movement"
+      "1909 - Morley-Minto Reforms (Separate Electorates)",
+      "April 13, 1919 - Jallianwala Bagh",
+      "1919 - Montagu-Chelmsford Reforms (Dyarchy)",
+      "1920-22 - Non-Cooperation Movement",
+      "Feb 4, 1922 - Chauri Chaura",
+      "1927 - Simon Commission",
+      "Dec 31, 1929 - Purna Swaraj (Lahore Congress)",
+      "March 12, 1930 - Dandi March started",
+      "April 6, 1930 - Salt law broken",
+      "1935 - Government of India Act",
+      "March 23, 1940 - Pakistan Resolution",
+      "Aug 8-9, 1942 - Quit India Movement",
+      "June 3, 1947 - Mountbatten Plan",
+      "Aug 15, 1947 - Independence"
     ],
     "importantPersonalities": [
       "Vasco da Gama (Portuguese explorer)",
@@ -674,12 +819,16 @@
     ]
   },
   "revisionStrategy": {
-    "week1": "European Arrival + Administrative Organization till 1857",
-    "week2": "Revolt of 1857 (all aspects)",
-    "week3": "Events 1858-1885 (all sub-topics)",
-    "week4": "Congress Formation and Early Phase",
-    "week5": "Militant Nationalism Era (all sub-topics)",
-    "week6": "Complete revision with timeline focus",
-    "week7": "Practice questions and mock tests"
-  }
+    "week1": "Foundation: European Arrival to 1857 Revolt",
+    "week2": "1858-1920: Crown Rule, INC, Moderates-Extremists, Revolutionary movements",
+    "week3": "Early Gandhi: Satyagrahas, Rowlatt, Jallianwala, Khilafat, Non-Cooperation",
+    "week4": "Simon Commission to Civil Disobedience: Dandi March, RTCs, Gandhi-Irwin Pact",
+    "week5": "1933-1947: GOI Act 1935, Elections, WWII, Quit India, Pakistan, Independence",
+    "week6": "Thematic: Governor-Generals, Social Reforms, Education, Press, Tribal-Peasant movements",
+    "week7": "Complete timeline revision: All dates memorization",
+    "week8": "Comparison tables: NCM vs CDM, Moderates vs Extremists, Acts comparison",
+    "week9": "Practice questions and mock tests",
+    "week10": "Final revision: Focus on weak areas and high-frequency topics"
+  },
+  "completionNote": "Comprehensive roadmap now covers complete Modern Indian History (1498-1947) with 21+ topic JSON files created. All visual types (timeline, table, flowchart, mindmap) utilized for optimal learning."
 }

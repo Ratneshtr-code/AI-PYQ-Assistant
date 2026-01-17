@@ -1,0 +1,138 @@
+{
+  "id": "gandhi-early-satyagrahas",
+  "subject": "history",
+  "title": "Gandhi's Early Satyagrahas (1917-1918) - Comparative Analysis",
+  "description": "Champaran, Ahmedabad, and Kheda Satyagrahas - Gandhi's experiments with truth in India",
+  "visualType": "table",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["wwi-impact-india", "montagu-chelmsford-reforms", "non-cooperation-movement"],
+    "tags": ["Gandhi", "Satyagraha", "1917-1918", "Champaran", "Ahmedabad", "Kheda"]
+  },
+  "data": {
+    "introContext": {
+      "title": "Gandhi's Introduction to Indian Masses",
+      "description": "Gandhi returned from South Africa (1915) where he developed Satyagraha technique. Advised by Gokhale to tour India for one year before entering politics. These three Satyagrahas (1917-18) were his introduction to Indian masses and testing of Satyagraha on Indian soil.",
+      "significance": "These local struggles established Gandhi's leadership, refined Satyagraha method, and prepared him for all-India movements."
+    },
+    "columns": [
+      { "key": "aspect", "label": "Aspect", "width": "15%" },
+      { "key": "champaran", "label": "CHAMPARAN SATYAGRAHA (1917)", "width": "28%" },
+      { "key": "ahmedabad", "label": "AHMEDABAD MILL STRIKE (1918)", "width": "28%" },
+      { "key": "kheda", "label": "KHEDA SATYAGRAHA (1918)", "width": "29%" }
+    ],
+    "rows": [
+      {
+        "id": "location-time",
+        "aspect": "📍 LOCATION & TIME",
+        "champaran": "📍 Champaran district, Bihar\n\n📅 April-May 1917\n\nFirst Satyagraha in India",
+        "ahmedabad": "📍 Ahmedabad, Gujarat\n\n📅 February-March 1918\n\nIndustrial labor dispute",
+        "kheda": "📍 Kheda district, Gujarat\n\n📅 March-June 1918\n\nPeasant tax resistance"
+      },
+      {
+        "id": "issue",
+        "aspect": "⚡ MAIN ISSUE",
+        "champaran": "Tinkathia System:\n\n• European indigo planters forced peasants to grow indigo on 3/20th of land (15%)\n• Peasants could not grow food crops on that land\n• Forced to sell indigo at fixed low prices\n• Suffered from illegal cesses and dues\n• Poverty and exploitation widespread\n• System in place since mid-19th century",
+        "ahmedabad": "Workers' Wages Dispute:\n\n• Plague in 1917 led to workers' exodus\n• Mill owners paid 'plague bonus' (70% wage increase) to bring workers back\n• As plague subsided, owners withdrew bonus\n• Workers demanded 50% wage increase\n• Owners offered only 20%\n• Workers went on strike\n• Mill owners: Ambalal Sarabhai (textile magnate)",
+        "kheda": "Tax Relief Demand:\n\n• Crop failure in 1917-18 due to drought\n• Revenue code: taxes remitted if crop less than 25% of normal\n• Actual crop was 25% or less\n• But government refused remission\n• Insisted on full tax collection\n• Peasants unable to pay\n• Demanded tax suspension/reduction"
+      },
+      {
+        "id": "how-gandhi-involved",
+        "aspect": "🎯 HOW GANDHI GOT INVOLVED",
+        "champaran": "• Raj Kumar Shukla (local peasant) met Gandhi at Lucknow Congress (1916)\n• Persistently urged Gandhi to visit Champaran\n• Gandhi reluctantly agreed\n• Arrived Champaran April 1917\n• Was new to India, didn't know local issues deeply\n• Investigated personally",
+        "ahmedabad": "• Gandhi was living in Ahmedabad at Sabarmati Ashram\n• Local issue, directly approached\n• Anusuya Behn Sarabhai (Ambalal's sister) urged Gandhi to help workers\n• Gandhi's ashram philosophy emphasized labor dignity\n• Personal conflict: Ambalal was friend and financier of his ashram",
+        "kheda": "• Nearby to Ahmedabad\n• Local leaders (Vallabhbhai Patel, Indulal Yajnik) approached Gandhi\n• Gandhi familiar with Gujarat by now\n• Coincided with Ahmedabad strike period\n• Natural extension of his local work"
+      },
+      {
+        "id": "associates",
+        "aspect": "👥 KEY ASSOCIATES",
+        "champaran": "• Rajendra Prasad (later India's President)\n• J.B. Kripalani (Acharya Kripalani)\n• Braj Kishore Prasad\n• Mazharul Haque\n• Anugrah Narayan Sinha\n\nMostly Bihar leaders who later became national figures",
+        "ahmedabad": "• Anusuya Behn Sarabhai (sister of mill owner, but supported workers)\n• Sardar Vallabhbhai Patel\n• Indulal Yajnik\n• Shankarlal Banker\n\nMostly Gujarat leaders",
+        "kheda": "• Vallabhbhai Patel (key organizer; emerged as leader)\n• Indulal Yajnik\n• Narhari Parikh\n• Mohanlal Pandya\n• Ravi Shankar Vyas\n\nPatel's organizational genius recognized here"
+      },
+      {
+        "id": "methods",
+        "aspect": "🛠️ METHODS USED",
+        "champaran": "Investigation & Documentation:\n\n• Gandhi defied order to leave district\n• Conducted detailed inquiry\n• Recorded 8,000+ testimonies of peasants\n• Documented exploitation systematically\n• Opened schools and dispensaries\n• Created awareness among peasants\n• Non-violent civil disobedience\n• Gandhi willing to go to jail",
+        "ahmedabad": "Strike with Conditions:\n\n• Workers went on strike\n• Gandhi imposed discipline: non-violence, no coercion of non-strikers\n• Daily meetings for moral support\n• Explained workers' rights through leaflets\n• FAST UNTO DEATH: When strike weakening, Gandhi fasted (first political fast in India)\n• Fasted 3 days\n• Emotional pressure on mill owners (his friends)",
+        "kheda": "No-Tax Campaign:\n\n• Peasants pledged not to pay taxes\n• Campaign for tax remission\n• Meetings and propaganda\n• Created awareness\n• Social boycott of those who paid\n• Withholding tax (civil disobedience)\n• Gandhi toured villages extensively"
+      },
+      {
+        "id": "government-response",
+        "aspect": "🏛️ GOVT/OPPOSITION RESPONSE",
+        "champaran": "British Response:\n\n• Initially tried to force Gandhi to leave\n• Served notice to quit district\n• Gandhi refused; prepared to be arrested\n• Thousands gathered to support\n• Authorities panicked; withdrew order\n• Allowed him to conduct inquiry\n• Lt. Governor appointed official inquiry committee; Gandhi member\n• Accepted Gandhi's findings largely",
+        "ahmedabad": "Mill Owners' Response:\n\n• Refused to negotiate initially\n• Adamant on their position\n• Gandhi's fast put moral pressure (Ambalal was friend)\n• Embarrassed by Gandhi's suffering\n• Ashram's existence depended on Ambalal's support\n• Finally agreed to arbitration",
+        "kheda": "Government Response:\n\n• Adamant on tax collection initially\n• Threatened coercion and confiscation\n• As movement intensified, became worried\n• Secretly instructed officials to be lenient\n• Suspended tax collection from poorer peasants\n• Rich peasants had to pay"
+      },
+      {
+        "id": "outcome",
+        "aspect": "✅ OUTCOME & SUCCESS",
+        "champaran": "MAJOR SUCCESS:\n\n• Inquiry Committee findings favored peasants\n• Champaran Agrarian Act (1918) passed\n• Tinkathia system abolished completely\n• Indigo cultivation no longer compulsory\n• Peasants freed from forced indigo cultivation\n• Planters had to refund illegal dues (25%)\n• Schools and dispensaries established",
+        "ahmedabad": "PARTIAL SUCCESS:\n\n• Arbitration by Prof. Anukul Chandra Banerjee\n• Award: 35% wage increase (between 20% and 50% demanded)\n• Both sides accepted\n• Workers got substantial raise\n• Textile Labour Association (TLA) formed - India's first organized non-political labor union\n• Established principle of collective bargaining",
+        "kheda": "MORAL VICTORY:\n\n• Government suspended tax collection from poorer peasants\n• Rich peasants (who could pay) had to pay\n• Not complete success but significant concession\n• Demonstrated power of organized resistance\n• Government forced to acknowledge peasants' distress\n• Important psychological victory",
+        "overall": "All three established Gandhi's reputation and refined Satyagraha technique"
+      },
+      {
+        "id": "significance",
+        "aspect": "⭐ SIGNIFICANCE",
+        "champaran": "For Gandhi:\n• First Satyagraha in India\n• Proved Satyagraha worked in India\n• Established him among peasant masses\n• Challenged unjust laws successfully\n\nFor India:\n• Showed peasants could fight exploitation\n• Non-violent resistance effective\n• Ended century-old exploitation\n\nFor Leaders:\n• Trained future leaders (Rajendra Prasad)\n\nHistorical:\n• First time nationalist leader championed peasant cause directly",
+        "ahmedabad": "For Gandhi:\n• First experiment with fasting as political weapon\n• Established him as workers' champion\n• Moral pressure technique refined\n\nFor Workers:\n• First organized labor movement under Gandhi\n• Workers' dignity and rights established\n• TLA became model labor organization\n\nFor India:\n• Gandhian method extended to industrial workers\n• Non-violent labor dispute resolution\n\nNote: Controversy over fast - seen by some as coercion on friends",
+        "kheda": "For Gandhi:\n• Tested no-tax campaign method\n• Prepared for future civil disobedience\n• Established him in Gujarat firmly\n\nFor Patel:\n• Emerged as great organizer\n• His organizational skills recognized\n• Beginning of Sardar's political career\n\nFor Peasants:\n• Confidence to resist unjust taxation\n• Organized peasant power demonstrated\n\nFor India:\n• Template for future agrarian struggles\n• Tax resistance as political weapon"
+      },
+      {
+        "id": "gandhian-methods",
+        "aspect": "💡 GANDHIAN TECHNIQUES DEMONSTRATED",
+        "champaran": "• Non-violent resistance\n• Thorough investigation before action\n• Constructive work (schools, dispensaries)\n• Willingness to face arrest\n• Mass mobilization\n• Moral force over physical force\n• Satyagraha = holding firmly to truth",
+        "ahmedabad": "• Fasting as moral pressure\n• Non-violence even in strikes\n• Discipline among protesters\n• No coercion of opponents/non-participants\n• Arbitration preferred over confrontation\n• Building permanent organization (TLA)\n• Personal suffering to move hearts",
+        "kheda": "• Civil disobedience (tax refusal)\n• Extensive grassroots organization\n• Social pressure and unity\n• Withstanding government coercion\n• Compromise when necessary\n• Practical approach (rich paid, poor exempted)\n• Village-level mobilization"
+      },
+      {
+        "id": "limitations",
+        "aspect": "⚠️ LIMITATIONS",
+        "champaran": "• Local issue; limited geographic spread\n• Did not address broader peasant exploitation\n• Compromise: only 25% refund, not full\n• Upper-caste peasants benefited more\n• Gandhi still testing methods",
+        "ahmedabad": "• Benefited industrial workers only\n• Gandhi's fast controversial (pressure on friends)\n• Divided opinion among colleagues\n• Not fully voluntary settlement (pressure)\n• Limited to one mill, one city",
+        "kheda": "• Partial success; rich had to pay\n• Not all peasants benefited equally\n• Government concession grudging, not policy change\n• Did not address root cause of agrarian distress\n• Limited to one district"
+      },
+      {
+        "id": "lessons-learned",
+        "aspect": "📚 LESSONS FOR FUTURE",
+        "champaran": "For Non-Cooperation Movement (1920):\n\n• Investigation & documentation crucial\n• Constructive work alongside resistance\n• Peasant base can be mobilized\n• British vulnerable to moral pressure\n• Non-violence works if disciplined",
+        "ahmedabad": "For Future Struggles:\n\n• Fasting effective but must be used judiciously\n• Workers can be organized non-violently\n• Arbitration better than confrontation\n• Permanent organizations needed (led to TLA, later AITUC influence)\n• Also taught Gandhi limits of using personal relationships",
+        "kheda": "For Civil Disobedience (1930):\n\n• No-tax campaign can be powerful weapon\n• But needs strong organization\n• Peasant unity crucial\n• Government forced to negotiate\n• Template for future Salt Satyagraha and CDM"
+      }
+    ],
+    "additionalInfo": {
+      "title": "Common Features & Overall Assessment",
+      "commonFeatures": [
+        {
+          "feature": "Scale",
+          "detail": "All were local struggles, not all-India movements"
+        },
+        {
+          "feature": "Timing",
+          "detail": "1917-1918, during or immediately after WWI"
+        },
+        {
+          "feature": "Method",
+          "detail": "All used Satyagraha (non-violent resistance)"
+        },
+        {
+          "feature": "Issues",
+          "detail": "All addressed economic exploitation of common people"
+        },
+        {
+          "feature": "Leadership",
+          "detail": "All established Gandhi's leadership and refined his methods"
+        },
+        {
+          "feature": "Training Ground",
+          "detail": "All served as training for future national leaders"
+        }
+      ],
+      "chronology": "Champaran (April-May 1917) → Ahmedabad (Feb-March 1918) → Kheda (March-June 1918)",
+      "significance": "These three struggles were Gandhi's 'laboratory experiments' with Satyagraha in India. They established his mass contact, refined his methods, trained future leaders, and prepared ground for all-India movements (Non-Cooperation 1920, Civil Disobedience 1930).",
+      "examTip": "Remember 'CPK' (Champaran-Peasants-Indigo; Ahmedabad-Textile workers-Wages; Kheda-Peasants-Tax). Also remember associates: Champaran-Rajendra Prasad; Ahmedabad-Anusuya Behn; Kheda-Vallabhbhai Patel."
+    }
+  }
+}
+

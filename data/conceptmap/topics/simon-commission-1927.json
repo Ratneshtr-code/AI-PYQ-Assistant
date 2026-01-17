@@ -1,0 +1,366 @@
+{
+  "id": "simon-commission-1927",
+  "subject": "history",
+  "title": "Simon Commission & Indian Response (1927-1930)",
+  "description": "All-White Commission boycotted by Indians; 'Simon Go Back' movement",
+  "visualType": "timeline",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["non-cooperation-movement-1920-22", "nehru-report-1928", "civil-disobedience-movement"],
+    "tags": ["Simon-Commission", "1927-1930", "boycott", "Lajpat-Rai"]
+  },
+  "data": {
+    "startYear": 1927,
+    "endYear": 1930,
+    "legend": [
+      { "type": "commission", "label": "Commission Activities" },
+      { "type": "protest", "label": "Indian Protests" },
+      { "type": "alternative", "label": "Alternative Proposals" }
+    ],
+    "phases": [
+      {
+        "id": "announcement-arrival",
+        "name": "Announcement & Arrival",
+        "period": "November 1927 - February 1928",
+        "description": "Commission announced and arrives; protests begin"
+      },
+      {
+        "id": "boycott-phase",
+        "name": "Nationwide Boycott",
+        "period": "February 1928 - April 1929",
+        "description": "'Simon Go Back' protests across India"
+      },
+      {
+        "id": "report-aftermath",
+        "name": "Report & Impact",
+        "period": "June 1930 onwards",
+        "description": "Commission's report published; irrelevant by then"
+      }
+    ],
+    "events": [
+      {
+        "id": "background",
+        "year": "1919-1927",
+        "title": "Background: GOI Act 1919 Review Clause",
+        "description": "Act required review after 10 years; Commission appointed 2 years early",
+        "type": "commission",
+        "phase": "announcement-arrival",
+        "icon": "📋",
+        "details": {
+          "points": [
+            "Government of India Act 1919 contained provision for review after 10 years (by 1929)",
+            "Conservative government in Britain (Stanley Baldwin PM) feared Labour might come to power",
+            "Decided to appoint Commission 2 years early (1927) before Labour won",
+            "Labour Party more sympathetic to Indian demands",
+            "Conservatives wanted to control reform process"
+          ]
+        }
+      },
+      {
+        "id": "commission-announced",
+        "year": "Nov 8, 1927",
+        "title": "Simon Commission Announced",
+        "description": "All-White commission to review Indian constitutional reforms",
+        "type": "commission",
+        "phase": "announcement-arrival",
+        "icon": "📜",
+        "details": {
+          "composition": {
+            "chairman": "Sir John Simon (Liberal lawyer and politician)",
+            "members": [
+              "6 other British MPs (Labour and Conservative)",
+              "Total: 7 members, ALL BRITISH",
+              "NO INDIAN MEMBER"
+            ]
+          },
+          "mandate": [
+            "Review working of Government of India Act 1919",
+            "Suggest further reforms",
+            "Report on whether dyarchy successful",
+            "Recommend next steps in constitutional development"
+          ],
+          "insult": [
+            "No Indian member in commission to decide India's future",
+            "British deciding for Indians without Indian participation",
+            "Treated Indians as subjects incapable of self-governance",
+            "Huge insult to Indian aspirations"
+          ]
+        },
+        "tags": ["Simon Commission", "announcement"]
+      },
+      {
+        "id": "immediate-reaction",
+        "year": "Nov 1927",
+        "title": "Immediate Indian Outrage",
+        "description": "All parties unanimously condemn all-white commission",
+        "type": "protest",
+        "phase": "announcement-arrival",
+        "icon": "😡",
+        "details": {
+          "reactions": [
+            "Congress: Immediate rejection; demanded Indian participation",
+            "Muslim League: Also rejected (Jinnah led opposition)",
+            "Liberal Federation: Rejected",
+            "Hindu Mahasabha: Rejected",
+            "UNPRECEDENTED UNITY: All Indian political parties united in opposition",
+            "Even moderates and loyalists opposed"
+          ],
+          "reasons": [
+            "All-white commission insulting",
+            "Indians capable of deciding own future",
+            "After sacrifice in WWI, still treated as inferiors",
+            "Dyarchy had failed; Indians knew why; didn't need British to tell them"
+          ],
+          "slogan": "'All parties and all communities united in rejection'"
+        }
+      },
+      {
+        "id": "madras-congress",
+        "year": "Dec 1927",
+        "title": "Madras Congress Session - Boycott Decided",
+        "description": "Congress decides to boycott Commission at all stages",
+        "type": "protest",
+        "phase": "announcement-arrival",
+        "icon": "🏛️",
+        "details": {
+          "decision": [
+            "Congress session at Madras (December 1927)",
+            "President: Dr. M.A. Ansari",
+            "Resolution: Complete boycott of Simon Commission",
+            "No cooperation at any stage",
+            "No meetings, no evidence, no assistance",
+            "Black flag demonstrations when Commission arrives"
+          ],
+          "opposition": [
+            "Some leaders favored conditional cooperation",
+            "Jinnah initially wanted cooperation if Indians included",
+            "But boycott resolution passed unanimously"
+          ]
+        },
+        "tags": ["Congress", "boycott"]
+      },
+      {
+        "id": "commission-arrives",
+        "year": "Feb 3, 1928",
+        "title": "Simon Commission Arrives in India (Bombay)",
+        "description": "Greeted with black flags and 'Simon Go Back' slogans",
+        "type": "protest",
+        "phase": "boycott-phase",
+        "icon": "🚢",
+        "details": {
+          "arrival": [
+            "Commission arrived at Bombay (February 3, 1928)",
+            "Massive black flag demonstrations",
+            "Hartals and strikes across India",
+            "Slogan: 'SIMON GO BACK'",
+            "Empty streets during processions",
+            "People wore black badges"
+          ],
+          "scale": "Unprecedented nationwide protest; unity of all communities"
+        }
+      },
+      {
+        "id": "lahore-protest",
+        "year": "Oct 30, 1928",
+        "title": "Lahore Protest - Lala Lajpat Rai Lathi Charge",
+        "description": "Brutal police lathi charge on peaceful protest; Lajpat Rai injured",
+        "type": "protest",
+        "phase": "boycott-phase",
+        "icon": "💔",
+        "details": {
+          "event": [
+            "Simon Commission visit to Lahore (October 30, 1928)",
+            "Massive procession led by Lala Lajpat Rai to protest",
+            "Thousands participated peacefully",
+            "Police Superintendent James Scott ordered lathi charge",
+            "Brutal lathi charge on peaceful protesters",
+            "Lala Lajpat Rai (Punjab Kesari, 63 years old) beaten severely on chest",
+            "Lajpat Rai injured but continued leading protest"
+          ],
+          "lajpatStatement": "Lajpat Rai declared: 'Every blow aimed at me is a nail in the coffin of British imperialism'",
+          "aftermath": "Lajpat Rai died 17 days later (November 17, 1928); injuries likely contributed though exact cause disputed"
+        },
+        "tags": ["Lajpat Rai", "lathi charge", "Lahore", "martyrdom"]
+      },
+      {
+        "id": "lajpat-rai-death",
+        "year": "Nov 17, 1928",
+        "title": "Death of Lala Lajpat Rai",
+        "description": "Punjab Kesari dies; nation mourns; rage against British",
+        "type": "protest",
+        "phase": "boycott-phase",
+        "icon": "💔",
+        "details": {
+          "death": [
+            "Died November 17, 1928 (17 days after lathi charge)",
+            "Official cause: heart attack",
+            "Popular belief: injuries from lathi charge contributed",
+            "Became martyr; funeral attended by lakhs",
+            "Outrage across India"
+          ],
+          "impact": [
+            "Crystallized anti-British sentiment",
+            "Demand for revenge (led to Saunders' assassination by Bhagat Singh, Rajguru, Sukhdev)",
+            "Simon Commission became hated symbol",
+            "Strengthened resolve to boycott"
+          ],
+          "legacy": "'Punjab Kesari' (Lion of Punjab) remembered as martyr who died protesting British tyranny"
+        },
+        "tags": ["Lajpat Rai", "death", "martyr"]
+      },
+      {
+        "id": "lucknow-protest",
+        "year": "Nov 30, 1928",
+        "title": "Lucknow Protest - Jawaharlal Nehru Injured",
+        "description": "Police brutality on protesters; Nehru and others injured",
+        "type": "protest",
+        "phase": "boycott-phase",
+        "icon": "⚔️",
+        "details": {
+          "event": [
+            "Simon Commission visit to Lucknow (November 30, 1928)",
+            "Protest led by Jawaharlal Nehru and others",
+            "Police lathi charge",
+            "Jawaharlal Nehru badly beaten",
+            "Govind Ballabh Pant seriously injured (permanent damage to health)",
+            "Many protesters hospitalized"
+          ],
+          "significance": "Showed British willing to use violence against peaceful protesters; further alienated Indians"
+        }
+      },
+      {
+        "id": "calcutta-protest",
+        "year": "1929",
+        "title": "Calcutta and Other Cities - Continued Protests",
+        "description": "Protests continue wherever Commission goes",
+        "type": "protest",
+        "phase": "boycott-phase",
+        "icon": "✊",
+        "details": {
+          "pattern": [
+            "Commission toured India city by city",
+            "Everywhere: Black flags, hartals, 'Simon Go Back' slogans",
+            "Police repression: lathi charges, arrests",
+            "But protests continued undeterred",
+            "By April 1929, Commission completed hearings and left India"
+          ],
+          "participation": [
+            "Students, workers, professionals, women - all sections participated",
+            "Hindu-Muslim unity in protests",
+            "Even some princes expressed discontent privately"
+          ]
+        }
+      },
+      {
+        "id": "alternative-proposals",
+        "year": "1928",
+        "title": "Indian Alternative Proposals Emerge",
+        "description": "Indians decide to draft own constitution",
+        "type": "alternative",
+        "phase": "boycott-phase",
+        "icon": "📜",
+        "details": {
+          "logic": [
+            "If British won't include Indians in Simon Commission,",
+            "Indians will draft own constitutional proposal",
+            "Show British that Indians capable of self-governance"
+          ],
+          "initiatives": [
+            "All Parties Conference convened (1928)",
+            "Task: Draft constitution acceptable to all Indian parties",
+            "Motilal Nehru Committee formed",
+            "Led to Nehru Report (August 1928)"
+          ]
+        }
+      },
+      {
+        "id": "report-published",
+        "year": "Jun 1930",
+        "title": "Simon Commission Report Published",
+        "description": "Report published but ignored by Indians; irrelevant",
+        "type": "commission",
+        "phase": "report-aftermath",
+        "icon": "📄",
+        "details": {
+          "timing": [
+            "Report published June 1930 (2 years after arrival)",
+            "By then, political situation completely changed",
+            "Civil Disobedience Movement launched (April 1930)",
+            "Indians not interested in Simon Report"
+          ],
+          "recommendations": [
+            "Abolish dyarchy; introduce 'responsible government' in provinces",
+            "Expand provincial autonomy",
+            "Centre remain under British control (defence, foreign policy)",
+            "Gradual reforms; no immediate dominion status",
+            "Safeguards for minorities"
+          ],
+          "reception": [
+            "Congress ignored report completely",
+            "Engaged in Civil Disobedience; beyond reforms",
+            "Demand shifted to Purna Swaraj (complete independence)",
+            "Report obsolete before implementation"
+          ],
+          "outcome": [
+            "Recommendations formed basis for Government of India Act 1935",
+            "But by then, Indians wanted much more",
+            "Simon Commission fiasco showed British out of touch with Indian aspirations"
+          ]
+        }
+      }
+    ],
+    "assessment": {
+      "title": "Significance & Impact of Simon Commission",
+      "negative": {
+        "britishPerspective": [
+          "Commission boycotted completely; couldn't gather adequate Indian opinion",
+          "Violent protests; British prestige damaged",
+          "Showed Indians united against British policies",
+          "Failed to win Indian cooperation",
+          "Report ignored; wasted effort"
+        ]
+      },
+      "positive": {
+        "indianPerspective": [
+          "United all Indian political parties (unprecedented)",
+          "Congress, Muslim League, Hindu Mahasabha, Liberals - all boycotted together",
+          "Mass mobilization practice for future movements",
+          "Lala Lajpat Rai became martyr; inspired revolutionaries (Bhagat Singh)",
+          "Forced Indians to draft own constitution (Nehru Report)",
+          "Demonstrated Indians' political maturity and unity",
+          "Preparation for Civil Disobedience Movement",
+          "Shifted demand from reforms to complete independence"
+        ]
+      },
+      "keyOutcomes": [
+        "Nehru Report (1928) - Indian alternative constitution",
+        "Jinnah's 14 Points (1929) - Muslim League's counter-proposals",
+        "Lahore Congress (1929) - Purna Swaraj declaration",
+        "Civil Disobedience Movement (1930)",
+        "Government of India Act 1935 (partially based on Simon Report)"
+      ],
+      "legacy": [
+        "'Simon Go Back' became symbol of Indian resistance",
+        "Lala Lajpat Rai's martyrdom inspired generation",
+        "Proved British couldn't impose reforms without Indian consultation",
+        "Last time British tried to exclude Indians from constitutional process",
+        "Accelerated movement toward independence"
+      ]
+    },
+    "examTips": {
+      "mustRemember": [
+        "Simon Commission: 7-member all-British commission (1927)",
+        "Chairman: Sir John Simon",
+        "Appointed 2 years early (1927 instead of 1929)",
+        "NO INDIAN MEMBER - major insult",
+        "Arrived India: February 3, 1928",
+        "Slogan: 'SIMON GO BACK'",
+        "Lala Lajpat Rai beaten in Lahore protest (Oct 30, 1928); died Nov 17, 1928",
+        "Unanimously boycotted by all Indian parties",
+        "Report published June 1930; ignored by Indians",
+        "Led to Nehru Report (1928), Jinnah's 14 Points, Purna Swaraj (1929)"
+      ]
+    }
+  }
+}
+

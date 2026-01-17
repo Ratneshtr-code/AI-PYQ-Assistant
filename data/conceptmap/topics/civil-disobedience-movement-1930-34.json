@@ -1,0 +1,139 @@
+{
+  "id": "civil-disobedience-movement-1930-34",
+  "subject": "history",
+  "title": "Civil Disobedience Movement (1930-1934)",
+  "description": "Salt Satyagraha, Dandi March, mass movement for Purna Swaraj",
+  "visualType": "timeline",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["political-developments-1928-29", "gandhi-irwin-pact", "round-table-conferences"],
+    "tags": ["Civil-Disobedience", "Dandi-March", "Salt-Satyagraha", "1930"]
+  },
+  "data": {
+    "startYear": 1930,
+    "endYear": 1934,
+    "events": [
+      {
+        "id": "dandi-march",
+        "year": "Mar 12 - Apr 6, 1930",
+        "title": "Dandi March (Salt Satyagraha)",
+        "icon": "🧂",
+        "details": {
+          "route": "Sabarmati Ashram → Dandi (Gujarat coast): 385 km, 24 days",
+          "participants": "Gandhi + 78 satyagrahis (carefully selected)",
+          "dates": "Started: March 12; Reached Dandi: April 6",
+          "act": "April 6 morning: Gandhi picked salt from seashore, broke Salt Law",
+          "why": "• Salt tax affected poorest; everyone needed salt\n• Simple, symbolic act everyone could understand and replicate\n• Salt monopoly unjust (British taxed basic necessity)",
+          "spread": "Lakhs made illegal salt across India; millions joined movement",
+          "exam": "**MOST ASKED**: Date, distance, companions, symbolic significance"
+        }
+      },
+      {
+        "id": "mass-movement",
+        "year": "Apr-Dec 1930",
+        "title": "Nationwide Civil Disobedience",
+        "icon": "✊",
+        "details": {
+          "methods": "• Salt law breaking\n• Boycott foreign cloth & goods\n• Non-payment of taxes\n• Boycott of British institutions\n• Picketing of liquor & foreign cloth shops\n• Forest laws violated",
+          "participation": "• Women: Mass participation (first time at this scale)\n• Students, workers, peasants, middle class\n• Frontier Gandhi (Khan Abdul Ghaffar Khan) - Khudai Khidmatgars (Red Shirts) in NWFP",
+          "scale": "Larger than Non-Cooperation; 90,000+ arrested including Gandhi (May 5)"
+        }
+      },
+      {
+        "id": "dharasana",
+        "year": "May 21, 1930",
+        "title": "Dharasana Salt Works Raid",
+        "icon": "💔",
+        "details": {
+          "event": "Satyagrahis tried to raid Dharasana Salt Works (Gujarat)",
+          "brutality": "Police brutally beat unarmed volunteers with steel-tipped lathis",
+          "reporter": "American journalist Webb Miller reported worldwide",
+          "impact": "International sympathy for India; British brutality exposed"
+        }
+      },
+      {
+        "id": "repression",
+        "year": "1930",
+        "title": "Severe British Repression",
+        "icon": "⛓️",
+        "details": {
+          "arrests": "90,000+ jailed (including Gandhi, Nehru, Patel, etc.)",
+          "violence": "Lathi charges, firings (Peshawar firing killed many)",
+          "ordinances": "Repressive ordinances; AICC declared illegal",
+          "confiscation": "Properties confiscated; Congress offices sealed"
+        }
+      },
+      {
+        "id": "gandhi-irwin",
+        "year": "Mar 5, 1931",
+        "title": "Gandhi-Irwin Pact",
+        "icon": "🤝",
+        "details": {
+          "talks": "Gandhi released from jail; negotiations with Viceroy Irwin",
+          "terms": "• CDM suspended\n• Political prisoners released (except violent offenders)\n• Salt making allowed on coast for personal use\n• Picketing allowed\n• Gandhi agreed to attend Round Table Conference",
+          "criticism": "Critics said Gandhi got nothing substantial; called it 'sell-out'",
+          "defense": "Gandhi argued: moral victory; British negotiated with Indian leader as equal"
+        }
+      },
+      {
+        "id": "second-rtc",
+        "year": "Sep-Dec 1931",
+        "title": "Second Round Table Conference",
+        "icon": "🇬🇧",
+        "details": {
+          "gandhi": "Gandhi alone represented Congress (wearing loincloth in London)",
+          "failure": "Conference failed; no agreement on minorities, powers",
+          "quote": "Gandhi: 'I am here as sole representative of Indian National Congress'",
+          "return": "Returned disappointed; movement resumed"
+        }
+      },
+      {
+        "id": "second-phase",
+        "year": "Jan 1932",
+        "title": "Second Phase - Resumed Movement",
+        "icon": "🔄",
+        "details": {
+          "restart": "Gandhi restarted CDM (Jan 1932) after RTC failure",
+          "repression": "Even harsher repression; Gandhi, Congress leaders arrested immediately",
+          "ordinances": "Emergency ordinances; Congress outlawed",
+          "scale": "Weaker than first phase; leaders in jail, people exhausted"
+        }
+      },
+      {
+        "id": "communal-award",
+        "year": "Aug 1932",
+        "title": "Communal Award & Poona Pact",
+        "icon": "⚖️",
+        "details": {
+          "award": "PM Ramsay MacDonald announced Communal Award: separate electorates for Dalits (Depressed Classes)",
+          "gandhiFast": "Gandhi (in jail) fasted unto death against separate electorates for Dalits",
+          "poonaPact": "Poona Pact (Sep 24, 1932): Reserved seats for Dalits but in general electorate (not separate)",
+          "leaders": "B.R. Ambedkar agreed reluctantly; Gandhi's fast broke"
+        }
+      },
+      {
+        "id": "withdrawal",
+        "year": "May 1933 - 1934",
+        "title": "Movement Gradually Withdrawn",
+        "icon": "📉",
+        "details": {
+          "reasons": "• Mass exhaustion\n• Severe repression\n• Leaders in jail\n• Communal tensions rising\n• Economic hardship",
+          "gandhi": "Gandhi suspended mass civil disobedience (May 1933); allowed only individual Satyagraha",
+          "official": "Congress officially withdrew CDM (1934)",
+          "shift": "Focus shifted to constructive work and council entry"
+        }
+      }
+    ],
+    "assessment": {
+      "achievements": "• Massive participation (larger than NCM)\n• Women's mass involvement\n• British prestige damaged\n• Independence demand became mass sentiment\n• International attention\n• Frontier Gandhi mobilized NWFP",
+      "limitations": "• Did not achieve independence\n• Communal Award divided nation\n• Withdrawn due to repression\n• Property confiscations hurt middle class",
+      "significance": "Proved Indians determined for freedom; prepared ground for Quit India (1942)"
+    },
+    "examTips": {
+      "critical": "Dandi March: March 12-April 6, 1930; 385 km; 78 companions; broke salt law",
+      "dates": "Gandhi-Irwin Pact: March 5, 1931; Poona Pact: Sep 24, 1932",
+      "compare": "CDM vs NCM: CDM had more women, targeted specific laws, international attention"
+    }
+  }
+}
+

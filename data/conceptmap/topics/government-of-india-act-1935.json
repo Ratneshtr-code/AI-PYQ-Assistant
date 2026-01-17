@@ -1,0 +1,141 @@
+{
+  "id": "government-of-india-act-1935",
+  "subject": "history",
+  "title": "Government of India Act 1935",
+  "description": "Longest act; provincial autonomy; federal structure (never implemented); basis of Indian Constitution",
+  "visualType": "flowchart",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["round-table-conferences", "provincial-elections-1937"],
+    "tags": ["GOI-Act-1935", "Provincial-Autonomy", "Federation"]
+  },
+  "data": {
+    "categories": [
+      {
+        "id": "features",
+        "label": "Key Features",
+        "color": "#10B981",
+        "icon": "⚖️",
+        "items": [
+          {
+            "id": "provincial",
+            "label": "Provincial Autonomy (Implemented)",
+            "details": {
+              "change": "Abolished Dyarchy; introduced complete responsible government in provinces",
+              "features": ["Governors acted on advice of ministers", "Ministers responsible to legislature", "Governor had special powers (minorities, law & order)", "11 provinces with autonomy"],
+              "exam": "**MOST IMPORTANT**: Dyarchy ended; Provincial autonomy started"
+            }
+          },
+          {
+            "id": "federal",
+            "label": "All-India Federation (Never Implemented)",
+            "details": {
+              "plan": "Federation of British India + Princely States",
+              "failure": "Princely states never joined → Federation never implemented",
+              "reason": "Princes feared losing autonomy; WWII intervened",
+              "exam": "Ask why it failed: Princely states didn't join"
+            }
+          },
+          {
+            "id": "franchise",
+            "label": "Extended Franchise",
+            "details": {
+              "increase": "10% → 30% adults got voting rights (still property-based)",
+              "women": "Some women got vote for first time",
+              "still": "70% population excluded"
+            }
+          },
+          {
+            "id": "bicameral",
+            "label": "Bicameral Legislatures",
+            "details": {
+              "central": "Federal Assembly + Council of States",
+              "provincial": "6 provinces got bicameral (Bengal, Bombay, Madras, Bihar, UP, Assam)"
+            }
+          },
+          {
+            "id": "services",
+            "label": "Federal Public Service Commission & Provincial PSCs",
+            "details": {"established": "UPSC + State PSCs established", "recruitment": "Merit-based recruitment"}
+          },
+          {
+            "id": "rbi",
+            "label": "Reserve Bank of India",
+            "details": {"established": "RBI established (1935) as central bank"}
+          },
+          {
+            "id": "burma",
+            "label": "Burma Separated",
+            "details": {"separation": "Burma separated from India (became separate colony)"}
+          }
+        ]
+      },
+      {
+        "id": "safeguards",
+        "label": "British Safeguards (Ensured Control)",
+        "color": "#EF4444",
+        "icon": "⚠️",
+        "items": [
+          {
+            "id": "governor-powers",
+            "label": "Governor's Special Powers",
+            "details": {
+              "powers": ["Minorities protection", "Services", "Law & order", "Special responsibilities", "Could dismiss ministers"],
+              "reality": "Responsible government with strings attached"
+            }
+          },
+          {
+            "id": "viceroy-powers",
+            "label": "Viceroy's Powers",
+            "details": {
+              "retained": ["Defence", "Foreign affairs", "Tribal areas", "Veto over legislation", "Ordinance powers"],
+              "reality": "No responsible government at center"
+            }
+          },
+          {
+            "id": "communal",
+            "label": "Communal Representation Extended",
+            "details": {"extended": "Separate electorates for Muslims, Sikhs, Christians, Anglo-Indians, Europeans", "weightage": "Muslims got weightage in Hindu-majority provinces"}
+          }
+        ]
+      },
+      {
+        "id": "assessment",
+        "label": "Congress Response & Assessment",
+        "color": "#F59E0B",
+        "icon": "📊",
+        "items": [
+          {
+            "id": "congress-stance",
+            "label": "Congress Position",
+            "details": {
+              "official": "Rejected Act as unsatisfactory and unacceptable",
+              "decision": "But decided to contest 1937 elections to 'wreck it from within'",
+              "strategy": "Fight elections, expose limitations, prepare masses"
+            }
+          },
+          {
+            "id": "positives",
+            "label": "Positive Aspects",
+            "details": {
+              "points": ["Provincial autonomy real gain", "Experience in governance", "Largest electorate till then", "Basis for future Constitution", "Abolished dyarchy"]
+            }
+          },
+          {
+            "id": "negatives",
+            "label": "Negative Aspects",
+            "details": {
+              "points": ["No responsible government at center", "Governor's special powers", "Federation failed", "Communal electorates", "British retained key subjects", "Not based on Indian consent"]
+            }
+          }
+        ]
+      }
+    ],
+    "examTips": {
+      "critical": "**Longest British Act** (321 sections, 10 schedules); Provincial Autonomy started; Federation never implemented; Dyarchy abolished; Burma separated",
+      "dates": "Passed: 1935; Implemented: 1937 (provincial autonomy); Federation: Never",
+      "compare": "GOI Act 1919 (Dyarchy) vs 1935 (Provincial Autonomy); 1935 basis for Indian Constitution"
+    }
+  }
+}
+

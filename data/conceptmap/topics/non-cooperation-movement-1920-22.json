@@ -1,0 +1,626 @@
+{
+  "id": "non-cooperation-movement-1920-22",
+  "subject": "history",
+  "title": "Non-Cooperation-Khilafat Movement (1920-1922)",
+  "description": "Gandhi's first all-India mass movement; peak of Hindu-Muslim unity",
+  "visualType": "timeline",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["khilafat-movement", "rowlatt-jallianwala-timeline", "gandhi-early-satyagrahas"],
+    "tags": ["Non-Cooperation", "1920-1922", "Gandhi", "mass-movement", "Chauri-Chaura"]
+  },
+  "data": {
+    "startYear": 1920,
+    "endYear": 1922,
+    "legend": [
+      { "type": "planning", "label": "Planning & Launch" },
+      { "type": "peak", "label": "Peak Movement" },
+      { "type": "suspension", "label": "Suspension & Aftermath" }
+    ],
+    "phases": [
+      {
+        "id": "preparation",
+        "name": "Preparation & Launch",
+        "period": "March - December 1920",
+        "description": "From Khilafat delegation failure to formal launch"
+      },
+      {
+        "id": "movement-peak",
+        "name": "Movement at Peak",
+        "period": "January 1921 - January 1922",
+        "description": "Mass participation; boycotts and hartals across India"
+      },
+      {
+        "id": "suspension",
+        "name": "Suspension & Aftermath",
+        "period": "February 1922 onwards",
+        "description": "Chauri Chaura and Gandhi's decision to call off"
+      }
+    ],
+    "events": [
+      {
+        "id": "gandhi-proposes",
+        "year": "Mar 1920",
+        "title": "Gandhi Proposes Non-Cooperation",
+        "description": "After Khilafat delegation failure, Gandhi advocates non-cooperation",
+        "type": "planning",
+        "phase": "preparation",
+        "icon": "💡",
+        "details": {
+          "context": [
+            "Khilafat delegation to England returned empty-handed (March 1920)",
+            "Hunter Committee report on Jallianwala Bagh unsatisfactory",
+            "Constitutional methods exhausted",
+            "Time for stronger action"
+          ],
+          "gandhiProposal": [
+            "Proposed non-violent non-cooperation with British government",
+            "Until three wrongs redressed: Khilafat wrong, Punjab wrong, Swaraj",
+            "Peaceful boycott of British institutions, goods, titles, services",
+            "Mass civil disobedience"
+          ]
+        }
+      },
+      {
+        "id": "calcutta-session",
+        "year": "Sep 4-9, 1920",
+        "title": "Calcutta Special Congress Session",
+        "description": "Congress approves Non-Cooperation; some opposition",
+        "type": "planning",
+        "phase": "preparation",
+        "icon": "🏛️",
+        "details": {
+          "venue": "Calcutta (now Kolkata)",
+          "president": "Lala Lajpat Rai (special session)",
+          "resolution": [
+            "Congress approved Gandhi's Non-Cooperation resolution",
+            "Aims: Redress of Khilafat and Punjab wrongs; attainment of Swaraj",
+            "Methods: Boycott of legislatures, courts, schools, foreign cloth, titles",
+            "Progressive stages of non-cooperation outlined"
+          ],
+          "opposition": [
+            "C.R. Das, Motilal Nehru initially opposed (later became supporters)",
+            "Feared loss of contact with masses if boycotted councils",
+            "Worried about violence",
+            "Some moderates walked out"
+          ],
+          "gandhiPromise": "'Swaraj in one year' if program followed sincerely"
+        },
+        "tags": ["Congress", "resolution"]
+      },
+      {
+        "id": "tilak-death",
+        "year": "Aug 1, 1920",
+        "title": "Death of Bal Gangadhar Tilak",
+        "description": "Tilak's death removes potential opposition to Gandhi",
+        "type": "planning",
+        "phase": "preparation",
+        "icon": "💔",
+        "details": {
+          "impact": [
+            "Tilak died August 1, 1920 (aged 64)",
+            "Biggest mass leader before Gandhi",
+            "Had reservations about non-cooperation method",
+            "His death left vacuum; Gandhi became undisputed leader",
+            "Tilak's followers eventually joined Gandhi",
+            "Symbolically ended extremist era; Gandhi era began"
+          ],
+          "funeral": "Largest funeral procession till then; 200,000+ attended"
+        }
+      },
+      {
+        "id": "nagpur-session",
+        "year": "Dec 26-31, 1920",
+        "title": "Nagpur Congress Session - Official Launch",
+        "description": "Non-Cooperation Movement formally launched",
+        "type": "planning",
+        "phase": "preparation",
+        "icon": "🚀",
+        "details": {
+          "venue": "Nagpur",
+          "president": "C. Vijayaraghavachariar (but Gandhi dominated)",
+          "decisions": [
+            "Confirmed Calcutta resolution",
+            "Non-Cooperation Movement officially launched",
+            "Congress goal changed from 'self-government within British Empire' to 'Swaraj' (complete self-rule)",
+            "Congress constitution changed",
+            "Membership fee reduced to 4 annas (to enable poor to join)",
+            "Provincial Congress Committees (PCCs) organized on linguistic basis",
+            "Working Committee of 15 members created"
+          ],
+          "opposition": [
+            "Moderates like Jinnah, C.Y. Chintamani opposed",
+            "Many left Congress",
+            "But vast majority supported Gandhi"
+          ],
+          "significance": "Transformed Congress from elite body to mass organization; Gandhi's leadership established"
+        },
+        "tags": ["Congress", "launch", "Nagpur"]
+      },
+      {
+        "id": "program-stages",
+        "year": "Jan 1921",
+        "title": "Non-Cooperation Program Stages",
+        "description": "Progressive stages of non-cooperation outlined",
+        "type": "peak",
+        "phase": "movement-peak",
+        "icon": "📋",
+        "details": {
+          "firstStage": {
+            "title": "First Stage (Immediate)",
+            "actions": [
+              "Surrender of titles, honors, honorary posts",
+              "Boycott of official functions and durbars",
+              "Withdrawal from nominated seats in local bodies",
+              "Refusal to attend government levees, parties"
+            ]
+          },
+          "secondStage": {
+            "title": "Second Stage",
+            "actions": [
+              "Boycott of legislative councils (Central and Provincial)",
+              "Boycott of law courts by lawyers and litigants",
+              "Boycott of government schools and colleges",
+              "Boycott of foreign cloth and goods; bonfire of foreign cloth"
+            ]
+          },
+          "thirdStage": {
+            "title": "Third Stage (if needed)",
+            "actions": [
+              "Mass civil disobedience including tax refusal",
+              "Resignation from government service (police, military, civil service)",
+              "Only if non-violence maintained"
+            ]
+          },
+          "constructiveProgram": {
+            "title": "Constructive Program (Parallel)",
+            "activities": [
+              "Promotion of hand-spinning (charkha) and khadi",
+              "National schools and colleges",
+              "Panchayat courts (arbitration)",
+              "Hindu-Muslim unity",
+              "Removal of untouchability",
+              "Prohibition (anti-liquor)"
+            ]
+          }
+        }
+      },
+      {
+        "id": "title-surrender",
+        "year": "Jan-Feb 1921",
+        "title": "Mass Surrender of Titles and Honors",
+        "description": "Hundreds surrender British titles as protest",
+        "type": "peak",
+        "phase": "movement-peak",
+        "icon": "🏅",
+        "details": {
+          "prominent": [
+            "Rabindranath Tagore (already renounced knighthood 1919)",
+            "Jamna Lal Bajaj surrendered 'Rai Bahadur'",
+            "Many 'Khan Bahadurs', 'Rai Bahadurs', 'Rao Bahadurs' returned",
+            "Lawyers gave up practice",
+            "Government servants resigned"
+          ],
+          "impact": "Symbolic rejection of British honors; showed determination"
+        }
+      },
+      {
+        "id": "prince-of-wales-boycott",
+        "year": "Nov 17, 1921",
+        "title": "Boycott of Prince of Wales Visit",
+        "description": "Hartals and boycott during royal visit; some violence",
+        "type": "peak",
+        "phase": "movement-peak",
+        "icon": "👑",
+        "details": {
+          "visit": [
+            "Prince of Wales (future King Edward VIII) visited India",
+            "Arrived Bombay on November 17, 1921",
+            "Congress called for complete boycott (hartal, black flags)",
+            "Massive boycott observed across India",
+            "Empty streets during royal processions"
+          ],
+          "bombayRiots": [
+            "Violence broke out in Bombay",
+            "Communal riots between Hindus and Muslims",
+            "Parsis and Europeans attacked",
+            "Gandhi fasted for 5 days as penance",
+            "Revealed fragility of Hindu-Muslim unity"
+          ],
+          "significance": "Successful boycott but violence worried Gandhi"
+        }
+      },
+      {
+        "id": "student-response",
+        "year": "1921",
+        "title": "Students Boycott Schools & Colleges",
+        "description": "Thousands leave educational institutions",
+        "type": "peak",
+        "phase": "movement-peak",
+        "icon": "🎓",
+        "details": {
+          "scale": [
+            "Thousands of students left government schools and colleges",
+            "Some institutions saw 50-90% students leaving",
+            "Teachers also resigned in many cases"
+          ],
+          "nationalInstitutions": [
+            "National schools and colleges established as alternative",
+            "Gujarat Vidyapith (Ahmedabad) - founded by Gandhi",
+            "Kashi Vidyapeeth (Varanasi) - Madan Mohan Malaviya",
+            "Jamia Millia Islamia (Aligarh, later Delhi)",
+            "Bihar Vidyapeeth",
+            "Bengal National College expanded",
+            "Taught in vernacular languages; nationalist curriculum"
+          ],
+          "challenges": [
+            "Lack of funds for national institutions",
+            "No recognized degrees",
+            "Parents worried about children's careers",
+            "Many students returned to government schools after movement ended"
+          ]
+        }
+      },
+      {
+        "id": "lawyers-boycott",
+        "year": "1921",
+        "title": "Lawyers Boycott Courts",
+        "description": "Prominent lawyers give up lucrative practice",
+        "type": "peak",
+        "phase": "movement-peak",
+        "icon": "⚖️",
+        "details": {
+          "prominentLawyers": [
+            "C.R. Das (earning Rs 25,000/month, highest in Bengal)",
+            "Motilal Nehru (earning Rs 1,00,000/year, highest in UP)",
+            "Rajendra Prasad",
+            "C. Rajagopalachari",
+            "Vallabhbhai Patel",
+            "T. Prakasam",
+            "M.R. Jayakar"
+          ],
+          "sacrifice": "Gave up highly lucrative practices; immense personal sacrifice",
+          "alternative": "Panchayat courts and arbitration committees set up but not very successful",
+          "impact": "Showed dedication; but most lawyers eventually returned to practice"
+        }
+      },
+      {
+        "id": "foreign-cloth-boycott",
+        "year": "1921",
+        "title": "Boycott & Bonfire of Foreign Cloth",
+        "description": "Massive campaign against foreign cloth; charkha promoted",
+        "type": "peak",
+        "phase": "movement-peak",
+        "icon": "🔥",
+        "details": {
+          "boycott": [
+            "Public bonfires of foreign cloth across India",
+            "Picketing of shops selling foreign cloth",
+            "Imports of British cloth dropped dramatically (48% decline 1920-22)",
+            "Foreign cloth worth crores burned",
+            "Gandhi himself toured with charkha"
+          ],
+          "khadi": [
+            "Hand-spinning (charkha) and hand-weaving promoted",
+            "Khadi (hand-spun cloth) became symbol of swadeshi and self-reliance",
+            "Spinningwheel became Congress symbol",
+            "Gandhi wore only loincloth and shawl (from 1921) - symbol of poverty identification",
+            "All Congress members required to spin daily",
+            "Khadi uniforms for Congress workers"
+          ],
+          "economic": [
+            "Benefited Indian handloom weavers and spinners",
+            "Created employment for millions",
+            "Hurt British textile industry significantly",
+            "Lancashire mills protested to British government"
+          ],
+          "symbolism": "Charkha and khadi became symbols of self-reliance, nationalism, identification with poor"
+        }
+      },
+      {
+        "id": "council-boycott",
+        "year": "Nov 1920 onwards",
+        "title": "Boycott of Legislative Councils",
+        "description": "Elections boycotted; elected representatives resigned",
+        "type": "peak",
+        "phase": "movement-peak",
+        "icon": "🏛️",
+        "details": {
+          "elections1920": [
+            "Elections to provincial and central councils held under GOI Act 1919",
+            "Congress called for boycott",
+            "Boycott partially successful",
+            "In some provinces (Bengal, Bombay, Madras) 60-70% boycott",
+            "In Punjab almost complete boycott",
+            "In UP and CP moderate"
+          ],
+          "impact": [
+            "Dyarchy couldn't function properly with empty councils",
+            "Those elected (mainly moderates and loyalists) had limited legitimacy",
+            "Showed mass support for Gandhi over moderates",
+            "British reforms undermined"
+          ],
+          "laterDevelopment": "After movement ended, Congress participated in 1923 elections (Swaraj Party formed)"
+        }
+      },
+      {
+        "id": "massParticipation",
+        "year": "1921",
+        "title": "Unprecedented Mass Participation",
+        "description": "All sections of society joined movement",
+        "type": "peak",
+        "phase": "movement-peak",
+        "icon": "👥",
+        "details": {
+          "breadth": [
+            "First truly mass movement in Indian history",
+            "Middle class (lawyers, teachers, students) joined",
+            "Merchants and traders supported boycott",
+            "Peasants participated in many areas",
+            "Workers went on strikes",
+            "Women came out in large numbers for first time",
+            "Muslims and Hindus united"
+          ],
+          "volunteers": [
+            "Thousands became full-time Congress volunteers",
+            "Gave up jobs and studies",
+            "Wore khadi uniform",
+            "Organized boycotts and picketing",
+            "Women's volunteer corps formed"
+          ],
+          "scale": [
+            "Congress membership: 1,00,000 in 1920 → 20,00,000 in 1921",
+            "Tilak Swaraj Fund: Rs 1 crore collected in few months",
+            "Thousands jailed willingly",
+            "Millions participated in hartals and processions"
+          ]
+        }
+      },
+      {
+        "id": "repression",
+        "year": "1921-22",
+        "title": "Government Repression Intensifies",
+        "description": "Mass arrests; leaders imprisoned",
+        "type": "peak",
+        "phase": "movement-peak",
+        "icon": "⛓️",
+        "details": {
+          "arrests": [
+            "30,000+ people arrested and imprisoned",
+            "Prominent leaders jailed: Ali Brothers (Sep 1921), C.R. Das, Lajpat Rai",
+            "Volunteers courted arrest willingly",
+            "Jails overcrowded; makeshift prisons created",
+            "Many convicted under sedition laws"
+          ],
+          "repressiveMeasures": [
+            "Public meetings banned",
+            "Newspapers suppressed",
+            "Volunteer organizations declared illegal",
+            "Heavy fines on towns and villages",
+            "Police brutality increased"
+          ],
+          "gandhiStillFree": "Gandhi not arrested yet; government feared making him martyr would escalate movement"
+        }
+      },
+      {
+        "id": "bardoli-resolution",
+        "year": "Feb 1, 1922",
+        "title": "Bardoli Resolution - Civil Disobedience Planned",
+        "description": "Gandhi plans mass civil disobedience in Bardoli, Gujarat",
+        "type": "peak",
+        "phase": "movement-peak",
+        "icon": "📜",
+        "details": {
+          "decision": [
+            "All-India Congress Committee met at Bardoli (Gujarat)",
+            "Decided to launch mass civil disobedience",
+            "Starting from Bardoli taluk (district)",
+            "Would spread if successful",
+            "Gandhi issued ultimatum to Viceroy",
+            "Tax refusal and complete non-cooperation planned"
+          ],
+          "conditions": [
+            "Non-violence must be strictly observed",
+            "Political prisoners to be released",
+            "Freedom of press",
+            "Allow peaceful picketing"
+          ],
+          "timing": "Civil disobedience to start within 7 days if demands not met",
+          "confidence": "Movement at peak; success seemed near; 'Swaraj' appeared within reach"
+        },
+        "tags": ["Bardoli", "Civil Disobedience"]
+      },
+      {
+        "id": "chauri-chaura",
+        "year": "Feb 4, 1922",
+        "title": "CHAURI CHAURA INCIDENT",
+        "description": "Violent mob kills 22 policemen; Gandhi shocked",
+        "type": "suspension",
+        "phase": "suspension",
+        "icon": "🔥",
+        "details": {
+          "place": "Chauri Chaura, Gorakhpur district, United Provinces (UP)",
+          "incident": [
+            "Volunteers procession passing through town",
+            "Police tried to disperse; opened fire",
+            "Some volunteers killed",
+            "Angry mob retaliated",
+            "Attacked police station",
+            "Set fire to police station",
+            "22 policemen burned alive inside",
+            "Brutal violence; mob fury"
+          ],
+          "gandhiReaction": [
+            "Gandhi was in Bardoli planning mass civil disobedience",
+            "Received news on February 5",
+            "Deeply shocked and 'sick at heart'",
+            "Felt responsible for violence",
+            "Called violence 'a breach of ahimsa'",
+            "Believed people not ready for mass civil disobedience",
+            "Decided to suspend entire movement"
+          ]
+        },
+        "tags": ["Chauri Chaura", "violence", "turning point"]
+      },
+      {
+        "id": "movement-suspended",
+        "year": "Feb 12, 1922",
+        "title": "Non-Cooperation Movement Suspended",
+        "description": "Gandhi calls off entire movement; leaders shocked",
+        "type": "suspension",
+        "phase": "suspension",
+        "icon": "🛑",
+        "details": {
+          "decision": [
+            "Congress Working Committee met at Bardoli (Feb 11-12)",
+            "Gandhi insisted on suspending movement",
+            "Entire Non-Cooperation Movement called off",
+            "Civil disobedience postponed indefinitely",
+            "Mass campaign stopped"
+          ],
+          "reaction": [
+            "Congress leaders shocked and disappointed",
+            "Felt movement at peak; shouldn't stop",
+            "Jawaharlal Nehru, Subhash Bose, C.R. Das deeply upset",
+            "Felt one local incident shouldn't derail nationwide movement",
+            "Felt Gandhi abandoned struggle at crucial moment",
+            "But Gandhi adamant: non-violence non-negotiable"
+          ],
+          "gandhiLogic": [
+            "'Chauri Chaura crime was deliberate'",
+            "'People not trained in non-violence'",
+            "'I must await better atmosphere'",
+            "'Better to suspend movement than allow it to become violent'",
+            "'My Himalayan blunder' (similar to 1919)"
+          ]
+        }
+      },
+      {
+        "id": "gandhi-arrested",
+        "year": "Mar 10, 1922",
+        "title": "Gandhi Arrested",
+        "description": "After suspending movement, Gandhi arrested for sedition",
+        "type": "suspension",
+        "phase": "suspension",
+        "icon": "⛓️",
+        "details": {
+          "arrest": [
+            "Arrested March 10, 1922, at Sabarmati Ashram",
+            "Charged with sedition (for writings in 'Young India' magazine)",
+            "Trial at Ahmedabad"
+          ],
+          "trial": [
+            "Famous trial (March 18, 1922)",
+            "Gandhi pleaded guilty",
+            "Gave historic speech: 'Non-cooperation with evil is as much a duty as cooperation with good'",
+            "Called British rule 'satanic'",
+            "Judge: C.N. Broomfield (appreciated Gandhi but had to convict)",
+            "Sentenced to 6 years imprisonment"
+          ],
+          "quote": "Gandhi's statement: 'I am here to invite and submit cheerfully to the highest penalty that can be inflicted upon me for what in law is a deliberate crime and what appears to me to be the highest duty of a citizen'"
+        },
+        "tags": ["Gandhi", "arrest", "trial", "sedition"]
+      },
+      {
+        "id": "gandhi-released",
+        "year": "Feb 5, 1924",
+        "title": "Gandhi Released (Health Grounds)",
+        "description": "Released after appendicitis operation; served only 2 years",
+        "type": "suspension",
+        "phase": "suspension",
+        "icon": "🏥",
+        "details": {
+          "imprisonment": [
+            "Imprisoned at Yerawada Jail, Pune",
+            "Developed appendicitis (Jan 1924)",
+            "Operated in jail; health critical",
+            "Released February 5, 1924 (on health grounds)",
+            "Served only 2 out of 6 years"
+          ],
+          "aftermath": [
+            "By time of release, political situation changed",
+            "Hindu-Muslim unity broken",
+            "Communal riots frequent",
+            "Khilafat issue dead (Turkey abolished Caliphate March 1924)",
+            "Congress divided over council entry",
+            "Movement momentum lost completely"
+          ]
+        }
+      }
+    ],
+    "assessment": {
+      "title": "Assessment of Non-Cooperation Movement",
+      "achievements": [
+        "First all-India mass movement; millions participated",
+        "Demonstrated power of non-violent mass resistance",
+        "Transformed Congress from elite club to mass organization",
+        "Peak of Hindu-Muslim unity (never repeated)",
+        "British imports declined drastically (48% drop in cloth)",
+        "Dyarchy undermined through council boycott",
+        "Trained generation in political action",
+        "Khadi and charkha became symbols of nationalism",
+        "Women participated in large numbers for first time",
+        "Showed British rule rested on Indian cooperation; withdrawal could paralyze system",
+        "Made Swaraj a mass demand"
+      ],
+      "limitations": [
+        "Did not achieve Swaraj (Gandhi's promise failed)",
+        "Suspended suddenly; left masses confused",
+        "Violence occurred despite non-violence emphasis",
+        "Constructive program (national schools, etc.) couldn't sustain",
+        "Lawyers, students mostly returned to old careers",
+        "No economic program for peasants/workers",
+        "Primarily middle-class movement; limited peasant participation"
+      ],
+      "chauri_chaura_controversy": {
+        "gandhiDefense": [
+          "Non-violence was fundamental principle, not tactic",
+          "Movement becoming violent; had to stop",
+          "Better to suspend than let it degenerate",
+          "Moral authority came from non-violence; violence would delegitimize"
+        ],
+        "critics": [
+          "One local incident shouldn't derail nationwide movement",
+          "Movement at peak; victory within reach",
+          "Gandhi's personal morality imposed on political movement",
+          "Betrayed those who sacrificed (jailed, lost careers)",
+          "British relieved; got breathing space"
+        ]
+      },
+      "aftermath": [
+        "Congress split over future strategy",
+        "Swaraj Party formed (1923) for council entry",
+        "No-changers wanted to continue boycott",
+        "Hindu-Muslim unity collapsed rapidly",
+        "Communal riots from 1923 onwards",
+        "Next major movement only in 1930 (Civil Disobedience)"
+      ],
+      "significance": [
+        "Proved mass non-violent resistance possible",
+        "Made Gandhi undisputed leader",
+        "Showed British vulnerability",
+        "Trained millions in political action",
+        "Despite suspension, permanently changed Indian politics",
+        "British realized they ruled on sufferance",
+        "Path to independence became clearer"
+      ]
+    },
+    "examTips": {
+      "mustRemember": [
+        "Non-Cooperation Movement: 1920-1922",
+        "Launched officially: Nagpur Congress (December 1920)",
+        "Three aims: Khilafat wrong, Punjab wrong, Swaraj",
+        "Methods: Boycott of councils, courts, schools, foreign cloth, titles",
+        "Constructive: Khadi, national schools, Hindu-Muslim unity",
+        "Peak Hindu-Muslim unity; Ali Brothers and Gandhi together",
+        "Chauri Chaura incident: February 4, 1922 (22 policemen killed)",
+        "Gandhi suspended movement: February 12, 1922",
+        "Gandhi arrested: March 10, 1922; sentenced 6 years",
+        "Released: February 5, 1924 (health grounds); served 2 years",
+        "First mass movement; millions participated; transformed Congress",
+        "Khadi and charkha became symbols"
+      ]
+    }
+  }
+}
+

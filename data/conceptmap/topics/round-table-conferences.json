@@ -1,0 +1,84 @@
+{
+  "id": "round-table-conferences",
+  "subject": "history",
+  "title": "Round Table Conferences (1930-1932)",
+  "description": "Three conferences in London; Gandhi attended second; all failed",
+  "visualType": "table",
+  "metadata": {
+    "examRelevance": "high",
+    "relatedTopics": ["civil-disobedience-movement-1930-34", "gandhi-irwin-pact"],
+    "tags": ["Round-Table-Conference", "1930-1932", "London"]
+  },
+  "data": {
+    "columns": [
+      {"key": "aspect", "label": "Aspect", "width": "15%"},
+      {"key": "first", "label": "FIRST RTC (Nov 1930 - Jan 1931)", "width": "28%"},
+      {"key": "second", "label": "SECOND RTC (Sep - Dec 1931)", "width": "28%"},
+      {"key": "third", "label": "THIRD RTC (Nov - Dec 1932)", "width": "29%"}
+    ],
+    "rows": [
+      {
+        "id": "dates",
+        "aspect": "📅 DATES",
+        "first": "November 12, 1930 - January 19, 1931",
+        "second": "September 7 - December 1, 1931",
+        "third": "November 17 - December 24, 1932"
+      },
+      {
+        "id": "context",
+        "aspect": "📋 CONTEXT",
+        "first": "CDM at peak; Gandhi in jail; British wanted negotiations without Congress",
+        "second": "After Gandhi-Irwin Pact; CDM suspended; Gandhi released to attend",
+        "third": "After second phase CDM; Gandhi in jail; Congress not interested"
+      },
+      {
+        "id": "congress",
+        "aspect": "🇮🇳 CONGRESS",
+        "first": "**BOYCOTTED**\n\nGandhi & Congress leaders in jail; refused to participate",
+        "second": "**PARTICIPATED**\n\nGandhi sole representative of Congress\n\nWore loincloth; stayed in poor area of London",
+        "third": "**BOYCOTTED**\n\nCongress leaders in jail; no participation"
+      },
+      {
+        "id": "participants",
+        "aspect": "👥 INDIAN PARTICIPANTS",
+        "first": "**89 delegates:**\n• Princes\n• Muslim League\n• Liberals\n• Hindu Mahasabha\n• Depressed Classes (Ambedkar)\n• Sikhs, Christians, etc.\n\nNO Congress = NO legitimacy",
+        "second": "GANDHI alone for Congress\n\n+ Same others as First RTC\n\nGandhi claimed to represent all of India; others disputed",
+        "third": "Few delegates; mostly loyalists and princes\n\nVery poorly attended; no major leaders"
+      },
+      {
+        "id": "issues",
+        "aspect": "🎯 MAIN ISSUES",
+        "first": "• Federal structure\n• Princely states integration\n• Minorities protection\n• Defence & finance control\n\nNo agreement reached",
+        "second": "• Minorities (separate electorates)\n• Powers to provinces vs center\n• Transfer of power timeline\n• Defence control\n\nDeadlock on all issues",
+        "third": "• Communal Award (already announced)\n• Federal structure details\n\nNo substantive discussions"
+      },
+      {
+        "id": "outcome",
+        "aspect": "✅ OUTCOME",
+        "first": "**TOTAL FAILURE**\n\n• No Congress = no credibility\n• Participants disagreed on everything\n• British refused real power transfer\n• Adjourned inconclusively",
+        "second": "**FAILURE**\n\n• Gandhi couldn't get agreement on minorities\n• British refused dominion status\n• Muslims insisted on separate electorates\n• Gandhi refused\n• Returned empty-handed",
+        "third": "**COMPLETE FAILURE**\n\n• Barely discussed anything\n• Congress absent\n• Communal Award imposed\n• British proceeded with GOI Act 1935 unilaterally"
+      },
+      {
+        "id": "significance",
+        "aspect": "⭐ SIGNIFICANCE",
+        "first": "Exposed British tactics: divide Indians, avoid Congress, maintain control",
+        "second": "Gandhi's presence gave international attention; but failed to achieve anything; CDM resumed",
+        "third": "Showed RTCs meaningless; British would impose reforms anyway; led to GOI Act 1935"
+      }
+    ],
+    "additionalInfo": {
+      "gandhiQuotes": {
+        "title": "Gandhi at Second RTC",
+        "arrival": "Arrived in simple dress; met mill workers in Lancashire (British textile workers hurt by boycott)",
+        "quote1": "'I am here as sole representative of Indian National Congress which represents India'",
+        "quote2": "When asked if he had enough clothing meeting King: 'King has enough for both of us'",
+        "meetings": "Met PM, Churchill (who hated him), Labour leaders, common people"
+      },
+      "communalAward": "PM Ramsay MacDonald announced Communal Award (Aug 1932) giving separate electorates to Muslims, Sikhs, Depressed Classes, etc. - Gandhi opposed strenuously",
+      "result": "All three conferences failed → British imposed Government of India Act 1935 without Indian consensus",
+      "examTip": "Remember: 1st-No Congress; 2nd-Gandhi alone; 3rd-No one important. All failed. Led to GOI Act 1935"
+    }
+  }
+}
+

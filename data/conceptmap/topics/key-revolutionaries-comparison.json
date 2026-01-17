@@ -1,0 +1,178 @@
+{
+  "id": "key-revolutionaries-comparison",
+  "subject": "history",
+  "title": "Key Revolutionaries (1908-1917) - Comparative Analysis",
+  "description": "Detailed comparison of major revolutionary leaders and their contributions",
+  "visualType": "table",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["revolutionary-movements-1908-1917", "revolutionary-timeline-1908-1917"],
+    "tags": ["revolutionaries", "leaders", "comparison", "martyrs"]
+  },
+  "data": {
+    "columns": [
+      { "key": "name", "label": "Revolutionary", "width": "15%" },
+      { "key": "region", "label": "Region & Organization", "width": "18%" },
+      { "key": "contribution", "label": "Key Contributions & Activities", "width": "27%" },
+      { "key": "incident", "label": "Major Incident/Role", "width": "22%" },
+      { "key": "fate", "label": "Fate & Legacy", "width": "18%" }
+    ],
+    "rows": [
+      {
+        "id": "khudiram-bose",
+        "name": "🔥 KHUDIRAM BOSE",
+        "region": "Bengal\n\nAnushilan Samiti",
+        "contribution": "• Youngest revolutionary martyr (18 years)\n• Attempted assassination of Magistrate Kingsford\n• Symbol of youthful sacrifice\n• Inspired entire generation",
+        "incident": "Muzaffarpur Bomb Case (April 30, 1908)\n\n• Target: Magistrate Kingsford\n• Bomb killed two British ladies by mistake\n• Partner Prafulla Chaki committed suicide\n• Khudiram caught, showed no remorse",
+        "fate": "Hanged: August 11, 1908 (aged 18)\n\nLegacy:\n• Became instant folk hero\n• Songs written about him\n• 'Khudiram Bose Balidan Diwas'\n• Inspired youth across India\n• Youngest martyr of revolution"
+      },
+      {
+        "id": "aurobindo-ghosh",
+        "name": "🕉️ AUROBINDO GHOSH",
+        "region": "Bengal\n\nJugantar (Editor)\n\nAnushilan Samiti",
+        "contribution": "• Intellectual leader of revolutionary movement\n• Editor of revolutionary newspaper Jugantar\n• Advocated complete independence\n• Wrote revolutionary articles\n• Inspired youth through writings\n• Later became spiritual leader",
+        "incident": "Alipore Bomb Conspiracy Case (1908-09)\n\n• Chief accused (34 total)\n• British wanted to convict him as mastermind\n• Defended brilliantly by C.R. Das\n• Gave no evidence; maintained silence\n• Approver Naren Goswami failed to implicate him convincingly",
+        "fate": "Acquitted: May 1909\n\nAfter:\n• Left politics (1910)\n• Went to Pondicherry\n• Became spiritual guru\n• Founded Sri Aurobindo Ashram\n• Shifted from revolutionary to spiritual nationalism"
+      },
+      {
+        "id": "barindra-ghosh",
+        "name": "⚔️ BARINDRA KUMAR GHOSH",
+        "region": "Bengal\n\nJugantar (Founder)\n\nAnushilan Samiti",
+        "contribution": "• Aurobindo's younger brother\n• Founded Jugantar newspaper\n• Ran bomb-making factory at Maniktala Garden\n• Trained revolutionaries\n• Active organizer and operative leader",
+        "incident": "Alipore Bomb Conspiracy Case\n\n• Main operative accused\n• Evidence found at Maniktala bomb factory\n• Convicted as mastermind of operations\n• Sentenced to death initially",
+        "fate": "Death sentence commuted to life\n\nTransported to Andaman\n\nReleased: 1920\n\nAfter:\n• Gave up revolutionary path\n• Became writer and journalist\n• Wrote books on nationalism"
+      },
+      {
+        "id": "madan-lal-dhingra",
+        "name": "💪 MADAN LAL DHINGRA",
+        "region": "Punjab → London\n\nIndia House",
+        "contribution": "• Took revolutionary violence to Britain\n• Member of India House, London\n• Inspired by Savarkar\n• Showed Indians willing to die for freedom\n• Defiant till end",
+        "incident": "Murder of Curzon Wyllie (July 1, 1909)\n\n• Location: Imperial Institute Hall, London\n• Shot Sir William Curzon Wyllie (5 bullets)\n• Also killed Dr. Cawas Lalcaca\n• Made no attempt to escape\n• Refused to apologize in court",
+        "fate": "Hanged: August 17, 1909 (Pentonville Prison, London)\n\nFamous Statement:\n• 'I believe only lesson required in India is to learn to die'\n• 'I am proud to die for my country'\n\nLegacy: Martyr who shocked British establishment"
+      },
+      {
+        "id": "vd-savarkar",
+        "name": "📚 VINAYAK DAMODAR SAVARKAR",
+        "region": "Maharashtra\n\nAbhinav Bharat Society (Founder)",
+        "contribution": "• Most influential revolutionary ideologue\n• Founded Abhinav Bharat (1904)\n• Wrote 'The Indian War of Independence, 1857'\n• Trained revolutionaries in London (India House)\n• Openly advocated armed revolution\n• Hindu nationalist ideology",
+        "incident": "Nashik Conspiracy Case (1910)\n\n• Implicated in Jackson's murder\n• Arrested in London (March 1910)\n• Attempted dramatic escape in Marseilles\n• Swam to French shore but recaptured\n• International legal controversy",
+        "fate": "Sentenced: Two life terms (50 years total)\n\nTransported to Andaman Cellular Jail (Kalapani)\n\nReleased: 1921 (with restrictions till 1937)\n\nLater:\n• Became Hindu nationalist leader\n• Founded Hindu Mahasabha ideology\n• Controversial mercy petitions\n• Key figure in Hindu nationalism"
+      },
+      {
+        "id": "anant-kanhere",
+        "name": "🎯 ANANT LAXMAN KANHERE",
+        "region": "Maharashtra\n\nAbhinav Bharat",
+        "contribution": "• Young revolutionary inspired by Savarkar\n• Student revolutionary\n• Willing to sacrifice life\n• Acted alone without escape plan",
+        "incident": "Murder of Collector Jackson (Dec 21, 1909)\n\n• Location: Theatre in Nasik during play\n• Shot Collector Jackson who was harsh on Indians\n• Point-blank range, no escape attempt\n• Calmly surrendered",
+        "fate": "Hanged: April 19, 1910 (aged 19)\n\nLegacy:\n• Martyr of Maharashtra revolutionary movement\n• His action led to Savarkar's arrest\n• Remembered for fearless sacrifice"
+      },
+      {
+        "id": "rash-behari-bose",
+        "name": "🎖️ RASH BEHARI BOSE",
+        "region": "Bengal → All India\n\nAnushilan Samiti, Ghadar links",
+        "contribution": "• Master conspirator and organizer\n• Planned Delhi Conspiracy (1912)\n• Coordinated Ghadar Uprising (1915)\n• Escaped British for years\n• Later founded INA in Japan",
+        "incident": "Delhi Conspiracy (Dec 23, 1912)\n\n• Bomb on Viceroy Hardinge's procession\n• Planned during Delhi Durbar\n• Viceroy seriously injured\n• Basanta Kumar Biswas threw bomb, caught\n• RB Bose escaped despite massive manhunt",
+        "fate": "Escaped to Japan (1915)\n\nLived in Japan till death (1945)\n\nLegacy:\n• Founded Indian Independence League\n• Organized INA in Japan\n• Handed INA to Subhash Bose (1943)\n• Bridge between revolutionary and INA movement"
+      },
+      {
+        "id": "basanta-biswas",
+        "name": "💥 BASANTA KUMAR BISWAS",
+        "region": "Bengal\n\nAnushilan Samiti",
+        "contribution": "• Executed Delhi Conspiracy\n• Brave operative who didn't betray colleagues\n• Maintained silence during torture",
+        "incident": "Delhi Conspiracy (Dec 23, 1912)\n\n• Threw bomb at Viceroy Hardinge\n• Attendant killed, Viceroy injured\n• Arrested after long hunt\n• Refused to name Rash Behari Bose despite torture",
+        "fate": "Hanged: May 1915\n\nLegacy:\n• Loyal revolutionary who protected colleagues\n• Suffered silently"
+      },
+      {
+        "id": "lala-hardayal",
+        "name": "🌍 LALA HAR DAYAL",
+        "region": "Punjab → USA, Germany\n\nGhadar Party (Founder)\nBerlin Committee",
+        "contribution": "• Brilliant intellectual (Oxford scholar)\n• Founded Ghadar Party (1913)\n• Published 'Ghadar' newspaper\n• Mobilized Indian diaspora in USA\n• Sought international support for revolution\n• Socialist ideology",
+        "incident": "Ghadar Movement (1913-1915)\n\n• Organized Ghadarites' return to India\n• Coordinated with revolutionaries in India\n• WWI seen as opportunity\n• US government arrested him (1914)\n• Escaped to Berlin, joined Berlin Committee",
+        "fate": "Escaped USA, went to Germany\n\nWorked with Berlin Committee\n\nDied: 1939, Philadelphia\n\nLegacy:\n• International face of Indian revolution\n• Connected overseas Indians to freedom struggle\n• Intellectual revolutionary"
+      },
+      {
+        "id": "sohan-singh-bhakna",
+        "name": "🚜 SOHAN SINGH BHAKNA",
+        "region": "Punjab → USA\n\nGhadar Party (President)",
+        "contribution": "• First President of Ghadar Party\n• Represented farmer-worker base\n• Mobilized Punjabi immigrants\n• Socialist leanings\n• Worked for farmers' rights",
+        "incident": "Ghadar Movement\n\n• Led organizational efforts\n• Returned to India with Ghadarites (1914)\n• Arrested in Punjab",
+        "fate": "Imprisoned in Lahore Conspiracy Case\n\nReleased: 1930\n\nAfter:\n• Joined left-wing movement\n• Worked for peasants and workers\n• Communist inclinations\n\nDied: 1968\n\nLegacy: Represented working-class revolutionary"
+      },
+      {
+        "id": "kartar-singh-sarabha",
+        "name": "🔥 KARTAR SINGH SARABHA",
+        "region": "Punjab → USA\n\nGhadar Party",
+        "contribution": "• Youngest Ghadar martyr (19 years)\n• Brilliant organizer and writer\n• Wrote for Ghadar newspaper\n• Inspired by 1857 Revolt\n• Returned to India for uprising",
+        "incident": "Ghadar Uprising Attempt (1915)\n\n• Returned from USA (1914)\n• Worked to incite mutiny in Punjab regiments\n• Arrested before uprising\n• Tried in Lahore Conspiracy Case",
+        "fate": "Hanged: November 16, 1915 (aged 19)\n\nLegacy:\n• Icon of Ghadar Movement\n• Bhagat Singh's idol (inspired him)\n• Youngest Ghadar martyr\n• Symbol of youth sacrifice"
+      },
+      {
+        "id": "maulana-mahmud-hasan",
+        "name": "☪️ MAULANA MAHMUD HASAN",
+        "region": "UP (Deoband) → Middle East\n\nDeobandi Scholar",
+        "contribution": "• Senior Islamic scholar involved in revolution\n• Sought Turkish Caliphate support\n• Planned Provisional Government at Kabul\n• Represented Muslim participation in revolution\n• Shaikhul Hind title",
+        "incident": "Silk Letter Conspiracy (1915-1916)\n\n• Planned Provisional Government (Kabul, 1915)\n• Leaders: Obaidullah Sindhi, Raja Mahendra Pratap\n• Sought Afghan-Turkish invasion of India\n• Messages on silk cloth\n• British intercepted letters",
+        "fate": "Arrested in Mecca (1916)\n\nImprisoned in Malta (1916-1920)\n\nReleased: 1920 (health broken)\n\nDied: 1920\n\nLegacy:\n• Showed Muslim ulema's anti-British stance\n• Influenced Ali Brothers and Khilafat leaders"
+      },
+      {
+        "id": "virendranath-chattopadhyaya",
+        "name": "🇩🇪 VIRENDRANATH CHATTOPADHYAYA",
+        "region": "Bengal → Germany\n\nBerlin Committee (Leader)",
+        "contribution": "• Sarojini Naidu's brother\n• Led Berlin Committee during WWI\n• Sought German support for revolution\n• Coordinated international revolutionary efforts\n• Communist ideology",
+        "incident": "Hindu-German Conspiracy (1914-1917)\n\n• Berlin Committee coordinated with Ghadar Party\n• Planned arms shipments to India\n• Worked with German government\n• Most plans failed\n• Continued revolutionary work from Europe",
+        "fate": "Remained in Europe\n\nJoined Communist International\n\nDisappeared in Stalin's purges (1937)\n\nPresumably executed in Soviet Union\n\nLegacy: International revolutionary; tragic end"
+      },
+      {
+        "id": "bhupendranath-dutta",
+        "name": "📖 BHUPENDRANATH DUTTA",
+        "region": "Bengal → International\n\nBerlin Committee, Jugantar",
+        "contribution": "• Swami Vivekananda's younger brother\n• Revolutionary and socialist thinker\n• Wrote for Jugantar newspaper\n• Member of Berlin Committee\n• Historian and scholar of socialism",
+        "incident": "Multiple revolutionary activities\n\n• Arrested in Barisal Conspiracy Case\n• Imprisoned several times\n• Worked with Berlin Committee during WWI\n• Continued revolutionary work from Europe",
+        "fate": "Imprisoned multiple times\n\nAfter:\n• Became Marxist scholar\n• Wrote extensively on Indian history and socialism\n• Joined Communist movement\n\nDied: 1961\n\nLegacy: Revolutionary who became intellectual"
+      },
+      {
+        "id": "jatin-das-bagha",
+        "name": "🐅 JATINDRANATH MUKHERJEE (BAGHA JATIN)",
+        "region": "Bengal\n\nJugantar, Anushilan Samiti",
+        "contribution": "• Called 'Bagha Jatin' (Tiger Jatin) for killing tiger bare-handed\n• Master organizer\n• Coordinated with Ghadar and German support\n• Planned armed uprising during WWI\n• Established revolutionary network",
+        "incident": "Balasore Conspiracy (September 1915)\n\n• Waiting for German arms shipment (never arrived)\n• Engaged in gun battle with British police at Balasore, Odisha\n• Fought bravely despite being outnumbered\n• Seriously wounded in firefight",
+        "fate": "Died: September 10, 1915 (from injuries)\n\nLegacy:\n• Legendary revolutionary hero\n• Combined physical prowess with organizational skills\n• 'Bagha Jatin' became synonym for bravery"
+      }
+    ],
+    "additionalInfo": {
+      "title": "Comparative Analysis",
+      "patterns": [
+        {
+          "aspect": "Age Profile",
+          "detail": "Mostly young (18-30 years); Khudiram (18), Sarabha (19), Kanhere (19) were teenagers"
+        },
+        {
+          "aspect": "Education",
+          "detail": "Highly educated elite; many had college education or studied abroad"
+        },
+        {
+          "aspect": "Geographic Distribution",
+          "detail": "Bengal most active, followed by Maharashtra and Punjab; some went international"
+        },
+        {
+          "aspect": "Ideology",
+          "detail": "Mix of nationalism, socialism, and religious revivalism; all wanted complete independence"
+        },
+        {
+          "aspect": "Methods",
+          "detail": "Assassinations, bomb attacks, armed dacoities; secret societies and underground networks"
+        },
+        {
+          "aspect": "Outcome",
+          "detail": "Many hanged as martyrs; some imprisoned in Andaman; few escaped abroad; movement crushed by 1917"
+        },
+        {
+          "aspect": "Legacy",
+          "detail": "Inspired next generation (Bhagat Singh, Chandrasekhar Azad); showed inadequacy of terrorism; many later revolutionaries joined Gandhi"
+        }
+      ],
+      "examTip": "Remember the trio for each region: Bengal (Khudiram, Aurobindo, RB Bose), Maharashtra (Savarkar, Kanhere), Punjab (Har Dayal, Bhakna, Sarabha)"
+    }
+  }
+}
+

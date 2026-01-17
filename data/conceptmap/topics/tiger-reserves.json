@@ -1,0 +1,161 @@
+{
+  "id": "tiger-reserves",
+  "subject": "geography",
+  "title": "Tiger Reserves in India",
+  "description": "Interactive map showing all tiger reserves across India organized by state",
+  "visualType": "map",
+  "mapType": "state-categorized",
+  "data": {
+    "center": [20.5937, 78.9629],
+    "zoom": 5,
+    "legend": {
+      "title": "Tiger Reserves",
+      "items": [
+        {
+          "label": "States with Tiger Reserves",
+          "color": "#F97316",
+          "description": "Click on orange states to see tiger reserves"
+        },
+        {
+          "label": "States without Tiger Reserves",
+          "color": "#E5E7EB",
+          "description": "Grey states do not have tiger reserves"
+        }
+      ]
+    },
+    "states": [
+      {
+        "id": "rajasthan",
+        "name": "Rajasthan",
+        "color": "#F97316",
+        "hasContent": true,
+        "items": [
+          {
+            "id": "mukandra-hills",
+            "name": "Mukandra Hills TR"
+          },
+          {
+            "id": "ramgarh-vishdhari",
+            "name": "Ramgarh Vishdhari TR"
+          },
+          {
+            "id": "ranthambore",
+            "name": "Ranthambore TR"
+          },
+          {
+            "id": "sariska",
+            "name": "Sariska TR"
+          },
+          {
+            "id": "dholpur-karauli",
+            "name": "Dholpur-Karauli TR"
+          }
+        ]
+      },
+      {
+        "id": "madhya-pradesh",
+        "name": "Madhya Pradesh",
+        "color": "#F97316",
+        "hasContent": true,
+        "items": [
+          {
+            "id": "bandhavgarh",
+            "name": "Bandhavgarh TR"
+          },
+          {
+            "id": "kanha",
+            "name": "Kanha TR"
+          },
+          {
+            "id": "panna",
+            "name": "Panna TR"
+          },
+          {
+            "id": "pench-mp",
+            "name": "Pench TR"
+          },
+          {
+            "id": "sanjay-dubri",
+            "name": "Sanjay-Dubri TR"
+          },
+          {
+            "id": "satpura",
+            "name": "Satpura TR"
+          },
+          {
+            "id": "veerangana-durgavati",
+            "name": "Veerangana Durgavati TR"
+          },
+          {
+            "id": "ratapani",
+            "name": "Ratapani TR"
+          },
+          {
+            "id": "madhav",
+            "name": "Madhav TR"
+          }
+        ]
+      },
+      {
+        "id": "karnataka",
+        "name": "Karnataka",
+        "color": "#F97316",
+        "hasContent": true,
+        "items": [
+          {
+            "id": "bandipur",
+            "name": "Bandipur TR"
+          },
+          {
+            "id": "bhadra",
+            "name": "Bhadra TR"
+          },
+          {
+            "id": "brt",
+            "name": "Biligiri Ranganatha Temple TR"
+          },
+          {
+            "id": "nagarahole",
+            "name": "Nagarahole TR"
+          },
+          {
+            "id": "kali",
+            "name": "Kali TR"
+          }
+        ]
+      },
+      {
+        "id": "uttarakhand",
+        "name": "Uttarakhand",
+        "color": "#F97316",
+        "hasContent": true,
+        "items": [
+          {
+            "id": "corbett",
+            "name": "Jim Corbett TR"
+          },
+          {
+            "id": "rajaji",
+            "name": "Rajaji TR"
+          }
+        ]
+      },
+      {
+        "id": "west-bengal",
+        "name": "West Bengal",
+        "color": "#F97316",
+        "hasContent": true,
+        "items": [
+          {
+            "id": "sundarbans",
+            "name": "Sundarbans TR"
+          },
+          {
+            "id": "buxa",
+            "name": "Buxa TR"
+          }
+        ]
+      }
+    ]
+  }
+}

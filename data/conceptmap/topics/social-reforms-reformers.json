@@ -1,0 +1,109 @@
+{
+  "id": "social-reforms-reformers",
+  "subject": "history",
+  "title": "Social Reform Movements & Reformers (19th-20th Century)",
+  "description": "Major social reform movements against sati, child marriage, caste, women's rights",
+  "visualType": "table",
+  "metadata": {
+    "examRelevance": "high",
+    "relatedTopics": ["events-1858-1885-overview"],
+    "tags": ["social-reforms", "reformers", "Brahmo-Samaj", "Arya-Samaj"]
+  },
+  "data": {
+    "columns": [
+      {"key": "movement", "label": "Movement/Organization", "width": "20%"},
+      {"key": "founder", "label": "Founder & Year", "width": "15%"},
+      {"key": "ideology", "label": "Ideology & Reforms", "width": "35%"},
+      {"key": "exam", "label": "Exam Key Points", "width": "30%"}
+    ],
+    "rows": [
+      {
+        "id": "brahmo",
+        "movement": "**BRAHMO SAMAJ**\n\n(Bengal)",
+        "founder": "Raja Ram Mohan Roy\n\n1828, Calcutta",
+        "ideology": "**Against**: Sati, polygamy, child marriage, caste system, idol worship\n\n**For**: Monotheism, women's education, widow remarriage\n\n**Philosophy**: Rational interpretation of Hinduism; influenced by Islam & Christianity",
+        "exam": "**Raja Ram Mohan Roy = Father of Indian Renaissance**\n\nSati abolished (1829)\n\nFirst major reform movement\n\nMonotheistic Hindu reform"
+      },
+      {
+        "id": "prarthana",
+        "movement": "**PRARTHANA SAMAJ**\n\n(Maharashtra)",
+        "founder": "Atmaram Pandurang\n\n1867, Bombay\n\n(M.G. Ranade later led)",
+        "ideology": "**Similar to Brahmo Samaj** but in Maharashtra\n\n**Against**: Caste system, child marriage, sati\n\n**For**: Women's education, widow remarriage, inter-caste marriage",
+        "exam": "Maharashtra's Brahmo Samaj\n\nM.G. Ranade prominent leader\n\nAge of Consent Act agitation"
+      },
+      {
+        "id": "arya",
+        "movement": "**ARYA SAMAJ**\n\n(North India)",
+        "founder": "Swami Dayananda Saraswati\n\n1875, Bombay (HQ: Lahore)",
+        "ideology": "**Slogan**: 'Back to Vedas'\n\n**Against**: Idol worship, caste by birth, child marriage, sati\n\n**For**: Vedic authority, women's education, Shuddhi (reconversion to Hinduism)\n\n**Methods**: Education (DAV schools), orphanages",
+        "exam": "**'Back to Vedas'**\n\nSwami Dayananda\n\nDAV College movement\n\nShuddhi Movement\n\nMore militant than Brahmo"
+      },
+      {
+        "id": "ramakrishna",
+        "movement": "**RAMAKRISHNA MISSION**",
+        "founder": "Swami Vivekananda\n\n1897\n\n(Guru: Ramakrishna Paramhansa)",
+        "ideology": "**Philosophy**: Vedanta; all religions are true\n\n**Work**: Education, healthcare, social service\n\n**Message**: Service to humanity = service to God\n\n**Emphasis**: Character building, practical Vedanta",
+        "exam": "**Vivekananda = Chicago Speech (1893)**\n\nPractical Vedanta\n\nSocial service focus\n\n'Arise, awake, stop not'"
+      },
+      {
+        "id": "aligarh",
+        "movement": "**ALIGARH MOVEMENT**\n\n(Muslim Reform)",
+        "founder": "Sir Syed Ahmad Khan\n\n1875-77\n\nMAO College → AMU",
+        "ideology": "**For Muslims**: Modern education essential\n\n**Pro-British**: Cooperation with British\n\n**Reform**: Purdah, polygamy reforms\n\n**Education**: Scientific & English education\n\n**Founded**: Mohammadan Anglo-Oriental (MAO) College, Aligarh (1875) → Aligarh Muslim University (AMU, 1920)",
+        "exam": "**Sir Syed Ahmad Khan**\n\nMAO College (1875)\n\nModern education for Muslims\n\nPro-British stance"
+      },
+      {
+        "id": "deoband",
+        "movement": "**DEOBAND MOVEMENT**\n\n(Muslim Orthodox)",
+        "founder": "Mohammad Qasim Nanotvi\n\nRashid Ahmad Gangohi\n\n1866, Deoband (UP)",
+        "ideology": "**Conservative**: Orthodox Islamic education\n\n**Against**: British; Western influence\n\n**For**: Islamic traditions, Sharia\n\n**But**: Opposed British rule; nationalist\n\n**Education**: Traditional Islamic madrassas",
+        "exam": "Opposite of Aligarh\n\nOrthodox but anti-British\n\nMaulana Mahmud Hasan\n\nDeoband Seminary"
+      },
+      {
+        "id": "theosophical",
+        "movement": "**THEOSOPHICAL SOCIETY**",
+        "founder": "Madam H.P. Blavatsky\n\nColonel Olcott\n\n1875, USA; 1882 India\n\n**Annie Besant (1893) - India",
+        "ideology": "**Philosophy**: Universal brotherhood, revival of ancient religions\n\n**India**: Revived interest in Indian philosophy, Hinduism, Buddhism\n\n**Annie Besant**: Home Rule Movement, Congress President, Hindu revival",
+        "exam": "Annie Besant prominent\n\nHome Rule Movement\n\nRevived Indian culture"
+      },
+      {
+        "id": "young-bengal",
+        "movement": "**YOUNG BENGAL**",
+        "founder": "Henry Vivian Derozio\n\n1820s-30s",
+        "ideology": "**Radical**: Questioned all orthodoxies\n\n**Rationalist**: Free thinking, atheism\n\n**Against**: All superstitions, caste\n\n**Influence**: Influenced by Western rationalism",
+        "exam": "Derozio = Teacher, poet\n\nRadical free-thinking\n\nHindu College, Calcutta"
+      },
+      {
+        "id": "satyashodhak",
+        "movement": "**SATYASHODHAK SAMAJ**\n\n(Truth-Seekers Society)",
+        "founder": "Jyotiba Phule\n\n1873, Maharashtra",
+        "ideology": "**Against**: Brahmanical supremacy, caste system\n\n**For**: Education of lower castes, women\n\n**Revolutionary**: First major anti-caste movement\n\n**Work**: Schools for girls and shudras",
+        "exam": "**Jyotiba Phule = Anti-caste pioneer**\n\nWife: Savitribai Phule\n\nEducation for all"
+      },
+      {
+        "id": "self-respect",
+        "movement": "**SELF-RESPECT MOVEMENT**\n\n(Tamil Nadu)",
+        "founder": "E.V. Ramasamy Naicker (Periyar)\n\n1925",
+        "ideology": "**Against**: Brahminism, caste, superstition, Hindi imposition\n\n**For**: Rationalism, atheism, Dravidian identity\n\n**Radical**: Most radical anti-caste movement",
+        "exam": "Periyar = Dravidian leader\n\nAnti-Brahmin\n\nRationalist\n\nTamil pride"
+      }
+    ],
+    "individualReformers": {
+      "title": "Key Individual Reformers (Quick Reference)",
+      "reformers": [
+        "**Ishwar Chandra Vidyasagar**: Widow Remarriage Act (1856); Sanskrit College; Bengali prose",
+        "**Keshab Chandra Sen**: Brahmo Samaj leader; women's education; Civil Marriage Act (1872)",
+        "**Pandita Ramabai**: Women's education; widow welfare; Arya Mahila Samaj",
+        "**Swami Vivekananda**: Ramakrishna Mission; Chicago speech (1893); Practical Vedanta",
+        "**Annie Besant**: Theosophical Society; Home Rule Movement; Congress President",
+        "**Gopal Krishna Gokhale**: Servants of India Society (1905); moderate reformer",
+        "**B.R. Ambedkar**: Dalit rights; Constitution architect; fought untouchability"
+      ]
+    },
+    "examTips": {
+      "critical": "Raja Ram Mohan Roy = Brahmo Samaj (1828) + Sati abolished (1829); Dayananda = Arya Samaj (1875) 'Back to Vedas'; Vivekananda = Ramakrishna Mission (1897); Sir Syed = Aligarh Movement",
+      "acts": "Sati Abolition (1829); Widow Remarriage Act (1856); Age of Consent Act (1891)"
+    }
+  }
+}
+
