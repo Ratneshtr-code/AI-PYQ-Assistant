@@ -133,31 +133,77 @@ export default function TableVisual({ topicData }) {
                             </thead>
                             <tbody>
                                 {filteredRows.map((row, idx) => (
-                                    <motion.tr
-                                        key={row.id}
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        transition={{ delay: idx * 0.03 }}
-                                        className={`border-b border-gray-200 hover:bg-gray-50 transition-colors ${
-                                            row.category ? getCategoryColor(row.category) : ""
-                                        }`}
-                                    >
-                                        {columns.map((col) => (
-                                            <td key={col.key} className="px-6 py-4 text-sm text-gray-800">
-                                                {col.render ? col.render(row[col.key]) : row[col.key]}
+                                    <>
+                                        <motion.tr
+                                            key={row.id}
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            transition={{ delay: idx * 0.03 }}
+                                            className={`border-b border-gray-200 hover:bg-gray-50 transition-colors ${
+                                                row.category ? getCategoryColor(row.category) : ""
+                                            }`}
+                                        >
+                                            {columns.map((col) => (
+                                                <td key={col.key} className="px-6 py-4 text-sm text-gray-800">
+                                                    {col.render ? col.render(row[col.key]) : row[col.key]}
+                                                </td>
+                                            ))}
+                                            <td className="px-6 py-4 text-center">
+                                                {row.details && (
+                                                    <button
+                                                        onClick={() => setExpandedRow(expandedRow === row.id ? null : row.id)}
+                                                        className="text-blue-500 hover:text-blue-700 font-medium text-sm"
+                                                    >
+                                                        {expandedRow === row.id ? "Hide" : "Show"}
+                                                    </button>
+                                                )}
                                             </td>
-                                        ))}
-                                        <td className="px-6 py-4 text-center">
-                                            {row.details && (
-                                                <button
-                                                    onClick={() => setExpandedRow(expandedRow === row.id ? null : row.id)}
-                                                    className="text-blue-500 hover:text-blue-700 font-medium text-sm"
-                                                >
-                                                    {expandedRow === row.id ? "Hide" : "Show"}
-                                                </button>
-                                            )}
-                                        </td>
-                                    </motion.tr>
+                                        </motion.tr>
+                                        {/* Expanded Details Row */}
+                                        {expandedRow === row.id && row.details && (
+                                            <tr key={`${row.id}-details`}>
+                                                <td colSpan={columns.length + 1} className="px-6 py-4 bg-blue-50 border-b border-blue-200">
+                                                    <AnimatePresence>
+                                                        <motion.div
+                                                            initial={{ opacity: 0, height: 0 }}
+                                                            animate={{ opacity: 1, height: "auto" }}
+                                                            exit={{ opacity: 0, height: 0 }}
+                                                            transition={{ duration: 0.2 }}
+                                                            className="overflow-hidden"
+                                                        >
+                                                            <div className="py-2">
+                                                                <h3 className="text-lg font-bold text-gray-800 mb-3">
+                                                                    {row[columns[0]?.key] || "Details"}
+                                                                </h3>
+                                                                {typeof row.details === 'string' ? (
+                                                                    <p className="text-gray-700">{row.details}</p>
+                                                                ) : (
+                                                                    <div className="space-y-3">
+                                                                        {row.details.description && (
+                                                                            <p className="text-gray-700">{row.details.description}</p>
+                                                                        )}
+                                                                        {row.details.points && (
+                                                                            <ul className="list-disc list-inside space-y-1 text-gray-700">
+                                                                                {row.details.points.map((point, i) => (
+                                                                                    <li key={i}>{point}</li>
+                                                                                ))}
+                                                                            </ul>
+                                                                        )}
+                                                                        {row.details.impact && (
+                                                                            <div className="mt-3 p-3 bg-white rounded border border-blue-300">
+                                                                                <p className="text-xs font-semibold text-blue-800 mb-1">Impact:</p>
+                                                                                <p className="text-sm text-blue-900">{row.details.impact}</p>
+                                                                            </div>
+                                                                        )}
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                        </motion.div>
+                                                    </AnimatePresence>
+                                                </td>
+                                            </tr>
+                                        )}
+                                    </>
                                 ))}
                                 {filteredRows.length === 0 && (
                                     <tr>
@@ -191,64 +237,57 @@ export default function TableVisual({ topicData }) {
                                     </div>
                                 ))}
                                 {row.details && (
-                                    <button
-                                        onClick={() => setExpandedRow(expandedRow === row.id ? null : row.id)}
-                                        className="mt-3 text-blue-500 hover:text-blue-700 font-medium text-sm"
-                                    >
-                                        {expandedRow === row.id ? "Hide Details" : "Show Details"}
-                                    </button>
+                                    <>
+                                        <button
+                                            onClick={() => setExpandedRow(expandedRow === row.id ? null : row.id)}
+                                            className="mt-3 text-blue-500 hover:text-blue-700 font-medium text-sm"
+                                        >
+                                            {expandedRow === row.id ? "Hide Details" : "Show Details"}
+                                        </button>
+                                        {/* Expanded Details Inline */}
+                                        <AnimatePresence>
+                                            {expandedRow === row.id && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, height: 0 }}
+                                                    animate={{ opacity: 1, height: "auto" }}
+                                                    exit={{ opacity: 0, height: 0 }}
+                                                    transition={{ duration: 0.2 }}
+                                                    className="mt-4 pt-4 border-t border-gray-300 overflow-hidden"
+                                                >
+                                                    <h3 className="text-base font-bold text-gray-800 mb-2">
+                                                        {row[columns[0]?.key] || "Details"}
+                                                    </h3>
+                                                    {typeof row.details === 'string' ? (
+                                                        <p className="text-sm text-gray-700">{row.details}</p>
+                                                    ) : (
+                                                        <div className="space-y-2">
+                                                            {row.details.description && (
+                                                                <p className="text-sm text-gray-700">{row.details.description}</p>
+                                                            )}
+                                                            {row.details.points && (
+                                                                <ul className="list-disc list-inside space-y-1 text-sm text-gray-700">
+                                                                    {row.details.points.map((point, i) => (
+                                                                        <li key={i}>{point}</li>
+                                                                    ))}
+                                                                </ul>
+                                                            )}
+                                                            {row.details.impact && (
+                                                                <div className="mt-2 p-2 bg-white rounded border border-blue-300">
+                                                                    <p className="text-xs font-semibold text-blue-800 mb-1">Impact:</p>
+                                                                    <p className="text-xs text-blue-900">{row.details.impact}</p>
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    )}
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
+                                    </>
                                 )}
                             </motion.div>
                         ))}
                     </div>
                 </div>
-
-                {/* Expanded Row Details */}
-                <AnimatePresence>
-                    {expandedRow && (
-                        <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: "auto" }}
-                            exit={{ opacity: 0, height: 0 }}
-                            className="mt-4 bg-blue-50 rounded-lg border border-blue-200 p-6"
-                        >
-                            {(() => {
-                                const row = filteredRows.find(r => r.id === expandedRow);
-                                if (!row || !row.details) return null;
-
-                                return (
-                                    <div>
-                                        <h3 className="text-lg font-bold text-gray-800 mb-3">
-                                            {row[columns[0]?.key] || "Details"}
-                                        </h3>
-                                        {typeof row.details === 'string' ? (
-                                            <p className="text-gray-700">{row.details}</p>
-                                        ) : (
-                                            <div className="space-y-3">
-                                                {row.details.description && (
-                                                    <p className="text-gray-700">{row.details.description}</p>
-                                                )}
-                                                {row.details.points && (
-                                                    <ul className="list-disc list-inside space-y-1 text-gray-700">
-                                                        {row.details.points.map((point, i) => (
-                                                            <li key={i}>{point}</li>
-                                                        ))}
-                                                    </ul>
-                                                )}
-                                                {row.details.impact && (
-                                                    <div className="mt-3 p-3 bg-white rounded border border-blue-300">
-                                                        <p className="text-xs font-semibold text-blue-800 mb-1">Impact:</p>
-                                                        <p className="text-sm text-blue-900">{row.details.impact}</p>
-                                                    </div>
-                                                )}
-                                            </div>
-                                        )}
-                                    </div>
-                                );
-                            })()}
-                        </motion.div>
-                    )}
-                </AnimatePresence>
 
                 {/* Summary */}
                 {data.summary && (
