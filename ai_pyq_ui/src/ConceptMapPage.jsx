@@ -1,5 +1,5 @@
 // src/ConceptMapPage.jsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { buildApiUrl } from "./config/apiConfig";
@@ -7,6 +7,8 @@ import SubjectSelector from "./components/conceptmap/SubjectSelector";
 import TopicList from "./components/conceptmap/TopicList";
 import ContentRenderer from "./components/conceptmap/ContentRenderer";
 import LearningPath from "./components/conceptmap/LearningPath";
+import UserMenuDropdown from "./components/UserMenuDropdown";
+import FeedbackModal from "./components/FeedbackModal";
 import { useMobileDetection } from "./utils/useMobileDetection";
 
 export default function ConceptMapPage() {
@@ -26,6 +28,50 @@ export default function ConceptMapPage() {
     const [roadmapExists, setRoadmapExists] = useState(true);
     const [checkingRoadmap, setCheckingRoadmap] = useState(false);
     const [roadmap, setRoadmap] = useState(null);
+    
+    // User panel state
+    const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn") === "true");
+    const [userName, setUserName] = useState(
+        (() => {
+            try {
+                const data = localStorage.getItem("userData");
+                const userData = data ? JSON.parse(data) : null;
+                return userData?.full_name || userData?.username || localStorage.getItem("userName") || "User";
+            } catch {
+                return localStorage.getItem("userName") || "User";
+            }
+        })()
+    );
+    const [userInitials, setUserInitials] = useState(() => {
+        const name = (() => {
+            try {
+                const data = localStorage.getItem("userData");
+                const userData = data ? JSON.parse(data) : null;
+                return userData?.full_name || userData?.username || localStorage.getItem("userName") || "User";
+            } catch {
+                return localStorage.getItem("userName") || "User";
+            }
+        })();
+        const names = name.split(" ");
+        return names.length > 1 
+            ? (names[0][0] + names[1][0]).toUpperCase()
+            : name.substring(0, 2).toUpperCase();
+    });
+    const [subscriptionPlan, setSubscriptionPlan] = useState(
+        (() => {
+            try {
+                const data = localStorage.getItem("userData");
+                const userData = data ? JSON.parse(data) : null;
+                return userData?.subscription_plan === "premium" ? "Premium" : "Free";
+            } catch {
+                return "Free";
+            }
+        })()
+    );
+    const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+    const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
+    const userMenuButtonRef = useRef(null);
+    const [isLoggingOut, setIsLoggingOut] = useState(false);
 
     // Check if we're on a learning-path route
     const isLearningPathRoute = location.pathname.includes('/learning-path');
@@ -233,6 +279,124 @@ export default function ConceptMapPage() {
         fetchRoadmapAndTopics();
     }, [selectedSubject]);
 
+    // User state management
+    useEffect(() => {
+        const updateUserState = async () => {
+            if (isLoggingOut) return;
+            
+            let isLoggedInLocal = localStorage.getItem("isLoggedIn") === "true";
+            
+            if (!isLoggedInLocal && !isLoggingOut) {
+                try {
+                    const response = await fetch("/auth/me", {
+                        method: "GET",
+                        headers: { "Content-Type": "application/json" },
+                        credentials: "include",
+                    });
+                    
+                    if (response.ok) {
+                        const userData = await response.json();
+                        localStorage.setItem("userData", JSON.stringify(userData));
+                        localStorage.setItem("isLoggedIn", "true");
+                        localStorage.setItem("userName", userData.full_name || userData.username || "User");
+                        isLoggedInLocal = true;
+                        window.dispatchEvent(new Event("userLoggedIn"));
+                    }
+                } catch (error) {
+                    console.error("Error checking session:", error);
+                }
+            }
+            
+            setIsLoggedIn(isLoggedInLocal);
+            
+            if (!isLoggedInLocal) {
+                setSubscriptionPlan("Free");
+                setUserName("User");
+                setUserInitials("U");
+                return;
+            }
+            
+            const userDataStr = localStorage.getItem("userData");
+            if (userDataStr) {
+                try {
+                    const cachedUserData = JSON.parse(userDataStr);
+                    setSubscriptionPlan(cachedUserData.subscription_plan === "premium" ? "Premium" : "Free");
+                    const savedName = cachedUserData.full_name || cachedUserData.username || "User";
+                    setUserName(savedName);
+                    const names = savedName.split(" ");
+                    const initials = names.length > 1 
+                        ? (names[0][0] + names[1][0]).toUpperCase()
+                        : savedName.substring(0, 2).toUpperCase();
+                    setUserInitials(initials);
+                } catch (parseErr) {
+                    console.error("Error parsing cached user data:", parseErr);
+                }
+            }
+        };
+
+        updateUserState();
+
+        const handleStorageChange = (e) => {
+            if (e.key === "isLoggedIn" || e.key === "hasPremium" || e.key === "userName" || e.key === "userData") {
+                updateUserState();
+            }
+        };
+
+        const handleCustomEvent = () => {
+            if (!isLoggingOut) {
+                updateUserState();
+            }
+        };
+
+        window.addEventListener("storage", handleStorageChange);
+        window.addEventListener("premiumStatusChanged", handleCustomEvent);
+        window.addEventListener("userLoggedIn", handleCustomEvent);
+        window.addEventListener("userLoggedOut", handleCustomEvent);
+        window.addEventListener("userProfileUpdated", handleCustomEvent);
+
+        return () => {
+            window.removeEventListener("storage", handleStorageChange);
+            window.removeEventListener("premiumStatusChanged", handleCustomEvent);
+            window.removeEventListener("userLoggedIn", handleCustomEvent);
+            window.removeEventListener("userLoggedOut", handleCustomEvent);
+            window.removeEventListener("userProfileUpdated", handleCustomEvent);
+        };
+    }, [isLoggingOut]);
+
+    const handleSignOut = async () => {
+        setIsLoggingOut(true);
+        
+        try {
+            await fetch("/auth/logout", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+            });
+        } catch (error) {
+            console.error("Logout API error:", error);
+        }
+        
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("userName");
+        localStorage.removeItem("userEmail");
+        localStorage.removeItem("hasPremium");
+        localStorage.removeItem("userData");
+        
+        setIsLoggedIn(false);
+        setUserName("User");
+        setUserInitials("U");
+        setSubscriptionPlan("Free");
+        
+        window.dispatchEvent(new Event("premiumStatusChanged"));
+        window.dispatchEvent(new Event("userLoggedOut"));
+        
+        navigate("/", { replace: true });
+        
+        setTimeout(() => {
+            setIsLoggingOut(false);
+        }, 1000);
+    };
+
 
     const handleSubjectSelect = (subjectId) => {
         setSelectedSubject(subjectId);
@@ -273,9 +437,9 @@ export default function ConceptMapPage() {
     };
 
     return (
-        <div className="flex flex-col min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+        <div className="flex flex-col h-screen bg-gradient-to-br from-gray-50 to-blue-50 overflow-hidden">
             {/* Top Bar with Home Navigation */}
-            <div className="bg-white/80 backdrop-blur-sm border-b border-gray-200/50 shadow-sm z-10">
+            <div className="bg-white/80 backdrop-blur-sm border-b border-gray-200/50 shadow-sm z-10 flex-shrink-0">
                 <div className="flex items-center justify-between px-4 md:px-6 py-3">
                     {/* Home Navigation Button */}
                     <motion.button
@@ -348,7 +512,7 @@ export default function ConceptMapPage() {
                         })
                     }}
                     transition={{ duration: 0.3 }}
-                    className={`bg-white/95 backdrop-blur-sm border-r border-gray-200/50 shadow-xl flex flex-col transition-all duration-300 ${
+                    className={`bg-white/95 backdrop-blur-sm border-r border-gray-200/50 shadow-xl flex flex-col transition-all duration-300 h-full overflow-hidden ${
                         sidebarCollapsed && !isMobile ? "w-16" : "w-[280px]"
                     } ${isMobile ? "fixed left-0 top-0 h-full z-50" : "flex-shrink-0"}`}
                 >
@@ -382,7 +546,7 @@ export default function ConceptMapPage() {
                     </button>
 
                     {/* Subjects Section */}
-                    <div className="pt-12 md:pt-0 relative" style={{ zIndex: 10 }}>
+                    <div className="pt-12 md:pt-0 relative flex-shrink-0" style={{ zIndex: 10 }}>
                         {loadingSubjects ? (
                             <div className="h-full flex items-center justify-center p-4">
                                 <div className="text-center">
@@ -392,11 +556,6 @@ export default function ConceptMapPage() {
                             </div>
                         ) : (
                             <div className="p-3 relative">
-                                {(!sidebarCollapsed || isMobile) && (
-                                    <h2 className="text-sm font-semibold text-gray-700 mb-3 px-2 uppercase tracking-wide">
-                                        Subjects
-                                    </h2>
-                                )}
                                 <SubjectSelector
                                     subjects={subjects}
                                     selectedSubject={selectedSubject}
@@ -410,15 +569,8 @@ export default function ConceptMapPage() {
                         )}
                     </div>
 
-                    {/* Topics Section - Appears immediately below Subjects */}
-                    <div className="flex-1 overflow-y-auto relative" style={{ zIndex: 1 }}>
-                        {(!sidebarCollapsed || isMobile) && (
-                            <div className="px-3 pt-2 pb-2">
-                                <h2 className="text-sm font-semibold text-gray-700 mb-3 px-2 uppercase tracking-wide">
-                                    Topics
-                                </h2>
-                            </div>
-                        )}
+                    {/* Topics Section - Appears immediately below Subjects, scrollable */}
+                    <div className="flex-1 overflow-y-auto relative min-h-0" style={{ zIndex: 1 }}>
                         <TopicList
                             topics={topics}
                             organizedTopics={organizedTopics}
@@ -431,21 +583,108 @@ export default function ConceptMapPage() {
                             isCollapsed={sidebarCollapsed && !isMobile}
                         />
                     </div>
+
+                    {/* User Panel - Fixed at bottom */}
+                    <div className="px-4 pb-4 border-t border-gray-100 bg-gray-50/50 relative flex-shrink-0">
+                        {isLoggedIn ? (
+                            <div className="mt-4 relative">
+                                <button
+                                    ref={userMenuButtonRef}
+                                    onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                                    className={`w-full flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 transition-colors ${
+                                        sidebarCollapsed && !isMobile ? "justify-center" : ""
+                                    }`}
+                                >
+                                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-white font-semibold text-xs flex-shrink-0">
+                                        {userInitials}
+                                    </div>
+                                    {(!sidebarCollapsed || isMobile) && (
+                                        <>
+                                            <div className="flex-1 min-w-0 text-left">
+                                                <p className="text-sm font-medium text-gray-900 truncate">
+                                                    {userName}
+                                                </p>
+                                                <p className="text-xs text-gray-500">
+                                                    {subscriptionPlan === "Premium" ? "Premium" : "Free"}
+                                                </p>
+                                            </div>
+                                            <svg className="w-4 h-4 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                        </>
+                                    )}
+                                </button>
+                                
+                                {/* User Menu Dropdown */}
+                                <UserMenuDropdown
+                                    isOpen={isUserMenuOpen}
+                                    onClose={() => setIsUserMenuOpen(false)}
+                                    toggleButtonRef={userMenuButtonRef}
+                                    onSignOut={handleSignOut}
+                                    userName={userName}
+                                    userInitials={userInitials}
+                                    subscriptionPlan={subscriptionPlan}
+                                    isCollapsed={sidebarCollapsed && !isMobile}
+                                    onOpenFeedback={() => setIsFeedbackModalOpen(true)}
+                                />
+                            </div>
+                        ) : (
+                            <div className="mt-4">
+                                {sidebarCollapsed && !isMobile ? (
+                                    <button
+                                        onClick={() => navigate("/login")}
+                                        className="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center mx-auto transition-colors"
+                                        title="Sign In"
+                                    >
+                                        <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                        </svg>
+                                    </button>
+                                ) : (
+                                    <>
+                                        <p className="text-xs text-gray-600 mb-3 text-center">
+                                            Sign in to unlock insights
+                                        </p>
+                                        <div className="flex gap-2">
+                                            <button
+                                                onClick={() => navigate("/login")}
+                                                className="flex-1 py-2 px-3 text-xs font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors"
+                                            >
+                                                Sign In
+                                            </button>
+                                            <button
+                                                onClick={() => navigate("/signup")}
+                                                className="flex-1 py-2 px-3 text-xs font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-colors"
+                                            >
+                                                Sign Up
+                                            </button>
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+                        )}
+                    </div>
                 </motion.aside>
+                
+                {/* Feedback Modal */}
+                <FeedbackModal 
+                    isOpen={isFeedbackModalOpen} 
+                    onClose={() => setIsFeedbackModalOpen(false)} 
+                />
 
                 {/* Main Content Area - Full Width */}
-                <div className="flex-1 flex flex-col overflow-hidden bg-gradient-to-br from-blue-50/50 to-indigo-50/50">
+                <div className="flex-1 flex flex-col overflow-y-auto bg-gradient-to-br from-blue-50/50 to-indigo-50/50">
                     {/* Learning Path View - Only show if no topic is selected */}
                     {isLearningPathRoute && currentSubjectId && !selectedTopic ? (
                         checkingRoadmap ? (
-                            <div className="flex-1 flex items-center justify-center p-4 md:p-8">
+                            <div className="flex-1 flex items-center justify-center p-4 md:p-8 min-h-full">
                                 <div className="text-center">
                                     <div className="inline-block animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600 mb-3"></div>
                                     <p className="text-gray-600">Loading...</p>
                                 </div>
                             </div>
                         ) : roadmapExists ? (
-                            <div className="flex-1 flex flex-col overflow-hidden">
+                            <div className="flex-1 flex flex-col min-h-full">
                                 <div className="flex-1 min-h-0 rounded-lg overflow-hidden shadow-xl border border-gray-200/50 bg-white m-4">
                                     <LearningPath
                                         subject={currentSubjectId}
