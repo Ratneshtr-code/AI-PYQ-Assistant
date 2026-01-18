@@ -206,7 +206,7 @@ export default function ContentRenderer({ topic, selectedSubject, onTopicSelect 
         );
     }
 
-    // Summary or Quiz tabs (coming soon)
+    // Quiz tab (coming soon)
     return (
         <div className="w-full h-full flex flex-col">
             <TopicNavBar
@@ -218,15 +218,10 @@ export default function ContentRenderer({ topic, selectedSubject, onTopicSelect 
             />
             <div className="flex-1 flex items-center justify-center bg-gray-50">
                 <div className="text-center max-w-md">
-                    <div className="text-6xl mb-4">
-                        {activeTab === "summary" ? "📝" : "🎯"}
-                    </div>
+                    <div className="text-6xl mb-4">🎯</div>
                     <h3 className="text-2xl font-bold text-gray-700 mb-2">Coming Soon!</h3>
                     <p className="text-gray-600">
-                        {activeTab === "summary" 
-                            ? "Quick revision summaries are being prepared for this topic."
-                            : "Interactive quizzes will be available soon to test your knowledge."
-                        }
+                        Interactive quizzes will be available soon to test your knowledge.
                     </p>
                 </div>
             </div>

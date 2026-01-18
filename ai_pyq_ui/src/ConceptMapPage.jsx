@@ -1,24 +1,61 @@
 // src/ConceptMapPage.jsx
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { buildApiUrl } from "./config/apiConfig";
 import SubjectSelector from "./components/conceptmap/SubjectSelector";
 import TopicList from "./components/conceptmap/TopicList";
 import ContentRenderer from "./components/conceptmap/ContentRenderer";
+import LearningPath from "./components/conceptmap/LearningPath";
 import { useMobileDetection } from "./utils/useMobileDetection";
 
 export default function ConceptMapPage() {
     const isMobile = useMobileDetection();
     const navigate = useNavigate();
+    const location = useLocation();
+    const { subjectId, topicId } = useParams();
     const [subjects, setSubjects] = useState([]);
     const [topics, setTopics] = useState([]);
+    const [organizedTopics, setOrganizedTopics] = useState([]);
     const [selectedSubject, setSelectedSubject] = useState(null);
     const [selectedTopic, setSelectedTopic] = useState(null);
     const [loadingSubjects, setLoadingSubjects] = useState(true);
     const [loadingTopics, setLoadingTopics] = useState(false);
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
     const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+    const [roadmapExists, setRoadmapExists] = useState(true);
+    const [checkingRoadmap, setCheckingRoadmap] = useState(false);
+    const [roadmap, setRoadmap] = useState(null);
+
+    // Check if we're on a learning-path route
+    const isLearningPathRoute = location.pathname.includes('/learning-path');
+    const currentSubjectId = subjectId || selectedSubject;
+
+    // Check if roadmap exists for the subject
+    useEffect(() => {
+        if (isLearningPathRoute && currentSubjectId) {
+            setCheckingRoadmap(true);
+            const checkRoadmap = async () => {
+                try {
+                    const url = buildApiUrl(`conceptmap/roadmap/${currentSubjectId}`);
+                    const res = await fetch(url, {
+                        credentials: "include",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Accept": "application/json",
+                        },
+                    });
+                    setRoadmapExists(res.ok);
+                } catch (err) {
+                    console.error("Error checking roadmap:", err);
+                    setRoadmapExists(false);
+                } finally {
+                    setCheckingRoadmap(false);
+                }
+            };
+            checkRoadmap();
+        }
+    }, [isLearningPathRoute, currentSubjectId]);
 
     // Fetch subjects on mount
     useEffect(() => {
@@ -50,31 +87,43 @@ export default function ConceptMapPage() {
         fetchSubjects();
     }, []);
 
-    // Auto-select Geography subject on mount
+    // Auto-select subject from URL or default to Geography
     useEffect(() => {
         if (subjects.length > 0 && !selectedSubject) {
-            const geographySubject = subjects.find(
-                sub => sub.id?.toLowerCase() === 'geography' || sub.name?.toLowerCase() === 'geography'
-            );
-            if (geographySubject) {
-                setSelectedSubject(geographySubject.id);
+            if (subjectId) {
+                // Use subject from URL
+                const subject = subjects.find(sub => sub.id === subjectId);
+                if (subject) {
+                    setSelectedSubject(subject.id);
+                }
+            } else {
+                // Default to Geography
+                const geographySubject = subjects.find(
+                    sub => sub.id?.toLowerCase() === 'geography' || sub.name?.toLowerCase() === 'geography'
+                );
+                if (geographySubject) {
+                    setSelectedSubject(geographySubject.id);
+                }
             }
         }
-    }, [subjects, selectedSubject]);
+    }, [subjects, selectedSubject, subjectId]);
 
-    // Fetch topics when subject is selected
+    // Fetch roadmap and topics when subject is selected
     useEffect(() => {
         if (!selectedSubject) {
             setTopics([]);
+            setOrganizedTopics([]);
             setSelectedTopic(null);
+            setRoadmap(null);
             return;
         }
 
-        const fetchTopics = async () => {
+        const fetchRoadmapAndTopics = async () => {
             setLoadingTopics(true);
             try {
-                const url = buildApiUrl(`conceptmap/topics/${selectedSubject}`);
-                const res = await fetch(url, {
+                // Fetch topics
+                const topicsUrl = buildApiUrl(`conceptmap/topics/${selectedSubject}`);
+                const topicsRes = await fetch(topicsUrl, {
                     credentials: "include",
                     headers: {
                         "Content-Type": "application/json",
@@ -82,23 +131,106 @@ export default function ConceptMapPage() {
                     },
                 });
 
-                if (!res.ok) {
+                if (!topicsRes.ok) {
                     console.error("Failed to fetch topics");
                     setTopics([]);
+                    setOrganizedTopics([]);
                     return;
                 }
 
-                const data = await res.json();
-                setTopics(data.topics || []);
+                const topicsData = await topicsRes.json();
+                const allTopics = topicsData.topics || [];
+                setTopics(allTopics);
+
+                // Try to fetch roadmap to organize topics
+                try {
+                    const roadmapUrl = buildApiUrl(`conceptmap/roadmap/${selectedSubject}`);
+                    const roadmapRes = await fetch(roadmapUrl, {
+                        credentials: "include",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Accept": "application/json",
+                        },
+                    });
+
+                    if (roadmapRes.ok) {
+                        const roadmapData = await roadmapRes.json();
+                        setRoadmap(roadmapData);
+
+                        // Organize topics by roadmap chapters
+                        if (roadmapData.topics && roadmapData.topics.length > 0) {
+                            const organized = [];
+                            
+                            roadmapData.topics.forEach((chapter) => {
+                                // Find topics that belong to this chapter
+                                const chapterTopics = [];
+                                
+                                chapter.subTopics.forEach((subTopic) => {
+                                    const topic = allTopics.find(t => t.id === subTopic.id);
+                                    if (topic) {
+                                        chapterTopics.push(topic);
+                                    }
+                                });
+
+                                if (chapterTopics.length > 0) {
+                                    organized.push({
+                                        chapterTitle: chapter.mainTopic,
+                                        chapterId: chapter.id,
+                                        topics: chapterTopics
+                                    });
+                                }
+                            });
+
+                            // Add any remaining topics that weren't in the roadmap
+                            const roadmapTopicIds = new Set(
+                                roadmapData.topics.flatMap(ch => ch.subTopics.map(st => st.id))
+                            );
+                            const remainingTopics = allTopics.filter(t => !roadmapTopicIds.has(t.id));
+                            
+                            if (remainingTopics.length > 0) {
+                                organized.push({
+                                    chapterTitle: "Other Topics",
+                                    chapterId: "other",
+                                    topics: remainingTopics
+                                });
+                            }
+
+                            setOrganizedTopics(organized);
+                        } else {
+                            // No roadmap structure, use flat list
+                            setOrganizedTopics([{
+                                chapterTitle: "All Topics",
+                                chapterId: "all",
+                                topics: allTopics
+                            }]);
+                        }
+                    } else {
+                        // No roadmap available, use flat list
+                        setOrganizedTopics([{
+                            chapterTitle: "All Topics",
+                            chapterId: "all",
+                            topics: allTopics
+                        }]);
+                    }
+                } catch (roadmapErr) {
+                    console.error("Error fetching roadmap:", roadmapErr);
+                    // Use flat list if roadmap fetch fails
+                    setOrganizedTopics([{
+                        chapterTitle: "All Topics",
+                        chapterId: "all",
+                        topics: allTopics
+                    }]);
+                }
             } catch (err) {
                 console.error("Error fetching topics:", err);
                 setTopics([]);
+                setOrganizedTopics([]);
             } finally {
                 setLoadingTopics(false);
             }
         };
 
-        fetchTopics();
+        fetchRoadmapAndTopics();
     }, [selectedSubject]);
 
 
@@ -289,6 +421,7 @@ export default function ConceptMapPage() {
                         )}
                         <TopicList
                             topics={topics}
+                            organizedTopics={organizedTopics}
                             selectedTopic={selectedTopic}
                             onSelectTopic={(topic) => {
                                 handleTopicSelect(topic);
@@ -302,7 +435,52 @@ export default function ConceptMapPage() {
 
                 {/* Main Content Area - Full Width */}
                 <div className="flex-1 flex flex-col overflow-hidden bg-gradient-to-br from-blue-50/50 to-indigo-50/50">
-                    {selectedTopic ? (
+                    {/* Learning Path View - Only show if no topic is selected */}
+                    {isLearningPathRoute && currentSubjectId && !selectedTopic ? (
+                        checkingRoadmap ? (
+                            <div className="flex-1 flex items-center justify-center p-4 md:p-8">
+                                <div className="text-center">
+                                    <div className="inline-block animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600 mb-3"></div>
+                                    <p className="text-gray-600">Loading...</p>
+                                </div>
+                            </div>
+                        ) : roadmapExists ? (
+                            <div className="flex-1 flex flex-col overflow-hidden">
+                                <div className="flex-1 min-h-0 rounded-lg overflow-hidden shadow-xl border border-gray-200/50 bg-white m-4">
+                                    <LearningPath
+                                        subject={currentSubjectId}
+                                        onTopicSelect={handleTopicSelect}
+                                        currentTopicId={topicId}
+                                    />
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="flex-1 flex items-center justify-center p-4 md:p-8">
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.5 }}
+                                    className="text-center max-w-md"
+                                >
+                                    <div className="text-5xl md:text-7xl mb-4 md:mb-6">🗺️</div>
+                                    <h3 className="text-xl md:text-2xl font-semibold text-gray-700 mb-2 md:mb-3">
+                                        Coming Soon
+                                    </h3>
+                                    <p className="text-gray-500 text-sm md:text-lg">
+                                        The learning path for this subject is being prepared. Please check back later.
+                                    </p>
+                                    <motion.button
+                                        onClick={() => navigate("/conceptmap/subjects")}
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        className="mt-6 px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg shadow-md hover:shadow-lg transition-all"
+                                    >
+                                        Back to Subjects
+                                    </motion.button>
+                                </motion.div>
+                            </div>
+                        )
+                    ) : selectedTopic ? (
                         <motion.div
                             initial={{ opacity: 0, scale: 0.98 }}
                             animate={{ opacity: 1, scale: 1 }}

@@ -8,7 +8,6 @@ export default function LearningPath({ subject, onTopicSelect, currentTopicId })
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [selectedTopic, setSelectedTopic] = useState(null);
-    const [viewMode, setViewMode] = useState("list"); // list | graph
 
     useEffect(() => {
         if (!subject) return;
@@ -98,30 +97,6 @@ export default function LearningPath({ subject, onTopicSelect, currentTopicId })
                             </h1>
                             <p className="text-gray-600 text-lg">{roadmap.description}</p>
                         </div>
-                        
-                        {/* View Mode Toggle */}
-                        <div className="hidden md:flex gap-2 bg-white rounded-lg p-1 shadow-sm border border-gray-200">
-                            <button
-                                onClick={() => setViewMode("list")}
-                                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                                    viewMode === "list"
-                                        ? "bg-purple-500 text-white"
-                                        : "text-gray-600 hover:bg-gray-100"
-                                }`}
-                            >
-                                📋 List View
-                            </button>
-                            <button
-                                onClick={() => setViewMode("graph")}
-                                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                                    viewMode === "graph"
-                                        ? "bg-purple-500 text-white"
-                                        : "text-gray-600 hover:bg-gray-100"
-                                }`}
-                            >
-                                🕸️ Graph View
-                            </button>
-                        </div>
                     </div>
 
                     {/* Learning Path Overview */}
@@ -149,10 +124,8 @@ export default function LearningPath({ subject, onTopicSelect, currentTopicId })
                     </div>
                 </div>
 
-                {/* Content based on view mode */}
-                {viewMode === "list" ? (
-                    /* List View */
-                    <div className="space-y-6">
+                {/* List View */}
+                <div className="space-y-6">
                         {roadmap.topics.map((topic, idx) => (
                             <motion.div
                                 key={topic.id}
@@ -227,10 +200,7 @@ export default function LearningPath({ subject, onTopicSelect, currentTopicId })
                                                                     <span className="text-purple-500 text-xs">📍 You are here</span>
                                                                 )}
                                                             </div>
-                                                            <p className="text-xs text-gray-600 mb-2">{subTopic.description}</p>
-                                                            <span className="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded">
-                                                                {subTopic.visualType}
-                                                            </span>
+                                                            <p className="text-xs text-gray-600">{subTopic.description}</p>
                                                         </div>
                                                     </div>
                                                 </motion.button>
@@ -253,17 +223,6 @@ export default function LearningPath({ subject, onTopicSelect, currentTopicId })
                             </motion.div>
                         ))}
                     </div>
-                ) : (
-                    /* Graph View - Simplified representation */
-                    <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-200">
-                        <h3 className="text-xl font-bold text-gray-800 mb-6">Topic Network Graph</h3>
-                        <div className="text-center text-gray-500 py-12">
-                            <div className="text-6xl mb-4">🕸️</div>
-                            <p>Interactive network graph visualization coming soon!</p>
-                            <p className="text-sm mt-2">For now, use List View to explore the learning path.</p>
-                        </div>
-                    </div>
-                )}
 
                 {/* Study Tips */}
                 {roadmap.studyTips && roadmap.studyTips.length > 0 && (

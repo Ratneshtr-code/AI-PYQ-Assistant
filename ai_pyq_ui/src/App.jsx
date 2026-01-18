@@ -9,6 +9,7 @@ import ExamDashboardPage from "./ExamDashboardPage";
 import CrossExamInsightsPage from "./CrossExamInsightsPage";
 import TopicWisePYQPage from "./TopicWisePYQPage";
 import ConceptMapPage from "./ConceptMapPage";
+import SubjectPage from "./components/conceptmap/SubjectPage";
 import LoginPage from "./LoginPage";
 import SignUpPage from "./SignUpPage";
 import VerifyEmailPage from "./VerifyEmailPage";
@@ -74,7 +75,11 @@ function AppContent() {
                     element={<LandingPage />}
                 />
                 <Route path="/search" element={<SearchPage />} />
-                <Route path="/conceptmap" element={<ConceptMapPage />} />
+                <Route path="/conceptmap" element={<Navigate to="/conceptmap/subjects" replace />} />
+                <Route path="/conceptmap/subjects" element={<SubjectPage />} />
+                <Route path="/conceptmap/subjects/:subjectId/learning-path" element={<ConceptMapPage />} />
+                <Route path="/conceptmap/subjects/:subjectId/topics/:topicId" element={<ConceptMapPage />} />
+                <Route path="/conceptmap/topics" element={<ConceptMapPage />} />
                 <Route path="/exam-dashboard" element={<ExamDashboardPage />} />
                 <Route path="/cross-exam-insights" element={<CrossExamInsightsPage />} />
                 <Route path="/topic-wise-pyq" element={<TopicWisePYQPage />} />

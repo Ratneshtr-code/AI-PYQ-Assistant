@@ -27,13 +27,6 @@ export default function TopicNavBar({
             description: "Interactive visual content" 
         },
         { 
-            id: "summary", 
-            label: "Summary", 
-            icon: "📝", 
-            available: false,
-            description: "Quick revision notes (Coming Soon)" 
-        },
-        { 
             id: "quiz", 
             label: "Quiz", 
             icon: "🎯", 

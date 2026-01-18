@@ -1,16 +1,5 @@
 {
-  "history": [
-    {
-      "id": 1,
-      "topic": "Revolt of 1857",
-      "path": "revolt-1857.png"
-    },
-    {
-      "id": 2,
-      "topic": "Leaders of 1857",
-      "path": "leaders-1857.png"
-    }
-  ],
+  "history": [],
   "geography": [
     {
       "id": 1,
