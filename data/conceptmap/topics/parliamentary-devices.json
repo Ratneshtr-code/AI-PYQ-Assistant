@@ -1,0 +1,122 @@
+{
+  "id": "parliamentary-devices",
+  "subject": "polity",
+  "title": "Parliamentary Devices & Procedures",
+  "description": "Key parliamentary devices including Sessions, Quorum, Question Hour, Zero Hour, Motions, and Special Procedures used in Indian Parliament",
+  "visualType": "table",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["parliament-structure", "legislative-procedures"],
+    "tags": ["Parliamentary Devices", "Question Hour", "Zero Hour", "Motions", "Sessions", "Quorum"]
+  },
+  "data": {
+    "columns": [
+      { "key": "device", "label": "Device/Procedure" },
+      { "key": "timing", "label": "Timing/Duration" },
+      { "key": "features", "label": "Key Features" },
+      { "key": "purpose", "label": "Purpose/Significance" },
+      { "key": "examPoints", "label": "Exam Points" }
+    ],
+    "rows": [
+      {
+        "id": "sessions",
+        "device": "**Sessions of Parliament**",
+        "timing": "**3 sessions per year:**\n• Budget Session (Feb-May)\n• Monsoon Session (Jul-Sep)\n• Winter Session (Nov-Dec)",
+        "features": "• Gap between sessions ≤ 6 months (Art 85)\n• President summons Parliament (Art 85(1))\n• Session ends by prorogation",
+        "purpose": "Constitutional obligation to meet thrice yearly; Ensures continuous oversight of government",
+        "examPoints": "Art 85 - Max 6 months gap crucial; President summons on PM's advice; Both Houses prorogued simultaneously"
+      },
+      {
+        "id": "quorum",
+        "device": "**Quorum (Art 100(3))**",
+        "timing": "**Throughout sitting**\nRequired at all times",
+        "features": "• **1/10th of total members**\n• LS: 55 members (543/10)\n• RS: 25 members (245/10)\n• Including Presiding Officer",
+        "purpose": "Ensures minimum attendance for valid proceedings; If no quorum, House adjourned till quorum present",
+        "examPoints": "Art 100(3) - 1/10th members; If pointed out, Speaker counts; If no quorum, House adjourned; Often misused to stall proceedings"
+      },
+      {
+        "id": "question-hour",
+        "device": "**Question Hour**",
+        "timing": "**First hour of sitting**\n11 AM - 12 PM\n(Monday to Friday)",
+        "features": "• **Starred Questions**: Oral answer + supplementary questions (distinguished by *)\n• **Unstarred Questions**: Written answer only\n• **Short Notice Questions**: <10 days notice on urgent public importance",
+        "purpose": "Most important device for executive accountability; Ministers answer questions on government policies/actions",
+        "examPoints": "NOT mentioned in Constitution (Rules of Procedure); Starred vs Unstarred crucial; Can skip if urgent govt business"
+      },
+      {
+        "id": "zero-hour",
+        "device": "**Zero Hour**",
+        "timing": "**12 PM - 1 PM**\nImmediately after Question Hour",
+        "features": "• **Not in Rules** (convention since 1962)\n• Members raise matters without prior notice\n• No formal debate/voting\n• Speaker's discretion",
+        "purpose": "Allows members to raise urgent public issues; Flexible device for raising diverse matters",
+        "examPoints": "NOT in Constitution/Rules; Indian innovation; No voting; Matters of urgent public importance; Speaker controls"
+      },
+      {
+        "id": "motions",
+        "device": "**Motions**",
+        "timing": "**Varies by type**\nDuring regular business",
+        "features": "• **Adjournment Motion**: Urgent, definite matter of public importance; Censures govt\n• **No-confidence Motion** (Art 75(3)): Only LS; 50 members support needed\n• **Censure Motion**: Disapproval of govt policy\n• **Cut Motions**: On budget demands (Policy/Economy/Token)",
+        "purpose": "Key tools for opposition to criticize government; No-confidence can topple government",
+        "examPoints": "Adjournment = Censure govt; No-confidence only in LS (50 MPs); Censure = less severe; Cut motions during budget"
+      },
+      {
+        "id": "point-of-order",
+        "device": "**Point of Order**",
+        "timing": "**Anytime during proceedings**\nImmediate interruption",
+        "features": "• **Rule violation** pointed out\n• Must cite specific rule\n• Speaker's decision final (Art 122(1))\n• No debate on Point of Order",
+        "purpose": "Ensures procedural regularity; Protects parliamentary rules; Members can raise immediately if rules violated",
+        "examPoints": "Based on Rules of Procedure; Speaker decides (Art 122 - Courts can't interfere); Must cite rule number; No debate"
+      },
+      {
+        "id": "special-mention",
+        "device": "**Special Mention (Rule 377)**",
+        "timing": "**End of Question Hour**\nBefore main business",
+        "features": "• **Urgent matter** of sufficient importance\n• No prior notice debate\n• Member makes statement (5 min)\n• No debate/voting",
+        "purpose": "Allows raising important issues without full debate; Quicker than regular motions",
+        "examPoints": "Under LS Rule 377 (RS has similar provision); No debate; 5-min statement; Published in proceedings"
+      },
+      {
+        "id": "resolutions",
+        "device": "**Resolutions**",
+        "timing": "**Varies**\nScheduled business",
+        "features": "• **Private Member's Resolution**: By non-minister (Friday)\n• **Government Resolution**: By minister (anytime)\n• **Substantive Motion**: Self-contained proposal\n• Requires debate & voting",
+        "purpose": "Express opinion of House; Can be on any matter of general public interest; Not binding on govt (unlike bills)",
+        "examPoints": "Private members' day = Friday; Govt resolutions binding on govt; Can be on any topic; Voted upon"
+      },
+      {
+        "id": "half-hour",
+        "device": "**Half-an-Hour Discussion**",
+        "timing": "**Any day**\nAfter Question Hour",
+        "features": "• **Follow-up** to starred question\n• Notice of 3 days\n• Max 30 minutes\n• Detailed discussion on answer given",
+        "purpose": "Deeper examination of issues raised in Question Hour; Seeks clarification/additional info",
+        "examPoints": "NOT in Constitution; Procedural device; 3 days notice; Only on starred question answer; 30 min max"
+      },
+      {
+        "id": "short-duration",
+        "device": "**Short Duration Discussion (Rule 193)**",
+        "timing": "**2.5 hours**\nScheduled by Business Advisory Committee",
+        "features": "• **Urgent public importance** matter\n• 10 days notice\n• No voting at end\n• Also called '2.5 hour discussion'",
+        "purpose": "Discuss important issues without voting; Allows detailed debate on contemporary issues",
+        "examPoints": "LS Rule 193; 2.5 hours; No voting; 10 days notice; Any urgent public importance matter"
+      }
+    ],
+    "notes": [
+      "**Constitutional vs Procedural**: Only Quorum (Art 100(3)) is in Constitution; Others are in Rules of Procedure & Conduct of Business",
+      "**Question Hour Importance**: Most effective tool for executive accountability; Ministers must answer; Can lead to debates",
+      "**Zero Hour Uniqueness**: Indian parliamentary innovation (1962); Not found in British Parliament; Most flexible device",
+      "**Motions for Control**: Adjournment (censures govt), No-confidence (only LS, can topple govt), Censure (disapproval), Cut (budget reduction)",
+      "**Speaker's Power**: Final authority on Point of Order, admitting motions, allowing special mentions; Art 122(1) prevents judicial review of proceedings",
+      "**Art 105**: Powers, privileges, immunities of Parliament and members - Freedom of speech (can't be prosecuted for anything said in House)",
+      "**Comparison**: Question Hour (1st hour, oral questions) vs Zero Hour (2nd hour, no rules, urgent matters) vs Special Mention (Rule 377, no debate)"
+    ],
+    "examTips": [
+      "Remember **timing**: Question Hour (11 AM-12 PM), Zero Hour (12 PM-1 PM), Half-hour discussion (after QH)",
+      "**Only Quorum (Art 100(3)) is Constitutional**; Rest are in Rules of Procedure",
+      "**Starred vs Unstarred**: Starred (*) = Oral + Supplementary; Unstarred = Written only",
+      "**Motions distinction**: Adjournment (censure + adjourn House), No-confidence (only LS, 50 support), Censure (disapproval), Cut (budget)",
+      "**Zero Hour** is Indian innovation (not in UK Parliament); Most flexible device",
+      "**Point of Order**: Must cite rule; Speaker's decision final; Art 122(1) prevents judicial review",
+      "**Rule 377 (Special Mention)** vs **Rule 193 (Short Duration Discussion)**: 377 = No debate, 5 min; 193 = 2.5 hours, no voting"
+    ]
+  }
+}
+

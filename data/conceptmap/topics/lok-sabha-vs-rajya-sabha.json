@@ -1,0 +1,257 @@
+{
+  "id": "lok-sabha-vs-rajya-sabha",
+  "subject": "polity",
+  "title": "Lok Sabha vs Rajya Sabha - Comprehensive Comparison",
+  "description": "Complete comparison of India's two houses of Parliament covering constitutional provisions, composition, powers, procedures, and exam-relevant exceptional points",
+  "visualType": "table",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["parliament-structure", "legislative-procedures", "union-executive"],
+    "tags": ["Lok Sabha", "Rajya Sabha", "Parliament", "Art 79-122", "Comparison", "Lower House", "Upper House"]
+  },
+  "data": {
+    "columns": [
+      {"key": "aspect", "label": "Aspect"},
+      {"key": "rajya_sabha", "label": "Rajya Sabha (Council of States)"},
+      {"key": "lok_sabha", "label": "Lok Sabha (House of the People)"}
+    ],
+    "rows": [
+      {
+        "id": "constitutional-basis",
+        "aspect": "**Constitutional Basis**",
+        "rajya_sabha": "**Art 80**: Council of States\n**Upper House** of Parliament\nRepresents **States** (Federal character)",
+        "lok_sabha": "**Art 81**: House of the People\n**Lower House** of Parliament\nRepresents **People** (Popular sovereignty)"
+      },
+      {
+        "id": "nature",
+        "aspect": "**Nature & Dissolution**",
+        "rajya_sabha": "**Permanent body** - Never dissolves\n**1/3rd members retire** every 2 years\nContinuous existence since 1952",
+        "lok_sabha": "**Temporary body** - Dissolves after 5 years\n**Entire House** dissolves at once\nCan be dissolved before 5 years by President"
+      },
+      {
+        "id": "composition",
+        "aspect": "**Total Strength**",
+        "rajya_sabha": "**Maximum 250 members**\nCurrently **245 members**\n• 233 elected (States & UTs)\n• 12 nominated by President",
+        "lok_sabha": "**Maximum 552 members**\nCurrently **543 members**\n• 530 from States\n• 13 from Union Territories\n• 2 Anglo-Indians (Lapsed after 104th Amendment 2020)"
+      },
+      {
+        "id": "election-method",
+        "aspect": "**Method of Election**",
+        "rajya_sabha": "**Indirect election** by State Legislative Assemblies\n**STV (Single Transferable Vote)** - Proportional representation\nMembers represent their State",
+        "lok_sabha": "**Direct election** by people of India\n**FPTP (First Past The Post)** system\nMembers represent their constituency"
+      },
+      {
+        "id": "tenure",
+        "aspect": "**Term/Tenure**",
+        "rajya_sabha": "**6 years** term for each member\n1/3rd (82 members approx) retire every 2 years\nMember can be re-elected indefinitely",
+        "lok_sabha": "**5 years** normal term\nCan be dissolved earlier (no-confidence, PM's advice)\n**Emergency**: Extended by 1 year at a time (max 1 year after Emergency ends - Art 83(2))"
+      },
+      {
+        "id": "state-representation",
+        "aspect": "**State-wise Representation**",
+        "rajya_sabha": "Based on **population** of State\n**UP 31** (highest), Maharashtra 19, Tamil Nadu 18\n**Sikkim 1** (lowest)\nStates with <4 population get 1 seat",
+        "lok_sabha": "Based on **population** of State\n**UP 80** (highest), Maharashtra 48, West Bengal 42, Bihar 40\n**Sikkim, Mizoram 1** (lowest)\nReserved seats: 84 SC, 47 ST"
+      },
+      {
+        "id": "nominated-members",
+        "aspect": "**Nominated Members**",
+        "rajya_sabha": "**12 members** nominated by President (Art 80(3))\nExperts in: **Art, Literature, Science, Social Service**\nExample: Sachin Tendulkar, Lata Mangeshkar, Mary Kom",
+        "lok_sabha": "**2 Anglo-Indian members** nominated by President (Art 331)\n**LAPSED** after 104th Amendment 2020\nNo nominated members currently"
+      },
+      {
+        "id": "qualifications",
+        "aspect": "**Qualifications (Art 84)**",
+        "rajya_sabha": "• Indian citizen\n• **30+ years** of age\n• No office of profit\n• Registered voter in any State",
+        "lok_sabha": "• Indian citizen\n• **25+ years** of age\n• No office of profit\n• Registered voter in any State"
+      },
+      {
+        "id": "presiding-officer",
+        "aspect": "**Presiding Officer**",
+        "rajya_sabha": "**Chairman**: Vice President of India (Art 64)\n**Ex-officio** - NOT a member of RS\nAppointed by virtue of being VP\nCannot vote except in tie (casting vote)",
+        "lok_sabha": "**Speaker**: Elected from LS members (Art 93)\n**IS a member** of LS\nUsually from ruling party (convention)\nCannot vote except in tie (casting vote)"
+      },
+      {
+        "id": "deputy-officer",
+        "aspect": "**Deputy Presiding Officer**",
+        "rajya_sabha": "**Deputy Chairman** (Art 89)\nElected by RS members from amongst themselves\nRemovable by effective majority of RS",
+        "lok_sabha": "**Deputy Speaker** (Art 93)\nElected by LS members from amongst themselves\nUsually from opposition (convention)\nRemovable by effective majority of LS (Art 94)"
+      },
+      {
+        "id": "removal-officer",
+        "aspect": "**Removal of Presiding Officer**",
+        "rajya_sabha": "**Deputy Chairman** removable by:\n• Resolution of RS\n• Effective majority (simple majority of present & voting)\n• 14 days notice required\n**Chairman (VP)** removed separately as VP",
+        "lok_sabha": "**Speaker & Deputy Speaker** removable by:\n• Resolution of LS\n• Effective majority (simple majority of present & voting)\n• **14 days notice** required (Art 94)\nRarely happens in practice"
+      },
+      {
+        "id": "quorum",
+        "aspect": "**Quorum (Art 100(3))**",
+        "rajya_sabha": "**1/10th of total strength** = 25 members\nIf no quorum, meeting adjourned\nOften misused to stall proceedings",
+        "lok_sabha": "**1/10th of total strength** = 55 members\nIf no quorum, meeting adjourned\nOften misused to stall proceedings"
+      },
+      {
+        "id": "legislative-power",
+        "aspect": "**Legislative Powers**",
+        "rajya_sabha": "Can initiate **any bill EXCEPT Money Bills**\nCan delay **Ordinary Bill** by max **6 months**\nCan delay **Money Bill** by max **14 days**\nCannot reject Ordinary/Money Bills - LS prevails",
+        "lok_sabha": "Can initiate **ANY bill** including Money Bills\n**Final authority** on all bills\nIf bill sent back by RS, LS can pass again\n**Joint Sitting** called if deadlock - LS dominates (543 vs 245)"
+      },
+      {
+        "id": "money-bill",
+        "aspect": "**Money Bill Powers (Art 110)**",
+        "rajya_sabha": "**Cannot initiate** Money Bills\nCan **recommend amendments** (not binding)\n**14 days** to return with recommendations\nIf not returned in 14 days, deemed passed\n**No veto power**",
+        "lok_sabha": "**Exclusive power** to originate Money Bills\n**Final authority** on Money Bills\nCan accept/reject RS recommendations\n**Speaker's certificate** on Money Bill is final (Art 110(3))\nRS cannot delay beyond 14 days"
+      },
+      {
+        "id": "financial-bill",
+        "aspect": "**Financial Bills (Type I & II)**",
+        "rajya_sabha": "**Financial Bill Type I**: Same as Money Bill (14 days)\n**Financial Bill Type II**: Like Ordinary Bill (6 months delay)\nCannot increase/reduce taxation/expenditure proposals",
+        "lok_sabha": "**Financial Bill Type I**: Originates only in LS\n**Financial Bill Type II**: Originates only in LS\n**Full control** over financial legislation\nRS has limited say"
+      },
+      {
+        "id": "budget",
+        "aspect": "**Budget & Grants**",
+        "rajya_sabha": "**Cannot vote** on Budget\n**Cannot vote** on Demands for Grants (Art 113)\nCan **discuss** budget in General Discussion\n**No control** over government expenditure",
+        "lok_sabha": "**Exclusive power** to vote on Budget\nVotes on **Demands for Grants** (Art 113)\nCan **reduce/reject** but **NOT increase** demand (Art 113(3))\n**Cut Motions**: Policy (Re 1), Economy (specific), Token (Rs 100)"
+      },
+      {
+        "id": "appropriation-bill",
+        "aspect": "**Appropriation Bill (Art 114)**",
+        "rajya_sabha": "Can make **recommendations** (14 days)\nCannot reject or amend\nLS can accept/reject recommendations\n**No control** over withdrawal from Consolidated Fund",
+        "lok_sabha": "**Final authority** on Appropriation Bill\nMust pass for govt to withdraw money from CFI\n**Money Bill** - All Money Bill provisions apply\nCannot be amended (amounts already voted)"
+      },
+      {
+        "id": "executive-control",
+        "aspect": "**Control over Executive**",
+        "rajya_sabha": "**No control** over Council of Ministers\nMinisters can be from RS (Max 15% of LS)\nCan ask questions, discuss policies\n**Cannot move no-confidence** motion",
+        "lok_sabha": "**Full control** over Council of Ministers\nCouncil collectively responsible **ONLY to LS** (Art 75(3))\nCan move **no-confidence motion** (50 members support)\nIf passed, govt must resign"
+      },
+      {
+        "id": "no-confidence",
+        "aspect": "**No-Confidence Motion**",
+        "rajya_sabha": "**NOT allowed** in RS\nCannot move no-confidence against govt\nCan criticize policies but cannot remove govt",
+        "lok_sabha": "**Only in LS** (Art 75(3))\nNeeds support of **50 members** to admit\nIf passed, **govt must resign**\nMost powerful parliamentary tool"
+      },
+      {
+        "id": "question-hour",
+        "aspect": "**Question Hour**",
+        "rajya_sabha": "**11 AM - 12 PM** (1 hour)\n**Starred Questions**: Oral answer + supplementary\n**Unstarred Questions**: Written answer\nMinisters must answer questions",
+        "lok_sabha": "**11 AM - 12 PM** (1 hour)\n**Starred Questions**: Oral answer + supplementary\n**Unstarred Questions**: Written answer\nMore impactful due to executive responsibility"
+      },
+      {
+        "id": "zero-hour",
+        "aspect": "**Zero Hour**",
+        "rajya_sabha": "**12 PM - 1 PM** (after Question Hour)\n**Indian innovation** (started 1962)\n**NOT in Constitution/Rules**\nMembers raise urgent matters without notice",
+        "lok_sabha": "**12 PM - 1 PM** (after Question Hour)\n**Indian innovation** (started 1962)\n**NOT in Constitution/Rules**\nMembers raise urgent matters without notice"
+      },
+      {
+        "id": "motions",
+        "aspect": "**Parliamentary Motions**",
+        "rajya_sabha": "**Adjournment Motion**: Can move (censures govt)\n**Censure Motion**: Can move\n**No-confidence Motion**: **NOT allowed**\n**Cut Motions**: **NOT allowed** (no budget voting)",
+        "lok_sabha": "**Adjournment Motion**: Can move (censures govt)\n**Censure Motion**: Can move\n**No-confidence Motion**: **Only in LS**\n**Cut Motions**: **Only in LS** (during Demands for Grants)"
+      },
+      {
+        "id": "joint-sitting",
+        "aspect": "**Joint Sitting (Art 108)**",
+        "rajya_sabha": "Called for **Ordinary/Financial Bills only** (NOT Money Bills)\nPresided by **LS Speaker**\nRS members: 245\n**LS will dominate** due to larger strength",
+        "lok_sabha": "Called for **Ordinary/Financial Bills only** (NOT Money Bills)\nPresided by **LS Speaker**\nLS members: 543\n**LS dominates** - More votes than RS"
+      },
+      {
+        "id": "joint-sitting-history",
+        "aspect": "**Joint Sitting - Historical Use**",
+        "rajya_sabha": "Used only **3 times** in history:\n• Dowry Prohibition Act 1960\n• Banking Service Commission (Repeal) Act 1978\n• Prevention of Terrorism Act (POTA) 2002",
+        "lok_sabha": "Used only **3 times** in history:\n• Dowry Prohibition Act 1960\n• Banking Service Commission (Repeal) Act 1978\n• Prevention of Terrorism Act (POTA) 2002"
+      },
+      {
+        "id": "exclusive-power-rs",
+        "aspect": "**Exclusive Powers of RS**",
+        "rajya_sabha": "**Art 249**: Authorize Parliament to legislate on **State List** (National interest) - **2/3rd majority** needed\n**Art 312**: Create new **All India Service** - **2/3rd majority** needed\n**VP Removal**: RS initiates resolution (Art 67b)",
+        "lok_sabha": "No exclusive powers similar to Art 249/312\nBut has **supreme powers** in:\n• Money Bills (Art 110)\n• No-confidence (Art 75(3))\n• Budget & Grants (Art 113-114)"
+      },
+      {
+        "id": "exclusive-power-ls",
+        "aspect": "**Exclusive Powers of LS**",
+        "rajya_sabha": "No equivalent powers\nWeaker than LS in all financial & executive matters",
+        "lok_sabha": "**Money Bills**: Exclusive origination & passage (Art 110)\n**No-confidence**: Only LS can remove govt (Art 75(3))\n**Budget**: Must be passed by LS\n**Demands for Grants**: Only LS votes (Art 113)"
+      },
+      {
+        "id": "electoral-function",
+        "aspect": "**Electoral Functions**",
+        "rajya_sabha": "**President Election**: RS members vote (along with LS + MLAs)\n**Vice President Election**: RS members vote (only MPs, no MLAs)\n**Equal power** with LS in President's impeachment (Art 61)",
+        "lok_sabha": "**President Election**: LS members vote (along with RS + MLAs)\n**Vice President Election**: LS members vote (only MPs, no MLAs)\n**Equal power** with RS in President's impeachment (Art 61)"
+      },
+      {
+        "id": "impeachment",
+        "aspect": "**President's Impeachment (Art 61)**",
+        "rajya_sabha": "**Equal power** with LS\nCan initiate impeachment (1/4th members notice)\nMust pass with **2/3rd of total strength**\nRS investigation if LS initiates",
+        "lok_sabha": "**Equal power** with RS\nCan initiate impeachment (1/4th members notice)\nMust pass with **2/3rd of total strength**\nLS investigation if RS initiates"
+      },
+      {
+        "id": "judges-removal",
+        "aspect": "**Judges Removal (Art 124(4))**",
+        "rajya_sabha": "**Equal power** with LS\nCan initiate removal of SC/HC judges\n**Special majority** needed: 2/3rd present + Majority of total\nBoth Houses must pass separately",
+        "lok_sabha": "**Equal power** with RS\nCan initiate removal of SC/HC judges\n**Special majority** needed: 2/3rd present + Majority of total\nBoth Houses must pass separately"
+      },
+      {
+        "id": "constitutional-amendment",
+        "aspect": "**Constitutional Amendments (Art 368)**",
+        "rajya_sabha": "**Equal power** with LS\n**Special majority** needed: 2/3rd present & voting + Majority of total strength\nSome amendments need 50% State ratification\n**Cannot be overruled** by LS",
+        "lok_sabha": "**Equal power** with RS\n**Special majority** needed: 2/3rd present & voting + Majority of total strength\nSome amendments need 50% State ratification\n**Cannot overrule** RS in amendments"
+      },
+      {
+        "id": "emergency-national",
+        "aspect": "**National Emergency (Art 352)**",
+        "rajya_sabha": "**Equal power** with LS\nMust approve Emergency within 1 month\n**Special majority** needed for approval\nCan disapprove Emergency proclamation",
+        "lok_sabha": "**Equal power** with RS\nMust approve Emergency within 1 month\n**Special majority** needed for approval\n**10% members** can demand disapproval vote (44th Amendment)"
+      },
+      {
+        "id": "emergency-financial",
+        "aspect": "**Financial Emergency (Art 360)**",
+        "rajya_sabha": "**Equal power** with LS\nMust approve within 2 months\n**Simple majority** sufficient\nNever used (0 times in history)",
+        "lok_sabha": "**Equal power** with RS\nMust approve within 2 months\n**Simple majority** sufficient\nNever used (0 times in history)"
+      },
+      {
+        "id": "president-rule",
+        "aspect": "**President's Rule (Art 356)**",
+        "rajya_sabha": "**Equal power** with LS\nMust approve within 2 months\n**Simple majority** sufficient\nExtension beyond 1 year needs both Houses",
+        "lok_sabha": "**Equal power** with RS\nMust approve within 2 months\n**Simple majority** sufficient\nExtension beyond 1 year needs both Houses"
+      },
+      {
+        "id": "sessions",
+        "aspect": "**Parliamentary Sessions**",
+        "rajya_sabha": "**3 sessions per year**:\n• Budget Session (Feb-May)\n• Monsoon Session (July-Aug)\n• Winter Session (Nov-Dec)\nSummoned by President (Art 85)",
+        "lok_sabha": "**3 sessions per year**:\n• Budget Session (Feb-May)\n• Monsoon Session (July-Aug)\n• Winter Session (Nov-Dec)\nSummoned by President (Art 85)"
+      },
+      {
+        "id": "prorogation",
+        "aspect": "**Prorogation**",
+        "rajya_sabha": "President prorogues RS (ends session)\nPending bills **do NOT lapse**\nCommittee work continues during prorogation",
+        "lok_sabha": "President prorogues LS (ends session)\nPending bills **do NOT lapse** (unless LS dissolves)\nCommittee work continues during prorogation"
+      },
+      {
+        "id": "dissolution-effect",
+        "aspect": "**Effect of Dissolution**",
+        "rajya_sabha": "**Never dissolves** - Permanent body\nNo concept of dissolution\nContinuous existence",
+        "lok_sabha": "**All pending bills lapse** (except bills pending in RS)\nSpeaker & Deputy Speaker vacate office\nNew elections conducted\nNew LS constituted within 6 months"
+      },
+      {
+        "id": "ministers-from-house",
+        "aspect": "**Ministers from House**",
+        "rajya_sabha": "Ministers can be from RS\nPM usually from LS (not mandatory)\nRS ministers must answer questions in RS\nMax 15% of LS strength (91st Amendment)",
+        "lok_sabha": "Most ministers from LS (convention)\nPM must command majority in LS\nLS ministers must answer questions in LS\nMax 15% of LS strength (91st Amendment)"
+      },
+      {
+        "id": "comparative-power",
+        "aspect": "**Overall Power Comparison**",
+        "rajya_sabha": "**Less powerful** than LS\n**Cannot**: Reject bills, Control finances, Remove govt\n**Can**: Delay bills (6 months max), Special powers (Art 249, 312)\nOften called 'Elder House' with mature deliberation",
+        "lok_sabha": "**More powerful** than RS\n**Supreme** in: Financial matters, Executive control, Legislation\n**Real power center** of Indian democracy\nRepresents popular will"
+      },
+      {
+        "id": "exam-key-point",
+        "aspect": "**Exam Key Points**",
+        "rajya_sabha": "• **NOT equal** to LS (unlike US Senate)\n• Represents **federal character**\n• **Cannot remove govt** (no no-confidence)\n• Exclusive powers: **Art 249** (State List), **Art 312** (All India Services)\n• Can delay Ordinary Bill **6 months**, Money Bill **14 days**",
+        "lok_sabha": "• **Supreme chamber** in Indian Parliament\n• **Real executive** responsible ONLY to LS\n• **Money Bills**: Exclusive power (Speaker's certificate final)\n• **No-confidence**: Only in LS\n• Dominates **Joint Sitting** (543 vs 245)"
+      }
+    ],
+    "summary": "Lok Sabha is MORE POWERFUL than Rajya Sabha. LS has exclusive control over Money Bills (Art 110), Budget & Grants (Art 113-114), and can remove government via no-confidence (Art 75(3)). RS can delay Ordinary Bills (6 months max) and Money Bills (14 days max) but cannot reject them. RS has exclusive powers under Art 249 (authorize Parliament to legislate on State List) and Art 312 (create All India Services). Both Houses have equal power in Constitutional Amendments, President's impeachment, and Emergency provisions. LS (543 members, 5-year term, directly elected) represents people; RS (245 members, 6-year term, indirectly elected) represents states. Key exam point: Despite being Upper House, RS is LESS powerful than LS unlike US Senate."
+  }
+}
+

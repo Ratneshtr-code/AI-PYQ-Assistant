@@ -1,0 +1,165 @@
+{
+  "id": "martial-law-vs-fr",
+  "subject": "polity",
+  "title": "Martial Law vs Suspension of Fundamental Rights",
+  "description": "",
+  "visualType": "table",
+  "metadata": {
+    "examRelevance": "high",
+    "relatedTopics": ["fundamental-rights", "emergency-provisions", "writs"],
+    "tags": ["Martial Law", "Emergency", "Fundamental Rights", "Article 34", "Article 359"]
+  },
+  "data": {
+    "columns": [
+      { "key": "aspect", "label": "Aspect" },
+      { "key": "martialLaw", "label": "Martial Law" },
+      { "key": "suspensionFR", "label": "Suspension of Fundamental Rights" }
+    ],
+    "categories": [
+      {"id": "all", "label": "All Comparisons"}
+    ],
+    "rows": [
+      {
+        "id": "definition",
+        "aspect": "**Definition**",
+        "martialLaw": "**Military rule** replacing civil administration in a specific area due to breakdown of law and order",
+        "suspensionFR": "**Presidential order** under Art 359 suspending right to move court for enforcement of FRs during **National Emergency** (Art 352)",
+        "category": "all"
+      },
+      {
+        "id": "constitutional-provision",
+        "aspect": "**Constitutional Provision**",
+        "martialLaw": "**NO specific provision** in Constitution for Martial Law. **Art 34** only mentions indemnity for acts during Martial Law",
+        "suspensionFR": "**Art 359** - President can suspend right to move court for enforcement of FRs (except Art 20-21 after 44th Amendment)",
+        "category": "all"
+      },
+      {
+        "id": "scope",
+        "aspect": "**Scope/Area**",
+        "martialLaw": "**Limited to specific area** where civil administration has broken down (local/regional)",
+        "suspensionFR": "**Applies to entire country** during National Emergency",
+        "category": "all"
+      },
+      {
+        "id": "authority",
+        "aspect": "**Who Declares**",
+        "martialLaw": "**Executive** (Government) declares; **NOT mentioned in Constitution**",
+        "suspensionFR": "**President** issues order under Art 359 on advice of Cabinet",
+        "category": "all"
+      },
+      {
+        "id": "nature",
+        "aspect": "**Nature**",
+        "martialLaw": "**Extra-constitutional** concept (borrowed from British tradition); based on common law",
+        "suspensionFR": "**Constitutional provision** - Art 359 explicitly provides for it",
+        "category": "all"
+      },
+      {
+        "id": "administration",
+        "aspect": "**Administration**",
+        "martialLaw": "**Military administration** replaces civil administration; Army takes over law and order",
+        "suspensionFR": "**Civil administration continues**; only enforcement of FRs suspended (people cannot move court)",
+        "category": "all"
+      },
+      {
+        "id": "courts",
+        "aspect": "**Courts**",
+        "martialLaw": "**Ordinary courts continue** to function; but **military courts** may be set up for summary trials",
+        "suspensionFR": "**Ordinary courts continue** but cannot entertain petitions for enforcement of suspended FRs",
+        "category": "all"
+      },
+      {
+        "id": "frs-affected",
+        "aspect": "**Fundamental Rights**",
+        "martialLaw": "FRs **NOT automatically suspended**; but **may not be enforceable** in practice due to military control",
+        "suspensionFR": "**Right to move court** for enforcement of FRs **explicitly suspended** by Presidential order (Art 20-21 cannot be suspended after 44th Amendment)",
+        "category": "all"
+      },
+      {
+        "id": "duration",
+        "aspect": "**Duration**",
+        "martialLaw": "**Till normalcy restored** in affected area; no fixed time limit",
+        "suspensionFR": "**Till Emergency continues**; cannot extend beyond Emergency period",
+        "category": "all"
+      },
+      {
+        "id": "parliamentary-approval",
+        "aspect": "**Parliamentary Approval**",
+        "martialLaw": "**NOT required** (executive action; no constitutional provision)",
+        "suspensionFR": "**Emergency itself requires** Parliamentary approval every 6 months (Art 352)",
+        "category": "all"
+      },
+      {
+        "id": "examples",
+        "aspect": "**Historical Examples**",
+        "martialLaw": "**Punjab (1919)** - After Jallianwala Bagh; **Bombay (1942)** - Quit India Movement. **Never declared in independent India**",
+        "suspensionFR": "**1975-77 Emergency** - President issued order under Art 359 suspending Art 14, 19, 21, 22 (ADM Jabalpur case: Even Art 21 suspended)",
+        "category": "all"
+      },
+      {
+        "id": "indemnity",
+        "aspect": "**Indemnity**",
+        "martialLaw": "**Art 34**: Parliament can indemnify persons for acts done during Martial Law (protect from legal action)",
+        "suspensionFR": "**Art 359(1A)** (added by 44th Amendment): Acts during Emergency NOT automatically protected; illegal acts still punishable",
+        "category": "all"
+      },
+      {
+        "id": "judicial-review",
+        "aspect": "**Judicial Review**",
+        "martialLaw": "Courts can review **after Martial Law ends**; examine if acts were justified",
+        "suspensionFR": "**During Emergency**: Cannot review (enforcement suspended). **After Emergency**: Can review legality of acts",
+        "category": "all"
+      },
+      {
+        "id": "modern-status",
+        "aspect": "**Current Status**",
+        "martialLaw": "**Concept largely obsolete**; NOT declared in independent India; replaced by Armed Forces Special Powers Act (AFSPA) in disturbed areas",
+        "suspensionFR": "**44th Amendment (1978) safeguards**: Art 20-21 (life & liberty) **cannot be suspended** even during Emergency; procedural safeguards added",
+        "category": "all"
+      }
+    ],
+    "additionalNotes": {
+      "article34": [
+        "**Article 34**: Restriction on rights conferred by Part III while Martial Law is in force",
+        "Parliament may **indemnify** any person for acts done in maintenance of law and order during Martial Law",
+        "Provides legal protection to military personnel for actions during Martial Law",
+        "NOT a provision to declare Martial Law; only deals with **consequences** of Martial Law"
+      ],
+      "article359": [
+        "**Article 359**: Suspension of enforcement of rights conferred by Part III during Emergency",
+        "**President can issue order** suspending right to move court for enforcement of FRs",
+        "**Cannot suspend Art 20-21** (life & liberty) after 44th Amendment 1978",
+        "**Art 359(1A)** (44th Amendment): Acts during Emergency NOT automatically protected; State must still act within law",
+        "**Applies only during National Emergency** (Art 352), not State or Financial Emergency"
+      ],
+      "44thAmendment1978": [
+        "**Major safeguards added** after 1975-77 Emergency misuse:",
+        "**1. Art 20-21 cannot be suspended**: Right to life and liberty protected even during Emergency",
+        "**2. Art 359(1A) added**: Acts during Emergency not automatically indemnified; illegal acts still punishable",
+        "**3. Emergency in writing**: President's satisfaction must be communicated in writing with reasons",
+        "**4. Cabinet advice**: President must act on written advice of Cabinet (not alone)",
+        "**5. Limited grounds**: Emergency only for 'war, external aggression, armed rebellion' (removed 'internal disturbance')",
+        "**6. Judicial review restored**: Courts can examine if constitutional requirements met"
+      ],
+      "admJabalpurCase": [
+        "**ADM Jabalpur v Shivkant Shukla (1976)** - Darkest judgment in SC history",
+        "**During 1975 Emergency**, President suspended Art 21 under Art 359",
+        "**SC held (4:1)**: During Emergency when Art 21 suspended, **right to life itself suspended**; HC cannot be issued even for illegal detention",
+        "**Justice H.R. Khanna dissented**: Right to life cannot be suspended even during Emergency (he was superseded for this dissent)",
+        "**44th Amendment 1978**: Overruled this judgment; Art 20-21 **cannot be suspended** even during Emergency",
+        "**Lessons**: Led to constitutional safeguards; strengthened judicial independence"
+      ],
+      "examTips": [
+        "**Most asked**: Difference between Martial Law and Suspension of FRs",
+        "**Key difference**: Martial Law = Military rule (extra-constitutional); Suspension of FRs = Presidential order under Art 359 (constitutional)",
+        "**Art 34**: Indemnity for acts during Martial Law (NOT provision to declare it)",
+        "**Art 359**: Suspension of enforcement of FRs during Emergency",
+        "**44th Amendment**: Art 20-21 cannot be suspended; acts during Emergency not automatically protected",
+        "**ADM Jabalpur case**: Overruled by 44th Amendment; Art 21 cannot be suspended",
+        "**Remember**: Martial Law = Local, Military rule, Extra-constitutional; FR Suspension = National, Civil administration continues, Constitutional (Art 359)"
+      ]
+    },
+    "summary": "**Martial Law** = Military rule in specific area (extra-constitutional, Art 34 gives indemnity). **Suspension of FRs** = Presidential order under Art 359 during National Emergency (constitutional provision). **Key differences**: Martial Law is local, military rule, extra-constitutional; FR suspension is national, civil administration continues, constitutional. **44th Amendment 1978**: Art 20-21 cannot be suspended even during Emergency. **ADM Jabalpur (1976)**: Held Art 21 could be suspended (overruled by 44th Amendment). **Art 34** = Indemnity for Martial Law acts; **Art 359** = Suspension of FR enforcement during Emergency."
+  }
+}
+

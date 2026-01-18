@@ -1,0 +1,249 @@
+{
+  "id": "parliament-structure",
+  "subject": "polity",
+  "title": "Parliament Structure - Rajya Sabha & Lok Sabha (Part V, Art 79-122)",
+  "description": "Comprehensive coverage of Indian Parliament structure with Rajya Sabha and Lok Sabha composition, powers, and key officials",
+  "visualType": "tabs",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["union-executive", "legislative-procedures", "budget-process"],
+    "tags": ["Parliament", "Rajya Sabha", "Lok Sabha", "Art 79-122", "Legislative", "Council of States", "House of People"]
+  },
+  "data": {
+    "tabs": [
+      {
+        "id": "compare-houses",
+        "label": "📊 Compare Both Houses",
+        "title": "Quick Comparison: Rajya Sabha vs Lok Sabha",
+        "sections": [
+          {
+            "heading": "Constitutional Basis",
+            "comparisonGrid": [
+              {
+                "body": "Rajya Sabha",
+                "points": ["**Art 80**: Council of States", "**Upper House**", "Permanent body (never dissolves)", "Federal character (represents States)"]
+              },
+              {
+                "body": "Lok Sabha",
+                "points": ["**Art 81**: House of the People", "**Lower House**", "5-year term (can be dissolved)", "Popular chamber (represents People)"]
+              }
+            ]
+          },
+          {
+            "heading": "Composition & Strength",
+            "comparisonGrid": [
+              {
+                "body": "Rajya Sabha",
+                "points": ["Max **250 members**", "Currently **245** (233 elected + 12 nominated)", "Elected by State/UT Legislatures (STV)", "12 nominated by President (Art, Lit, Science, Social Service)"]
+              },
+              {
+                "body": "Lok Sabha",
+                "points": ["Max **552 members**", "Currently **543** (530 States + 13 UTs)", "Directly elected by people (FPTP)", "2 nominated by President (Anglo-Indians) - *Lapsed after 2020*"]
+              }
+            ]
+          },
+          {
+            "heading": "Tenure & Term",
+            "comparisonGrid": [
+              {
+                "body": "Rajya Sabha",
+                "points": ["**6 years** term", "**1/3rd retires** every 2 years", "Continuous body (never fully reconstituted)", "Member can be re-elected indefinitely"]
+              },
+              {
+                "body": "Lok Sabha",
+                "points": ["**5 years** term", "**Entire House** dissolves", "Can be dissolved before 5 years", "During Emergency: Extended by 1 year at a time (max 1 year after Emergency ends)"]
+              }
+            ]
+          },
+          {
+            "heading": "Presiding Officers",
+            "comparisonGrid": [
+              {
+                "body": "Rajya Sabha",
+                "points": ["**Chairman**: Vice President of India (ex-officio)", "**Deputy Chairman**: Elected from RS members", "Chairman can vote only in tie (casting vote)", "Chairman NOT a member of RS"]
+              },
+              {
+                "body": "Lok Sabha",
+                "points": ["**Speaker**: Elected from LS members", "**Deputy Speaker**: Elected from LS members", "Speaker can vote only in tie (casting vote)", "Speaker IS a member of LS"]
+              }
+            ]
+          },
+          {
+            "heading": "Special Powers",
+            "comparisonGrid": [
+              {
+                "body": "Rajya Sabha",
+                "points": ["**Art 249**: Can empower Parliament to legislate on State List (2/3rd majority)", "**Art 312**: Can create new All India Service (2/3rd majority)", "Can remove VP (initiate resolution)", "Equal power in President's impeachment"]
+              },
+              {
+                "body": "Lok Sabha",
+                "points": ["**Money Bills**: Exclusive power (Art 110)", "**No-confidence motion**: Only in LS (Art 75(3))", "**Budget**: Must be passed by LS", "More powerful in financial matters"]
+              }
+            ]
+          },
+          {
+            "heading": "Exam Key Points",
+            "comparisonGrid": [
+              {
+                "body": "Rajya Sabha",
+                "points": ["**Not equal to LS** (unlike US Senate)", "Can delay Ordinary Bill by 6 months max", "Can delay Money Bill by 14 days max", "Cannot initiate Money Bills"]
+              },
+              {
+                "body": "Lok Sabha",
+                "points": ["**More powerful** than RS", "Real executive (PM + Council) responsible ONLY to LS", "Can override RS in most matters", "Represents popular sovereignty"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "rajya-sabha",
+        "label": "Rajya Sabha",
+        "title": "Rajya Sabha - Council of States (Art 80)",
+        "sections": [
+          {
+            "heading": "Constitutional Provision",
+            "points": [
+              "**Art 80**: RS shall consist of 250 members (233 elected + 12 nominated + 5 UT - but currently 245)",
+              "**Permanent House**: Never dissolves; 1/3rd members retire every 2 years",
+              "**Represents States**: Federal character; Each state gets seats based on population",
+              "**Indirect Election**: Elected by State Legislative Assemblies using STV (proportional representation)",
+              "**Qualifications (Art 84)**: Indian citizen, 30+ years, no office of profit"
+            ]
+          },
+          {
+            "heading": "Composition & Representation",
+            "points": [
+              "**Total Strength**: 245 members (as of 2023)",
+              "**Elected Members (233)**: States 229, Union Territories 4 (Delhi, Puducherry, J&K, Ladakh)",
+              "**Nominated Members (12)**: Experts in Art, Literature, Science, Social Service (President nominates)",
+              "**State-wise allocation**: UP 31 (highest), Maharashtra 19, Tamil Nadu 18; Sikkim 1 (lowest)",
+              "**States with <4 members**: Get 1 seat (eg: Goa, Sikkim, Tripura, Meghalaya)"
+            ]
+          },
+          {
+            "heading": "Chairman & Deputy Chairman",
+            "points": [
+              "**Chairman**: Vice President of India (Art 64) - *ex-officio*, not a member of RS",
+              "**Deputy Chairman**: Elected by RS members from amongst themselves (Art 89)",
+              "**Chairman's Powers**: Presides over RS, maintains order, decides points of order, casting vote in tie",
+              "**Removal of Deputy Chairman**: By effective majority of RS (simple resolution)",
+              "**Acting Chairman**: When Chairman acts as President (Art 65), Deputy Chairman presides RS"
+            ]
+          },
+          {
+            "heading": "Powers & Functions",
+            "points": [
+              "**Legislative**: Can initiate any bill except Money Bills; Can delay Ordinary Bill by max 6 months",
+              "**Financial**: Can recommend amendments to Money Bills (not binding); LS can accept/reject; 14 days delay max",
+              "**Executive**: Can discuss executive actions; Ministers accountable to both Houses",
+              "**Electoral**: Elects Vice President (along with LS); Participates in Presidential election",
+              "**Judicial**: Participates in impeachment of President, removal of VP, Judges, CAG, CEC"
+            ]
+          },
+          {
+            "heading": "Exclusive Powers of RS",
+            "points": [
+              "**Art 249**: Can authorize Parliament to legislate on State List subjects (National interest) - Needs 2/3rd of members present & voting",
+              "**Art 312**: Can create new All India Services (IAS, IPS, IFS type) - Needs 2/3rd majority",
+              "**Removal of VP**: RS initiates resolution for removal of VP (Art 67b); LS must agree",
+              "**Elder House**: Acts as 'House of Elders' with experienced members; Provides mature deliberation",
+              "**Federal Guardian**: Protects states' interests in legislation"
+            ]
+          },
+          {
+            "heading": "Limitations & Exam Tips",
+            "points": [
+              "**Not Equal to LS**: Despite being Upper House, less powerful than LS (unlike US Senate = House of Representatives)",
+              "**No Money Bill Power**: Cannot initiate, reject, or amend Money Bills",
+              "**No Control over Executive**: Council of Ministers responsible ONLY to LS (Art 75(3)); No-confidence motion only in LS",
+              "**6-month delay**: Can delay Ordinary Bill by max 6 months (sends back with amendments; if LS passes again, RS must pass within 2 months)",
+              "**Important Cases**: None landmark; But RS role in Art 249, 312 asked in exams"
+            ]
+          }
+        ],
+        "summary": "RS is a permanent federal chamber representing states with 245 members (233 elected by State Assemblies + 12 nominated). Chaired by VP. Has exclusive powers under Art 249 (State List legislation) & Art 312 (All India Services). Less powerful than LS - can delay bills but not reject; no Money Bill or no-confidence powers."
+      },
+      {
+        "id": "lok-sabha",
+        "label": "Lok Sabha",
+        "title": "Lok Sabha - House of the People (Art 81)",
+        "sections": [
+          {
+            "heading": "Constitutional Provision",
+            "points": [
+              "**Art 81**: LS shall consist of max 552 members (530 States + 20 UTs + 2 nominated Anglo-Indians)",
+              "**Direct Election**: Elected by people of India using FPTP (First Past The Post) system",
+              "**5-year term**: Normal term; Can be dissolved before 5 years; Extended during Emergency",
+              "**Popular Sovereignty**: Represents will of the people; More powerful than RS",
+              "**Qualifications (Art 84)**: Indian citizen, 25+ years, no office of profit"
+            ]
+          },
+          {
+            "heading": "Composition & Representation",
+            "points": [
+              "**Total Strength**: 543 members (as of 2019) - 530 States + 13 UTs",
+              "**State-wise allocation**: UP 80 (highest), Maharashtra 48, West Bengal 42, Bihar 40; Sikkim, Mizoram 1 (lowest)",
+              "**UT Representatives**: Delhi 7, J&K 5, Puducherry 1, etc.",
+              "**Nominated Members**: 2 Anglo-Indians (by President) - **Lapsed after 104th Amendment 2020**",
+              "**Reserved Seats**: 84 SC, 47 ST (as per population); Rotated every delimitation"
+            ]
+          },
+          {
+            "heading": "Speaker & Deputy Speaker",
+            "points": [
+              "**Speaker (Art 93)**: Elected by LS from amongst its members; Usually from ruling party",
+              "**Deputy Speaker (Art 93)**: Elected by LS; Usually from opposition (convention)",
+              "**Speaker's Powers**: Presides over LS, final authority on Money Bill (Art 110(3)), decides disqualification under 10th Schedule",
+              "**Casting Vote**: Speaker votes only in case of tie (Art 100(1))",
+              "**Removal**: By effective majority of LS (resolution with 14 days notice) - Art 94"
+            ]
+          },
+          {
+            "heading": "Powers & Functions",
+            "points": [
+              "**Legislative**: Can initiate any bill including Money Bills; Final say on legislation",
+              "**Financial**: Exclusive power over Money Bills (Art 110); Budget must be passed by LS; Grants voted by LS",
+              "**Executive Control**: Council of Ministers collectively responsible ONLY to LS (Art 75(3)); No-confidence motion only in LS",
+              "**Electoral**: Elects President (along with RS & State Assemblies), VP (with RS), Speaker, Deputy Speaker",
+              "**Judicial**: Participates in impeachment of President, removal of Judges, CAG, CEC, etc."
+            ]
+          },
+          {
+            "heading": "Exclusive Powers of LS",
+            "points": [
+              "**Money Bills (Art 110)**: Only LS can originate Money Bills; RS can recommend (not binding); 14 days delay max",
+              "**No-confidence Motion (Art 75(3))**: Only LS can move no-confidence against Council of Ministers; If passed, govt must resign",
+              "**Budget & Grants**: Budget introduced in LS; Demands for Grants voted by LS; RS can only recommend",
+              "**Deadlock Resolution**: Joint Sitting called by President - LS will prevail due to larger strength (543 vs 245)",
+              "**Financial Bills**: All Financial Bills (Type I & II) must originate in LS"
+            ]
+          },
+          {
+            "heading": "Dissolution & Emergency",
+            "points": [
+              "**Dissolution**: President can dissolve LS before 5 years on PM's advice; After no-confidence; After general election",
+              "**During Emergency (Art 352)**: Term can be extended by 1 year at a time; Max 1 year after Emergency ends (Art 83(2))",
+              "**Prorogation vs Dissolution**: Prorogation = end of session (both Houses); Dissolution = end of LS term (only LS)",
+              "**Dissolution effects**: All pending bills in LS lapse (except bills pending in RS, or bills passed by LS awaiting RS approval)",
+              "**Post-dissolution**: President can summon LS within 6 months of dissolution (for Budget session)"
+            ]
+          },
+          {
+            "heading": "Exam Important Points",
+            "points": [
+              "**Most Powerful**: LS is supreme - Controls executive (PM + Council responsible only to LS), Controls finance (Money Bills)",
+              "**Speaker's Neutrality**: After election, Speaker resigns from party; Maintains impartiality; Has casting vote",
+              "**Delimitation**: Last done in 2008 (based on 2001 census); Frozen till 2026 (42nd Amendment); Now extended to 2031 (104th Amendment)",
+              "**Anti-Defection**: Speaker decides disqualification under 10th Schedule (not subject to judicial review till decision made)",
+              "**Joint Sitting**: LS dominates due to strength (543 vs 245) - Conducted by LS Speaker"
+            ]
+          }
+        ],
+        "summary": "LS is the directly elected popular chamber with 543 members (530 States + 13 UTs) serving 5-year terms. Presided by Speaker. Supreme legislative body - Exclusive power over Money Bills, no-confidence motion, and financial matters. Council of Ministers responsible ONLY to LS. More powerful than RS in all matters."
+      }
+    ],
+    "summary": "Indian Parliament (Art 79) = President + Rajya Sabha + Lok Sabha. Bicameral legislature with LS (543 members, 5-year term, directly elected) more powerful than RS (245 members, permanent, indirectly elected). LS controls Money Bills & executive; RS can delay bills but not reject. Both equal in President's impeachment, Constitutional Amendments."
+  }
+}
+

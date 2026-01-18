@@ -1,0 +1,378 @@
+{
+  "id": "fr-dpsp-conflicts",
+  "subject": "polity",
+  "title": "Conflicts between Fundamental Rights and DPSPs",
+  "description": "",
+  "visualType": "splitPanel",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["fundamental-rights", "dpsps", "fr-vs-dpsp", "constitutional-amendments"],
+    "tags": ["FR vs DPSP Conflict", "Kesavananda Bharati", "Minerva Mills", "Art 31C", "Basic Structure"]
+  },
+  "data": {
+    "categories": [
+      {"id": "nature", "label": "Nature of Conflict", "color": "#6366F1"},
+      {"id": "cases", "label": "Landmark Cases", "color": "#3B82F6"},
+      {"id": "amendments", "label": "Constitutional Amendments", "color": "#10B981"},
+      {"id": "resolution", "label": "Resolution Mechanisms", "color": "#F59E0B"}
+    ],
+    "articles": [
+      {
+        "id": "conflict-overview",
+        "number": "Overview",
+        "shortLabel": "Basics",
+        "title": "Why FRs and DPSPs Conflict?",
+        "category": "nature",
+        "color": "#6366F1",
+        "content": {
+          "fundamentalTension": [
+            "**FRs**: Individual liberty, property rights, negative obligations ('State shall NOT')",
+            "**DPSPs**: Social welfare, equitable distribution, positive obligations ('State SHALL')",
+            "**Conflict arises**: When implementing DPSP (social welfare) requires restricting FR (individual liberty)"
+          ],
+          "examples": [
+            "**Land reforms** (DPSP Art 39(b) - equitable distribution) vs **Right to property** (was FR Art 31, now Art 300A)",
+            "**Nationalization** (DPSP Art 39(b) - common good) vs **Right to trade** (FR Art 19(1)(g))",
+            "**Reservation** (DPSP Art 46 - SC/ST welfare) vs **Right to equality** (FR Art 14, 16)",
+            "**Labor laws** (DPSP Art 43 - living wage) vs **Freedom of contract** (FR Art 19(1)(g))"
+          ],
+          "coreIssue": [
+            "**FR philosophy**: Liberal individualism - protect individual from State",
+            "**DPSP philosophy**: Socialism/welfare - State intervention for common good",
+            "**Balance needed**: Too much FR → Inequality; Too much DPSP → Tyranny",
+            "**Indian Constitution**: Attempts to balance both"
+          ],
+          "examTips": "**Most asked**: Why conflict arises? Because FRs protect individual liberty (negative) while DPSPs require State intervention for welfare (positive). Classic example: Property rights (FR) vs Land reforms (DPSP)."
+        }
+      },
+      {
+        "id": "champakam-case",
+        "number": "Champakam Case",
+        "shortLabel": "Champakam",
+        "title": "State of Madras v Champakam Dorairajan (1951)",
+        "category": "cases",
+        "color": "#3B82F6",
+        "content": {
+          "facts": [
+            "**Year**: 1951 (first major FR vs DPSP conflict case)",
+            "**Issue**: Madras government reserved seats in medical/engineering colleges for **backward classes, SCs, STs** based on caste",
+            "**Reservation exceeded merit**: Some reserved candidates had lower marks than general category",
+            "**Legal basis**: Government justified under Art 46 (DPSP - protect SC/ST)",
+            "**Champakam Dorairajan**: Brahmin student denied admission despite higher marks; challenged reservation"
+          ],
+          "scJudgment": [
+            "**SC held**: **FRs prevail over DPSPs**",
+            "**Reasoning**: Art 37 explicitly states DPSPs are **non-justiciable**; FRs are **justiciable** (enforceable through Art 32)",
+            "**Cannot violate FR** (Art 15(1), 29(2) - no discrimination) to implement DPSP (Art 46)",
+            "**State's power limited**: Cannot make laws violating FRs even if for DPSP implementation",
+            "Reservation struck down as violating Art 15(1) (no discrimination), Art 29(2) (merit-based admission)"
+          ],
+          "aftermath": [
+            "**1st Constitutional Amendment 1951** passed immediately after judgment",
+            "**Art 15(4) added**: State can make special provisions for SCs, STs, backward classes",
+            "**Art 15(4) is exception to Art 15(1)**: Permits reservation without violating equality",
+            "Converted DPSP goal (Art 46) into **constitutional exception** to FR",
+            "Shows **Legislature's response** to judicial interpretation"
+          ],
+          "significance": [
+            "**First clear ruling**: FRs have primacy over DPSPs",
+            "**Led to amendment**: 1st Amendment changed constitutional balance",
+            "**Established principle**: DPSPs cannot override justiciable FRs",
+            "**But not final word**: Later cases (Kesavananda, Minerva Mills) modified this"
+          ],
+          "examTips": "**Most asked case**: Champakam (1951) held **FRs prevail over DPSPs**. Led to **1st Amendment** adding Art 15(4) (reservation permitted). Remember: First major FR-DPSP conflict; FR won; Legislature amended Constitution."
+        }
+      },
+      {
+        "id": "kesavananda-case",
+        "number": "Kesavananda",
+        "shortLabel": "Kesav",
+        "title": "Kesavananda Bharati v State of Kerala (1973)",
+        "category": "cases",
+        "color": "#3B82F6",
+        "content": {
+          "facts": [
+            "**Year**: 1973 (landmark case - 13-judge bench)",
+            "**Issue**: Kerala Land Reforms Act - acquired property of Kesavananda Bharati's mutt (monastery)",
+            "**Challenge**: Violation of right to property (then FR Art 31)",
+            "**Bigger issue**: Can Parliament **amend Constitution** to give DPSP primacy over FR? (24th, 25th, 29th Amendments validity challenged)",
+            "**Central question**: Unlimited amendment power or limitations?"
+          ],
+          "scJudgment": [
+            "**Historic judgment**: **Basic Structure doctrine** established",
+            "**7:6 majority**: Parliament **cannot destroy basic features** of Constitution",
+            "**Basic structure includes**: Supremacy of Constitution, Rule of law, Judicial review, Separation of powers, **Balance between FRs and DPSPs**",
+            "**FRs and DPSPs together form basic structure**: Neither absolute supremacy",
+            "**Harmony needed**: Both are integral; Cannot sacrifice one completely for other"
+          ],
+          "onFRvsDPSP": [
+            "**Moved away from Champakam**: Not just 'FRs prevail'",
+            "**New approach**: **Harmonious construction** - balance both FRs and DPSPs",
+            "**Both important**: FRs for individual liberty; DPSPs for social justice",
+            "**Constitutional scheme**: Combination of FRs (means) and DPSPs (ends) creates 'Conscience of Constitution'",
+            "**Amendment power**: Can amend FRs to implement DPSPs, BUT cannot destroy basic structure"
+          ],
+          "significance": [
+            "**Most important case** in Indian constitutional law",
+            "**Basic structure doctrine**: Limits amendment power",
+            "**FR-DPSP balance**: Part of basic structure; Both equally important",
+            "**Overruled implicit**: Champakam's absolute FR primacy modified to balance approach"
+          ],
+          "examTips": "**MOST CRITICAL CASE**: Kesavananda (1973) - Basic Structure doctrine. **Balance between FRs and DPSPs** is part of basic structure. Neither absolute supremacy. Harmonious construction needed. 13-judge bench, 7:6 verdict."
+        }
+      },
+      {
+        "id": "minerva-mills-case",
+        "number": "Minerva Mills",
+        "shortLabel": "Minerva",
+        "title": "Minerva Mills v Union of India (1980)",
+        "category": "cases",
+        "color": "#3B82F6",
+        "content": {
+          "facts": [
+            "**Year**: 1980 (tested 42nd Amendment - 'Mini Constitution')",
+            "**Issue**: 42nd Amendment 1976 (during Emergency) made sweeping changes:",
+            "• Extended Art 31C to **ALL DPSPs** (originally only Art 39(b), (c))",
+            "• Added clause: Laws implementing DPSPs **cannot be challenged** on ground of violating Art 14, 19, 31",
+            "• Amended Art 368: No amendment can be questioned in any court on any ground",
+            "**Effect**: Made DPSPs supreme; Removed judicial review"
+          ],
+          "scJudgment": [
+            "**5-judge bench struck down** parts of 42nd Amendment",
+            "**Art 31C extension (to all DPSPs) struck down**: Violates basic structure",
+            "**Reasoning**: Balance between FRs and DPSPs is **basic feature**; Cannot give DPSPs absolute primacy",
+            "**Art 31C limited**: Valid only for Art 39(b), (c) (socialist DPSPs); Not for all DPSPs",
+            "**Art 368 clause struck down**: Judicial review cannot be removed; Basic structure protected"
+          ],
+          "famousQuote": [
+            "**Justice Bhagwati**: '*The Indian Constitution is founded on the bedrock of the balance between Parts III and IV*'",
+            "**'Two lungs' analogy**: Constitution has **two lungs - FRs and DPSPs**; Both essential for life of Constitution",
+            "Cannot let one lung collapse to save the other",
+            "Harmony and balance between FRs and DPSPs is essence of Constitution"
+          ],
+          "principles": [
+            "**Balance is key**: FRs and DPSPs must be balanced; Neither can have absolute supremacy",
+            "**Limited primacy**: Art 31C valid only for Art 39(b), (c) (equitable distribution); Not blanket supremacy to all DPSPs",
+            "**Judicial review intact**: Courts can examine if law genuinely implements DPSP or uses it as pretext to violate FR",
+            "**Democracy protected**: Emergency-era attempt to make DPSPs supreme failed"
+          ],
+          "significance": [
+            "**Reinforced Kesavananda**: Basic structure doctrine strengthened",
+            "**FR-DPSP balance**: Reaffirmed as basic feature",
+            "**Limited Art 31C**: Scope reduced; Only Art 39(b), (c) covered",
+            "**Judicial independence**: Courts can review FR-DPSP balance"
+          ],
+          "examTips": "**MOST IMPORTANT FR-DPSP case**: Minerva Mills (1980) - Balance between FRs and DPSPs is basic feature. **'Two lungs'** analogy. Art 31C extension to all DPSPs struck down (now valid only for Art 39(b), (c)). Reinforced harmonious construction."
+        }
+      },
+      {
+        "id": "art31c-amendment",
+        "number": "Art 31C",
+        "shortLabel": "31C",
+        "title": "Article 31C - DPSP Supremacy Attempt",
+        "category": "amendments",
+        "color": "#10B981",
+        "content": {
+          "provision": [
+            "**Added by**: 25th Constitutional Amendment 1971",
+            "**Purpose**: Give **priority to DPSP** implementation over FR",
+            "**Original scope**: Laws implementing **Art 39(b), (c)** (socialist principles - equitable distribution, common good)",
+            "**Protection**: Such laws cannot be challenged on ground of violating Art 14 (equality), Art 19 (freedoms)",
+            "**Rationale**: Enable land reforms, nationalization without FR challenges"
+          ],
+          "art39bAndC": [
+            "**Art 39(b)**: Ownership and control of **material resources** distributed for **common good**",
+            "**Art 39(c)**: Economic system does not result in **concentration of wealth** and means of production",
+            "Both are **socialist DPSPs** - Basis for nationalization, land reforms"
+          ],
+          "42ndAmendmentChange": [
+            "**42nd Amendment 1976** (Emergency period): Extended Art 31C to **ALL DPSPs**",
+            "**New clause**: Laws implementing **any DPSP** protected from FR challenge",
+            "**Effect**: Made all DPSPs supreme over FRs; Drastically changed constitutional balance",
+            "**Intent**: Give government free hand to implement socialist policies without judicial interference"
+          ],
+          "minervaMillsReversal": [
+            "**Minerva Mills (1980)**: SC struck down 42nd Amendment extension",
+            "**Reasoning**: Giving all DPSPs primacy over FRs destroys basic structure",
+            "**Current status**: Art 31C valid **only for Art 39(b), (c)** - NOT for all DPSPs",
+            "**Limited protection**: Only socialist economic DPSPs have some primacy; Not social/Gandhian DPSPs"
+          ],
+          "currentScope": [
+            "Laws implementing **Art 39(b), (c)** cannot be challenged on ground of violating **Art 14, 19** (but can be challenged on Art 21, other FRs)",
+            "**Bank nationalization**, land reforms, MRTP Act, etc. protected under Art 31C",
+            "Courts can still examine if law **genuinely** implements Art 39(b), (c) or uses it as pretext"
+          ],
+          "examTips": "**Art 31C**: Added by 25th Amendment 1971. Originally protected laws implementing Art 39(b), (c). 42nd Amendment extended to ALL DPSPs (struck down by Minerva Mills). **Current**: Valid only for Art 39(b), (c) vs Art 14, 19."
+        }
+      },
+      {
+        "id": "art31a-31b",
+        "number": "Art 31A/31B",
+        "shortLabel": "31A/B",
+        "title": "Article 31A, 31B - Land Reform Protection",
+        "category": "amendments",
+        "color": "#10B981",
+        "content": {
+          "article31A": [
+            "**Added by**: 1st Constitutional Amendment 1951",
+            "**Purpose**: Protect **land reform laws** from FR challenges",
+            "**Scope**: Laws providing for acquisition of estates, zamindari abolition, management of property by State",
+            "**Protection**: Cannot be challenged on ground of violating Art 14 (equality), Art 19 (freedoms), Art 31 (property - now repealed)",
+            "**Background**: Post-Champakam case; Enable land reforms (DPSP Art 39(b)) without FR obstacles"
+          ],
+          "article31B": [
+            "**Added by**: 1st Constitutional Amendment 1951",
+            "**Ninth Schedule**: Created Ninth Schedule - list of Acts/Regulations protected from judicial review",
+            "**Originally 13 Acts**: Mainly land reform Acts of various states",
+            "**Current status**: **284 Acts** (misused - Acts unrelated to land reforms added)",
+            "**Protection**: Acts in Ninth Schedule cannot be challenged for violating FRs"
+          ],
+          "irCoelho2007": [
+            "**I.R. Coelho v State of Tamil Nadu (2007)** - 9-judge bench",
+            "**Limited Ninth Schedule immunity**:",
+            "• Acts added to Ninth Schedule **after Apr 24, 1973** (Kesavananda date) can be reviewed for **basic structure** violation",
+            "• Acts violating basic structure NOT protected even if in Ninth Schedule",
+            "• Judicial review restored to some extent",
+            "**Effect**: Curtailed 9th Schedule misuse; Basic structure cannot be violated"
+          ],
+          "frVsDpspAngle": [
+            "Art 31A, 31B show **Legislature's attempt** to give DPSP (land reforms) priority over FR (property)",
+            "**Immediate response** to Champakam case (1951) where SC held FRs prevail",
+            "Created **exceptions to FRs** for implementing DPSP goals",
+            "Shows **ongoing tension** between individual rights (FR) and social welfare (DPSP)"
+          ],
+          "examTips": "**Art 31A, 31B**: 1st Amendment 1951. Protect land reforms (DPSP) from FR challenges. Art 31A = land reform laws; Art 31B = Ninth Schedule (284 Acts). **I.R. Coelho (2007)**: Basic structure can be reviewed even for 9th Schedule Acts."
+        }
+      },
+      {
+        "id": "harmonious-construction",
+        "number": "Harmony",
+        "shortLabel": "Balance",
+        "title": "Harmonious Construction - Resolution Mechanism",
+        "category": "resolution",
+        "color": "#F59E0B",
+        "content": {
+          "principle": [
+            "**Harmonious construction**: Interpret FRs and DPSPs **together** to give effect to both",
+            "**Not conflict, but complement**: FRs and DPSPs are not enemies; They complement each other",
+            "**Granville Austin**: 'FRs are means; DPSPs are ends' - Work together for same goal",
+            "**Modern approach**: Courts expand FRs using DPSP goals"
+          ],
+          "judicialTechniques": [
+            "**1. Art 21 expansion**: SC expanded Art 21 (life & liberty) to include DPSP goals:",
+            "• Right to livelihood (DPSP Art 39(a)) read into Art 21 - *Olga Tellis (1985)*",
+            "• Right to education (DPSP Art 45) read into Art 21 - *Mohini Jain (1992)* (later became Art 21A via 86th Amendment)",
+            "• Right to health (DPSP Art 47) read into Art 21 - *CESCA v Union (1995)*",
+            "• Right to environment (DPSP Art 48A) read into Art 21 - *MC Mehta cases*",
+            "**2. Using DPSPs to interpret FR scope**: DPSPs guide how FRs should be understood",
+            "**3. Upholding laws**: If law balances FR and DPSP, courts uphold it"
+          ],
+          "examples": [
+            "**Reservation cases**: Balance Art 14, 16 (FR - equality) with Art 46 (DPSP - SC/ST welfare)",
+            "• SC upheld reservation as **reasonable classification** under Art 14",
+            "• Used DPSP Art 46 to justify exception to equality principle",
+            "**Minimum wage laws**: Balance Art 19(1)(g) (FR - freedom of trade) with Art 43 (DPSP - living wage)",
+            "• Courts held reasonable restriction on freedom for social welfare",
+            "**Environmental laws**: Balance Art 19(1)(g) (trade) with Art 48A (DPSP - environment)",
+            "• Sustainable development principle - balance both"
+          ],
+          "convergence": [
+            "**DPSP → FR**: Some DPSPs became FRs:",
+            "• Art 45 (free education for children) → Art 21A (FR) via 86th Amendment 2002",
+            "**FR expansion**: FRs now include many DPSP goals through judicial interpretation",
+            "**Net effect**: Gap between FRs and DPSPs narrowing over time"
+          ],
+          "examTips": "**Harmonious construction**: Modern approach - balance FRs and DPSPs. Courts expand Art 21 to include DPSP goals (livelihood, education, health, environment). Use DPSPs to interpret FRs. Examples: Olga Tellis (livelihood), Mohini Jain (education), MC Mehta (environment)."
+        }
+      },
+      {
+        "id": "property-right-conflict",
+        "number": "Property Conflict",
+        "shortLabel": "Property",
+        "title": "Right to Property - Biggest FR-DPSP Conflict",
+        "category": "nature",
+        "color": "#6366F1",
+        "content": {
+          "background": [
+            "**Original status**: Right to property was **Fundamental Right** (Art 19(1)(f) and Art 31)",
+            "**DPSP goal**: Art 39(b), (c) require equitable distribution, prevent concentration of wealth",
+            "**Conflict**: Land reforms, nationalization (DPSP implementation) violated property right (FR)",
+            "**Biggest constitutional battle**: Multiple amendments, cases over decades"
+          ],
+          "amendments": [
+            "**1st Amendment 1951**: Art 31A, 31B added - protect land reforms",
+            "**4th Amendment 1955**: Amended Art 31 - compensation requirement relaxed",
+            "**17th Amendment 1964**: Expanded Art 31A scope",
+            "**25th Amendment 1971**: Art 31(2) amended - 'compensation' changed to 'amount'; Art 31C added",
+            "**42nd Amendment 1976**: Property right restrictions; Extended Art 31C to all DPSPs",
+            "**44th Amendment 1978**: **Removed property as FR** - Now only legal right (Art 300A)",
+            "**Total 8+ amendments** related to property - Most amended FR"
+          ],
+          "keyCase": [
+            "**Kesavananda Bharati (1973)**: Challenge to 24th, 25th, 29th Amendments (all related to property)",
+            "Outcome: Basic structure doctrine; Property NOT basic structure",
+            "**Effect**: Property can be heavily regulated for public good (DPSP implementation)"
+          ],
+          "resolution": [
+            "**Final resolution**: Property **removed as FR** (44th Amendment 1978)",
+            "**Current status**: Art 300A - Property as **legal right** (not FR)",
+            "Can be acquired by law; Compensation required but not necessarily market value",
+            "**DPSP won**: State can acquire, redistribute property for social welfare without FR challenge",
+            "**But not absolute**: Art 300A still requires 'authority of law'; Cannot be arbitrary"
+          ],
+          "significance": [
+            "Shows **Legislature's determination** to implement DPSP (land reforms) over FR (property)",
+            "**Multiple amendments** show difficulty of balancing individual rights vs social welfare",
+            "**Final outcome**: Social welfare (DPSP) prevailed over individual property right (FR)",
+            "**But**: Judicial review retained - Property acquisition must follow due process"
+          ],
+          "examTips": "**Property right - biggest FR-DPSP conflict**: Originally FR (Art 19(1)(f), 31). 8+ amendments to balance with DPSP Art 39(b), (c). **44th Amendment 1978** removed as FR → now Art 300A (legal right). Shows DPSP (social welfare) can prevail over FR (individual right) through amendments."
+        }
+      },
+      {
+        "id": "modern-approach",
+        "number": "Modern View",
+        "shortLabel": "Current",
+        "title": "Modern Judicial Approach - Integration",
+        "category": "resolution",
+        "color": "#F59E0B",
+        "content": {
+          "evolution": [
+            "**1950s (Champakam)**: FRs prevail; DPSPs subordinate",
+            "**1970s (Kesavananda)**: Both important; Balance needed; Both part of basic structure",
+            "**1980s (Minerva Mills)**: Two lungs theory; Neither supreme",
+            "**1990s onwards**: Integration - FRs expanded to include DPSP goals"
+          ],
+          "currentPrinciples": [
+            "**1. No hierarchy**: Neither FRs nor DPSPs absolutely supreme",
+            "**2. Complementary**: Both work together for constitutional goals",
+            "**3. Judicial creativity**: Courts expand FRs using DPSPs as guide",
+            "**4. Case-by-case**: Balance determined based on facts of each case",
+            "**5. Basic structure**: FR-DPSP balance itself is basic feature - Cannot be destroyed"
+          ],
+          "examples": [
+            "**Vishaka v State of Rajasthan (1997)**: Used DPSP Art 42 (maternity relief) to create sexual harassment guidelines under Art 21",
+            "**Unnikrishnan v State of AP (1993)**: Merged Art 45 (DPSP - education) with Art 21 (FR - life) to create right to education",
+            "**Vellore Citizens' Welfare Forum (1996)**: Merged Art 48A (DPSP - environment) with Art 21 (FR) - Sustainable development",
+            "**Bandhua Mukti Morcha (1984)**: Used DPSP Art 39(e), (f) to expand Art 21 (dignity of workers)"
+          ],
+          "techniques": [
+            "**Expansive interpretation of Art 21**: Most important technique",
+            "**Reading DPSPs into FRs**: DPSPs guide scope of FRs",
+            "**Reasonable classification**: Use DPSP goals to justify FR restrictions (Art 14)",
+            "**Public Interest Litigation (PIL)**: Tool to enforce DPSP goals through FR violations"
+          ],
+          "futureDirection": [
+            "**Converging trend**: Gap between FRs and DPSPs narrowing",
+            "**Possibilities**: More DPSPs may become FRs (like Art 45 → 21A)",
+            "**Judicial role**: Courts increasingly using DPSPs to expand FRs",
+            "**Balance shifts**: Depending on social needs, emphasis changes (individual liberty vs social welfare)"
+          ],
+          "examTips": "**Modern approach**: Integration of FRs and DPSPs. Courts expand Art 21 using DPSP goals. Examples: Vishaka (Art 42), Unnikrishnan (Art 45), Vellore (Art 48A), Bandhua Mukti (Art 39). PIL tool for enforcement. No hierarchy - complementary."
+        }
+      }
+    ],
+    "summary": "**FR-DPSP Conflicts**: Arise when social welfare (DPSP) requires restricting individual liberty (FR). **Champakam (1951)**: FRs prevail; Led to 1st Amendment. **Kesavananda (1973)**: Basic Structure - balance between FRs and DPSPs is basic feature. **Minerva Mills (1980)**: 'Two lungs' theory - both essential; Art 31C limited to Art 39(b), (c). **Key amendments**: Art 31A, 31B (land reforms); Art 31C (DPSP priority for Art 39(b), (c)). **Property right**: Removed as FR (44th Amendment) - biggest FR-DPSP conflict. **Modern approach**: Integration - Courts expand Art 21 to include DPSP goals (livelihood, education, health, environment). Harmonious construction - complementary not contradictory."
+  }
+}
+

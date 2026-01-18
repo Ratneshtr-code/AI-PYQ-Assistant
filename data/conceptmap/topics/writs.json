@@ -1,0 +1,394 @@
+{
+  "id": "writs",
+  "subject": "polity",
+  "title": "Writs under Article 32 & 226",
+  "description": "",
+  "visualType": "splitPanel",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["fundamental-rights", "judicial-review"],
+    "tags": ["Writs", "Article 32", "Article 226", "Constitutional Remedies", "Habeas Corpus", "Mandamus"]
+  },
+  "data": {
+    "categories": [
+      {"id": "overview", "label": "Overview & Basics", "color": "#6366F1"},
+      {"id": "writs", "label": "5 Types of Writs", "color": "#3B82F6"},
+      {"id": "comparison", "label": "Art 32 vs Art 226", "color": "#10B981"},
+      {"id": "limitations", "label": "Limitations & Cases", "color": "#F59E0B"}
+    ],
+    "articles": [
+      {
+        "id": "writ-overview",
+        "number": "Overview",
+        "shortLabel": "Basics",
+        "title": "What are Writs?",
+        "category": "overview",
+        "color": "#6366F1",
+        "content": {
+          "definition": [
+            "**Writ** = Formal written order issued by a court",
+            "Derived from English common law (prerogative writs of King's Bench)",
+            "Mechanism to enforce Fundamental Rights",
+            "**Art 32**: Supreme Court can issue writs for enforcement of FRs",
+            "**Art 226**: High Courts can issue writs for FRs AND other legal rights (wider scope)"
+          ],
+          "fiveWrits": [
+            "**1. Habeas Corpus** - 'You may have the body' (against illegal detention)",
+            "**2. Mandamus** - 'We command' (command public authority to perform duty)",
+            "**3. Prohibition** - 'To forbid' (prevent lower court from exceeding jurisdiction)",
+            "**4. Certiorari** - 'To be certified' (quash order of lower court exceeding jurisdiction)",
+            "**5. Quo Warranto** - 'By what authority' (inquire into legality of claim to public office)"
+          ],
+          "significance": [
+            "Makes Fundamental Rights justiciable (can be enforced through courts)",
+            "Dr. Ambedkar called Art 32 **'Heart and Soul of Constitution'**",
+            "Without right to constitutional remedies, other FRs would be meaningless",
+            "Writs are extraordinary remedies (not ordinary suits)",
+            "Fast-track mechanism for justice"
+          ],
+          "examTips": "**Most asked**: 5 types of writs with meanings (Habeas Corpus, Mandamus, Prohibition, Certiorari, Quo Warranto). Art 32 (SC) only for FRs; Art 226 (HC) for FRs + other rights. Habeas Corpus and Mandamus most frequently used."
+        }
+      },
+      {
+        "id": "habeas-corpus",
+        "number": "Habeas Corpus",
+        "shortLabel": "HC",
+        "title": "Habeas Corpus - Against Illegal Detention",
+        "category": "writs",
+        "color": "#3B82F6",
+        "content": {
+          "meaning": [
+            "**Latin**: 'You may have the body'",
+            "**Purpose**: Secure release of person illegally detained",
+            "**Against**: Executive, private individual, any authority",
+            "**Protects**: Personal liberty (Art 21)"
+          ],
+          "whenIssued": [
+            "Person detained **without legal authority**",
+            "Detention **beyond legal period** (e.g., beyond 24 hours without magistrate - Art 22)",
+            "Detention in **non-compliance with law** (e.g., preventive detention without grounds)",
+            "Arrest by **wrong authority**",
+            "Detention in **wrong place**"
+          ],
+          "procedure": [
+            "Court issues writ commanding detaining authority to **produce the person** before court",
+            "Court examines **legality of detention**",
+            "If detention illegal, person is **released immediately**",
+            "If detention legal, remanded back to custody"
+          ],
+          "cannotBeIssued": [
+            "**Lawful detention** by competent court",
+            "**Detention outside jurisdiction** of court (territorial limitation)",
+            "**Detention already ended** (person already released)",
+            "**Contempt of court** cases (person detained for contempt)"
+          ],
+          "keyCases": [
+            "**ADM Jabalpur v Shivkant Shukla (1976)** - During Emergency, right to HC suspended (controversial judgment; later criticized)",
+            "**Gopalan v State of Madras (1950)** - HC issued for illegal detention",
+            "**Kanu Sanyal v State (1973)** - HC for preventive detention without grounds",
+            "**Rudul Sah v Bihar (1983)** - HC issued; compensation awarded for illegal detention even after release"
+          ],
+          "examTips": "**Most important writ**. Latin = 'You may have the body'. Against **illegal detention**. Protects Art 21 (personal liberty). Can be against executive or private person. Cannot be issued during Emergency (Art 359 suspends). ADM Jabalpur case most controversial."
+        }
+      },
+      {
+        "id": "mandamus",
+        "number": "Mandamus",
+        "shortLabel": "M",
+        "title": "Mandamus - Command to Perform Duty",
+        "category": "writs",
+        "color": "#3B82F6",
+        "content": {
+          "meaning": [
+            "**Latin**: 'We command'",
+            "**Purpose**: Command public authority to perform **public legal duty**",
+            "**Against**: Government, public officials, statutory bodies, public authorities",
+            "**Cannot be issued against**: Private individuals, President, Governors"
+          ],
+          "whenIssued": [
+            "Public authority **refuses to perform** a legal duty",
+            "Duty is of **public nature** (not private)",
+            "Petitioner has **legal right** to performance of that duty",
+            "No other **adequate remedy** available",
+            "Duty is **clear and certain** (not discretionary)"
+          ],
+          "examples": [
+            "Government refuses to release pension/salary",
+            "Municipality refuses to issue trade license (when entitled)",
+            "University refuses to declare exam results",
+            "Government refuses to appoint to public post (when selected)",
+            "Authority refuses to perform statutory duty"
+          ],
+          "cannotBeIssued": [
+            "To enforce **contractual obligations** (use civil suit)",
+            "Against **private individuals** or companies",
+            "Against **President or Governor** (Art 361 immunity)",
+            "For **policy decisions** (courts don't interfere in policy)",
+            "When **alternative remedy** exists (must exhaust remedies first)",
+            "To perform **discretionary functions** (only ministerial/mandatory duties)"
+          ],
+          "keyCases": [
+            "**UP v Babu Ram Upadhya (1961)** - Mandamus can be issued to enforce FR",
+            "**Smt. Ujjam Bai v State of UP (1962)** - Cannot be issued to compel legislature to enact law",
+            "**Bombay v Bombay Education Society (1954)** - Cannot be issued against private bodies",
+            "**Dwarka Prasad v State of UP (1954)** - Cannot be issued for contractual rights"
+          ],
+          "examTips": "**Second most important**. Latin = 'We command'. To **compel performance of public duty**. Against public authorities only (not private persons). Cannot be against President/Governor. Cannot be for discretionary acts (only mandatory duties)."
+        }
+      },
+      {
+        "id": "prohibition",
+        "number": "Prohibition",
+        "shortLabel": "P",
+        "title": "Prohibition - Prevent Excess of Jurisdiction",
+        "category": "writs",
+        "color": "#3B82F6",
+        "content": {
+          "meaning": [
+            "**Latin**: 'To forbid'",
+            "**Purpose**: **Prevent** inferior court/tribunal from **exceeding jurisdiction** or acting **contrary to law**",
+            "**Issued to**: Lower courts, tribunals, quasi-judicial bodies",
+            "**Preventive** in nature (issued before order passed)"
+          ],
+          "whenIssued": [
+            "Lower court/tribunal **exceeding jurisdiction**",
+            "Court/tribunal acting **without jurisdiction**",
+            "Proceeding in **violation of principles of natural justice**",
+            "Court/tribunal acting **contrary to law**"
+          ],
+          "againstWhom": [
+            "**Judicial authorities**: Lower courts (subordinate to HC)",
+            "**Quasi-judicial authorities**: Tribunals, tax authorities, etc.",
+            "**NOT against**: Legislative bodies, private persons, administrative authorities acting administratively"
+          ],
+          "timing": [
+            "Issued **before final order** passed (preventive)",
+            "Stops the proceedings from continuing",
+            "If order already passed, use **Certiorari** (not Prohibition)"
+          ],
+          "keyCases": [
+            "**Secretary of State v Mask & Co (1940)** - Prohibition issued to prevent tribunal from exceeding jurisdiction",
+            "**Raja of Bobbili v State of Madras (1951)** - Prohibition and Certiorari distinguish based on timing"
+          ],
+          "examTips": "**Prohibition = Preventive** (before order). **Certiorari = Corrective** (after order). Both issued to **inferior courts/tribunals** for excess of jurisdiction. Prohibition stops proceedings; Certiorari quashes order."
+        }
+      },
+      {
+        "id": "certiorari",
+        "number": "Certiorari",
+        "shortLabel": "C",
+        "title": "Certiorari - Quash Order for Excess of Jurisdiction",
+        "category": "writs",
+        "color": "#3B82F6",
+        "content": {
+          "meaning": [
+            "**Latin**: 'To be certified' or 'To be informed'",
+            "**Purpose**: **Quash** (set aside) order of inferior court/tribunal that has **exceeded jurisdiction** or acted **contrary to law**",
+            "**Issued to**: Lower courts, tribunals, quasi-judicial bodies",
+            "**Corrective** in nature (issued after order passed)"
+          ],
+          "whenIssued": [
+            "Order passed by court/tribunal **exceeding jurisdiction**",
+            "Order passed **without jurisdiction**",
+            "Order violates **principles of natural justice**",
+            "Order is **patently illegal** or suffers from **error of law apparent on face of record**"
+          ],
+          "grounds": [
+            "**1. Excess of jurisdiction** - authority acted beyond powers",
+            "**2. Lack of jurisdiction** - authority had no power at all",
+            "**3. Error of law** apparent on face of record",
+            "**4. Violation of natural justice** - no hearing given, bias, etc.",
+            "**5. Fraud** or **malafides**"
+          ],
+          "againstWhom": [
+            "**Judicial authorities**: Lower courts (subordinate to HC)",
+            "**Quasi-judicial authorities**: Tribunals, administrative bodies exercising judicial functions",
+            "**NOT against**: Supreme Court (by HC), legislative bodies, pure administrative acts"
+          ],
+          "timing": [
+            "Issued **after final order** passed (corrective)",
+            "Can be issued even if order was passed long ago (but delay must be explained)",
+            "If proceedings still pending, use **Prohibition** (not Certiorari)"
+          ],
+          "keyCases": [
+            "**Hari Vishnu Kamath v Syed Ahmad Ishaque (1955)** - Certiorari issued to quash tribunal order",
+            "**Nagendra Nath Bora v CIT (1957)** - Error of law apparent on face of record justifies Certiorari",
+            "**Khurshid Ahmad v State of UP (1965)** - Certiorari cannot be issued against private bodies"
+          ],
+          "examTips": "**Certiorari = Corrective** (after order). **Prohibition = Preventive** (before order). Certiorari **quashes** order; Prohibition **stops** proceedings. Issued to **inferior courts/tribunals**. Grounds: Excess of jurisdiction, violation of natural justice, error of law."
+        }
+      },
+      {
+        "id": "quo-warranto",
+        "number": "Quo Warranto",
+        "shortLabel": "QW",
+        "title": "Quo Warranto - Challenge to Public Office",
+        "category": "writs",
+        "color": "#3B82F6",
+        "content": {
+          "meaning": [
+            "**Latin**: 'By what authority' or 'By what warrant'",
+            "**Purpose**: Inquire into **legality of claim** of person to **public office**",
+            "**Issued against**: Person holding public office without legal authority",
+            "**Effect**: If claim illegal, person **ousted from office**"
+          ],
+          "whenIssued": [
+            "Person holding **public office** without **legal authority**",
+            "Office is of **public nature** (not private employment)",
+            "Office is **substantive** (not merely honorary or ministerial)",
+            "Appointment is **contrary to law** (e.g., lack of qualifications)"
+          ],
+          "conditions": [
+            "**1. Public office**: Office must be public, not private employment (e.g., Minister, Judge, Vice-Chancellor)",
+            "**2. Substantive office**: Not merely honorary (e.g., members of advisory bodies not covered)",
+            "**3. Created by law**: Office must be created by Constitution or statute",
+            "**4. Unauthorized holding**: Person holds office without legal authority"
+          ],
+          "canBeIssuedFor": [
+            "**Vice-Chancellor** of university (appointed without qualifications)",
+            "**Director** of public corporation",
+            "**Public officials** appointed contrary to law",
+            "**Members** of statutory bodies (if unqualified)"
+          ],
+          "cannotBeIssuedFor": [
+            "**Private employment** (use civil suit)",
+            "**Ministerial posts** (use Mandamus)",
+            "**President, Governors** (political offices, not justiciable in this manner)",
+            "**MPs, MLAs** (Election Commission and Election Tribunal have jurisdiction)"
+          ],
+          "keyCases": [
+            "**University of Mysore v Govinda Rao (1965)** - Quo Warranto can be issued against Vice-Chancellor",
+            "**Jamalpur v Pt. Kaleshwar (1964)** - Cannot be issued for private office",
+            "**State of Arunachal Pradesh v Khudiram Chakma (1994)** - Issued to challenge appointment as Speaker"
+          ],
+          "examTips": "**Least used writ**. Latin = 'By what authority'. Challenges **holding of public office** without legal authority. Office must be **public, substantive, created by law**. Cannot be for private employment, MPs/MLAs (election petitions instead)."
+        }
+      },
+      {
+        "id": "art32-vs-art226",
+        "number": "Art 32 vs 226",
+        "shortLabel": "Comparison",
+        "title": "Article 32 vs Article 226 - SC vs HC",
+        "category": "comparison",
+        "color": "#10B981",
+        "content": {
+          "article32": [
+            "**Court**: Supreme Court",
+            "**Scope**: **Only for enforcement of Fundamental Rights** (Part III)",
+            "**Nature**: **Fundamental Right itself** (cannot be suspended except during Emergency under Art 359)",
+            "**Discretion**: SC **cannot refuse** to entertain petition (it's a guaranteed right)",
+            "**Territorial jurisdiction**: **All India** (can file from anywhere in India)",
+            "**Writs**: All 5 types of writs"
+          ],
+          "article226": [
+            "**Court**: High Courts",
+            "**Scope**: **For Fundamental Rights AND any other legal rights** (much wider than Art 32)",
+            "**Nature**: **Not a Fundamental Right** (discretionary power of HC)",
+            "**Discretion**: HC **can refuse** to entertain petition (has discretion to not issue writ)",
+            "**Territorial jurisdiction**: **Within state** only (can file only within HC's territorial jurisdiction)",
+            "**Writs**: All 5 types of writs"
+          ],
+          "keyDifferences": [
+            "**1. Scope**: Art 32 = FRs only; Art 226 = FRs + other legal rights (wider)",
+            "**2. Nature**: Art 32 = FR itself (guaranteed); Art 226 = discretionary power",
+            "**3. Jurisdiction**: Art 32 = All India; Art 226 = Within state only",
+            "**4. Refusal**: Art 32 = SC cannot refuse; Art 226 = HC can refuse",
+            "**5. Suspension**: Art 32 suspended during Emergency (Art 359); Art 226 not suspended",
+            "**6. Appeal**: From HC writ (Art 226) → Appeal to SC under Art 136; From SC writ (Art 32) → No appeal (review only)"
+          ],
+          "whenToApproach": [
+            "**Art 32 (SC)**: When FR violated + need all-India jurisdiction + guaranteed hearing",
+            "**Art 226 (HC)**: When any legal right violated (not just FR) + local matter + faster (HC may be geographically closer)"
+          ],
+          "examTips": "**Most asked comparison**. Art 32 = **FR itself** (guaranteed), **SC**, **FRs only**, **All India**. Art 226 = **Discretionary power**, **HC**, **FRs + other rights**, **State only**. Art 226 **wider scope** but **discretionary**; Art 32 **narrower scope** but **guaranteed**."
+        }
+      },
+      {
+        "id": "limitations-writs",
+        "number": "Limitations",
+        "shortLabel": "Limits",
+        "title": "Limitations on Writs",
+        "category": "limitations",
+        "color": "#F59E0B",
+        "content": {
+          "generalLimitations": [
+            "**Not against private individuals**: Writs generally against State/public authorities (except HC against private detention)",
+            "**Not for contractual rights**: Use civil suit, not writs",
+            "**Not against President/Governors**: Art 361 grants immunity",
+            "**Discretionary acts**: Mandamus cannot compel discretionary functions (only ministerial)",
+            "**Alternative remedy exists**: Must exhaust alternative remedies first",
+            "**Laches (delay)**: Unexplained delay may defeat writ",
+            "**During Emergency**: Art 359 allows suspension of enforcement of FRs (Art 32 suspended)"
+          ],
+          "specificLimitations": [
+            "**Habeas Corpus**: Cannot be issued for lawful detention, contempt of court",
+            "**Mandamus**: Cannot be against private persons, for policy matters, for contracts",
+            "**Prohibition**: Cannot be against legislative/administrative acts, only judicial acts",
+            "**Certiorari**: Cannot be against SC (by HC), against pure administrative acts",
+            "**Quo Warranto**: Cannot be for private employment, MPs/MLAs"
+          ],
+          "emergencyProvisions": [
+            "**Art 359**: During National Emergency (Art 352), President can suspend right to move court for enforcement of FRs",
+            "**Effect**: Art 32 suspended; cannot approach SC for writs",
+            "**Art 226 not suspended**: Can still approach HC (but HC may refuse as it's discretionary)",
+            "**1975-77 Emergency**: Art 32 suspended; even HC writ suspended (ADM Jabalpur case)",
+            "**44th Amendment 1978**: Art 20, 21 (life and liberty) cannot be suspended even during Emergency"
+          ],
+          "importantPrinciples": [
+            "**Locus standi**: Petitioner must have legal right/interest (except PIL - any person can file)",
+            "**Public Interest Litigation (PIL)**: Relaxed locus standi; any person can file for public cause",
+            "**Alternative remedy**: Generally must exhaust other remedies first (but not absolute bar)",
+            "**Clean hands**: Petitioner must approach with 'clean hands' (not involved in illegality)",
+            "**Suppress material facts**: If petitioner suppresses facts, writ may be dismissed"
+          ],
+          "keyCases": [
+            "**ADM Jabalpur v Shivkant Shukla (1976)** - Right to life suspended during Emergency; HC could not issue HC (overruled in effect by 44th Amendment)",
+            "**Maneka Gandhi v Union (1978)** - Expanded Art 21; procedure must be fair, just, reasonable",
+            "**S.P. Gupta v Union (1981)** - Judges Transfer case; expanded PIL, locus standi relaxed",
+            "**Bandhua Mukti Morcha v Union (1984)** - PIL for bonded laborers; epistolary jurisdiction"
+          ],
+          "examTips": "**Limitations**: Not against private persons (generally), not for contracts, not against President/Governor, alternative remedy must be exhausted. **Emergency**: Art 32 suspended under Art 359; Art 20-21 cannot be suspended (44th Amendment). **PIL**: Relaxed locus standi for public causes."
+        }
+      },
+      {
+        "id": "prohibition-vs-certiorari",
+        "number": "P vs C",
+        "shortLabel": "P vs C",
+        "title": "Prohibition vs Certiorari - Key Differences",
+        "category": "comparison",
+        "color": "#10B981",
+        "content": {
+          "prohibition": [
+            "**Timing**: **Before** final order passed (preventive)",
+            "**Purpose**: **Stop** proceedings from continuing",
+            "**Effect**: **Prohibits** inferior court from proceeding further",
+            "**Nature**: **Preventive** remedy",
+            "**Stage**: Issued when case is **pending** before inferior court"
+          ],
+          "certiorari": [
+            "**Timing**: **After** final order passed (corrective)",
+            "**Purpose**: **Quash** (set aside) order already passed",
+            "**Effect**: **Nullifies** order of inferior court",
+            "**Nature**: **Corrective** remedy",
+            "**Stage**: Issued when order **already passed** by inferior court"
+          ],
+          "similarities": [
+            "Both issued to **inferior courts/tribunals**",
+            "Both for **excess of jurisdiction** or **violation of law**",
+            "Both protect **principles of natural justice**",
+            "Both issued by **High Court** (Art 226) or **Supreme Court** (Art 32)",
+            "Both are **discretionary** remedies"
+          ],
+          "mnemonic": [
+            "**Prohibition = PREVENT** (before order) → Think 'P' for Prevent",
+            "**Certiorari = CORRECT** (after order) → Think 'C' for Correct",
+            "**Time distinction**: Prohibition stops; Certiorari quashes"
+          ],
+          "examTips": "**Most asked distinction**. **Prohibition** = **Preventive** (before order), **stops** proceedings. **Certiorari** = **Corrective** (after order), **quashes** order. Both for **inferior courts**, **excess of jurisdiction**. Remember: **P = Prevent, C = Correct**."
+        }
+      }
+    ],
+    "summary": "**5 Writs** under Art 32 (SC) and Art 226 (HC): **1. Habeas Corpus** (against illegal detention), **2. Mandamus** (command to perform duty), **3. Prohibition** (prevent excess of jurisdiction - before order), **4. Certiorari** (quash order for excess of jurisdiction - after order), **5. Quo Warranto** (challenge to public office). **Art 32** = FR itself, SC, FRs only, All India, guaranteed. **Art 226** = Discretionary power, HC, FRs + other rights, State only, wider scope. **Prohibition** = Preventive (before order); **Certiorari** = Corrective (after order). During Emergency, Art 32 can be suspended (Art 359), but Art 20-21 cannot be suspended (44th Amendment)."
+  }
+}
+

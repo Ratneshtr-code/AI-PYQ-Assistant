@@ -1,0 +1,217 @@
+{
+  "id": "federal-vs-unitary",
+  "subject": "polity",
+  "title": "Federal vs Unitary System - Comprehensive Comparison",
+  "description": "",
+  "visualType": "table",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["federal-features", "parliamentary-vs-presidential", "centre-state-relations"],
+    "tags": ["Federalism", "Unitary", "Quasi-federal", "Comparison", "Art 1"]
+  },
+  "data": {
+    "columns": [
+      { "key": "aspect", "label": "Aspect of Comparison" },
+      { "key": "federalSystem", "label": "Federal System" },
+      { "key": "unitarySystem", "label": "Unitary System" }
+    ],
+    "categories": [
+      {"id": "all", "label": "All Comparisons (20+ Points)"}
+    ],
+    "rows": [
+      {
+        "id": "definition",
+        "aspect": "**Definition**",
+        "federalSystem": "**Dual polity** - Power divided between Central (Union) and State (Regional) governments by Constitution",
+        "unitarySystem": "**Single polity** - All power vests in Central government; Regional units subordinate to Centre",
+        "category": "all"
+      },
+      {
+        "id": "power-source",
+        "aspect": "**Source of Power**",
+        "federalSystem": "**Constitution** - Both Centre and States derive powers from Constitution",
+        "unitarySystem": "**Centre** - States/regions derive power from Centre (delegated authority)",
+        "category": "all"
+      },
+      {
+        "id": "sovereignty",
+        "aspect": "**Sovereignty**",
+        "federalSystem": "**Divided** - Sovereignty shared between Centre and States (dual sovereignty)",
+        "unitarySystem": "**Undivided** - Sovereignty vests entirely in Central government",
+        "category": "all"
+      },
+      {
+        "id": "constitution-type",
+        "aspect": "**Constitution Type**",
+        "federalSystem": "**Written and rigid** - Federal structure defined in Constitution; Difficult to amend federal provisions (need state consent)",
+        "unitarySystem": "**May be written or unwritten** - Can be flexible (like UK); Easy to change governance structure",
+        "category": "all"
+      },
+      {
+        "id": "power-distribution",
+        "aspect": "**Power Distribution**",
+        "federalSystem": "**Constitutional distribution** - Powers clearly divided (Union, State, Concurrent Lists in 7th Schedule)",
+        "unitarySystem": "**No distribution** - Centre can allocate/withdraw powers to/from states at will",
+        "category": "all"
+      },
+      {
+        "id": "autonomy",
+        "aspect": "**State/Regional Autonomy**",
+        "federalSystem": "**High autonomy** - States have independent powers; Cannot be taken away by Centre (except emergency)",
+        "unitarySystem": "**Low/No autonomy** - Regions subordinate; Centre controls; Can be dissolved/merged",
+        "category": "all"
+      },
+      {
+        "id": "legislation",
+        "aspect": "**Legislative Powers**",
+        "federalSystem": "**Divided** - Separate subjects for Union and States (Union List - 97 subjects, State List - 61 subjects, Concurrent - 47)",
+        "unitarySystem": "**Centralized** - Centre has exclusive legislative power; Can legislate on all subjects",
+        "category": "all"
+      },
+      {
+        "id": "executive",
+        "aspect": "**Executive Powers**",
+        "federalSystem": "**Dual executive** - Union govt for Union subjects; State govt for State subjects; Independent executive authority",
+        "unitarySystem": "**Single executive** - Central govt executive authority over entire country; States are agents of Centre",
+        "category": "all"
+      },
+      {
+        "id": "judiciary",
+        "aspect": "**Judiciary**",
+        "federalSystem": "**Dual/Integrated** - Federal courts (Supreme Court) + State courts (High Courts); Interpret federal-state disputes",
+        "unitarySystem": "**Single hierarchy** - Unified court system under central control",
+        "category": "all"
+      },
+      {
+        "id": "amendment",
+        "aspect": "**Constitutional Amendment**",
+        "federalSystem": "**Requires state consent** - Federal provisions (Centre-State relations, SC/HC, 7th Schedule) need 50% state ratification (Art 368)",
+        "unitarySystem": "**Centre alone** - Central govt/parliament can amend without consulting states",
+        "category": "all"
+      },
+      {
+        "id": "taxation",
+        "aspect": "**Taxation Powers**",
+        "federalSystem": "**Divided** - Centre has certain taxes (customs, GST, income tax); States have others (land revenue, excise); Concurrent (GST)",
+        "unitarySystem": "**Centralized** - Central govt controls taxation; May share revenue with regions",
+        "category": "all"
+      },
+      {
+        "id": "citizenship",
+        "aspect": "**Citizenship**",
+        "federalSystem": "**Dual** (USA, Switzerland) or **Single** (India, Canada) - May have both national and state citizenship",
+        "unitarySystem": "**Single** - Only national citizenship",
+        "category": "all"
+      },
+      {
+        "id": "disputes",
+        "aspect": "**Centre-State Disputes**",
+        "federalSystem": "**Judicial resolution** - Supreme Court adjudicates disputes (Art 131 - original jurisdiction); Interstate disputes also (Art 262)",
+        "unitarySystem": "**No mechanism** - Centre's decision final; No dispute as states are subordinate",
+        "category": "all"
+      },
+      {
+        "id": "flexibility",
+        "aspect": "**Flexibility**",
+        "federalSystem": "**Rigid** - Constitutional changes to federal structure difficult; Need states' consent; Protects federal balance",
+        "unitarySystem": "**Flexible** - Easy to change governance; Parliament/Centre can modify structure anytime",
+        "category": "all"
+      },
+      {
+        "id": "administration",
+        "aspect": "**Administration**",
+        "federalSystem": "**Complex** - Two levels of administration; Coordination needed; May cause delays",
+        "unitarySystem": "**Simple** - Single chain of command; Efficient; Quick decision-making",
+        "category": "all"
+      },
+      {
+        "id": "suitability",
+        "aspect": "**Suitability**",
+        "federalSystem": "**Large, diverse countries** - Geographically large; Diverse population (linguistic, cultural, ethnic diversity); USA, Canada, India, Australia, Brazil",
+        "unitarySystem": "**Small, homogeneous countries** - Small area; Uniform population; UK, France, Japan, China, New Zealand",
+        "category": "all"
+      },
+      {
+        "id": "advantages",
+        "aspect": "**Advantages**",
+        "federalSystem": "• Protects diversity\n• Prevents tyranny (checks and balances)\n• Local governance (better understanding of local needs)\n• Federating units retain identity\n• Diffusion of power",
+        "unitarySystem": "• Strong Centre - Unity\n• Quick decisions\n• Simple and efficient\n• Uniform laws\n• Lower administrative cost",
+        "category": "all"
+      },
+      {
+        "id": "disadvantages",
+        "aspect": "**Disadvantages**",
+        "federalSystem": "• Complex and expensive\n• Slow decision-making\n• Centre-State conflicts\n• Duplication of functions\n• May lead to regionalism",
+        "unitarySystem": "• Risk of tyranny\n• Ignores diversity\n• Distant from local needs\n• Over-centralization\n• Regional aspirations suppressed",
+        "category": "all"
+      },
+      {
+        "id": "emergency",
+        "aspect": "**During Emergency**",
+        "federalSystem": "**Federal structure may be suspended** - In India, during National Emergency, India becomes unitary (Art 356); States lose autonomy",
+        "unitarySystem": "**No change** - Already centralized; Emergency just strengthens Centre further",
+        "category": "all"
+      },
+      {
+        "id": "examples",
+        "aspect": "**Examples**",
+        "federalSystem": "**Classical federal**: USA, Australia, Canada, Brazil, Switzerland, Germany, Argentina\n**Quasi-federal**: India (federal + unitary features)",
+        "unitarySystem": "**Examples**: UK, France, Japan, China, Italy, Spain, New Zealand, Sri Lanka, Bangladesh",
+        "category": "all"
+      }
+    ],
+    "additionalNotes": {
+      "indianContext": [
+        "**Art 1**: India is 'Union of States' (NOT 'Federation of States')",
+        "**Why 'Union'?**: States have no right to secede; Permanent union (unlike USA where states have theoretical secession right)",
+        "**K.C. Wheare**: India is 'Quasi-federal' - Federal in structure, Unitary in spirit",
+        "**Granville Austin**: India is 'Co-operative federalism' - Cooperation between Centre and States"
+      ],
+      "indianFederalFeatures": [
+        "**1. Written Constitution** - Federal structure defined",
+        "**2. Dual polity** - Union and States (Art 1, Part I)",
+        "**3. Division of powers** - 7th Schedule (Union, State, Concurrent Lists)",
+        "**4. Supremacy of Constitution** - Constitutional supremacy, not Parliament",
+        "**5. Rigid Constitution** - Federal provisions need state ratification (Art 368)",
+        "**6. Independent Judiciary** - SC as arbiter (Art 131, 136, 226, 32)",
+        "**7. Bicameralism** - Rajya Sabha represents states (Art 80)"
+      ],
+      "indianUnitaryFeatures": [
+        "**1. Strong Centre** - Union List (97) > State List (61); Residuary powers to Union (Art 248)",
+        "**2. Single Constitution** - No separate state constitutions (unlike USA)",
+        "**3. Single citizenship** - No state citizenship (unlike USA)",
+        "**4. Integrated judiciary** - Single hierarchy; SC apex; HCs under SC",
+        "**5. Emergency provisions** - Art 352, 356, 360 (Centre can suspend federal structure)",
+        "**6. Governor** - Centre's agent in states (Art 153-162); Appointed by President",
+        "**7. All India Services** - IAS, IPS, IFS controlled by Centre (Art 312)",
+        "**8. Centre can legislate on State List** - During emergency (Art 250), national interest (Art 249), interstate agreement (Art 252)",
+        "**9. State boundaries** - Centre can change by simple majority (Art 3)",
+        "**10. Parliament's supremacy** - Can override state laws on Concurrent List (Art 254)",
+        "**11. Financial dependence** - States depend on Centre for grants (Art 275, 282)"
+      ],
+      "quasiFederal": [
+        "**K.C. Wheare (1953)**: India is 'Quasi-federal' - Neither truly federal nor unitary",
+        "**Reasoning**: Strong unitary features (emergency, single citizenship, strong Centre) make it lean towards unitary",
+        "**BUT**: Federal structure (division of powers, dual polity, written Constitution) make it federal",
+        "**Conclusion**: **'Federal in normal times, Unitary during emergency'**"
+      ],
+      "scView": [
+        "**State of West Bengal v Union (1963)**: SC observed Indian Constitution is 'federal' (division of powers)",
+        "**S.R. Bommai (1994)**: SC emphasized federal structure is **basic feature** of Constitution; Cannot be destroyed",
+        "**Kesavananda Bharati (1973)**: Federalism is part of basic structure",
+        "**Judicial trend**: SC has been protecting federalism through interpretations (Art 356 abuse curtailed, states' rights protected)"
+      ],
+      "examTips": [
+        "**Most asked**: Why India is 'Quasi-federal'? (Federal + Unitary features)",
+        "**Remember**: India = **'Union of States'** (Art 1), NOT 'Federation'",
+        "**K.C. Wheare quote**: 'Quasi-federal' - Very important",
+        "**Federal features**: Division of powers, written Constitution, dual polity, rigid (need states for federal provisions)",
+        "**Unitary features**: Strong Centre, single citizenship, emergency, Governor, All India Services, integrated judiciary",
+        "**SC view**: Federalism is **basic structure** (S.R. Bommai 1994)",
+        "**Explain**: 10-15 points comparison; Then explain India's position (quasi-federal)"
+      ]
+    },
+    "summary": "**Federal vs Unitary**: **Federal** = Dual polity; Power divided by Constitution; States have autonomy; Written and rigid; Dual executive/judiciary; Suitable for large, diverse countries (USA, Canada, India). **Unitary** = Single polity; Power vests in Centre; States subordinate; Flexible; Single executive; Suitable for small, homogeneous countries (UK, France, Japan). **India**: **'Quasi-federal'** (K.C. Wheare) - Federal in structure (division of powers, dual polity, written Constitution, rigid) + Unitary in spirit (strong Centre, single citizenship, emergency, Governor, All India Services). **Art 1**: India is 'Union of States'. **Federal in normal times, Unitary during emergency**. **SC view**: Federalism is **basic structure** (S.R. Bommai 1994)."
+  }
+}
+

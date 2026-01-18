@@ -1,0 +1,200 @@
+{
+  "id": "emergency-provisions",
+  "subject": "polity",
+  "title": "Emergency Provisions - Part XVIII (Art 352-360)",
+  "description": "Comprehensive comparison of three types of emergencies with constitutional provisions, effects, historical instances, and safeguards",
+  "visualType": "table",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["administrative-relations", "fundamental-rights", "constitutional-amendments", "federal-features"],
+    "tags": ["Emergency", "Art 352", "Art 356", "Art 360", "National Emergency", "President's Rule", "Financial Emergency", "1975 Emergency"]
+  },
+  "data": {
+    "columns": [
+      { "key": "aspect", "label": "Aspect" },
+      { "key": "nationalEmergency", "label": "National Emergency (Art 352)" },
+      { "key": "stateEmergency", "label": "State Emergency / President's Rule (Art 356)" },
+      { "key": "financialEmergency", "label": "Financial Emergency (Art 360)" }
+    ],
+    "categories": [
+      {"id": "all", "label": "Complete Comparison (30+ Points)"}
+    ],
+    "rows": [
+      {
+        "id": "article",
+        "aspect": "**Constitutional Article**",
+        "nationalEmergency": "**Art 352** - Emergency due to War, External Aggression, Armed Rebellion",
+        "stateEmergency": "**Art 356** - Failure of constitutional machinery in State\n\n*[Detailed coverage in Centre-State Relations → Administrative]*",
+        "financialEmergency": "**Art 360** - Threat to financial stability or credit of India",
+        "category": "all"
+      },
+      {
+        "id": "grounds",
+        "aspect": "**Grounds for Proclamation**",
+        "nationalEmergency": "**Three grounds**:\n• War (actual war declared)\n• External aggression (threat of war from foreign country)\n• Armed rebellion (internal - 44th Amendment changed 'internal disturbance' to 'armed rebellion')\n\n**44th Amendment**: Made grounds more specific; 'Internal disturbance' too vague, misused in 1975",
+        "stateEmergency": "**One ground**:\n• Government of State **cannot be carried on in accordance with Constitution**\n\n**In practice**: Hung Assembly, loss of majority, Governor's report, law & order breakdown, corruption (often misused)\n\n**S.R. Bommai (1994)**: Curbed misuse; Justiciable; Floor test mandatory",
+        "financialEmergency": "**One ground**:\n• Financial stability or credit of India (or any part) **threatened**\n\n**Never proclaimed**: Not used even once since 1950\n\n**Potential situations**: Economic collapse, debt default, currency crisis, bankruptcy",
+        "category": "all"
+      },
+      {
+        "id": "who-proclaims",
+        "aspect": "**Who Can Proclaim?**",
+        "nationalEmergency": "**President** on advice of Council of Ministers\n\n**44th Amendment**: Advice must be **in writing**; President can ask Cabinet to reconsider once (but bound by reconsidered advice)",
+        "stateEmergency": "**President** on receiving **Governor's report** or otherwise satisfied (suo motu)\n\n**S.R. Bommai**: President's satisfaction **justiciable**; Courts can examine material basis",
+        "financialEmergency": "**President** on advice of Council of Ministers",
+        "category": "all"
+      },
+      {
+        "id": "parliamentary-approval",
+        "aspect": "**Parliamentary Approval**",
+        "nationalEmergency": "**Within 1 month** of proclamation\n\n**Both Houses** must approve by **special majority**:\n• Majority of total membership of House\n• 2/3 majority of members present and voting\n\n**44th Amendment**: Earlier simple majority; Now special majority (harder to proclaim)",
+        "stateEmergency": "**Within 2 months** of proclamation\n\n**Both Houses** must approve by **simple majority**\n\n**Easier than National Emergency**: Simple majority sufficient",
+        "financialEmergency": "**Within 2 months** of proclamation\n\n**Both Houses** must approve by **simple majority**",
+        "category": "all"
+      },
+      {
+        "id": "duration",
+        "aspect": "**Duration**",
+        "nationalEmergency": "**Initially**: 6 months (if approved by Parliament)\n\n**Extensions**: Can be extended **indefinitely** by 6 months at a time (each extension needs Parliamentary approval by special majority)\n\n**Maximum**: No maximum limit\n\n**1975-77 Emergency**: Lasted 21 months",
+        "stateEmergency": "**Initially**: 6 months (if approved)\n\n**Maximum**: **3 years** total\n\n**Extension beyond 1 year** requires:\n• National Emergency in force (Art 352), OR\n• Election Commission certifies elections cannot be held\n\n**44th Amendment**: Added these safeguards",
+        "financialEmergency": "**No maximum duration** specified\n\n**Indefinite**: Can continue as long as Parliament approves\n\n**Never used**: No precedent",
+        "category": "all"
+      },
+      {
+        "id": "revocation",
+        "aspect": "**Revocation**",
+        "nationalEmergency": "**By President** anytime (no Parliamentary approval needed for revocation)\n\n**44th Amendment**: **Lok Sabha can disapprove** by simple majority → President MUST revoke\n\n**Special provision**: If 1/10th of LS members give written notice → LS must meet within 14 days to consider disapproval resolution",
+        "stateEmergency": "**By President** anytime (no Parliamentary approval needed for revocation)\n\n**In practice**: Revoked when new govt formed after elections or confidence restored",
+        "financialEmergency": "**By President** anytime (no Parliamentary approval needed for revocation)\n\n**Never proclaimed**: No precedent of revocation",
+        "category": "all"
+      },
+      {
+        "id": "effects-executive",
+        "aspect": "**Effect on Executive**",
+        "nationalEmergency": "**Union executive power extends** to giving directions to States on any matter (Art 353)\n\n**State govt continues**: State govts NOT dismissed (unlike Art 356)\n\n**Centre controls**: But Centre can give binding directions; State autonomy reduced",
+        "stateEmergency": "**State govt dismissed**: CM and Ministers resign/removed\n\n**Governor rules**: On behalf of President\n\n**Union takes over**: President exercises all powers of State govt + Governor",
+        "financialEmergency": "**Union can direct States**:\n• Observe financial propriety canons\n• Reserve Money Bills/Financial Bills for President's consideration\n\n**Salaries reduced**: Union can direct reduction of salaries of State employees (including HC judges)",
+        "category": "all"
+      },
+      {
+        "id": "effects-legislative",
+        "aspect": "**Effect on Legislative Powers**",
+        "nationalEmergency": "**Parliament can legislate on State List** (Art 250)\n\n**Duration**: Laws continue for **6 months** after emergency ends (then lapse)\n\n**Parliament supremacy**: Parliament's law overrides State law",
+        "stateEmergency": "**State Legislature**: Dissolved or kept in suspended animation (President's discretion)\n\n**Parliament legislates**: Parliament can make laws for State (on State List subjects)\n\n**Duration**: Laws continue even after emergency ends (don't lapse)",
+        "financialEmergency": "**Union can direct**: States to reserve Money Bills for President's consideration\n\n**Financial control**: Union controls State's financial legislation",
+        "category": "all"
+      },
+      {
+        "id": "effects-fundamental-rights",
+        "aspect": "**Effect on Fundamental Rights**",
+        "nationalEmergency": "**Art 358** (Automatic suspension):\n• If emergency due to **war or external aggression** → Art 19 (6 freedoms) **automatically suspended**\n• State can make any law violating Art 19\n• No judicial remedy during emergency\n• After emergency ends: Laws made during emergency continue (don't automatically become void)\n\n**Art 359** (Presidential order suspension):\n• President can suspend **right to move court** for enforcement of FRs (except Art 20, 21)\n• **44th Amendment**: Art 20, 21 **CANNOT be suspended** (life & liberty protected even during emergency)\n• President's order specifies which FRs suspended\n\n**Armed Rebellion**: Only Art 359 applicable (Art 358 NOT applicable)",
+        "stateEmergency": "**NO effect on FRs**\n\nFundamental Rights remain in force\n\n**Citizens can approach courts** for FR violations",
+        "financialEmergency": "**NO effect on FRs**\n\nFundamental Rights remain in force\n\n**Citizens can approach courts** for FR violations",
+        "category": "all"
+      },
+      {
+        "id": "federal-structure",
+        "aspect": "**Effect on Federal Structure**",
+        "nationalEmergency": "**Federal → Unitary**\n\n• Parliament can legislate on State List\n• Union can direct States\n• Centre's financial control over States\n• State autonomy curtailed\n\n**BUT**: States NOT dismissed; Govts continue functioning under Centre's directions",
+        "stateEmergency": "**Federal structure suspended** in that State\n\n• State govt dismissed\n• Parliament legislates for State\n• Union rules State\n• State becomes Union Territory-like\n\n**Temporary**: Federal structure restored after emergency revoked",
+        "financialEmergency": "**Federal → Unitary** (financial sphere)\n\n• Union controls States' finances\n• States' financial autonomy lost\n• Union can reduce State employees' salaries",
+        "category": "all"
+      },
+      {
+        "id": "frequency",
+        "aspect": "**How Often Used?**",
+        "nationalEmergency": "**3 times** (6 proclamations):\n\n**1. 1962-68** (China war - Oct 1962)\n**2. 1971-77** (Pakistan war - Dec 1971; continued)\n**3. 1975-77** (Internal disturbance/'Emergency' - June 1975)\n\n**1975 Emergency**: Most controversial; 'Internal disturbance' misused; 21 months; Suspended democracy",
+        "stateEmergency": "**Used 125+ times** (most controversial)\n\n**Frequently misused**: Political reasons, dismissing Opposition-ruled states\n\n**Pre-Bommai** (before 1994): Very frequent (90+ times till 2000)\n\n**Post-Bommai** (after 1994): Much less frequent; Judicial scrutiny reduced misuse\n\n**Last used**: Arunachal Pradesh (2016), Uttarakhand (2016), J&K (2018)",
+        "financialEmergency": "**NEVER used** (0 times)\n\nNot proclaimed even once since 1950\n\n**No precedent**: Provisions untested",
+        "category": "all"
+      },
+      {
+        "id": "safeguards",
+        "aspect": "**Safeguards (44th Amendment 1978)**",
+        "nationalEmergency": "**Pre-Emergency safeguards**:\n• **Special majority** required (not simple majority)\n• Cabinet advice must be **in writing**\n• President can ask Cabinet to reconsider\n• **'Armed rebellion'** (not vague 'internal disturbance')\n\n**During Emergency**:\n• Art 20, 21 **CANNOT be suspended** (life & liberty protected)\n• LS can disapprove by simple majority → President must revoke\n• 1/10th LS members can demand meeting for disapproval\n\n**Post-Emergency**:\n• Laws made violating Art 19 continue (but can be challenged after emergency)",
+        "stateEmergency": "**44th Amendment safeguards**:\n• Duration limited to **3 years max** (earlier indefinite)\n• Extension beyond 1 year needs National Emergency OR EC certification\n\n**Judicial safeguards** (S.R. Bommai 1994):\n• **Justiciable** - Courts can review\n• **Floor test mandatory** - If majority dispute, prove on Assembly floor\n• President must independently assess (not blindly follow Governor)\n• **Federalism is basic structure** - Cannot be arbitrarily destroyed",
+        "financialEmergency": "**No specific safeguards** in Constitution\n\n**Parliamentary approval**: Needs Parliamentary approval within 2 months\n\n**Revocable**: President can revoke anytime\n\n**Never used**: No judicial precedent",
+        "category": "all"
+      },
+      {
+        "id": "criticism",
+        "aspect": "**Criticisms**",
+        "nationalEmergency": "**1975 Emergency**: Biggest criticism\n• Democracy suspended 21 months\n• Press censorship, mass arrests, FR suspended\n• Indira Gandhi govt misused 'internal disturbance'\n• Opposition leaders jailed, judiciary weakened\n\n**44th Amendment response**: Tightened provisions to prevent future misuse\n\n**Grounds too wide**: Even 'armed rebellion' can be misused",
+        "stateEmergency": "**Most controversial provision**:\n• Used 125+ times; Often for **political reasons**\n• Centre dismissing Opposition-ruled states (1977-79, 1980s-90s)\n• Undermines federalism, democratic process\n• Governor's partisan reports\n\n**S.R. Bommai (1994)**: Judicial intervention curbed misuse significantly\n\n**But**: Still potential for misuse",
+        "financialEmergency": "**Never tested**: Provisions exist but never used\n\n**Concerns**:\n• Vague grounds ('threat to financial stability' - subjective)\n• No precedent or judicial interpretation\n• Potential for misuse (reduce State salaries arbitrarily)\n• Could be used for political pressure on States",
+        "category": "all"
+      },
+      {
+        "id": "key-cases",
+        "aspect": "**Landmark Cases**",
+        "nationalEmergency": "**ADM Jabalpur v Shivkant Shukla (1976)**:\n• During 1975 Emergency; SC held **no right to life/liberty** during emergency (Art 21 suspended)\n• **Dissent by Justice H.R. Khanna**: Became celebrated dissent\n• **Most criticized judgment** in SC history\n• **Overruled implicitly**: 44th Amendment ensured Art 20-21 cannot be suspended\n\n**Minerva Mills (1980)**:\n• Struck down 42nd Amendment provisions extending emergency powers",
+        "stateEmergency": "**S.R. Bommai v Union of India (1994)**:\n• **Landmark 9-judge bench**\n• **Federalism is basic structure** - Cannot be destroyed via Art 356\n• President's satisfaction **justiciable** - Courts can examine\n• **Floor test mandatory** - If majority dispute, prove on floor\n• Governor's report not binding on President\n• Parliament's approval also justiciable\n\n**Effect**: Dramatically reduced Art 356 misuse post-1994",
+        "financialEmergency": "**No case law**: Never proclaimed, never challenged\n\n**No judicial precedent**",
+        "category": "all"
+      },
+      {
+        "id": "historical-instances",
+        "aspect": "**Historical Instances**",
+        "nationalEmergency": "**1. Oct 1962**: China war (Indo-China war) - Lasted till Jan 1968\n\n**2. Dec 1971**: Bangladesh war (Indo-Pakistan war) - Continued from 1971-77\n\n**3. June 25, 1975**: **'The Emergency'** - Internal disturbance\n• **Most infamous**: Indira Gandhi govt\n• **21 months** (June 1975 - March 1977)\n• Democracy suspended, press censored, opposition jailed\n• **42nd Amendment** passed (Mini Constitution)\n• Ended after Janata Party won 1977 elections\n• **Dark chapter** in Indian democracy",
+        "stateEmergency": "**First use**: Kerala 1959 (Communist govt dismissed)\n\n**Most frequent**: 1977-79 (9 states after Emergency), 1980s-90s (frequent political dismissals)\n\n**Notable**:\n• Punjab 1987-92 (terrorism)\n• J&K multiple times (1977, 1986, 1990, 1996, 2018)\n• Bihar, UP, Uttarakhand, Arunachal Pradesh (recent)\n\n**Post-Bommai**: Less frequent but still used (Uttarakhand 2016, Arunachal 2016)",
+        "financialEmergency": "**NEVER proclaimed**\n\nNot used even during:\n• 1991 economic crisis (BOP crisis, forex depletion)\n• 2008 global financial crisis\n• 2020 COVID economic shock\n\n**States never faced**: Even when States faced financial distress, Art 360 not invoked",
+        "category": "all"
+      },
+      {
+        "id": "comparison-summary",
+        "aspect": "**Summary Comparison**",
+        "nationalEmergency": "**Most serious**: Affects entire country\n\n**Federal → Unitary**: Parliament can legislate on State List, Union directs States\n\n**FRs suspended**: Art 19 suspended (if war/external aggression); Art 20-21 protected\n\n**Used 3 times**: 1962, 1971, **1975** (most controversial)\n\n**44th Amendment safeguards**: Special majority, Cabinet advice in writing, Art 20-21 cannot be suspended",
+        "stateEmergency": "**Most misused**: 125+ times; Often political\n\n**State govt dismissed**: Parliament rules State; State Legislature dissolved/suspended\n\n**No FR suspension**: FRs remain in force\n\n**S.R. Bommai (1994)**: Curbed misuse; Federalism basic structure; Justiciable; Floor test\n\n**Max 3 years**: 44th Amendment limit",
+        "financialEmergency": "**Never used**: 0 times since 1950\n\n**Financial control**: Union controls State finances; Can reduce salaries\n\n**No FR suspension**: FRs remain in force\n\n**No precedent**: Provisions untested; No case law",
+        "category": "all"
+      }
+    ],
+    "additionalNotes": {
+      "constitutionalBasis": [
+        "**Part XVIII** (Art 352-360): Emergency Provisions",
+        "**42nd Amendment 1976** (During Emergency): Strengthened emergency powers; Extended emergency provisions; Made Parliament supreme over judiciary",
+        "**44th Amendment 1978** (Post-Emergency): Restored balance; Added safeguards against misuse; Protected Art 20-21; Changed 'internal disturbance' to 'armed rebellion'",
+        "**Purpose**: Handle extraordinary situations threatening nation's security, integrity, or financial stability"
+      ],
+      "rationaleBehindProvisions": [
+        "**War/External threat**: Need quick, coordinated national response; State boundaries irrelevant in war",
+        "**Constitutional breakdown**: If State govt fails, Centre must intervene to maintain constitutional governance",
+        "**Financial crisis**: If economic collapse threatens nation, Centre needs control to restore stability",
+        "**Temporary measures**: All emergencies designed to be temporary; Restore normalcy ASAP"
+      ],
+      "1975EmergencyDetails": [
+        "**Date**: June 25, 1975 - March 21, 1977 (21 months)",
+        "**Reason**: 'Internal disturbance' (vague ground; Actually political - Allahabad HC had found Indira Gandhi guilty of election malpractice)",
+        "**Effects**: Press censorship, mass arrests (1 lakh+), opposition leaders jailed, judiciary weakened, Parliament rubber stamp",
+        "**Excesses**: Forced sterilization, demolitions, human rights violations",
+        "**42nd Amendment**: Passed during Emergency; 'Mini Constitution'; Extended Parliament/PM powers",
+        "**End**: Indira Gandhi called elections (March 1977); Janata Party won; Emergency revoked",
+        "**Legacy**: Dark chapter; Led to 44th Amendment safeguards; 'Never again' resolve"
+      ],
+      "srBommaiImpact": [
+        "**Before Bommai** (1947-1994): Art 356 used 90+ times; Frequent political misuse; Centre dismissed Opposition states routinely",
+        "**Bommai case** (1994): 9-judge bench; Federalism is basic structure; Justiciable; Floor test mandatory",
+        "**After Bommai** (1994-2024): Much less frequent; Judicial scrutiny; Political cost high; Used cautiously",
+        "**Impact**: Saved federalism; Protected State govts from arbitrary dismissal; Strengthened constitutional governance"
+      ],
+      "financialEmergencyWhy NeverUsed": [
+        "**Economic crises handled differently**: Fiscal policies, RBI intervention, IMF loans, structural reforms",
+        "**1991 crisis**: Severe BOP crisis, forex $1 billion; But handled through economic reforms (not Art 360)",
+        "**Political cost**: Proclaiming financial emergency = admitting govt failure; Heavy political cost",
+        "**State resistance**: States would strongly resist salary cuts, financial control",
+        "**Untested provision**: No precedent; Legal uncertainties; Risky to use first time"
+      ],
+      "examTips": [
+        "**Most asked**: 1975 Emergency details; 44th Amendment safeguards; S.R. Bommai case (Art 356)",
+        "**Comparison table**: Art 352 vs 356 vs 360 - Grounds, duration, effects, frequency",
+        "**44th Amendment**: Know all safeguards (special majority, written advice, Art 20-21 protected, LS disapproval)",
+        "**S.R. Bommai**: Federalism basic structure; Floor test; Justiciable - CRITICAL for Art 356",
+        "**1975 Emergency**: Timeline, causes, effects, excesses, end, legacy, 42nd Amendment",
+        "**Numbers**: Art 352 (3 times), Art 356 (125+ times), Art 360 (0 times)",
+        "**Never confuse**: National Emergency ≠ President's Rule; Different articles, effects, grounds"
+      ]
+    },
+    "summary": "**Three types of emergencies**: **(1) National Emergency (Art 352)** - War, External aggression, Armed rebellion; **Used 3 times** (1962 China war, 1971 Pakistan war, **1975 'The Emergency'**); Federal → Unitary; Parliament can legislate on State List; FRs suspended (Art 19 if war/external, Art 359 by Presidential order); **44th Amendment safeguards** - Special majority, Art 20-21 cannot be suspended, LS can disapprove. **(2) State Emergency/President's Rule (Art 356)** - Constitutional machinery failure in State; **Used 125+ times** (most misused); State govt dismissed, Parliament rules State; **S.R. Bommai (1994)** - Federalism basic structure, justiciable, floor test mandatory; Max 3 years. **(3) Financial Emergency (Art 360)** - Threat to financial stability; **NEVER used** (0 times); Union controls State finances, can reduce salaries. **1975 Emergency** = Darkest chapter (21 months, democracy suspended, press censored); Led to **44th Amendment 1978** (safeguards). **S.R. Bommai 1994** = Saved federalism (curbed Art 356 misuse)."
+  }
+}
+

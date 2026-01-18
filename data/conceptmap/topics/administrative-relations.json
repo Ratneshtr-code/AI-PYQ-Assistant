@@ -1,0 +1,449 @@
+{
+  "id": "administrative-relations",
+  "subject": "polity",
+  "title": "Centre-State Administrative Relations",
+  "description": "",
+  "visualType": "splitPanel",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["legislative-relations", "federal-features", "union-executive", "emergency-provisions"],
+    "tags": ["Centre-State Relations", "Executive Powers", "Art 73", "Art 162", "Art 256-257", "Art 355-356", "All India Services"]
+  },
+  "data": {
+    "categories": [
+      {"id": "distribution", "label": "Distribution of Powers", "color": "#6366F1"},
+      {"id": "directions", "label": "Centre's Directions", "color": "#10B981"},
+      {"id": "services", "label": "Services & Coordination", "color": "#F59E0B"},
+      {"id": "disputes", "label": "Disputes & Emergency", "color": "#EF4444"}
+    ],
+    "articles": [
+      {
+        "id": "art73-162",
+        "number": "Art 73 & 162",
+        "shortLabel": "Executive Powers",
+        "title": "Distribution of Executive Powers - Art 73 & 162",
+        "category": "distribution",
+        "color": "#6366F1",
+        "content": {
+          "art73": [
+            "**Art 73**: Extent of **Union executive power**",
+            "**Clause (1)**: Union executive power extends to:",
+            "• Subjects on which Parliament has power to make laws (Union List + Concurrent List + Residuary)",
+            "• Rights, authority, jurisdiction exercised before Constitution by Government of India",
+            "**Clause (2)**: Extends to exercise of rights, authority, jurisdiction outside India to extent vested in Government of India",
+            "**Clause (3)**: Subject to Art 162 (State executive power)"
+          ],
+          "art162": [
+            "**Art 162**: Extent of **State executive power**",
+            "State executive power extends to subjects on which State Legislature has power to make laws (State List + Concurrent List)",
+            "**Subject to**: Union executive power (Art 73) and any directions by Union under Constitution",
+            "**Subordinate to Union**: State executive power subject to Union executive power"
+          ],
+          "parallelism": [
+            "**Principle**: Executive power follows legislative power (generally)",
+            "**Union executive**: Extends to Union List + Concurrent List + Residuary subjects",
+            "**State executive**: Extends to State List + Concurrent List subjects",
+            "**Overlap on Concurrent**: Both have executive power on Concurrent subjects"
+          ],
+          "unionSupremacy": [
+            "**Art 162 expressly subordinates State executive to Union executive**",
+            "**Union can give directions**: Union can give directions to States on executive matters (Art 256, 257)",
+            "**State must comply**: States bound to comply with Union's directions",
+            "**Failure to comply**: Can lead to President's Rule (Art 356)"
+          ],
+          "exceptions": [
+            "**Railways**: Entry 22 Union List (legislative) → But Art 258A allows delegation to States",
+            "**Defence**: Entry 1 Union List → Union exclusive executive power",
+            "**Foreign Affairs**: Entry 10 Union List → Union exclusive executive power",
+            "**Inter-state subjects**: Where coordination needed, Union has overriding power"
+          ],
+          "examTips": "**Art 73**: Union executive extends to Union + Concurrent + Residuary. **Art 162**: State executive extends to State + Concurrent; **BUT subject to Union** (Art 73, Art 256-257 directions). Shows **Union supremacy** in executive sphere. Executive power generally follows legislative power."
+        }
+      },
+      {
+        "id": "art256",
+        "number": "Art 256",
+        "shortLabel": "Comply Laws",
+        "title": "Art 256 - State Shall Comply with Union Laws",
+        "category": "directions",
+        "color": "#10B981",
+        "content": {
+          "provision": [
+            "**Art 256**: Executive power of **State** shall be exercised to ensure **compliance with Union laws**",
+            "**Mandatory compliance**: States MUST comply with laws made by Parliament",
+            "**Applies to all Union laws**: Laws on Union List, Concurrent List, Residuary subjects",
+            "**Union can give directions**: Union may give directions to State for compliance"
+          ],
+          "scopeOfDirections": [
+            "**What directions?**: How State should exercise its executive power to comply with Union laws",
+            "**Examples**:",
+            "• Implementation of Union laws (e.g., GST collection, central schemes)",
+            "• Enforcement of Union laws (e.g., criminal laws on Concurrent List)",
+            "• Coordination with Centre (e.g., national security, disaster management)",
+            "• Use of state machinery for Union purposes"
+          ],
+          "failureToComply": [
+            "**Art 365**: If State fails to comply with or give effect to Union directions → Union can invoke **Art 356** (President's Rule)",
+            "**Constitutional breakdown**: Non-compliance treated as failure of constitutional machinery in State",
+            "**President's Rule**: Centre can dismiss State government and impose President's Rule",
+            "**Serious consequence**: Loses State's autonomy; Centre takes over"
+          ],
+          "examplesOfDirections": [
+            "**COVID-19 pandemic**: Centre gave directions to States on lockdown, masks, vaccination",
+            "**GST implementation**: Centre directs States on GST collection, compliance",
+            "**National security**: Centre directs States on anti-terrorism measures, border security",
+            "**Environmental laws**: Centre directs States to implement air/water pollution control",
+            "**Disaster management**: Centre directs States during natural disasters, floods, earthquakes"
+          ],
+          "unionSupremacy": [
+            "**Shows strong Centre**: States obliged to implement Union laws (even if state disagrees with policy)",
+            "**No state autonomy on compliance**: State cannot refuse citing federal autonomy",
+            "**Unitary feature**: In unitary countries, subordinate units must comply with central laws; Art 256 similar",
+            "**Contrast with federal**: In true federal countries (USA), states have more autonomy; Can challenge federal laws in court"
+          ],
+          "examTips": "**Art 256**: State MUST **comply with Union laws**. Union can give **directions** to States for compliance. **Failure** → Art 356 (President's Rule) via Art 365. Shows **Union supremacy** - States obliged to implement Union policies. Unitary feature."
+        }
+      },
+      {
+        "id": "art257",
+        "number": "Art 257",
+        "shortLabel": "Not Impede",
+        "title": "Art 257 - State Shall Not Impede Union's Exercise of Powers",
+        "category": "directions",
+        "color": "#10B981",
+        "content": {
+          "provision": [
+            "**Art 257**: Executive power of State shall be exercised so as **NOT to impede or prejudice** exercise of Union's executive power",
+            "**Negative obligation**: State shall NOT obstruct Union",
+            "**Applies to all Union activities**: Communications, defence, railways, etc.",
+            "**Union can give directions**: To ensure State doesn't impede Union"
+          ],
+          "specificProvisions": [
+            "**Art 257(1)**: General - State shall not impede Union's executive power",
+            "**Art 257(2)**: **Communications** (roads, railways, waterways) → Union can give directions to State to construct, maintain specific highways/roads for Union's purposes",
+            "**Art 257(3)**: **Railways** → Union can give directions to State for protection of railways and safe working",
+            "**Art 257(4)**: Union bears **cost** of compliance with directions under Art 257(2), (3)"
+          ],
+          "art257vs256": [
+            "**Art 256**: State must **comply with** Union laws (positive obligation - do something)",
+            "**Art 257**: State must **not impede** Union (negative obligation - don't obstruct)",
+            "**Both show Union supremacy**: Union's executive power paramount"
+          ],
+          "communicationsAndRailways": [
+            "**Entry 23 Union List**: National highways declared by Parliament",
+            "**Entry 22 Union List**: Railways",
+            "**Art 257(2)**: Union can direct State to construct/maintain roads for Union's purposes (strategic, defence, communication)",
+            "**Art 257(3)**: Union can direct State to protect railways, ensure safe railway working",
+            "**Cost borne by Union**: Union reimburses State for expenditure incurred in compliance (Art 257(4))"
+          ],
+          "examples": [
+            "**National highways**: Union directs State to maintain NH passing through State",
+            "**Defence roads**: Union directs State to construct roads for defence/strategic purposes",
+            "**Railway protection**: Union directs State police to protect railway installations, prevent sabotage",
+            "**Railway crossings**: Union directs State to construct over-bridges, under-passes for railway safety",
+            "**Strategic corridors**: Union directs State to ensure smooth passage for defence, communication"
+          ],
+          "examTips": "**Art 257**: State shall **NOT impede** Union's executive power. Special provisions for **communications** (roads) and **railways** (Art 257(2), (3)). Union can give directions; **Union bears cost** (Art 257(4)). Ensures Union's functions not obstructed by States."
+        }
+      },
+      {
+        "id": "art355",
+        "number": "Art 355",
+        "shortLabel": "Union's Duty",
+        "title": "Art 355 - Union's Duty to Protect States",
+        "category": "directions",
+        "color": "#10B981",
+        "content": {
+          "provision": [
+            "**Art 355**: It shall be the **duty of the Union** to:",
+            "• Protect every State against **external aggression** and **internal disturbance**",
+            "• Ensure that government of every State is carried on in accordance with **provisions of Constitution**",
+            "**Duty, not power**: Framed as Union's duty; But implies power to intervene"
+          ],
+          "protectionAgainstExternal": [
+            "**External aggression**: War, invasion, armed attack by foreign country",
+            "**Union's role**: Defence is Union subject (Entry 1 Union List)",
+            "**Armed forces**: Union deploys armed forces to protect State",
+            "**No state consent needed**: Union's duty; State cannot refuse protection",
+            "**Emergency**: If external aggression, Union can declare National Emergency (Art 352)"
+          ],
+          "protectionAgainstInternal": [
+            "**Internal disturbance**: Armed rebellion, large-scale violence, breakdown of law and order",
+            "**Union's intervention**: Union can send armed forces (Art 355) or impose President's Rule (Art 356)",
+            "**State request**: Usually State requests Centre's help; But Centre can intervene suo motu if needed",
+            "**Examples**: Naxal violence, insurgency, terrorism, communal riots"
+          ],
+          "constitutionalGovernance": [
+            "**Ensure constitutional governance**: Union must ensure State government functions according to Constitution",
+            "**Basis for Art 356**: If State government cannot function constitutionally → Art 356 (President's Rule)",
+            "**Constitutional breakdown**: Union can intervene to restore constitutional governance",
+            "**Prevents unconstitutional actions**: State cannot act against Constitution; Union intervenes"
+          ],
+          "art355vsArt356": [
+            "**Art 355**: Union's **duty** to protect States and ensure constitutional governance",
+            "**Art 356**: Union's **power** to impose President's Rule if constitutional machinery fails",
+            "**Connection**: Art 355 provides duty/rationale; Art 356 provides mechanism/power",
+            "**Art 355 wider**: Includes external aggression, internal disturbance (not just constitutional failure)"
+          ],
+          "examplesOfUse": [
+            "**1962 China war**: Union protected border states (external aggression)",
+            "**1971 Bangladesh war**: Union protected eastern border (external aggression)",
+            "**Naxal violence**: Centre deploys CRPF, armed forces to States (internal disturbance)",
+            "**Punjab terrorism (1980s)**: Centre intervened under Art 355, later Art 356",
+            "**Kashmir insurgency**: Continuous deployment of armed forces (internal disturbance)"
+          ],
+          "examTips": "**Art 355**: Union's **duty** to protect States against **external aggression + internal disturbance** and ensure **constitutional governance**. Basis for Union's intervention in States. Connection with **Art 356** (President's Rule). Shows Union's paramount role in protecting States."
+        }
+      },
+      {
+        "id": "art356",
+        "number": "Art 356",
+        "shortLabel": "President's Rule",
+        "title": "Art 356 - President's Rule (State Emergency)",
+        "category": "disputes",
+        "color": "#EF4444",
+        "content": {
+          "provision": [
+            "**Art 356**: If President, on receiving **Governor's report** or otherwise, is satisfied that government of State **cannot be carried on in accordance with Constitution** → President can declare **emergency in that State**",
+            "**Effect**: State government dismissed; State Legislature dissolved/suspended; President rules State through Governor; Parliament makes laws for State",
+            "**Called**: President's Rule, State Emergency, Constitutional Emergency"
+          ],
+          "procedure": [
+            "**Step 1**: Governor sends report to President that constitutional machinery failed in State",
+            "**Step 2**: President issues **proclamation** under Art 356",
+            "**Step 3**: Proclamation must be laid before **Parliament** within 2 months",
+            "**Step 4**: Approved by both Houses by **simple majority** within 2 months",
+            "**Step 5**: If approved, continues for **6 months**; Can be extended up to **3 years** (max)"
+          ],
+          "duration": [
+            "**Initially**: 6 months (if approved by Parliament)",
+            "**Extensions**: Can be extended by 6 months at a time",
+            "**Maximum**: **3 years** total (originally 1 year; 44th Amendment made it 1 year; But multiple extensions possible up to 3 years)",
+            "**Conditions for extension beyond 1 year**:",
+            "• **National Emergency** in force (Art 352), OR",
+            "• **Election Commission certifies** that elections cannot be held in State due to difficulties"
+          ],
+          "consequences": [
+            "**State government dismissed**: Chief Minister and Council of Ministers resign/removed",
+            "**State Legislature**: Can be dissolved or kept in suspended animation",
+            "**Governor rules**: Governor administers State on behalf of President",
+            "**Parliament legislates**: Parliament can make laws for State (on State List subjects) - Art 250 NOT applicable; Separate power under Art 356",
+            "**President's powers**: President exercises all powers of State government and Governor"
+          ],
+          "groundsForImposition": [
+            "**Constitutional breakdown**: Government cannot be carried on according to Constitution (Art 356 language)",
+            "**In practice** (misused in past):",
+            "• Hung Assembly - No party has majority",
+            "• Chief Minister loses majority, refuses to resign",
+            "• Governor's report claiming breakdown (often political)",
+            "• Centre-State confrontation (different parties)",
+            "• Law and order breakdown (disputed)",
+            "• Corruption, maladministration (disputed)"
+          ],
+          "misuse": [
+            "**Most controversial provision**: Used 125+ times; Often misused for political reasons",
+            "**Examples of misuse**:",
+            "• 1959 Kerala - First time; Communist govt dismissed (political)",
+            "• 1975-77 Emergency - 9 states under President's Rule",
+            "• 1977-79 - Janata govt dismissed 9 Congress-ruled states (political revenge)",
+            "• 1980s-90s - Frequent imposition (over 90 times till 2000)",
+            "**Centre dismissing Opposition-ruled states**: Pattern of misuse when Centre and State have different parties"
+          ],
+          "srBommaiCase": [
+            "**S.R. Bommai v Union of India (1994)** - Landmark 9-judge bench",
+            "**Facts**: BJP govts in Rajasthan, MP, HP, UP dismissed using Art 356 (1992); Challenged in SC",
+            "**SC held**:",
+            "• **Federalism is basic structure**: Cannot be arbitrarily destroyed via Art 356",
+            "• **President's satisfaction justiciable**: Courts can examine whether material existed for President's satisfaction",
+            "• **Governor's report not binding**: President must independently assess; Courts can see Governor's report",
+            "• **Floor test mandatory**: If dispute about majority, must prove on floor of Assembly (not dismiss without floor test)",
+            "• **Parliament's approval justiciable**: Courts can examine whether Parliament's approval valid",
+            "**Effect**: Curbed Art 356 misuse significantly; Post-1994, much less frequent use"
+          ],
+          "44thAmendmentSafeguards": [
+            "**44th Amendment 1978** (post-Emergency safeguards):",
+            "• Initially 1 year duration (can be extended up to 3 years with conditions)",
+            "• Extension beyond 1 year needs: National Emergency OR EC certification that elections cannot be held",
+            "• Parliament's approval needed within 2 months (both Houses)",
+            "**Before 44th Amendment**: Could be extended indefinitely; More arbitrary"
+          ],
+          "examTips": "**Art 356**: President's Rule if **constitutional machinery fails** in State. Governor's report → President's proclamation → Parliament approval (2 months) → 6 months duration (extendable to 3 years max). **Most controversial** provision - Misused 125+ times. **S.R. Bommai (1994)**: Federalism is basic structure; Floor test mandatory; Justiciable. **44th Amendment**: Safeguards added. Post-Bommai, less misuse."
+        }
+      },
+      {
+        "id": "all-india-services",
+        "number": "Art 312",
+        "shortLabel": "All India Services",
+        "title": "All India Services - Union's Control over State Administration",
+        "category": "services",
+        "color": "#F59E0B",
+        "content": {
+          "provision": [
+            "**Art 312**: **Rajya Sabha** can create **All India Services** (AIS) by resolution passed by **2/3rd majority**",
+            "**Currently 3 AIS**: Indian Administrative Service (IAS), Indian Police Service (IPS), Indian Forest Service (IFS)",
+            "**Dual control**: AIS officers serve both Union and States; Recruited by Union, serve in States, controlled by Union",
+            "**Unitary feature**: Shows Union's control over State administration"
+          ],
+          "whyRajyaSabha": [
+            "**Rajya Sabha represents States** (Art 80) - Federal chamber",
+            "**States' consent**: Through RS, States authorize creation of AIS",
+            "**2/3rd majority**: Ensures broad consensus; Not simple majority",
+            "**Federal spirit**: States voluntarily agree to Union-controlled services in their administration"
+          ],
+          "threeServices": [
+            "**1. Indian Administrative Service (IAS)**:",
+            "• Created: 1947 (successor to ICS - Indian Civil Service)",
+            "• Functions: District Collector, Chief Secretary, Secretaries in Union/State govts",
+            "• Backbone of civil administration",
+            "**2. Indian Police Service (IPS)**:",
+            "• Created: 1948",
+            "• Functions: DGP, IGP, SP, Police Commissioners, CBI, IB, RAW",
+            "• Maintains law and order, investigation",
+            "**3. Indian Forest Service (IFS)**:",
+            "• Created: 1966 (under Art 312)",
+            "• Functions: Forest conservation, wildlife protection, environment",
+            "• Panchayat Forest Officers, Chief Conservator of Forests"
+          ],
+          "dualControl": [
+            "**Recruitment**: Union Public Service Commission (UPSC) conducts Civil Services Exam; Union recruits",
+            "**Cadre**: Officers allocated to different State cadres; Serve in States",
+            "**Service conditions**: Determined by Union (Parliament makes law - AIS Act 1951)",
+            "**Transfers**: Intra-state transfers by State; Inter-state transfers by Union (with State concurrence)",
+            "**Disciplinary action**: Major penalties by Union; Minor penalties by State",
+            "**Union can recall**: Officers can be deputed to Central government anytime"
+          ],
+          "advantages": [
+            "**National integration**: Officers from different states serve across India; Promotes unity",
+            "**Uniformity**: Uniform standards of administration across states",
+            "**Continuity**: Professional, non-partisan administration; Insulated from political pressures",
+            "**Coordination**: Better Centre-State coordination (officers understand both perspectives)",
+            "**Expertise**: Central training (LBSNAA for IAS, SVPNPA for IPS); High quality"
+          ],
+          "criticisms": [
+            "**Violates federalism**: Union control over State administration; States have less autonomy",
+            "**Centre's agents**: AIS officers may prioritize Union's agenda over State's interests",
+            "**States want control**: Many States demand state civil services instead of AIS",
+            "**Inflexible**: States cannot remove or discipline officers easily",
+            "**Second ARC**: Recommended review of AIS system; States seek more control"
+          ],
+          "constitutionalBasis": [
+            "**Art 312**: Empowers creation of AIS",
+            "**Art 312(3)**: AIS Act regulates recruitment, service conditions",
+            "**Art 309**: Parliament/State Legislature can regulate recruitment and service conditions (general provision)",
+            "**Proviso to Art 312(3)**: AIS Act overrides Art 309 for AIS officers"
+          ],
+          "examTips": "**Art 312**: **Rajya Sabha** (2/3 majority) can create **All India Services**. Currently **3 AIS**: IAS, IPS, IFS. **Dual control**: Recruited by Union (UPSC), serve in States, controlled by Union. Shows **Union's control** over State administration (unitary feature). Advantages: National integration, uniformity, continuity. Criticism: Violates federalism."
+        }
+      },
+      {
+        "id": "art258-258a",
+        "number": "Art 258-258A",
+        "shortLabel": "Delegation",
+        "title": "Art 258 & 258A - Mutual Delegation of Functions",
+        "category": "services",
+        "color": "#F59E0B",
+        "content": {
+          "art258": [
+            "**Art 258**: **Union can entrust** its executive functions to **State** (or its officers)",
+            "**State's consent**: With consent of State government",
+            "**Examples**: Union entrusts State with:",
+            "• Collection of Union taxes (Income tax, GST)",
+            "• Implementation of Union schemes (MGNREGA, PM-KISAN, etc.)",
+            "• Enforcement of Union laws (criminal laws on Concurrent List)",
+            "• Election duty (State machinery used for Lok Sabha elections)"
+          ],
+          "art258A": [
+            "**Art 258A**: **State can entrust** its executive functions to **Union** (or its officers)",
+            "**Added**: 7th Constitutional Amendment 1956",
+            "**Union's consent**: With consent of Union government",
+            "**Less common**: States rarely entrust functions to Union (Union already has wide powers)",
+            "**Examples**: State may request Union to handle specific matters requiring expertise/resources"
+          ],
+          "cooperativeFederalism": [
+            "**Mutual delegation**: Shows cooperative federalism - Union and States cooperate",
+            "**Flexibility**: Both can entrust functions to each other as needed",
+            "**Practical arrangement**: Avoids duplication; Uses existing machinery efficiently",
+            "**Consent-based**: Not imposed; Both parties must agree"
+          ],
+          "art258Widespread": [
+            "**Most common**: Union extensively uses Art 258 to entrust functions to States",
+            "**Reasons**:",
+            "• State machinery closer to people (district collectors, police)",
+            "• Union lacks field staff in States",
+            "• Union schemes implemented through State govts (MGNREGA, PMAY, etc.)",
+            "• Tax collection (State helps Union collect taxes)",
+            "• Elections (State machinery conducts Lok Sabha elections for Election Commission)"
+          ],
+          "costsAndReimbursement": [
+            "**Art 258**: Union may entrust **with or without** reimbursing State for extra costs",
+            "**In practice**: Union usually reimburses States for costs incurred",
+            "**Examples**: Election expenses (Union reimburses States), Scheme implementation (Union funds + State implementation)",
+            "**Dispute**: Sometimes States complain Union doesn't adequately compensate"
+          ],
+          "examTips": "**Art 258**: Union can **entrust** functions to State (with consent). **Art 258A**: State can entrust to Union (with consent). Shows **cooperative federalism**. Art 258 widely used (Union schemes, tax collection, elections via State machinery). Union may/may not reimburse costs. Practical cooperation mechanism."
+        }
+      },
+      {
+        "id": "inter-state-disputes",
+        "number": "Art 131, 262, 263",
+        "shortLabel": "Inter-State",
+        "title": "Inter-State Relations & Dispute Resolution",
+        "category": "disputes",
+        "color": "#EF4444",
+        "content": {
+          "art131": [
+            "**Art 131**: Supreme Court's **original jurisdiction** for disputes between:",
+            "• Union vs State(s)",
+            "• Union + State(s) vs State(s)",
+            "• State vs State",
+            "**Exclusive jurisdiction**: Only SC can decide such disputes (not High Courts)",
+            "**Legal disputes**: Must involve legal questions of interpretation of Constitution/laws",
+            "**Examples**: Border disputes, river water sharing, taxation disputes"
+          ],
+          "art262": [
+            "**Art 262**: Parliament can make law for adjudication of **inter-state river water disputes**",
+            "**Clause (1)**: Parliament may provide for adjudication of disputes regarding use, distribution, control of inter-state river waters",
+            "**Clause (2)**: Parliament may exclude SC/HC jurisdiction over such disputes",
+            "**Inter-State Water Disputes Act 1956**: Parliament enacted under Art 262",
+            "**Tribunals**: Central government constitutes tribunal for each river water dispute (e.g., Cauvery, Krishna, Ravi-Beas)"
+          ],
+          "riverWaterDisputes": [
+            "**Most contentious inter-state disputes**: Water sharing (Cauvery, Krishna, Godavari, Ravi-Beas, Narmada, etc.)",
+            "**Why contentious?**: Water is critical for agriculture, drinking, industries; Scarcity leads to conflicts",
+            "**Tribunal process**: State approaches Centre → Centre constitutes tribunal → Tribunal hears, adjudicates → Award binding",
+            "**Examples**:",
+            "• **Cauvery dispute**: Karnataka vs Tamil Nadu (decades-long; Supreme Court finally settled 2018)",
+            "• **Krishna dispute**: Maharashtra, Karnataka, AP, Telangana",
+            "• **Ravi-Beas dispute**: Punjab vs Haryana",
+            "**SC role**: Though Art 262(2) excludes SC jurisdiction, SC entertains appeals under Art 136 (Special Leave Petition)"
+          ],
+          "art263": [
+            "**Art 263**: **Inter-State Council** - To investigate and advise on inter-state disputes",
+            "**President can establish**: Inter-State Council if public interest requires",
+            "**Functions**:",
+            "• Inquire into and advise on disputes between States",
+            "• Investigate and discuss subjects of common interest (Centre-State, State-State)",
+            "• Make recommendations for better coordination",
+            "**Not a tribunal**: Only advisory body; Recommendations not binding"
+          ],
+          "interStateCouncil": [
+            "**Established**: 1990 (after Sarkaria Commission recommendation)",
+            "**Composition**: PM (Chairman), CMs of all States, Governors of UTs, 6 Union Cabinet Ministers (nominated by PM)",
+            "**Functions**: Discuss Centre-State and inter-state issues; Coordinate policies; Resolve conflicts amicably",
+            "**Meetings**: Rarely meets regularly; Not very effective in practice",
+            "**Sarkaria Commission (1988)**: Recommended permanent Inter-State Council for better Centre-State relations"
+          ],
+          "otherDisputes": [
+            "**Border disputes**: Karnataka-Maharashtra (Belgaum), Assam-Nagaland, Haryana-Punjab",
+            "**Resolved by**: SC under Art 131 OR Parliament by law (Art 3 - reorganization)",
+            "**Taxation disputes**: GST disputes resolved by GST Council",
+            "**Political disputes**: Resolved through negotiations, political process, Inter-State Council"
+          ],
+          "examTips": "**Art 131**: SC's original jurisdiction for Union-State, State-State disputes. **Art 262**: Inter-state river water disputes → Parliament makes law (Tribunals); SC/HC jurisdiction can be excluded. **Art 263**: Inter-State Council (advisory). Most contentious disputes: **River water** (Cauvery, Krishna). **Inter-State Council** established 1990 (Sarkaria Commission)."
+        }
+      }
+    ],
+    "summary": "**Centre-State Administrative Relations**: **Art 73**: Union executive extends to Union + Concurrent + Residuary subjects. **Art 162**: State executive extends to State + Concurrent; **Subject to Union**. **Centre's Directions**: Art 256 (Comply with Union laws), Art 257 (Not impede Union), Art 355 (Union's duty to protect States). **President's Rule** (Art 356): Most controversial provision; Misused 125+ times; **S.R. Bommai (1994)** curbed misuse (federalism is basic structure, floor test mandatory, justiciable). **All India Services** (Art 312): IAS, IPS, IFS - Dual control; Shows Union's control over State administration. **Delegation**: Art 258 (Union entrusts to State - widely used), Art 258A (State entrusts to Union). **Inter-State Disputes**: Art 131 (SC jurisdiction), Art 262 (River water tribunals), Art 263 (Inter-State Council). Shows **strong Union executive control** over States."
+  }
+}
+

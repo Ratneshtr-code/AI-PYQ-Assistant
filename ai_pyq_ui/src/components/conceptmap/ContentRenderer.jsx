@@ -10,6 +10,8 @@ import ClockVisual from "./visuals/ClockVisual";
 import StaircaseVisual from "./visuals/StaircaseVisual";
 import ArticleCardsVisual from "./visuals/ArticleCardsVisual";
 import SplitPanelVisual from "./visuals/SplitPanelVisual";
+import PreambleVisual from "./visuals/PreambleVisual";
+import TabsVisual from "./visuals/TabsVisual";
 import TopicNavBar from "./TopicNavBar";
 import LearningPath from "./LearningPath";
 
@@ -196,6 +198,14 @@ export default function ContentRenderer({ topic, selectedSubject, onTopicSelect 
             
             case "splitPanel":
                 content = <SplitPanelVisual topicData={topicData} />;
+                break;
+            
+            case "preambleVisual":
+                content = <PreambleVisual topicData={topicData} />;
+                break;
+            
+            case "tabs":
+                content = <TabsVisual topicData={topicData} />;
                 break;
             
             default:

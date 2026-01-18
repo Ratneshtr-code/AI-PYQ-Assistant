@@ -1,0 +1,251 @@
+{
+  "id": "legislative-assembly-vs-council",
+  "subject": "polity",
+  "title": "Legislative Assembly vs Legislative Council - State Legislature Comparison",
+  "description": "Comprehensive comparison of State Legislative Assembly (Vidhan Sabha) and Legislative Council (Vidhan Parishad) covering constitutional provisions, composition, powers, and procedures",
+  "visualType": "table",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["state-executive", "parliament-structure", "legislative-procedures"],
+    "tags": ["Vidhan Sabha", "Vidhan Parishad", "State Legislature", "Art 168-177", "Legislative Assembly", "Legislative Council", "Bicameral"]
+  },
+  "data": {
+    "columns": [
+      {"key": "aspect", "label": "Aspect"},
+      {"key": "legislative_assembly", "label": "Legislative Assembly (Vidhan Sabha)"},
+      {"key": "legislative_council", "label": "Legislative Council (Vidhan Parishad)"}
+    ],
+    "rows": [
+      {
+        "id": "constitutional-basis",
+        "aspect": "**Constitutional Basis**",
+        "legislative_assembly": "**Art 170**: Constitution of Legislative Assembly\n**Lower House** of State Legislature\nDirectly represents **People** of State",
+        "legislative_council": "**Art 169**: Abolition/Creation of Legislative Council\n**Upper House** of State Legislature\nRepresents **diverse sections** of society"
+      },
+      {
+        "id": "existence",
+        "aspect": "**Existence & Mandatory Status**",
+        "legislative_assembly": "**Mandatory** in every State\n**Cannot be abolished**\nEvery State must have an Assembly",
+        "legislative_council": "**Optional** - At State's discretion\nCan be **created or abolished** by Parliament (Art 169)\n**Special majority** of Assembly + Parliament approval needed"
+      },
+      {
+        "id": "states-having",
+        "aspect": "**States with Bicameral Legislature**",
+        "legislative_assembly": "**All 28 States** have Legislative Assembly\n**All States** mandatory",
+        "legislative_council": "**Only 6 States** currently have Council:\n• **Andhra Pradesh** (68 members)\n• **Telangana** (40 members)\n• **Karnataka** (75 members)\n• **Maharashtra** (78 members)\n• **Bihar** (75 members)\n• **Uttar Pradesh** (100 members - highest)"
+      },
+      {
+        "id": "nature",
+        "aspect": "**Nature & Dissolution**",
+        "legislative_assembly": "**Temporary body** - Dissolves after 5 years\n**Entire House** dissolves at once\nCan be dissolved before 5 years by Governor",
+        "legislative_council": "**Permanent body** - Never dissolves\n**1/3rd members retire** every 2 years\nContinuous existence like Rajya Sabha"
+      },
+      {
+        "id": "composition-basis",
+        "aspect": "**Basis of Composition**",
+        "legislative_assembly": "**Direct election** by people\n**FPTP (First Past The Post)** system\nOne member per constituency",
+        "legislative_council": "**6 categories of members** (Art 171(3)):\n• 1/3rd by Local Bodies\n• 1/3rd by Assembly members\n• 1/12th by Teachers (3+ years)\n• 1/12th by Graduates (3+ years)\n• 1/6th nominated by Governor"
+      },
+      {
+        "id": "total-strength",
+        "aspect": "**Total Strength**",
+        "legislative_assembly": "**Max 500 members** (Art 170(1))\n**Min 60 members** (exception: smaller states)\n• Mizoram, Goa, Sikkim: 40 members (min)\n• Arunachal Pradesh, Nagaland: 60 members\n• UP: 403 members (highest currently)",
+        "legislative_council": "**Max: 1/3rd of Assembly strength** (Art 171(1))\n**Min: 40 members**\n• UP: 100 members (highest)\n• Telangana: 40 members (lowest)\nCannot exceed 1/3rd of Assembly"
+      },
+      {
+        "id": "nominated",
+        "aspect": "**Nominated Members**",
+        "legislative_assembly": "**1 Anglo-Indian** nominated by Governor (if needed)\n**Lapsed** after 104th Amendment 2020\nNo other nominated members",
+        "legislative_council": "**1/6th members** nominated by Governor (Art 171(3)(e))\nExperts in: **Literature, Science, Art, Cooperative movement, Social service**\nAbout 7-17 members depending on State"
+      },
+      {
+        "id": "term",
+        "aspect": "**Term/Tenure**",
+        "legislative_assembly": "**5 years** normal term (Art 172(1))\nCan be dissolved earlier by Governor\n**Emergency**: Extended by 1 year at a time (max 1 year after Emergency ends)",
+        "legislative_council": "**6 years** term for each member (Art 172(1))\n**1/3rd retire** every 2 years (about 13-33 members)\nMember can be re-elected indefinitely"
+      },
+      {
+        "id": "qualifications",
+        "aspect": "**Qualifications (Art 173)**",
+        "legislative_assembly": "• Indian citizen\n• **25+ years** of age\n• No office of profit\n• Registered voter in State",
+        "legislative_council": "• Indian citizen\n• **30+ years** of age\n• No office of profit\n• Registered voter in State"
+      },
+      {
+        "id": "presiding-officer",
+        "aspect": "**Presiding Officer**",
+        "legislative_assembly": "**Speaker** (Art 178)\nElected by Assembly members from amongst themselves\nUsually from ruling party\nCannot vote except in tie (casting vote)",
+        "legislative_council": "**Chairman** (Art 182)\nElected by Council members from amongst themselves\nCannot vote except in tie (casting vote)\nSimilar to RS Chairman"
+      },
+      {
+        "id": "deputy-officer",
+        "aspect": "**Deputy Presiding Officer**",
+        "legislative_assembly": "**Deputy Speaker** (Art 178)\nElected by Assembly members\nUsually from opposition (convention)\nRemovable by effective majority",
+        "legislative_council": "**Deputy Chairman** (Art 182)\nElected by Council members\nRemovable by effective majority\nPresides when Chairman absent"
+      },
+      {
+        "id": "removal-officer",
+        "aspect": "**Removal of Presiding Officer**",
+        "legislative_assembly": "**Speaker & Deputy Speaker** removable by:\n• Resolution of Assembly\n• Effective majority (simple majority)\n• **14 days notice** required (Art 179)\nRarely happens",
+        "legislative_council": "**Chairman & Deputy Chairman** removable by:\n• Resolution of Council\n• Effective majority (simple majority)\n• **14 days notice** required (Art 183)\nRarely happens"
+      },
+      {
+        "id": "reserved-seats",
+        "aspect": "**Reserved Seats**",
+        "legislative_assembly": "**SC & ST seats** reserved (Art 170(1))\nBased on population of SC/ST in State\nExample: UP has 85 SC + 2 ST reserved seats",
+        "legislative_council": "**No reservation** for SC/ST\nAll members through election/nomination\nNo caste-based reservation"
+      },
+      {
+        "id": "quorum",
+        "aspect": "**Quorum**",
+        "legislative_assembly": "**1/10th of total strength** or 10 members (whichever is more)\nIf no quorum, meeting adjourned\nOften misused to stall proceedings",
+        "legislative_council": "**1/10th of total strength** or 10 members (whichever is more)\nIf no quorum, meeting adjourned\nSame as Assembly"
+      },
+      {
+        "id": "legislative-power",
+        "aspect": "**Legislative Powers**",
+        "legislative_assembly": "Can initiate **ANY bill** including Money Bills\n**Final authority** on all bills\nIf bill sent back by Council, Assembly can pass again\n**Dominates** in bicameral legislature",
+        "legislative_council": "Can initiate **any bill EXCEPT Money Bills**\nCan delay **Ordinary Bill** by max **3-4 months** total\nCan delay **Money Bill** by max **14 days**\nCannot reject bills - Assembly prevails"
+      },
+      {
+        "id": "money-bill",
+        "aspect": "**Money Bill Powers**",
+        "legislative_assembly": "**Exclusive power** to originate Money Bills\n**Final authority** on Money Bills\nCan accept/reject Council recommendations\n**Speaker's certificate** final\nCouncil cannot delay beyond 14 days",
+        "legislative_council": "**Cannot initiate** Money Bills\nCan **recommend amendments** (not binding)\n**14 days** to return with recommendations\nIf not returned in 14 days, deemed passed\n**No veto power** - Similar to Rajya Sabha"
+      },
+      {
+        "id": "ordinary-bill-assembly",
+        "aspect": "**Ordinary Bill - Originated in Assembly**",
+        "legislative_assembly": "Passes bill, sends to Council\nIf Council:\n• Rejects: Assembly can pass again after 3 months\n• Amends: Assembly can accept/reject\n• No action for 3 months: Deemed rejected\n**Assembly will prevail** ultimately",
+        "legislative_council": "Can:\n• Reject bill\n• Amend bill\n• Sit on bill for 3 months\nBut **cannot stop** bill - Assembly can pass again\nMax delay: **3-4 months** total"
+      },
+      {
+        "id": "ordinary-bill-council",
+        "aspect": "**Ordinary Bill - Originated in Council**",
+        "legislative_assembly": "Receives bill from Council\nCan:\n• Pass as is\n• Amend\n• Reject\n**Final authority** on all bills\nCouncil has no recourse if Assembly rejects",
+        "legislative_council": "Can originate Ordinary Bills (NOT Money Bills)\nSends to Assembly for approval\nIf Assembly rejects, bill dies\n**Assembly supremacy** maintained"
+      },
+      {
+        "id": "budget",
+        "aspect": "**Budget & Grants**",
+        "legislative_assembly": "**Exclusive power** to vote on State Budget\nVotes on **Demands for Grants**\nCan **reduce/reject** but **NOT increase** demand\n**Cut Motions** allowed\n**Full control** over State finances",
+        "legislative_council": "**Cannot vote** on Budget\n**Cannot vote** on Demands for Grants\nCan **discuss** budget\n**No control** over State finances\nSimilar to Rajya Sabha role"
+      },
+      {
+        "id": "appropriation-bill",
+        "aspect": "**Appropriation Bill**",
+        "legislative_assembly": "**Final authority** on Appropriation Bill\nMust pass for govt to withdraw from Consolidated Fund\nCouncil can recommend (14 days, not binding)\nCannot be amended (amounts already voted)",
+        "legislative_council": "Can make **recommendations** (14 days)\nCannot reject or amend\nAssembly can accept/reject recommendations\n**No control** over withdrawal from State Fund"
+      },
+      {
+        "id": "executive-control",
+        "aspect": "**Control over State Executive**",
+        "legislative_assembly": "**Full control** over Council of Ministers\nCouncil collectively responsible **ONLY to Assembly**\nCan move **no-confidence motion**\nIf passed, govt must resign\n**Real power center** of State",
+        "legislative_council": "**No control** over Council of Ministers\nMinisters can be from Council\nCan ask questions, discuss policies\n**Cannot move no-confidence** motion\n**No executive control**"
+      },
+      {
+        "id": "no-confidence",
+        "aspect": "**No-Confidence Motion**",
+        "legislative_assembly": "**Only in Assembly**\nCan move no-confidence against State govt\nIf passed, **govt must resign**\nCM must command majority in Assembly\n**Most powerful tool**",
+        "legislative_council": "**NOT allowed** in Council\nCannot move no-confidence\nCan criticize policies but cannot remove govt\nSame as Rajya Sabha"
+      },
+      {
+        "id": "confidence-vote",
+        "aspect": "**Confidence Vote**",
+        "legislative_assembly": "New CM must prove majority in Assembly\n**Floor test** conducted in Assembly\nGovernor can order floor test\nDecides govt stability",
+        "legislative_council": "**No floor test** in Council\nCM need not prove majority in Council\nCouncil has no role in govt formation\nSame pattern as Parliament"
+      },
+      {
+        "id": "question-hour",
+        "aspect": "**Question Hour**",
+        "legislative_assembly": "**1 hour** (timing varies by State)\nStarred & Unstarred questions\nMinisters must answer\nMore impactful due to executive responsibility",
+        "legislative_council": "**1 hour** (timing varies by State)\nStarred & Unstarred questions\nMinisters must answer\nLess impactful (no executive control)"
+      },
+      {
+        "id": "adjournment-motion",
+        "aspect": "**Adjournment Motion**",
+        "legislative_assembly": "Can move adjournment motion\nCensures government\nDiscusses urgent public importance\nPowerful tool to criticize govt",
+        "legislative_council": "Can move adjournment motion\nDiscusses urgent matters\nBut cannot remove govt (no no-confidence)\nWeaker impact than Assembly"
+      },
+      {
+        "id": "cut-motions",
+        "aspect": "**Cut Motions**",
+        "legislative_assembly": "**Allowed** during Demands for Grants:\n• **Policy Cut** (Re 1)\n• **Economy Cut** (specific amount)\n• **Token Cut** (Rs 100)\nPowerful opposition tool",
+        "legislative_council": "**NOT allowed**\nCannot vote on Demands for Grants\nCannot move Cut Motions\nNo financial control"
+      },
+      {
+        "id": "sessions",
+        "aspect": "**Sessions**",
+        "legislative_assembly": "**Summoned by Governor**\nTypically 3-4 sessions per year:\n• Budget Session\n• Monsoon/Monsoon Session\n• Winter Session\nMax gap: **6 months** between sessions",
+        "legislative_council": "**Summoned by Governor**\nSessions coincide with Assembly sessions\nMeets separately but parallel\nSame 6-month gap rule"
+      },
+      {
+        "id": "prorogation",
+        "aspect": "**Prorogation**",
+        "legislative_assembly": "Governor prorogues Assembly (ends session)\nPending bills **do NOT lapse** (unless dissolved)\nCommittee work continues",
+        "legislative_council": "Governor prorogues Council (ends session)\nPending bills **do NOT lapse**\nCommittee work continues\nNever dissolves"
+      },
+      {
+        "id": "dissolution-effect",
+        "aspect": "**Effect of Dissolution**",
+        "legislative_assembly": "**All pending bills lapse** (except bills in Council)\nSpeaker & Deputy Speaker vacate office\nNew elections conducted\nNew Assembly within 6 months",
+        "legislative_council": "**Never dissolves** - Permanent body\nNo concept of dissolution\nBills pending in Council do NOT lapse\nContinuous existence"
+      },
+      {
+        "id": "ministers-from",
+        "aspect": "**Ministers from Legislature**",
+        "legislative_assembly": "Most ministers from Assembly (convention)\nCM must command majority in Assembly\n**Max 15%** of Assembly strength (91st Amendment)\nMust be member within **6 months**",
+        "legislative_council": "Ministers can be from Council\nBut CM must have Assembly support\n**Max 15%** of Assembly strength (not Council)\nCounts towards Assembly 15% limit"
+      },
+      {
+        "id": "abolition-creation",
+        "aspect": "**Abolition/Creation Procedure (Art 169)**",
+        "legislative_assembly": "**Can abolish Council**:\n• Assembly must pass resolution (Majority of total + 2/3rd present)\n• Parliament passes bill (Simple majority)\n• Council **cannot prevent** its own abolition\n**Cannot be abolished** itself",
+        "legislative_council": "**Can be abolished** by Parliament (Art 169)\n**Can be created** if State Assembly requests:\n• Assembly passes resolution\n• Parliament passes bill\nCouncil has **no say** in its abolition"
+      },
+      {
+        "id": "abolition-history",
+        "aspect": "**Historical Abolition/Creation**",
+        "legislative_assembly": "Andhra Pradesh:\n• Council abolished in 1985\n• Re-created in 2007\n• Abolished again in 2024\nAssembly remains throughout",
+        "legislative_council": "**Abolished** in several States:\n• Punjab (1969)\n• West Bengal, Tamil Nadu (1969)\n• Andhra Pradesh (1985, 2024)\n**Created**: Telangana (2020)"
+      },
+      {
+        "id": "joint-sitting",
+        "aspect": "**Joint Sitting**",
+        "legislative_assembly": "**No provision** for Joint Sitting of State Legislature\nUnlike Parliament (Art 108)\nAssembly simply passes bill again after delay",
+        "legislative_council": "**No provision** for Joint Sitting\nAssembly can pass bill after delay\nNo Joint Sitting mechanism in Constitution for States"
+      },
+      {
+        "id": "electoral-functions",
+        "aspect": "**Electoral Functions**",
+        "legislative_assembly": "**Presidential Election**: MLAs vote (Electoral College)\n**Rajya Sabha Election**: MLAs elect RS members (STV)\n**Council Election**: MLAs elect 1/3rd of Council members",
+        "legislative_council": "**No role** in Presidential election (not in Electoral College)\n**No role** in Rajya Sabha election\n**Elects**: 1/3rd of its own members"
+      },
+      {
+        "id": "governor-removal",
+        "aspect": "**Removal of Governor**",
+        "legislative_assembly": "**No power** to remove Governor\nCan pass resolution requesting removal\nOnly President can remove Governor\nAssembly has no binding power",
+        "legislative_council": "**No power** to remove Governor\nCan pass resolution (non-binding)\nOnly President removes Governor\nSame as Assembly"
+      },
+      {
+        "id": "constitutional-amendments",
+        "aspect": "**Constitutional Amendments (Art 368)**",
+        "legislative_assembly": "**Only Assembly** ratifies Constitutional Amendments\n50% State Assemblies needed for certain amendments\nCouncil has **no role** in ratification\n**Assembly represents State** for ratification",
+        "legislative_council": "**No role** in ratifying Constitutional Amendments\nOnly Assembly can ratify\nCouncil completely excluded from amendment process\n**Major distinction** from Parliament"
+      },
+      {
+        "id": "comparative-power",
+        "aspect": "**Overall Power Comparison**",
+        "legislative_assembly": "**Supreme in State**\n**Can**: Control finances, Remove govt, Abolish Council, Ratify amendments\n**More powerful** than Council in ALL matters\n**Real power center** - Similar to Lok Sabha",
+        "legislative_council": "**Much weaker** than Assembly\n**Cannot**: Control finances, Remove govt, Prevent abolition, Ratify amendments\n**Can**: Delay bills (3-4 months), Provide expert scrutiny\nOften called **'House of Elders'** with diverse representation"
+      },
+      {
+        "id": "exam-key-points",
+        "aspect": "**Exam Key Points**",
+        "legislative_assembly": "• **Mandatory** in every State (cannot be abolished)\n• **5-year term**, directly elected by people\n• **Supreme power** over finances, executive, legislation\n• CM responsible **ONLY to Assembly**\n• Can **abolish Council** (Art 169)\n• Ratifies Constitutional Amendments\n• **Similar to Lok Sabha** at State level",
+        "legislative_council": "• **Optional** - Only **6 States** have Council currently\n• **6-year term**, 1/3rd retire every 2 years, **never dissolves**\n• **6 categories**: 1/3rd Local Bodies, 1/3rd Assembly, 1/12th Teachers, 1/12th Graduates, 1/6th Nominated\n• **Can be abolished** by Parliament (Art 169)\n• Can delay Ordinary Bill **3-4 months**, Money Bill **14 days**\n• **NO control** over govt (no no-confidence power)\n• **Similar to Rajya Sabha** at State level"
+      }
+    ],
+    "summary": "Legislative Assembly is SUPREME in State Legislature. Assembly has exclusive control over Money Bills, Budget & Grants, and can remove government via no-confidence. Council can delay Ordinary Bills (3-4 months max) and Money Bills (14 days max) but cannot reject them. Assembly can abolish Council (Art 169) - Council cannot prevent its own abolition. Only 6 States currently have bicameral legislature: Andhra Pradesh, Telangana, Karnataka, Maharashtra, Bihar, Uttar Pradesh. Council has 6 categories of members (Local Bodies, Assembly members, Teachers, Graduates, Nominated). Assembly (5-year term, directly elected, 25+ age) is similar to Lok Sabha; Council (6-year term, indirectly elected/nominated, 30+ age) is similar to Rajya Sabha. Key exam point: Assembly can abolish Council, but Council CANNOT be abolished by itself. Constitutional Amendments ratified ONLY by Assembly, not Council."
+  }
+}
+

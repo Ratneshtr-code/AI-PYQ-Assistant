@@ -1,0 +1,385 @@
+{
+  "id": "financial-relations",
+  "subject": "polity",
+  "title": "Centre-State Financial Relations",
+  "description": "",
+  "visualType": "splitPanel",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["legislative-relations", "administrative-relations", "finance-commission", "gst"],
+    "tags": ["Centre-State Relations", "Financial Relations", "Art 268-293", "Finance Commission", "GST", "Grants-in-Aid", "Taxation"]
+  },
+  "data": {
+    "categories": [
+      {"id": "taxation", "label": "Taxation Powers", "color": "#6366F1"},
+      {"id": "distribution", "label": "Revenue Distribution", "color": "#10B981"},
+      {"id": "grants", "label": "Grants & Borrowing", "color": "#F59E0B"},
+      {"id": "commission", "label": "Finance Commission & GST", "color": "#EF4444"}
+    ],
+    "articles": [
+      {
+        "id": "taxation-overview",
+        "number": "Overview",
+        "shortLabel": "Tax Powers",
+        "title": "Distribution of Taxation Powers - Overview",
+        "category": "taxation",
+        "color": "#6366F1",
+        "content": {
+          "constitutionalBasis": [
+            "**Part XII** (Art 264-300A): Finance, Property, Contracts, Suits",
+            "**Chapter I** (Art 264-291): Finance - Distribution of revenues between Union and States",
+            "**7th Schedule**: Entries related to taxation in Union List, State List, Concurrent List (pre-GST)",
+            "**101st Amendment 2016**: GST - Revolutionized taxation distribution"
+          ],
+          "principleOfSeparation": [
+            "**Different taxes**: Union and States have **different taxation powers** (not overlapping, except GST)",
+            "**Union taxes** (Entry 82-92C Union List): Income tax, Customs, Corporation tax, Excise (except on liquor), Service tax, GST on inter-state",
+            "**State taxes** (Entry 45-63 State List): Land revenue, Agricultural income, Stamp duty, Excise on liquor, Entertainment tax, Property tax, Vehicle tax, Profession tax, GST on intra-state",
+            "**No taxation on Concurrent List** (pre-GST): Taxation exclusively divided between Union and State Lists"
+          ],
+          "gstRevolution": [
+            "**101st Amendment 2016**: Added GST entries",
+            "**Entry 92A (Union List)**: GST on **inter-state** supply of goods/services",
+            "**Entry 92B (State List)**: GST on **intra-state** supply of goods/services",
+            "**Concurrent taxation**: For first time, both Union and States can levy same tax (GST) on same transaction",
+            "**CGST + SGST = GST**: Centre levies CGST, State levies SGST; Together form GST",
+            "**IGST**: Centre levies Integrated GST on inter-state trade (later divided between Centre and States)"
+          ],
+          "verticalImbalance": [
+            "**Tax powers unequal**: Union has more lucrative, elastic, growing tax sources (Income tax, Customs, Corporation tax, GST)",
+            "**State taxes limited**: Land revenue (declining), Agricultural income (politically difficult), Vehicle tax, Liquor excise (limited base)",
+            "**Expenditure responsibilities**: States have large expenditure (Health, Education, Police, Agriculture) but limited revenues",
+            "**Result**: **Vertical fiscal imbalance** - States depend on Union for funds (grants, tax devolution)",
+            "**Finance Commission**: Corrects imbalance by recommending tax devolution and grants"
+          ],
+          "examTips": "**Taxation powers** divided between Union (Entry 82-92C) and States (Entry 45-63). **Union taxes**: Income, Customs, Corporation, Excise, Service tax, Inter-state GST. **State taxes**: Land revenue, Agricultural income, Liquor excise, Property, Vehicle, Intra-state GST. **101st Amendment (GST)**: Concurrent taxation introduced. **Vertical imbalance**: Union has more revenue; States have more expenditure → Depend on grants, devolution."
+        }
+      },
+      {
+        "id": "art268-269",
+        "number": "Art 268-269",
+        "shortLabel": "Levied & Collected",
+        "title": "Taxes Levied by Union, Collected & Retained by States",
+        "category": "distribution",
+        "color": "#10B981",
+        "content": {
+          "art268": [
+            "**Art 268**: Duties levied by **Union** but collected and appropriated by **States**",
+            "**Earlier**: Stamp duties on bills of exchange, cheques, promissory notes, etc. (Entry 91 Union List)",
+            "**101st Amendment**: Art 268 amended - **Deleted** stamp duty provision (subsumed in GST)",
+            "**Now**: Art 268 has no operational content (provision exists but no tax under it)"
+          ],
+          "art269": [
+            "**Art 269**: Taxes levied and collected by **Union** but assigned to **States**",
+            "**Earlier (pre-GST)**: Taxes on sale/purchase of goods in inter-state trade (Central Sales Tax)",
+            "**101st Amendment**: Art 269 **completely substituted**",
+            "**Post-GST Art 269**: Deals with IGST (Integrated GST on inter-state supply)"
+          ],
+          "art269PostGST": [
+            "**Art 269(1)**: Taxes on supplies in course of **inter-state trade or commerce** (IGST) - Levied and collected by Union",
+            "**Art 269(2)**: IGST (except on imports) **assigned to States** in manner prescribed by Parliament",
+            "**Distribution**: IGST collected by Centre → Distributed to States based on destination principle (where goods/services consumed)",
+            "**Destination-based**: Revenue goes to consuming state (not producing state)"
+          ],
+          "centralSalesTaxFate": [
+            "**Central Sales Tax (CST)**: Levied by Centre on inter-state sale of goods (pre-GST)",
+            "**Collected by States**: Centre levied, States collected, retained by originating state",
+            "**Abolished**: After GST implementation (2017), CST abolished; Replaced by IGST",
+            "**Problem with CST**: Export-favoring (producing state retained); Cascading tax (tax on tax)"
+          ],
+          "examTips": "**Art 268**: Union levies, States collect & retain. Now **defunct** (post-GST; stamp duty deleted). **Art 269**: Pre-GST (Central Sales Tax); **Post-GST (Amended)**: **IGST** levied by Union, assigned to States. IGST distributed based on **destination principle** (where consumed, not produced). CST abolished; Replaced by IGST."
+        }
+      },
+      {
+        "id": "art270",
+        "number": "Art 270",
+        "shortLabel": "Shared Taxes",
+        "title": "Art 270 - Distribution of Union Taxes (Tax Devolution)",
+        "category": "distribution",
+        "color": "#10B981",
+        "content": {
+          "provision": [
+            "**Art 270**: All Union taxes (except Art 268, 269, 269A, surcharges and cesses) → **Distributed between Union and States**",
+            "**Post-80th Amendment**: Simplified - All Union taxes mandatorily shareable (no more permissive sharing)",
+            "**Post-101st Amendment (GST)**: Art 270 further amended to accommodate GST"
+          ],
+          "art270PostGST": [
+            "**Art 270(1)**: All taxes and duties referred to Union List (except Entry 84 - Duties of Excise on medicinal and toilet preparations containing alcohol, narcotics, etc., Entry 92B - Service tax, Entry 92C - GST) shall be distributed between Union and States",
+            "**Wait, complex!**: Let me simplify:",
+            "**Shareable Union taxes**: Income tax, Corporation tax, Customs duties, and other central taxes",
+            "**Not shareable**: Surcharges and cesses (Centre retains), Specific excise duties on alcohol/narcotics, Service tax (pre-GST, now subsumed in GST), GST (has separate mechanism)"
+          ],
+          "devolutionProcess": [
+            "**Finance Commission recommends**: Percentage of Union tax revenues to be devolved to States",
+            "**Vertical devolution**: What % of Union taxes go to States (e.g., 42% recommended by 15th FC)",
+            "**Horizontal distribution**: How to distribute among States (criteria: Population, Area, Income distance, Demographic performance, Forest cover, Tax effort, etc.)",
+            "**Parliament accepts**: Finance Commission recommendations usually accepted (not binding but conventionally accepted)"
+          ],
+          "recentDevolution": [
+            "**14th Finance Commission (2015-20)**: Recommended **42% devolution** (historically highest; Previously 32%)",
+            "**15th Finance Commission (2021-26)**: Recommended **41% devolution** (slight reduction due to J&K becoming UT)",
+            "**Trend**: Increasing devolution over decades (1st FC - 55% to Centre, 45% to States; Now reversed)"
+          ],
+          "surchargesAndCesses": [
+            "**Not shareable**: Surcharges and cesses on Union taxes NOT shared with States",
+            "**Centre retains 100%**: Union keeps entire surcharge and cess revenue",
+            "**Controversy**: Centre increasingly levying cesses instead of taxes (to avoid sharing with States)",
+            "**Examples**: Education cess, Health cess, Krishi Kalyan cess, GST Compensation cess",
+            "**States' complaint**: Erodes devolution; Centre collecting more via cesses, sharing less via taxes"
+          ],
+          "examTips": "**Art 270**: **Tax devolution** - Union taxes (Income, Corporation, Customs, etc.) distributed between Union and States. **Finance Commission recommends** vertical (e.g., 42% to States) and horizontal (criteria-based) distribution. **Not shareable**: Surcharges, cesses (Centre retains 100%). **Controversy**: Centre using cesses to avoid sharing. **14th FC**: 42% devolution (highest). **15th FC**: 41%."
+        }
+      },
+      {
+        "id": "art275",
+        "number": "Art 275",
+        "shortLabel": "Grants-in-Aid",
+        "title": "Art 275 - Grants-in-Aid from Union to States",
+        "category": "grants",
+        "color": "#F59E0B",
+        "content": {
+          "provision": [
+            "**Art 275**: Parliament can provide **grants-in-aid** to States **in need of assistance**",
+            "**From Consolidated Fund of India**: Charged on CFI (not voted by Parliament)",
+            "**Finance Commission recommends**: Which States need grants and how much",
+            "**Purpose**: Help poorer States bridge fiscal deficit; Equalization"
+          ],
+          "typesOfGrants": [
+            "**1. Statutory Grants (Art 275)**: Recommended by Finance Commission; Non-discretionary; Fixed formula",
+            "**2. Discretionary Grants (Art 282)**: Given by Union at its discretion for specific purposes (schemes, projects)",
+            "**Art 275 grants**: Revenue grants to fill budget deficit of States",
+            "**Art 282 grants**: Plan grants, scheme-specific grants (MGNREGA, PMAY, etc.)"
+          ],
+          "financeCommissionRole": [
+            "**Art 275(1)**: Parliament may provide grants to States **as Parliament may determine**",
+            "**In practice**: Parliament follows Finance Commission recommendations",
+            "**FC identifies**: States in need of assistance (poorer, hilly, tribal, special need States)",
+            "**Criteria**: Per capita income, fiscal capacity, special needs (insurgency, natural calamity, tribal welfare, etc.)"
+          ],
+          "whichStatesGet": [
+            "**Poorer States**: States with low per capita income, low fiscal capacity (Bihar, UP, Jharkhand, Odisha, Chhattisgarh, MP)",
+            "**Special category States** (till 14th FC): NE States, J&K, Himachal Pradesh, Uttarakhand - Got 90% grants + 10% loans for Central schemes",
+            "**Post-14th FC**: Special category abolished (except NE States); But special needs still considered in horizontal distribution",
+            "**Hill States**: Himachal, Uttarakhand get grants for hilly terrain difficulties",
+            "**Tribal States**: States with large tribal population (Odisha, Chhattisgarh, Jharkhand) get grants"
+          ],
+          "art275vs282": [
+            "**Art 275**: **Finance Commission** recommends; **Non-discretionary**; **Revenue** grants for budget deficit; **Equalization**",
+            "**Art 282**: **Union's discretion**; **Discretionary**; **Scheme/purpose**-specific grants (MGNREGA, PMAY, etc.); **Plan** grants"
+          ],
+          "examTips": "**Art 275**: **Grants-in-Aid** from Union to States **in need**. **Finance Commission recommends**. Purpose: **Equalization** (help poorer States). **Poorer States** get more (Bihar, UP, Jharkhand, Odisha, MP). **Special category States** (NE, hill States). **Statutory grants** (Art 275) vs **Discretionary grants** (Art 282)."
+        }
+      },
+      {
+        "id": "art282",
+        "number": "Art 282",
+        "shortLabel": "Discretionary",
+        "title": "Art 282 - Discretionary Grants for Any Public Purpose",
+        "category": "grants",
+        "color": "#F59E0B",
+        "content": {
+          "provision": [
+            "**Art 282**: Union or State may make grants for **any public purpose**, even if **not within their legislative competence**",
+            "**Union's discretion**: Union can give grants to States for any purpose (education, health, agriculture, etc.)",
+            "**State's discretion**: State can also give grants to Union (rare in practice)",
+            "**Most important grant provision**: Bulk of Union-to-State transfers happen under Art 282"
+          ],
+          "scopeOfPower": [
+            "**Any public purpose**: Not restricted to subjects in Union/State List",
+            "**Examples**: Union gives grants for:",
+            "• State subjects (Agriculture, Health, Police, Education - State List subjects)",
+            "• National schemes (MGNREGA, PMAY, Ayushman Bharat, PM-KISAN, etc.)",
+            "• Infrastructure (Roads, irrigation, ports in States)",
+            "• Disaster relief, Welfare schemes, Skill development",
+            "**Beyond legislative competence**: Union can grant for State subjects; State can grant for Union subjects"
+          ],
+          "centralSectorVsCentrallySponsored": [
+            "**Central Sector Schemes**: 100% Union-funded; Implemented by Union; On Union List subjects (e.g., Railways, Space)",
+            "**Centrally Sponsored Schemes (CSS)**: Funded by Union + State (shared); Implemented by States; Usually on State/Concurrent subjects",
+            "**Art 282 enables CSS**: Union uses Art 282 to give grants to States for CSS implementation",
+            "**Funding pattern**: Earlier 75:25 or 90:10 (Union:State); Post-14th FC, many CSS at 60:40 (to give States more autonomy)"
+          ],
+          "examples": [
+            "**MGNREGA**: Rural employment (State subject - Employment, Entry 23 State List); Union gives grants under Art 282",
+            "**PM-KISAN**: Agricultural income support (Agriculture - Entry 14 State List); Union grants",
+            "**Ayushman Bharat**: Health insurance (Health - Entry 6 State List); Union grants",
+            "**PMAY**: Housing (State subject); Union grants",
+            "**Swachh Bharat**: Sanitation (State subject - Entry 6 State List); Union grants",
+            "**Mid-Day Meal, Sarva Shiksha Abhiyan**: Education (Concurrent, but State responsibility); Union grants"
+          ],
+          "conditionsAndControl": [
+            "**Grants with conditions**: Union attaches conditions to grants (scheme guidelines, monitoring, utilization certificates)",
+            "**State must comply**: To receive grants, State must follow Union's conditions",
+            "**Union's control**: Through grants, Union influences State policies even on State subjects",
+            "**Criticism**: Erodes federalism; Union dictates to States via financial leverage; States lose autonomy"
+          ],
+          "states'Concerns": [
+            "**Tied grants**: Art 282 grants are tied to specific schemes; States cannot use as per their priorities",
+            "**One-size-fits-all**: Central schemes may not suit local needs; But States must implement",
+            "**Matching contribution**: States must contribute (60:40, 75:25); Burden on State finances",
+            "**Administrative burden**: Compliance, reporting, monitoring - States' administrative cost increases",
+            "**NITI Aayog, Finance Commissions**: Recommend more untied funds, less CSS; Give States flexibility"
+          ],
+          "examTips": "**Art 282**: Union can give **discretionary grants** for **any public purpose** (even State subjects). Enables **Centrally Sponsored Schemes** (MGNREGA, PMAY, Ayushman Bharat). **Grants with conditions** - Union controls State policies via financial leverage. **Criticism**: Tied grants erode federalism; States lose autonomy. Bulk of Union-State transfers via Art 282."
+        }
+      },
+      {
+        "id": "art280",
+        "number": "Art 280",
+        "shortLabel": "Finance Commission",
+        "title": "Art 280 - Finance Commission (Constitutional Body)",
+        "category": "commission",
+        "color": "#EF4444",
+        "content": {
+          "provision": [
+            "**Art 280**: President shall constitute **Finance Commission** every **5 years or earlier**",
+            "**Functions**: Recommend distribution of taxes between Union and States (vertical and horizontal), grants-in-aid to States, strengthen finances of Panchayats and Municipalities",
+            "**Constitutional body**: Quasi-judicial body; Independent; Ensures objective fiscal federalism"
+          ],
+          "composition": [
+            "**Chairman**: Appointed by President; Usually former judge, economist, or bureaucrat with finance expertise",
+            "**4 Members**: Appointed by President",
+            "**Qualifications** (as per FC Act):",
+            "• Chairman: Should have experience in public affairs",
+            "• Members: Special knowledge of economics, finance, accounts, administration",
+            "**Term**: Till submission of report (usually 2-3 years for one FC)"
+          ],
+          "functions": [
+            "**1. Tax devolution** (Art 280(3)(a)): Recommend distribution of net proceeds of Union taxes between Union and States (vertical devolution %)",
+            "**2. Horizontal distribution** (Art 280(3)(a)): Recommend how to distribute States' share among States (criteria: Population, Income distance, Area, Forest cover, Demographic performance, Tax effort, Fiscal capacity)",
+            "**3. Grants-in-Aid** (Art 280(3)(b)): Recommend grants to States in need (Art 275)",
+            "**4. Sound finance** (Art 280(3)(c)): Recommend measures for augmenting Consolidated Fund of State (to supplement resources of Panchayats and Municipalities - 73rd & 74th Amendments)",
+            "**5. Any other matter**: Referred by President in interest of sound finance"
+          ],
+          "recentCommissions": [
+            "**14th Finance Commission (2015-20)**: Chairman - Dr. Y.V. Reddy; **Recommended 42% devolution** (historic high); Abolished special category status (except NE States); Increased horizontal distribution criteria from 4 to 8",
+            "**15th Finance Commission (2021-26)**: Chairman - N.K. Singh; **Recommended 41% devolution** (slight reduction due to J&K reorganization); Performance incentives; Focus on health, education, judiciary",
+            "**16th Finance Commission (2026-31)**: To be constituted in 2024; Will give recommendations for 2026-31"
+          ],
+          "recommendationsVsBinding": [
+            "**Not binding**: FC recommendations not constitutionally binding on Parliament/President",
+            "**In practice**: Conventionally accepted; Very rare to reject FC recommendations",
+            "**Laid before Parliament**: President causes FC report to be laid before Parliament (Art 280(4)) with Action Taken Report",
+            "**Parliament decides**: Parliament ultimately decides (but usually follows FC)"
+          ],
+          "criticalRole": [
+            "**Fiscal federalism**: Ensures equitable distribution of resources between Union and States",
+            "**Equalization**: Bridges gap between rich and poor States (horizontal equity)",
+            "**Constitutional safeguard**: Protects States' interests; Prevents Union from arbitrarily withholding funds",
+            "**Quasi-judicial**: Independent body; Not influenced by political considerations (ideally)"
+          ],
+          "examTips": "**Art 280**: **Finance Commission** constituted every **5 years** by President. **Functions**: Tax devolution (vertical & horizontal), Grants-in-Aid (Art 275), Panchayat/Municipality finances. **14th FC**: 42% devolution (highest). **15th FC**: 41% devolution. Recommendations **not binding** but conventionally accepted. **Critical for fiscal federalism**."
+        }
+      },
+      {
+        "id": "art293",
+        "number": "Art 293",
+        "shortLabel": "Borrowing",
+        "title": "Art 293 - Borrowing by States (Union's Control)",
+        "category": "grants",
+        "color": "#F59E0B",
+        "content": {
+          "provision": [
+            "**Art 293(1)**: State government can borrow **within India** on security of Consolidated Fund of State (within limits fixed by State Legislature)",
+            "**Art 293(2)**: State Legislature can fix limits on State's borrowing",
+            "**Art 293(3)**: State **cannot borrow without Union's consent** if State owes debt to Union or Union has guaranteed State's debt",
+            "**Art 293(4)**: Union's consent required for State's borrowing if Union has guaranteed State's debt"
+          ],
+          "unionControl": [
+            "**Art 293(3) is key**: Most States owe debt to Union (past loans, advances); So effectively, **all State borrowing needs Union's consent**",
+            "**Union's veto**: Union can refuse consent; Control State's borrowing",
+            "**Fiscal discipline**: Ensures States don't over-borrow; Prevents fiscal indiscipline",
+            "**But**: Limits State's financial autonomy; States depend on Union's approval"
+          ],
+          "art292": [
+            "**Art 292**: Union government can borrow (within or outside India) on security of Consolidated Fund of India (within limits fixed by Parliament)",
+            "**Parliament's control**: Parliament fixes borrowing limits for Union",
+            "**No state consent**: Union doesn't need State consent for borrowing"
+          ],
+          "waysAndMeansAdvances": [
+            "**Temporary borrowing**: States borrow from RBI (Ways and Means Advances) for short-term cash flow mismatches",
+            "**Overdraft**: States can run overdraft with RBI for limited period (usually 14-90 days)",
+            "**RBI guidelines**: RBI sets limits on WMA, overdraft for each State (based on State's expenditure, revenue)",
+            "**Interest charged**: States pay interest to RBI on WMA and overdraft"
+          ],
+          "frbmAct": [
+            "**Fiscal Responsibility and Budget Management Act 2003**: Union law to ensure fiscal discipline",
+            "**States also have FRBM**: Most States enacted State FRBM Acts (12th FC recommendation)",
+            "**Targets**: Eliminate revenue deficit, cap fiscal deficit at 3% of GSDP, reduce debt-to-GSDP ratio",
+            "**15th FC**: Recommended States' fiscal deficit at 3% of GSDP (with performance incentives up to 3.5%)",
+            "**Pandemic**: FRBM targets relaxed during COVID-19; Higher borrowing permitted"
+          ],
+          "verticalImbalance": [
+            "**Revenue < Expenditure**: Most States' own revenue insufficient for expenditure",
+            "**Dependence on Union**: States depend on Union for tax devolution (Art 270), grants (Art 275, 282), and loans (Art 293)",
+            "**Borrowing need**: States borrow to finance fiscal deficit, capital expenditure, infrastructure",
+            "**Debt burden**: Many States have high debt (Punjab, Rajasthan, Kerala over 30-35% of GSDP)"
+          ],
+          "examTips": "**Art 293**: State can borrow within India (within limits fixed by State Legislature). **BUT Union's consent needed** if State owes debt to Union (Art 293(3)) - Effectively, all States need Union consent (most owe to Union). Union's **control over State borrowing**. **FRBM Act**: Fiscal discipline; 3% fiscal deficit target. Shows Union's financial control over States."
+        }
+      },
+      {
+        "id": "gst-council",
+        "number": "Art 279A",
+        "shortLabel": "GST Council",
+        "title": "Art 279A - GST Council (Cooperative Federalism)",
+        "category": "commission",
+        "color": "#EF4444",
+        "content": {
+          "provision": [
+            "**Art 279A**: Added by 101st Constitutional Amendment 2016",
+            "**GST Council**: Constitutional body for GST-related decisions",
+            "**Composition**: Union Finance Minister (Chairperson), Union Minister of State (Revenue), State Finance Ministers of all States and UTs",
+            "**Functions**: Recommend GST rates, exemptions, threshold, model laws, dispute resolution"
+          ],
+          "composition": [
+            "**Chairperson**: Union Finance Minister",
+            "**Members**: Union Minister of State (Finance/Revenue) + Finance Ministers of all States and UTs with Legislature",
+            "**Total members**: 1 (FM) + 1 (MoS) + 28 (States) + 3 (UTs with Leg - Delhi, Puducherry, J&K) = 33 members",
+            "**Secretary**: Union Revenue Secretary (non-member, administrative support)"
+          ],
+          "votingPattern": [
+            "**Art 279A(9)**: GST Council decisions by **weighted majority** (3/4th of votes cast)",
+            "**Vote weightage**:",
+            "• **Union**: 1/3 vote weightage (33.33%)",
+            "• **States**: 2/3 vote weightage (66.67%) - Divided equally among all States",
+            "**Example**: If all States agree, Union cannot block (States have 2/3); If all States disagree, Union cannot impose (needs 3/4 total)",
+            "**Protects States**: States collectively have more weight; Prevents Union's unilateral imposition"
+          ],
+          "functions": [
+            "**Art 279A(4)**: GST Council shall make recommendations on:",
+            "• **GST rates, exemptions, thresholds**: Which goods/services taxed at what rate (0%, 5%, 12%, 18%, 28%)",
+            "• **Model GST laws, principles**: CGST law, SGST laws, IGST law, Compensation law",
+            "• **Principles of levy**: How to levy, collect, share GST",
+            "• **Apportionment of IGST**: How to divide IGST between Centre and States",
+            "• **Special provisions**: For certain States, hilly/NE States",
+            "• **Dispute resolution**: Mechanism for Centre-State or State-State disputes on GST",
+            "• **Transition**: Smooth transition to GST regime from earlier tax regime"
+          ],
+          "cooperativeFederalism": [
+            "**Most important example**: GST Council showcases cooperative federalism at its best",
+            "**Centre and States together**: Both decide GST policies jointly; Consensus-based",
+            "**States' strong role**: States have 2/3 vote weightage; Union cannot override",
+            "**Meetings**: GST Council meets regularly (50+ meetings since 2016); Active body",
+            "**Landmark reform**: GST (2017) biggest tax reform since independence; Council enabled smooth implementation"
+          ],
+          "recommendationsBinding": [
+            "**Not binding**: GST Council's recommendations not binding on Union or States (Art 279A says 'recommend')",
+            "**In practice**: Conventionally accepted; Union and States follow Council's decisions",
+            "**Supreme Court (2022)**: Union of India vs Mohit Minerals - SC held GST Council's recommendations not binding; Union and States can legislate differently",
+            "**But**: Practical need for uniformity; Unilateral action defeats GST purpose; Council's recommendations effectively binding"
+          ],
+          "criticisms": [
+            "**Too many rate slabs**: 0%, 5%, 12%, 18%, 28% + cess - Complex; Frequent changes confusing",
+            "**Frequent meetings**: 50+ meetings in 7 years - Time-consuming for State FMs",
+            "**Union's influence**: Though States have 2/3 weight, Union (as Chairperson, secretariat) has agenda-setting power",
+            "**Inverted duty structure**: Some cases, input tax rate > output tax rate - Refund issues"
+          ],
+          "examTips": "**Art 279A** (101st Amendment 2016): **GST Council** - Union FM (Chairperson) + States' FMs. **Weighted majority** (3/4): Union 1/3 vote, States 2/3 vote. **Functions**: Recommend GST rates, exemptions, model laws, dispute resolution. **Best example of cooperative federalism**. Recommendations **not binding** (SC 2022) but followed in practice. 50+ meetings since 2016."
+        }
+      }
+    ],
+    "summary": "**Centre-State Financial Relations**: **Taxation powers divided**: Union (Income, Customs, Corporation, Excise, Service tax, Inter-state GST), States (Land revenue, Agricultural income, Liquor excise, Property, Vehicle, Intra-state GST). **101st Amendment (GST 2016)**: Concurrent taxation introduced. **Tax devolution (Art 270)**: Union taxes distributed (14th FC: 42%, 15th FC: 41%). **Grants**: Art 275 (Finance Commission grants - equalization), Art 282 (Discretionary grants - CSS). **Finance Commission (Art 280)**: Constitutional body; Recommends devolution, grants; Constituted every 5 years. **Borrowing**: Art 293 - States need Union consent (Union's control). **GST Council (Art 279A)**: Union FM + States' FMs; Weighted majority (Union 1/3, States 2/3); **Best example of cooperative federalism**. **Vertical imbalance**: Union has more revenue, States have more expenditure → States depend on devolution, grants, loans."
+  }
+}
+

@@ -1,0 +1,565 @@
+{
+  "id": "legislative-relations",
+  "subject": "polity",
+  "title": "Centre-State Legislative Relations",
+  "description": "",
+  "visualType": "splitPanel",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["federal-features", "parts-schedules", "parliamentary-system", "administrative-relations"],
+    "tags": ["Centre-State Relations", "7th Schedule", "Union List", "State List", "Concurrent List", "Art 245-255"]
+  },
+  "data": {
+    "categories": [
+      {"id": "distribution", "label": "Distribution of Powers", "color": "#6366F1"},
+      {"id": "parliament-state", "label": "Parliament in State Field", "color": "#10B981"},
+      {"id": "control", "label": "Centre's Control", "color": "#EF4444"}
+    ],
+    "articles": [
+      {
+        "id": "art245-246",
+        "number": "Art 245-246",
+        "shortLabel": "Basic Distribution",
+        "title": "Distribution of Legislative Powers - Basic Framework",
+        "category": "distribution",
+        "color": "#6366F1",
+        "content": {
+          "territorialExtent": [
+            "**Art 245(1)**: Parliament can make laws for **whole or any part** of India",
+            "**Art 245(2)**: State Legislature can make laws for **whole or any part of that State**",
+            "**Extraterritorial operation**: Parliament can make laws with extraterritorial operation; State cannot (except in certain cases)"
+          ],
+          "art246": [
+            "**Art 246**: Distribution of legislative powers between Union and States",
+            "**Parliament**: Can legislate on **Union List + Concurrent List + Residuary subjects** (Art 246(1), (2))",
+            "**State Legislatures**: Can legislate on **State List + Concurrent List** (Art 246(3))",
+            "**Exclusive spheres**: Union List → Only Parliament; State List → Only State Legislature (except special circumstances)"
+          ],
+          "constitutionalBasis": [
+            "**7th Schedule**: Contains 3 Lists defining legislative competence",
+            "**Union List (List I)**: 97 subjects - Defence, Foreign affairs, Currency, Banking, Railways, etc.",
+            "**State List (List II)**: 61 subjects - Police, Public order, Agriculture, Land, Local govt, etc.",
+            "**Concurrent List (List III)**: 47 subjects - Criminal law, Marriage, Forests, Education, etc."
+          ],
+          "principleBehindDistribution": [
+            "**National importance**: Union List (Defence, Foreign policy, Currency)",
+            "**Local importance**: State List (Police, Agriculture, Public health)",
+            "**Common interest**: Concurrent List (Criminal law, Marriage, Education)",
+            "**Economies of scale**: Union List (Railways, Posts, Atomic energy)",
+            "**Uniformity needed**: Union List (Citizenship, Currency, Standards)"
+          ],
+          "examTips": "**Art 245-246**: Basic framework for legislative distribution. Parliament → Union + Concurrent + Residuary; States → State + Concurrent. **7th Schedule**: Union (97), State (61), Concurrent (47). Know major subjects in each list. Parliament has wider powers."
+        }
+      },
+      {
+        "id": "union-list",
+        "number": "List I",
+        "shortLabel": "Union List",
+        "title": "Union List (List I) - 97 Subjects",
+        "category": "distribution",
+        "color": "#6366F1",
+        "content": {
+          "overview": [
+            "**List I of 7th Schedule**: Contains **97 subjects** (originally 97)",
+            "**Exclusive domain**: Only **Parliament** can legislate on these subjects",
+            "**National importance**: Subjects requiring national uniformity and central control",
+            "**Residuary power**: Any subject not in any list → Union (Art 248)"
+          ],
+          "majorSubjects": [
+            "**1. Defence** (Entry 1) - Armed forces, deployment, war and peace",
+            "**2. Foreign Affairs** (Entry 10) - Diplomatic relations, UN, treaties, extradition",
+            "**3. Citizenship** (Entry 17) - Acquisition, loss of citizenship",
+            "**4. Naturalization** (Entry 18)",
+            "**5. Railways** (Entry 22) - Construction, operation, regulation",
+            "**6. Airways** (Entry 29) - Aircraft, air navigation",
+            "**7. Shipping** (Entry 24) - Ports, shipping on high seas, inland waterways",
+            "**8. Posts and Telegraphs** (Entry 31) - Post offices, telephones, wireless, broadcasting",
+            "**9. Currency, Coinage, Legal Tender** (Entry 36, 38)",
+            "**10. Foreign Trade** (Entry 41) - Import, export, inter-state trade and commerce",
+            "**11. Banking** (Entry 45) - RBI, banks, stock exchanges",
+            "**12. Insurance** (Entry 46)",
+            "**13. Corporations** (Entry 43, 44) - Incorporation, regulation of companies",
+            "**14. Atomic Energy** (Entry 53) - Nuclear energy, radioactive substances",
+            "**15. Mines and Minerals** (Entry 54) - Petroleum, oilfields, mineral resources",
+            "**16. Elections** (Entry 72) - Elections to Parliament and State Legislatures",
+            "**17. Audit** (Entry 76) - CAG, audit of Union and State accounts",
+            "**18. Union Public Service Commission** (Entry 78)",
+            "**19. Income Tax** (Entry 82) - Tax on income other than agricultural income",
+            "**20. Customs Duties** (Entry 83) - Import, export duties",
+            "**21. Excise Duties** (Entry 84) - Except on alcoholic liquors",
+            "**22. Corporation Tax** (Entry 85) - Tax on companies",
+            "**23. Service Tax** (Entry 92B - 88th Amendment)",
+            "**24. GST on Inter-state trade** (Entry 92C - 101st Amendment)"
+          ],
+          "importantPoints": [
+            "**Most important list**: Union has most powers; Shows strong Centre",
+            "**97 subjects**: Most extensive list",
+            "**Taxation**: Major taxes (Income tax, Customs, Corporation tax, Excise, Service tax) in Union List",
+            "**Strategic subjects**: Defence, Foreign affairs, Currency, Atomic energy - Only Centre",
+            "**Economic control**: Banking, Insurance, Foreign trade, Currency - Centre controls economy"
+          ],
+          "examTips": "**Union List = 97 subjects**. Remember major ones: Defence, Foreign affairs, Railways, Currency, Banking, Atomic energy, Income tax, Customs, Corporation tax. Shows **strong Centre** (unitary feature). Only Parliament can legislate (except emergency)."
+        }
+      },
+      {
+        "id": "state-list",
+        "number": "List II",
+        "shortLabel": "State List",
+        "title": "State List (List II) - 61 Subjects",
+        "category": "distribution",
+        "color": "#6366F1",
+        "content": {
+          "overview": [
+            "**List II of 7th Schedule**: Contains **61 subjects** (originally 66)",
+            "**Exclusive domain**: Only **State Legislatures** can legislate (normal circumstances)",
+            "**Local importance**: Subjects of local concern requiring regional knowledge",
+            "**But exceptions exist**: Parliament can legislate under special circumstances (Art 249, 250, 252, 356)"
+          ],
+          "majorSubjects": [
+            "**1. Public Order** (Entry 1) - BUT not including use of armed forces",
+            "**2. Police** (Entry 2) - State police forces (except Delhi)",
+            "**3. Administration of Justice** (Entry 3) - Courts except SC and HCs",
+            "**4. Prisons** (Entry 4) - Jails, detention houses",
+            "**5. Local Government** (Entry 5) - Municipal corporations, panchayats, local bodies",
+            "**6. Public Health and Sanitation** (Entry 6) - Hospitals, sanitation",
+            "**7. Agriculture** (Entry 14) - Farming, crop production, pest control",
+            "**8. Land** (Entry 18) - Land revenue, rights in land, land tenure, transfer",
+            "**9. Forests** (Entry 17A - shifted to Concurrent List by 42nd Amendment 1976)",
+            "**10. Fisheries** (Entry 21)",
+            "**11. Industries** (Entry 24) - Subject to Concurrent List (industries declared by Parliament)",
+            "**12. Gas and Gas-works** (Entry 25)",
+            "**13. Trade and Commerce** (Entry 26) - Within state",
+            "**14. Markets and Fairs** (Entry 28)",
+            "**15. Money-lending and Money-lenders** (Entry 30)",
+            "**16. Relief of Disabled and Unemployable** (Entry 9)",
+            "**17. Libraries** (Entry 12) - Except national libraries",
+            "**18. Burials and Cremation Grounds** (Entry 13)",
+            "**19. Betting and Gambling** (Entry 34)",
+            "**20. Land Revenue** (Entry 45) - Tax on agricultural land",
+            "**21. Duties on Agricultural Income** (Entry 46)",
+            "**22. Estate Duty** (Entry 47) - Except on agricultural land",
+            "**23. Taxes on Lands and Buildings** (Entry 49)",
+            "**24. Excise on Alcoholic Liquors** (Entry 51)",
+            "**25. Taxes on Vehicles** (Entry 57)",
+            "**26. Taxes on Animals and Boats** (Entry 59)",
+            "**27. Taxes on Professions, Trades** (Entry 60)"
+          ],
+          "importantPoints": [
+            "**61 subjects**: Originally 66; 5 shifted to Concurrent List (42nd Amendment 1976)",
+            "**Which 5 shifted?**: Education, Forests, Weights & Measures, Protection of wild animals, Administration of justice",
+            "**Local subjects**: Agriculture, Police, Public health, Land, Local govt",
+            "**Taxation**: Land revenue, Agricultural income, Excise on liquor, Property tax, Vehicle tax",
+            "**BUT Centre can invade**: During emergency, national interest, state consent, President's Rule"
+          ],
+          "42ndAmendmentImpact": [
+            "**5 subjects shifted from State to Concurrent List**:",
+            "1. **Education** (Entry 11 → Concurrent Entry 25)",
+            "2. **Forests** (Entry 17A → Concurrent Entry 17A)",
+            "3. **Weights and Measures** (Entry 33 → Concurrent Entry 33)",
+            "4. **Protection of wild animals and birds** (Entry 17B → Concurrent Entry 17B)",
+            "5. **Administration of justice; constitution and organization of all courts except SC and HCs** (Entry 3 → Concurrent Entry 11A)",
+            "**Effect**: Centralization - Centre got power to legislate on these subjects"
+          ],
+          "examTips": "**State List = 61 subjects** (originally 66). Remember: Police, Public order, Agriculture, Land, Local govt, Public health. **42nd Amendment shifted 5 to Concurrent** (Education, Forests, Weights & Measures, Wild animals, Justice administration). Shows gradual **centralization**."
+        }
+      },
+      {
+        "id": "concurrent-list",
+        "number": "List III",
+        "shortLabel": "Concurrent",
+        "title": "Concurrent List (List III) - 47 Subjects",
+        "category": "distribution",
+        "color": "#6366F1",
+        "content": {
+          "overview": [
+            "**List III of 7th Schedule**: Contains **47 subjects** (originally 47)",
+            "**Joint domain**: **Both Parliament and State Legislatures** can legislate",
+            "**Conflict resolution**: If both legislate and conflict, **Union law prevails** (Art 254)",
+            "**State law can survive**: If President gives assent; But Parliament can override anytime"
+          ],
+          "majorSubjects": [
+            "**1. Criminal Law** (Entry 1) - IPC, CrPC (except police, public order)",
+            "**2. Criminal Procedure** (Entry 2) - Investigation, prosecution, trial",
+            "**3. Preventive Detention** (Entry 3) - NSA, UAPA, etc.",
+            "**4. Civil Procedure** (Entry 13) - CPC",
+            "**5. Marriage and Divorce** (Entry 5) - Marriage laws, divorce",
+            "**6. Transfer of Property** (Entry 6) - Property transfer, registration",
+            "**7. Contracts** (Entry 7) - Contract Act",
+            "**8. Actionable Wrongs** (Entry 8) - Torts",
+            "**9. Bankruptcy and Insolvency** (Entry 9)",
+            "**10. Trust and Trustees** (Entry 10)",
+            "**11. Administration of Justice** (Entry 11A - 42nd Amendment) - Subordinate courts",
+            "**12. Evidence** (Entry 12) - Indian Evidence Act",
+            "**13. Contempt of Court** (Entry 11) - Except SC contempt",
+            "**14. Lunacy and Mental Deficiency** (Entry 16)",
+            "**15. Prevention of Cruelty to Animals** (Entry 17)",
+            "**16. Forests** (Entry 17A - 42nd Amendment) - Shifted from State List",
+            "**17. Protection of Wild Animals and Birds** (Entry 17B - 42nd Amendment)",
+            "**18. Economic and Social Planning** (Entry 20) - Planning Commission, NITI Aayog",
+            "**19. Commercial and Industrial Monopolies** (Entry 21) - Competition Act, MRTP",
+            "**20. Trade Unions** (Entry 22) - Labour unions, industrial disputes",
+            "**21. Social Security** (Entry 23) - ESI, PF, Welfare schemes",
+            "**22. Social Insurance** (Entry 24) - Insurance schemes",
+            "**23. Education** (Entry 25 - 42nd Amendment) - Shifted from State List",
+            "**24. Newspapers, Books, Printing Press** (Entry 39)",
+            "**25. Price Control** (Entry 34) - Essential Commodities Act",
+            "**26. Legal Profession** (Entry 26) - Advocates Act, Bar Councils",
+            "**27. Electricity** (Entry 38) - Generation, distribution",
+            "**28. Weights and Measures** (Entry 33 - 42nd Amendment)",
+            "**29. Population Control and Family Planning** (Entry 20A - 42nd Amendment)"
+          ],
+          "art254Repugnancy": [
+            "**Art 254**: If Parliament and State law on Concurrent subject conflict → **Repugnancy**",
+            "**Rule**: Union law prevails; State law void to extent of repugnancy",
+            "**Exception**: If State law reserved for President's assent and he gives assent → State law prevails **in that state**",
+            "**BUT**: Parliament can still override by making another law",
+            "**Examples**: Criminal law (IPC), Contract Act, Evidence Act - Union laws on Concurrent subjects; States can make supplementary laws"
+          ],
+          "importantPoints": [
+            "**47 subjects**: Both Centre and States can legislate",
+            "**Union law prevails** (Art 254): Shows unitary bias",
+            "**42nd Amendment**: Added/shifted 5 subjects (Education, Forests, Weights & Measures, Wild animals, Justice admin, Population control)",
+            "**Major laws**: IPC, CrPC, CPC, Contract Act, Evidence Act - All on Concurrent List",
+            "**Taxation**: No taxation entry in Concurrent (except GST after 101st Amendment)"
+          ],
+          "gstEntry": [
+            "**101st Amendment 2016**: Added Goods and Services Tax (GST) entries",
+            "**Entry 92A (Union List)**: GST on **inter-state** trade",
+            "**Entry 92B (State List)**: GST on **intra-state** trade",
+            "**Concurrent taxation**: Both Centre and States levy GST (CGST + SGST = GST)",
+            "**IGST**: Centre levies Integrated GST on inter-state trade"
+          ],
+          "examTips": "**Concurrent List = 47 subjects**. Both can legislate; **Union law prevails** (Art 254 - repugnancy). Major subjects: Criminal law (IPC, CrPC), Civil law (CPC), Marriage, Contracts, Education, Forests. **42nd Amendment added 5** (Education, Forests, etc.). **101st Amendment added GST**."
+        }
+      },
+      {
+        "id": "art248",
+        "number": "Art 248",
+        "shortLabel": "Residuary",
+        "title": "Residuary Powers - Parliament's Exclusive Domain",
+        "category": "distribution",
+        "color": "#6366F1",
+        "content": {
+          "provision": [
+            "**Art 248**: Parliament has **exclusive power** to make laws on **residuary subjects**",
+            "**Residuary subjects**: Subjects **not mentioned in any of the 3 Lists**",
+            "**Residuary clause**: Shows strong Centre (unitary feature)",
+            "**No state legislature power**: States have NO power on residuary subjects"
+          ],
+          "whatAreResiduary": [
+            "Subjects that were **not anticipated** when Constitution was framed",
+            "Subjects that **emerged later** due to technological/social developments",
+            "**Examples**:",
+            "• **Information Technology** - Software, IT industry, cyber laws (IT Act 2000)",
+            "• **Internet** - Regulation of internet, online content",
+            "• **Cyber crimes** - Hacking, identity theft, online fraud",
+            "• **Space technology** - Commercial space activities (beyond atomic energy)",
+            "• **Genetics** - Genetic engineering, cloning",
+            "• **Artificial Intelligence** - AI regulation",
+            "• **E-commerce** - Online business, digital marketplace",
+            "• **Cryptocurrency** - Digital currencies, blockchain"
+          ],
+          "constitutionalBasis": [
+            "**Art 248(1)**: Parliament can make any law on any matter not enumerated in Concurrent or State List",
+            "**Art 248(2)**: Residuary power includes power to make law imposing tax not mentioned in any List",
+            "**Exclusive to Parliament**: Unlike USA (residuary with states), Canada (residuary with Centre), India chose Centre (unitary bias)"
+          ],
+          "comparison": [
+            "**India**: Residuary with Union (Art 248) - Unitary feature",
+            "**USA**: Residuary with States - Federal feature",
+            "**Canada**: Residuary with Centre - Like India",
+            "**Australia**: Residuary with States - Federal feature"
+          ],
+          "taxation": [
+            "**Art 248(2)**: Residuary taxation power with Parliament",
+            "**Examples**: Service Tax (before 88th Amendment made it explicit Entry 92B Union List)",
+            "After GST (101st Amendment): Residuary taxation less important (most taxes covered)"
+          ],
+          "examTips": "**Art 248**: Residuary powers with **Parliament** (NOT states) - Shows **strong Centre** (unitary feature). Examples: IT, Internet, Cyber laws, AI, E-commerce, Cryptocurrency. Compare with USA (states have residuary), Canada (Centre like India)."
+        }
+      },
+      {
+        "id": "art249",
+        "number": "Art 249",
+        "shortLabel": "Rajya Sabha",
+        "title": "Art 249 - Parliament Legislates on State List (National Interest)",
+        "category": "parliament-state",
+        "color": "#10B981",
+        "content": {
+          "provision": [
+            "**Art 249**: **Rajya Sabha** can authorize Parliament to make laws on **State List** in **national interest**",
+            "**Condition**: Rajya Sabha must pass resolution by **2/3rd majority** of members present and voting",
+            "**Effect**: Parliament can legislate on that State List subject for **whole of India**",
+            "**Duration**: Resolution valid for **1 year**; Can be renewed any number of times (1 year each time)"
+          ],
+          "procedure": [
+            "**Step 1**: Rajya Sabha passes resolution declaring that it is necessary/expedient in **national interest** that Parliament make laws on specified State List subject",
+            "**Step 2**: **2/3rd majority** of RS members present and voting required (special majority)",
+            "**Step 3**: Once passed, Parliament (both LS and RS) can make law on that subject",
+            "**Step 4**: Law applies to **whole of India** (not just some states)",
+            "**Step 5**: Law ceases to have effect after **6 months** after resolution ceases to be in force"
+          ],
+          "whyRajyaSabha": [
+            "**Rajya Sabha represents states** (Art 80) - Federal chamber",
+            "**States' consent**: Through their representatives in RS, states authorize Centre to legislate",
+            "**2/3rd majority**: Ensures broad consensus; Not simple majority",
+            "**Federal spirit**: States (via RS) voluntarily surrender their exclusive domain to Centre for national interest"
+          ],
+          "nationalInterest": [
+            "**Not defined**: 'National interest' not defined in Constitution",
+            "**Rajya Sabha decides**: RS itself decides what constitutes national interest",
+            "**Cannot be challenged**: Courts cannot question RS's determination of national interest (political question)",
+            "**Examples**: National emergency, economic crisis, pandemic, war preparation, coordinated national policy needed"
+          ],
+          "examplesOfUse": [
+            "**Never used extensively**: Art 249 has been used very rarely",
+            "**Reason**: Parliament prefers to use other methods (Art 250 - emergency; Art 252 - state consent; Art 253 - treaty)",
+            "**Alternative**: Most times, subject is put in Concurrent List via constitutional amendment (like Education, Forests via 42nd Amendment)"
+          ],
+          "limitations": [
+            "**Only for national interest**: Not for any reason",
+            "**Rajya Sabha alone**: Lok Sabha cannot pass such resolution",
+            "**2/3rd majority**: High threshold; Difficult to achieve",
+            "**Temporary**: Maximum 1 year (renewable); Law ceases after 6 months of resolution expiry",
+            "**No permanent transfer**: State's legislative competence not permanently taken away"
+          ],
+          "examTips": "**Art 249**: **Rajya Sabha** (2/3 majority) can authorize Parliament to legislate on **State List** in **national interest**. Valid for **1 year** (renewable). Law ceases after **6 months** of resolution expiry. Why RS? Represents states (federal spirit). Rarely used in practice."
+        }
+      },
+      {
+        "id": "art250",
+        "number": "Art 250",
+        "shortLabel": "Emergency",
+        "title": "Art 250 - Parliament Legislates on State List (During Emergency)",
+        "category": "parliament-state",
+        "color": "#10B981",
+        "content": {
+          "provision": [
+            "**Art 250**: During **National Emergency** (Art 352), Parliament can make laws on **any subject in State List**",
+            "**No state consent needed**: Parliament can legislate unilaterally",
+            "**No special majority**: Ordinary legislative process sufficient",
+            "**Effect**: India becomes **unitary** during emergency; Federal structure suspended"
+          ],
+          "whenApplicable": [
+            "**Only during National Emergency** (Art 352) - War, External aggression, Armed rebellion",
+            "**NOT during other emergencies**: Does NOT apply to President's Rule (Art 356) or Financial Emergency (Art 360)",
+            "**President's proclamation**: Must be in force; Once emergency revoked, Art 250 power ceases"
+          ],
+          "duration": [
+            "**While emergency continues**: Parliament can legislate throughout emergency period",
+            "**After emergency ends**: Law continues for **6 months** after emergency proclamation ceases",
+            "**After 6 months**: Law becomes inoperative (unless extended by Parliament or State Legislature adopts it)",
+            "**No automatic repeal**: Law doesn't automatically become void; Just ceases to have effect"
+          ],
+          "scopeOfPower": [
+            "**Any subject**: Parliament can legislate on ANY subject in State List (no limitations)",
+            "**All states**: Law applies to all states (not limited to particular state)",
+            "**Override state laws**: Parliament's law on State List overrides state laws",
+            "**Concurrent-like**: State List temporarily becomes like Concurrent List (both can legislate, but Union prevails)"
+          ],
+          "examples": [
+            "**During 1962 Emergency** (China war): Parliament made laws on State subjects",
+            "**During 1971 Emergency** (Bangladesh war): Centre controlled many state subjects",
+            "**During 1975-77 Emergency**: Parliament extensively legislated on State List subjects (authoritarian period)"
+          ],
+          "implications": [
+            "**Federal → Unitary**: India's federal character suspended during emergency",
+            "**Strong Centre**: Shows strong central control in crisis",
+            "**State autonomy lost**: States lose exclusive legislative competence",
+            "**Temporary measure**: Designed for crisis; Not permanent"
+          ],
+          "examTips": "**Art 250**: During **National Emergency** (Art 352), Parliament can legislate on **State List**. No state consent needed. Law continues for **6 months** after emergency ends. Shows **Federal → Unitary** transformation during emergency. NOT applicable to Art 356, 360."
+        }
+      },
+      {
+        "id": "art252",
+        "number": "Art 252",
+        "shortLabel": "State Consent",
+        "title": "Art 252 - Parliament Legislates with State Consent",
+        "category": "parliament-state",
+        "color": "#10B981",
+        "content": {
+          "provision": [
+            "**Art 252**: If **two or more states** consent, Parliament can make law on **State List** subject for those states",
+            "**State resolution**: State Legislature must pass resolution requesting Parliament to legislate",
+            "**Voluntary**: States voluntarily surrender their legislative competence to Parliament",
+            "**Effect**: Parliament's law applies only to **consenting states** (not all India)"
+          ],
+          "procedure": [
+            "**Step 1**: Two or more State Legislatures pass **resolutions** requesting Parliament to make law on specified State List subject",
+            "**Step 2**: Parliament makes law; Law applies to **consenting states only**",
+            "**Step 3**: Other states can **adopt later**: Any other state can pass resolution to adopt the law (law then applies to that state too)",
+            "**Step 4**: **No withdrawal**: Once state consents, it **cannot withdraw** consent; Irreversible",
+            "**Step 5**: Parliament can **amend or repeal**: Only Parliament can amend/repeal (states cannot)"
+          ],
+          "whyUsed": [
+            "**Uniform law desired**: When states want uniform law on a subject (e.g., inter-state coordination needed)",
+            "**State lacks expertise**: State may lack resources/expertise to draft complex legislation",
+            "**Inter-state uniformity**: Subjects requiring uniformity across states (but not national issue, so Art 249 not applicable)",
+            "**Cooperative federalism**: Example of cooperative federalism in action"
+          ],
+          "examples": [
+            "**Wildlife Protection Act 1972**: Many states requested Parliament to legislate (before Forests moved to Concurrent List)",
+            "**Water and Air Pollution Acts**: Before Environment subjects in Concurrent",
+            "**Inter-state River Water Disputes**: States consent to Parliament making law",
+            "**Prize Competitions Act 1955**: States requested uniform law on lotteries, prize competitions"
+          ],
+          "limitations": [
+            "**No withdrawal**: State cannot withdraw once consent given",
+            "**Parliament's control**: Only Parliament can amend/repeal (state has no control)",
+            "**Limited applicability**: Applies only to consenting states (not all India)",
+            "**Two states minimum**: At least two states must request; Single state cannot invoke Art 252"
+          ],
+          "comparison": [
+            "**Art 249**: National interest, Rajya Sabha 2/3 majority, 1 year validity, All India → **Temporary**",
+            "**Art 252**: State consent, No special majority, Permanent until repealed, Consenting states only → **Permanent**",
+            "**Art 250**: Emergency, No consent, 6 months after emergency, All India → **Crisis measure**"
+          ],
+          "examTips": "**Art 252**: If **2+ states consent**, Parliament can legislate on **State List**. **Permanent** (unlike Art 249 - temporary). State **cannot withdraw**. Only Parliament can amend/repeal. Applies only to **consenting states**. Example: Wildlife Protection Act. Shows **cooperative federalism**."
+        }
+      },
+      {
+        "id": "art253",
+        "number": "Art 253",
+        "shortLabel": "Treaty",
+        "title": "Art 253 - Legislation for International Agreements",
+        "category": "parliament-state",
+        "color": "#10B981",
+        "content": {
+          "provision": [
+            "**Art 253**: Parliament can make law on **any subject** (including State List) to implement **international treaty/agreement**",
+            "**No state consent needed**: Parliament's exclusive power; States cannot refuse",
+            "**Overrides federal distribution**: Treaty obligation overrides federal division of powers",
+            "**Effect**: India can fulfill international commitments even if subject in State List"
+          ],
+          "rationale": [
+            "**International obligations**: India must honor treaty commitments",
+            "**Single voice**: India speaks as one nation internationally; Cannot say 'state subject, Centre cannot implement'",
+            "**Sovereignty**: Treaty-making power with Union (Entry 14 Union List - Foreign affairs)",
+            "**Federal limitation**: Federal division of powers should not prevent fulfilling international obligations"
+          ],
+          "scopeOfPower": [
+            "**Any treaty**: Bilateral, multilateral, conventions, international agreements",
+            "**Any subject**: Even if subject in State List, Parliament can legislate",
+            "**No judicial review of necessity**: Courts cannot question whether law is necessary for treaty implementation",
+            "**Wide interpretation**: Courts have given wide interpretation to Art 253; Liberal approach"
+          ],
+          "examples": [
+            "**TRIPS Agreement** (WTO): Patent laws, Copyright laws - Implemented via Parliament laws (even though Concurrent subject)",
+            "**Paris Convention**: Intellectual property - Parliament legislation",
+            "**UNCLOS** (UN Convention on Law of Sea): Maritime zones - Parliament law",
+            "**Montreal Protocol**: Ozone layer protection - Environment laws by Parliament",
+            "**CITES**: Wildlife protection - Parliament laws on state subjects",
+            "**ILO Conventions**: Labour laws - Parliament implementing ILO conventions"
+          ],
+          "importantCases": [
+            "**Maganbhai Ishwarbhai Patel v Union (1969)**: SC upheld Parliament's power under Art 253 to legislate on State List subject for implementing treaty",
+            "**Reasoning**: Treaty obligations must be fulfilled; Federal division cannot be excuse for non-performance",
+            "**Wide scope**: Art 253 gives Parliament wide power; Not limited to specific subjects"
+          ],
+          "limitations": [
+            "**Genuine treaty**: Must be genuine international treaty/agreement (not domestic matter disguised as treaty)",
+            "**Good faith**: Centre cannot misuse by making sham treaties to encroach on State List",
+            "**Basic Structure**: Cannot violate basic structure of Constitution (federalism is basic structure)"
+          ],
+          "examTips": "**Art 253**: Parliament can legislate on **any subject** (including State List) to implement **international treaty**. No state consent needed. Shows **international obligations > federal division**. Examples: TRIPS, ILO conventions, UNCLOS. **Maganbhai case** upheld. Prevents federal excuse for treaty non-performance."
+        }
+      },
+      {
+        "id": "art254",
+        "number": "Art 254",
+        "shortLabel": "Repugnancy",
+        "title": "Art 254 - Repugnancy Doctrine (Concurrent List Conflict)",
+        "category": "control",
+        "color": "#EF4444",
+        "content": {
+          "provision": [
+            "**Art 254**: If Parliament and State law on **Concurrent List** subject conflict → **Repugnancy**",
+            "**General rule**: **Union law prevails**; State law void to extent of repugnancy",
+            "**Exception**: If State law **reserved for President's assent** and President gives assent → State law prevails **in that state**",
+            "**Parliamentary override**: Parliament can still override by making fresh law"
+          ],
+          "whenRepugnancyArises": [
+            "**Direct conflict**: Both laws cannot operate together; Mutually contradictory provisions",
+            "**Occupy same field**: Both laws cover same subject matter; Cannot coexist",
+            "**Examples**:",
+            "• Union law allows something; State law prohibits same thing",
+            "• Union law prescribes one procedure; State law prescribes different procedure",
+            "• Union law gives certain rights; State law denies those rights"
+          ],
+          "testOfRepugnancy": [
+            "**Test 1**: Is there **direct collision**? (Both laws say opposite things)",
+            "**Test 2**: Do both laws **occupy same field**? (Both regulate same thing comprehensively)",
+            "**Test 3**: Does State law take away what Union law gives? (State law nullifies Union law)",
+            "**If YES to any**: Repugnancy exists → Union law prevails"
+          ],
+          "art254Exception": [
+            "**State law reserved for President**: State Governor reserves State law for President's consideration (Art 200, 201)",
+            "**President gives assent**: President approves reserved State law",
+            "**Effect**: State law prevails **in that state** despite repugnancy with Union law",
+            "**BUT**: Parliament can override anytime by making fresh law on same subject"
+          ],
+          "importantCases": [
+            "**Deep Chand v State of UP (1959)**: SC defined repugnancy - Direct conflict or occupy same field",
+            "**M Karunanidhi v Union (1979)**: SC held state law on prevention of disqualification conflicted with Parliament's law; State law void",
+            "**Tika Ramji v State of UP (1956)**: UP law conflicted with Essential Commodities Act (Union law); State law void to extent of repugnancy",
+            "**Zaverbhai v State of Bombay (1954)**: Bombay law on industrial disputes conflicted with Industrial Disputes Act (Union); Bombay law void"
+          ],
+          "implications": [
+            "**Union supremacy**: Shows Centre's dominance even on Concurrent List (unitary feature)",
+            "**State law subordinate**: State laws on Concurrent subject always vulnerable",
+            "**Limited state autonomy**: States' concurrent power heavily constrained",
+            "**Parliamentary override**: Even President-assented state law can be overridden by Parliament"
+          ],
+          "examTips": "**Art 254**: Repugnancy on **Concurrent List** → **Union law prevails**. Test: Direct conflict OR Occupy same field. **Exception**: State law reserved for President + President's assent → State law prevails in that state (BUT Parliament can override). Shows **Union supremacy** (unitary feature). **Deep Chand case** - Test of repugnancy."
+        }
+      },
+      {
+        "id": "governor-reservation",
+        "number": "Art 200-201",
+        "shortLabel": "Governor",
+        "title": "Governor's Power of Reservation - Centre's Control Mechanism",
+        "category": "control",
+        "color": "#EF4444",
+        "content": {
+          "provision": [
+            "**Art 200**: Governor can **reserve** State Bill for President's consideration (instead of giving assent)",
+            "**Art 201**: President may give assent, withhold assent, or return Bill (except Money Bill)",
+            "**Centre's control**: Indirect control over State legislation via Governor (Centre's agent)",
+            "**Effect**: State Bill cannot become law without President's approval (if reserved)"
+          ],
+          "whenGovernorReserves": [
+            "**Mandatory reservation**: Constitution/law requires reservation for certain types of Bills",
+            "**Discretionary reservation**: Governor may reserve in his discretion",
+            "**Examples of mandatory**:",
+            "• Bills affecting High Court powers",
+            "• Bills conflicting with Union laws on Concurrent subjects",
+            "• Bills derogating fundamental rights",
+            "• Bills affecting Constitution's basic structure"
+          ],
+          "presidentsOptions": [
+            "**Option 1**: Give assent → Bill becomes law",
+            "**Option 2**: Withhold assent → Bill dies (cannot become law)",
+            "**Option 3**: Return Bill (except Money Bill) with message → State Legislature reconsiders → If passed again, Governor must present to President again (President's decision final)",
+            "**No time limit**: President can take indefinite time (pocket veto possible)"
+          ],
+          "centreControlMechanism": [
+            "**Governor is Centre's agent**: Appointed by President (Art 155); Removable by President",
+            "**Centre guides Governor**: Through informal channels, Centre can guide Governor to reserve Bills",
+            "**Indirect control**: Centre cannot directly veto State laws; But through Governor and reservation, Centre exercises control",
+            "**Examples**: Governor reserved State Bills conflicting with Union policy (land reforms, APMC reforms, etc.)"
+          ],
+          "criticism": [
+            "**Undermines federalism**: States' legislative autonomy compromised",
+            "**Governor's partisanship**: Governor may reserve Bills for political reasons (if Centre and State have different parties)",
+            "**Pocket veto**: President can delay indefinitely (no time limit for decision)",
+            "**Sarkaria Commission**: Recommended guidelines for reservation; Avoid political misuse"
+          ],
+          "examTips": "**Art 200-201**: Governor can **reserve** State Bill for President. President may **assent, withhold, or return** (except Money Bill). Centre's **indirect control** over State legislation. Governor = Centre's agent. Shows **unitary feature**. Criticism: Undermines federalism, partisanship, pocket veto."
+        }
+      }
+    ],
+    "summary": "**Centre-State Legislative Relations**: Parliament can legislate on **Union List (97) + Concurrent List (47) + Residuary** (Art 246, 248). States can legislate on **State List (61) + Concurrent (47)**. **Concurrent conflict** → Union law prevails (Art 254 - repugnancy). **Parliament can invade State List**: (1) Art 249 - Rajya Sabha 2/3 majority, national interest, 1 year; (2) Art 250 - During emergency; (3) Art 252 - State consent (2+ states), permanent; (4) Art 253 - International treaty. **Centre's control**: Governor reservation (Art 200-201), Art 254 repugnancy. Shows **strong Centre** (unitary features dominate). **42nd Amendment** shifted 5 subjects from State to Concurrent (centralization). **101st Amendment** added GST (concurrent taxation)."
+  }
+}
+

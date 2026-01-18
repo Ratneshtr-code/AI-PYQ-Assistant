@@ -1,0 +1,243 @@
+{
+  "id": "fr-vs-dpsp",
+  "subject": "polity",
+  "title": "Fundamental Rights vs Directive Principles - Comprehensive Comparison",
+  "description": "",
+  "visualType": "table",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["fundamental-rights", "dpsps", "fr-dpsp-conflicts"],
+    "tags": ["FR vs DPSP", "Comparison", "Part III", "Part IV", "Justiciability"]
+  },
+  "data": {
+    "columns": [
+      { "key": "aspect", "label": "Aspect of Comparison" },
+      { "key": "fundamentalRights", "label": "Fundamental Rights (Part III)" },
+      { "key": "dpsp", "label": "Directive Principles (Part IV)" }
+    ],
+    "categories": [
+      {"id": "all", "label": "All Comparisons (25+ Points)"}
+    ],
+    "rows": [
+      {
+        "id": "constitutional-part",
+        "aspect": "**Constitutional Part**",
+        "fundamentalRights": "**Part III** (Articles 12-35)",
+        "dpsp": "**Part IV** (Articles 36-51)",
+        "category": "all"
+      },
+      {
+        "id": "nature",
+        "aspect": "**Nature**",
+        "fundamentalRights": "**Negative obligations** - State shall **NOT** do certain things (e.g., shall not discriminate - Art 15)",
+        "dpsp": "**Positive obligations** - State **SHALL** do certain things (e.g., shall strive to promote welfare - Art 38)",
+        "category": "all"
+      },
+      {
+        "id": "justiciability",
+        "aspect": "**Justiciability**",
+        "fundamentalRights": "**Justiciable** - Can be enforced through courts; Violation can be challenged",
+        "dpsp": "**Non-justiciable** (Art 37) - Cannot be enforced through courts; State cannot be compelled to implement",
+        "category": "all"
+      },
+      {
+        "id": "enforceability",
+        "aspect": "**Enforceability**",
+        "fundamentalRights": "**Enforceable by law** - Courts can issue writs (Art 32, 226); Violation leads to legal consequences",
+        "dpsp": "**Not enforceable** - Only moral obligation on State; No legal remedy for non-implementation",
+        "category": "all"
+      },
+      {
+        "id": "objective",
+        "aspect": "**Objective/Purpose**",
+        "fundamentalRights": "**Individual rights and liberty** - Protect individual against State tyranny",
+        "dpsp": "**Social and economic democracy** - Establish welfare state; Socio-economic justice",
+        "category": "all"
+      },
+      {
+        "id": "philosophy",
+        "aspect": "**Philosophy**",
+        "fundamentalRights": "**Liberal individualism** - Based on Western concept of individual liberty",
+        "dpsp": "**Socialism and welfare** - Based on socialist principles; Common good over individual",
+        "category": "all"
+      },
+      {
+        "id": "focus",
+        "aspect": "**Focus**",
+        "fundamentalRights": "**Individual-centric** - Rights of individual citizens",
+        "dpsp": "**Society-centric** - Welfare of society as a whole",
+        "category": "all"
+      },
+      {
+        "id": "applicability",
+        "aspect": "**Applicability**",
+        "fundamentalRights": "**Against State only** (Art 12 defines 'State'); Exceptions: Art 17, 23-24 also against private individuals",
+        "dpsp": "**Directives to State** - Guidelines for State in making laws and policies",
+        "category": "all"
+      },
+      {
+        "id": "role",
+        "aspect": "**Role in Governance**",
+        "fundamentalRights": "**Limitations on State power** - 'Thou shalt not' (State cannot violate)",
+        "dpsp": "**Guidelines for State action** - 'Thou shalt' (State should implement)",
+        "category": "all"
+      },
+      {
+        "id": "relationship",
+        "aspect": "**Relationship**",
+        "fundamentalRights": "**Means to an end** - FRs are the means",
+        "dpsp": "**End goals** - DPSPs are the ends (Granville Austin)",
+        "category": "all"
+      },
+      {
+        "id": "beneficiaries",
+        "aspect": "**Beneficiaries**",
+        "fundamentalRights": "**All persons** (some only for citizens - Art 15, 16, 19, 29, 30)",
+        "dpsp": "**Entire society** - Aimed at welfare of all",
+        "category": "all"
+      },
+      {
+        "id": "amendment",
+        "aspect": "**Amendment**",
+        "fundamentalRights": "**Difficult to amend** - Part of Basic Structure (Kesavananda Bharati); Core FRs cannot be amended",
+        "dpsp": "**Easier to amend** - Can be amended more easily; Not part of basic structure (except some aspects)",
+        "category": "all"
+      },
+      {
+        "id": "source",
+        "aspect": "**Source/Origin**",
+        "fundamentalRights": "Borrowed from **USA** (Bill of Rights concept)",
+        "dpsp": "Borrowed from **Ireland** (Irish Constitution 1937)",
+        "category": "all"
+      },
+      {
+        "id": "political-rights",
+        "aspect": "**Political Rights**",
+        "fundamentalRights": "**Includes political rights** - Right to vote, contest elections (Art 326), freedom of expression (Art 19(1)(a))",
+        "dpsp": "**No political rights** - Focuses on socio-economic rights only",
+        "category": "all"
+      },
+      {
+        "id": "economic-rights",
+        "aspect": "**Economic Rights**",
+        "fundamentalRights": "**Limited economic rights** - Right to property removed from FRs (44th Amendment 1978); Now legal right (Art 300A)",
+        "dpsp": "**Strong economic focus** - Economic justice, livelihood, equal pay (Art 39), living wage (Art 43)",
+        "category": "all"
+      },
+      {
+        "id": "social-rights",
+        "aspect": "**Social Rights**",
+        "fundamentalRights": "**Some social rights** - Equality (Art 14-18), abolition of untouchability (Art 17), minorities (Art 29-30)",
+        "dpsp": "**Comprehensive social rights** - Social justice (Art 38), welfare (Art 39), education (Art 41), maternity (Art 42)",
+        "category": "all"
+      },
+      {
+        "id": "implementation",
+        "aspect": "**Implementation**",
+        "fundamentalRights": "**Immediate implementation** - Effective from commencement of Constitution (Jan 26, 1950)",
+        "dpsp": "**Gradual implementation** - Subject to economic capacity; Implemented through legislation over time",
+        "category": "all"
+      },
+      {
+        "id": "legal-status",
+        "aspect": "**Legal Status**",
+        "fundamentalRights": "**Supreme** - Any law violating FRs is void (Art 13); Courts can strike down laws",
+        "dpsp": "**Subordinate to FRs** - If conflict, FRs generally prevail (State of Madras v Champakam 1951); But balanced approach (Minerva Mills 1980)",
+        "category": "all"
+      },
+      {
+        "id": "remedies",
+        "aspect": "**Remedies**",
+        "fundamentalRights": "**Constitutional remedies** - Art 32 (SC), Art 226 (HC); 5 writs available",
+        "dpsp": "**No remedies** - Cannot move court for enforcement; Only legislative/executive action",
+        "category": "all"
+      },
+      {
+        "id": "emergency",
+        "aspect": "**During Emergency**",
+        "fundamentalRights": "**Can be suspended** - Art 358 (Art 19 suspended automatically); Art 359 (other FRs by Presidential order); Art 20-21 cannot be suspended (44th Amendment)",
+        "dpsp": "**Cannot be suspended** - Remain in force; State expected to continue implementation",
+        "category": "all"
+      },
+      {
+        "id": "court-role",
+        "aspect": "**Role of Courts**",
+        "fundamentalRights": "**Active role** - Courts enforce FRs; Judicial review; Writs; PIL",
+        "dpsp": "**Interpretive role** - Courts use DPSPs to interpret FRs and laws; Cannot compel implementation",
+        "category": "all"
+      },
+      {
+        "id": "limitations",
+        "aspect": "**Limitations**",
+        "fundamentalRights": "**Subject to restrictions** - Art 19(2)-(6) allows reasonable restrictions; Can be limited for public interest",
+        "dpsp": "**No limitations** - But implementation subject to economic capacity and resources",
+        "category": "all"
+      },
+      {
+        "id": "self-executing",
+        "aspect": "**Self-Executing**",
+        "fundamentalRights": "**Self-executing** - No legislation needed for enforcement; Automatically enforceable",
+        "dpsp": "**Need legislation** - Require laws/schemes for implementation (e.g., MGNREGA for Art 41, RTE for Art 45→21A)",
+        "category": "all"
+      },
+      {
+        "id": "ambedkar-view",
+        "aspect": "**Dr. Ambedkar's View**",
+        "fundamentalRights": "Called Art 32 (Remedies) **'Heart and Soul of Constitution'** - Without remedies, FRs meaningless",
+        "dpsp": "Called DPSPs **'Novel feature'** of Constitution - Unique to Indian Constitution; Non-justiciable yet fundamental",
+        "category": "all"
+      },
+      {
+        "id": "examples",
+        "aspect": "**Examples**",
+        "fundamentalRights": "• Equality before law (Art 14)\n• Freedom of speech (Art 19(1)(a))\n• Right to life (Art 21)\n• Right to education (Art 21A)\n• Constitutional remedies (Art 32)",
+        "dpsp": "• Welfare state (Art 38)\n• Livelihood, equal pay (Art 39)\n• Right to work (Art 41)\n• Living wage (Art 43)\n• Uniform Civil Code (Art 44)\n• Environment (Art 48A)",
+        "category": "all"
+      }
+    ],
+    "additionalNotes": {
+      "complementaryNature": [
+        "**FRs and DPSPs are complementary** - Not contradictory",
+        "**Granville Austin**: 'FRs are means; DPSPs are ends'",
+        "**Both aim**: Establish socio-economic democracy in India",
+        "**FRs**: Negative liberty (freedom from State interference)",
+        "**DPSPs**: Positive liberty (State intervention for welfare)",
+        "Together they form **'Conscience of Constitution'**"
+      ],
+      "judicialView": [
+        "**State of Madras v Champakam (1951)**: FRs prevail over DPSPs in case of conflict",
+        "**Kesavananda Bharati (1973)**: FRs and DPSPs together form basic structure; Neither absolute supremacy",
+        "**Minerva Mills (1980)**: Balance between FRs and DPSPs; Harmony needed; Indian Constitution has two lungs - FRs and DPSPs",
+        "**Unnikrishnan (1993)**: Courts must harmonize FRs and DPSPs; Both are integral",
+        "**Modern approach**: Courts use DPSPs to expand scope of FRs (Art 21 expansion includes DPSP goals)"
+      ],
+      "constitutionalProvisions": [
+        "**Art 37**: DPSPs non-justiciable but **fundamental in governance**",
+        "**Art 31C** (25th Amendment 1971): Laws implementing Art 39(b), (c) given primacy over Art 14, 19 (socialist DPSPs)",
+        "**Art 31A, 31B**: Land reform laws protected from FR challenges",
+        "These provisions show **Legislature tried to give priority to DPSPs** in certain cases"
+      ],
+      "gradualTransformation": [
+        "**DPSP → FR**: Art 45 (free education) became Art 21A (FR) via 86th Amendment 2002",
+        "**Judicial expansion**: Courts expanded Art 21 (Life) to include DPSP goals:",
+        "• Right to livelihood (Art 39(a) → Art 21)",
+        "• Right to education (Art 45 → Art 21 → Art 21A)",
+        "• Right to health (Art 47 → Art 21)",
+        "• Right to environment (Art 48A → Art 21)",
+        "Shows **convergence of FRs and DPSPs** over time"
+      ],
+      "examTips": [
+        "**Most asked comparison**: 10-15 points minimum needed",
+        "**Remember**: FRs = Justiciable, Negative, Individual, Enforceable, Means",
+        "**Remember**: DPSPs = Non-justiciable, Positive, Social, Non-enforceable, Ends",
+        "**Key cases**: Champakam (FR prevails), Minerva Mills (balance), Kesavananda (basic structure)",
+        "**Granville Austin quote**: Very important - 'FRs are means; DPSPs are ends'",
+        "**Novel feature**: DPSPs are novel - non-justiciable yet fundamental in governance",
+        "**Borrowed from**: FRs from USA; DPSPs from Ireland",
+        "**Complementary not contradictory**: Together form conscience of Constitution"
+      ]
+    },
+    "summary": "**FRs vs DPSPs**: FRs (Part III, Art 12-35) are **justiciable, negative, individual-centric, enforceable** rights borrowed from USA. DPSPs (Part IV, Art 36-51) are **non-justiciable, positive, society-centric, non-enforceable** directives borrowed from Ireland. **FRs = Means, DPSPs = Ends** (Granville Austin). In conflict, **FRs generally prevail** (Champakam 1951), but **balanced approach** needed (Minerva Mills 1980). Both form **Basic Structure** and are **complementary** - together establish socio-economic democracy. Modern trend: **DPSP goals incorporated into FRs** through Art 21 expansion (livelihood, health, education, environment). **25+ points of distinction** for comprehensive exam answer."
+  }
+}
+

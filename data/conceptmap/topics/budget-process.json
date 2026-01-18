@@ -1,0 +1,282 @@
+{
+  "id": "budget-process",
+  "subject": "polity",
+  "title": "Budget Process & Grants (Art 112-116)",
+  "description": "Detailed coverage of Union Budget process, constitutional provisions, stages of enactment, and types of grants",
+  "visualType": "splitPanel",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["legislative-procedures", "parliament-structure", "central-govt-funds"],
+    "tags": ["Budget", "Art 112", "Annual Financial Statement", "Demands for Grants", "Appropriation Bill", "Finance Bill"]
+  },
+  "data": {
+    "categories": [
+      {"id": "constitutional-provision", "label": "Constitutional Provision", "color": "#6366F1"},
+      {"id": "stages-of-enactment", "label": "Stages of Enactment", "color": "#3B82F6"},
+      {"id": "special-grants", "label": "Special Grants", "color": "#10B981"},
+      {"id": "parliamentary-control", "label": "Parliamentary Control", "color": "#F59E0B"}
+    ],
+    "articles": [
+      {
+        "id": "art-112",
+        "number": "Art 112",
+        "title": "Annual Financial Statement (Budget)",
+        "category": "constitutional-provision",
+        "content": {
+          "provisions": [
+            "President shall cause to be laid before Parliament **Annual Financial Statement** (Budget) for each financial year",
+            "Financial Year: **1st April to 31st March** (changed from 1st Jan-31st Dec in 1867 by British)",
+            "Budget shows **estimated receipts & expenditure** of Government for the financial year",
+            "Budget distinguishes between **Charged** expenditure (non-votable) and **Voted** expenditure (votable by LS)"
+          ],
+          "scope": [
+            "**Receipts**: Revenue receipts (taxes, non-tax) + Capital receipts (borrowings, disinvestment)",
+            "**Expenditure**: Revenue expenditure (salaries, subsidies) + Capital expenditure (infrastructure, assets)",
+            "**Charged on Consolidated Fund** (Art 112(3)): Not voted by Parliament - President, Judges, CAG salaries, Debt charges, etc.",
+            "**Voted by Lok Sabha**: All other expenditure - Demands for Grants (Art 113)"
+          ],
+          "significance": [
+            "Most important parliamentary control over executive - 'No taxation without representation'",
+            "Lok Sabha controls public purse - Approves taxes & expenditure",
+            "Budget reflects government's priorities & policies for the year",
+            "Fiscal accountability ensured through detailed scrutiny by Parliament"
+          ],
+          "examTips": [
+            "Art 112 - Annual Financial Statement (NOT called 'Budget' in Constitution)",
+            "Financial Year: 1st April - 31st March (changed in 1867 during British rule)",
+            "Charged vs Voted: Charged (Art 112(3)) NOT voted (President, Judges, CAG, Debt); Voted by LS (Demands for Grants)",
+            "Budget = Financial Statement + Demands for Grants + Appropriation Bill + Finance Bill"
+          ]
+        }
+      },
+      {
+        "id": "stage-1",
+        "number": "Stage 1",
+        "title": "Budget Presentation",
+        "category": "stages-of-enactment",
+        "content": {
+          "provisions": [
+            "**Finance Minister** presents budget in Lok Sabha (usually last week of February)",
+            "**Budget Speech**: FM explains financial position, tax proposals, expenditure priorities",
+            "**Budget Documents**: Annual Financial Statement, Demands for Grants, Finance Bill, Economic Survey, etc.",
+            "**Halwa Ceremony** marks printing of budget documents (lock-in of officials begins)"
+          ],
+          "scope": [
+            "Budget presented in **Lok Sabha first** (Money Bill provision)",
+            "**Railway Budget** was separate till 2017; Now merged with General Budget",
+            "**Economic Survey** presented day before budget (overview of economy)",
+            "**Union Budget** covers all receipts, expenditure, taxation proposals for the year"
+          ],
+          "significance": [
+            "FM's budget speech outlines government's economic vision",
+            "Parliament gets detailed financial information for scrutiny",
+            "Public & businesses get clarity on tax rates, subsidies, schemes",
+            "Markets react to budget proposals (stock market, currency)"
+          ],
+          "examTips": [
+            "Budget presented in **Lok Sabha** (Money Bill - only LS can vote on financial matters)",
+            "No voting on Budget Speech - Just presentation & general discussion",
+            "Railway Budget merged in 2017 (earlier separate since 1924)",
+            "Budget date changed from Feb 28 to Feb 1 in 2017 for early implementation"
+          ]
+        }
+      },
+      {
+        "id": "stage-2",
+        "number": "Stage 2",
+        "title": "General Discussion",
+        "category": "stages-of-enactment",
+        "content": {
+          "provisions": [
+            "After budget presentation, **General Discussion** in both Houses",
+            "Members discuss overall budget, economic policies, allocation priorities",
+            "**No voting** at this stage - Only discussion & suggestions",
+            "Discussion can last several days (typically 4-5 days)"
+          ],
+          "scope": [
+            "Broad discussion on: Fiscal deficit, revenue targets, tax proposals, sectoral allocations",
+            "Opposition criticizes government's economic management & priorities",
+            "Government defends its policies & budget proposals",
+            "Both LS and RS participate (though RS can't vote on budget)"
+          ],
+          "significance": [
+            "Allows comprehensive review of government's fiscal policies",
+            "Opposition raises concerns about deficit, debt, inflation, unemployment",
+            "Public debate on economic priorities (welfare vs growth, subsidies vs infrastructure)",
+            "Media coverage ensures public awareness of government's plans"
+          ],
+          "examTips": [
+            "General Discussion in **both Houses** (not just LS)",
+            "No voting at this stage - Only policy discussion",
+            "Fiscal Deficit, Revenue Deficit, Primary Deficit are key terms discussed",
+            "FRBM Act (2003) mandates fiscal discipline targets"
+          ]
+        }
+      },
+      {
+        "id": "stage-3",
+        "number": "Stage 3",
+        "title": "Demands for Grants (Art 113)",
+        "category": "stages-of-enactment",
+        "content": {
+          "provisions": [
+            "**Art 113**: Expenditure (except Charged) must be voted by Lok Sabha as **Demands for Grants**",
+            "Each Ministry/Department presents its demand (total 109 demands in 2024)",
+            "**Standing Committees** scrutinize demands & submit reports",
+            "LS can **reduce or reject** a demand, but **cannot increase** it (Art 113(3))"
+          ],
+          "scope": [
+            "**Votable Expenditure**: All expenditure except Charged (salaries, schemes, subsidies, development)",
+            "Members can move **Cut Motions** to reduce/modify demands:",
+            "• **Policy Cut**: Disapprove policy (demand reduced to Re 1)",
+            "• **Economy Cut**: Reduce demand by specific amount (economy can be made)",
+            "• **Token Cut**: Discuss specific grievance (demand reduced by Rs 100)"
+          ],
+          "significance": [
+            "**Most crucial** parliamentary control - LS decides where money is spent",
+            "Cut Motions are opposition's tool to criticize govt policies & expenditure",
+            "Standing Committees provide detailed scrutiny (30+ members per committee)",
+            "If demand rejected, that Ministry cannot spend (govt may fall)"
+          ],
+          "examTips": [
+            "Art 113 - Demands for Grants voted ONLY by **Lok Sabha** (RS has no role)",
+            "LS can **reduce/reject** but **cannot increase** demand (Art 113(3))",
+            "**Cut Motions**: Policy Cut (Re 1), Economy Cut (specific amount), Token Cut (Rs 100 to discuss grievance)",
+            "**Guillotine**: If all demands not voted by deadline, all pending demands deemed passed (time limit enforcement)"
+          ]
+        }
+      },
+      {
+        "id": "stage-4",
+        "number": "Stage 4",
+        "title": "Appropriation Bill (Art 114)",
+        "category": "stages-of-enactment",
+        "content": {
+          "provisions": [
+            "**Art 114**: No money can be withdrawn from Consolidated Fund without Parliament's **Appropriation**",
+            "After Demands for Grants passed, **Appropriation Bill** introduced",
+            "This bill **authorizes** government to withdraw approved amounts from Consolidated Fund",
+            "It is a **Money Bill** - LS only; RS has 14 days to recommend"
+          ],
+          "scope": [
+            "**Appropriation** = Legal authorization to spend money already voted by LS",
+            "Without Appropriation Act, government **cannot withdraw money** from Consolidated Fund",
+            "Covers both **Charged** (included but not voted) and **Voted** expenditure",
+            "Once passed, becomes **Appropriation Act** - Law for that financial year"
+          ],
+          "significance": [
+            "Final legal authority for government to spend public money",
+            "Ensures money is spent only for purposes approved by Parliament",
+            "Fundamental principle: **No expenditure without parliamentary authorization**",
+            "Violation of Appropriation Act is illegal & punishable"
+          ],
+          "examTips": [
+            "Art 114 - **Appropriation Bill** gives legal authority to spend money from Consolidated Fund",
+            "It is a **Money Bill** - All Money Bill provisions apply (only LS, 14 days RS)",
+            "Appropriation Bill **cannot be amended** (no changes to amounts already voted)",
+            "Difference: Demands for Grants = **Voting** on amounts; Appropriation Bill = **Legal authorization** to withdraw"
+          ]
+        }
+      },
+      {
+        "id": "stage-5",
+        "number": "Stage 5",
+        "title": "Finance Bill",
+        "category": "stages-of-enactment",
+        "content": {
+          "provisions": [
+            "**Finance Bill** contains government's taxation proposals (new taxes, tax rate changes)",
+            "Introduced after Appropriation Bill",
+            "It is a **Money Bill** under Art 110 (deals with taxation)",
+            "LS can amend Finance Bill; RS can only recommend (14 days)"
+          ],
+          "scope": [
+            "**Taxation changes**: Income Tax, GST, Customs Duty, Excise Duty rate changes",
+            "**New taxes** or abolition of existing taxes",
+            "**Non-tax revenue** measures (fees, fines increases)",
+            "Finance Bill passed **before 31st March** (to ensure new tax rates apply from 1st April)"
+          ],
+          "significance": [
+            "Implements government's tax policy for the year",
+            "Affects every citizen/business (income tax slabs, GST rates, customs duty)",
+            "Revenue generation tool - Taxes fund government expenditure",
+            "Economic policy instrument - Lower taxes (stimulus), Higher taxes (revenue collection)"
+          ],
+          "examTips": [
+            "Finance Bill is a **Money Bill** (Art 110 - taxation)",
+            "Presented **after** Appropriation Bill (first authorize spending, then raise revenue)",
+            "Must be passed before 31st March for implementation from 1st April",
+            "LS can amend; RS only recommends (14 days)"
+          ]
+        }
+      },
+      {
+        "id": "grants",
+        "number": "Types",
+        "title": "Types of Grants",
+        "category": "special-grants",
+        "content": {
+          "provisions": [
+            "**Supplementary Grant (Art 115(1)(a))**: Additional funds needed during the year for unforeseen expenditure",
+            "**Additional Grant (Art 115(1)(b))**: More funds needed due to excess expenditure beyond voted/charged amount",
+            "**Excess Grant (Art 115(1)(c))**: Post-facto grant to regularize excess expenditure (after financial year ends)",
+            "**Vote of Credit (Art 116(1))**: Grants for undefined purpose when details cannot be stated (emergency, defense)"
+          ],
+          "scope": [
+            "**Exceptional Grant (Art 116(2))**: Grants forming no part of current service of financial year (new service)",
+            "**Token Grant (Art 116(3))**: Grant of nominal amount (Re 1) to introduce new policy/service (full grant sought later)",
+            "**Vote on Account (Art 116)**: Grant to meet expenditure for part of financial year (before full budget passed)",
+            "All these grants follow same procedure as Demands for Grants (voted by LS)"
+          ],
+          "significance": [
+            "Provide **flexibility** to government for unforeseen needs (disasters, wars, urgent schemes)",
+            "**Vote on Account** ensures continuity - Govt doesn't shut down if budget delayed (election year)",
+            "**Excess Grant** ensures accountability - CAG audits, PAC examines, Parliament regularizes",
+            "**Vote of Credit** gives broad powers but rarely used (last used in Kargil War 1999)"
+          ],
+          "examTips": [
+            "**Supplementary** = Additional funds **during** the year; **Excess** = Regularization **after** year ends",
+            "**Vote of Credit**: Broad grant, no details (defense, emergency); Rarely used (Kargil 1999)",
+            "**Vote on Account**: For **part of year** (2-4 months); Used in election year; Authorized by Art 116",
+            "All grants are **voted by LS only** (like Demands for Grants); RS has no voting power"
+          ]
+        }
+      },
+      {
+        "id": "cut-motions",
+        "number": "Tools",
+        "title": "Cut Motions - Opposition's Tool",
+        "category": "parliamentary-control",
+        "content": {
+          "provisions": [
+            "**Policy Cut Motion**: Demand reduced to **Re 1** - Expresses disapproval of policy underlying the demand",
+            "**Economy Cut Motion**: Demand reduced by **specific amount** - Economy can be made in expenditure",
+            "**Token Cut Motion**: Demand reduced by **Rs 100** - To discuss specific grievance about policy/administration"
+          ],
+          "scope": [
+            "Cut Motions moved by members **during Demands for Grants** discussion",
+            "Can be moved **only in Lok Sabha** (not in RS)",
+            "If Cut Motion passed, government may face **no-confidence** situation (depends on motion type)",
+            "Opposition uses Cut Motions to **highlight failures** & force debate on specific issues"
+          ],
+          "significance": [
+            "Important tool for **opposition** to criticize government",
+            "Forces government to defend its policies & expenditure priorities",
+            "**Policy Cut** is most serious - If passed, government's policy rejected (may fall)",
+            "**Token Cut** most used - Allows raising constituency grievances & local issues"
+          ],
+          "examTips": [
+            "**Policy Cut** = Re 1 (disapprove policy); **Economy Cut** = Specific amount (reduce expenditure); **Token Cut** = Rs 100 (discuss grievance)",
+            "Only in **Lok Sabha** during **Demands for Grants**",
+            "Policy Cut most serious (govt's policy rejected); Token Cut most frequently used",
+            "Cut Motions rarely passed (govt has majority) but allow opposition to raise issues"
+          ],
+          "keyCases": [
+            "No landmark cases on Cut Motions (procedural matter within Parliament)"
+          ]
+        }
+      }
+    ]
+  }
+}
+

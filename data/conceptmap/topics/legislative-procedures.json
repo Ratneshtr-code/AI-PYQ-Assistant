@@ -1,0 +1,88 @@
+{
+  "id": "legislative-procedures",
+  "subject": "polity",
+  "title": "Legislative Procedures - Bills & Joint Sitting",
+  "description": "Comprehensive guide to Ordinary Bills, Money Bills, Financial Bills, and Joint Sitting procedures in Indian Parliament",
+  "visualType": "table",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["parliament-structure", "parliamentary-devices", "budget-process"],
+    "tags": ["Legislative Procedure", "Bills", "Money Bill", "Financial Bill", "Ordinary Bill", "Joint Sitting", "Art 107-111"]
+  },
+  "data": {
+    "columns": [
+      { "key": "billType", "label": "Bill Type" },
+      { "key": "definition", "label": "Definition/Articles" },
+      { "key": "introduction", "label": "Introduction" },
+      { "key": "passageProcedure", "label": "Passage Procedure" },
+      { "key": "rsPowers", "label": "RS Powers" },
+      { "key": "presidentsAssent", "label": "President's Assent" }
+    ],
+    "rows": [
+      {
+        "id": "ordinary-bill",
+        "billType": "**Ordinary Bill (Art 107-108)**",
+        "definition": "• Bills on any matter EXCEPT financial matters (Art 107)\n• Can be Constitutional Amendment Bill, Criminal Law Bill, etc.\n• Needs passage by **both Houses** with **simple majority**",
+        "introduction": "• Can be introduced in **either House**\n• By Minister (Govt Bill) or Private Member (Fri)\n• Requires 7 days notice",
+        "passageProcedure": "**Stages:**\n1. First Reading (Introduction)\n2. Second Reading (General discussion + Clause-by-clause + Amendments)\n3. Third Reading (Final vote)\n4. Sent to other House (same 3 stages)\n5. Presidential Assent",
+        "rsPowers": "• **Equal powers** to LS\n• Can reject, amend, delay\n• If deadlock → Joint Sitting (Art 108)\n• RS can delay max **6 months** (combined both rejections)",
+        "presidentsAssent": "• President can give assent\n• Or withhold (Pocket Veto)\n• Or return for reconsideration (Suspensive Veto)\n• If Parliament passes again, President MUST assent"
+      },
+      {
+        "id": "money-bill",
+        "billType": "**Money Bill (Art 110)**",
+        "definition": "• Deals **ONLY** with matters in **Art 110(1)** (a) to (g):\n(a) Taxes\n(b) Borrowing of money\n(c) Consolidated/Contingency Fund\n(d) Appropriation of funds\n(e) Declaring expenditure charged\n(f) Receipt of money\n(g) Matters incidental to above\n• **Speaker certifies** if bill is Money Bill (Art 110(3)) - Final & binding",
+        "introduction": "• Can be introduced **ONLY in Lok Sabha**\n• By a Minister only (No Private Member's Money Bill)\n• Requires **President's recommendation** (Art 117)",
+        "passageProcedure": "**Stages:**\n1-3. Three readings in LS (same as Ordinary Bill)\n4. Sent to RS\n5. RS has **14 days** to recommend (not binding)\n6. LS accepts/rejects RS recommendations\n7. Presidential Assent (cannot return)",
+        "rsPowers": "• **Very limited powers**\n• Can only recommend amendments (**not binding**)\n• **14 days** to return\n• If 14 days lapse, deemed passed by both\n• **Cannot reject or amend**",
+        "presidentsAssent": "• President **cannot return** Money Bill\n• Must give assent (Art 111)\n• **No Pocket Veto** for Money Bills\n• **No Suspensive Veto**"
+      },
+      {
+        "id": "financial-bill-1",
+        "billType": "**Financial Bill Type I (Art 117(1))**",
+        "definition": "• Contains provisions of **Art 110** (Money Bill) + **Other matters**\n• Example: Bill imposing tax + creating regulatory body\n• Mixed nature",
+        "introduction": "• Can be introduced **ONLY in Lok Sabha**\n• By Minister only\n• Requires **President's recommendation** (Art 117(1))",
+        "passageProcedure": "**Stages:**\n1-3. Three readings in LS\n4. Sent to RS\n5. RS can amend **non-financial** provisions\n6. RS can delay, but LS can override\n7. If deadlock → **Joint Sitting possible**",
+        "rsPowers": "• Can amend **non-Money Bill provisions**\n• **Cannot amend Money Bill provisions**\n• Can delay but not reject\n• Stronger than Money Bill, weaker than Ordinary Bill",
+        "presidentsAssent": "• President can return (Suspensive Veto)\n• Can exercise Pocket Veto\n• Similar to Ordinary Bill"
+      },
+      {
+        "id": "financial-bill-2",
+        "billType": "**Financial Bill Type II (Art 117(3))**",
+        "definition": "• Involves expenditure from **Consolidated Fund** but doesn't fall under **Art 110**\n• Example: Bill increasing salary of judges\n• NOT a Money Bill",
+        "introduction": "• Can be introduced in **either House**\n• Requires **President's recommendation** for consideration (not introduction)\n• Can be introduced by Private Member (but can't be considered without President's nod)",
+        "passageProcedure": "**Stages:**\n1-5. Same as Ordinary Bill (all three readings in both Houses)\n6. If deadlock → **Joint Sitting possible**\n7. Presidential Assent",
+        "rsPowers": "• **Equal powers** to LS (like Ordinary Bill)\n• Can amend, reject, delay\n• If deadlock → Joint Sitting\n• Max 6 months delay",
+        "presidentsAssent": "• President can return (Suspensive Veto)\n• Can exercise Pocket Veto\n• Same as Ordinary Bill"
+      },
+      {
+        "id": "joint-sitting",
+        "billType": "**Joint Sitting (Art 108)**",
+        "definition": "• Called by **President** to resolve **deadlock** between LS & RS on Ordinary/Financial Bills (NOT Money Bills)\n• Deadlock = Bill rejected by one House after passage by other; OR Amendments not agreed; OR 6 months lapsed",
+        "introduction": "• **Presided by LS Speaker**\n• If Speaker absent, Deputy Speaker\n• If both absent, Deputy Chairman of RS",
+        "passageProcedure": "**Quorum**: 1/10th of total members (LS+RS) = 79 members (543+245)/10\n**Voting**: Simple majority of members present\n**LS dominance**: LS has 543 vs RS 245 → LS will prevail",
+        "rsPowers": "• **Only 3 Joint Sittings** in history:\n1. Dowry Prohibition Bill (1960)\n2. Banking Service Commission (Repeal) Bill (1978)\n3. POTA (2002)",
+        "presidentsAssent": "• After Joint Sitting, bill deemed passed by both Houses\n• President gives assent\n• No return/Pocket Veto for Joint Sitting bills (by convention)"
+      }
+    ],
+    "notes": [
+      "**Money Bill Supremacy**: Speaker's certificate (Art 110(3)) is final - Courts cannot question it (only examine if procedural requirements met)",
+      "**LS Dominance**: LS more powerful in financial matters (Money Bills, Budget, Grants); RS can only delay Ordinary Bills by 6 months max",
+      "**Joint Sitting Rarity**: Only 3 Joint Sittings since 1950 - Shows spirit of cooperation between Houses",
+      "**President's Veto Types**: (1) **Absolute** - Withholds assent, bill ends; (2) **Suspensive** - Returns for reconsideration (Parliament can override); (3) **Pocket** - Takes no action (bill pending indefinitely)",
+      "**Art 110 vs 117**: Art 110 = Money Bills only; Art 117(1) = Financial Bill Type I (Money + Other); Art 117(3) = Financial Bill Type II (Expenditure from Consolidated Fund)",
+      "**President's Recommendation**: Required for introduction of Money Bills & Financial Bill Type I; Required for consideration (not introduction) of Financial Bill Type II",
+      "**Important Case**: **Raja Ram Pal (2007)** - Speaker's decision to expel members upheld; Art 122(1) protects parliamentary proceedings from judicial review unless constitutional violation"
+    ],
+    "examTips": [
+      "**Money Bill vs Ordinary Bill**: Money Bill only Art 110 matters, only LS, 14 days RS, no return; Ordinary Bill any matter except financial, both Houses, 6 months delay, can be returned",
+      "**Speaker's Certificate**: Art 110(3) - Final on whether bill is Money Bill; Courts can't question (except procedural challenge)",
+      "**Joint Sitting**: Art 108 - Only for Ordinary/Financial Bills, NOT Money Bills; LS Speaker presides; LS dominates (543 vs 245); Only 3 times used",
+      "**President's Recommendation**: Art 117 - Money Bills & Fin Bill Type I need for introduction; Fin Bill Type II needs for consideration",
+      "**6 months delay**: RS can delay Ordinary Bill max 6 months (1st rejection = 6 months; 2nd rejection = further time till Joint Sitting)",
+      "**14 days for Money Bill**: RS must return within 14 days; If not, deemed passed; RS recommendations not binding on LS",
+      "**Financial Bills**: Type I (Money + Other, only LS, Joint Sitting possible); Type II (Expenditure CF, either House, like Ordinary Bill)"
+    ]
+  }
+}
+

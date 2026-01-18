@@ -6,15 +6,106 @@
   "version": "1.0",
   "lastUpdated": "2026-01-18",
   "learningPath": {
-    "overview": "This learning path covers fundamental aspects of Indian Polity and Constitution. Follow topics in order for comprehensive understanding and excellent exam preparation. We use innovative Split-Panel visual model to help you navigate and retain complex constitutional provisions permanently.",
-    "estimatedTime": "80-100 hours for complete mastery of current topics",
+    "overview": "This learning path covers fundamental aspects of Indian Polity and Constitution. Follow topics in order for comprehensive understanding and excellent exam preparation. We use innovative visual models (Split-Panel for article navigation, Tables for comparisons, Tabs for legislative bodies, Timeline for evolution, custom Preamble visual) to help you retain complex constitutional provisions permanently.",
+    "estimatedTime": "280-330 hours for complete mastery of current topics",
     "difficulty": "Medium to High",
     "examImportance": "Very High - Core topic for all government exams (SSC, UPSC, UPPCS, other PCS)"
   },
   "topics": [
     {
-      "id": "fundamental-rights-chapter",
+      "id": "constituent-assembly-chapter",
       "order": 1,
+      "mainTopic": "Constituent Assembly",
+      "category": "Constitutional Formation",
+      "status": "available",
+      "estimatedTime": "8-10 hours",
+      "importance": "Critical",
+      "description": "Comprehensive coverage of Constituent Assembly - formation, working, Drafting Committee, key debates, and sources of Constitution",
+      "prerequisites": [],
+      "subTopics": [
+        {
+          "id": "constituent-assembly",
+          "title": "Constituent Assembly - Formation to Adoption",
+          "visualType": "splitPanel",
+          "order": 1,
+          "description": "Navigate through formation, Drafting Committee (Dr. Ambedkar), sessions, debates, and adoption of Constitution"
+        }
+      ],
+      "keyTakeaways": [
+        "Formed based on Cabinet Mission Plan (1946) - 389 members (299 after partition)",
+        "Dr. Rajendra Prasad = President; Dr. B.R. Ambedkar = Drafting Committee Chairman",
+        "Worked for 2 years, 11 months, 18 days (165 sittings)",
+        "Objectives Resolution (Nehru, Jan 1947) - Soul of Constitution",
+        "Drafting Committee had 7 members (Ambedkar, Ayyar, Ayyangar, Munshi, Saadulla, Mitter, Khaitan)",
+        "Constitution adopted Nov 26, 1949; enforced Jan 26, 1950",
+        "Borrowed from 15+ countries (mainly GOI Act 1935, UK, US, Ireland, Canada)",
+        "Open, democratic, consensus-based process"
+      ],
+      "connections": ["preamble-chapter", "parts-schedules-chapter"]
+    },
+    {
+      "id": "preamble-chapter",
+      "order": 2,
+      "mainTopic": "Preamble - Soul of Constitution",
+      "category": "Constitutional Formation",
+      "status": "available",
+      "estimatedTime": "4-5 hours",
+      "importance": "Critical",
+      "description": "Study the Preamble with special visual layout - actual Preamble text on left, comprehensive smart notes on right covering keywords, 42nd Amendment, socialism, secularism, and key cases",
+      "prerequisites": ["constituent-assembly-chapter"],
+      "subTopics": [
+        {
+          "id": "preamble",
+          "title": "Preamble - Keywords & Amendments",
+          "visualType": "preambleVisual",
+          "order": 1,
+          "description": "View actual Preamble text with comprehensive explanation of each keyword, 42nd Amendment additions, and landmark cases"
+        }
+      ],
+      "keyTakeaways": [
+        "5 key terms: SOVEREIGN, SOCIALIST, SECULAR, DEMOCRATIC, REPUBLIC",
+        "4 objectives: JUSTICE (social, economic, political), LIBERTY (thought, expression, belief, faith, worship), EQUALITY (status, opportunity), FRATERNITY (dignity, unity, integrity)",
+        "42nd Amendment 1976 added: SOCIALIST, SECULAR, INTEGRITY",
+        "Source: Objectives Resolution (Nehru, 1947)",
+        "Called 'Soul of Constitution' (T.T. Krishnamachari)",
+        "Amendable (Kesavananda Bharati 1973 overruled Berubari 1960)",
+        "Indian socialism = Democratic socialism (not communism); Indian secularism = Sarva Dharma Sambhava"
+      ],
+      "connections": ["fundamental-rights-chapter"]
+    },
+    {
+      "id": "parts-schedules-chapter",
+      "order": 3,
+      "mainTopic": "Parts and Schedules of Constitution",
+      "category": "Constitutional Structure",
+      "status": "available",
+      "estimatedTime": "6-8 hours",
+      "importance": "Critical",
+      "description": "Complete table of all 25 Parts and 12 Schedules with articles, key points, and exam tips for quick reference and revision",
+      "prerequisites": ["constituent-assembly-chapter"],
+      "subTopics": [
+        {
+          "id": "parts-schedules",
+          "title": "Parts & Schedules - Complete Structure",
+          "visualType": "table",
+          "order": 1,
+          "description": "Comprehensive table covering all 25 Parts (from Part I Union & Territory to Part XXII) and 12 Schedules with articles, significance, and amendments"
+        }
+      ],
+      "keyTakeaways": [
+        "25 Parts (originally 22), 12 Schedules (originally 8)",
+        "470 Articles (originally 395) after 105 Amendments",
+        "Most important Parts: III (FRs), IV (DPSPs), IVA (FDs-42nd), V (Union), VI (States), IX (Panchayats-73rd), IXA (Municipalities-74th), XX (Amendment Art 368)",
+        "Key Schedules: 7th (Union-State-Concurrent Lists), 8th (22 languages), 9th (Land reforms), 10th (Anti-defection-52nd), 11th (Panchayats-73rd), 12th (Municipalities-74th)",
+        "Part VII repealed (7th Amendment 1956)",
+        "73rd & 74th Amendments added Part IX, IXA (Panchayats & Municipalities)",
+        "Union List 97, State List 66, Concurrent List 47 subjects"
+      ],
+      "connections": ["fundamental-rights-chapter", "dpsps-chapter"]
+    },
+    {
+      "id": "fundamental-rights-chapter",
+      "order": 4,
       "mainTopic": "Fundamental Rights (Part III)",
       "category": "Constitutional Framework",
       "status": "available",
@@ -29,6 +120,27 @@
           "visualType": "splitPanel",
           "order": 1,
           "description": "Navigate all major FR articles (Art 12-35) with master-detail interface showing organized content boxes for each article"
+        },
+        {
+          "id": "writs",
+          "title": "Writs under Article 32 & 226",
+          "visualType": "splitPanel",
+          "order": 2,
+          "description": "Complete coverage of 5 writs (Habeas Corpus, Mandamus, Prohibition, Certiorari, Quo Warranto), Art 32 vs Art 226 comparison, and limitations"
+        },
+        {
+          "id": "martial-law-vs-fr",
+          "title": "Martial Law vs Suspension of FRs",
+          "visualType": "table",
+          "order": 3,
+          "description": "Detailed comparison between Martial Law (Art 34) and Suspension of Fundamental Rights (Art 359) with 44th Amendment safeguards"
+        },
+        {
+          "id": "fr-exceptions",
+          "title": "Exceptions & Limitations to FRs",
+          "visualType": "splitPanel",
+          "order": 4,
+          "description": "Comprehensive coverage of all exceptions: Art 19 restrictions, preventive detention, armed forces, emergency provisions, saving laws (Art 31A/B/C), and immunities"
         }
       ],
       "keyTakeaways": [
@@ -37,14 +149,17 @@
         "Art 14 (Equality) and Art 21 (Life & Liberty) most expansive and litigated",
         "Art 19 originally had 7 freedoms; now 6 (property removed in 1978)",
         "Art 32 (Constitutional Remedies) called 'heart and soul of Constitution' by Dr. Ambedkar",
-        "FRs not absolute - subject to reasonable restrictions",
-        "Art 13 makes FRs supreme over ordinary laws"
+        "5 writs: Habeas Corpus (illegal detention), Mandamus (command duty), Prohibition (prevent before), Certiorari (quash after), Quo Warranto (public office)",
+        "Art 32 (SC) = FR itself, FRs only, All India; Art 226 (HC) = discretionary, FRs + other rights, State only",
+        "FRs not absolute - reasonable restrictions on Art 19 (Art 19(2)-(6))",
+        "Exceptions: Preventive detention (Art 22), Armed forces (Art 33), Martial Law (Art 34), Emergency (Art 358, 359), Saving laws (Art 31A/B/C), Immunity (Art 361)",
+        "44th Amendment: Art 20-21 cannot be suspended even during Emergency"
       ],
       "connections": ["dpsps-chapter"]
     },
     {
       "id": "dpsps-chapter",
-      "order": 2,
+      "order": 5,
       "mainTopic": "Directive Principles of State Policy (Part IV)",
       "category": "Constitutional Framework",
       "status": "available",
@@ -70,25 +185,512 @@
         "Art 48A (Environment) and Art 43A (Worker participation) added by 42nd Amendment 1976",
         "DPSPs complement FRs: FRs are means, DPSPs are ends"
       ],
+      "connections": ["fr-vs-dpsp-chapter"]
+    },
+    {
+      "id": "fr-vs-dpsp-chapter",
+      "order": 6,
+      "mainTopic": "FR vs DPSP - Comparison & Conflicts",
+      "category": "Constitutional Framework",
+      "status": "available",
+      "estimatedTime": "12-15 hours",
+      "importance": "Critical",
+      "description": "Master the comparison between FRs and DPSPs (25+ points) and understand major conflicts, constitutional amendments, and landmark cases that shaped their relationship",
+      "prerequisites": ["fundamental-rights-chapter", "dpsps-chapter"],
+      "subTopics": [
+        {
+          "id": "fr-vs-dpsp",
+          "title": "Fundamental Rights vs DPSPs - Complete Comparison",
+          "visualType": "table",
+          "order": 1,
+          "description": "Comprehensive comparison table with 25+ points of distinction covering nature, justiciability, philosophy, applicability, amendment, emergency provisions, and more"
+        },
+        {
+          "id": "fr-dpsp-conflicts",
+          "title": "Conflicts between FRs and DPSPs",
+          "visualType": "splitPanel",
+          "order": 2,
+          "description": "Navigate through major conflicts, landmark cases (Champakam, Kesavananda, Minerva Mills), constitutional amendments (Art 31C, 31A/B), property right battle, and modern harmonious construction approach"
+        }
+      ],
+      "keyTakeaways": [
+        "FRs: Justiciable, Negative, Individual-centric, Enforceable, Borrowed from USA; DPSPs: Non-justiciable, Positive, Society-centric, Non-enforceable, Borrowed from Ireland",
+        "Champakam (1951): FRs prevail over DPSPs; Led to 1st Amendment (Art 15(4))",
+        "Kesavananda (1973): Basic Structure - Balance between FRs and DPSPs is basic feature; Neither absolute supremacy",
+        "Minerva Mills (1980): 'Two lungs' theory - FRs and DPSPs both essential; Art 31C limited to Art 39(b), (c) only",
+        "Art 31C (25th Amendment 1971): Laws implementing Art 39(b), (c) protected from Art 14, 19 challenge",
+        "Art 31A, 31B (1st Amendment 1951): Protect land reforms; Ninth Schedule (284 Acts); I.R. Coelho (2007) limited immunity",
+        "Property right: Removed as FR (44th Amendment 1978) - biggest FR-DPSP conflict resolved",
+        "Modern approach: Harmonious construction; Courts expand Art 21 to include DPSP goals (livelihood, education, health, environment)",
+        "Granville Austin: 'FRs are means; DPSPs are ends' - Complementary not contradictory"
+      ],
+      "connections": ["constitutional-amendments-chapter"]
+    },
+    {
+      "id": "constitutional-amendments-chapter",
+      "order": 7,
+      "mainTopic": "Constitutional Amendments",
+      "category": "Constitutional Dynamics",
+      "status": "available",
+      "estimatedTime": "15-18 hours",
+      "importance": "Critical",
+      "description": "Complete coverage of constitutional amendment procedure (Art 368), three types of amendments, and landmark cases that shaped Parliament's amendment power",
+      "prerequisites": ["fundamental-rights-chapter", "dpsps-chapter"],
+      "subTopics": [
+        {
+          "id": "constitutional-amendments",
+          "title": "Constitutional Amendments - Types, Procedure & Cases",
+          "visualType": "splitPanel",
+          "order": 1,
+          "description": "Navigate through types of amendments (Simple Majority, Special Majority, Special Majority + States), procedure, and landmark cases (Shankari Prasad, Golak Nath, Kesavananda, Minerva Mills, Waman Rao) with trends analysis"
+        }
+      ],
+      "keyTakeaways": [
+        "106 Amendments till 2023; Art 368 provides procedure; Flexible yet rigid",
+        "Type 1: Simple Majority - Federal structure (Art 2-4), Citizenship (Art 5-11), Elections (Art 324-329)",
+        "Type 2: Special Majority - Most amendments (FRs, DPSPs); 2/3 present & voting + Majority of total strength",
+        "Type 3: Special Majority + 50% States - Federal provisions (President election, SC/HC, 7th Schedule, Art 368 itself)",
+        "Shankari Prasad (1951): Unlimited power to amend; Later overruled",
+        "Golak Nath (1967): FRs CANNOT be amended; Overruled Shankari & Sajjan; Led to 24th Amendment",
+        "Kesavananda (1973): Basic Structure doctrine - Can amend BUT not destroy basic structure; 13-judge bench, 7:6 verdict",
+        "Minerva Mills (1980): 'Two lungs' theory; Art 31C limited; Judicial review protected",
+        "42nd Amendment 1976: 'Mini Constitution' - Most controversial (Emergency period); Many provisions struck down",
+        "99th Amendment (NJAC) struck down by SC (2015) - Violated basic structure (judicial independence)"
+      ],
+      "connections": ["federal-system-chapter"]
+    },
+    {
+      "id": "federal-system-chapter",
+      "order": 8,
+      "mainTopic": "Federal System of India",
+      "category": "Constitutional Framework",
+      "status": "available",
+      "estimatedTime": "18-22 hours",
+      "importance": "Critical",
+      "description": "Comprehensive coverage of India's federal structure - comparison with unitary system, federal features, and parliamentary vs presidential systems",
+      "prerequisites": ["parts-schedules-chapter"],
+      "subTopics": [
+        {
+          "id": "federal-vs-unitary",
+          "title": "Federal vs Unitary System - Complete Comparison",
+          "visualType": "table",
+          "order": 1,
+          "description": "Comprehensive comparison table (20+ points) covering definition, power distribution, autonomy, amendment, suitability, advantages/disadvantages, with Indian context (Quasi-federal)"
+        },
+        {
+          "id": "federal-features",
+          "title": "Federal Features of Indian Constitution",
+          "visualType": "splitPanel",
+          "order": 2,
+          "description": "Navigate through 7 major federal features: Dual Polity (Art 1), Written Constitution, Division of Powers (7th Schedule), Constitutional Supremacy, Rigidity, Independent Judiciary, Bicameralism"
+        },
+        {
+          "id": "parliamentary-vs-presidential",
+          "title": "Parliamentary vs Presidential System",
+          "visualType": "table",
+          "order": 3,
+          "description": "Comprehensive comparison table (25+ points) covering executive structure, selection, responsibility, stability, checks and balances, with Indian parliamentary system details (Art 74, 75)"
+        }
+      ],
+      "keyTakeaways": [
+        "Art 1: India is 'Union of States' (NOT Federation - states cannot secede)",
+        "K.C. Wheare: India is 'Quasi-federal' - Federal in structure, Unitary in spirit",
+        "Federal features: Dual polity, Written Constitution, Division of powers (7th Schedule), Constitutional supremacy, Rigid (federal provisions need state consent), Independent judiciary (Art 131), Bicameralism (Rajya Sabha)",
+        "Unitary features: Strong Centre, Single citizenship, Integrated judiciary, Emergency (Art 352, 356, 360), Governor, All India Services, Centre can legislate on State List (emergency, national interest)",
+        "7th Schedule: Union List (97), State List (61), Concurrent (47); Residuary to Union (Art 248); Conflict: Union prevails (Art 254)",
+        "S.R. Bommai (1994): Federalism is basic structure; Cannot be destroyed",
+        "Parliamentary System (Art 74, 75): Dual executive (President nominal, PM real), Collective responsibility, PM from Parliament, No-confidence can remove, Fusion of powers",
+        "Presidential System (USA): Single executive (President), Direct election, Fixed term, Separation of powers, No collective responsibility",
+        "India chose Parliamentary: Familiarity (British rule), Accountability, Diverse country (Presidential risky), Dr. Ambedkar's reasoning",
+        "Parliamentary system is basic structure (S.R. Bommai) - Cannot be changed"
+      ],
+      "connections": ["centre-state-relations-chapter"]
+    },
+    {
+      "id": "centre-state-relations-chapter",
+      "order": 9,
+      "mainTopic": "Centre-State Relations",
+      "category": "Federalism in Action",
+      "status": "available",
+      "estimatedTime": "25-30 hours",
+      "importance": "Critical",
+      "description": "Comprehensive coverage of Centre-State relations across three dimensions: Legislative (7th Schedule, Parliament in State field, Repugnancy), Administrative (Executive powers, Directions, All India Services, President's Rule), and Financial (Taxation, Devolution, Grants, Finance Commission, GST)",
+      "prerequisites": ["federal-features", "parts-schedules-chapter"],
+      "subTopics": [
+        {
+          "id": "legislative-relations",
+          "title": "Centre-State Legislative Relations",
+          "visualType": "splitPanel",
+          "order": 1,
+          "description": "Navigate through distribution of legislative powers (7th Schedule - Union/State/Concurrent Lists), Residuary (Art 248), Parliament in State field (Art 249-253), and Centre's control (Art 254, Governor reservation)"
+        },
+        {
+          "id": "administrative-relations",
+          "title": "Centre-State Administrative Relations",
+          "visualType": "splitPanel",
+          "order": 2,
+          "description": "Explore distribution of executive powers (Art 73, 162), Centre's directions (Art 256-257, 355), President's Rule (Art 356 - S.R. Bommai case), All India Services (Art 312), delegation (Art 258-258A), and inter-state disputes"
+        },
+        {
+          "id": "financial-relations",
+          "title": "Centre-State Financial Relations",
+          "visualType": "splitPanel",
+          "order": 3,
+          "description": "Master taxation powers distribution, tax devolution (Art 270), Finance Commission (Art 280), grants-in-aid (Art 275, 282), borrowing (Art 293), and GST Council (Art 279A)"
+        }
+      ],
+      "keyTakeaways": [
+        "7th Schedule: Union List (97) - Defence, Currency, Railways; State List (61) - Police, Agriculture, Land; Concurrent (47) - Criminal law, Education; Residuary → Union (Art 248)",
+        "Parliament in State field: Art 249 (Rajya Sabha 2/3, national interest, 1 year), Art 250 (Emergency), Art 252 (State consent, permanent), Art 253 (International treaty)",
+        "Repugnancy (Art 254): Concurrent List conflict → Union law prevails; Exception: President-assented state law (but Parliament can override)",
+        "Executive powers: Art 73 (Union - Union+Concurrent+Residuary), Art 162 (State - State+Concurrent, subject to Union)",
+        "Centre's directions: Art 256 (Comply with Union laws), Art 257 (Not impede Union - railways, communications)",
+        "President's Rule (Art 356): Constitutional machinery failure; Misused 125+ times; S.R. Bommai (1994) - Federalism is basic structure, floor test mandatory, justiciable",
+        "All India Services (Art 312): IAS, IPS, IFS - Dual control (Union recruits, States serve, Union controls); Shows Union's control over State administration",
+        "Taxation: Union (Income, Customs, Corporation, Inter-state GST), States (Land revenue, Agricultural income, Liquor excise, Intra-state GST); 101st Amendment (GST 2016)",
+        "Tax devolution (Art 270): 14th FC (42% to States), 15th FC (41%); Surcharges, cesses NOT shareable (controversy)",
+        "Finance Commission (Art 280): Constituted every 5 years; Recommends devolution, grants (Art 275); 14th FC (Y.V. Reddy), 15th FC (N.K. Singh)",
+        "Grants: Art 275 (Statutory - equalization), Art 282 (Discretionary - CSS like MGNREGA, PMAY); Tied grants erode federalism",
+        "GST Council (Art 279A - 101st Amendment): Union FM + States' FMs; Weighted majority (Union 1/3, States 2/3); Best example of cooperative federalism",
+        "Vertical imbalance: Union has more revenue, States have more expenditure → States depend on devolution, grants, loans"
+      ],
+      "connections": ["emergency-provisions-chapter"]
+    },
+    {
+      "id": "emergency-provisions-chapter",
+      "order": 10,
+      "mainTopic": "Emergency Provisions",
+      "category": "Crisis Management",
+      "status": "available",
+      "estimatedTime": "8-10 hours",
+      "importance": "Critical",
+      "description": "Comprehensive comparison of three types of emergencies (National, State, Financial) with constitutional provisions, historical instances, landmark cases, and safeguards",
+      "prerequisites": ["federal-features", "fundamental-rights", "administrative-relations"],
+      "subTopics": [
+        {
+          "id": "emergency-provisions",
+          "title": "Emergency Provisions - Part XVIII (Art 352-360)",
+          "visualType": "table",
+          "order": 1,
+          "description": "Side-by-side comparison of National Emergency (Art 352), State Emergency/President's Rule (Art 356), and Financial Emergency (Art 360) covering grounds, effects, duration, safeguards, and historical instances"
+        }
+      ],
+      "keyTakeaways": [
+        "Three types: National Emergency (Art 352), State Emergency/President's Rule (Art 356), Financial Emergency (Art 360)",
+        "National Emergency (Art 352): War, External aggression, Armed rebellion (44th Amendment changed 'internal disturbance'); Used 3 times (1962, 1971, 1975)",
+        "1975 Emergency: Most controversial; 21 months; Democracy suspended; Led to 44th Amendment safeguards",
+        "44th Amendment 1978: Special majority required, Cabinet advice in writing, Art 20-21 CANNOT be suspended, LS can disapprove",
+        "Art 358: If war/external aggression → Art 19 automatically suspended; Art 359: President can suspend other FRs (except Art 20-21)",
+        "State Emergency (Art 356): Constitutional machinery failure; Used 125+ times (most misused); State govt dismissed, Parliament rules State",
+        "S.R. Bommai (1994): Federalism is basic structure; Art 356 justiciable; Floor test mandatory; Dramatically reduced misuse",
+        "President's Rule duration: 6 months initially; Max 3 years (44th Amendment); Extension beyond 1 year needs National Emergency OR EC certification",
+        "Financial Emergency (Art 360): Threat to financial stability; NEVER used (0 times); Union can control State finances, reduce salaries",
+        "Effects: National Emergency (Federal → Unitary, Parliament on State List, FRs suspended); State Emergency (State govt dismissed, no FR effect); Financial Emergency (Financial control, no FR effect)"
+      ],
+      "connections": ["union-executive-chapter"]
+    },
+    {
+      "id": "union-executive-chapter",
+      "order": 11,
+      "mainTopic": "Union Executive",
+      "category": "Governance Structure",
+      "status": "available",
+      "estimatedTime": "12-15 hours",
+      "importance": "Critical",
+      "description": "Comprehensive coverage of Union Executive bodies - President, Vice President, Prime Minister, and Council of Ministers with tabbed interface + Quick Comparison tab for side-by-side analysis",
+      "prerequisites": ["parliamentary-vs-presidential", "emergency-provisions"],
+      "subTopics": [
+        {
+          "id": "union-executive",
+          "title": "Union Executive - Part V (Art 52-78)",
+          "visualType": "tabs",
+          "order": 1,
+          "description": "Tab-based interface with 📊 Compare All tab showing all bodies side-by-side, plus individual tabs for President (Art 52-62), Vice President (Art 63-71), Prime Minister (Art 75), and Council of Ministers (Art 74-75) with constitutional provisions, election, powers, and removal procedures"
+        }
+      ],
+      "keyTakeaways": [
+        "Parliamentary system: Dual executive - President nominal (constitutional head), PM real (head of government)",
+        "President (Art 52-62): Elected by Electoral College (MPs+MLAs) via STV; 5-year term; Removable by impeachment (Art 61 - violation of Constitution, never used)",
+        "President acts on Cabinet advice (Art 74 - 44th Amendment); Very limited discretion after 44th Amendment",
+        "President's powers: Appoints PM/Ministers/Judges/CAG/EC/Governors, Part of Parliament, Pardoning (Art 72), Ordinance (Art 123 - 6 weeks), Veto (Absolute/Suspensive/Pocket), Emergency (Art 352/356/360)",
+        "Vice President (Art 63-71): Elected by MPs only (no MLAs) via STV; Ex-officio Chairman of Rajya Sabha (Art 64); Acts as President when President unable (Art 65)",
+        "VP removable by RS resolution (absolute majority) agreed by LS; Not impeachment, simpler process; No executive powers as VP (only as Acting President)",
+        "Prime Minister (Art 75): Real executive head; Leader of majority in Lok Sabha; Appointed by President; Must be MP (within 6 months)",
+        "PM removable by no-confidence in LS (Art 75(3) - collective responsibility); Powers - Appoints Ministers, Allocates portfolios, Advises President, Chairs Cabinet, Dissolves LS",
+        "Council of Ministers (Art 74-75): Headed by PM; Aids and advises President; Types - Cabinet Ministers, MoS, Deputy Ministers; Max 15% of LS (91st Amendment 2003)",
+        "Collective responsibility (Art 75(3)): All Ministers collectively responsible to LS; No-confidence → All resign together; Individual responsibility for own Ministry"
+      ],
+      "connections": ["state-executive-chapter"]
+    },
+    {
+      "id": "state-executive-chapter",
+      "order": 12,
+      "mainTopic": "State Executive",
+      "category": "Governance Structure",
+      "status": "available",
+      "estimatedTime": "10-12 hours",
+      "importance": "Critical",
+      "description": "Comprehensive coverage of State Executive bodies - Governors, Chief Ministers, and State Council of Ministers with tabbed interface + Quick Comparison tab mirroring Union Executive structure",
+      "prerequisites": ["union-executive-chapter", "administrative-relations"],
+      "subTopics": [
+        {
+          "id": "state-executive",
+          "title": "State Executive - Part VI (Art 153-167)",
+          "visualType": "tabs",
+          "order": 1,
+          "description": "Tab-based interface with 📊 Compare All tab showing all bodies side-by-side, plus individual tabs for Governors (Art 153-162), Chief Ministers (Art 164), and State Council of Ministers (Art 163-164) with constitutional provisions, appointment, powers, and removal procedures"
+        }
+      ],
+      "keyTakeaways": [
+        "State Parliamentary system: Similar to Union - Governor nominal (constitutional head), CM real (head of government)",
+        "Governor (Art 153-162): Appointed by President (Art 155); Holds office during President's pleasure (removable anytime - Art 156); 5-year term; 35+ years, Indian citizen",
+        "Governor's dual role: Constitutional head of State + Centre's agent (controversial); Often acts politically; Sarkaria Commission recommended impartiality",
+        "Governor's powers: Appoints CM/Ministers (Art 164), Part of State Legislature, Assent to Bills (Art 200 - 4 options; Reservation for President Art 201), Pardoning (Art 161 - cannot pardon death sentence), Ordinance (Art 213), Recommends President's Rule (Art 356)",
+        "Governor's discretionary powers: Appointing CM (no clear majority), Dismissing govt (loses majority, refuses to resign), Reserving Bills for President, Recommending President's Rule - Often misused",
+        "Chief Minister (Art 164): Real executive head of State; Leader of majority in Assembly; Appointed by Governor; Must be member of Legislature (within 6 months)",
+        "CM removable by no-confidence in Assembly (Art 164(2) - collective responsibility); Powers - Similar to PM at State level (Appoints Ministers, Allocates portfolios, Advises Governor, Chairs Cabinet, Dissolves Assembly)",
+        "State Council of Ministers (Art 163-164): Headed by CM; Aids and advises Governor; Types - Cabinet, MoS, Deputy; Max 15% of Assembly (91st Amendment); Min 12 even if 15% < 12",
+        "Collective responsibility (Art 164(2)): All State Ministers collectively responsible to Assembly; No-confidence → All resign; Individual responsibility for own Department",
+        "Governor vs President: Governor - No security of tenure (removable anytime), Cannot pardon death sentence, Often acts as Centre's agent; President - Impeachment only, Can pardon death sentence, Acts on Cabinet advice (bound by 44th Amendment)"
+      ],
       "connections": []
+    },
+    {
+      "id": "parliament-chapter",
+      "order": 13,
+      "mainTopic": "Parliament",
+      "category": "Legislative Structure",
+      "status": "available",
+      "estimatedTime": "18-22 hours",
+      "importance": "Critical",
+      "description": "Comprehensive coverage of Indian Parliament - Structure (Rajya Sabha & Lok Sabha), Parliamentary Devices, Legislative Procedures, Budget Process, and Central Government Funds",
+      "prerequisites": ["union-executive-chapter", "parliamentary-vs-presidential"],
+      "subTopics": [
+        {
+          "id": "parliament-structure",
+          "title": "Parliament Structure - Rajya Sabha & Lok Sabha (Art 79-122)",
+          "visualType": "tabs",
+          "order": 1,
+          "description": "Tabs interface with 📊 Compare Both Houses tab + Individual tabs for Rajya Sabha (Art 80) and Lok Sabha (Art 81) covering composition, powers, presiding officers, and key distinctions"
+        },
+        {
+          "id": "parliamentary-devices",
+          "title": "Parliamentary Devices & Procedures",
+          "visualType": "table",
+          "order": 2,
+          "description": "Comprehensive table covering Sessions, Quorum (Art 100(3)), Question Hour, Zero Hour, Motions, Point of Order, Special Mention (Rule 377), Resolutions"
+        },
+        {
+          "id": "legislative-procedures",
+          "title": "Legislative Procedures - Bills & Joint Sitting",
+          "visualType": "table",
+          "order": 3,
+          "description": "Detailed comparison of Ordinary Bill, Money Bill (Art 110), Financial Bills (Type I & II), and Joint Sitting (Art 108) procedures"
+        },
+        {
+          "id": "budget-process",
+          "title": "Budget Process & Grants (Art 112-116)",
+          "visualType": "splitPanel",
+          "order": 4,
+          "description": "Split-panel covering Annual Financial Statement (Budget - Art 112), Stages of Enactment, Demands for Grants (Art 113), Appropriation Bill (Art 114), Finance Bill, Types of Grants, and Cut Motions"
+        },
+        {
+          "id": "central-govt-funds",
+          "title": "Central Government Funds (Art 266-267)",
+          "visualType": "table",
+          "order": 5,
+          "description": "Comparison table of Consolidated Fund of India (Art 266(1)), Public Account (Art 266(2)), and Contingency Fund (Art 267) with withdrawal procedures and parliamentary control"
+        }
+      ],
+      "keyTakeaways": [
+        "Parliament (Art 79) = President + Rajya Sabha + Lok Sabha. Bicameral legislature; LS more powerful than RS in all matters",
+        "Lok Sabha (543 members, 5-year term, directly elected by people - FPTP): Supreme legislative body; Controls Money Bills, Budget, no-confidence; Council of Ministers responsible ONLY to LS",
+        "Rajya Sabha (245 members, permanent body, 1/3rd retires every 2 years, elected by State Assemblies - STV): Represents federal character; Limited powers - can delay bills but not reject",
+        "LS vs RS: LS more powerful - Money Bills (Art 110), No-confidence (Art 75(3)), Budget & Grants; RS has exclusive powers - Art 249 (State List legislation), Art 312 (All India Services)",
+        "Money Bill (Art 110): ONLY in LS; RS can recommend (14 days, not binding); Cannot be returned by President; Speaker certifies (Art 110(3) - final)",
+        "Joint Sitting (Art 108): For Ordinary/Financial Bills (NOT Money Bills); President summons; LS Speaker presides; LS dominates (543 vs 245); Only 3 times in history",
+        "Question Hour (11 AM-12 PM): Most important accountability tool; Starred (oral + supplementary) vs Unstarred (written); NOT in Constitution (Rules of Procedure)",
+        "Zero Hour (12 PM-1 PM): Indian innovation (1962); NOT in Constitution/Rules; Members raise urgent matters without notice; No voting; Speaker's discretion",
+        "Motions: Adjournment (censures govt), No-confidence (Art 75(3) - only LS, 50 support, can topple govt), Censure (disapproval), Cut (Policy/Economy/Token during Demands)",
+        "Budget Process: Annual Financial Statement (Art 112) → General Discussion → Demands for Grants (Art 113) → Appropriation Bill (Art 114) → Finance Bill",
+        "Demands for Grants (Art 113): Voted ONLY by LS; LS can reduce/reject but NOT increase (Art 113(3)); Cut Motions used by opposition",
+        "Cut Motions: Policy Cut (Re 1 - disapprove policy), Economy Cut (specific amount - reduce expenditure), Token Cut (Rs 100 - discuss grievance)",
+        "Appropriation Bill (Art 114): Legal authorization to withdraw money from Consolidated Fund; Money Bill; Cannot be amended; Parliament's final control over expenditure",
+        "Consolidated Fund (Art 266(1)): All govt receipts & expenditure; Parliamentary Appropriation needed for withdrawal; Most important fund",
+        "Public Account (Art 266(2)): Govt as banker/trustee; Others' money (PF, small savings); No Parliamentary approval for withdrawal; Returned to rightful owners",
+        "Contingency Fund (Art 267): ₹500 crore; President's disposal; Emergency unforeseen expenditure; No prior Parliamentary approval; Post-facto reimbursement from CFI",
+        "Speaker (Art 93): Elected by LS; Final authority on Money Bill (Art 110(3)); Decides disqualification (10th Schedule); Casting vote only in tie",
+        "Chairman of RS: Vice President (ex-officio); NOT a member of RS; Casting vote in tie; Deputy Chairman elected by RS members",
+        "Quorum (Art 100(3)): 1/10th members (LS 55, RS 25); House adjourned if no quorum; Often misused to stall proceedings",
+        "Parliamentary Privileges (Art 105): Freedom of speech (can't be prosecuted for words in House); Immunity from civil proceedings during session; Art 122(1) bars courts from questioning validity of proceedings"
+      ],
+      "connections": [
+        "Parliament → Union Executive: PM & Council responsible to LS (Art 75(3)); No-confidence only in LS; Budget must be passed by LS",
+        "Parliament → President: President is part of Parliament (Art 79); Summons & prorogues Parliament (Art 85); Addresses Parliament (Art 87); Assent to bills (Art 111)",
+        "Parliament → Federalism: RS represents States (federal character); Art 249 (RS allows Parliament to legislate on State List); Art 312 (RS creates All India Services)",
+        "Parliament → Judiciary: Parliament can impeach President (Art 61), remove Judges (Art 124(4)), CAG (Art 148(1)); But cannot question judicial decisions (separation of powers)",
+        "Parliament → Constitutional Amendments: Special majority needed (Art 368); Some amendments need 50% state ratification; Basic Structure cannot be amended (Kesavananda)",
+        "Budget → Consolidated Fund: All expenditure from CFI needs Parliamentary Appropriation (Art 266(3)); Demands for Grants voted by LS (Art 113); Appropriation Act mandatory (Art 114)",
+        "Budget → Executive Control: Parliament controls public purse; LS votes on Demands for Grants; If demands rejected, govt may fall; Cut Motions allow opposition to criticize",
+        "Money Bills → LS Supremacy: Money Bills (Art 110) only in LS; RS limited to 14 days recommendation; Speaker's certificate final; President cannot return Money Bills"
+      ]
+    },
+    {
+      "id": "legislative-comparisons-chapter",
+      "order": 14,
+      "mainTopic": "Legislative Comparisons",
+      "category": "Governance Structure",
+      "status": "available",
+      "estimatedTime": "12-15 hours",
+      "importance": "Critical",
+      "description": "Comprehensive side-by-side comparisons of legislative bodies at Union and State levels - Essential for understanding structural and functional differences",
+      "prerequisites": ["parliament-chapter", "state-executive-chapter"],
+      "subTopics": [
+        {
+          "id": "lok-sabha-vs-rajya-sabha",
+          "title": "Lok Sabha vs Rajya Sabha - Complete Comparison",
+          "visualType": "table",
+          "order": 1,
+          "description": "40+ point comparison covering constitutional basis, composition, powers, procedures, and exam-relevant exceptional points"
+        },
+        {
+          "id": "legislative-assembly-vs-council",
+          "title": "Legislative Assembly vs Legislative Council",
+          "visualType": "table",
+          "order": 2,
+          "description": "38+ point comparison of State legislative bodies covering powers, abolition procedures, bicameral states, and key distinctions"
+        }
+      ],
+      "keyTakeaways": [
+        "Lok Sabha MORE POWERFUL than Rajya Sabha: Exclusive control over Money Bills (Art 110), Budget, No-confidence (Art 75(3))",
+        "Rajya Sabha exclusive powers: Art 249 (State List legislation - 2/3rd), Art 312 (All India Services - 2/3rd)",
+        "LS (543 members, 5-year term, 25+ age, FPTP direct election) vs RS (245 members, 6-year term 1/3rd retire, 30+ age, STV indirect election)",
+        "Money Bill: Only LS originates; RS 14 days recommendation (not binding); Speaker certificate final (Art 110(3))",
+        "No-confidence: Only in LS (Art 75(3)); RS cannot remove govt; Council of Ministers responsible ONLY to LS",
+        "Joint Sitting (Art 108): LS dominates (543 vs 245); Only for Ordinary/Financial Bills (NOT Money Bills); Used 3 times only",
+        "Legislative Assembly SUPREME in State: Can abolish Council (Art 169); Exclusive budget control; CM responsible ONLY to Assembly",
+        "Legislative Council: Optional (only 6 States); Can be abolished by Parliament; 6 categories of members (1/3rd Local Bodies, 1/3rd Assembly, 1/12th Teachers, 1/12th Graduates, 1/6th Nominated)",
+        "Assembly (5-year term, 25+ age, directly elected) vs Council (6-year term 1/3rd retire, 30+ age, indirectly elected/nominated)",
+        "Council can delay Ordinary Bill 3-4 months, Money Bill 14 days; Cannot prevent Assembly from passing bills",
+        "Art 169: Assembly can abolish Council (Majority total + 2/3rd present) → Parliament passes bill → Council cannot prevent its own abolition",
+        "Only 6 States bicameral: AP, Telangana, Karnataka, Maharashtra, Bihar, UP; Others unicameral",
+        "Constitutional Amendments: Only Assembly ratifies (not Council) - Council completely excluded from ratification process"
+      ],
+      "connections": ["parliament-chapter", "state-executive-chapter", "union-executive-chapter"]
+    },
+    {
+      "id": "local-governance-chapter",
+      "order": 15,
+      "mainTopic": "Local Governance & Special Areas",
+      "category": "Federal Structure & Local Governance",
+      "status": "available",
+      "estimatedTime": "30-35 hours",
+      "importance": "Critical",
+      "description": "Union Territories, Scheduled & Tribal Areas with constitutional provisions, and complete Panchayati Raj evolution from Art 40 DPSP to 73rd Amendment",
+      "prerequisites": ["federal-features", "dpsps-chapter"],
+      "subTopics": [
+        {
+          "id": "union-territories",
+          "title": "Union Territories - Administration, Powers & Provisions",
+          "visualType": "table",
+          "order": 1,
+          "description": "All 8 UTs with special provisions, key bills/acts, and exam-relevant points - Delhi NCT, J&K reorganization, Ladakh, Puducherry"
+        },
+        {
+          "id": "scheduled-tribal-areas",
+          "title": "Scheduled & Tribal Areas - 5th & 6th Schedule",
+          "visualType": "tabs",
+          "order": 2,
+          "description": "Constitutional provisions (Art 244), TAC, ADCs, PESA Act 1996, Forest Rights Act 2006, comparison of 5th vs 6th Schedule"
+        },
+        {
+          "id": "panchayat-raj",
+          "title": "Panchayat Raj - Evolution from Art 40 to 73rd Amendment",
+          "visualType": "timeline",
+          "order": 3,
+          "description": "Complete timeline: Art 40 DPSP (1950) → Balwant Rai Mehta (1957) → Ashok Mehta (1977) → 64th Amendment failed (1989) → 73rd Amendment (1992) → PESA (1996)"
+        }
+      ],
+      "keyTakeaways": [
+        "8 Union Territories: Delhi (NCT), Puducherry, J&K, Ladakh, Chandigarh, Andaman & Nicobar, Lakshadweep, DNH & DD",
+        "3 UTs with Legislature: Delhi (Art 239AA - 70 members), Puducherry (Art 239A - 33 members), J&K (114 members)",
+        "Delhi NCT: Art 239AA; 3 subjects reserved for Parliament (Police, Public Order, Land - Entry 1, 2, 18); 2021 Act strengthened LG",
+        "J&K: Only State downgraded to UT (2019); Art 370 abrogated; J&K Reorganisation Act 2019 - Most important for exams",
+        "Ladakh: Newest UT (2019); No Legislature; Demands 6th Schedule protection",
+        "5th Schedule (Art 244(1)): 10 States in central India; Scheduled Areas; Governor has special powers; TAC (max 20 members, 3/4th tribal MLAs); Land protection",
+        "6th Schedule (Art 244(2)): 4 North-East States (Assam, Meghalaya, Tripura, Mizoram); 10 ADCs with legislative, judicial, financial powers; Customary law protected",
+        "ADCs have MUCH greater autonomy than 5th Schedule TAC: Can make laws, levy taxes, constitute courts; 73rd Amendment NOT applicable to 6th Schedule",
+        "PESA Act 1996: Extended Panchayats to 5th Schedule areas; Gram Sabha SUPREME; Mandatory consultation on land, resources; Can prevent land alienation",
+        "73rd Amendment 1992: LANDMARK - Inserted Part IX (Art 243-243O) & 11th Schedule (29 subjects)",
+        "Mandatory provisions: 3-tier, direct elections, 5-year term, 1/3rd women, SC/ST reservation, State Election Commission, State Finance Commission, Gram Sabha",
+        "11th Schedule: 29 subjects (Agriculture, Education, Health, Minor irrigation, Drinking water, Roads, Poverty alleviation, Women & child development)",
+        "Effective April 24, 1993; 3 million elected representatives (1 million women); Largest democratic decentralization in world",
+        "Art 40 DPSP (1950): Non-justiciable directive; Balwant Rai Mehta (1957): 3-tier system; Rajasthan first (1959)",
+        "64th Amendment (1989): Failed in Rajya Sabha; 73rd Amendment (1992): Succeeded under P.V. Narasimha Rao govt"
+      ],
+      "connections": ["federal-features", "dpsps-chapter", "constitutional-amendments-chapter"]
     }
   ],
   "studyTips": [
+    "Start with Constituent Assembly to understand how Constitution was formed - Dr. Ambedkar, Drafting Committee, 165 sittings",
+    "Memorize Preamble keywords - SOVEREIGN, SOCIALIST (42nd Amendment), SECULAR (42nd Amendment), DEMOCRATIC, REPUBLIC",
+    "Use Parts & Schedules table for quick reference - know which Part covers what (Part III FRs, Part IV DPSPs, Part V Union, etc.)",
     "Use Split-Panel visual model to permanently retain concepts - master-detail interface allows quick navigation and deep content exploration",
-    "Article numbers are CRITICAL - Art 14, 19, 21, 32 for FRs; Art 37, 39, 44 for DPSPs",
-    "Understand FR vs DPSP distinction: FRs negative/justiciable/individual-centric vs DPSPs positive/non-justiciable/society-centric",
-    "Constitutional Amendments important: 1st (Art 15(4), 16(4)), 42nd (Art 48A, 43A), 44th (Property right removed), 86th (Art 21A education)",
-    "Landmark cases crucial: Maneka Gandhi (Art 21 expansion), Kesavananda Bharati (Basic Structure), Indra Sawhney (Reservation)",
-    "Art 19 originally 7 freedoms (a-g); Art 19(1)(f) property deleted by 44th Amendment 1978",
-    "Remember the 6 freedoms under Art 19: Speech, Assembly, Association, Movement, Residence, Profession",
-    "Art 21 most expansive - judicial creativity expanded to include privacy, livelihood, health, education, environment",
-    "Art 32 gives direct access to Supreme Court for FR violations - called 'heart of Constitution'",
-    "DPSPs implemented through laws: MGNREGA (Art 41), Maternity Act (Art 42), Minimum Wages (Art 43), 73rd Amendment (Art 40)",
-    "Gandhian DPSPs: Art 40 (Panchayats), Art 43 (Cottage industries), Art 47 (Prohibition), Art 48 (Cow protection)",
-    "Practice comparison questions: FR vs DPSP, different articles under same category"
+    "Article numbers are CRITICAL - Art 14, 19, 21, 32 for FRs; Art 37, 39, 44 for DPSPs; Art 34 (Martial Law), Art 358-359 (Emergency); Art 368 (Amendment); Art 1, 245-263 (Federalism)",
+    "Master 5 writs with Latin meanings - Habeas Corpus, Mandamus, Prohibition, Certiorari, Quo Warranto. Remember: Art 32 (SC) = FR itself; Art 226 (HC) = wider scope",
+    "Master FR vs DPSP comparison (25+ points): FRs justiciable/negative/individual vs DPSPs non-justiciable/positive/social. Use comparison table for quick revision",
+    "Learn FR-DPSP conflict resolution: Champakam (1951) FRs prevail → Kesavananda (1973) Balance is basic structure → Minerva Mills (1980) Two lungs theory",
+    "Constitutional Amendments: Know 3 types - (1) Simple majority, (2) Special majority, (3) Special majority + 50% states. 106 amendments till 2023",
+    "Amendment landmark cases: Shankari Prasad (unlimited) → Golak Nath (FRs unamendable) → Kesavananda (Basic Structure) → Minerva Mills (Two lungs)",
+    "Basic Structure doctrine (Kesavananda 1973): Parliament can amend BUT cannot destroy basic features. 13-judge bench, 7:6 verdict. Most important case",
+    "Federalism: India is 'Quasi-federal' (K.C. Wheare) - Federal in structure (division of powers, dual polity) + Unitary in spirit (strong Centre, emergency)",
+    "7th Schedule crucial: Union List (97) - Defence, currency; State List (61) - Police, agriculture; Concurrent (47) - Criminal law, education. Residuary → Union (Art 248)",
+    "Parliamentary System (Art 74, 75): Dual executive (President nominal, PM real), Collective responsibility to Lok Sabha (Art 75(3)), No-confidence can remove",
+    "Parliamentary vs Presidential: Know 25+ points comparison. India chose Parliamentary (Westminster model) - Familiarity, Accountability, Dr. Ambedkar's reasoning",
+    "Art 31C (25th Amendment): Laws implementing Art 39(b), (c) protected from Art 14, 19. 42nd Amendment extended to all DPSPs - Minerva Mills struck down extension",
+    "Property right battle: Originally FR (Art 19(1)(f), Art 31) → 8+ amendments → 44th Amendment 1978 removed as FR → Now Art 300A (legal right). Biggest FR-DPSP conflict",
+    "Art 21 expansion: Maneka Gandhi (1978) revolutionized - Courts added livelihood, education, health, environment to Art 21. DPSP goals integrated into FRs",
+    "S.R. Bommai (1994): Federalism is basic structure. Parliamentary system is basic structure. Art 356 (President's Rule) abuse curtailed",
+    "Remember: Art 1 (India = Union of States, NOT Federation - states cannot secede). Dr. Ambedkar's explanation crucial",
+    "Practice comparison tables: FR vs DPSP (25+ points), Federal vs Unitary (20+ points), Parliamentary vs Presidential (25+ points)",
+    "7th Schedule crucial: Union List (97) - Defence, Currency, Railways; State List (61) - Police, Agriculture, Land; Concurrent (47) - Criminal law, Education. Residuary → Union (Art 248)",
+    "Parliament in State field: Art 249 (RS 2/3, 1 year), Art 250 (Emergency), Art 252 (State consent, permanent), Art 253 (Treaty). All show strong Centre",
+    "President's Rule (Art 356): Most asked - S.R. Bommai (1994) case crucial. Federalism is basic structure. Floor test mandatory. 44th Amendment safeguards",
+    "Centre-State Executive: Art 73 vs Art 162; Art 256-257 (Directions); Art 355 (Union's duty); All India Services (IAS, IPS, IFS - dual control)",
+    "Finance: 14th FC (42%), 15th FC (41%) devolution. Art 275 (FC grants), Art 282 (Discretionary - CSS). Surcharges/cesses NOT shareable (controversy)",
+    "GST Council (Art 279A): Union 1/3 vote, States 2/3 vote. Best example of cooperative federalism. 101st Amendment 2016. Weighted majority 3/4",
+    "Remember numbers: Union List 97, State List 61 (originally 66), Concurrent 47. 42nd Amendment shifted 5 from State to Concurrent (centralization)",
+    "Vertical imbalance: Union has more revenue (Income tax, Customs, GST), States have more expenditure (Health, Education, Police) → Depend on devolution, grants",
+    "Emergency Provisions: Three types - Art 352 (National), Art 356 (State/President's Rule), Art 360 (Financial). Use comparison table for quick revision",
+    "1975 Emergency: MOST ASKED - 21 months, democracy suspended, press censored. Led to 44th Amendment safeguards (special majority, Art 20-21 protected, LS disapproval)",
+    "44th Amendment Emergency safeguards: Special majority, Cabinet advice in writing, 'Armed rebellion' (not vague 'internal disturbance'), Art 20-21 CANNOT be suspended",
+    "S.R. Bommai (1994): CRITICAL for Art 356 - Federalism basic structure, justiciable, floor test mandatory. Reduced Art 356 misuse dramatically (125+ times used, mostly pre-1994)",
+    "Art 358 vs Art 359: Art 358 (Automatic - Art 19 suspended if war/external aggression), Art 359 (Presidential order - Other FRs, except Art 20-21)",
+    "Frequency: Art 352 (3 times - 1962, 1971, 1975), Art 356 (125+ times - most misused), Art 360 (0 times - never used)",
+    "Union Executive: Use TABS model with 📊 Compare All tab - Quick side-by-side comparison of all 4 bodies. President (Art 52-62), VP (Art 63-71), PM (Art 75), Council (Art 74-75). Dual executive - President nominal, PM real (Parliamentary system)",
+    "Parliament (Art 79-122): President + RS + LS. LS (543) > RS (245) in all matters. LS controls Money Bills (Art 110), Budget, No-confidence. RS can delay Ordinary Bills 6 months max",
+    "Money Bill vs Ordinary Bill: Money Bill (Art 110 only, only LS, 14 days RS, Speaker certifies, no return) vs Ordinary Bill (any non-financial, both Houses, 6 months delay, Joint Sitting)",
+    "Parliamentary Devices: Question Hour (11 AM-12 PM, most important), Zero Hour (Indian innovation, no rules), Motions (Adjournment, No-confidence, Censure, Cut), Quorum (Art 100(3) - 1/10th)",
+    "Budget Process: Art 112 (Budget) → Art 113 (Demands for Grants - LS votes) → Art 114 (Appropriation Bill - legal authority) → Finance Bill (taxation). Cut Motions (Policy Re 1, Economy specific amount, Token Rs 100)",
+    "Funds: CFI (Art 266(1) - Parliamentary Appropriation), Public Account (Art 266(2) - No Parliamentary approval, trustee), Contingency Fund (Art 267 - ₹500 cr, President, emergency, post-facto)",
+    "President: Electoral College (MPs+MLAs) via STV; 5-year term; Impeachment Art 61 (violation of Constitution); Acts on Cabinet advice (Art 74 - 44th Amendment); Limited discretion",
+    "President's powers: Appoints (PM, Ministers, Judges, CAG, EC, Governors), Part of Parliament, Pardoning (Art 72 - wider than Governor), Ordinance (Art 123 - 6 weeks), Veto (3 types), Emergency (Art 352/356/360)",
+    "VP: Elected by MPs only (no MLAs); Ex-officio RS Chairman (Art 64); Acts as President (Art 65); Removable by RS resolution + LS agreement (simpler than impeachment)",
+    "PM: Real executive; Leader of majority in LS; Appointed by President; Removable by no-confidence (Art 75(3)); Powers - Appoints Ministers, Allocates portfolios, Advises President, Chairs Cabinet",
+    "Council of Ministers: Collective responsibility (Art 75(3)) - No-confidence → All resign; 91st Amendment - Max 15% of LS; Types - Cabinet, MoS, Deputy; Cabinet = Inner core, real power",
+    "State Executive: 📊 Compare All tab shows all 3 bodies side-by-side. Similar to Union but at State level; Governor (Art 153-162), CM (Art 164), State Council (Art 163-164); Governor appointed by President, holds during pleasure (removable anytime)",
+    "Governor's dual role: Constitutional head + Centre's agent (controversial); Discretionary powers - Appointing CM, Dismissing govt, Reserving Bills, Recommending President's Rule (often misused)",
+    "Governor vs President: Governor - Removable anytime (no impeachment), Cannot pardon death sentence (Art 161), Often political; President - Impeachment only, Can pardon death (Art 72), Acts on advice (bound)"
   ],
   "examStrategy": {
     "frequentTopics": [
+      "Constituent Assembly: Cabinet Mission Plan (1946), Dr. Ambedkar (Drafting Committee Chairman), 165 sittings, Nov 26 1949 adopted",
+      "Preamble: 42nd Amendment added SOCIALIST, SECULAR, INTEGRITY; Kesavananda Bharati case (amendable)",
+      "Parts & Schedules: 25 Parts, 12 Schedules, 470 Articles; 7th Schedule (Union-State-Concurrent Lists), 8th Schedule (22 languages)",
+      "5 Writs: Habeas Corpus (detention), Mandamus (duty), Prohibition (before), Certiorari (after), Quo Warranto (office)",
+      "Art 32 vs Art 226: SC (FR itself, FRs only, All India) vs HC (discretionary, FRs+other rights, State only)",
+      "Art 358 vs Art 359: Art 19 automatic suspension (war/external aggression) vs other FRs Presidential order (any emergency)",
+      "Preventive detention (Art 22): 3 months max without Advisory Board; NSA, UAPA laws",
       "Art 14: Equality before law - Rule of law, reasonable classification",
       "Art 15: Prohibition of discrimination - Reservations (15(4), 15(5))",
       "Art 16: Equality in public employment - Reservation in jobs and promotions",
@@ -109,7 +711,10 @@
       "Landmark cases: Maneka Gandhi, Kesavananda, Indra Sawhney, Minerva Mills"
     ],
     "mustKnowDates": [
-      "1950 - Constitution came into effect (26 January)",
+      "1946 - Constituent Assembly first meeting (9 December)",
+      "1947 - Objectives Resolution adopted (22 January); Partition (membership reduced from 389 to 299)",
+      "1949 - Constitution adopted (26 November); originally 395 Articles, 8 Schedules",
+      "1950 - Constitution came into effect (26 January); Republic Day",
       "1951 - 1st Amendment (Art 15(4), 16(4) reservation provisions)",
       "1976 - 42nd Amendment ('Mini Constitution' - Art 48A, 43A added)",
       "1978 - 44th Amendment (Property right removed from FRs)",
@@ -120,11 +725,16 @@
       "2017 - Right to Privacy declared Fundamental Right (Puttaswamy case)"
     ],
     "mustKnowCases": [
-      "AK Gopalan (1950) - Narrow interpretation of Art 21; later overruled",
-      "Romesh Thappar (1950) - Freedom of press part of Art 19(1)(a)",
-      "Kesavananda Bharati (1973) - Basic Structure doctrine; Parliament cannot destroy Constitution's basic features",
+      "State of Madras v Champakam Dorairajan (1951) - FRs prevail over DPSPs; Led to 1st Amendment",
+      "Shankari Prasad (1951) - Parliament has unlimited power to amend; Later overruled",
+      "Sajjan Singh (1965) - Reaffirmed unlimited amendment power; Dissenting judges planted seeds of Basic Structure",
+      "Golak Nath (1967) - FRs CANNOT be amended; Overruled Shankari & Sajjan; Led to 24th Amendment",
+      "Kesavananda Bharati (1973) - Basic Structure doctrine; 13-judge bench, 7:6 verdict; Most important case",
       "Maneka Gandhi (1978) - Revolutionary; Art 21 expanded; procedure must be fair, just, reasonable",
-      "Minerva Mills (1980) - Balance between FRs and DPSPs; neither absolute supremacy",
+      "Minerva Mills (1980) - 'Two lungs' theory; Balance between FRs and DPSPs; Art 31C limited",
+      "Waman Rao (1981) - Ninth Schedule Acts before 1973 immune; After 1973 can be reviewed for basic structure",
+      "S.R. Bommai (1994) - Federalism is basic structure; Art 356 abuse curtailed",
+      "I.R. Coelho (2007) - Ninth Schedule immunity limited; Basic structure test for all 9th Schedule Acts",
       "MC Mehta cases (1980s-90s) - Environmental PIL; right to clean environment under Art 21",
       "Indra Sawhney (1992) - OBC reservation valid; creamy layer concept; 50% ceiling",
       "Mohini Jain (1992) - Right to education part of Art 21",
@@ -165,34 +775,55 @@
     ]
   },
   "revisionStrategy": {
-    "week1": "Fundamental Rights Part 1: Art 12-18 (Definition, Equality)",
-    "week2": "Fundamental Rights Part 2: Art 19-22 (Freedom) - Focus on Art 19 and 21",
-    "week3": "Fundamental Rights Part 3: Art 23-30 (Exploitation, Religion, Cultural) and Art 32 (Remedies)",
-    "week4": "DPSPs Complete: Art 36-51 all categories using Staircase model",
-    "week5": "Comparison and Integration: FR vs DPSP, Landmark cases, Constitutional Amendments",
-    "week6": "Practice: MCQs, previous year questions, case-based questions",
-    "week7": "Revision: Visual models (Clock for FRs, Staircase for DPSPs), article numbers, key cases",
-    "week8": "Mock tests and weak area focus"
+    "week1": "Constitutional Formation: Constituent Assembly, Preamble, Parts & Schedules - Foundation building",
+    "week2": "Fundamental Rights Part 1: Art 12-18 (Definition, Equality) using Split-Panel model",
+    "week3": "Fundamental Rights Part 2: Art 19-22 (Freedom) - Focus on Art 19 and 21 expansion",
+    "week4": "Fundamental Rights Part 3: Art 23-30 (Exploitation, Religion, Cultural) and Art 32 (Remedies with 5 Writs)",
+    "week5": "FR Sub-topics: Writs (Art 32 vs 226), Martial Law vs FR, FR Exceptions - Complete FR mastery",
+    "week6": "DPSPs Complete: Art 36-51 all categories using Split-Panel model",
+    "week7": "FR vs DPSP: 25-point comparison table + Conflicts (Champakam, Kesavananda, Minerva Mills)",
+    "week8": "Constitutional Amendments: 3 types, Procedure (Art 368), Landmark cases (Shankari → Golak Nath → Kesavananda → Minerva)",
+    "week9": "Federal System: Federal vs Unitary (Quasi-federal), Federal features, 7th Schedule (Union-State-Concurrent Lists)",
+    "week10": "Parliamentary System: Parliamentary vs Presidential (25 points), Art 74-75, Westminster model",
+    "week11": "Integration & Connections: Link all topics, understand evolution, constitutional amendments impact",
+    "week12": "Practice: MCQs, previous year questions, case-based questions, comparison tables",
+    "week13": "Revision: All visual models, article numbers, landmark cases, amendment numbers",
+    "week14": "Mock tests and weak area focus with targeted revision"
   },
   "futureTopics": {
+    "completed": [
+      "Constituent Assembly ✅",
+      "Preamble ✅",
+      "Parts and Schedules ✅",
+      "Fundamental Rights (with Writs, Exceptions, Martial Law) ✅",
+      "DPSPs ✅",
+      "FR vs DPSP Comparison (25+ points) ✅",
+      "FR-DPSP Conflicts (Cases, Amendments, Resolutions) ✅",
+      "Constitutional Amendments (Types, Procedure, Landmark Cases) ✅",
+      "Federal vs Unitary System (Quasi-federal) ✅",
+      "Federal Features of Constitution ✅",
+      "Parliamentary vs Presidential System ✅",
+      "Centre-State Relations (Legislative, Administrative, Financial) ✅",
+      "Emergency Provisions (National, State, Financial) ✅",
+      "Union Executive (President, VP, PM, Council of Ministers) ✅",
+      "State Executive (Governor, CM, State Council of Ministers) ✅",
+      "Parliament (RS & LS, Devices, Bills, Budget, Funds) ✅",
+      "Legislative Comparisons (Lok Sabha vs Rajya Sabha, Assembly vs Council) ✅",
+      "Union Territories (All 8 UTs with special provisions) ✅",
+      "Scheduled & Tribal Areas (5th & 6th Schedule, PESA, FRA) ✅",
+      "Panchayat Raj (Art 40 to 73rd Amendment timeline) ✅"
+    ],
     "planned": [
+      "Unitary Features of Constitution",
       "Fundamental Duties (Art 51A)",
-      "Union Executive (President, PM, Council of Ministers)",
-      "State Executive (Governor, CM, Council of Ministers)",
-      "Parliament (Lok Sabha, Rajya Sabha, Sessions, Legislative Process)",
-      "State Legislature",
+      "State Legislature (Detailed coverage beyond comparisons)",
       "Judiciary (Supreme Court, High Courts, Subordinate Courts)",
-      "Constitutional Amendment Procedure (Art 368)",
-      "Emergency Provisions (National, State, Financial)",
-      "Centre-State Relations",
-      "Panchayati Raj (73rd Amendment)",
-      "Municipalities (74th Amendment)",
-      "Scheduled and Tribal Areas",
-      "Official Language",
-      "Special Provisions for certain states",
-      "Important Constitutional Bodies (Election Commission, CAG, UPSC, etc.)"
+      "Municipalities (74th Amendment, Urban Local Bodies)",
+      "Official Language (Art 343-351)",
+      "Special Provisions for certain states (Art 370 history, Art 371 provisions)",
+      "Important Constitutional Bodies (Election Commission, CAG, UPSC, Finance Commission, NITI Aayog)"
     ]
   },
-  "completionNote": "Initial polity roadmap created with 2 foundational topics using innovative visual models. Fundamental Rights use Clock Model for article-by-article navigation. DPSPs use Staircase Model for category-wise learning. Both designed for permanent retention and exam success."
+  "completionNote": "Comprehensive polity roadmap created with 15 major chapters and 30+ detailed topics using diverse visual models. Covers: (1) Constitutional Formation (Constituent Assembly, Preamble, Parts & Schedules), (2) Fundamental Rights with 4 sub-topics (Main FRs, Writs, Martial Law vs FR, Exceptions), (3) DPSPs, (4) FR vs DPSP (Comparison + Conflicts), (5) Constitutional Amendments (Types, Procedure, Landmark Cases), (6) Federal System (Federal vs Unitary, Federal Features, Parliamentary vs Presidential), (7) Centre-State Relations (Legislative, Administrative, Financial), (8) Emergency Provisions (National, State, Financial), (9) Union Executive (President, VP, PM, Council of Ministers), (10) State Executive (Governor, CM, State Council), (11) Parliament (Structure with RS & LS comparison, Parliamentary Devices, Legislative Procedures with Bills & Joint Sitting, Budget Process, Central Govt Funds), (12) Legislative Comparisons (Lok Sabha vs Rajya Sabha 40+ points, Assembly vs Council 38+ points), (13) Local Governance & Special Areas (Union Territories all 8, Scheduled & Tribal Areas 5th & 6th Schedule, Panchayat Raj evolution timeline). Uses Split-Panel for article navigation, Comparison Tables (40+ points for legislative bodies), Custom Preamble visual, Tabs model for Executive bodies & Parliament houses & Scheduled Areas, and Timeline for Panchayat Raj evolution. Designed for permanent retention and exam excellence with high-yield, exam-focused content covering constitutional framework, dynamics, comparative aspects, federalism in action, crisis management, governance structure, complete legislative process, local governance, and tribal autonomy."
 }
 

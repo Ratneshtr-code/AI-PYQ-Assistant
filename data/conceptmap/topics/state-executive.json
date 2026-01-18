@@ -1,0 +1,361 @@
+{
+  "id": "state-executive",
+  "subject": "polity",
+  "title": "State Executive - Part VI (Governors, Chief Ministers, State Council of Ministers)",
+  "description": "Comprehensive coverage of State Executive bodies with constitutional provisions, appointment process, powers, and removal procedures",
+  "visualType": "tabs",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["union-executive", "administrative-relations", "emergency-provisions", "federal-features"],
+    "tags": ["Governor", "Chief Minister", "State Council", "Art 153-167", "State Executive", "Centre's Agent"]
+  },
+  "data": {
+    "tabs": [
+      {
+        "id": "compare-all",
+        "label": "📊 Compare All",
+        "title": "Quick Comparison: State Executive Bodies",
+        "sections": [
+          {
+            "heading": "Constitutional Articles",
+            "comparisonGrid": [
+              {
+                "body": "Governor",
+                "points": ["Art 153-162", "Nominal Head", "Appointed by President", "5-year term"]
+              },
+              {
+                "body": "Chief Minister",
+                "points": ["Art 163-164", "Real Executive Head", "Leader of majority party in Assembly", "No fixed term"]
+              },
+              {
+                "body": "State Council of Ministers",
+                "points": ["Art 163-164", "Collectively responsible to Assembly", "Appointed by Governor on CM's advice", "Aid & advise Governor"]
+              }
+            ]
+          },
+          {
+            "heading": "Appointment/Selection",
+            "comparisonGrid": [
+              {
+                "body": "Governor",
+                "points": ["Appointed by President", "Holds office during President's pleasure", "Not elected", "Centre's nominee in State"]
+              },
+              {
+                "body": "Chief Minister",
+                "points": ["Appointed by Governor", "Leader of majority in Assembly", "First appointed, then floor test", "No formal election to post"]
+              },
+              {
+                "body": "State Council of Ministers",
+                "points": ["Appointed by Governor on CM's advice", "Cabinet + MoS + Deputy Ministers", "From State Legislature (can be nominated)", "Must be MLA/MLC within 6 months"]
+              }
+            ]
+          },
+          {
+            "heading": "Removal",
+            "comparisonGrid": [
+              {
+                "body": "Governor",
+                "points": ["Removed by President", "Holds office during President's pleasure", "No impeachment process", "Resignation to President"]
+              },
+              {
+                "body": "Chief Minister",
+                "points": ["Loss of Assembly confidence", "No-confidence motion", "Voluntary resignation", "Dismissal by Governor (rare)"]
+              },
+              {
+                "body": "State Council of Ministers",
+                "points": ["Collective responsibility to Assembly", "Falls with CM", "Individual removal by CM", "Assembly no-confidence motion"]
+              }
+            ]
+          },
+          {
+            "heading": "Key Powers",
+            "comparisonGrid": [
+              {
+                "body": "Governor",
+                "points": ["Executive: Appoints CM, Ministers, Judges", "Legislative: Summons Assembly, Assent to bills", "Discretionary: President's Rule (Art 356)", "Veto: Absolute (money bills), Suspensive, Pocket"]
+              },
+              {
+                "body": "Chief Minister",
+                "points": ["Leader of State Cabinet", "Allocates portfolios", "Chairs Cabinet meetings", "Link between Governor & Council", "Advises Governor on all matters"]
+              },
+              {
+                "body": "State Council of Ministers",
+                "points": ["Formulates state policies", "Prepares state budget", "Implements laws", "Collectively responsible to Assembly", "Advises Governor"]
+              }
+            ]
+          },
+          {
+            "heading": "Exam Quick Points",
+            "comparisonGrid": [
+              {
+                "body": "Governor",
+                "points": ["Controversial role: Centre's agent vs Constitutional head", "Discretionary powers: Art 163", "Ordinance making power (Art 213)", "Rajasthan has 2 governors provision"]
+              },
+              {
+                "body": "Chief Minister",
+                "points": ["Parallel to PM at state level", "Most powerful state executive", "Can be from Council too", "Leader of House in Assembly"]
+              },
+              {
+                "body": "State Council of Ministers",
+                "points": ["Similar to Union Council", "Collective responsibility (Art 164(2))", "Individual responsibility to Governor", "Size: 15% of Assembly strength (91st Amendment)"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "governor",
+        "label": "Governor",
+        "title": "Governor of State (Art 153-162)",
+        "sections": [
+          {
+            "heading": "Constitutional Provision",
+            "points": [
+              "**Art 153**: There shall be a Governor for each State",
+              "**Art 154**: Executive power of State vested in Governor; Exercised directly or through officers subordinate to him",
+              "**Art 155**: Appointed by **President** (not elected); Holds office during President's pleasure",
+              "**Art 156**: Term - 5 years from entering office; But removable anytime by President",
+              "**Dual role**: Constitutional head of State + Centre's agent in State (controversial)",
+              "**One Governor for multiple States**: President can appoint one Governor for 2 or more States (Art 153)"
+            ]
+          },
+          {
+            "heading": "Appointment & Oath",
+            "points": [
+              "**Appointed by President (Art 155)**: On advice of PM/Home Minister; No fixed procedure/criteria",
+              "**Conventions** (Sarkaria Commission recommendations):",
+              "• Should be from outside State (not domicile of State)",
+              "• Should be eminent person (not active politician)",
+              "• Should be appointed after consulting CM of State",
+              "• Should not be person who actively participated in politics recently",
+              "**In practice**: Often violated; Politicians/party loyalists appointed; State not consulted",
+              "**Qualifications (Art 157)**: Indian citizen, 35+ years",
+              "**Disqualifications (Art 158)**: Cannot be member of Parliament or State Legislature; Cannot hold office of profit",
+              "**Oath (Art 159)**: Oath to preserve, protect, defend Constitution and law; Administered by Chief Justice of HC or senior-most HC judge",
+              "**Salary**: ₹3.5 lakh/month; Charged on Consolidated Fund of State; Cannot be reduced during term (Art 158)"
+            ]
+          },
+          {
+            "heading": "Removal",
+            "points": [
+              "**Art 156(1)**: Holds office during **pleasure of President**",
+              "**Can be removed anytime**: President can remove Governor anytime without giving reasons; No impeachment process",
+              "**No security of tenure**: Unlike President (impeachment) or Judges (specific procedure), Governor has no security",
+              "**Controversial**: Often removed for political reasons when govt changes at Centre",
+              "**Examples**: 1977 (Janata govt removed Congress-appointed Governors), 2014 (BJP govt removed UPA-appointed Governors)",
+              "**B.P. Singhal case (2010)**: SC held President can remove Governor but should record reasons; Governor can challenge if mala fide"
+            ]
+          },
+          {
+            "heading": "Executive Powers",
+            "points": [
+              "**Appoints CM & Ministers (Art 164)**: Appoints CM (leader of majority in Assembly); Other Ministers on CM's advice",
+              "**Appoints**: Advocate General of State (Art 165), State Election Commissioner, State Public Service Commission Chairman & members (Art 316), VC of State universities",
+              "**Administration**: All executive actions of State taken in name of Governor (Art 166); Bound by CM's advice (Art 163 - normally)",
+              "**Seeks information**: Can ask CM to furnish information on administration (Art 167)",
+              "**Recommends President's Rule**: Sends report to President if constitutional machinery fails (Art 356) - Controversial power"
+            ]
+          },
+          {
+            "heading": "Legislative Powers",
+            "points": [
+              "**Part of State Legislature**: Bills become law after Governor's assent (Art 200)",
+              "**Summon/Prorogue**: Can summon, prorogue State Legislature; Dissolve Assembly (Art 174) - On CM's advice (normally)",
+              "**Address**: Addresses first session after each General Election and first session of each year (Art 176)",
+              "**Nominates**: Anglo-Indians to Assembly (if not adequately represented - abolished 104th Amendment)",
+              "**Messages**: Can send messages to Legislature on pending Bills"
+            ]
+          },
+          {
+            "heading": "Legislative Powers - Assent to Bills (Art 200)",
+            "points": [
+              "**4 options**:",
+              "• Give assent → Bill becomes Act",
+              "• Withhold assent → Bill dies (rarely used)",
+              "• Return Bill (except Money Bill) for reconsideration → If re-passed, Governor MUST give assent OR reserve for President",
+              "• **Reserve Bill for President's consideration** (Art 201) - Mandatory for certain Bills",
+              "**Mandatory reservation**: Bills affecting HC powers, Bills conflicting with Union laws, Bills derogating FRs (convention)",
+              "**Pocket veto**: Keep Bill pending indefinitely (neither assent nor return) - Controversial; Criticized by SC"
+            ]
+          },
+          {
+            "heading": "Financial Powers",
+            "points": [
+              "**Money Bills**: Can be introduced only with Governor's recommendation (Art 207)",
+              "**Budget**: Annual Financial Statement laid before Legislature in Governor's name (Art 202)",
+              "**Contingency Fund**: Controls Contingency Fund of State (Art 267); Can make advances",
+              "**Grants**: Can make grants from Consolidated Fund for any public purpose"
+            ]
+          },
+          {
+            "heading": "Judicial Powers",
+            "points": [
+              "**Pardoning power (Art 161)**: Can grant pardons, reprieves, respites, remissions, suspend/remit/commute sentences",
+              "**Scope**: In cases where sentence for offence against State law",
+              "**Limitation**: **Cannot pardon death sentence** (only President can - Art 72); Can only suspend, remit, commute death sentence",
+              "**Narrower than President**: President's pardoning power wider (covers court-martial, Union laws, death sentences); Governor's narrower"
+            ]
+          },
+          {
+            "heading": "Ordinance Making Power (Art 213)",
+            "points": [
+              "**When**: Legislature not in session, and Governor satisfied immediate action needed",
+              "**Same force as Act**: Ordinance has same force and effect as Act of State Legislature",
+              "**Duration**: 6 weeks from Legislature reassembles; Must be approved within 6 weeks, else lapses",
+              "**Can be withdrawn**: Governor can withdraw anytime",
+              "**Limitations**: Cannot amend Constitution; Cannot violate provisions reserved for President's assent; Must be laid before Legislature"
+            ]
+          },
+          {
+            "heading": "Discretionary Powers (Art 163)",
+            "points": [
+              "**Art 163**: Governor acts on advice of Council of Ministers headed by CM",
+              "**Exception**: In matters where Governor required to act in his **discretion** by Constitution",
+              "**Discretionary powers** (Constitutional/Conventional):",
+              "• **Reservation of Bill for President** (Art 200) - Discretionary",
+              "• **Appointing CM** if no clear majority (invite largest party, call for floor test)",
+              "• **Dismissing govt** if loses majority and refuses to resign",
+              "• **Recommending President's Rule** (Art 356) - Sends report to President",
+              "• **Seeking information from CM** on administration",
+              "**Special provisions**: For certain States (Nagaland, Sikkim, Arunachal Pradesh, etc.) - Governor has special responsibilities as per Art 371, 371A, etc.",
+              "**Controversy**: Governors often exceed discretionary powers for political reasons; Sarkaria Commission criticized misuse"
+            ]
+          }
+        ],
+        "summary": "**Governor**: Appointed by President (Art 155); Holds office during President's pleasure (Art 156 - removable anytime); 5-year term. **Dual role**: Constitutional head + Centre's agent (controversial). **Qualifications**: 35+ years, Indian citizen. **Powers**: Appoints CM/Ministers (Art 164), Part of State Legislature, Assent to Bills (Art 200 - 4 options including reservation for President Art 201), Pardoning (Art 161 - cannot pardon death sentence), Ordinance (Art 213), Recommends President's Rule (Art 356). **Discretionary powers**: Appointing CM (no clear majority), Dismissing govt, Reserving Bills, Recommending President's Rule. **Criticism**: Often acts as Centre's agent; Misuses discretionary powers for political reasons."
+      },
+      {
+        "id": "chief-minister",
+        "label": "Chief Minister",
+        "title": "Chief Minister of State (Art 164)",
+        "sections": [
+          {
+            "heading": "Constitutional Provision",
+            "points": [
+              "**Art 164**: CM appointed by Governor; Other Ministers appointed by Governor on CM's advice",
+              "**Real Executive**: In Parliamentary system, CM is real head of State government; Governor is nominal",
+              "**Leader of Majority**: CM is leader of majority party/coalition in State Assembly",
+              "**Similar to PM**: CM's position at State level similar to PM's at Union level"
+            ]
+          },
+          {
+            "heading": "Appointment & Oath",
+            "points": [
+              "**Appointed by Governor (Art 164(1))**: Governor appoints CM",
+              "**Convention**: Governor appoints leader of majority party in Assembly as CM",
+              "**If no clear majority**: Governor may exercise discretion (invite largest party, call for floor test)",
+              "**Qualifications**: Must be member of State Legislature (Assembly or Council); If not, must become within 6 months (Art 164(4))",
+              "**Oath (Art 164(3))**: Oath of office and secrecy; Administered by Governor",
+              "**Term**: No fixed term; Continues as long as enjoys confidence of Assembly; Normally 5 years (if govt stable)"
+            ]
+          },
+          {
+            "heading": "Removal",
+            "points": [
+              "**No-confidence**: If Assembly passes no-confidence motion (simple majority) → CM and entire Council must resign (Art 164(2))",
+              "**Loss of confidence**: If CM loses confidence of Assembly → Must resign or Governor can dismiss",
+              "**Governor can dismiss**: If CM refuses to resign after losing majority, Governor can dismiss and invite other party",
+              "**Death/Resignation**: If CM dies or resigns → Governor appoints new CM"
+            ]
+          },
+          {
+            "heading": "Powers - Relation with Governor",
+            "points": [
+              "**Communicates decisions**: All Council decisions communicated to Governor (Art 167)",
+              "**Advises Governor**: Governor acts on CM's advice (through Council - Art 163)",
+              "**Appointment of Ministers**: CM recommends Ministers to Governor; Governor appoints on CM's advice",
+              "**Allocation of portfolios**: CM allocates and reshuffles portfolios",
+              "**Chief spokesperson**: CM is chief spokesman of State govt"
+            ]
+          },
+          {
+            "heading": "Powers - Relation with Council of Ministers",
+            "points": [
+              "**Chief of Council**: CM is head of State Council of Ministers; Presides over Cabinet meetings",
+              "**Appoints & dismisses**: Recommends appointment and dismissal of Ministers to Governor",
+              "**Chairs Cabinet**: Chairs State Cabinet meetings; Sets agenda",
+              "**Distributes portfolios**: Allocates, reshuffles portfolios of Ministers",
+              "**Coordinates**: Coordinates work of different State Departments"
+            ]
+          },
+          {
+            "heading": "Powers - Relation with Legislature",
+            "points": [
+              "**Leader of House**: CM is Leader of Assembly (if Assembly member)",
+              "**Advises dissolution**: Advises Governor to dissolve Assembly (Governor normally accepts)",
+              "**Announces policies**: Announces State govt policies in Legislature",
+              "**Defends policies**: Replies to debates, no-confidence motions"
+            ]
+          }
+        ],
+        "summary": "**Chief Minister**: Real executive head of State; Leader of majority in Assembly; Appointed by Governor (Art 164); Must be member of Legislature (within 6 months). **Removable**: By no-confidence motion in Assembly (Art 164(2)). **Powers**: Appoints & dismisses Ministers; Allocates portfolios; Advises Governor; Chairs Cabinet; Leader of House; Dissolves Assembly. **Relation with Governor**: Governor acts on CM's advice (Art 163). **Similar to PM** at State level."
+      },
+      {
+        "id": "state-council",
+        "label": "State Council of Ministers",
+        "title": "State Council of Ministers (Art 163-164)",
+        "sections": [
+          {
+            "heading": "Constitutional Provision",
+            "points": [
+              "**Art 163**: Council of Ministers with CM as head to aid and advise Governor",
+              "**Art 164**: Composition, appointment, collective responsibility",
+              "**Size**: 91st Amendment - Max 15% of Assembly strength (earlier no limit)",
+              "**Portfolios**: CM allocates portfolios or Ministers without portfolios"
+            ]
+          },
+          {
+            "heading": "Appointment & Oath",
+            "points": [
+              "**Appointed by Governor (Art 164(1))**: On advice of CM",
+              "**Qualifications**: Must be member of State Legislature (Assembly or Council); If not, must become within 6 months (Art 164(4))",
+              "**Oath (Art 164(3))**: Oath of office and secrecy; Administered by Governor",
+              "**Term**: No fixed term; Serve at pleasure of Governor (actually CM)",
+              "**Removal**: Governor can remove on CM's advice; Or must resign if no-confidence passed in Assembly"
+            ]
+          },
+          {
+            "heading": "Types of Ministers",
+            "points": [
+              "**1. Cabinet Ministers**: Senior-most; Head important Departments; Attend Cabinet meetings",
+              "**2. Ministers of State (MoS)**: Junior Ministers; May have independent charge OR assist Cabinet Minister",
+              "**3. Deputy Ministers**: Assist Ministers; Lowest rank",
+              "**91st Amendment 2003**: Limited State Council size to 15% of Assembly strength; Minimum 12 Ministers even if 15% < 12"
+            ]
+          },
+          {
+            "heading": "Collective Responsibility (Art 164(2))",
+            "points": [
+              "**Council collectively responsible to Assembly**: All Ministers collectively responsible; Stand or fall together",
+              "**No-confidence**: If no-confidence passed → Entire Council must resign (including CM)",
+              "**Solidarity**: All Ministers must support govt decisions publicly",
+              "**Resign together**: If govt loses confidence, all Ministers resign together"
+            ]
+          },
+          {
+            "heading": "Individual Responsibility",
+            "points": [
+              "**For one's department**: Each Minister individually responsible for his/her Department",
+              "**Answer to Legislature**: Must answer questions, defend policies in Legislature",
+              "**Resign if fault**: If serious lapse, Minister expected to resign (convention)",
+              "**CM can dismiss**: CM can ask Minister to resign or recommend removal to Governor"
+            ]
+          },
+          {
+            "heading": "Powers & Functions",
+            "points": [
+              "**Policy formulation**: Formulate State govt policies",
+              "**Legislative**: Initiate legislation in State Legislature; Pilot Bills; Defend Bills",
+              "**Executive**: Implement State laws; Administer Departments; Execute decisions",
+              "**Financial**: Prepare State Budget; Authorize expenditure; Manage State finances",
+              "**Coordinate**: Coordinate between different Departments"
+            ]
+          }
+        ],
+        "summary": "**State Council of Ministers**: Headed by CM; Aids and advises Governor (Art 163); Appointed by Governor on CM's advice. **Types**: Cabinet Ministers, MoS, Deputy Ministers. **91st Amendment**: Max 15% of Assembly strength (min 12). **Collective responsibility** (Art 164(2)): All Ministers collectively responsible to Assembly; No-confidence → All resign. **Individual responsibility**: Each Minister for his Department. **Functions**: Policy formulation, legislation, administration, State Budget."
+      }
+    ],
+    "summary": "**State Executive (Part VI)**: Parliamentary system - Dual executive (Governor nominal, CM real). **Governor** (Art 153-162): Appointed by President (Art 155); Holds office during President's pleasure (removable anytime - Art 156); 5-year term; **Dual role** - Constitutional head + Centre's agent (controversial). Powers - Appoints CM/Ministers (Art 164), Part of Legislature, Assent to Bills (Art 200 - 4 options; Reservation for President Art 201), Pardoning (Art 161 - cannot pardon death sentence), Ordinance (Art 213), Recommends President's Rule (Art 356). **Discretionary powers** - Appointing CM, Dismissing govt, Reserving Bills, Recommending President's Rule. **Chief Minister** (Art 164): Real executive head; Leader of majority in Assembly; Appointed by Governor; Removable by no-confidence (Art 164(2)); Powers - Appoints Ministers, Allocates portfolios, Advises Governor, Chairs Cabinet, Dissolves Assembly. **State Council** (Art 163-164): Headed by CM; Collective responsibility to Assembly (Art 164(2)); Max 15% of Assembly (91st Amendment). **Similar to Union** but at State level."
+  }
+}
+

@@ -1,9 +1,20 @@
 // components/conceptmap/visuals/SplitPanelVisual.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 export default function SplitPanelVisual({ topicData }) {
-    const [selectedArticle, setSelectedArticle] = useState(null);
+    const { data } = topicData || {};
+    const articles = data?.articles || [];
+    const categories = data?.categories || [];
+
+    const [selectedArticle, setSelectedArticle] = useState(articles[0] || null);
+
+    // Update selected article when articles change
+    useEffect(() => {
+        if (articles.length > 0 && !selectedArticle) {
+            setSelectedArticle(articles[0]);
+        }
+    }, [articles, selectedArticle]);
 
     if (!topicData || !topicData.data) {
         return (
@@ -13,13 +24,12 @@ export default function SplitPanelVisual({ topicData }) {
         );
     }
 
-    const { data } = topicData;
-    const articles = data.articles || [];
-    const categories = data.categories || [];
-
-    // Set default selected article if not set
-    if (!selectedArticle && articles.length > 0) {
-        setSelectedArticle(articles.find(a => a.id === "art-14") || articles[0]);
+    if (articles.length === 0) {
+        return (
+            <div className="w-full h-full flex items-center justify-center bg-gray-50">
+                <p className="text-gray-500">No articles available</p>
+            </div>
+        );
     }
 
     // Helper function to parse markdown bold

@@ -1,0 +1,94 @@
+{
+  "id": "preamble",
+  "subject": "polity",
+  "title": "Preamble - Soul of the Constitution",
+  "description": "",
+  "visualType": "preambleVisual",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["constituent-assembly", "fundamental-rights", "dpsps"],
+    "tags": ["Preamble", "Constitution", "Socialist", "Secular", "Integrity"]
+  },
+  "data": {
+    "preambleText": "WE, THE PEOPLE OF INDIA, having solemnly resolved to constitute India into a SOVEREIGN SOCIALIST SECULAR DEMOCRATIC REPUBLIC and to secure to all its citizens:\n\nJUSTICE, social, economic and political;\n\nLIBERTY of thought, expression, belief, faith and worship;\n\nEQUALITY of status and of opportunity;\n\nand to promote among them all\n\nFRATERNITY assuring the dignity of the individual and the unity and integrity of the Nation;\n\nIN OUR CONSTITUENT ASSEMBLY this twenty-sixth day of November, 1949, do HEREBY ADOPT, ENACT AND GIVE TO OURSELVES THIS CONSTITUTION.",
+    "keywords": [
+      {"word": "WE, THE PEOPLE OF INDIA", "significance": "Source of authority is the people (popular sovereignty)", "color": "#6366F1"},
+      {"word": "SOVEREIGN", "significance": "India is supreme, not subordinate to any external power", "color": "#3B82F6"},
+      {"word": "SOCIALIST", "significance": "Economic justice, reduce inequalities (Added by 42nd Amendment 1976)", "color": "#10B981"},
+      {"word": "SECULAR", "significance": "No state religion, equal respect to all religions (Added by 42nd Amendment 1976)", "color": "#F59E0B"},
+      {"word": "DEMOCRATIC", "significance": "Government by the people, of the people, for the people", "color": "#8B5CF6"},
+      {"word": "REPUBLIC", "significance": "Head of State is elected, not hereditary", "color": "#EC4899"},
+      {"word": "JUSTICE", "significance": "Social, Economic, Political justice for all citizens", "color": "#EF4444"},
+      {"word": "LIBERTY", "significance": "Freedom of thought, expression, belief, faith, worship", "color": "#06B6D4"},
+      {"word": "EQUALITY", "significance": "Of status and opportunity - no discrimination", "color": "#84CC16"},
+      {"word": "FRATERNITY", "significance": "Spirit of brotherhood, dignity of individual, unity and integrity of nation", "color": "#F97316"},
+      {"word": "INTEGRITY", "significance": "Added by 42nd Amendment 1976 (was only 'unity' earlier)", "color": "#A855F7"}
+    ],
+    "content": {
+      "basicFacts": [
+        "**Adopted on**: November 26, 1949 (same day as Constitution)",
+        "**Source**: Inspired by 'Objectives Resolution' moved by Jawaharlal Nehru on December 13, 1946",
+        "**Called**: 'Soul of the Constitution' (T.T. Krishnamachari) or 'Identity Card' of Constitution",
+        "**Nature**: Neither part of Constitution nor can be used to amend Constitution (court held)",
+        "**Amendability**: Preamble is amendable under Art 368 (Kesavananda Bharati case 1973)"
+      ],
+      "keyTerms": [
+        "**1. WE, THE PEOPLE** - Popular sovereignty; authority derives from people, not King or Parliament",
+        "**2. SOVEREIGN** - India is independent; no external power can dictate; full power over internal and external affairs",
+        "**3. SOCIALIST** - Democratic socialism (not communist); economic justice; reduce inequalities; welfare state [Added 42nd Amendment]",
+        "**4. SECULAR** - No state religion; equal respect to all religions; State neutral; freedom of religion [Added 42nd Amendment]",
+        "**5. DEMOCRATIC** - Government elected by people; representative democracy; adult franchise; rule of majority with minority rights",
+        "**6. REPUBLIC** - Head of State (President) elected for fixed term; not hereditary monarch; promotes equality",
+        "**7. JUSTICE** - Social (no discrimination), Economic (no exploitation, equal opportunity), Political (equal political rights)",
+        "**8. LIBERTY** - Freedom of thought, expression, belief, faith, worship; essential for democratic functioning",
+        "**9. EQUALITY** - Of status (no titles except military/academic), Of opportunity (equal chance in public employment, education)",
+        "**10. FRATERNITY** - Spirit of brotherhood; dignity of individual (respect for human rights); unity and integrity of Nation",
+        "**11. INTEGRITY** - Territorial, political, social integrity; added by 42nd Amendment 1976 (only 'unity' was there earlier)"
+      ],
+      "42ndAmendment": [
+        "**Year**: 1976 (during Emergency)",
+        "**Three words added**: SOCIALIST, SECULAR, INTEGRITY",
+        "**Before amendment**: 'Sovereign Democratic Republic' and 'unity of the Nation'",
+        "**After amendment**: 'Sovereign Socialist Secular Democratic Republic' and 'unity and integrity of the Nation'",
+        "**Reason**: Explicitly state India's socialist and secular nature; emphasize territorial integrity (after 1971 Bangladesh creation)",
+        "**Controversy**: Added during Emergency (when democratic processes suspended)"
+      ],
+      "keyCases": [
+        "**Berubari Union case (1960)** - Preamble is not part of Constitution; cannot be used to amend Constitution",
+        "**Kesavananda Bharati (1973)** - Overruled Berubari; Preamble is part of Constitution; amendable under Art 368; reflects basic structure",
+        "**S.R. Bommai (1994)** - Secularism is basic feature; part of basic structure (cannot be amended)",
+        "**Union Carbide case (1989)** - Preamble indicates ideals and aspirations; can be used to interpret ambiguous provisions"
+      ],
+      "examTips": [
+        "**Most asked**: 42nd Amendment (1976) added SOCIALIST, SECULAR, INTEGRITY",
+        "**Remember**: SOVEREIGN, SOCIALIST, SECULAR, DEMOCRATIC, REPUBLIC - 5 key terms describing polity",
+        "**Objectives**: JUSTICE (3 types), LIBERTY (5 freedoms), EQUALITY (2 types), FRATERNITY (2 aspects)",
+        "**Source**: Objectives Resolution (Nehru, Jan 22, 1947)",
+        "**Called**: Soul of Constitution (T.T. Krishnamachari), Identity Card (N.A. Palkhivala)",
+        "**Amendable**: Yes (Kesavananda Bharati 1973 overruled Berubari 1960)",
+        "**Key difference**: SOCIALIST in Preamble = Democratic socialism (not communism); SECULAR = Sarva Dharma Sambhava (equal respect), not anti-religion"
+      ],
+      "socialismExplained": [
+        "**NOT communist socialism** (no dictatorship, no single party, no abolition of private property)",
+        "**Democratic socialism**: Mixed economy; public + private sector; welfare state; reduce inequalities",
+        "**Features**: Economic justice, DPSP implementation, affirmative action, pro-poor policies",
+        "**Reflects**: DPSP like Art 38 (welfare), Art 39 (equal pay, livelihood), Art 39(b) (common good)"
+      ],
+      "secularismExplained": [
+        "**NOT anti-religion** or atheism",
+        "**Indian secularism** = Sarva Dharma Sambhava (equal respect for all religions)",
+        "**Features**: No state religion, freedom of religion (Art 25-28), State equidistant from all religions, can regulate religious practices",
+        "**Different from Western secularism**: Western = complete separation; Indian = equal respect and intervention for social reform",
+        "**Allows**: State to interfere for social reform (abolish untouchability, allow temple entry, Hindu Code Bill)"
+      ],
+      "sources": [
+        "**USA**: 'We, the people' (popular sovereignty concept)",
+        "**France**: 'Liberty, Equality, Fraternity' (motto of French Revolution)",
+        "**USSR**: 'Socialist' (economic model, though India's is democratic socialism)",
+        "**Objectives Resolution**: Jawaharlal Nehru's Objectives Resolution (1947) is the foundation",
+        "**Indian values**: Fraternity, dignity, unity reflect Indian philosophical traditions"
+      ]
+    }
+  }
+}
+

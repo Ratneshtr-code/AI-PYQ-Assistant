@@ -1,0 +1,145 @@
+{
+  "id": "union-territories",
+  "subject": "polity",
+  "title": "Union Territories of India - Administration, Powers & Special Provisions",
+  "description": "Comprehensive coverage of all 8 Union Territories with their administrative structures, special provisions, key bills, amendments, and exam-relevant constitutional provisions",
+  "visualType": "table",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["state-executive", "union-executive", "federal-features"],
+    "tags": ["Union Territories", "Delhi", "J&K", "Puducherry", "Ladakh", "Art 239", "Art 239AA", "NCT", "UT Administration"]
+  },
+  "data": {
+    "columns": [
+      {"key": "ut_name", "label": "Union Territory"},
+      {"key": "type_status", "label": "Type & Status"},
+      {"key": "administration", "label": "Administration & Head"},
+      {"key": "legislature", "label": "Legislature"},
+      {"key": "special_provisions", "label": "Special Constitutional Provisions"},
+      {"key": "key_bills_acts", "label": "Key Bills, Acts & Amendments"},
+      {"key": "exam_points", "label": "Exam Important Points"}
+    ],
+    "rows": [
+      {
+        "id": "delhi",
+        "ut_name": "**Delhi (National Capital Territory)**",
+        "type_status": "**NCT - Special Status**\n**Art 239AA** (69th Amendment 1991)\nPart capital, part UT\n**Partial statehood**",
+        "administration": "**Lieutenant Governor** (Art 239AA)\nAppointed by President\nActs on **Council of Ministers' advice** (except land, police, public order)\n**Dual control**: LG + CM",
+        "legislature": "**Legislative Assembly** (70 members)\nDirectly elected (5-year term)\n**Chief Minister** heads Council of Ministers\n**Cannot legislate** on: Police, Public order, Land (reserved for Parliament)",
+        "special_provisions": "**Art 239AA**: Special status for Delhi\n**Art 239AB**: Council of Ministers for Delhi\n**7th Schedule**: Entry 1, 2, 18 (Union List) reserved for Centre\n**Excluded subjects**: Police, Public Order, Land\nCM responsible to Assembly, but LG has overriding powers",
+        "key_bills_acts": "**Government of NCT of Delhi (Amendment) Act 2021**:\n• LG not bound by CM's advice\n• LG has final say on all matters\n• \"Government\" means LG, not CM\n• Services controlled by LG, not CM\n\n**Landmark Cases**:\n• **Government of NCT of Delhi v. Union of India (2018)**: SC held LG must act on CM's advice (except excluded subjects)\n• **Government of NCT of Delhi v. Union of India (2023)**: SC held Services under Centre, not Delhi govt\n\n**69th Amendment 1991**: Created NCT status for Delhi",
+        "exam_points": "**Most asked UT in exams**\n• **Art 239AA** - Most important\n• Delhi = **Partial statehood** (neither full State nor full UT)\n• **3 subjects** reserved for Parliament: Police, Public Order, Land\n• 2021 Act strengthened LG's powers over CM\n• 2023 SC verdict: Services (IAS/bureaucracy) under Centre\n• **Capital of India** + Union Territory\n• Only UT with **70-member Assembly** (highest)"
+      },
+      {
+        "id": "puducherry",
+        "ut_name": "**Puducherry (Pondicherry)**",
+        "type_status": "**UT with Legislature**\n**Art 239A** (14th Amendment 1962)\nFormer French colony\n**Partial statehood**",
+        "administration": "**Lieutenant Governor** (Art 239A)\nAppointed by President\nActs on **CM's advice** (except law & order, police)\nLess powerful than Delhi LG",
+        "legislature": "**Legislative Assembly** (33 members: 30 elected + 3 nominated)\nDirectly elected (5-year term)\n**Chief Minister** heads govt\n**Cannot legislate** on: Public order, Police\n**Nominated members**: 3 by Centre (usually MPs)",
+        "special_provisions": "**Art 239A**: Puducherry can have Legislature & Council of Ministers\n**7th Schedule**: Most State List subjects available\n**More autonomy** than Delhi in practice\nCM has more control than Delhi CM\nLG generally acts on CM's advice (convention)",
+        "key_bills_acts": "**14th Amendment 1962**: Granted Legislature & CM to Puducherry\n\n**Puducherry became UT**: 1962 (after French left in 1954)\n\n**Renaming**: Pondicherry → Puducherry (2006)\n\n**No major controversies** like Delhi (CM-LG relations smooth)\n\n**Key feature**: More like a State in functioning despite being UT",
+        "exam_points": "• **Art 239A** - Special provision for Puducherry\n• **Only UT** with **nominated members** in Assembly (3 members)\n• Former **French colony** (unlike others - British)\n• **33-member Assembly** (30 elected + 3 nominated)\n• More autonomy than Delhi in practice\n• Comprises 4 regions: Puducherry, Karaikal, Mahe, Yanam\n• **Less controversial** than Delhi (CM-LG relations better)\n• Similar to Delhi but with less conflict"
+      },
+      {
+        "id": "jammu-kashmir",
+        "ut_name": "**Jammu & Kashmir**",
+        "type_status": "**UT with Legislature**\nFormer State (downgraded 2019)\n**Art 370 abrogated** (2019)\nHighly controversial",
+        "administration": "**Lieutenant Governor** (Art 239)\nAppointed by President\n**Extensive powers** over all subjects\nMore powerful than State Governors\n**Security matters**: Direct LG control",
+        "legislature": "**Legislative Assembly** (114 members: 90 elected + 24 seats reserved for PoK)\nDirectly elected (5-year term - elections held Oct 2024)\n**Chief Minister** heads govt\n**LG has overriding powers** on all matters\nFirst Assembly after reorganization formed in 2024",
+        "special_provisions": "**Art 370 ABROGATED** (Aug 5, 2019)\n**Art 371** type provisions NOT extended\n**President's Rule** since June 2018\n**J&K Reorganisation Act 2019**: Divided J&K into 2 UTs (J&K + Ladakh)\n**No special provisions** currently\nAll Constitution articles apply (except special state provisions)",
+        "key_bills_acts": "**J&K Reorganisation Act 2019** (Most important):\n• Bifurcated J&K into 2 UTs: J&K + Ladakh\n• **Abrogated Art 370** (special status)\n• Abrogated Art 35A (permanent residency)\n• J&K = UT with Legislature\n• Ladakh = UT without Legislature\n• Effective: Oct 31, 2019\n\n**Landmark Cases**:\n• **In re: Article 370 of the Constitution (2023)**: SC upheld abrogation of Art 370 (5-judge bench, pending final verdict as of 2024)\n\n**Key Provision**: Statehood promised to be restored later",
+        "exam_points": "**Most controversial & most asked in exams**\n• **Only State downgraded to UT** in Indian history\n• **Art 370 abrogated** (Aug 5, 2019) - VERY IMPORTANT\n• **Art 35A abrogated** - Permanent residency provisions removed\n• Bifurcated into **2 UTs**: J&K (with Legislature) + Ladakh (without Legislature)\n• **J&K Reorganisation Act 2019** - Most important Act\n• **114-member Assembly** (90 elected, 24 reserved for PoK)\n• **Statehood restoration** promised by Centre\n• First UT Assembly elections held: **Oct 2024**\n• LG has **more powers** than in States"
+      },
+      {
+        "id": "ladakh",
+        "ut_name": "**Ladakh**",
+        "type_status": "**UT without Legislature**\nCreated from J&K (2019)\n**No Assembly**\nDirect Central control",
+        "administration": "**Lieutenant Governor** (Art 239)\nAppointed by President\n**Direct rule** - No CM, No Assembly\n**All powers** with LG\nReports to Union Home Ministry",
+        "legislature": "**No Legislature**\n**No Assembly, No CM**\nDirect Central administration through LG\n**Autonomous Hill Councils**:\n• Leh Autonomous Hill Development Council (LAHDC Leh)\n• Kargil Autonomous Hill Development Council (LAHDC Kargil)\nCouncils have limited local governance powers",
+        "special_provisions": "**No Legislature** as per J&K Reorganisation Act 2019\n**No special constitutional provisions** (Art 370/35A removed)\n**Autonomous Hill Councils** continue (created 1995 & 2003)\nAll laws made by **Parliament only**\n**6th Schedule NOT applied** (despite demand)",
+        "key_bills_acts": "**J&K Reorganisation Act 2019**:\n• Created Ladakh as separate UT without Legislature\n• Separated from J&K on Oct 31, 2019\n• Comprises: Leh & Kargil districts\n\n**Demands**:\n• **Statehood** or Union Territory with Legislature\n• **6th Schedule** protection (tribal rights)\n• **Separate Lok Sabha seats** (currently part of Ladakh constituency - 1 seat)\n\n**Key Issue**: Local opposition to UT status without Legislature",
+        "exam_points": "• **Newest UT** (created Oct 31, 2019)\n• **Only UT in India without any Legislature** (among inhabited UTs)\n• Created from bifurcation of J&K\n• Comprises **2 districts**: Leh (Buddhist majority) + Kargil (Muslim majority)\n• **1 Lok Sabha seat** (Ladakh constituency)\n• **Autonomous Hill Councils** provide limited local governance\n• **Demanding**: 6th Schedule, Statehood, Separate LS seats\n• **Strategic location**: China (Aksai Chin) & Pakistan (PoK) borders\n• **International boundary disputes** in region"
+      },
+      {
+        "id": "chandigarh",
+        "ut_name": "**Chandigarh**",
+        "type_status": "**UT without Legislature**\n**Joint capital**: Punjab & Haryana\nPlanned city (Le Corbusier)\n**Shared capital**",
+        "administration": "**Administrator** (Art 239)\nUsually a serving IAS officer\nReports to Union Home Ministry\n**Direct Central rule**\nAlso acts as Governor-like figure",
+        "legislature": "**No Legislature**\n**No Assembly, No CM**\nDirect Central administration\n**Municipal Corporation** for local governance\n**1 Lok Sabha seat**",
+        "special_provisions": "**Capital of 2 States**: Punjab & Haryana (Art 239)\n**Punjab Reorganisation Act 1966**: Created Chandigarh as UT\n**Pending transfer to Punjab** (under Punjab Reorganisation Act)\n**Haryana claims**: Compensation in return\n**Stalemate continues** since 1966",
+        "key_bills_acts": "**Punjab Reorganisation Act 1966**:\n• Created Chandigarh as UT\n• Made it capital of both Punjab & Haryana\n• Provision for transfer to Punjab after Hindi-speaking areas of Punjab given to Haryana\n• **Transfer never happened** (political reasons)\n\n**Rajiv-Longowal Accord 1985**: Promised transfer to Punjab\n• **Not implemented** due to opposition from Haryana\n\n**Current status**: Indefinite UT status",
+        "exam_points": "• **Only UT** that is **capital of 2 States** (Punjab + Haryana)\n• Created by **Punjab Reorganisation Act 1966**\n• **Planned city** (designed by Le Corbusier - French architect)\n• **Pending transfer** to Punjab since 1966 (never happened)\n• **1 Lok Sabha seat** (Chandigarh constituency)\n• No Legislature despite being inhabited UT\n• **High Court**: Common for Punjab, Haryana & Chandigarh\n• **Municipal Corporation** for local governance\n• **Political deadlock**: Punjab wants it, Haryana opposes"
+      },
+      {
+        "id": "andaman-nicobar",
+        "ut_name": "**Andaman & Nicobar Islands**",
+        "type_status": "**UT without Legislature**\nIsland territory\n**Strategic location**\n**Tribal areas**",
+        "administration": "**Lieutenant Governor** (Art 239)\nAppointed by President\nReports to Union Home Ministry\n**Direct Central rule**\n**Special powers** for tribal protection",
+        "legislature": "**No Legislature**\n**No Assembly, No CM**\n**1 Lok Sabha seat** (Andaman & Nicobar Islands)\n**Zilla Parishads** for local governance\n**Tribal areas**: Special protection under 6th Schedule-like provisions",
+        "special_provisions": "**Tribal Protection**: Special provisions for **Sentinelese, Jarawa, Onge** tribes\n**Restricted Areas**: Parts of islands restricted (tribal protection)\n**RAP (Restricted Area Permit)** required for some islands\n**Strategic importance**: Near Strait of Malacca\n**Cellular Jail**: Historical significance (Kala Pani)",
+        "key_bills_acts": "**Andaman & Nicobar Islands (Protection of Aboriginal Tribes) Regulation 1956**:\n• Protection of tribal areas\n• Restricted entry to tribal zones\n• Special permissions required\n\n**Key Islands**:\n• **North Sentinel Island**: Home to Sentinelese tribe (most isolated tribe - no contact policy)\n• **Port Blair**: Capital\n\n**Strategic**: **Tri-Services Command** headquarters (only joint command in India)",
+        "exam_points": "• **1 Lok Sabha seat** (Andaman & Nicobar Islands)\n• **Southernmost point of India**: Indira Point (Great Nicobar)\n• **Only Tri-Services Command** in India (HQ: Port Blair)\n• **Cellular Jail** (Kala Pani) - National Memorial\n• **North Sentinel Island**: Most isolated tribe (no contact policy)\n• **Restricted Area Permit (RAP)** for some islands\n• **Capital**: Port Blair\n• **2004 Tsunami**: Severely affected\n• **Strategic location**: Near Malacca Strait, Myanmar, Indonesia\n• **10 Degree Channel**: Separates Andaman & Nicobar"
+      },
+      {
+        "id": "lakshadweep",
+        "ut_name": "**Lakshadweep**",
+        "type_status": "**UT without Legislature**\nSmallest UT (area)\nIsland territory\n**Coral islands**",
+        "administration": "**Administrator** (Art 239)\nUsually IAS officer or Indian Navy officer\nReports to Union Home Ministry\n**Direct Central rule**\n**Small population** (~65,000)",
+        "legislature": "**No Legislature**\n**No Assembly, No CM**\n**1 Lok Sabha seat** (Lakshadweep)\n**District Panchayat** + **10 Island Panchayats** for local governance\n**Smallest UT** by area (32 sq km)",
+        "special_provisions": "**Only Muslim-majority UT** in India\n**No SC/ST reservation** (100% Muslim population, except few officials)\n**Liquor banned** (local laws)\n**Coconut cultivation**: Main economy\n**Tourism restricted** (permit required for some islands)\n**Coral reefs**: Ecological protection",
+        "key_bills_acts": "**Lakshadweep Development Authority Regulation 2021** (Controversial):\n• Proposed to allow liquor\n• Land acquisition provisions\n• **Massive local opposition**\n• Administrator's reforms heavily criticized\n• Many provisions withdrawn after protests\n\n**Panchayati Raj**: Extended to Lakshadweep\n\n**Anti-Cow Slaughter**: Proposed (controversial in Muslim-majority islands)",
+        "exam_points": "• **Smallest UT** by area (32 sq km) - India's smallest district also\n• **Only Muslim-majority UT** (96%+ Muslim)\n• **1 Lok Sabha seat** (smallest constituency by population)\n• **36 islands** (11 inhabited)\n• **Capital**: Kavaratti\n• **Coral islands** (only coral islands in India)\n• **No airport on main islands** (Agatti island has airport)\n• **2021 reforms controversy**: Liquor, land acquisition - local opposition\n• **Arabian Sea**: West of Kerala coast\n• **Minicoy Island**: Southernmost island, distinct culture"
+      },
+      {
+        "id": "dnh-dd",
+        "ut_name": "**Dadra & Nagar Haveli and Daman & Diu**",
+        "type_status": "**UT without Legislature**\nMerged UT (2020)\nFormer Portuguese colonies\n**Geographically separated**",
+        "administration": "**Administrator** (Art 239)\nUsually IAS officer\nReports to Union Home Ministry\n**2 separate regions**: DNH (inland) + DD (coastal)\nSingle administration since 2020",
+        "legislature": "**No Legislature**\n**No Assembly, No CM**\n**2 Lok Sabha seats**:\n• Dadra & Nagar Haveli (1 seat)\n• Daman & Diu (1 seat)\n**Municipal Councils** for local governance",
+        "special_provisions": "**Merged UT**: Two separate UTs merged in 2020\n**Geographically non-contiguous**: DNH surrounded by Gujarat & Maharashtra; DD in Gujarat coast\n**Former Portuguese colonies** (liberated 1954-1961)\n**Unique status**: One UT, two separate regions\n**Industrial development**: Special Economic Zones",
+        "key_bills_acts": "**Dadra & Nagar Haveli and Daman & Diu (Merger of Union Territories) Act 2019**:\n• Merged two UTs into one\n• Effective: Jan 26, 2020\n• **Reasons**: Better administration, reduced expenditure\n• Single Administrator for both regions\n\n**Historical**:\n• **Portuguese rule**: Till 1954 (DNH) & 1961 (DD)\n• DNH liberated by locals in 1954\n• DD liberated in Operation Vijay 1961 (with Goa)\n• Made separate UTs in 1961",
+        "exam_points": "• **Merged UT** (effective Jan 26, 2020) - Latest merger\n• **Former Portuguese colonies** (like Goa)\n• **Geographically separated**: DNH inland, DD on coast\n• **2 Lok Sabha seats** (DNH 1 + DD 1) - Unique among merged UTs\n• **DNH**: Surrounded by Gujarat & Maharashtra\n• **DD**: 2 districts - Daman + Diu (separated by Gulf of Khambhat)\n• **Capital**: Daman\n• **Industrial hub**: Many factories, SEZs\n• **Tourism**: Beaches, Portuguese architecture\n• Only UT formed by **merging 2 existing UTs**"
+      }
+    ],
+    "summary": "India has **8 Union Territories** (Art 239): Delhi (NCT), Puducherry, J&K, Ladakh, Chandigarh, Andaman & Nicobar, Lakshadweep, DNH & DD. **3 UTs with Legislature**: Delhi (Art 239AA - 70 members), Puducherry (Art 239A - 33 members), J&K (114 members). **5 UTs without Legislature**: Ladakh, Chandigarh, A&N Islands, Lakshadweep, DNH & DD. **Delhi**: Most controversial (Art 239AA; 2021 Act strengthened LG; 2023 SC verdict on Services). **J&K**: Only State downgraded to UT (2019); Art 370 abrogated; most important for exams. **Ladakh**: Newest UT (2019); no Legislature; demands 6th Schedule. **Chandigarh**: Capital of Punjab + Haryana; transfer to Punjab pending since 1966. **Puducherry**: 3 nominated MLAs; former French colony. **Lakshadweep**: Smallest UT (32 sq km); only Muslim-majority UT. **DNH & DD**: Merged UT (2020); geographically separated; former Portuguese. All UTs administered by LG/Administrator appointed by President. Parliament legislates for UTs. Exam focus: Delhi (Art 239AA, 2021 Act), J&K (Art 370 abrogation, Reorganisation Act 2019), constitutional provisions (Art 239, 239A, 239AA).",
+    "additionalInfo": {
+      "title": "Key Constitutional Provisions & Common Features",
+      "comparison": [
+        {
+          "aspect": "Art 239 - General Provision",
+          "detail": "Every UT shall be administered by President through Administrator/LG appointed by him. President can specify designation."
+        },
+        {
+          "aspect": "Art 239A - Puducherry Special",
+          "detail": "Puducherry can have Legislature & Council of Ministers. President may create such provisions by regulation."
+        },
+        {
+          "aspect": "Art 239AA - Delhi NCT Special",
+          "detail": "Special status for Delhi. Legislature can make laws on State List & Concurrent List (except Police, Public Order, Land - Entry 1, 2, 18)."
+        },
+        {
+          "aspect": "Art 239AB - Delhi Council of Ministers",
+          "detail": "Delhi shall have Council of Ministers with CM. Council collectively responsible to Assembly. Max 10% of Assembly strength."
+        },
+        {
+          "aspect": "Art 240 - Parliament's Power",
+          "detail": "Parliament can make laws for UTs. President can make regulations for UTs (except Delhi, Puducherry, J&K)."
+        },
+        {
+          "aspect": "Art 241 - High Courts for UTs",
+          "detail": "Parliament can create/extend jurisdiction of HCs to UTs. Delhi HC (Delhi), Calcutta HC (A&N), Kerala HC (Lakshadweep), Bombay HC (DNH & DD)."
+        },
+        {
+          "aspect": "Lok Sabha Representation",
+          "detail": "All UTs have representation in Lok Sabha. Total 20 seats reserved for UTs (Delhi 7, A&N 1, Puducherry 1, Lakshadweep 1, Chandigarh 1, DNH 1, DD 1, Ladakh 1, J&K 5)."
+        },
+        {
+          "aspect": "Rajya Sabha Representation",
+          "detail": "Only 3 UTs have RS representation: Delhi (3), Puducherry (1), J&K (4). Total 8 RS seats for UTs."
+        }
+      ],
+      "examTip": "**Most Important for Exams**: Delhi (Art 239AA, 2021 Amendment Act, LG vs CM power), J&K (Art 370 abrogation, Reorganisation Act 2019, downgrade from State), constitutional articles (Art 239, 239A, 239AA, 239AB, 240, 241), and differences between UTs with/without Legislature. Know which UTs have Legislature (only 3: Delhi, Puducherry, J&K) and special provisions for each."
+    }
+  }
+}
+

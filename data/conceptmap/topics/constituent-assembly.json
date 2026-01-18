@@ -1,0 +1,402 @@
+{
+  "id": "constituent-assembly",
+  "subject": "polity",
+  "title": "Constituent Assembly of India",
+  "description": "",
+  "visualType": "splitPanel",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["preamble", "fundamental-rights", "parts-schedules"],
+    "tags": ["Constituent Assembly", "Constitution", "Drafting Committee", "Dr. Ambedkar"]
+  },
+  "data": {
+    "categories": [
+      {"id": "formation", "label": "Formation & Composition", "color": "#6366F1"},
+      {"id": "functioning", "label": "Functioning & Sessions", "color": "#3B82F6"},
+      {"id": "committees", "label": "Important Committees", "color": "#10B981"},
+      {"id": "drafting", "label": "Drafting Committee", "color": "#F59E0B"},
+      {"id": "debates", "label": "Key Debates & Decisions", "color": "#8B5CF6"},
+      {"id": "timeline", "label": "Timeline & Milestones", "color": "#DC2626"}
+    ],
+    "articles": [
+      {
+        "id": "ca-formation",
+        "number": "Formation",
+        "shortLabel": "Origin",
+        "title": "Formation of Constituent Assembly",
+        "category": "formation",
+        "color": "#6366F1",
+        "content": {
+          "provisions": [
+            "Demand for Constituent Assembly first made by **M.N. Roy in 1934**",
+            "**INC officially adopted demand in 1935** (Lucknow Session)",
+            "**1940**: British accepted demand conditionally (August Offer)",
+            "**Cripps Mission 1942**: Proposed Constituent Assembly",
+            "**Cabinet Mission Plan 1946**: Provided framework for Constituent Assembly formation"
+          ],
+          "cabinetMission": [
+            "**Total members**: 389",
+            "**British Indian Provinces**: 296 members",
+            "**Princely States**: 93 members",
+            "**Allocation**: Population-based (1 member per million)",
+            "**Election**: Indirect election by Provincial Legislative Assemblies",
+            "**Communal composition**: General 213, Muslims 79, Sikhs 4",
+            "**Elections held**: July-August 1946"
+          ],
+          "postPartition": [
+            "After partition (1947), membership reduced",
+            "**Total members after partition**: 299",
+            "**British India**: 229",
+            "**Princely States**: 70",
+            "Pakistan's members (79) left the assembly"
+          ],
+          "examTips": "**Most asked**: M.N. Roy first demanded CA (1934); INC adopted (1935); Cabinet Mission Plan (1946) gave framework. Pre-partition: 389 members; Post-partition: 299 members. **Not directly elected by people** - elected by Provincial Assemblies."
+        }
+      },
+      {
+        "id": "ca-chairman",
+        "number": "Leadership",
+        "shortLabel": "Leaders",
+        "title": "President & Vice-President",
+        "category": "formation",
+        "color": "#6366F1",
+        "content": {
+          "provisions": [
+            "**President**: Dr. Rajendra Prasad",
+            "**Vice-President**: Harendra Coomar Mookerjee (H.C. Mookherjee)",
+            "**Constitutional Adviser**: B.N. Rau (Sir Benegal Narsing Rau)",
+            "**Constitutional Lawyer**: Alladi Krishnaswami Ayyar",
+            "**First meeting**: December 9, 1946"
+          ],
+          "notes": [
+            "Dr. Sachchidananda Sinha was **temporary Chairman** for first session (Dec 9, 1946)",
+            "Dr. Rajendra Prasad elected as **permanent President** on Dec 11, 1946",
+            "B.N. Rau played crucial role in preparing initial draft",
+            "Alladi Krishnaswami Ayyar helped in constitutional matters"
+          ],
+          "examTips": "**Remember**: Sachchidananda Sinha = Temporary Chairman; Rajendra Prasad = Permanent President; H.C. Mookherjee = VP; B.N. Rau = Constitutional Adviser (prepared initial draft)"
+        }
+      },
+      {
+        "id": "ca-sessions",
+        "number": "Sessions",
+        "shortLabel": "Sessions",
+        "title": "Sessions & Duration",
+        "category": "functioning",
+        "color": "#3B82F6",
+        "content": {
+          "provisions": [
+            "**First meeting**: December 9, 1946",
+            "**Last meeting**: November 26, 1949",
+            "**Total duration**: 2 years, 11 months, 18 days",
+            "**Total sessions**: 11 sessions",
+            "**Total sittings**: 165 days",
+            "**Total time spent**: 114 days in plenary, 51 days in committees"
+          ],
+          "keyMilestones": [
+            "**Dec 9, 1946**: First meeting (Temporary President: Sachchidananda Sinha)",
+            "**Dec 11, 1946**: Dr. Rajendra Prasad elected President",
+            "**Dec 13, 1946**: Jawaharlal Nehru moved Objectives Resolution",
+            "**Jan 22, 1947**: Objectives Resolution adopted",
+            "**Aug 29, 1947**: Drafting Committee appointed (Dr. Ambedkar as Chairman)",
+            "**Nov 4, 1947**: First draft presented by B.N. Rau",
+            "**Feb 21, 1948**: Dr. Ambedkar introduced draft Constitution in CA",
+            "**Nov 26, 1949**: Constitution adopted",
+            "**Jan 26, 1950**: Constitution came into force (Republic Day)"
+          ],
+          "examTips": "**Most asked dates**: Dec 9, 1946 (first meeting), Jan 22, 1947 (Objectives Resolution), Aug 29, 1947 (Drafting Committee), Nov 26, 1949 (adopted), Jan 26, 1950 (enforced). Total: **165 sittings, 11 sessions, 2y 11m 18d**."
+        }
+      },
+      {
+        "id": "ca-committees",
+        "number": "Committees",
+        "shortLabel": "Committees",
+        "title": "Important Committees",
+        "category": "committees",
+        "color": "#10B981",
+        "content": {
+          "majorCommittees": [
+            "**Union Powers Committee** - Jawaharlal Nehru (Chairman)",
+            "**Union Constitution Committee** - Jawaharlal Nehru",
+            "**Provincial Constitution Committee** - Sardar Patel",
+            "**Drafting Committee** - Dr. B.R. Ambedkar (most important)",
+            "**Fundamental Rights Sub-Committee** - J.B. Kripalani",
+            "**Minorities Sub-Committee** - H.C. Mookerjee",
+            "**North-East Frontier Tribal Areas Committee** - Gopinath Bordoloi",
+            "**Excluded & Partially Excluded Areas Committee** - A.V. Thakkar",
+            "**Expert Committee on Financial Provisions** - Nalini Ranjan Sarkar",
+            "**Ad-hoc Committee on National Flag** - Dr. Rajendra Prasad",
+            "**Committee on Chief Commissioners' Provinces** - B. Pattabhi Sitaramayya",
+            "**Steering Committee** - Dr. Rajendra Prasad",
+            "**Credentials Committee** - Alladi Krishnaswami Ayyar",
+            "**House Committee** - B. Pattabhi Sitaramayya",
+            "**Order of Business Committee** - Dr. K.M. Munshi"
+          ],
+          "significance": [
+            "Total **22 major committees** and **8 minor committees** formed",
+            "**Drafting Committee** most important - prepared final draft",
+            "Sardar Patel's Provincial Constitution Committee shaped federal structure",
+            "Nehru's Union Powers Committee defined Centre-State relations"
+          ],
+          "examTips": "**Must remember**: Drafting Committee (Ambedkar), Union Powers (Nehru), Provincial Constitution (Patel), Fundamental Rights (Kripalani), Ad-hoc Flag Committee (Rajendra Prasad). Total 22 major + 8 minor = **30 committees**."
+        }
+      },
+      {
+        "id": "drafting-committee",
+        "number": "Drafting Committee",
+        "shortLabel": "Drafting",
+        "title": "Drafting Committee - Most Important",
+        "category": "drafting",
+        "color": "#F59E0B",
+        "content": {
+          "composition": [
+            "**Appointed on**: August 29, 1947",
+            "**Chairman**: Dr. B.R. Ambedkar",
+            "**Total members**: 7 (originally) → 6 (after partition)"
+          ],
+          "members": [
+            "**1. Dr. B.R. Ambedkar** (Chairman) - Called 'Father of Indian Constitution'",
+            "**2. Alladi Krishnaswami Ayyar** - Constitutional expert from Madras",
+            "**3. N. Gopalaswami Ayyangar** - Kashmir expert, drafted Art 370",
+            "**4. K.M. Munshi** - Jurist and scholar from Bombay",
+            "**5. Syed Mohammad Saadulla** - Muslim League member from Assam",
+            "**6. B.L. Mitter** - Bengal (resigned due to ill health)",
+            "**7. D.P. Khaitan** - Bengal (died in 1948; replaced by T.T. Krishnamachari)",
+            "**Note**: After B.L. Mitter resigned and D.P. Khaitan died, effectively **5 members** did most work"
+          ],
+          "functions": [
+            "Consolidate recommendations of various committees",
+            "Prepare initial draft of Constitution",
+            "Examine amendments and suggestions",
+            "Present draft to Constituent Assembly for debate",
+            "**Prepared draft in 8 months** (Feb 1948 presented to CA)"
+          ],
+          "ambedkarRole": [
+            "Chairman of Drafting Committee",
+            "Introduced draft Constitution on **February 21, 1948**",
+            "Replied to debates and moved amendments",
+            "Made **final speech on Nov 25, 1949** (day before adoption)",
+            "Called **'Father of Indian Constitution'** - though he credited many others",
+            "In his final speech, acknowledged 3 years of hard work"
+          ],
+          "examTips": "**MOST ASKED**: Ambedkar = Chairman; 7 members originally (6 after partition, 5 effectively worked); Appointed Aug 29, 1947; Draft presented Feb 21, 1948. Members: Ambedkar, Ayyar, Ayyangar, Munshi, Saadulla, Mitter (resigned), Khaitan (died, replaced by Krishnamachari).",
+          "quotes": [
+            "**Dr. Ambedkar's famous quote**: 'Constitution is not a mere lawyers' document, it is a vehicle of Life, and its spirit is always the spirit of Age.'",
+            "**Granville Austin** called CA 'the greatest and most representative body ever assembled in India'",
+            "**B.N. Rau** prepared initial draft which Drafting Committee refined"
+          ]
+        }
+      },
+      {
+        "id": "objectives-resolution",
+        "number": "Objectives Resolution",
+        "shortLabel": "Objectives",
+        "title": "Objectives Resolution - Soul of Constitution",
+        "category": "debates",
+        "color": "#8B5CF6",
+        "content": {
+          "provisions": [
+            "**Moved by**: Jawaharlal Nehru on **December 13, 1946**",
+            "**Adopted on**: January 22, 1947",
+            "Called **'Soul of the Constitution'** by T.T. Krishnamachari",
+            "Laid down fundamentals and philosophy of constitutional structure"
+          ],
+          "keyPoints": [
+            "**India shall be Independent Sovereign Republic**",
+            "**Power derives from people of India**",
+            "**Guarantees justice, equality, liberty** to all citizens",
+            "**Adequate safeguards for minorities, backward areas, depressed classes**",
+            "**Maintains integrity of territory** of Republic",
+            "**Occupies rightful place** in world affairs",
+            "**Contributes to world peace and welfare of mankind**"
+          ],
+          "significance": [
+            "Reflected in **Preamble** of Constitution",
+            "Guiding light for Constituent Assembly debates",
+            "Established India would be a **Republic** (not dominion)",
+            "First formal declaration of intent to frame Constitution",
+            "Reflected aspirations of freedom struggle"
+          ],
+          "examTips": "**Very important**: Moved by Nehru (Dec 13, 1946), Adopted (Jan 22, 1947). Called 'Soul of Constitution'. Reflected in Preamble. Key: India = Independent Sovereign Republic with power from people."
+        }
+      },
+      {
+        "id": "ca-working",
+        "number": "Working",
+        "shortLabel": "Process",
+        "title": "Working & Procedure",
+        "category": "functioning",
+        "color": "#3B82F6",
+        "content": {
+          "provisions": [
+            "**Open debates**: Assembly proceedings were open and democratic",
+            "**Consensus-based**: Decisions mostly by consensus, not voting",
+            "**Three readings**: Draft Constitution had three readings",
+            "**Detailed clause-by-clause debate**: Every article debated thoroughly",
+            "**Amendments**: Over 2,000 amendments moved; 7,635 amendments considered"
+          ],
+          "draftStages": [
+            "**Stage 1**: Committees prepared reports on various subjects",
+            "**Stage 2**: B.N. Rau prepared initial draft (Feb 1948)",
+            "**Stage 3**: Drafting Committee refined draft",
+            "**Stage 4**: First reading - general discussion (Nov 4-9, 1948)",
+            "**Stage 5**: Second reading - clause-by-clause discussion (Nov 15, 1948 - Oct 17, 1949)",
+            "**Stage 6**: Third reading - final discussion (Nov 14-26, 1949)",
+            "**Stage 7**: Adoption on November 26, 1949"
+          ],
+          "participationStats": [
+            "**Total speeches**: Over 9,000 speeches delivered",
+            "**Total amendments**: 7,635 amendments moved",
+            "**Total cost**: ₹64 lakh (approx)",
+            "**Language**: Debates in Hindi and English",
+            "**Records**: Verbatim records maintained"
+          ],
+          "examTips": "**Process**: 3 readings → 7,635 amendments → 165 sittings → 9,000+ speeches. B.N. Rau prepared initial draft; Drafting Committee refined it. Open, democratic, consensus-based."
+        }
+      },
+      {
+        "id": "ca-sources",
+        "number": "Sources",
+        "shortLabel": "Sources",
+        "title": "Sources of Constitution",
+        "category": "debates",
+        "color": "#8B5CF6",
+        "content": {
+          "majorSources": [
+            "**Government of India Act 1935** - Federal structure, Governor, Emergency, Judiciary",
+            "**British Constitution** - Parliamentary system, Rule of law, Single citizenship, Bicameral Parliament",
+            "**US Constitution** - Fundamental Rights, Judicial Review, Independence of Judiciary, Preamble (opening words)",
+            "**Irish Constitution** - Directive Principles of State Policy, Nomination of RS members",
+            "**Canadian Constitution** - Federal structure with strong Centre, Residuary powers to Centre",
+            "**Australian Constitution** - Concurrent List, Freedom of trade and commerce",
+            "**Weimar Constitution (Germany)** - Suspension of Fundamental Rights during emergency",
+            "**Soviet Constitution (USSR)** - Fundamental Duties, Socialist principles in DPSP",
+            "**French Constitution** - Liberty, Equality, Fraternity in Preamble; Republican ideals",
+            "**South African Constitution** - Election of Rajya Sabha members, Amendment procedure",
+            "**Japanese Constitution** - Procedure established by law (later modified to due process)"
+          ],
+          "indianSources": [
+            "**Ancient texts**: Arthashastra, Manusmriti (concepts of dharma, justice)",
+            "**Independence movement**: Ideas from freedom struggle, Congress resolutions",
+            "**Government of India Act 1935**: Largest source - federal structure, powers distribution"
+          ],
+          "examTips": "**Most borrowed from**: Government of India Act 1935 (federal structure). Remember: UK (Parliamentary), US (FR, JR), Ireland (DPSP), Canada (Strong Centre), USSR (FD), Germany (Emergency suspension), France (Liberty-Equality-Fraternity)."
+        }
+      },
+      {
+        "id": "ca-notable-members",
+        "number": "Notable Members",
+        "shortLabel": "Members",
+        "title": "Prominent Members",
+        "category": "formation",
+        "color": "#6366F1",
+        "content": {
+          "leaders": [
+            "**Jawaharlal Nehru** - First PM, moved Objectives Resolution",
+            "**Sardar Vallabhbhai Patel** - Deputy PM, integrated princely states",
+            "**Dr. B.R. Ambedkar** - Law Minister, Drafting Committee Chairman",
+            "**Dr. Rajendra Prasad** - CA President, First President of India",
+            "**Maulana Abul Kalam Azad** - Education Minister, freedom fighter",
+            "**C. Rajagopalachari** - First Indian Governor General",
+            "**J.B. Kripalani** - Congress President",
+            "**K.M. Munshi** - Jurist, Drafting Committee member",
+            "**Alladi Krishnaswami Ayyar** - Constitutional expert",
+            "**N. Gopalaswami Ayyangar** - Drafted Article 370",
+            "**Frank Anthony** - Represented Anglo-Indian community",
+            "**H.V. Kamath** - Socialist leader",
+            "**Shyama Prasad Mukherjee** - Hindu Mahasabha leader",
+            "**Hansa Mehta** - Women's rights advocate",
+            "**Sarojini Naidu** - Poet, freedom fighter",
+            "**Sucheta Kriplani** - First woman CM (UP)"
+          ],
+          "womenMembers": [
+            "**Total women members**: 15",
+            "Notable: Sarojini Naidu, Hansa Mehta, Sucheta Kripalani, Rajkumari Amrit Kaur, Dakshayani Velayudhan, Vijaya Lakshmi Pandit, Annie Mascarene"
+          ],
+          "diverseRepresentation": [
+            "**Scheduled Castes**: Dr. Ambedkar, Jagjivan Ram",
+            "**Muslims**: Maulana Azad, M.A. Jinnah (left after partition)",
+            "**Anglo-Indians**: Frank Anthony",
+            "**Parsis**: H.P. Modi",
+            "**Christians**: Multiple members from South India",
+            "**Sikhs**: Multiple members from Punjab"
+          ],
+          "examTips": "**Remember**: 15 women members (Sarojini Naidu, Hansa Mehta prominent). Dr. Ambedkar, Nehru, Patel, Rajendra Prasad were key figures. Frank Anthony represented Anglo-Indians."
+        }
+      },
+      {
+        "id": "ca-key-debates",
+        "number": "Debates",
+        "shortLabel": "Debates",
+        "title": "Key Constitutional Debates",
+        "category": "debates",
+        "color": "#8B5CF6",
+        "content": {
+          "majorDebates": [
+            "**Language issue**: Hindi vs English; Devanagari script; Hindustani rejected",
+            "**Uniform Civil Code**: Debated under Art 44; consensus to keep as DPSP",
+            "**Cow slaughter**: Debated under Art 48; Dr. Ambedkar emphasized economic (not religious) rationale",
+            "**Reservation in legislatures**: SC/ST reservation in Lok Sabha, State Assemblies agreed",
+            "**Separate electorates**: Rejected; joint electorates with reservation adopted",
+            "**Property rights**: Intense debate; initially FR, later made legal right (44th Amendment)",
+            "**Presidential vs Parliamentary system**: Parliamentary system chosen",
+            "**Unitary vs Federal**: Federal with strong Centre adopted",
+            "**National symbols**: Flag, anthem, emblem debates",
+            "**Adult franchise**: Universal adult suffrage adopted (revolutionary for that era)"
+          ],
+          "controversies": [
+            "**Art 370** (Kashmir special status) - N. Gopalaswami Ayyangar drafted, described as 'temporary'",
+            "**Hindi as official language** - South Indian members opposed; English retained for 15 years (now indefinite)",
+            "**Reservation period** - Initially 10 years for SC/ST; now extended multiple times",
+            "**Preventive detention** - Liberal members opposed; retained for 'temporary' period"
+          ],
+          "consensus": [
+            "Most decisions by **consensus**, not voting",
+            "Accommodated diverse views",
+            "Balanced individual liberty with social welfare",
+            "Blended Western institutions with Indian traditions"
+          ],
+          "examTips": "**Key debates**: Language (Hindi vs English), UCC (made DPSP), Cow slaughter (economic reason), Separate electorates (rejected), Parliamentary system (adopted). Most decisions by consensus."
+        }
+      },
+      {
+        "id": "ca-achievement",
+        "number": "Achievement",
+        "shortLabel": "Legacy",
+        "title": "Constitutional Achievement",
+        "category": "timeline",
+        "color": "#DC2626",
+        "content": {
+          "significance": [
+            "**Longest written Constitution** in the world (at that time)",
+            "**Most detailed and comprehensive** Constitution",
+            "**Blended best practices** from global constitutions",
+            "**Democratic and representative** body",
+            "**Inclusive participation** - all communities represented",
+            "**Open debates** - transparent and democratic process",
+            "**Flexible and rigid**: Amendable yet fundamental principles protected"
+          ],
+          "uniqueFeatures": [
+            "**Single document**: Unlike UK's unwritten or US's brief Constitution",
+            "**Borrowed yet original**: Adapted global ideas to Indian context",
+            "**Balance**: Individual rights (FR) + Social welfare (DPSP)",
+            "**Federal with unitary features**: Strong Centre for national integration",
+            "**Secular yet accommodating**: Respects all religions",
+            "**Adult franchise**: Revolutionary - all adults vote (21+, now 18+)"
+          ],
+          "statistics": [
+            "**Original**: 395 Articles, 8 Schedules (now 470 Articles, 12 Schedules after 105 Amendments)",
+            "**Heaviest Constitution**: Shortest = Monaco; Longest written = India",
+            "**Borrowed from 15+ countries**: Yet uniquely Indian",
+            "**2 years, 11 months, 18 days**: Framing period",
+            "**165 sittings**: Actual working days",
+            "**₹64 lakh**: Total cost of framing"
+          ],
+          "examTips": "**Remember**: Longest written Constitution, 2y 11m 18d to frame, 165 sittings, 395 Articles + 8 Schedules originally. Borrowed from 15+ countries. Dr. Ambedkar = Father of Constitution; CA = Greatest representative body ever (Granville Austin)."
+        }
+      }
+    ],
+    "summary": "**Constituent Assembly** formed based on Cabinet Mission Plan (1946) with 389 members (299 after partition). Functioned for **2 years, 11 months, 18 days** with **165 sittings**. **Dr. Rajendra Prasad** was President. **Drafting Committee** (7 members) chaired by **Dr. B.R. Ambedkar** prepared Constitution. **Objectives Resolution** (moved by Nehru, Jan 22, 1947) laid foundation. Constitution adopted on **Nov 26, 1949** and enforced on **Jan 26, 1950**. Borrowed from 15+ countries (mainly GOI Act 1935, UK, US, Ireland, Canada). Open, democratic, consensus-based process. **Most asked**: Formation (Cabinet Mission), Drafting Committee (Ambedkar, 7 members), Timeline (Dec 9, 1946 to Nov 26, 1949), Sources (GOI Act 1935 largest), Debates (Language, UCC, Cow slaughter)."
+  }
+}
+

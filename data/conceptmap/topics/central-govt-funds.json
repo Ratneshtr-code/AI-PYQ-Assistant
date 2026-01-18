@@ -1,0 +1,68 @@
+{
+  "id": "central-govt-funds",
+  "subject": "polity",
+  "title": "Central Government Funds (Art 266-267)",
+  "description": "Comparison of Consolidated Fund, Public Account, and Contingency Fund of India with their constitutional provisions and usage",
+  "visualType": "table",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["budget-process", "legislative-procedures", "parliament-structure"],
+    "tags": ["Consolidated Fund", "Public Account", "Contingency Fund", "Art 266", "Art 267", "Government Funds"]
+  },
+  "data": {
+    "columns": [
+      { "key": "fundName", "label": "Fund Name" },
+      { "key": "constitutionalProvision", "label": "Constitutional Provision" },
+      { "key": "natureComposition", "label": "Nature & Composition" },
+      { "key": "purposeUsage", "label": "Purpose & Usage" },
+      { "key": "withdrawalControl", "label": "Withdrawal/Control" }
+    ],
+    "rows": [
+      {
+        "id": "consolidated-fund",
+        "fundName": "**Consolidated Fund of India (CFI)**\n**Art 266(1)**",
+        "constitutionalProvision": "• **Art 266(1)**: All revenues received, loans raised, money received in repayment of loans → CFI\n• **Art 266(3)**: No money can be appropriated from CFI except as per Appropriation law\n• Most important fund - **Public account of Government**",
+        "natureComposition": "**Receipts:**\n• All **tax revenues** (Income Tax, GST, Customs, Excise)\n• All **non-tax revenues** (Interest, Dividends, Fees, Fines)\n• All **loans raised** by Government\n• **Repayment of loans** given by Govt\n**Expenditure:**\n• All **government expenditure** (salaries, schemes, subsidies, debt repayment)",
+        "purposeUsage": "**Purpose:**\n• **Main account** for Government's financial operations\n• Funds all government activities (defense, education, health, infrastructure)\n• Services government debt (interest payments)\n**Usage:**\n• Charged expenditure paid directly (President, Judges, CAG, Debt)\n• Voted expenditure paid after Parliament's approval (Demands for Grants)",
+        "withdrawalControl": "**Withdrawal:**\n• **Parliamentary authorization** mandatory (Art 266(3))\n• **Appropriation Act** needed for withdrawal\n• No money can be withdrawn without Parliament's vote\n**Control:**\n• Parliament has full control\n• Lok Sabha votes on expenditure\n• CAG audits all expenditure"
+      },
+      {
+        "id": "public-account",
+        "fundName": "**Public Account of India**\n**Art 266(2)**",
+        "constitutionalProvision": "• **Art 266(2)**: Money received by Govt in which Govt acts as **banker/trustee** (not owner)\n• Government holds money **on behalf of others**\n• Must be **returned/paid back** to rightful owners",
+        "natureComposition": "**Receipts:**\n• **Provident Funds** (GPF, CPF - employees' savings)\n• **Small Savings** (Post Office deposits, NSC, PPF)\n• **Reserve Funds** & **Deposits**\n• **Other Liabilities** (pension funds, insurance)\n**NOT included:**\n• Government's own revenue (goes to CFI)\n• Loans raised by govt (goes to CFI)",
+        "purposeUsage": "**Purpose:**\n• Government acts as **custodian** of public money\n• These funds belong to **individuals/institutions** (not govt)\n• Must be returned when due (retirement, maturity)\n**Usage:**\n• PF paid to employees on retirement\n• Small savings returned with interest on maturity\n• Pension paid from this account",
+        "withdrawalControl": "**Withdrawal:**\n• **NO parliamentary authorization** needed\n• Money withdrawn to pay rightful claimants\n• Executive has authority (Finance Ministry)\n**Control:**\n• Parliament does NOT vote on it\n• CAG audits for proper utilization\n• Finance Ministry manages"
+      },
+      {
+        "id": "contingency-fund",
+        "fundName": "**Contingency Fund of India**\n**Art 267(1)**",
+        "constitutionalProvision": "• **Art 267(1)**: Parliament by law establishes **Contingency Fund** at disposal of **President**\n• Currently **₹500 crore** (increased from ₹50 crore in 2005)\n• **Imprest** (advance) account for emergencies",
+        "natureComposition": "**Receipts:**\n• **Parliamentary allocation** (initially ₹500 crore placed)\n• Replenished after withdrawal (Parliament reimburses CFI)\n**Nature:**\n• **Emergency fund** at President's disposal\n• **Advance** from this fund (later reimbursed from CFI)\n• NOT Government's regular fund",
+        "purposeUsage": "**Purpose:**\n• Meet **urgent unforeseen expenditure** (disasters, calamities, emergencies)\n• **Immediate action** possible (no time to wait for Parliament)\n• **Temporary arrangement** till Parliament approves\n**Usage:**\n• Natural disasters (floods, earthquakes)\n• Security emergencies\n• Any urgent unforeseen need\n**Recent Use:** COVID-19 pandemic (2020)",
+        "withdrawalControl": "**Withdrawal:**\n• President can authorize withdrawal (on PM/FM advice)\n• **NO prior parliamentary approval** needed (emergency)\n• After withdrawal, **Parliament must approve** & reimburse from CFI\n**Control:**\n• Executive has initial authority\n• Parliament approves post-facto (Supplementary Grant)\n• If Parliament rejects, money must be returned"
+      }
+    ],
+    "notes": [
+      "**Consolidated Fund = Government's Main Account**: All receipts (tax, non-tax, loans) → All expenditure (salaries, schemes, debt) → Parliamentary control (Appropriation Act)",
+      "**Public Account = Trustee Account**: Government holds money belonging to others (PF, small savings) → No parliamentary approval for withdrawal → Paid to rightful claimants",
+      "**Contingency Fund = Emergency Advance**: President's disposal for unforeseen urgent needs → No prior parliamentary approval → Later reimbursed from CFI after Parliament approves",
+      "**Key Distinction**: CFI = Govt's money (Parliamentary control); Public Account = Others' money (No Parliamentary control); Contingency Fund = Emergency advance (Post-facto Parliamentary control)",
+      "**State Funds**: States have similar 3 funds - Consolidated Fund of State (Art 266), Public Account of State (Art 266), Contingency Fund of State (Art 267(2)) under Governor's disposal",
+      "**CAG's Role (Art 149)**: CAG audits all 3 funds to ensure proper utilization & financial discipline"
+    ],
+    "examTips": [
+      "**Art 266(1) - CFI**: All govt receipts → All govt expenditure → Parliamentary Appropriation needed",
+      "**Art 266(2) - Public Account**: Govt as banker/trustee → Others' money (PF, small savings) → No Parliamentary approval for withdrawal",
+      "**Art 267 - Contingency Fund**: Emergency unforeseen expenditure → President's disposal → Post-facto Parliamentary approval",
+      "**Amount**: Contingency Fund = ₹500 crore (increased in 2005 from ₹50 crore)",
+      "**Parliamentary Control**: Maximum on CFI (Appropriation Act) → None on Public Account → Post-facto on Contingency Fund",
+      "**Ownership**: CFI (Govt's money) vs Public Account (Others' money held by Govt) vs Contingency Fund (Advance to Govt)",
+      "**Charged vs Voted from CFI**: Charged = No vote (President, Judges, CAG, Debt); Voted = Parliament votes (Demands for Grants)"
+    ],
+    "importantCases": [
+      "No landmark cases on Government Funds (financial constitutional provisions - Parliament's domain)"
+    ]
+  }
+}
+

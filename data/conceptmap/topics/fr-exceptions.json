@@ -1,0 +1,403 @@
+{
+  "id": "fr-exceptions",
+  "subject": "polity",
+  "title": "Exceptions and Limitations to Fundamental Rights",
+  "description": "",
+  "visualType": "splitPanel",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["fundamental-rights", "emergency-provisions", "martial-law-vs-fr"],
+    "tags": ["Fundamental Rights", "Exceptions", "Limitations", "Restrictions", "Art 19"]
+  },
+  "data": {
+    "categories": [
+      {"id": "general", "label": "General Exceptions", "color": "#6366F1"},
+      {"id": "specific", "label": "Article-Specific Exceptions", "color": "#3B82F6"},
+      {"id": "emergency", "label": "Emergency Exceptions", "color": "#EF4444"},
+      {"id": "constitutional", "label": "Constitutional Immunities", "color": "#8B5CF6"}
+    ],
+    "articles": [
+      {
+        "id": "overview-exceptions",
+        "number": "Overview",
+        "shortLabel": "Basics",
+        "title": "Why Exceptions to FRs?",
+        "category": "general",
+        "color": "#6366F1",
+        "content": {
+          "rationale": [
+            "**FRs are NOT absolute** - subject to reasonable restrictions",
+            "**Balance individual liberty** with **social welfare** and **public interest**",
+            "**Prevent misuse** of FRs for anti-national activities",
+            "**Accommodate special circumstances** (emergencies, security threats)",
+            "**Protect sovereignty and integrity** of India",
+            "**Ensure public order, morality, health**"
+          ],
+          "typesOfExceptions": [
+            "**1. Reasonable restrictions** (Art 19(2) to 19(6)) - on 6 freedoms",
+            "**2. State immunity** - President, Governors (Art 361)",
+            "**3. Preventive detention** - Art 22(3) to 22(7)",
+            "**4. Martial Law** - Art 34 (indemnity for acts)",
+            "**5. Emergency provisions** - Art 358, 359",
+            "**6. Saving of certain laws** - Art 31A, 31B, 31C (property, DPSP)",
+            "**7. Armed Forces** - Art 33 (Parliament can restrict/abrogate FRs)"
+          ],
+          "significance": [
+            "Makes FRs realistic and workable",
+            "Prevents absolute libertarianism",
+            "Accommodates national interest",
+            "Balances rights with responsibilities"
+          ],
+          "examTips": "**Most asked**: FRs NOT absolute. Reasonable restrictions under Art 19(2)-19(6). Emergency exceptions under Art 358, 359. Immunities under Art 361. Preventive detention Art 22. Armed Forces Art 33."
+        }
+      },
+      {
+        "id": "art19-restrictions",
+        "number": "Art 19(2)-(6)",
+        "shortLabel": "19 Limits",
+        "title": "Reasonable Restrictions on Article 19 Freedoms",
+        "category": "specific",
+        "color": "#3B82F6",
+        "content": {
+          "overview": [
+            "**Art 19(1)** grants **6 freedoms** (originally 7, property removed)",
+            "**Art 19(2) to 19(6)** allow State to impose **reasonable restrictions**",
+            "Restrictions must be **reasonable** (decided by courts)",
+            "Only on **specified grounds** (cannot be on any arbitrary ground)"
+          ],
+          "art19_1a_SpeechExpression": [
+            "**Freedom**: Speech and expression (19(1)(a))",
+            "**Restrictions** (Art 19(2)): Sovereignty & integrity of India, security of State, friendly relations with foreign states, public order, decency or morality, contempt of court, defamation, incitement to offence",
+            "**8 grounds** for restrictions",
+            "**Examples**: Censorship during war, ban on hate speech, obscenity laws, sedition"
+          ],
+          "art19_1b_Assembly": [
+            "**Freedom**: Peaceful assembly without arms (19(1)(b))",
+            "**Restrictions** (Art 19(3)): Sovereignty & integrity of India, public order",
+            "**2 grounds** for restrictions",
+            "**Examples**: Section 144 CrPC (prohibit assembly), ban on unlawful assemblies"
+          ],
+          "art19_1c_Association": [
+            "**Freedom**: Form associations or unions (19(1)(c))",
+            "**Restrictions** (Art 19(4)): Sovereignty & integrity of India, public order, morality",
+            "**3 grounds** for restrictions",
+            "**Examples**: Ban on organizations (RSS banned 1948-49, CPI banned in past)"
+          ],
+          "art19_1d_Movement": [
+            "**Freedom**: Move freely throughout India (19(1)(d))",
+            "**Restrictions** (Art 19(5)): Interests of general public, protection of Scheduled Tribes",
+            "**2 grounds** for restrictions",
+            "**Examples**: Inner Line Permit in NE states, restricted areas for security"
+          ],
+          "art19_1e_Residence": [
+            "**Freedom**: Reside and settle in any part of India (19(1)(e))",
+            "**Restrictions** (Art 19(5)): Interests of general public, protection of Scheduled Tribes",
+            "**2 grounds** for restrictions",
+            "**Examples**: J&K had Art 35A restrictions (abrogated 2019), tribal area protections"
+          ],
+          "art19_1g_Profession": [
+            "**Freedom**: Practice any profession, occupation, trade, business (19(1)(g))",
+            "**Restrictions** (Art 19(6)): Interests of general public",
+            "**1 ground** only",
+            "**Examples**: Professional qualifications required, licenses for trades, nationalization of industries"
+          ],
+          "reasonablenessTest": [
+            "**Determined by courts** (judiciary decides reasonableness)",
+            "**Proportionality**: Restriction must be proportionate to objective",
+            "**Least restrictive**: Should not go beyond necessity",
+            "**Not arbitrary**: Must have rational nexus with objective",
+            "**Examples**: Total ban may be unreasonable; licensing may be reasonable"
+          ],
+          "examTips": "**Most asked**: Grounds for restrictions on each freedom. **Art 19(1)(a)** has **8 grounds** (most); **19(1)(g)** has **1 ground** (least). Reasonableness decided by **courts**. Remember: 'Sovereignty & integrity' added by 16th Amendment 1963 (after China war)."
+        }
+      },
+      {
+        "id": "art22-preventive-detention",
+        "number": "Art 22(3)-(7)",
+        "shortLabel": "PD",
+        "title": "Preventive Detention - Exception to Art 21-22",
+        "category": "specific",
+        "color": "#3B82F6",
+        "content": {
+          "overview": [
+            "**Preventive detention** = Detention to **prevent future crime** (not punishment for past crime)",
+            "**Art 22(1)-(2)** provide safeguards for arrest",
+            "**Art 22(3)-(7)** provide **lesser safeguards** for preventive detention (exception)",
+            "Borrowed from **Government of India Act 1935**"
+          ],
+          "exceptions": [
+            "**Art 22(3)**: Safeguards in Art 22(1)-(2) **do not apply** to preventive detention",
+            "No right to be informed of grounds immediately (grounds communicated later)",
+            "No right to consult lawyer immediately",
+            "No right to be produced before magistrate within 24 hours"
+          ],
+          "safeguards": [
+            "**Art 22(4)**: Detention beyond **3 months** requires **Advisory Board** approval",
+            "**Art 22(5)**: Grounds of detention must be communicated **as soon as possible**; detenu can make representation",
+            "**Art 22(6)**: Detention beyond Advisory Board opinion period requires fresh order",
+            "**Art 22(7)**: Parliament can prescribe circumstances and procedure by law",
+            "**Advisory Board**: Consists of serving or retired High Court judges; gives opinion within 3 months"
+          ],
+          "laws": [
+            "**National Security Act (NSA) 1980** - Detention up to 12 months",
+            "**Unlawful Activities Prevention Act (UAPA) 1967** - Anti-terrorism",
+            "**Conservation of Foreign Exchange and Prevention of Smuggling Activities Act (COFEPOSA) 1974**",
+            "**Prevention of Illicit Traffic in Narcotic Drugs and Psychotropic Substances Act (PITNDPS) 1988**",
+            "**Maintenance of Internal Security Act (MISA)** - Repealed in 1978 (misused during Emergency)"
+          ],
+          "criticism": [
+            "**Draconian**: Detention without trial violates liberty",
+            "**Misuse**: Often used for political opponents",
+            "**Vague grounds**: 'National security' open to interpretation",
+            "**Low conviction rate**: Most detentions not leading to convictions",
+            "**Human rights concern**: International criticism"
+          ],
+          "examTips": "**Art 22(3)-(7)**: Preventive detention exception. **3 months** = max detention without Advisory Board. **Advisory Board** has HC judges. Art 22(1)-(2) safeguards **NOT applicable**. Laws: NSA, UAPA, COFEPOSA. MISA repealed 1978 (Emergency misuse)."
+        }
+      },
+      {
+        "id": "art33-armed-forces",
+        "number": "Art 33",
+        "shortLabel": "Forces",
+        "title": "Restriction of FRs for Armed Forces",
+        "category": "specific",
+        "color": "#3B82F6",
+        "content": {
+          "provision": [
+            "**Art 33**: Parliament can **restrict or abrogate** FRs for members of Armed Forces, para-military forces, police",
+            "Ensures **discipline and efficiency** of forces",
+            "Covers: Army, Navy, Air Force, para-military forces (BSF, CRPF, CISF, ITBP, SSB), police forces"
+          ],
+          "rationale": [
+            "**Military discipline** requires restrictions on certain freedoms",
+            "**National security** paramount",
+            "Cannot allow complete freedom of speech (may compromise operations)",
+            "Cannot allow right to form associations (no unions in army)",
+            "Hierarchical structure needs obedience"
+          ],
+          "restrictedRights": [
+            "**No freedom of speech and expression** (19(1)(a)) - Cannot criticize superiors openly",
+            "**No right to form associations** (19(1)(c)) - No trade unions in armed forces",
+            "**No right to constitutional remedies** (Art 32) - Cannot directly approach SC for service matters (use Armed Forces Tribunal)",
+            "**Special laws apply**: Army Act, Navy Act, Air Force Act, Police Acts"
+          ],
+          "laws": [
+            "**Army Act 1950**, Navy Act 1957, Air Force Act 1950 - Restrict FRs for armed forces",
+            "**Armed Forces Tribunal Act 2007** - Exclusive jurisdiction for service matters",
+            "**Police Acts** - Restrict FRs for police forces"
+          ],
+          "examTips": "**Art 33**: Parliament can restrict FRs for **armed forces, para-military, police**. No unions (Art 19(1)(c) restricted). Service matters go to **Armed Forces Tribunal** (not SC under Art 32 directly). Ensures **discipline**."
+        }
+      },
+      {
+        "id": "art34-martial-law",
+        "number": "Art 34",
+        "shortLabel": "Martial",
+        "title": "Martial Law - Indemnity Exception",
+        "category": "specific",
+        "color": "#3B82F6",
+        "content": {
+          "provision": [
+            "**Art 34**: Parliament can **indemnify** persons for acts done during **Martial Law**",
+            "Protects military/civil personnel from legal action for acts during Martial Law",
+            "Does NOT provide for declaration of Martial Law (extra-constitutional concept)",
+            "Only deals with **consequences** of Martial Law"
+          ],
+          "martialLaw": [
+            "**Martial Law** = Military rule replacing civil administration",
+            "**Extra-constitutional**: No provision in Constitution to declare it",
+            "**Historical**: Declared during British era (Punjab 1919, Bombay 1942)",
+            "**Independent India**: NEVER declared (AFSPA used instead for disturbed areas)"
+          ],
+          "indemnity": [
+            "Parliament can pass law to **protect** persons from prosecution/suits",
+            "Indemnity can be **prospective or retrospective**",
+            "Validates acts that may have been illegal",
+            "Ensures military personnel not harassed by litigation"
+          ],
+          "examTips": "**Art 34**: **Indemnity** for acts during Martial Law (NOT provision to declare it). Parliament passes law protecting personnel. Martial Law **NEVER declared** in independent India. Use AFSPA in disturbed areas instead."
+        }
+      },
+      {
+        "id": "art358-emergency",
+        "number": "Art 358",
+        "shortLabel": "358",
+        "title": "Automatic Suspension of Art 19 during Emergency",
+        "category": "emergency",
+        "color": "#EF4444",
+        "content": {
+          "provision": [
+            "**Art 358**: During **National Emergency (Art 352)**, Art 19 (6 freedoms) **automatically suspended**",
+            "NO Presidential order required (automatic effect)",
+            "Applies only to **war or external aggression** emergency (NOT armed rebellion)",
+            "All 6 freedoms under Art 19 suspended"
+          ],
+          "effect": [
+            "**State can make any law** violating Art 19 (will not be void under Art 13)",
+            "**Executive can take any action** violating Art 19 (cannot be challenged)",
+            "Suspension is **absolute** for Art 19",
+            "**Revives automatically** when emergency ends"
+          ],
+          "duration": [
+            "**Only during emergency period**",
+            "Once emergency revoked, Art 19 **automatically revives**",
+            "Acts done during emergency **remain valid** even after emergency (unless specifically repealed)"
+          ],
+          "examples": [
+            "During 1962 Emergency (China war), 1971 Emergency (Pakistan war): Art 19 suspended",
+            "Government could impose censorship, restrict movement, ban organizations without court challenge"
+          ],
+          "examTips": "**Art 358**: Art 19 **automatically suspended** during National Emergency (war/external aggression only, NOT armed rebellion). NO Presidential order needed. Revives **automatically** when emergency ends. Absolute suspension."
+        }
+      },
+      {
+        "id": "art359-emergency",
+        "number": "Art 359",
+        "shortLabel": "359",
+        "title": "Suspension of Other FRs during Emergency",
+        "category": "emergency",
+        "color": "#EF4444",
+        "content": {
+          "provision": [
+            "**Art 359**: President can suspend **right to move court** for enforcement of FRs during **National Emergency**",
+            "Applies to FRs **other than Art 19** (Art 19 covered by Art 358)",
+            "**Presidential order required** (not automatic like Art 358)",
+            "**Art 20-21 CANNOT be suspended** (44th Amendment 1978)"
+          ],
+          "effect": [
+            "Cannot approach court to enforce FRs mentioned in Presidential order",
+            "**Art 32 (SC)** and **Art 226 (HC)** suspended for those FRs",
+            "State can violate those FRs; citizens cannot seek remedy",
+            "**Art 20-21 protected**: Right to life, protection against conviction, cannot be suspended"
+          ],
+          "44thAmendment": [
+            "**1978**: After 1975-77 Emergency misuse, safeguards added",
+            "**Art 20-21 cannot be suspended** even during emergency",
+            "**Art 359(1A) added**: Acts during emergency NOT automatically protected; State must act within law",
+            "Illegal acts still punishable after emergency"
+          ],
+          "1975Emergency": [
+            "**1975-77 Emergency**: Art 359 order suspended Art 14, 19, 21, 22",
+            "**ADM Jabalpur case (1976)**: SC held even Art 21 (life) suspended; no HC even for illegal detention",
+            "**Justice H.R. Khanna dissented**: Right to life cannot be suspended (he was superseded)",
+            "**44th Amendment**: Overruled ADM Jabalpur; Art 20-21 cannot be suspended"
+          ],
+          "examTips": "**Art 359**: Presidential order required to suspend **enforcement** of FRs (except Art 19 covered by Art 358). **Art 20-21 CANNOT be suspended** (44th Amendment 1978). ADM Jabalpur case overruled. Suspension is of **enforcement**, not rights themselves."
+        }
+      },
+      {
+        "id": "art31a-31b-31c",
+        "number": "Art 31A/B/C",
+        "shortLabel": "31A/B/C",
+        "title": "Saving of Property Laws & DPSP Laws",
+        "category": "constitutional",
+        "color": "#8B5CF6",
+        "content": {
+          "article31A": [
+            "**Art 31A**: Saving of laws providing for acquisition of estates, etc.",
+            "Added by **1st Amendment 1951**",
+            "Laws for acquisition of estates (zamindari abolition), management of property by State, etc. **cannot be challenged** on ground of violating Art 14, 19, 31",
+            "Protects **land reform laws** from judicial review"
+          ],
+          "article31B": [
+            "**Art 31B**: Validation of certain Acts and Regulations (Ninth Schedule)",
+            "Added by **1st Amendment 1951**",
+            "Acts/Regulations placed in **Ninth Schedule** cannot be challenged on ground of violating FRs",
+            "Originally 13 Acts; now **284 Acts** (misused for non-land reform Acts)",
+            "**I.R. Coelho (2007)**: SC held Acts violating **basic structure** can be reviewed even if in 9th Schedule"
+          ],
+          "article31C": [
+            "**Art 31C**: Saving of laws giving effect to DPSP (Art 39(b), (c))",
+            "Added by **25th Amendment 1971**",
+            "Laws implementing Art 39(b), 39(c) (socialist DPSPs) cannot be challenged on ground of violating Art 14, 19",
+            "**42nd Amendment 1976**: Extended to ALL DPSPs (struck down by SC in Minerva Mills case)",
+            "**Current status**: Applies only to Art 39(b), 39(c)"
+          ],
+          "rationale": [
+            "**Protect land reforms** from being struck down by courts",
+            "**Implement socialist policies** (nationalization, etc.)",
+            "**DPSP implementation** (non-justiciable principles) given priority over FR (justiciable rights)",
+            "Balance between FR (individual rights) and DPSP (social welfare)"
+          ],
+          "criticism": [
+            "**Undermines judicial review** - core of rule of law",
+            "**9th Schedule misused** - Acts unrelated to land reforms placed",
+            "**FR vs DPSP conflict** - Which is more important?",
+            "**I.R. Coelho judgment**: Restored balance; basic structure cannot be violated"
+          ],
+          "examTips": "**Art 31A**: Protects land reform laws (1st Amendment 1951). **Art 31B**: 9th Schedule immunity (1st Amendment); I.R. Coelho case limited it (basic structure protected). **Art 31C**: Protects laws implementing Art 39(b), (c) only (originally all DPSPs - struck down by Minerva Mills)."
+        }
+      },
+      {
+        "id": "art361-immunity",
+        "number": "Art 361",
+        "shortLabel": "361",
+        "title": "Immunity for President & Governors",
+        "category": "constitutional",
+        "color": "#8B5CF6",
+        "content": {
+          "provision": [
+            "**Art 361(1)**: President/Governors **immune from court proceedings** during term of office",
+            "**Criminal immunity**: Absolute during office; no criminal proceedings",
+            "**Civil immunity**: Can file civil suit only after **2 months notice**; proceedings stayed during office",
+            "**Personal acts**: Immunity covers **official acts** done in official capacity"
+          ],
+          "rationale": [
+            "Protects **dignity of office**",
+            "Prevents **harassment** by frivolous litigation",
+            "Ensures **smooth functioning** without legal distractions",
+            "Constitutional head needs protection to perform duties"
+          ],
+          "scope": [
+            "**Covers**: Acts done in official capacity as President/Governor",
+            "**Does NOT cover**: Personal acts done before assuming office (can be prosecuted after term)",
+            "**After term**: Can be prosecuted for acts done before or after office (not during office)",
+            "**Impeachment**: Can be impeached during office (not ordinary criminal trial)"
+          ],
+          "examples": [
+            "President cannot be arrested or prosecuted during tenure",
+            "Governor cannot be sued in personal capacity during tenure",
+            "After leaving office, can be prosecuted for pre-office crimes"
+          ],
+          "examTips": "**Art 361**: President & Governors **immune during office**. Criminal immunity = absolute; Civil suit = after 2 months notice (proceedings stayed). Covers **official acts**. Can be impeached (not ordinary trial). After office, can be prosecuted for pre-office acts."
+        }
+      },
+      {
+        "id": "comparison-art358-359",
+        "number": "358 vs 359",
+        "shortLabel": "Comparison",
+        "title": "Article 358 vs Article 359 - Key Differences",
+        "category": "emergency",
+        "color": "#EF4444",
+        "content": {
+          "article358": [
+            "**Scope**: Only **Art 19** (6 freedoms)",
+            "**Automatic**: Suspension is **automatic** (no Presidential order needed)",
+            "**Emergency type**: Only during **war or external aggression** (NOT armed rebellion)",
+            "**Effect**: Art 19 **completely suspended**; State can make any law/take any action violating Art 19",
+            "**Revival**: **Automatic** when emergency ends",
+            "**Protection**: Acts during emergency remain valid even after"
+          ],
+          "article359": [
+            "**Scope**: **All FRs except Art 19** (and Art 20-21 after 44th Amendment)",
+            "**Presidential order**: Requires **Presidential order** (not automatic)",
+            "**Emergency type**: During **any National Emergency** (war, external aggression, armed rebellion)",
+            "**Effect**: **Right to move court** suspended (not FRs themselves); cannot seek enforcement",
+            "**Revival**: When order revoked",
+            "**Protection**: Acts NOT automatically protected (Art 359(1A) - 44th Amendment)"
+          ],
+          "keyDifferences": [
+            "**1. Scope**: Art 358 = Art 19 only; Art 359 = Other FRs",
+            "**2. Automatic**: Art 358 = automatic; Art 359 = Presidential order needed",
+            "**3. Emergency type**: Art 358 = war/external aggression only; Art 359 = any emergency",
+            "**4. Suspension**: Art 358 = complete; Art 359 = enforcement suspended",
+            "**5. Protection**: Art 358 = acts valid after emergency; Art 359 = acts not automatically protected (44th Amendment)"
+          ],
+          "examTips": "**Most asked comparison**. **Art 358** = Art 19, automatic, war/external aggression only, complete suspension. **Art 359** = Other FRs, Presidential order, any emergency, enforcement suspended. Art 20-21 cannot be suspended (44th Amendment)."
+        }
+      }
+    ],
+    "summary": "**Exceptions to FRs**: (1) **Reasonable restrictions** on Art 19 (Art 19(2)-(6)), (2) **Preventive detention** (Art 22(3)-(7) - exception to Art 21-22), (3) **Armed forces** (Art 33 - restrict FRs), (4) **Martial Law** (Art 34 - indemnity), (5) **Emergency** (Art 358 - Art 19 suspended automatically during war/external aggression; Art 359 - other FRs suspended by Presidential order), (6) **Saving laws** (Art 31A/B/C - land reforms, 9th Schedule, DPSP laws), (7) **Immunity** (Art 361 - President, Governors immune during office). **44th Amendment 1978**: Art 20-21 cannot be suspended even during Emergency. **I.R. Coelho (2007)**: 9th Schedule Acts violating basic structure can be reviewed."
+  }
+}
+

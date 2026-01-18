@@ -1,0 +1,514 @@
+{
+  "id": "constitutional-amendments",
+  "subject": "polity",
+  "title": "Constitutional Amendments - Types, Procedure & Landmark Cases",
+  "description": "",
+  "visualType": "splitPanel",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["kesavananda-bharati", "basic-structure", "fr-dpsp-conflicts"],
+    "tags": ["Amendment", "Art 368", "Basic Structure", "Special Majority", "Procedure"]
+  },
+  "data": {
+    "categories": [
+      {"id": "types", "label": "Types of Amendment", "color": "#6366F1"},
+      {"id": "procedure", "label": "Amendment Procedure", "color": "#10B981"},
+      {"id": "cases", "label": "Landmark Cases", "color": "#EF4444"},
+      {"id": "analysis", "label": "Analysis & Trends", "color": "#F59E0B"}
+    ],
+    "articles": [
+      {
+        "id": "overview",
+        "number": "Overview",
+        "shortLabel": "Basics",
+        "title": "Constitutional Amendment - Basics",
+        "category": "types",
+        "color": "#6366F1",
+        "content": {
+          "definition": [
+            "**Amendment**: Change/modification to Constitution",
+            "**Art 368**: Provides procedure for constitutional amendment",
+            "**Flexible yet rigid**: Easier than USA (rigid), tougher than UK (flexible)",
+            "**Balance**: Stability (not too easy) + Adaptability (not too rigid)"
+          ],
+          "whyAmendments": [
+            "**Changing needs**: Society, economy, politics evolve",
+            "**Judicial interpretation**: SC decisions may require constitutional changes",
+            "**Loopholes**: Plug gaps identified during implementation",
+            "**New challenges**: Technology, globalization, rights expansion",
+            "**Political goals**: Governments amend for their agenda (socialism, emergency, etc.)"
+          ],
+          "statistics": [
+            "**Total amendments**: **106 Amendments** (as of 2023)",
+            "**First**: 1st Amendment 1951 (Property, Champakam case response)",
+            "**Most recent**: 106th Amendment 2023 (Reservation in Assemblies/LS for SCs/STs extended 10 years)",
+            "**Longest**: 42nd Amendment 1976 ('Mini Constitution' - 59 articles, Emergency period)",
+            "**Most amended articles**: Art 14-16 (Equality), Art 19 (Freedoms), Art 31 (Property - repealed)"
+          ],
+          "constitutionalProvision": [
+            "**Art 368**: Empowers Parliament to amend Constitution",
+            "**Clause (1)**: Parliament may amend by addition, variation, repeal",
+            "**Clause (2)**: Procedure for amendment (special majority, state ratification)",
+            "**BUT**: Kesavananda (1973) ruled Parliament **cannot destroy basic structure**"
+          ],
+          "examTips": "**106 Amendments** till 2023. Art 368 provides procedure. Flexible yet rigid. **Basic structure doctrine** (Kesavananda 1973) limits amendment power. 42nd Amendment (1976) = longest; 1st Amendment (1951) = first."
+        }
+      },
+      {
+        "id": "simple-majority",
+        "number": "Type 1",
+        "shortLabel": "Simple",
+        "title": "Amendment by Simple Majority",
+        "category": "types",
+        "color": "#6366F1",
+        "content": {
+          "definition": [
+            "**Simple majority**: More than 50% of members **present and voting**",
+            "**No special procedure**: Same as ordinary legislation",
+            "**Art 368 NOT required**: These are NOT formal constitutional amendments",
+            "**Easiest method**: Parliament can amend on its own"
+          ],
+          "provisions": [
+            "**Admission/creation of new states** (Art 2-4)",
+            "**Citizenship** - acquisition, termination (Art 5-11)",
+            "**Elections** - Electoral processes (Art 324-329)",
+            "**Scheduled areas and Scheduled Tribes** (Art 244)",
+            "**Fifth Schedule** (Administration of scheduled areas)",
+            "**Sixth Schedule** (Administration of tribal areas in Assam, Meghalaya, Tripura, Mizoram)",
+            "**Abolition of second chamber** in states (Art 169 - Legislative Council)",
+            "**Use of English language** in Parliament (Art 343 - within 15 years of Constitution, can be extended)"
+          ],
+          "examples": [
+            "**Reorganization of states**: States created by simple majority laws",
+            "**Citizenship Act amendments**: Changes to citizenship rules",
+            "**Election Commission**: Changes to election processes",
+            "**GST Council**: Created by simple majority",
+            "**Art 169**: Many states abolished/created Legislative Councils (UP, Bihar, Karnataka, etc.)"
+          ],
+          "examTips": "**Simple majority**: Present and voting. Mainly for **federal structure** (Art 2-4 states), **citizenship** (Art 5-11), **elections** (Art 324-329), **Scheduled areas** (Art 244, 5th/6th Schedule), **Art 169** (Legislative Council). NOT formal amendment under Art 368."
+        }
+      },
+      {
+        "id": "special-majority",
+        "number": "Type 2",
+        "shortLabel": "Special",
+        "title": "Amendment by Special Majority",
+        "category": "types",
+        "color": "#6366F1",
+        "content": {
+          "definition": [
+            "**Special majority** (Art 368): Two conditions BOTH must be satisfied:",
+            "**1. At least 2/3rd majority** of members **present and voting** in each House",
+            "**2. Simple majority** (more than 50%) of **total strength** of each House",
+            "**Example**: Lok Sabha strength 545 → Need: (i) 2/3 of present & voting, (ii) 273+ (majority of 545)"
+          ],
+          "scope": [
+            "**Most amendments** fall under this category",
+            "**No state ratification needed**: Parliament alone can amend",
+            "Covers **majority of constitutional provisions** not in Type 1 or Type 3"
+          ],
+          "majorProvisions": [
+            "**Fundamental Rights** (Part III) - except what affects federal structure",
+            "**Directive Principles** (Part IV)",
+            "**All matters under Art 368** except those requiring state ratification"
+          ],
+          "examples": [
+            "**86th Amendment 2002**: Art 21A added (Right to Education) - Special majority",
+            "**97th Amendment 2011**: Co-operative societies (Art 19(1)(c), Part IXB) - Special majority",
+            "**101st Amendment 2016**: GST - Special majority + State ratification (Type 3)",
+            "**103rd Amendment 2019**: EWS reservation (Art 15, 16) - Special majority"
+          ],
+          "importantPoints": [
+            "**Majority of total strength**: Even if members absent, need 50%+ of total (not just present)",
+            "**Example**: If Lok Sabha = 545, and only 400 present → Need (i) 267+ votes (2/3 of 400), (ii) 273+ votes (majority of 545) → Must satisfy 273+",
+            "**Joint sitting NOT allowed**: Separate majority needed in each House",
+            "**No time limit**: Bill can be debated for any duration"
+          ],
+          "examTips": "**Special majority**: (i) 2/3 of present & voting, (ii) Majority of total strength - BOTH needed. Used for **most amendments** (FRs, DPSPs, etc.). No state ratification. Examples: Art 21A (86th), EWS quota (103rd)."
+        }
+      },
+      {
+        "id": "special-majority-states",
+        "number": "Type 3",
+        "shortLabel": "States",
+        "title": "Special Majority + State Ratification",
+        "category": "types",
+        "color": "#6366F1",
+        "content": {
+          "definition": [
+            "**Strictest method**: Special majority in Parliament + Ratification by at least **50% of state legislatures** (simple majority in state)",
+            "**Federal provisions**: Provisions affecting Centre-State relations require state consent",
+            "**Protects federalism**: States get veto power over amendments affecting their powers"
+          ],
+          "provisionsRequiringThis": [
+            "**1. Election of President** (Art 54, 55)",
+            "**2. Extent of Union/State executive power** (Art 73, 162)",
+            "**3. Supreme Court & High Courts** (Chapter IV, V of Part V, Chapter V of Part VI):",
+            "   • Composition, jurisdiction, powers of SC, HCs",
+            "**4. Distribution of legislative powers** (Chapter I of Part XI, Lists in 7th Schedule)",
+            "**5. Representation of states in Parliament** (Art 81)",
+            "**6. Art 368 itself** (Amendment procedure)",
+            "**7. Any matter in 7th Schedule** (Union, State, Concurrent Lists)"
+          ],
+          "procedure": [
+            "**Step 1**: Bill introduced in either House of Parliament",
+            "**Step 2**: Passed by **special majority** in both Houses",
+            "**Step 3**: Sent to **all state legislatures** for consideration",
+            "**Step 4**: At least **50% states** (simple majority in state) must ratify",
+            "**Step 5**: Bill presented to President for assent",
+            "**No time limit**: States can take any time; No deadline for ratification"
+          ],
+          "importantPoints": [
+            "**50% states**: Out of total states (currently 28); NOT 50% of those who vote",
+            "**Simple majority in states**: Not special majority",
+            "**No voting again**: Once state ratifies, cannot revoke (done deal)",
+            "**State rejection doesn't matter**: Only YES votes counted; If 14 states ratify out of 28, sufficient (rejections irrelevant)",
+            "**President cannot refuse**: Once Parliament passes, President must assent (Art 368(2))"
+          ],
+          "examples": [
+            "**7th Amendment 1956**: States Reorganisation Act - State boundaries changed",
+            "**24th Amendment 1971**: Parliament can amend FRs (Art 13, 368 amended) - State ratification",
+            "**42nd Amendment 1976**: Many provisions - Most controversial; State ratification obtained",
+            "**101st Amendment 2016**: GST - Overhauled taxation (7th Schedule changed); 50%+ states ratified"
+          ],
+          "examTips": "**Special majority + States**: For **federal provisions** (Art 54, 55, 73, 162, SC/HC, 7th Schedule, Lists). 50% states need to ratify (simple majority in state). Examples: GST (101st), 24th Amendment (Art 368), State reorganization (7th)."
+        }
+      },
+      {
+        "id": "procedure-details",
+        "number": "Procedure",
+        "shortLabel": "Process",
+        "title": "Amendment Procedure - Step by Step",
+        "category": "procedure",
+        "color": "#10B981",
+        "content": {
+          "initiationOfBill": [
+            "**Who can introduce**: Only in **Parliament** (NOT state legislatures)",
+            "**Minister or Private member**: Any MP can introduce (Government or Private Member Bill)",
+            "**Either House**: Can be introduced in Lok Sabha or Rajya Sabha",
+            "**No prior permission**: President's recommendation NOT required (unlike Money Bill, Ordinary Bills involving expenditure)"
+          ],
+          "passageInParliament": [
+            "**Same procedure in both Houses**:",
+            "• First reading (Introduction)",
+            "• Second reading (Debate, clause by clause discussion)",
+            "• Third reading (Final vote)",
+            "**Special majority required**: In both Houses separately",
+            "**No joint sitting**: If one House rejects, Bill fails (unlike ordinary Bills where joint sitting possible)",
+            "**Deadlock**: If Rajya Sabha rejects, Bill dies (no mechanism to override)"
+          ],
+          "stateRatification": [
+            "**If required** (federal provisions): Sent to all states",
+            "**State legislatures**: Simple majority sufficient",
+            "**No time limit**: States can take any time",
+            "**50% states**: Need at least half of states to ratify",
+            "**Rejection irrelevant**: Only YES counted; NO doesn't matter",
+            "**Cannot withdraw**: Once ratified, state cannot revoke"
+          ],
+          "presidentialAssent": [
+            "**President MUST assent**: No discretion to refuse (Art 368(2))",
+            "**Cannot return** for reconsideration (unlike ordinary Bills)",
+            "**Cannot withhold**: Mandatory assent once Parliament passes",
+            "**Exception**: Only if SC declares amendment unconstitutional (basic structure violation)"
+          ],
+          "uniqueFeatures": [
+            "**No joint sitting**: Both Houses must pass separately; No deadlock resolution mechanism",
+            "**Rajya Sabha has equal power**: Unlike Money Bills where LS has supremacy",
+            "**President bound**: Unlike ordinary Bills where President has discretion",
+            "**Private member can initiate**: Unlike many countries where only government can propose constitutional amendments",
+            "**No referendum**: People not directly involved (unlike some countries)"
+          ],
+          "examTips": "**Procedure**: Any MP can introduce in either House. Special majority in both Houses (no joint sitting). If federal provisions, 50% states ratify. President MUST assent (no discretion). Rajya Sabha has equal power. No referendum."
+        }
+      },
+      {
+        "id": "sankari-prasad-case",
+        "number": "Sankari Prasad",
+        "shortLabel": "Sankari",
+        "title": "Shankari Prasad v Union of India (1951)",
+        "category": "cases",
+        "color": "#EF4444",
+        "content": {
+          "facts": [
+            "**Year**: 1951 (First major case on amendment power)",
+            "**Challenge**: 1st Constitutional Amendment 1951 challenged",
+            "**1st Amendment**: Added Art 31A, 31B (Ninth Schedule); Protected land reforms; Response to Champakam case",
+            "**Issue**: Can Parliament amend Fundamental Rights? Does Art 13 limit Art 368?",
+            "**Petitioner**: Argued Art 13 ('law' includes amendment) prohibits FRs violation; Amendment violating FRs is void"
+          ],
+          "art13Argument": [
+            "**Art 13(2)**: 'State shall not make any **law** which takes away or abridges FRs; Any law in contravention with FRs shall be **void**'",
+            "**Petitioner's argument**: 'Law' in Art 13 includes constitutional amendments; So amendment violating FRs should be void",
+            "**Government's argument**: Art 13 applies only to ordinary laws, not constitutional amendments; Art 368 power separate"
+          ],
+          "scJudgment": [
+            "**5-judge bench**: Parliament has **unlimited power** to amend Constitution, including FRs",
+            "**Reasoning**: 'Law' in Art 13 means ordinary law, NOT constitutional amendment",
+            "**Art 368 separate**: Amendment power is different from legislative power; Art 13 doesn't limit Art 368",
+            "**FRs can be amended**: Parliament can amend any provision including FRs",
+            "**1st Amendment upheld**: Art 31A, 31B valid"
+          ],
+          "significance": [
+            "**Established**: Parliament's wide amendment power",
+            "**No limitation**: Court did not find any limitation on amendment power",
+            "**Encouraged amendments**: Opened door for future amendments to FRs",
+            "**Short-lived**: Later overruled by Kesavananda (1973) - Basic structure doctrine"
+          ],
+          "examTips": "**Shankari Prasad (1951)**: Parliament has **unlimited power** to amend, including FRs. Art 13 (law void if violates FR) doesn't apply to amendments. Later overruled by Kesavananda (1973). 1st Amendment upheld."
+        }
+      },
+      {
+        "id": "sajjan-singh-case",
+        "number": "Sajjan Singh",
+        "shortLabel": "Sajjan",
+        "title": "Sajjan Singh v State of Rajasthan (1965)",
+        "category": "cases",
+        "color": "#EF4444",
+        "content": {
+          "facts": [
+            "**Year**: 1965",
+            "**Challenge**: 17th Constitutional Amendment 1964",
+            "**17th Amendment**: Expanded scope of Art 31A (land reforms protection); Added 44 Acts to Ninth Schedule",
+            "**Issue**: Can Parliament's amendment power be unlimited? Should Shankari Prasad be reconsidered?"
+          ],
+          "scJudgment": [
+            "**5-judge bench (3:2 verdict)**: Upheld 17th Amendment",
+            "**Majority view**: Followed Shankari Prasad; Parliament has power to amend entire Constitution",
+            "**Reasoning**: Constitution is supreme, not any part (including FRs); Parliament as constituent power can amend anything",
+            "**17th Amendment valid**: Expansion of Art 31A and Ninth Schedule upheld"
+          ],
+          "dissentingView": [
+            "**Justice Hidayatullah & Justice Mudholkar (dissent)**: Expressed **doubts** about unlimited amendment power",
+            "**Concern**: If Parliament can amend anything, it can destroy Constitution itself",
+            "**Suggestion**: Some limitations should exist on amendment power",
+            "**This dissent**: Later became basis for Basic Structure doctrine in Kesavananda"
+          ],
+          "significance": [
+            "**Reaffirmed**: Shankari Prasad - Unlimited amendment power",
+            "**BUT dissent important**: Seeds of Basic Structure doctrine planted",
+            "**Encouraged more amendments**: Government emboldened to make frequent amendments (24th, 25th, 29th, 42nd)",
+            "**Led to Kesavananda**: Excessive amendments led SC to reconsider in Kesavananda (1973)"
+          ],
+          "examTips": "**Sajjan Singh (1965)**: Reaffirmed Shankari Prasad - Parliament can amend entire Constitution. BUT **dissenting judges** (Hidayatullah, Mudholkar) expressed doubts about unlimited power - Seeds of Basic Structure doctrine. 17th Amendment upheld."
+        }
+      },
+      {
+        "id": "golak-nath-case",
+        "number": "Golak Nath",
+        "shortLabel": "Golak",
+        "title": "Golak Nath v State of Punjab (1967)",
+        "category": "cases",
+        "color": "#EF4444",
+        "content": {
+          "facts": [
+            "**Year**: 1967 (11-judge bench - overrule Shankari Prasad & Sajjan Singh)",
+            "**Challenge**: Punjab Land Reforms Acts placed in Ninth Schedule (17th Amendment)",
+            "**Issue**: Can Parliament amend Fundamental Rights?",
+            "**Background**: Series of amendments (1st, 4th, 17th) curtailing FRs; Concerns about unlimited amendment power"
+          ],
+          "scJudgment": [
+            "**6:5 majority**: Parliament **CANNOT amend Fundamental Rights**",
+            "**Revolutionary judgment**: Overruled Shankari Prasad and Sajjan Singh",
+            "**Reasoning**: FRs are 'transcendental and immutable' - Beyond amendment",
+            "**Art 13 includes amendments**: 'Law' in Art 13 includes constitutional amendments; Amendment violating FRs is void",
+            "**Amendment = law**: Parliament under Art 368 exercises legislative power, not constituent power; So Art 13 applies"
+          ],
+          "keyHoldings": [
+            "**FRs cannot be amended**: Parliament cannot amend Part III (Fundamental Rights)",
+            "**Prospective application**: This ruling applies to **future amendments only** (not past - past amendments valid)",
+            "**17th Amendment**: Upheld (already enacted; retrospective invalidation would cause chaos)",
+            "**Implication**: Parliament's hands tied; Cannot amend FRs in future"
+          ],
+          "aftermath": [
+            "**Government shocked**: This judgment paralyzed amendment power",
+            "**Political response**: Parliament passed **24th Amendment 1971** to overturn Golak Nath",
+            "**24th Amendment**: (i) Art 13 doesn't apply to amendments, (ii) Parliament can amend any part including FRs, (iii) Art 368 power is constituent power not legislative",
+            "**Led to Kesavananda**: 24th Amendment challenged → Kesavananda (1973) → Basic Structure doctrine"
+          ],
+          "significance": [
+            "**First limitation**: First time SC imposed limit on Parliament's amendment power",
+            "**FRs protected**: For first time, FRs declared unamendable",
+            "**Catalyst**: Led to 24th Amendment and eventually Kesavananda case",
+            "**Overruled by Kesavananda**: Kesavananda held FRs CAN be amended (but not destroy basic structure)"
+          ],
+          "examTips": "**Golak Nath (1967)**: Parliament **CANNOT amend FRs** (6:5 verdict, 11-judge bench). Overruled Shankari & Sajjan. FRs 'transcendental'. Prospective application. Led to **24th Amendment 1971** (overturn Golak Nath). Later overruled by Kesavananda (1973)."
+        }
+      },
+      {
+        "id": "kesavananda-case",
+        "number": "Kesavananda",
+        "shortLabel": "Kesav",
+        "title": "Kesavananda Bharati v State of Kerala (1973)",
+        "category": "cases",
+        "color": "#EF4444",
+        "content": {
+          "facts": [
+            "**Year**: 1973 (Largest bench - 13 judges)",
+            "**Challenge**: 24th, 25th, 29th Amendments (response to Golak Nath)",
+            "**24th Amendment**: Overturned Golak Nath - Parliament CAN amend FRs",
+            "**25th Amendment**: Art 31 amended - compensation for property acquisition; Art 31C added (DPSP over FR)",
+            "**29th Amendment**: Two Kerala land reform Acts added to Ninth Schedule",
+            "**Issue**: Extent of Parliament's amendment power?"
+          ],
+          "scJudgment": [
+            "**7:6 verdict**: **Basic Structure Doctrine** established",
+            "**Parliament CAN amend**: Any provision including FRs CAN be amended",
+            "**BUT limitation**: Cannot destroy **Basic Structure/Basic Features** of Constitution",
+            "**Golak Nath overruled**: FRs CAN be amended (Golak Nath was wrong)",
+            "**24th Amendment valid**: Parliament has power to amend FRs"
+          ],
+          "basicStructure": [
+            "**What is Basic Structure?** Essential features/character of Constitution",
+            "**Examples** (as per various judges in Kesavananda):",
+            "• Supremacy of Constitution",
+            "• Rule of law",
+            "• Separation of powers",
+            "• Republican and democratic form of government",
+            "• Secular character",
+            "• Federal character",
+            "• Independence of judiciary",
+            "• Judicial review",
+            "• Free and fair elections",
+            "• Balance between FRs and DPSPs",
+            "**Not exhaustive list**: SC can add more basic features in future cases"
+          ],
+          "significance": [
+            "**Most important** constitutional case in Indian history",
+            "**Balanced approach**: Parliament can amend (democracy) BUT cannot destroy essential features (constitutionalism)",
+            "**Saved democracy**: Prevented Parliament from destroying Constitution during Emergency",
+            "**Living doctrine**: Basic structure list expanded in later cases",
+            "**Global influence**: Adopted by Pakistan, Bangladesh, Malaysia, Belize, Uganda"
+          ],
+          "aftermath": [
+            "**42nd Amendment 1976** (Emergency): Tried to remove basic structure doctrine - Failed",
+            "**Minerva Mills 1980**: Reaffirmed and strengthened basic structure",
+            "**Waman Rao 1981**: Ninth Schedule amendments after 1973 can be reviewed for basic structure",
+            "**I.R. Coelho 2007**: Strengthened judicial review of Ninth Schedule"
+          ],
+          "examTips": "**MOST IMPORTANT CASE**: Kesavananda (1973) - **Basic Structure Doctrine** - Parliament CAN amend BUT cannot destroy basic structure. 13-judge bench, 7:6 verdict. Overruled Golak Nath. Examples: Supremacy, Rule of law, Federalism, Judicial review, FR-DPSP balance. Saved democracy."
+        }
+      },
+      {
+        "id": "minerva-mills-case",
+        "number": "Minerva Mills",
+        "shortLabel": "Minerva",
+        "title": "Minerva Mills v Union of India (1980)",
+        "category": "cases",
+        "color": "#EF4444",
+        "content": {
+          "facts": [
+            "**Year**: 1980 (Emergency aftermath)",
+            "**Challenge**: 42nd Constitutional Amendment 1976 ('Mini Constitution')",
+            "**42nd Amendment changes**:",
+            "• Extended Art 31C to ALL DPSPs (not just Art 39(b), (c))",
+            "• Added clause: Laws implementing DPSPs cannot be challenged for violating FRs",
+            "• Art 368 clause: No amendment can be questioned on any ground in any court",
+            "**Issue**: Can Parliament make itself immune from judicial review?"
+          ],
+          "scJudgment": [
+            "**5-judge bench**: Struck down clauses of 42nd Amendment",
+            "**Art 31C extension struck down**: Giving ALL DPSPs primacy over FRs violates basic structure",
+            "**Reasoning**: **Balance between FRs and DPSPs** is basic feature; Cannot be destroyed",
+            "**Art 31C valid only for Art 39(b), (c)**: Not for all DPSPs",
+            "**Art 368 clause struck down**: Judicial review is basic feature; Cannot be removed"
+          ],
+          "twoLungsTheory": [
+            "**Justice Bhagwati's famous quote**: '*Indian Constitution is founded on the bedrock of the balance between Parts III and IV*'",
+            "**'Two lungs' analogy**: Constitution has **two lungs - FRs (Part III) and DPSPs (Part IV)**",
+            "Both lungs essential for life of Constitution",
+            "Cannot allow one lung to collapse to save the other",
+            "**Balance is basic structure**: Neither FRs nor DPSPs can have absolute supremacy"
+          ],
+          "significance": [
+            "**Strengthened basic structure**: Reaffirmed Kesavananda",
+            "**Limited Art 31C**: Scope reduced - Valid only for Art 39(b), (c)",
+            "**Judicial review protected**: Courts' power to review amendments reaffirmed",
+            "**Emergency excesses curbed**: 42nd Amendment's authoritarian provisions struck down",
+            "**FR-DPSP balance**: Explicitly declared as basic feature"
+          ],
+          "examTips": "**Minerva Mills (1980)**: 42nd Amendment partially struck down. **'Two lungs' theory** - FRs and DPSPs both essential; balance is basic structure. Art 31C valid only for Art 39(b), (c) - NOT all DPSPs. Judicial review protected. Strengthened Kesavananda."
+        }
+      },
+      {
+        "id": "waman-rao-case",
+        "number": "Waman Rao",
+        "shortLabel": "Waman",
+        "title": "Waman Rao v Union of India (1981)",
+        "category": "cases",
+        "color": "#EF4444",
+        "content": {
+          "facts": [
+            "**Year**: 1981",
+            "**Issue**: Can Acts placed in **Ninth Schedule after Kesavananda** (1973) be reviewed for basic structure?",
+            "**Background**: Ninth Schedule (Art 31B) created to protect land reform laws from judicial review",
+            "**Dilemma**: Ninth Schedule immunity vs Basic Structure doctrine"
+          ],
+          "scJudgment": [
+            "**Bifurcated Ninth Schedule**:",
+            "**Before Apr 24, 1973** (Kesavananda date): Acts in Ninth Schedule **immune** - Cannot be challenged even for basic structure",
+            "**After Apr 24, 1973**: Acts can be **reviewed for basic structure** violation",
+            "**Reasoning**: Pre-Kesavananda Acts acquired immunity before basic structure doctrine came; Post-Kesavananda Acts must comply with basic structure"
+          ],
+          "implications": [
+            "**Ninth Schedule not absolute**: Immunity limited",
+            "**Date-based distinction**: Apr 24, 1973 (Kesavananda date) is cutoff",
+            "**Post-1973 Acts vulnerable**: Can be struck down if violate basic structure",
+            "**Balanced approach**: Respected past Acts (legal certainty) but subjected future Acts to basic structure test"
+          ],
+          "irCoelhoRefinement": [
+            "**I.R. Coelho (2007)** further refined:",
+            "9-judge bench held even **post-1973 Ninth Schedule Acts** can be reviewed",
+            "If Act violates basic structure, Ninth Schedule immunity won't save it",
+            "Test: Whether Act violates basic structure (not just FRs)",
+            "**Effect**: Ninth Schedule immunity further curtailed"
+          ],
+          "examTips": "**Waman Rao (1981)**: Ninth Schedule Acts **before Apr 24, 1973** (Kesavananda date) immune. Acts **after 1973** can be reviewed for basic structure. Later, **I.R. Coelho (2007)** strengthened review power - All Ninth Schedule Acts can be tested for basic structure."
+        }
+      },
+      {
+        "id": "amendment-trends",
+        "number": "Trends",
+        "shortLabel": "Analysis",
+        "title": "Amendment Trends & Analysis",
+        "category": "analysis",
+        "color": "#F59E0B",
+        "content": {
+          "decadeWise": [
+            "**1950s**: 11 amendments - Property rights, land reforms (1st, 4th)",
+            "**1960s**: 11 amendments - State reorganization, property (7th, 17th)",
+            "**1970s**: 19 amendments - Most active decade; Emergency period; Fundamental changes (24th, 25th, 42nd, 44th)",
+            "**1980s**: 11 amendments - Post-emergency corrections",
+            "**1990s**: 16 amendments - Economic liberalization, Panchayati Raj, women's reservation attempts",
+            "**2000s**: 17 amendments - Right to education (86th), GST (101st)",
+            "**2010s**: 15 amendments - GST implementation, Land acquisition, Judicial appointments (99th - struck down)",
+            "**2020s**: 6 amendments (till 2023) - EWS reservation (103rd), Extension of SC/ST/Anglo-Indian reservation"
+          ],
+          "topThemes": [
+            "**1. Property rights**: Most amended - 1st, 4th, 17th, 25th, 44th (Right to property removed)",
+            "**2. Reservation**: 1st, 77th, 81st, 85th, 95th, 103rd (EWS) - Expanding reservation",
+            "**3. Land reforms**: 1st, 4th, 17th - DPSP implementation",
+            "**4. Federalism**: 7th (States Reorganization), 101st (GST) - Centre-State relations",
+            "**5. Election reforms**: 61st (Voting age 21→18), 91st (Anti-defection strengthening)",
+            "**6. Emergency provisions**: 42nd (Authoritarian), 44th (Restored democracy)",
+            "**7. Rights expansion**: 86th (Right to Education Art 21A)",
+            "**8. Judicial**: 99th (NJAC - struck down by SC)"
+          ],
+          "controversialAmendments": [
+            "**42nd Amendment 1976**: 'Mini Constitution' - Most controversial; Made during Emergency; Extended PM/Parliament power; Curtailed SC/HC powers; Removed property as FR; Changed Preamble (added 'Socialist', 'Secular', 'Integrity'); Extended Art 31C; Tried to limit judicial review - Many provisions struck down by Minerva Mills",
+            "**44th Amendment 1978**: Reversed many 42nd Amendment provisions; Restored fundamental rights; Removed right to property as FR (made legal right); Strengthened civil liberties",
+            "**99th Amendment 2014**: NJAC (National Judicial Appointments Commission) to replace Collegium system - **Struck down by SC** (2015) as violating basic structure (independence of judiciary)",
+            "**103rd Amendment 2019**: 10% EWS reservation - Challenged (pending) - Concern: Breaches 50% ceiling (Indra Sawhney), excludes social/educational backwardness criterion"
+          ],
+          "failedAttempts": [
+            "**Women's Reservation Bill**: Introduced multiple times (1996, 1998, 2010) - Not passed; 108th Amendment Bill passed in Rajya Sabha (2010) but lapsed in Lok Sabha",
+            "**Uniform Civil Code**: DPSP Art 44 - Never implemented; Too controversial",
+            "**Electoral reforms**: Many proposed amendments failed - State funding of elections, proportional representation, etc."
+          ],
+          "examTips": "**Trends**: 106 amendments; 1970s most active (19 amendments - Emergency period). **Property rights** most amended topic. **42nd Amendment** most controversial ('Mini Constitution'). **99th Amendment (NJAC) struck down** by SC. Amendments show evolution from individual rights (1950s) to social welfare (1970s-2020s)."
+        }
+      }
+    ],
+    "summary": "**Constitutional Amendments**: **106 amendments** (till 2023) under **Art 368**. **Three types**: (1) Simple majority (federal, citizenship, elections), (2) Special majority (most amendments - FRs, DPSPs), (3) Special majority + 50% states (federal provisions - President election, SC/HC, 7th Schedule). **Key cases**: **Shankari Prasad (1951)** - Unlimited power; **Golak Nath (1967)** - Cannot amend FRs; **Kesavananda (1973)** - Basic Structure doctrine (can amend BUT not basic structure); **Minerva Mills (1980)** - Two lungs theory (FR-DPSP balance). **Most amended**: Property rights (1st, 4th, 17th, 25th, 44th). **42nd Amendment 1976** = 'Mini Constitution' (most controversial). **99th Amendment (NJAC) struck down** by SC (2015)."
+  }
+}
+

@@ -1,0 +1,299 @@
+{
+  "id": "scheduled-tribal-areas",
+  "subject": "polity",
+  "title": "Scheduled & Tribal Areas - Constitutional Provisions & Protection",
+  "description": "Comprehensive coverage of 5th Schedule and 6th Schedule areas with tribal protection provisions, governance structures, and key legislations",
+  "visualType": "tabs",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["federal-features", "panchayat-raj", "dpsps"],
+    "tags": ["5th Schedule", "6th Schedule", "Tribal Areas", "Art 244", "TAC", "ADC", "PESA", "Scheduled Areas"]
+  },
+  "data": {
+    "tabs": [
+      {
+        "id": "fifth-schedule",
+        "label": "5th Schedule Areas",
+        "title": "5th Schedule - Administration of Scheduled Areas (Art 244(1))",
+        "sections": [
+          {
+            "heading": "Constitutional Provisions",
+            "points": [
+              "**Art 244(1)**: Provisions of 5th Schedule apply to administration & control of **Scheduled Areas** in States (except Assam, Meghalaya, Tripura, Mizoram)",
+              "**Scheduled Areas**: Areas with **predominant tribal population**, declared by President",
+              "**President's power**: Can declare any area as Scheduled Area, increase/decrease its extent, alter boundaries, rescind declaration (Art 244(1))",
+              "**Para 6 of 5th Schedule**: President can direct State laws NOT to apply or apply with modifications to Scheduled Areas",
+              "**Central Control**: Despite in State territory, Centre has oversight through Governor's special role"
+            ]
+          },
+          {
+            "heading": "States Covered under 5th Schedule",
+            "points": [
+              "**10 States** have 5th Schedule Areas (as of 2024):",
+              "• **Andhra Pradesh**: Parts of tribal districts",
+              "• **Chhattisgarh**: Major tribal population (Bastar, Surguja, etc.)",
+              "• **Gujarat**: Parts of tribal districts (Bharuch, Sabarkantha, etc.)",
+              "• **Himachal Pradesh**: Tribal areas (Kinnaur, Lahaul-Spiti)",
+              "• **Jharkhand**: Several tribal districts (Ranchi, Gumla, etc.)",
+              "• **Madhya Pradesh**: Tribal districts (Dhar, Jhabua, Mandla, etc.)",
+              "• **Maharashtra**: Tribal areas (Thane, Nashik, Pune, Ahmednagar)",
+              "• **Odisha**: Large tribal population (Koraput, Sundargarh, Mayurbhanj, etc.)",
+              "• **Rajasthan**: Tribal belts (Udaipur, Dungarpur, Banswara)",
+              "• **Telangana**: Tribal areas (separated from AP in 2014)"
+            ]
+          },
+          {
+            "heading": "Tribes Advisory Council (TAC)",
+            "points": [
+              "**Para 4 of 5th Schedule**: Every State with Scheduled Areas must have a **Tribes Advisory Council (TAC)**",
+              "**Composition**: **Max 20 members**, 3/4th must be tribal representatives from State Legislature",
+              "**Chairman**: Minister in-charge of tribal welfare in State",
+              "**Functions**: Advise Governor on tribal welfare & administration of Scheduled Areas",
+              "**Consultation mandatory**: Governor must consult TAC on matters relating to welfare & advancement of STs in State",
+              "**Special feature**: TAC has advisory role only, not executive/legislative power"
+            ]
+          },
+          {
+            "heading": "Governor's Special Powers in Scheduled Areas",
+            "points": [
+              "**Annual Report**: Governor submits annual report to President on administration of Scheduled Areas (Para 3)",
+              "**Executive directions**: President may give directions to State on administration of Scheduled Areas through Governor",
+              "**Modification of laws**: Governor can direct State/Central laws NOT to apply to Scheduled Areas or apply with modifications (Para 5)",
+              "**Regulation-making power**: Governor can make regulations for peace & good governance of Scheduled Areas (Para 5(1))",
+              "**Presidential approval**: Governor's regulations require President's assent to become law",
+              "**Restrictions**: Can prohibit/restrict transfer of land by/among tribal members (Para 5(2))",
+              "**Money lending**: Can regulate money lending to STs in Scheduled Areas"
+            ]
+          },
+          {
+            "heading": "Land Protection & Tribal Rights",
+            "points": [
+              "**Land transfer restrictions**: Para 5(2) allows Governor to prohibit/restrict land transfer from tribals to non-tribals",
+              "**Preventing exploitation**: Protects tribals from land grabbing by non-tribals",
+              "**Traditional rights**: Recognition of customary law & tribal practices in land ownership",
+              "**State variations**: Each State has enacted specific land transfer regulations for Scheduled Areas",
+              "**PESA Act 1996**: Extended Panchayati Raj to Scheduled Areas with safeguards for tribal autonomy (discussed in separate tab)"
+            ]
+          },
+          {
+            "heading": "Exam Important Points",
+            "points": [
+              "**5th Schedule vs 6th Schedule**: 5th applies to **10 States** (central India); 6th applies to **4 States** in North-East (Assam, Meghalaya, Tripura, Mizoram)",
+              "**President's power**: Can declare/alter/rescind Scheduled Areas; Ultimate authority",
+              "**Governor's special role**: Makes regulations (with President's assent); Submits annual report; Acts on President's directions",
+              "**TAC**: Advisory body (not executive); 20 members max; 3/4th tribal MLAs",
+              "**Land protection**: Key feature - Prevents non-tribal encroachment on tribal lands",
+              "**PESA Act 1996**: Extended Panchayats to 5th Schedule areas with tribal autonomy safeguards",
+              "**No autonomous councils**: Unlike 6th Schedule (which has ADCs with legislative/judicial powers)",
+              "**State laws can be modified**: Governor can exempt Scheduled Areas from State laws"
+            ]
+          }
+        ],
+        "summary": "5th Schedule (Art 244(1)) covers Scheduled Areas in 10 States (Andhra Pradesh, Chhattisgarh, Gujarat, Himachal Pradesh, Jharkhand, Madhya Pradesh, Maharashtra, Odisha, Rajasthan, Telangana). President declares Scheduled Areas. Governor has special powers: makes regulations, submits annual report to President, can modify State laws. Tribes Advisory Council (TAC) advises Governor - max 20 members, 3/4th tribal MLAs. Key protection: Land transfer restrictions to prevent tribal exploitation. PESA Act 1996 extended Panchayats to these areas. No autonomous councils (unlike 6th Schedule)."
+      },
+      {
+        "id": "sixth-schedule",
+        "label": "6th Schedule Areas",
+        "title": "6th Schedule - Autonomous Districts in North-East (Art 244(2))",
+        "sections": [
+          {
+            "heading": "Constitutional Provisions",
+            "points": [
+              "**Art 244(2)**: Provisions of 6th Schedule apply to administration of **tribal areas** in Assam, Meghalaya, Tripura, Mizoram",
+              "**Autonomous Districts (AD)**: Areas with tribal population given autonomy through **Autonomous District Councils (ADC)**",
+              "**Autonomous Regions (AR)**: Can be created within AD if different tribal communities exist",
+              "**Greater autonomy**: 6th Schedule areas have **more autonomy** than 5th Schedule areas (legislative, judicial, financial powers)",
+              "**Self-governance**: ADCs have power to make laws, levy taxes, administer justice"
+            ]
+          },
+          {
+            "heading": "States & Autonomous Councils under 6th Schedule",
+            "points": [
+              "**Assam** (3 ADCs):",
+              "• **Bodoland Territorial Council (BTC)** - Bodo tribe (40 members)",
+              "• **Karbi Anglong Autonomous Council** - Karbi tribe (26 members)",
+              "• **North Cachar Hills Autonomous Council** - Dimasa tribe (28 members)",
+              "**Meghalaya** (3 ADCs):",
+              "• **Khasi Hills Autonomous District Council** - Khasi tribe (30 members)",
+              "• **Jaintia Hills Autonomous District Council** - Jaintia/Pnar tribe (30 members)",
+              "• **Garo Hills Autonomous District Council** - Garo tribe (40 members)",
+              "**Tripura** (1 ADC):",
+              "• **Tripura Tribal Areas Autonomous District Council (TTAADC)** - Multiple tribes (30 members)",
+              "**Mizoram** (3 ADCs):",
+              "• **Chakma Autonomous District Council** - Chakma tribe (20 members)",
+              "• **Lai Autonomous District Council** - Lai tribe (20 members)",
+              "• **Mara Autonomous District Council** - Mara tribe (20 members)"
+            ]
+          },
+          {
+            "heading": "Autonomous District Council (ADC) - Powers & Functions",
+            "points": [
+              "**Composition**: 30 members (can vary - BTC has 40, some have 20-28); 4 members nominated by Governor, rest elected; **5-year term**",
+              "**Chief Executive Member (CEM)**: Leader of ADC; Elected by council members; Heads Executive Committee",
+              "**Legislative Powers (Para 3)**: Can make laws on: Land, Forests, Water, Agriculture, Village councils, Inheritance of property, Marriage & divorce, Social customs, Money lending",
+              "**Judicial Powers (Para 4-5)**: Can constitute Village Courts & District Courts; Trial of cases according to customary law; Civil & criminal jurisdiction (limited)",
+              "**Financial Powers (Para 8)**: Can levy & collect taxes on: Land & buildings, Professions & trades, Animals & vehicles, Entertainment & amusements; Receives grants from State/Centre",
+              "**Land management**: Control over land use, allotment, assignment in AD area",
+              "**Executive powers**: Appoint officers for administration; Construct roads, manage schools, health centers"
+            ]
+          },
+          {
+            "heading": "Customary Law & Tribal Practices",
+            "points": [
+              "**Para 1**: Tribal customs & practices protected by Constitution",
+              "**Village councils**: Traditional tribal councils recognized; Administer customary law",
+              "**Inheritance**: Tribal inheritance laws apply (not Hindu/Muslim personal laws)",
+              "**Marriage & divorce**: Tribal customs govern marriage/divorce (not State laws)",
+              "**Criminal & civil cases**: ADC courts apply customary law for tribals",
+              "**State laws excluded**: Acts of Parliament & State Legislature do NOT automatically apply to AD; Governor must notify application"
+            ]
+          },
+          {
+            "heading": "Comparison: 5th Schedule vs 6th Schedule",
+            "comparisonGrid": [
+              {
+                "body": "5th Schedule",
+                "points": [
+                  "**Geography**: 10 States in central India",
+                  "**Autonomy**: Limited - No ADCs with legislative powers",
+                  "**Body**: Tribes Advisory Council (TAC) - Advisory only",
+                  "**Governor's role**: Strong - Makes regulations, modifies laws",
+                  "**Land protection**: Yes - Transfer restrictions",
+                  "**Panchayats**: PESA Act 1996 extended with safeguards"
+                ]
+              },
+              {
+                "body": "6th Schedule",
+                "points": [
+                  "**Geography**: 4 States in North-East (Assam, Meghalaya, Tripura, Mizoram)",
+                  "**Autonomy**: High - ADCs have legislative, judicial, financial powers",
+                  "**Body**: Autonomous District Councils (ADC) - Executive & legislative powers",
+                  "**Governor's role**: Limited - ADCs largely self-governed",
+                  "**Customary law**: Protected - Marriage, inheritance, social customs",
+                  "**Panchayats**: Constitution (73rd Amendment) does NOT apply to 6th Schedule areas"
+                ]
+              }
+            ]
+          },
+          {
+            "heading": "Exam Important Points",
+            "points": [
+              "**6th Schedule**: Much **greater autonomy** than 5th Schedule",
+              "**ADCs**: Have **legislative, judicial, financial** powers (unlike TAC which is only advisory)",
+              "**Customary law**: Core feature - Tribal customs protected in marriage, inheritance, property",
+              "**Village Courts**: Can be constituted by ADC; Apply customary law; Limited criminal & civil jurisdiction",
+              "**State laws don't apply automatically**: Governor must notify for Parliament/State laws to extend to AD",
+              "**Bodoland Territorial Council (BTC)**: Largest ADC (40 members); Created after Bodo Accord 2003; Special status under 6th Schedule",
+              "**73rd Amendment excluded**: Panchayati Raj does NOT apply to 6th Schedule areas (Art 243M(3))",
+              "**Financial autonomy**: ADCs can levy taxes; Receive grants from State & Centre",
+              "**Demand for inclusion**: Some tribal areas (Ladakh, tribes in other States) demand 6th Schedule status",
+              "**Amendment**: Parliament can amend 6th Schedule (no State ratification needed)"
+            ]
+          }
+        ],
+        "summary": "6th Schedule (Art 244(2)) provides HIGH autonomy to tribal areas in 4 North-East States (Assam, Meghalaya, Tripura, Mizoram) through Autonomous District Councils (ADCs). 10 ADCs exist (Assam 3, Meghalaya 3, Tripura 1, Mizoram 3). ADCs have legislative (can make laws on land, forest, marriage, inheritance), judicial (village courts, customary law), and financial (levy taxes) powers. Customary law protected. State laws don't apply automatically. 73rd Amendment (Panchayati Raj) does NOT apply to 6th Schedule areas. Much greater autonomy than 5th Schedule (which has only advisory TAC). BTC (Bodoland) largest ADC with 40 members."
+      },
+      {
+        "id": "key-acts",
+        "label": "Important Acts",
+        "title": "Key Legislations for Scheduled & Tribal Areas",
+        "sections": [
+          {
+            "heading": "PESA Act 1996 (Panchayats Extension to Scheduled Areas)",
+            "points": [
+              "**Full name**: The Provisions of the Panchayats (Extension to Scheduled Areas) Act, 1996",
+              "**Enacted**: December 24, 1996; **Came into force**: December 24, 1996",
+              "**Objective**: Extend Panchayati Raj (73rd Amendment) to **5th Schedule areas** with safeguards for tribal autonomy",
+              "**Coverage**: Applies to **Scheduled Areas in 10 States** (5th Schedule States)",
+              "**Background**: 73rd Amendment 1992 created Panchayati Raj but excluded 5th Schedule areas (Art 243M(4)(b)). PESA extended Panchayats but with special provisions to preserve tribal autonomy",
+              "**Key principle**: **Gram Sabha is supreme** in tribal areas - Self-governance at village level"
+            ]
+          },
+          {
+            "heading": "PESA Act - Key Provisions & Powers of Gram Sabha",
+            "points": [
+              "**Gram Sabha supremacy**: Every village shall have a Gram Sabha consisting of all adult members; Gram Sabha is the foundation of Panchayati Raj in Scheduled Areas",
+              "**Mandatory consultation**: State must consult Gram Sabha before land acquisition in Scheduled Areas",
+              "**Natural resources**: Gram Sabha must be consulted on matters related to minor water bodies, minor minerals, minor forest produce",
+              "**Land alienation**: Gram Sabha has power to **prevent land alienation** and restore alienated tribal land",
+              "**Approval of development plans**: Panchayat at appropriate level must approve plans, programs, projects for social & economic development before implementation",
+              "**Control over institutions**: Gram Sabha has control over institutions & functionaries in village across sectors",
+              "**Customary rights**: PESA recognizes traditional tribal practices & customary rights in resource management",
+              "**Licenses & leases**: Gram Sabha must recommend before grant of prospecting/mining licenses for minor minerals"
+            ]
+          },
+          {
+            "heading": "PESA Act - Safeguards for Tribal Autonomy",
+            "points": [
+              "**Reservation of seats**: Panchayats at all levels shall have **ST reservation** in proportion to their population",
+              "**Chairpersons**: Chairpersons of Panchayats at village & intermediate level reserved for STs",
+              "**State laws must conform**: State legislations on Panchayats for Scheduled Areas must be in consonance with customary law, social practices, traditional management of community resources",
+              "**Non-interference**: State shall not make laws that are inconsistent with tribal traditions",
+              "**Self-governance**: Tribals manage their own affairs through Gram Sabha & Panchayats",
+              "**Dispute resolution**: Gram Sabha has role in traditional dispute resolution mechanisms"
+            ]
+          },
+          {
+            "heading": "Forest Rights Act 2006 (Scheduled Tribes & Other Traditional Forest Dwellers)",
+            "points": [
+              "**Full name**: The Scheduled Tribes and Other Traditional Forest Dwellers (Recognition of Forest Rights) Act, 2006",
+              "**Enacted**: 2006; **Came into force**: December 31, 2007; **Rules notified**: 2008",
+              "**Objective**: Recognize & vest forest rights & occupation in forest land in **forest dwelling STs** & other traditional forest dwellers",
+              "**Coverage**: Applies across India (not limited to Scheduled Areas)",
+              "**Background**: Tribals living in forests for generations did not have legal rights over forest land/resources; Forest laws treated them as encroachers",
+              "**Key principle**: **Recognize historical injustice** to forest-dwelling tribals; Grant them rights over forest land they have been cultivating/inhabiting"
+            ]
+          },
+          {
+            "heading": "Forest Rights Act - Key Provisions",
+            "points": [
+              "**Individual Forest Rights (IFR)**: Right to cultivate forest land (max 4 hectares); Right to live in forest areas; Right to self-cultivation",
+              "**Community Forest Rights (CFR)**: Rights over community forest resources; Rights to protect, conserve, manage community forests; Right to collect, use, sell minor forest produce",
+              "**Right to collect**: Collect, use, dispose minor forest produce (bamboo, tendu leaves, herbs, etc.)",
+              "**Right to graze**: Graze cattle in forest areas",
+              "**Right to in-situ rehabilitation**: If displaced from protected areas without proper compensation, right to return",
+              "**Gram Sabha's role**: Gram Sabha is the authority to **initiate process** of determining forest rights; Gram Sabha passes resolution on claims",
+              "**Claims verification**: Sub-Divisional Level Committee (SDLC) & District Level Committee (DLC) verify claims; Final approval by DLC"
+            ]
+          },
+          {
+            "heading": "Forest Rights Act - Exam Points",
+            "points": [
+              "**Criticisms**: Slow implementation; Less than 50% claims processed; State govts reluctant; Conflicts with Forest Conservation Act 1980; Wildlife protection concerns",
+              "**Amendments proposed**: 2019 amendments proposed (not passed) to dilute provisions; Tribal groups opposed",
+              "**Eviction controversies**: SC ordered eviction of those whose FRA claims rejected (2019) - Massive protests - Order stayed",
+              "**Gram Sabha's power**: Central to FRA - Initiates process, verifies claims, passes resolution",
+              "**Minor Forest Produce**: Tribals have **right to collect, sell** - Important for tribal livelihood",
+              "**CFR vs IFR**: Community rights (grazing, MFP, conservation) vs Individual rights (cultivation, habitation)"
+            ]
+          },
+          {
+            "heading": "Other Important Acts & Provisions",
+            "points": [
+              "**Land Acquisition Act 2013 (RFCTLARR Act)**: Special provisions for Scheduled Areas - Consent of Gram Sabha mandatory for land acquisition; Social Impact Assessment required",
+              "**Scheduled Castes & Scheduled Tribes (Prevention of Atrocities) Act 1989**: Prevent atrocities against SCs/STs; Special courts; Harsher punishment for offenses",
+              "**National Commission for STs**: Constitutional body (Art 338A - 89th Amendment 2003); Monitors safeguards; Investigates complaints; Earlier part of SC & ST Commission",
+              "**Reservation**: STs have reservation in Lok Sabha (47 seats), State Assemblies, Govt jobs (7.5%), Educational institutions (7.5%)",
+              "**Tribal Sub-Plan (TSP)**: Funds earmarked for tribal development proportionate to ST population; Now called Scheduled Tribe Component (STC)"
+            ]
+          },
+          {
+            "heading": "Exam Important Summary",
+            "points": [
+              "**PESA 1996**: Extended Panchayats to 5th Schedule areas; **Gram Sabha is supreme**; Mandatory consultation on land, resources; Prevents land alienation",
+              "**FRA 2006**: Recognizes forest rights of STs; IFR (Individual rights - max 4 ha) + CFR (Community rights - MFP, grazing); Gram Sabha initiates process",
+              "**Key difference**: PESA for 5th Schedule Scheduled Areas; FRA for ALL forest-dwelling STs across India",
+              "**Gram Sabha**: Central institution in both PESA & FRA; Has powers over land, resources, development; Foundation of tribal self-governance",
+              "**Implementation issues**: Both Acts face slow implementation; State govt reluctance; Conflicts with forest/wildlife laws",
+              "**Constitutional backing**: PESA implements Art 243M(4)(b); FRA implements Art 15(5) (special provisions for SCs/STs)",
+              "**6th Schedule**: PESA does NOT apply to 6th Schedule areas (they have ADCs with separate powers)"
+            ]
+          }
+        ],
+        "summary": "PESA Act 1996 extended Panchayati Raj to 5th Schedule areas with tribal safeguards. Gram Sabha is supreme - must be consulted on land acquisition, natural resources, mining licenses. Can prevent land alienation & restore tribal land. Forest Rights Act 2006 recognizes forest rights of tribals across India (not limited to Scheduled Areas). Two types: Individual Forest Rights (IFR - cultivation, max 4 ha) & Community Forest Rights (CFR - MFP collection, grazing, conservation). Gram Sabha initiates claims process. Both Acts face slow implementation. Land Acquisition Act 2013 requires Gram Sabha consent for acquisition in Scheduled Areas. SC & ST (Prevention of Atrocities) Act 1989 prevents atrocities. National Commission for STs (Art 338A) monitors safeguards. STs have 7.5% reservation in jobs & education, 47 Lok Sabha seats reserved."
+      }
+    ],
+    "summary": "India has two systems for tribal area administration: **5th Schedule** (10 States in central India) & **6th Schedule** (4 States in North-East). 5th Schedule: President declares Scheduled Areas; Governor has special powers; Tribes Advisory Council (TAC) advises; Land transfer restrictions; PESA 1996 extended Panchayats. 6th Schedule: HIGH autonomy through Autonomous District Councils (ADCs); 10 ADCs in Assam, Meghalaya, Tripura, Mizoram; ADCs have legislative, judicial, financial powers; Customary law protected; 73rd Amendment excluded. Key Acts: PESA 1996 (Gram Sabha supreme in 5th Schedule areas), Forest Rights Act 2006 (forest rights for tribals - IFR & CFR). 6th Schedule has MUCH greater autonomy than 5th Schedule. Exam focus: Constitutional provisions (Art 244(1), 244(2)), comparison of 5th & 6th Schedules, PESA & FRA provisions, Gram Sabha's role."
+  }
+}
+

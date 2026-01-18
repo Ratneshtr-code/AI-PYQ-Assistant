@@ -1,0 +1,475 @@
+{
+  "id": "union-executive",
+  "subject": "polity",
+  "title": "Union Executive - Part V (President, Vice President, Prime Minister, Council of Ministers)",
+  "description": "Comprehensive coverage of Union Executive bodies with constitutional provisions, election process, powers, and impeachment procedures",
+  "visualType": "tabs",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["parliamentary-vs-presidential", "emergency-provisions", "legislative-relations", "constitutional-amendments"],
+    "tags": ["President", "Vice President", "Prime Minister", "Council of Ministers", "Art 52-78", "Union Executive", "Parliamentary System"]
+  },
+  "data": {
+    "tabs": [
+      {
+        "id": "compare-all",
+        "label": "📊 Compare All",
+        "title": "Quick Comparison: Union Executive Bodies",
+        "sections": [
+          {
+            "heading": "Constitutional Articles",
+            "comparisonGrid": [
+              {
+                "body": "President",
+                "points": ["Art 52-62", "Nominal Head", "Elected by Electoral College", "5-year term"]
+              },
+              {
+                "body": "Vice President",
+                "points": ["Art 63-73", "Ex-officio Chairman of Rajya Sabha", "Elected by Electoral College (MPs only)", "5-year term"]
+              },
+              {
+                "body": "Prime Minister",
+                "points": ["Art 74-75", "Real Executive Head", "Leader of majority party in LS", "No fixed term"]
+              },
+              {
+                "body": "Council of Ministers",
+                "points": ["Art 74-75", "Collectively responsible to LS", "Appointed by President on PM's advice", "Aid & advise President"]
+              }
+            ]
+          },
+          {
+            "heading": "Election/Appointment",
+            "comparisonGrid": [
+              {
+                "body": "President",
+                "points": ["Electoral College: MPs + MLAs", "Indirect Election", "Single Transferable Vote", "Proportional representation"]
+              },
+              {
+                "body": "Vice President",
+                "points": ["Electoral College: MPs only", "Indirect Election", "Single Transferable Vote", "Open ballot system"]
+              },
+              {
+                "body": "Prime Minister",
+                "points": ["Appointed by President", "Leader of majority in LS", "First appointed, then LS vote of confidence", "No formal election"]
+              },
+              {
+                "body": "Council of Ministers",
+                "points": ["Appointed by President on PM's advice", "Cabinet + MoS + Deputy Ministers", "From Parliament (can be nominated)", "Must be MP within 6 months"]
+              }
+            ]
+          },
+          {
+            "heading": "Removal/Impeachment",
+            "comparisonGrid": [
+              {
+                "body": "President",
+                "points": ["Impeachment: Art 61", "Violation of Constitution", "Special majority + 2/3rd members", "Both Houses must pass"]
+              },
+              {
+                "body": "Vice President",
+                "points": ["Art 67(b) - Resolution by RS", "Effective majority of RS", "Agreed by LS", "No impeachment process"]
+              },
+              {
+                "body": "Prime Minister",
+                "points": ["Loss of LS confidence", "No-confidence motion", "Voluntary resignation", "Death/incapacity"]
+              },
+              {
+                "body": "Council of Ministers",
+                "points": ["Collective responsibility to LS", "Falls with PM", "Individual removal by PM", "LS no-confidence motion"]
+              }
+            ]
+          },
+          {
+            "heading": "Key Powers",
+            "comparisonGrid": [
+              {
+                "body": "President",
+                "points": ["Executive: Appoints PM, Ministers, Governors, Judges", "Legislative: Summons Parliament, Assent to bills", "Emergency: National, State, Financial", "Veto: Absolute, Suspensive, Pocket"]
+              },
+              {
+                "body": "Vice President",
+                "points": ["Presides over RS", "Casting vote in RS (tie-breaker)", "Acts as President when vacancy", "No executive powers (except as acting President)"]
+              },
+              {
+                "body": "Prime Minister",
+                "points": ["Leader of Cabinet", "Allocates portfolios", "Chairs Cabinet meetings", "Link between President & Council", "Advises President on appointments"]
+              },
+              {
+                "body": "Council of Ministers",
+                "points": ["Formulates policies", "Prepares budget", "Implements laws", "Collectively responsible to LS", "Advises President on all matters"]
+              }
+            ]
+          },
+          {
+            "heading": "Exam Quick Points",
+            "comparisonGrid": [
+              {
+                "body": "President",
+                "points": ["Nominal vs Real executive", "Ordinance making power (Art 123)", "Pardoning power (Art 72)", "Emergency powers most important"]
+              },
+              {
+                "body": "Vice President",
+                "points": ["Only constitutional VP in world who is ex-officio RS Chairman", "Can't preside RS while acting as President", "Elected by MPs only (not MLAs)", "No diplomatic immunity"]
+              },
+              {
+                "body": "Prime Minister",
+                "points": ["Primus inter pares (First among equals)", "Most powerful executive", "Can be from RS too", "Leader of House in LS"]
+              },
+              {
+                "body": "Council of Ministers",
+                "points": ["Cabinet: 15-20 members (core)", "Collective responsibility (Art 75(3))", "Individual responsibility to President", "Size not fixed by Constitution"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "president",
+        "label": "President",
+        "title": "President of India (Art 52-62)",
+        "sections": [
+          {
+            "heading": "Constitutional Provision",
+            "points": [
+              "**Art 52**: There shall be a President of India",
+              "**Art 53**: Executive power of Union vested in President; Exercised directly or through officers subordinate to him",
+              "**Art 58**: Qualifications - Indian citizen, 35+ years, qualified to be LS member, not holding office of profit",
+              "**Nominal Head**: In Parliamentary system, President is nominal/ceremonial head; PM is real executive",
+              "**Part of Parliament**: Art 79 - Parliament = President + Lok Sabha + Rajya Sabha"
+            ]
+          },
+          {
+            "heading": "Election & Oath",
+            "points": [
+              "**Art 54**: Elected by Electoral College (MPs + MLAs of all States + Delhi, Puducherry, J&K)",
+              "**Art 55**: System of Proportional Representation by Single Transferable Vote (STV); Secret ballot",
+              "**Uniform scale**: Value of vote calculated to maintain uniformity between States and between States & Union",
+              "**Formula**: MLA vote value = (State Population / Total MLAs) ÷ 1000; MP vote value = Total MLAs vote value / Total MPs",
+              "**Term**: 5 years from date of entering office (Art 56); Can resign anytime (to VP); Removable by impeachment",
+              "**Re-election**: Can be re-elected any number of times (no term limit like USA)",
+              "**Oath**: Art 60 - Oath to preserve, protect, defend Constitution and law; Administered by CJI or senior-most SC judge",
+              "**Salary**: ₹5 lakh/month (earlier ₹1.5 lakh; increased 2018); Charged on Consolidated Fund of India"
+            ]
+          },
+          {
+            "heading": "Impeachment",
+            "points": [
+              "**Art 61**: Removal by impeachment for 'violation of Constitution'",
+              "**Procedure**:",
+              "• Charge framed by either House of Parliament",
+              "• Notice signed by 1/4th members of House; 14 days' notice",
+              "• Resolution passed by 2/3rd majority of total membership of that House",
+              "• Other House investigates charges (acts as court)",
+              "• President has right to appear and be represented",
+              "• If charges proved by 2/3rd of total membership of investigating House → President removed",
+              "**Grounds**: 'Violation of Constitution' (not defined; Wide scope)",
+              "**Never used**: No President impeached so far; Only once initiated (against President K.R. Narayanan - withdrawn)"
+            ]
+          },
+          {
+            "heading": "Executive Powers (Art 53, 73, 77)",
+            "points": [
+              "**Appointments**: Appoints PM, Council of Ministers (Art 75), CJI & SC/HC judges (Art 124, 217), CAG (Art 148), Attorney General (Art 76), Election Commissioners (Art 324), Governors (Art 155), UPSC Chairman & members (Art 316)",
+              "**Administration**: All executive actions of Union taken in name of President (Art 77); But bound by Cabinet advice (Art 74)",
+              "**Foreign affairs**: Represents India internationally; Receives foreign dignitaries; Appoints ambassadors (Entry 10 Union List)",
+              "**Defence**: Supreme Commander of Armed Forces (Art 53); But cannot declare war (Cabinet decides)",
+              "**Emergency**: Proclaims National Emergency (Art 352), President's Rule (Art 356), Financial Emergency (Art 360) - On Cabinet advice"
+            ]
+          },
+          {
+            "heading": "Legislative Powers",
+            "points": [
+              "**Part of Parliament**: Bills become law only after President's assent (Art 111)",
+              "**Summon/Prorogue**: Can summon, prorogue Parliament; Dissolve Lok Sabha (Art 85) - On PM's advice",
+              "**Address Parliament**: Addresses first session after each General Election and first session of each year (Art 87)",
+              "**Messages**: Can send messages to either House on pending Bills (Art 86)",
+              "**Nominates members**: 12 to Rajya Sabha (Art 80(1)), 2 Anglo-Indians to Lok Sabha (abolished 104th Amendment 2019)",
+              "**Appoints**: Speaker/Deputy Speaker of LS (Art 93), Chairman's Panel in RS",
+              "**Lays reports**: Laid before Parliament - CAG, Finance Commission, UPSC, SC/ST Commission reports"
+            ]
+          },
+          {
+            "heading": "Financial Powers",
+            "points": [
+              "**Money Bills**: Can be introduced only with President's recommendation (Art 117)",
+              "**Budget**: Annual Financial Statement (Budget) laid before Parliament in President's name (Art 112)",
+              "**Consolidated Fund**: All revenues, loans, expenditures flow to/from Consolidated Fund of India (Art 266); Operated by President",
+              "**Contingency Fund**: Controls Contingency Fund of India (Art 267); Can make advances for unforeseen expenditure",
+              "**Finance Commission**: Constitutes Finance Commission every 5 years (Art 280)",
+              "**Grants**: Can make grants from Consolidated Fund for any public purpose (Art 282)"
+            ]
+          },
+          {
+            "heading": "Judicial Powers",
+            "points": [
+              "**Appoints judges**: CJI and SC judges (Art 124), HC CJs and judges (Art 217) - On advice of collegium",
+              "**Pardoning power (Art 72)**: Can grant pardons, reprieves, respites, remissions, suspend/remit/commute sentences",
+              "• **Scope**: In all cases (court-martial, Union law violations, death sentences)",
+              "• **Types**: Pardon (completely absolves), Commutation (reduce sentence), Remission (reduce period), Reprieve (temporary suspension), Respite (award lesser sentence)",
+              "• **Wider than Governor**: President can pardon death sentences; Governor cannot",
+              "• **Not a court**: President not bound by court's view; But usually acts on Cabinet/Home Ministry advice",
+              "**Seeks advice**: Can seek advisory opinion of SC on questions of law/fact (Art 143)"
+            ]
+          },
+          {
+            "heading": "Veto Powers (Art 111)",
+            "points": [
+              "**Absolute Veto**: Withhold assent to Bill (Bill dies); Used for Private Member Bills",
+              "**Suspensive Veto**: Return Bill (except Money Bill) to Parliament for reconsideration; If re-passed, President MUST give assent",
+              "**Pocket Veto**: Keep Bill pending indefinitely (neither assent nor return); Take no action - Bill hangs",
+              "**Constitutional amendments**: President MUST give assent (Art 368(2)); Cannot use veto (but can delay)"
+            ]
+          },
+          {
+            "heading": "Ordinance Making Power (Art 123)",
+            "points": [
+              "**When**: Parliament not in session, and President satisfied immediate action needed",
+              "**Same force as Act**: Ordinance has same force and effect as Act of Parliament",
+              "**Duration**: 6 weeks from Parliament reassembles; Must be approved by Parliament within 6 weeks, else lapses",
+              "**Can be withdrawn**: President can withdraw anytime",
+              "**Limitations**: Cannot amend Constitution; Cannot be issued if Bill pending in Parliament on same matter; Must be laid before Parliament",
+              "**42nd Amendment**: Extended power to promulgate Ordinances even when one House in session (if other House not in session)",
+              "**Misuse**: Often misused to bypass Parliament; D.C. Wadhwa case (1987) - SC criticized repeated re-promulgation"
+            ]
+          },
+          {
+            "heading": "Discretionary Powers",
+            "points": [
+              "**Art 74 (before 42nd Amendment)**: President could act in his discretion in some matters",
+              "**42nd Amendment 1976**: Made President bound by Cabinet advice in ALL matters (removed discretion)",
+              "**44th Amendment 1978**: President can ask Cabinet to reconsider advice ONCE; But bound by reconsidered advice",
+              "**Current position**: President acts on Cabinet advice in all matters; Very limited/no discretion",
+              "**Situations where President may exercise judgment** (debated):",
+              "• Appointing PM (if no clear majority - Art 75)",
+              "• Dissolving LS (if PM loses majority but doesn't resign)",
+              "• Returning Bill for reconsideration (Art 111)",
+              "• Seeking clarification from Cabinet on advice"
+            ]
+          }
+        ],
+        "summary": "**President**: Nominal head; Elected by Electoral College (MPs + MLAs) via STV; 5-year term; Removable by impeachment (Art 61 - violation of Constitution); Acts on Cabinet advice (Art 74 - 44th Amendment). **Powers**: Appoints PM, CMs (Governors), CJI, CAG, EC, AG; Part of Parliament; Money Bills need recommendation; Pardoning power (Art 72); Ordinance (Art 123 - 6 weeks). **Veto**: Absolute, Suspensive, Pocket. **Discretion**: Very limited after 44th Amendment."
+      },
+      {
+        "id": "vice-president",
+        "label": "Vice President",
+        "title": "Vice President of India (Art 63-71)",
+        "sections": [
+          {
+            "heading": "Constitutional Provision",
+            "points": [
+              "**Art 63**: There shall be a Vice President of India",
+              "**Art 64**: VP is **ex-officio Chairman of Rajya Sabha** (does not preside over Lok Sabha)",
+              "**Art 65**: VP acts as President when President unable to discharge functions (death, resignation, removal, absence, illness)",
+              "**Not member of either House**: VP not member of Parliament or State Legislature (Art 66(4))",
+              "**Unique position**: Only constitutional functionary with dual role - Executive (VP) + Legislative (RS Chairman)"
+            ]
+          },
+          {
+            "heading": "Election & Oath",
+            "points": [
+              "**Art 66**: Elected by Electoral College of members of **both Houses of Parliament** (MPs only - no MLAs)",
+              "**System**: Proportional Representation by Single Transferable Vote; Secret ballot",
+              "**Qualifications (Art 66(3))**: Indian citizen, 35+ years, qualified to be RS member, not holding office of profit",
+              "**Term**: 5 years from entering office (Art 67); Can resign (to President); Removable by resolution",
+              "**Re-election**: Can be re-elected any number of times",
+              "**Oath**: Art 69 - Oath to preserve, protect, defend Constitution; Administered by President or person designated by President",
+              "**Salary**: ₹4 lakh/month (as VP); When acting as President, gets President's salary"
+            ]
+          },
+          {
+            "heading": "Removal",
+            "points": [
+              "**Art 67(b)**: Removed by resolution of Rajya Sabha passed by **absolute majority** (majority of total members) and agreed to by Lok Sabha",
+              "**Procedure**: Resolution originates in Rajya Sabha; 14 days' notice required; LS simply agrees (not re-passes with absolute majority)",
+              "**Not impeachment**: Removal procedure different from President (not called impeachment); Simpler process",
+              "**Grounds**: No specific grounds mentioned (unlike President - 'violation of Constitution'); Any reason acceptable to RS",
+              "**As RS Chairman**: Can be removed from Chairmanship by RS resolution (different from removal as VP)"
+            ]
+          },
+          {
+            "heading": "Powers & Functions",
+            "points": [
+              "**Ex-officio RS Chairman (Art 64)**: Presides over RS; Maintains order; Decides points of order; Does not vote ordinarily (only casting vote in tie)",
+              "**Acts as President (Art 65)**: When President's office vacant (death, resignation, removal) or President unable to discharge functions (illness, absence) → VP discharges President's functions",
+              "**Duration as Acting President**: Till President resumes office OR new President elected (within 6 months - Art 62)",
+              "**Not automatically President**: VP does not become President; Only acts as President temporarily",
+              "**No executive powers as VP**: As VP (when not acting as President), has no executive powers; Only legislative function as RS Chairman",
+              "**Salary**: Gets salary as RS Chairman (₹4 lakh) + allowances; When acting as President, gets President's salary"
+            ]
+          }
+        ],
+        "summary": "**Vice President**: Elected by MPs only (no MLAs) via STV; 5-year term; Removable by RS resolution (absolute majority) agreed by LS. **Dual role**: (1) Ex-officio Chairman of Rajya Sabha (Art 64), (2) Acts as President when President unable to discharge functions (Art 65). **No executive powers** as VP (only as Acting President). **Not member** of either House (Art 66(4))."
+      },
+      {
+        "id": "prime-minister",
+        "label": "Prime Minister",
+        "title": "Prime Minister of India (Art 75)",
+        "sections": [
+          {
+            "heading": "Constitutional Provision",
+            "points": [
+              "**Art 75**: PM appointed by President; Other Ministers appointed by President on PM's advice",
+              "**Real Executive**: In Parliamentary system, PM is real head of government; President is nominal",
+              "**Leader of Majority**: PM is leader of majority party/coalition in Lok Sabha",
+              "**First among equals**: Traditionally called 'primus inter pares' (first among equals in Cabinet); But in practice, much more powerful",
+              "**Not much in Constitution**: Constitution has very few articles on PM (unlike President); Powers evolved through conventions"
+            ]
+          },
+          {
+            "heading": "Appointment & Oath",
+            "points": [
+              "**Appointed by President (Art 75(1))**: President appoints PM",
+              "**Convention**: President appoints leader of majority party in Lok Sabha as PM",
+              "**If no clear majority**: President may exercise discretion (invite largest party/coalition; Call for floor test)",
+              "**Qualifications**: Must be member of Parliament (LS or RS); If not, must become MP within 6 months (Art 75(5))",
+              "**No specific qualifications**: No age, citizenship qualifications specified in Constitution (unlike President/VP)",
+              "**Oath**: Art 75(4) - Oath of office and secrecy; Administered by President; Oath to uphold Constitution, perform duties faithfully",
+              "**Term**: No fixed term; Continues as long as enjoys confidence of Lok Sabha; Normally 5 years (if govt stable)"
+            ]
+          },
+          {
+            "heading": "Removal",
+            "points": [
+              "**No-confidence motion**: If Lok Sabha passes no-confidence motion (simple majority) → PM and entire Council must resign (Art 75(3))",
+              "**Loss of confidence**: If PM loses confidence of LS (no-confidence passed OR defeat on confidence/money Bill) → Must resign",
+              "**President cannot remove**: President cannot remove PM arbitrarily; PM removable only through LS (loss of confidence)",
+              "**Death/Resignation**: If PM dies or resigns → President appoints new PM; Council of Ministers continues till new PM appointed"
+            ]
+          },
+          {
+            "heading": "Powers - Relation with President",
+            "points": [
+              "**Communicates decisions**: All Council of Ministers decisions communicated to President (Art 78)",
+              "**Advises President**: President acts on PM's advice (through Council of Ministers - Art 74)",
+              "**Appointment of Ministers**: PM recommends Ministers to President; President appoints on PM's advice (Art 75(1))",
+              "**Allocation of portfolios**: PM allocates and reshuffles portfolios among Ministers",
+              "**Seeks information**: President can ask PM to furnish information on administration and legislative proposals (Art 78)"
+            ]
+          },
+          {
+            "heading": "Powers - Relation with Council of Ministers",
+            "points": [
+              "**Chief of Council**: PM is head of Council of Ministers; Presides over Cabinet meetings",
+              "**Appoints & dismisses**: Recommends appointment and dismissal of Ministers to President",
+              "**Chairs Cabinet**: Chairs Cabinet, Cabinet Committees; Sets agenda for meetings",
+              "**Distributes portfolios**: Allocates, reshuffles, changes portfolios of Ministers",
+              "**Coordinates**: Coordinates work of different Ministries/Departments",
+              "**Final say**: In case of differences in Cabinet, PM's view usually prevails"
+            ]
+          },
+          {
+            "heading": "Powers - Relation with Parliament",
+            "points": [
+              "**Leader of House**: PM is Leader of Lok Sabha (if LS member) or has representative if RS member",
+              "**Advises dissolution**: Advises President to dissolve Lok Sabha (President bound to accept)",
+              "**Announces policies**: Announces government policies in Parliament",
+              "**Defends policies**: Defends government policies; Replies to debates, no-confidence motions",
+              "**Appoints leaders**: Recommends appointment of Speaker, Deputy Speaker, Leaders of Houses"
+            ]
+          },
+          {
+            "heading": "Other Powers",
+            "points": [
+              "**Head of government**: Chief spokesman of government; Represents India in international forums (along with President)",
+              "**Crisis management**: Leads during national crises, emergencies, disasters",
+              "**Appoints key functionaries**: Recommends appointment of CAG, Election Commissioners, CJI, Governors, Ambassadors, etc.",
+              "**National security**: Chairs Cabinet Committee on Security (CCS); Nuclear command authority vests in PM",
+              "**Policy formulation**: Key role in formulating domestic and foreign policies"
+            ]
+          }
+        ],
+        "summary": "**Prime Minister**: Real executive head; Leader of majority in Lok Sabha; Appointed by President (Art 75); Must be MP (within 6 months). **Removable**: By no-confidence motion in LS (Art 75(3)). **Powers**: Appoints & dismisses Ministers; Allocates portfolios; Advises President; Chairs Cabinet; Leader of House; Dissolves LS. **Relation with President**: President acts on PM's advice (Art 74). **Most powerful**: In practice, much more than 'first among equals'."
+      },
+      {
+        "id": "council-of-ministers",
+        "label": "Council of Ministers",
+        "title": "Council of Ministers (Art 74-75)",
+        "sections": [
+          {
+            "heading": "Constitutional Provision",
+            "points": [
+              "**Art 74**: Council of Ministers with PM as head to aid and advise President",
+              "**Art 75**: Composition, appointment, collective responsibility, individual responsibility",
+              "**Size**: No constitutional limit on size; PM decides (91st Amendment - Max 15% of LS strength)",
+              "**Portfolios**: PM allocates portfolios (Ministers with departments) or Ministers without portfolios"
+            ]
+          },
+          {
+            "heading": "Appointment & Oath",
+            "points": [
+              "**Appointed by President (Art 75(1))**: On advice of PM",
+              "**Qualifications**: Must be member of Parliament (LS or RS); If not, must become within 6 months (Art 75(5))",
+              "**Oath**: Art 75(4) - Oath of office and secrecy; Administered by President",
+              "**Term**: No fixed term; Serve at pleasure of President (actually PM)",
+              "**Removal**: President can remove on PM's advice; Or must resign if no-confidence passed in LS"
+            ]
+          },
+          {
+            "heading": "Types of Ministers (Convention)",
+            "points": [
+              "**1. Cabinet Ministers**: Senior-most; Head important Ministries; Members of Cabinet; Attend Cabinet meetings; Take major policy decisions",
+              "**2. Ministers of State (MoS)**: Junior Ministers; May have independent charge of Ministry OR assist Cabinet Minister",
+              "**3. Ministers of State (Independent Charge)**: Head smaller Ministries independently; Not Cabinet members but can attend Cabinet meetings if invited",
+              "**4. Deputy Ministers**: Lowest rank; Assist Ministers of State or Cabinet Ministers; Not Cabinet members",
+              "**91st Amendment 2003**: Limited Council size to 15% of LS strength (earlier no limit; Indira Gandhi had 60+ Ministers in 1970s)"
+            ]
+          },
+          {
+            "heading": "Collective Responsibility (Art 75(3))",
+            "points": [
+              "**Council collectively responsible to Lok Sabha**: All Ministers collectively responsible; Stand or fall together",
+              "**No-confidence**: If no-confidence passed against any Minister/policy → Entire Council must resign (including PM)",
+              "**Solidarity**: All Ministers must support government decisions publicly; Cannot publicly disagree (even if disagreed in Cabinet)",
+              "**Resign together**: If govt loses confidence, all Ministers must resign together",
+              "**Basis of Parliamentary system**: Collective responsibility ensures govt accountable to people's representatives"
+            ]
+          },
+          {
+            "heading": "Individual Responsibility",
+            "points": [
+              "**For one's department**: Each Minister individually responsible for his/her Ministry/Department",
+              "**Answer to Parliament**: Must answer questions, defend policies of his/her Ministry in Parliament",
+              "**Resign if fault**: If serious lapse in Ministry, Minister expected to resign (convention, not constitutional)",
+              "**PM can dismiss**: PM can ask Minister to resign or recommend removal to President"
+            ]
+          },
+          {
+            "heading": "Powers & Functions",
+            "points": [
+              "**Policy formulation**: Formulate government policies (domestic, foreign, economic, etc.)",
+              "**Legislative**: Initiate legislation; Pilot Bills in Parliament; Defend government Bills",
+              "**Executive**: Implement laws; Administer Ministries/Departments; Execute government decisions",
+              "**Financial**: Prepare Budget; Authorize expenditure; Manage public finances",
+              "**Coordinate**: Coordinate between different Ministries; Resolve inter-ministerial disputes"
+            ]
+          },
+          {
+            "heading": "Cabinet vs Council of Ministers",
+            "points": [
+              "**Council of Ministers**: Includes ALL Ministers (Cabinet Ministers + MoS + Deputy Ministers); Larger body (50-80 members)",
+              "**Cabinet**: Inner core of Council; Only Cabinet Ministers (15-25 members); Takes major policy decisions",
+              "**Cabinet meetings**: Held regularly (usually weekly); Chaired by PM; Decisions binding on all Ministers",
+              "**Council meetings**: Rarely meet as full body; Too large for effective decision-making",
+              "**Real power**: Cabinet is real decision-making body; Council is formal constitutional body"
+            ]
+          },
+          {
+            "heading": "Cabinet Committees",
+            "points": [
+              "**Purpose**: Handle specific policy areas; Reduce Cabinet burden; Ensure focused decision-making",
+              "**Important committees**:",
+              "• **Cabinet Committee on Security (CCS)**: PM (Chair), Defence, Home, Finance, External Affairs Ministers",
+              "• **Cabinet Committee on Economic Affairs (CCEA)**: Economic policy, infrastructure, major projects",
+              "• **Cabinet Committee on Political Affairs (CCPA)**: Political issues, elections, key appointments",
+              "• **Appointments Committee of Cabinet (ACC)**: PM (Chair), Home Minister - Approves senior appointments",
+              "**Ad-hoc committees**: Formed for specific purposes; Dissolved after task completed"
+            ]
+          }
+        ],
+        "summary": "**Council of Ministers**: Headed by PM; Aids and advises President (Art 74); Appointed by President on PM's advice. **Types**: Cabinet Ministers, MoS, MoS (Independent Charge), Deputy Ministers. **91st Amendment**: Max 15% of LS strength. **Collective responsibility** (Art 75(3)): All Ministers collectively responsible to LS; Stand/fall together; No-confidence → All resign. **Individual responsibility**: Each Minister for his Ministry. **Cabinet**: Inner core; Real power; Takes major decisions."
+      }
+    ],
+    "summary": "**Union Executive (Part V)**: Parliamentary system - Dual executive (President nominal, PM real). **President** (Art 52-62): Elected by Electoral College (MPs+MLAs) via STV; 5-year term; Impeachment for violation of Constitution (Art 61 - never used); Acts on Cabinet advice (Art 74 - 44th Amendment); Powers - Appoints PM/Ministers/Judges, Part of Parliament, Pardoning (Art 72), Ordinance (Art 123), Veto, Emergency. **Vice President** (Art 63-71): Elected by MPs via STV; Ex-officio RS Chairman (Art 64); Acts as President (Art 65); Removable by RS resolution + LS agreement. **Prime Minister** (Art 75): Real executive head; Leader of majority in LS; Appointed by President; Removable by no-confidence (Art 75(3)); Powers - Appoints Ministers, Allocates portfolios, Advises President, Chairs Cabinet, Dissolves LS. **Council of Ministers** (Art 74-75): Headed by PM; Collective responsibility to LS (Art 75(3)); Types - Cabinet, MoS, Deputy Ministers; Max 15% of LS (91st Amendment); Cabinet = Inner core, real power."
+  }
+}
+

@@ -1,0 +1,251 @@
+{
+  "id": "parliamentary-vs-presidential",
+  "subject": "polity",
+  "title": "Parliamentary vs Presidential System - Comprehensive Comparison",
+  "description": "",
+  "visualType": "table",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["union-executive", "parliament", "president", "prime-minister", "federal-features"],
+    "tags": ["Parliamentary System", "Presidential System", "Westminster Model", "Government Types", "Executive"]
+  },
+  "data": {
+    "columns": [
+      { "key": "aspect", "label": "Aspect of Comparison" },
+      { "key": "parliamentary", "label": "Parliamentary System (India, UK)" },
+      { "key": "presidential", "label": "Presidential System (USA)" }
+    ],
+    "categories": [
+      {"id": "all", "label": "All Comparisons (25+ Points)"}
+    ],
+    "rows": [
+      {
+        "id": "executive-head",
+        "aspect": "**Executive Head**",
+        "parliamentary": "**Dual executive**: Nominal head (President/Monarch) + Real head (Prime Minister/Cabinet)",
+        "presidential": "**Single executive**: President is both Head of State and Head of Government",
+        "category": "all"
+      },
+      {
+        "id": "head-of-state",
+        "aspect": "**Head of State**",
+        "parliamentary": "**President/Monarch** - Nominal/Ceremonial head; Acts on advice of Council of Ministers (Art 74 in India)",
+        "presidential": "**President** - Real executive authority; Makes decisions independently",
+        "category": "all"
+      },
+      {
+        "id": "head-of-govt",
+        "aspect": "**Head of Government**",
+        "parliamentary": "**Prime Minister** - Real executive power; Leader of majority party; Heads Council of Ministers",
+        "presidential": "**President** - Same person is both Head of State and Government",
+        "category": "all"
+      },
+      {
+        "id": "selection",
+        "aspect": "**How Executive Selected**",
+        "parliamentary": "**PM from Legislature**: Leader of majority party in Parliament becomes PM; Indirect selection by people",
+        "presidential": "**President directly elected**: Separate election for President (Electoral College in USA); Direct mandate from people",
+        "category": "all"
+      },
+      {
+        "id": "membership",
+        "aspect": "**Executive in Legislature**",
+        "parliamentary": "**Ministers ARE members** of Parliament (Art 75(5) - India); PM and Ministers must be MPs",
+        "presidential": "**President is NOT member** of Congress; Cannot be Congressman; Separation of persons",
+        "category": "all"
+      },
+      {
+        "id": "term",
+        "aspect": "**Term of Office**",
+        "parliamentary": "**Unfixed term**: PM's term depends on confidence of Lok Sabha; Can be removed anytime by no-confidence (Art 75(3)); May continue entire 5 years or fall earlier",
+        "presidential": "**Fixed term**: President has fixed term (4 years in USA, 5 in France); Cannot be removed easily (only impeachment for serious offenses)",
+        "category": "all"
+      },
+      {
+        "id": "responsibility",
+        "aspect": "**Responsibility/Accountability**",
+        "parliamentary": "**Collective responsibility** (Art 75(3)): Council of Ministers collectively responsible to Lok Sabha; Must enjoy confidence; If no-confidence passed, entire Council resigns",
+        "presidential": "**No collective responsibility**: President not responsible to Legislature; No concept of vote of confidence/no-confidence",
+        "category": "all"
+      },
+      {
+        "id": "dissolution",
+        "aspect": "**Dissolution of Legislature**",
+        "parliamentary": "**PM can dissolve** lower house (Lok Sabha in India, House of Commons in UK) and call fresh elections (on PM's advice - Art 85)",
+        "presidential": "**Cannot dissolve**: President cannot dissolve Congress; Congress completes full term",
+        "category": "all"
+      },
+      {
+        "id": "separation-of-powers",
+        "aspect": "**Separation of Powers**",
+        "parliamentary": "**Fusion of powers**: Executive (PM/Ministers) is part of Legislature (Parliament); No strict separation; Executive emerges from Legislature",
+        "presidential": "**Strict separation**: Executive (President) and Legislature (Congress) are separate; No overlapping membership; Checks and balances",
+        "category": "all"
+      },
+      {
+        "id": "removal",
+        "aspect": "**Removal of Executive**",
+        "parliamentary": "**Easy removal**: No-confidence motion (Art 75(3)); Simple majority in Lok Sabha can remove PM/Council of Ministers anytime",
+        "presidential": "**Difficult removal**: Only **impeachment** for violation of Constitution/serious offenses; 2/3rd majority needed; Rarely successful",
+        "category": "all"
+      },
+      {
+        "id": "cabinet",
+        "aspect": "**Cabinet/Council**",
+        "parliamentary": "**Cabinet is real executive**: Council of Ministers (Art 74) headed by PM; Collective decision-making; PM is 'first among equals'",
+        "presidential": "**Cabinet is advisory**: President appoints Cabinet/Secretaries; But President takes final decisions; Not collective; President supreme",
+        "category": "all"
+      },
+      {
+        "id": "party-system",
+        "aspect": "**Party System**",
+        "parliamentary": "**Requires majority party/coalition**: PM must have majority in Lok Sabha; Hung Parliament can paralyze government; Coalition govts common",
+        "presidential": "**Can work with divided govt**: President from one party, Congress majority from another - Can function (checks and balances)",
+        "category": "all"
+      },
+      {
+        "id": "stability",
+        "aspect": "**Stability**",
+        "parliamentary": "**Less stable**: Govt can fall anytime if loses majority (no-confidence); Frequent govt changes possible (Italy, India pre-1990s); Coalition govts unstable",
+        "presidential": "**More stable**: President has fixed term; Cannot be removed easily; Govt stability assured for full term",
+        "category": "all"
+      },
+      {
+        "id": "flexibility",
+        "aspect": "**Flexibility**",
+        "parliamentary": "**More flexible**: Govt can be changed quickly if inefficient (no-confidence); Fresh elections possible; Responsive to public opinion",
+        "presidential": "**Less flexible**: Stuck with President for full term even if inefficient; Cannot be changed except impeachment (very difficult)",
+        "category": "all"
+      },
+      {
+        "id": "legislation",
+        "aspect": "**Legislative Control**",
+        "parliamentary": "**Executive controls legislature**: PM/Ministers are majority in Parliament; Can easily pass Bills (party discipline); Opposition weak",
+        "presidential": "**Independent legislature**: Congress independent of President; Can reject President's Bills; Checks President's power; Stronger legislature",
+        "category": "all"
+      },
+      {
+        "id": "checks",
+        "aspect": "**Checks and Balances**",
+        "parliamentary": "**Weak checks**: Since executive is part of legislature (fusion), difficult to check executive; Opposition is main check",
+        "presidential": "**Strong checks**: Executive and Legislature check each other; Judicial review strong; Real balance of power",
+        "category": "all"
+      },
+      {
+        "id": "representation",
+        "aspect": "**Representation**",
+        "parliamentary": "**Better representation**: Ministers are MPs; Direct contact with people's representatives; Questions/debates in Parliament (Art 75(5))",
+        "presidential": "**Less direct representation**: President/Cabinet not in Congress; Less direct contact with Legislature; Communication formal",
+        "category": "all"
+      },
+      {
+        "id": "decision-making",
+        "aspect": "**Decision Making**",
+        "parliamentary": "**Collective**: Cabinet/Council of Ministers collectively decide (Cabinet collective responsibility); Consensus-based; PM coordinates",
+        "presidential": "**Individual**: President takes final decisions; Cabinet advises but President decides; Faster decisions possible",
+        "category": "all"
+      },
+      {
+        "id": "emergency-response",
+        "aspect": "**Emergency Response**",
+        "parliamentary": "**Slower**: Collective decision-making; Cabinet approval needed; PM must carry Cabinet; May delay in crisis",
+        "presidential": "**Faster**: President can act quickly (Commander-in-Chief); No need for collective approval; Better for crisis management",
+        "category": "all"
+      },
+      {
+        "id": "accountability",
+        "aspect": "**Accountability**",
+        "parliamentary": "**High accountability**: Daily Question Hour (India Art 75(6)); Ministers answer to Parliament; Debates; Scrutiny; Vulnerable to no-confidence",
+        "presidential": "**Lower accountability**: President not answerable to Congress day-to-day; No Question Hour; Less scrutiny; Fixed term provides immunity",
+        "category": "all"
+      },
+      {
+        "id": "suitability",
+        "aspect": "**Suitability**",
+        "parliamentary": "**Homogeneous societies**: Where political parties strong; Stable majorities possible; UK, India, Canada, Australia, Japan",
+        "presidential": "**Diverse societies**: Where checks needed on executive; USA, Brazil, Indonesia, Philippines",
+        "category": "all"
+      },
+      {
+        "id": "advantages",
+        "aspect": "**Advantages**",
+        "parliamentary": "• Better coordination (executive + legislature)\n• More accountable (no-confidence)\n• Flexible (can change govt)\n• Better representation (Ministers are MPs)\n• Collective wisdom (Cabinet)",
+        "presidential": "• More stable (fixed term)\n• Strong checks (separation of powers)\n• Quick decisions (single executive)\n• No legislative paralysis (divided govt can function)\n• Clear mandate (direct election)",
+        "category": "all"
+      },
+      {
+        "id": "disadvantages",
+        "aspect": "**Disadvantages**",
+        "parliamentary": "• Less stable (no-confidence)\n• Fusion may lead to executive dominance\n• Weak opposition\n• Coalition instability\n• PM not directly elected",
+        "presidential": "• Less accountable (fixed term)\n• Slow legislation (checks)\n• Divided govt deadlocks\n• No collective wisdom\n• Less flexible (stuck with President)",
+        "category": "all"
+      },
+      {
+        "id": "examples",
+        "aspect": "**Examples**",
+        "parliamentary": "**UK** (Westminster model - origin), **India**, **Canada**, **Australia**, **Japan**, **Germany**, **Italy**, **Spain**, **Malaysia**",
+        "presidential": "**USA** (original model), **Brazil**, **Indonesia**, **Philippines**, **Nigeria**, **South Korea**, **France** (Semi-presidential)",
+        "category": "all"
+      },
+      {
+        "id": "hybrid",
+        "aspect": "**Hybrid/Semi-Presidential**",
+        "parliamentary": "N/A",
+        "presidential": "**France**: President (directly elected, real power) + PM (from Parliament); Both have executive powers; Mix of Parliamentary and Presidential",
+        "category": "all"
+      }
+    ],
+    "additionalNotes": {
+      "indianParliamentarySystem": [
+        "**Art 74**: Council of Ministers headed by PM to **aid and advise** President",
+        "**Art 75(3)**: Council of Ministers **collectively responsible** to Lok Sabha",
+        "**Art 75(5)**: Ministers must be MPs (or become MP within 6 months)",
+        "**Art 85**: President can dissolve Lok Sabha (on PM's advice)",
+        "**Borrowed from UK**: Westminster model (British Parliamentary system)"
+      ],
+      "whyIndiaBorrowed": [
+        "**Dr. Ambedkar's reasoning**: India familiar with parliamentary system (British rule); Continuity better than sudden change to Presidential",
+        "**Accountability**: Parliamentary system ensures accountability to people's representatives",
+        "**Diverse country**: Presidential system may lead to dictatorship in diverse country like India; Parliamentary system safer",
+        "**Collective wisdom**: Cabinet collective responsibility ensures decisions are well-deliberated"
+      ],
+      "criticisms": [
+        "**Instability**: India faced many unstable govts (1989-99 - 6 PMs in 10 years); Coalitions collapsed",
+        "**PM dominance**: When single party majority, PM becomes too powerful (no real checks) - Rajiv Gandhi (1984-89), Modi (2014-19, 2019-24)",
+        "**Party system breakdown**: Anti-defection law (10th Schedule) has made MPs rubber stamps; No independent thinking",
+        "**Non-serious opposition**: Opposition often disrupts Parliament instead of constructive debate"
+      ],
+      "presidentialDebate": [
+        "**Demand for Presidential system**: Some argue India needs Presidential for stability, quick decisions",
+        "**Against**: Parliamentary system ensures accountability; Presidential may lead to authoritarianism in India",
+        "**Nehru-Sardar Patel debate (1947-48)**: Patel favored Presidential; Nehru favored Parliamentary - Parliamentary won",
+        "**Current**: Parliamentary system part of **basic structure** (cannot be changed) - S.R. Bommai (1994)"
+      ],
+      "drAmbedkarView": [
+        "**Constituent Assembly Debates**: Dr. Ambedkar defended Parliamentary system:",
+        "• India familiar with it (British legacy)",
+        "• More democratic and responsible",
+        "• Presidential system may lead to dictatorship in India (American system evolved over 200 years; India cannot replicate overnight)",
+        "• Parliamentary system ensures executive accountable to Legislature (people's representatives)"
+      ],
+      "usaSystem": [
+        "**President**: Elected by Electoral College; 4-year term; Max 2 terms (22nd Amendment)",
+        "**Cabinet**: Appointed by President (Senate approval); Advises President but President decides",
+        "**Congress**: Senate (100 - 2 per state) + House of Representatives (435 - population-based); Cannot be dissolved",
+        "**No-confidence**: Not possible; Impeachment only (high crimes and misdemeanors)",
+        "**Veto**: President can veto Congress Bills; Congress can override with 2/3rd majority"
+      ],
+      "examTips": [
+        "**Most asked**: 10-15 points comparison; Then explain which system better for India",
+        "**Remember**: **Parliamentary** = Fusion, Collective responsibility, PM from Parliament, No-confidence, Flexible, Less stable",
+        "**Remember**: **Presidential** = Separation, No collective responsibility, Direct election, Fixed term, Stable, Less flexible",
+        "**India**: Parliamentary system (Art 74, 75) - Borrowed from UK (Westminster model)",
+        "**Why India chose**: Familiarity, Accountability, Diverse country (Presidential risky), Dr. Ambedkar's reasoning",
+        "**Criticism**: Instability (coalitions), PM dominance (single party majority), Anti-defection (MPs rubber stamps)",
+        "**Presidential demand**: Some argue for stability; But Parliamentary is **basic structure** (cannot be changed)"
+      ]
+    },
+    "summary": "**Parliamentary vs Presidential**: **Parliamentary** (India, UK) = Dual executive (President nominal, PM real), PM from Parliament, Collective responsibility (Art 75(3)), No-confidence can remove govt, PM can dissolve Lok Sabha, Fusion of powers, Flexible but less stable, More accountable. **Presidential** (USA) = Single executive (President both Head of State + Govt), Direct election, Fixed term, Separation of powers, Strong checks, Stable but less flexible, Less accountable. **India's choice**: Parliamentary (Art 74, 75) - Borrowed from UK (Westminster model). **Why?** Familiarity (British rule), Accountability, Diverse country (Presidential risky), Dr. Ambedkar's reasoning. **Criticism**: Instability (coalitions), PM dominance, Anti-defection. **Parliamentary system part of basic structure** (S.R. Bommai 1994) - Cannot be changed."
+  }
+}
+

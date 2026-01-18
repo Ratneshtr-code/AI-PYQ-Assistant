@@ -1,0 +1,266 @@
+{
+  "id": "federal-features",
+  "subject": "polity",
+  "title": "Federal Features of Indian Constitution",
+  "description": "",
+  "visualType": "splitPanel",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["federal-vs-unitary", "unitary-features", "quasi-federal", "centre-state-relations"],
+    "tags": ["Federalism", "Federal Features", "Quasi-federal", "Art 1", "7th Schedule"]
+  },
+  "data": {
+    "categories": [
+      {"id": "structural", "label": "Structural Features", "color": "#6366F1"},
+      {"id": "institutional", "label": "Institutional Features", "color": "#10B981"},
+      {"id": "functional", "label": "Functional Features", "color": "#F59E0B"}
+    ],
+    "articles": [
+      {
+        "id": "dual-polity",
+        "number": "Feature 1",
+        "shortLabel": "Dual Polity",
+        "title": "Dual Polity - Union and States",
+        "category": "structural",
+        "color": "#6366F1",
+        "content": {
+          "provision": [
+            "**Art 1**: India is 'Union of States'",
+            "**Two levels of government**: Union (Central) Government + State Governments",
+            "**Independent existence**: Both derive powers from Constitution (not one from the other)",
+            "**Neither subordinate**: States are NOT subordinate to Union (in their sphere of powers)"
+          ],
+          "unionVsFederation": [
+            "**Why 'Union' and not 'Federation'?**",
+            "**Dr. Ambedkar's explanation**: States have **no right to secede** from Union",
+            "**Permanent union**: Unlike USA where states theoretically can secede; India is indestructible union",
+            "**Federal character**: Though called 'Union', India has federal structure (dual polity, division of powers)"
+          ],
+          "structure": [
+            "**Union Government**: President (Art 52), Parliament (Art 79 - Lok Sabha + Rajya Sabha), Supreme Court (Art 124)",
+            "**State Governments**: Governor (Art 153), State Legislature (Art 168 - Vidhan Sabha ± Vidhan Parishad), High Court (Art 214)",
+            "**Separate spheres**: Union exercises powers on Union List; States on State List; Both on Concurrent List",
+            "**Constitutional distribution**: Powers defined by Constitution (Part XI, 7th Schedule)"
+          ],
+          "significance": [
+            "**Accommodates diversity**: India has 28 states + 8 UTs; Linguistic, cultural, ethnic diversity",
+            "**Local governance**: States better understand local needs; Can make laws for local issues",
+            "**Federal democracy**: Power not concentrated in Delhi; Distributed across states"
+          ],
+          "examTips": "**Art 1**: India is **'Union of States'** (NOT Federation - because states cannot secede). Dual polity - Union + States. Both derive powers from Constitution. Separate governments, legislatures, executives. **Why Union?** Indestructible union (Dr. Ambedkar)."
+        }
+      },
+      {
+        "id": "written-constitution",
+        "number": "Feature 2",
+        "shortLabel": "Written",
+        "title": "Written and Elaborate Constitution",
+        "category": "structural",
+        "color": "#6366F1",
+        "content": {
+          "characteristics": [
+            "**Written**: Unlike UK (unwritten/uncodified), Indian Constitution is written document",
+            "**Elaborate**: Longest Constitution in world - Originally **395 Articles, 8 Schedules**; Now **470 Articles, 12 Schedules** (after 106 amendments)",
+            "**Detailed**: Covers federal structure, powers, rights, duties, institutions, procedures - Everything documented"
+          ],
+          "federalRelevance": [
+            "**Essential for federalism**: Federal countries MUST have written Constitution to define:",
+            "• Powers of Union and States (7th Schedule - 3 Lists)",
+            "• Boundaries of jurisdiction (who can legislate on what)",
+            "• Rights and duties (Part III - FRs; Part IV - DPSPs)",
+            "• Dispute resolution mechanism (Art 131 - SC's original jurisdiction)",
+            "**Without written Constitution**: Federal structure impossible; Would lead to confusion and conflicts"
+          ],
+          "clarity": [
+            "**7th Schedule**: Union List (97 subjects), State List (61 subjects), Concurrent List (47 subjects) - Clear demarcation",
+            "**Part V**: Union government structure (Art 52-151)",
+            "**Part VI**: State government structure (Art 152-237)",
+            "**Part XI**: Centre-State relations (Art 245-263)",
+            "**Schedules**: Various lists, forms, provisions for specific matters"
+          ],
+          "examTips": "**Written Constitution** essential for federalism. India has **longest Constitution** (470 Articles, 12 Schedules). **7th Schedule** defines division of powers (Union, State, Concurrent Lists). Clear documentation prevents Centre-State conflicts. Unlike UK (unwritten)."
+        }
+      },
+      {
+        "id": "division-of-powers",
+        "number": "Feature 3",
+        "shortLabel": "Power Division",
+        "title": "Division of Powers - 7th Schedule",
+        "category": "structural",
+        "color": "#6366F1",
+        "content": {
+          "seventhSchedule": [
+            "**7th Schedule** (Art 246): Divides legislative powers into **3 Lists**:",
+            "**1. Union List** (List I): **97 subjects** - Defence, foreign affairs, currency, banking, railways, posts, customs, income tax, etc.",
+            "**2. State List** (List II): **61 subjects** - Police, public order, health, agriculture, land, irrigation, local govt, etc.",
+            "**3. Concurrent List** (List III): **47 subjects** - Criminal law, civil procedure, marriage, education, forests, economic planning, etc.",
+            "**Residuary powers** (Art 248): Subjects **not in any list** → Union (e.g., IT, cyber laws, space)"
+          ],
+          "legislativeCompetence": [
+            "**Parliament**: Can make laws on **Union List + Concurrent List + Residuary** (Art 246(1), (2))",
+            "**State Legislatures**: Can make laws on **State List + Concurrent List** (Art 246(3))",
+            "**Conflict on Concurrent**: If Union and State laws conflict, **Union law prevails** (Art 254)",
+            "**Exclusive spheres**: Union List → Only Parliament; State List → Only State Legislature (except emergency/special circumstances)"
+          ],
+          "rationaleOfLists": [
+            "**Union List**: Matters requiring national uniformity (defence, foreign policy) + subjects needing economies of scale (railways, currency)",
+            "**State List**: Matters of local concern (agriculture, police) + subjects where local knowledge needed",
+            "**Concurrent List**: Matters where both Union and State have stake (education, forests, marriage)"
+          ],
+          "shifts": [
+            "**Original**: Union List (97), State List (66), Concurrent List (47)",
+            "**42nd Amendment 1976**: 5 subjects shifted from State to Concurrent List (Education, Forests, Weights & Measures, Protection of wild animals & birds, Administration of justice)",
+            "**101st Amendment 2016 (GST)**: Taxation powers reorganized; GST on Concurrent List",
+            "**Trend**: Gradual centralization - More powers to Union over decades"
+          ],
+          "examTips": "**7th Schedule (Art 246)**: **Union List (97)** - Defence, currency, railways; **State List (61)** - Police, agriculture, land; **Concurrent (47)** - Criminal law, education, forests. **Residuary → Union** (Art 248). **Conflict**: Union law prevails on Concurrent (Art 254). **Trend**: Centralization (5 subjects shifted to Concurrent via 42nd Amendment)."
+        }
+      },
+      {
+        "id": "constitutional-supremacy",
+        "number": "Feature 4",
+        "shortLabel": "Supremacy",
+        "title": "Supremacy of Constitution",
+        "category": "structural",
+        "color": "#6366F1",
+        "content": {
+          "concept": [
+            "**Constitution is supreme**: Not Parliament (unlike UK where Parliament is supreme)",
+            "**All authorities bound**: Union, States, citizens - All subject to Constitution",
+            "**No authority beyond Constitution**: Neither Parliament nor State Legislatures can violate Constitution",
+            "**Art 13(2)**: Any law violating Fundamental Rights is **void**"
+          ],
+          "federalRelevance": [
+            "**Essential for federalism**: Without constitutional supremacy, Centre could dominate States",
+            "**Protects federal balance**: Union cannot encroach on State List; States cannot violate Union List",
+            "**Judicial review**: Courts can strike down Union/State laws violating Constitution (Art 13, 32, 226)",
+            "**Equal subjection**: Both Union and States equally bound by Constitution"
+          ],
+          "examples": [
+            "**Art 13**: Laws inconsistent with FRs void - Applies to both Union and State laws",
+            "**Art 131**: SC's original jurisdiction for Centre-State disputes - Constitution defines powers, SC enforces",
+            "**Kesavananda Bharati (1973)**: Basic Structure doctrine - Even Parliament cannot amend Constitution to destroy basic features",
+            "**Countless cases**: SC has struck down both Central and State laws for violating Constitution"
+          ],
+          "contrast": [
+            "**UK**: Parliamentary supremacy - Parliament can make/unmake any law; No written Constitution",
+            "**India**: Constitutional supremacy - Parliament's power limited by Constitution; Written Constitution supreme"
+          ],
+          "examTips": "**Constitutional supremacy** (NOT Parliamentary) - Essential for federalism. **Art 13**: Laws violating FRs void. Courts can strike down Union/State laws (Art 32, 226). Protects federal balance (Union cannot encroach on States). **Kesavananda**: Basic Structure doctrine - Parliament's power limited."
+        }
+      },
+      {
+        "id": "rigidity",
+        "number": "Feature 5",
+        "shortLabel": "Rigidity",
+        "title": "Rigid Amendment for Federal Provisions",
+        "category": "structural",
+        "color": "#6366F1",
+        "content": {
+          "concept": [
+            "**Art 368**: Provides procedure for constitutional amendment",
+            "**Federal provisions**: Provisions affecting Centre-State relations require **special majority + state ratification**",
+            "**50% states**: At least half of states must ratify (simple majority in state legislature)",
+            "**Protects federalism**: Union cannot unilaterally change federal structure"
+          ],
+          "federalProvisionsRequiringStateRatification": [
+            "**1. Election of President** (Art 54, 55)",
+            "**2. Extent of Union/State executive power** (Art 73, 162)",
+            "**3. Supreme Court and High Courts** (Chapter IV, V of Part V; Chapter V of Part VI)",
+            "**4. Distribution of legislative powers** (Chapter I of Part XI; 7th Schedule - 3 Lists)",
+            "**5. Representation of states in Parliament** (Art 81)",
+            "**6. Art 368 itself** (Amendment procedure)"
+          ],
+          "significance": [
+            "**States' protection**: States get veto power over amendments affecting their powers",
+            "**Federal balance**: Centre cannot dilute states' powers without their consent",
+            "**Cooperative federalism**: Amendments affecting federal structure require Centre + States agreement",
+            "**Contrast with unitary**: In unitary systems, Centre can change structure unilaterally"
+          ],
+          "examples": [
+            "**7th Amendment 1956**: States Reorganisation - Required state ratification (changed state boundaries, 7th Schedule)",
+            "**24th Amendment 1971**: Art 368 amended - State ratification needed (procedure itself changed)",
+            "**101st Amendment 2016 (GST)**: Changed taxation distribution (7th Schedule) - 50%+ states ratified"
+          ],
+          "examTips": "**Rigidity for federal provisions** (Art 368) - Special majority + **50% state ratification** needed for: President election (Art 54-55), executive power (Art 73, 162), SC/HC, 7th Schedule (Lists), Art 368 itself. Protects states from unilateral Central actions. Example: GST (101st Amendment) required state consent."
+        }
+      },
+      {
+        "id": "independent-judiciary",
+        "number": "Feature 6",
+        "shortLabel": "Judiciary",
+        "title": "Independent Judiciary as Federal Arbiter",
+        "category": "institutional",
+        "color": "#10B981",
+        "content": {
+          "role": [
+            "**SC as umpire**: Resolves disputes between Union and States (Art 131 - original jurisdiction)",
+            "**Independent**: SC independent from executive and legislature (Art 124-147)",
+            "**Guardian of Constitution**: SC protects Constitution, federal structure, FRs (Art 32, 136, 226)",
+            "**Essential for federalism**: Federal countries need independent judiciary to arbitrate Centre-State conflicts"
+          ],
+          "art131": [
+            "**Original jurisdiction**: SC has exclusive jurisdiction for disputes:",
+            "• Union vs State(s)",
+            "• Union + State(s) vs State(s)",
+            "• State vs State",
+            "**Examples**: River water disputes (Karnataka vs Tamil Nadu), border disputes (Maharashtra vs Karnataka), Centre-State power disputes"
+          ],
+          "judicialReview": [
+            "**Art 13**: Power to declare laws void if violating FRs",
+            "**Art 32**: Right to move SC for FR enforcement (FR itself)",
+            "**Art 226**: HCs can issue writs for FR and other legal rights",
+            "**Art 136**: SC's special leave petition - Can hear appeals from any court",
+            "**Protects federal balance**: SC can strike down both Central and State laws violating Constitution"
+          ],
+          "scProtectingFederalism": [
+            "**S.R. Bommai (1994)**: SC held federalism is **basic structure**; Cannot be destroyed; Curtailed Art 356 (President's Rule) abuse",
+            "**State of Rajasthan vs Union (1977)**: SC struck down President's Rule for being arbitrary",
+            "**Kesavananda Bharati (1973)**: Federal character part of basic structure",
+            "**Countless cases**: SC has protected states' rights, struck down Central overreach"
+          ],
+          "examTips": "**Independent judiciary** essential for federalism. **SC as umpire** (Art 131) - Resolves Centre-State disputes. **Judicial review** (Art 13, 32, 226) - Strikes down laws violating Constitution. **S.R. Bommai (1994)**: Federalism is **basic structure**. SC protects federal balance."
+        }
+      },
+      {
+        "id": "bicameralism",
+        "number": "Feature 7",
+        "shortLabel": "Bicameral",
+        "title": "Bicameralism - Rajya Sabha as States' Representation",
+        "category": "institutional",
+        "color": "#10B981",
+        "content": {
+          "structure": [
+            "**Art 79**: Parliament = President + Lok Sabha (House of People) + Rajya Sabha (Council of States)",
+            "**Lok Sabha** (Art 81): **543 elected + 2 nominated** (Anglo-Indians - abolished 104th Amendment); Represents people directly",
+            "**Rajya Sabha** (Art 80): **238 elected + 12 nominated**; Represents states and UTs; Federal chamber"
+          ],
+          "rajyaSabhaComposition": [
+            "**Elected members**: Elected by State/UT Legislative Assemblies (indirect election); Proportional representation by STV (Art 80(4))",
+            "**Seats per state**: Based on population - UP (31), Maharashtra (19), small states (1-3 each)",
+            "**Nominated**: 12 members nominated by President (Art 80(3)) - Persons with special knowledge in literature, science, art, social service",
+            "**Permanent house**: Never dissolves; 1/3rd members retire every 2 years; Continuity"
+          ],
+          "federalRelevance": [
+            "**Represents states**: Rajya Sabha ensures states have voice in national legislation",
+            "**Equal power**: Rajya Sabha has equal legislative power (except Money Bills); Can delay/amend most Bills",
+            "**Amendment procedure**: Special majority needed in both Houses (Art 368) - States (via Rajya Sabha) can block amendments",
+            "**Federal provisions**: Amendments affecting federal structure need state ratification (Art 368) - Rajya Sabha represents states' interests"
+          ],
+          "specialPowers": [
+            "**Art 249**: Rajya Sabha can authorize Parliament to legislate on **State List** (2/3rd majority) - National interest",
+            "**Art 312**: Rajya Sabha can create **All India Services** (2/3rd majority) - IAS, IPS, IFS",
+            "These powers show Rajya Sabha's role in federal matters"
+          ],
+          "contrast": [
+            "**USA**: Senate (100 members - 2 per state) has equal representation for all states (federal principle)",
+            "**India**: Rajya Sabha seats based on population (less federal, more representative) - Compromise between federal and unitary principles"
+          ],
+          "examTips": "**Bicameralism** - Lok Sabha (people) + Rajya Sabha (states). **Rajya Sabha** (Art 80) represents states; Elected by State Assemblies. **Federal role**: Equal legislative power (except Money Bills), can authorize Parliament to legislate on State List (Art 249), create All India Services (Art 312). Federal countries have bicameral legislature (upper house for states)."
+        }
+      }
+    ],
+    "summary": "**Federal Features of Indian Constitution**: **(1) Dual Polity** - Union + States (Art 1); **(2) Written Constitution** - Longest (470 Articles, 12 Schedules); **(3) Division of Powers** - 7th Schedule (Union List-97, State List-61, Concurrent-47); Residuary to Union (Art 248); **(4) Constitutional Supremacy** - NOT Parliamentary; Courts strike down laws (Art 13, 32, 226); **(5) Rigid Amendment** - Federal provisions need special majority + 50% state ratification (Art 368); **(6) Independent Judiciary** - SC as umpire (Art 131), judicial review, federalism is basic structure (S.R. Bommai 1994); **(7) Bicameralism** - Rajya Sabha represents states (Art 80). **BUT**: Strong unitary features (single citizenship, emergency, strong Centre, Governor, All India Services) make India **'Quasi-federal'** (K.C. Wheare). **Art 1**: India is 'Union of States' (NOT Federation - states cannot secede)."
+  }
+}
+

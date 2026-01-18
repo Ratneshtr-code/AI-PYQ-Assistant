@@ -1,0 +1,485 @@
+{
+  "id": "parts-schedules",
+  "subject": "polity",
+  "title": "Parts and Schedules of Indian Constitution",
+  "description": "",
+  "visualType": "table",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["constituent-assembly", "fundamental-rights", "dpsps"],
+    "tags": ["Parts", "Schedules", "Constitution", "Structure"]
+  },
+  "data": {
+    "columns": [
+      { "key": "part", "label": "Part / Schedule" },
+      { "key": "title", "label": "Title" },
+      { "key": "articles", "label": "Articles / Details" },
+      { "key": "keyPoints", "label": "Key Points" }
+    ],
+    "categories": [
+      {"id": "all", "label": "All"},
+      {"id": "parts", "label": "Parts (25)"},
+      {"id": "schedules", "label": "Schedules (12)"}
+    ],
+    "rows": [
+      {
+        "id": "part-1",
+        "part": "**Part I**",
+        "title": "The Union and its Territory",
+        "articles": "Art 1-4",
+        "category": "parts",
+        "keyPoints": "• **Art 1**: India, that is Bharat, shall be a Union of States\n• **Art 2**: Admission of new States\n• **Art 3**: Formation of new States\n• **Art 4**: Laws for amendments of First and Fourth Schedules",
+        "details": {
+          "significance": "Defines India as Union of States (not federation). Parliament can form new states by simple majority.",
+          "examTip": "Art 1 - 'India, that is Bharat'. Art 3 - Parliament can alter state boundaries by simple majority (not Art 368 amendment)."
+        }
+      },
+      {
+        "id": "part-2",
+        "part": "**Part II**",
+        "title": "Citizenship",
+        "articles": "Art 5-11",
+        "category": "parts",
+        "keyPoints": "• Single citizenship (like UK, unlike USA)\n• Art 5-8: Citizenship at commencement\n• Art 9: No dual citizenship\n• Art 10: Continuance of citizenship\n• Art 11: Parliament regulates citizenship",
+        "details": {
+          "significance": "Single citizenship promotes national unity. Citizenship Act 1955 regulates details.",
+          "examTip": "India has SINGLE citizenship (not dual like USA). Art 11 gives power to Parliament to regulate."
+        }
+      },
+      {
+        "id": "part-3",
+        "part": "**Part III**",
+        "title": "Fundamental Rights",
+        "articles": "Art 12-35",
+        "category": "parts",
+        "keyPoints": "• 6 categories of FRs (originally 7, property removed)\n• Art 12-13: Definition, application\n• Art 14-18: Right to Equality\n• Art 19-22: Right to Freedom\n• Art 23-24: Against Exploitation\n• Art 25-28: Freedom of Religion\n• Art 29-30: Cultural & Educational Rights\n• Art 32: Constitutional Remedies ('Heart of Constitution')",
+        "details": {
+          "significance": "Most important part. Justiciable rights enforceable through courts. Borrowed from USA.",
+          "examTip": "Art 32 = Right to Constitutional Remedies (Writs). Dr. Ambedkar called it 'Heart and Soul of Constitution'."
+        }
+      },
+      {
+        "id": "part-4",
+        "part": "**Part IV**",
+        "title": "Directive Principles of State Policy",
+        "articles": "Art 36-51",
+        "category": "parts",
+        "keyPoints": "• Non-justiciable directives for State policy\n• Art 37: Fundamental in governance but not enforceable\n• 7 categories: Social, Economic, Gandhian, Administrative, Environmental, International",
+        "details": {
+          "significance": "Welfare state principles. Borrowed from Irish Constitution. Complement FRs.",
+          "examTip": "Art 37 - DPSPs non-justiciable but fundamental. Art 39, 44, 48A most asked."
+        }
+      },
+      {
+        "id": "part-4a",
+        "part": "**Part IVA**",
+        "title": "Fundamental Duties",
+        "articles": "Art 51A",
+        "category": "parts",
+        "keyPoints": "• Added by 42nd Amendment 1976 (Swaran Singh Committee)\n• 11 Fundamental Duties (originally 10; 11th added by 86th Amendment 2002)\n• Not enforceable like FRs\n• Borrowed from USSR",
+        "details": {
+          "significance": "Moral obligations of citizens. Added during Emergency. 11th duty added for parents (education of children 6-14).",
+          "examTip": "Added by 42nd Amendment 1976. Total 11 duties (11th duty added by 86th Amendment 2002 - parents to educate children)."
+        }
+      },
+      {
+        "id": "part-5",
+        "part": "**Part V**",
+        "title": "The Union",
+        "articles": "Art 52-151",
+        "category": "parts",
+        "keyPoints": "• Executive: President (Art 52-78), Vice President, PM, COM, AG\n• Parliament: Lok Sabha, Rajya Sabha (Art 79-122)\n• Supreme Court (Art 124-147)\n• Comptroller & Auditor General (Art 148-151)",
+        "details": {
+          "significance": "Longest part. Defines Union government structure. Parliamentary system with nominal President.",
+          "examTip": "President = Art 52-78; Parliament = Art 79-122; SC = Art 124-147. Parliamentary system borrowed from UK."
+        }
+      },
+      {
+        "id": "part-6",
+        "part": "**Part VI**",
+        "title": "The States",
+        "articles": "Art 152-237",
+        "category": "parts",
+        "keyPoints": "• Executive: Governor, CM, Council of Ministers\n• State Legislature: Vidhan Sabha, Vidhan Parishad\n• High Courts (Art 214-231)",
+        "details": {
+          "significance": "Second longest part. Defines state government structure. Similar to Union but subordinate.",
+          "examTip": "Governor = Art 153-167; State Legislature = Art 168-212; HC = Art 214-231. Governor appointed by President."
+        }
+      },
+      {
+        "id": "part-7",
+        "part": "**Part VII**",
+        "title": "States in Part B of First Schedule",
+        "articles": "Art 238 (Repealed)",
+        "category": "parts",
+        "keyPoints": "• Originally for erstwhile princely states\n• Repealed by 7th Amendment 1956",
+        "details": {
+          "significance": "Now repealed. Was for princely states that joined India.",
+          "examTip": "Part VII repealed by 7th Amendment 1956 (States Reorganisation Act)."
+        }
+      },
+      {
+        "id": "part-8",
+        "part": "**Part VIII**",
+        "title": "The Union Territories",
+        "articles": "Art 239-242",
+        "category": "parts",
+        "keyPoints": "• Administration of UTs\n• Art 239: President administers UTs through Administrator\n• Art 239A: Delhi, Puducherry have legislatures\n• Art 239AA: Special provisions for Delhi (added by 69th Amendment 1991)",
+        "details": {
+          "significance": "8 UTs currently (Delhi, Chandigarh, Puducherry, etc.). Directly controlled by Union.",
+          "examTip": "Art 239AA for Delhi (69th Amendment 1991). Art 239A for Puducherry. Lt. Governor for UTs."
+        }
+      },
+      {
+        "id": "part-9",
+        "part": "**Part IX**",
+        "title": "The Panchayats",
+        "articles": "Art 243-243O",
+        "category": "parts",
+        "keyPoints": "• Added by 73rd Amendment 1992\n• 3-tier: Gram Panchayat, Panchayat Samiti, Zila Parishad\n• Elections every 5 years\n• 1/3 seats for women\n• 11th Schedule: 29 subjects for panchayats",
+        "details": {
+          "significance": "Gave constitutional status to Panchayati Raj. Implements DPSP Art 40 (village panchayats).",
+          "examTip": "73rd Amendment 1992 added Part IX. 11th Schedule has 29 subjects. 1/3 seats reserved for women."
+        }
+      },
+      {
+        "id": "part-9a",
+        "part": "**Part IXA**",
+        "title": "The Municipalities",
+        "articles": "Art 243P-243ZG",
+        "category": "parts",
+        "keyPoints": "• Added by 74th Amendment 1992\n• 3 types: Nagar Panchayat, Municipal Council, Municipal Corporation\n• Elections every 5 years\n• 1/3 seats for women\n• 12th Schedule: 18 subjects for municipalities",
+        "details": {
+          "significance": "Gave constitutional status to urban local bodies. Parallel to 73rd Amendment for rural areas.",
+          "examTip": "74th Amendment 1992 added Part IXA. 12th Schedule has 18 subjects. Also 1/3 women reservation."
+        }
+      },
+      {
+        "id": "part-9b",
+        "part": "**Part IXB**",
+        "title": "The Co-operative Societies",
+        "articles": "Art 243ZH-243ZT",
+        "category": "parts",
+        "keyPoints": "• Added by 97th Amendment 2011 (came into force 2012)\n• Right to form cooperative societies\n• Autonomous functioning of cooperatives\n• Democratic control, professional management",
+        "details": {
+          "significance": "Gave constitutional status to cooperative societies. Promotes cooperative movement.",
+          "examTip": "97th Amendment 2011 (enforced 2012) added Part IXB. Right to form cooperatives as constitutional right."
+        }
+      },
+      {
+        "id": "part-10",
+        "part": "**Part X**",
+        "title": "The Scheduled and Tribal Areas",
+        "articles": "Art 244-244A",
+        "category": "parts",
+        "keyPoints": "• Fifth Schedule: Scheduled Areas (mainly in Central India)\n• Sixth Schedule: Tribal Areas in Assam, Meghalaya, Tripura, Mizoram\n• Special provisions for administration\n• Tribal Advisory Councils, Autonomous District Councils",
+        "details": {
+          "significance": "Protects tribal areas and culture. Governor has special powers in Fifth Schedule areas.",
+          "examTip": "Fifth Schedule = Scheduled Areas (mainland); Sixth Schedule = Tribal Areas (North-East except Nagaland)."
+        }
+      },
+      {
+        "id": "part-11",
+        "part": "**Part XI**",
+        "title": "Relations between Union and States",
+        "articles": "Art 245-263",
+        "category": "parts",
+        "keyPoints": "• Legislative relations: Union List (97), State List (66), Concurrent List (47)\n• Administrative relations\n• Financial relations\n• Trade & commerce\n• Art 256: State to comply with Union laws",
+        "details": {
+          "significance": "Defines federal structure. Union List (Parliament), State List (State Legislature), Concurrent List (Both).",
+          "examTip": "7th Schedule: Union List 97 subjects, State List 66, Concurrent List 47. Residuary powers with Union."
+        }
+      },
+      {
+        "id": "part-12",
+        "part": "**Part XII**",
+        "title": "Finance, Property, Contracts and Suits",
+        "articles": "Art 264-300A",
+        "category": "parts",
+        "keyPoints": "• Finance Commission (Art 280) - every 5 years\n• Distribution of revenues between Union and States\n• Art 300A: Right to property (legal right, not FR after 44th Amendment)",
+        "details": {
+          "significance": "Financial federalism. Finance Commission recommends tax devolution. Right to property removed as FR (1978).",
+          "examTip": "Art 280 - Finance Commission every 5 years. Art 300A - Right to property (legal right since 44th Amendment 1978)."
+        }
+      },
+      {
+        "id": "part-13",
+        "part": "**Part XIII**",
+        "title": "Trade, Commerce and Intercourse within India",
+        "articles": "Art 301-307",
+        "category": "parts",
+        "keyPoints": "• Art 301: Freedom of trade and commerce throughout India\n• Parliament can impose restrictions for public interest",
+        "details": {
+          "significance": "Single market. Prevents trade barriers between states. Borrowed from Australian Constitution.",
+          "examTip": "Art 301 ensures free trade within India (like single market concept). Borrowed from Australia."
+        }
+      },
+      {
+        "id": "part-14",
+        "part": "**Part XIV**",
+        "title": "Services under Union and States",
+        "articles": "Art 308-323",
+        "category": "parts",
+        "keyPoints": "• All India Services: IAS, IPS, IFS\n• Union Public Service Commission (UPSC)\n• State Public Service Commissions\n• Recruitment, conditions of service",
+        "details": {
+          "significance": "Creates permanent, neutral civil services. UPSC conducts exams for All India Services and Central Services.",
+          "examTip": "Art 312 - All India Services (IAS, IPS created by Parliament). Art 315 - UPSC. Art 320 - Functions of UPSC."
+        }
+      },
+      {
+        "id": "part-14a",
+        "part": "**Part XIVA**",
+        "title": "Tribunals",
+        "articles": "Art 323A-323B",
+        "category": "parts",
+        "keyPoints": "• Added by 42nd Amendment 1976\n• Art 323A: Administrative Tribunals (CAT)\n• Art 323B: Tribunals for other matters (Income Tax, NCDRC, NGT)",
+        "details": {
+          "significance": "Decongests courts. Specialized tribunals for specific subjects. CAT for government employees.",
+          "examTip": "Added by 42nd Amendment. Art 323A = CAT (Central Administrative Tribunal). Art 323B = Other tribunals."
+        }
+      },
+      {
+        "id": "part-15",
+        "part": "**Part XV**",
+        "title": "Elections",
+        "articles": "Art 324-329A",
+        "category": "parts",
+        "keyPoints": "• Art 324: Election Commission of India\n• CEC + 2 ECs\n• Conduct of Lok Sabha, Rajya Sabha, State Legislature, President, VP elections\n• Free and fair elections",
+        "details": {
+          "significance": "Independent Election Commission ensures democracy. CEC = constitutional post with security of tenure.",
+          "examTip": "Art 324 - ECI conducts all elections (except panchayat, municipal - State Election Commission). CEC + 2 ECs."
+        }
+      },
+      {
+        "id": "part-16",
+        "part": "**Part XVI**",
+        "title": "Special Provisions for Certain Classes",
+        "articles": "Art 330-342",
+        "category": "parts",
+        "keyPoints": "• Reservation for SCs/STs in Lok Sabha, State Assemblies\n• Anglo-Indian representation\n• Art 335: Reservation in services\n• Art 338: National Commission for SCs\n• Art 338A: National Commission for STs\n• Art 340: Commission for OBCs",
+        "details": {
+          "significance": "Affirmative action for historically disadvantaged groups. SC/ST reservation extended every 10 years by amendment.",
+          "examTip": "Art 330 - SC/ST seats in LS. Art 332 - SC/ST seats in State Assemblies. Art 335 - Reservation in services."
+        }
+      },
+      {
+        "id": "part-17",
+        "part": "**Part XVII**",
+        "title": "Official Language",
+        "articles": "Art 343-351",
+        "category": "parts",
+        "keyPoints": "• Art 343: Hindi in Devanagari script = official language\n• English continued for 15 years (1950-1965), now indefinitely\n• 8th Schedule: 22 languages recognized\n• Art 351: Duty to develop Hindi",
+        "details": {
+          "significance": "Linguistic diversity accommodated. Hindi official but English continues. 22 scheduled languages.",
+          "examTip": "Art 343 - Hindi + Devanagari. Art 344 - Official Language Commission. 8th Schedule originally had 14 languages, now 22."
+        }
+      },
+      {
+        "id": "part-18",
+        "part": "**Part XVIII**",
+        "title": "Emergency Provisions",
+        "articles": "Art 352-360",
+        "category": "parts",
+        "keyPoints": "• Art 352: National Emergency (war, external aggression, armed rebellion)\n• Art 356: President's Rule in States (failure of constitutional machinery)\n• Art 360: Financial Emergency\n• Proclaimed 3 times: 1962 (China), 1971 (Pakistan), 1975 (Internal Emergency)",
+        "details": {
+          "significance": "Borrowed from Weimar Constitution (Germany). Strengthens Centre during crisis. Art 352 most controversial (1975 misuse).",
+          "examTip": "3 types of Emergency: National (352), President's Rule (356), Financial (360). 44th Amendment made safeguards (must be in writing, cabinet approval)."
+        }
+      },
+      {
+        "id": "part-19",
+        "part": "**Part XIX**",
+        "title": "Miscellaneous",
+        "articles": "Art 361-367",
+        "category": "parts",
+        "keyPoints": "• Art 361: Immunity for President, Governors\n• Art 363: Bar on court jurisdiction in disputes related to treaties before independence\n• Art 368: Moved to Part XX by 24th Amendment",
+        "details": {
+          "significance": "Covers various provisions not fitting elsewhere. Presidential immunity during tenure.",
+          "examTip": "Art 361 - President, Governors immune from criminal proceedings during office. Civil proceedings after 2 months notice."
+        }
+      },
+      {
+        "id": "part-20",
+        "part": "**Part XX**",
+        "title": "Amendment of the Constitution",
+        "articles": "Art 368",
+        "category": "parts",
+        "keyPoints": "• 3 types of amendments: Simple majority, Special majority, Special majority + state ratification\n• Special majority = 2/3rd of members present + voting + absolute majority of total members\n• Certain provisions need ratification by 50% states\n• Basic Structure doctrine - some parts cannot be amended",
+        "details": {
+          "significance": "105 amendments till 2021. Basic Structure doctrine (Kesavananda Bharati 1973) limits amendment power.",
+          "examTip": "Art 368 amendment procedure. Type 1: Simple majority (e.g., new states). Type 2: Special majority (most provisions). Type 3: Special majority + state ratification (federal provisions)."
+        }
+      },
+      {
+        "id": "part-21",
+        "part": "**Part XXI**",
+        "title": "Temporary, Transitional and Special Provisions",
+        "articles": "Art 369-392",
+        "category": "parts",
+        "keyPoints": "• Art 370: Special status for J&K (repealed by Art 370 itself in 2019)\n• Art 371: Special provisions for Maharashtra, Gujarat\n• Art 371A-371J: Special provisions for NE states, Karnataka, Goa, etc.",
+        "details": {
+          "significance": "Accommodates special circumstances of states. Art 370 most controversial (now abrogated).",
+          "examTip": "Art 370 for J&K abrogated in 2019. Art 371 onwards for other states. Art 371A for Nagaland, 371G for Mizoram, etc."
+        }
+      },
+      {
+        "id": "part-22",
+        "part": "**Part XXII**",
+        "title": "Short Title, Commencement, Authoritative Text in Hindi",
+        "articles": "Art 393-395",
+        "category": "parts",
+        "keyPoints": "• Art 393: Short title = Constitution of India\n• Art 394: Commencement - Jan 26, 1950 (Republic Day)\n• Art 395: Repeals Government of India Act 1935",
+        "details": {
+          "significance": "Final part. Constitution came into force on Jan 26, 1950. Replaced GOI Act 1935.",
+          "examTip": "Constitution adopted Nov 26, 1949; enforced Jan 26, 1950. Art 395 repealed GOI Act 1935."
+        }
+      },
+      {
+        "id": "schedule-1",
+        "part": "**First Schedule**",
+        "title": "List of States and Union Territories",
+        "articles": "Originally 14 states + 6 UTs, now 28 states + 8 UTs",
+        "category": "schedules",
+        "keyPoints": "• Lists all States and Union Territories\n• Updated whenever new state/UT formed\n• Latest: J&K became UT (2019); Ladakh became separate UT (2019)",
+        "details": {
+          "significance": "Dynamic schedule. Changes with state reorganization. Last changed in 2019 (J&K bifurcation).",
+          "examTip": "Currently 28 states + 8 UTs. Latest change: J&K reorganized into J&K (UT with legislature) + Ladakh (UT without legislature) in 2019."
+        }
+      },
+      {
+        "id": "schedule-2",
+        "part": "**Second Schedule**",
+        "title": "Salaries of High Officials",
+        "articles": "President, Governors, Judges, CAG, etc.",
+        "category": "schedules",
+        "keyPoints": "• President salary (currently ₹5 lakh/month)\n• Governors, Judges of SC/HC\n• Speaker, Deputy Speaker\n• CAG, Election Commissioners",
+        "details": {
+          "significance": "Ensures financial independence of constitutional authorities. Salaries can only be changed by constitutional amendment.",
+          "examTip": "President = ₹5 lakh/month; VP = ₹4 lakh; PM = ₹2 lakh; CJI = ₹2.8 lakh (approx). Can be changed only by amendment."
+        }
+      },
+      {
+        "id": "schedule-3",
+        "part": "**Third Schedule**",
+        "title": "Forms of Oaths or Affirmations",
+        "articles": "President, Ministers, Judges, MPs, MLAs, etc.",
+        "category": "schedules",
+        "keyPoints": "• Oath of office for President, Vice President, Ministers\n• Oath for MPs, MLAs\n• Oath for Judges of SC, HC\n• Oath for CAG, CEC",
+        "details": {
+          "significance": "Ensures allegiance to Constitution. Oath administered before assuming office.",
+          "examTip": "President's oath administered by CJI. PM's oath by President. Judges' oath administered by Governor/President."
+        }
+      },
+      {
+        "id": "schedule-4",
+        "part": "**Fourth Schedule**",
+        "title": "Allocation of Rajya Sabha Seats",
+        "articles": "State-wise seats in Rajya Sabha",
+        "category": "schedules",
+        "keyPoints": "• Total 245 members (233 elected + 12 nominated)\n• Uttar Pradesh: 31 seats (highest)\n• Sikkim, Tripura, Meghalaya, Nagaland, Mizoram: 1 seat each\n• UTs: Some have representation (Delhi, Puducherry)",
+        "details": {
+          "significance": "Ensures proportional representation of states in RS. Larger states get more seats.",
+          "examTip": "UP has most RS seats (31). Total RS strength = 245 (233 elected + 12 nominated by President for arts, science, literature, social service)."
+        }
+      },
+      {
+        "id": "schedule-5",
+        "part": "**Fifth Schedule**",
+        "title": "Scheduled Areas and Scheduled Tribes",
+        "articles": "Administration and control of Scheduled Areas",
+        "category": "schedules",
+        "keyPoints": "• Applies to Scheduled Areas in states (except North-East - Sixth Schedule)\n• Covers Jharkhand, Chhattisgarh, Odisha, MP, Rajasthan, Gujarat, Maharashtra, Andhra Pradesh, Telangana\n• Governor has special powers\n• Tribes Advisory Council (TAC) in each state",
+        "details": {
+          "significance": "Protects tribal areas from exploitation. Governor can modify or restrict application of laws. PESA Act 1996 extends panchayat to tribal areas.",
+          "examTip": "Fifth Schedule = Scheduled Areas (mainland tribal areas). Governor has special powers. TAC advises on tribal welfare."
+        }
+      },
+      {
+        "id": "schedule-6",
+        "part": "**Sixth Schedule**",
+        "title": "Tribal Areas in Assam, Meghalaya, Tripura, Mizoram",
+        "articles": "Administration of tribal areas in North-East",
+        "category": "schedules",
+        "keyPoints": "• Autonomous District Councils (ADCs) and Regional Councils\n• ADCs have legislative, judicial, executive powers\n• Can make laws on land, forests, marriage, social customs\n• Exempted from many central and state laws",
+        "details": {
+          "significance": "High degree of autonomy to tribal areas in NE. Preserves tribal culture and customs. 10 ADCs across 4 states.",
+          "examTip": "Sixth Schedule = 4 NE states (Assam, Meghalaya, Tripura, Mizoram). NOT Nagaland, Manipur, Arunachal (they have Art 371A type provisions)."
+        }
+      },
+      {
+        "id": "schedule-7",
+        "part": "**Seventh Schedule**",
+        "title": "Distribution of Powers (Union, State, Concurrent Lists)",
+        "articles": "Union List 97, State List 66, Concurrent List 47 subjects",
+        "category": "schedules",
+        "keyPoints": "• **Union List**: Defence, foreign affairs, railways, banking, etc. (97 subjects)\n• **State List**: Police, public health, agriculture, local govt (66 subjects; originally 47)\n• **Concurrent List**: Education, forests, marriage, criminal law (47 subjects; originally 47)\n• Residuary powers with Union (Art 248)",
+        "details": {
+          "significance": "Defines federal structure. Union List = Parliament only; State List = State Legislature only; Concurrent = Both (Union prevails in conflict).",
+          "examTip": "Union List 97, State List 66, Concurrent 47. Residuary with Union. During Emergency, Union can legislate on State List (Art 250)."
+        }
+      },
+      {
+        "id": "schedule-8",
+        "part": "**Eighth Schedule**",
+        "title": "Recognized Languages",
+        "articles": "Originally 14, now 22 scheduled languages",
+        "category": "schedules",
+        "keyPoints": "• Originally 14 languages at commencement (1950)\n• 21st Amendment (1967) added Sindhi\n• 71st Amendment (1992) added Konkani, Manipuri, Nepali\n• 92nd Amendment (2003) added Bodo, Dogri, Maithili, Santhali\n• Total now: 22 languages",
+        "details": {
+          "significance": "Languages recognized for official purposes. Can be used in parliament, exams, etc. Official Language Commission considers these.",
+          "examTip": "**22 languages** (originally 14 in 1950). Latest additions (2003): Bodo, Dogri, Maithili, Santhali. NO classical language status in 8th Schedule (separate designation)."
+        }
+      },
+      {
+        "id": "schedule-9",
+        "part": "**Ninth Schedule**",
+        "title": "Land Reforms and Zamindari Abolition Acts",
+        "articles": "Originally 13 Acts, now 284 Acts",
+        "category": "schedules",
+        "keyPoints": "• Added by 1st Amendment 1951\n• Provides immunity from judicial review to Acts placed in it\n• Initially for land reforms, later misused for other Acts\n• SC held (I.R. Coelho 2007): Acts violating basic structure can be reviewed",
+        "details": {
+          "significance": "Created to protect land reforms from being struck down. Later became controversial due to misuse. I.R. Coelho judgment limited its immunity.",
+          "examTip": "9th Schedule added by 1st Amendment 1951. Gives immunity from judicial review. I.R. Coelho case (2007) held: Basic structure cannot be violated even by 9th Schedule Acts."
+        }
+      },
+      {
+        "id": "schedule-10",
+        "part": "**Tenth Schedule**",
+        "title": "Anti-Defection Law",
+        "articles": "Provisions for disqualification on ground of defection",
+        "category": "schedules",
+        "keyPoints": "• Added by 52nd Amendment 1985\n• MP/MLA disqualified if defects (voluntarily gives up membership or votes against party whip)\n• Decision by Speaker/Chairman (subject to judicial review)\n• Exception: Merger of 2/3rd members of party",
+        "details": {
+          "significance": "Curbs political defection. Ensures stability of government. However, gives excessive power to Speaker.",
+          "examTip": "52nd Amendment 1985 added 10th Schedule (Anti-Defection Law). Disqualification if: (1) voluntarily gives up membership (2) votes against party whip. Exception: 2/3rd merger."
+        }
+      },
+      {
+        "id": "schedule-11",
+        "part": "**Eleventh Schedule**",
+        "title": "Powers of Panchayats",
+        "articles": "29 subjects for Panchayati Raj Institutions",
+        "category": "schedules",
+        "keyPoints": "• Added by 73rd Amendment 1992\n• 29 subjects devolved to Panchayats\n• Includes: Agriculture, land reforms, minor irrigation, animal husbandry, fisheries, social forestry, drinking water, rural housing, poverty alleviation, primary education, health, women & child development",
+        "details": {
+          "significance": "Empowers Panchayats for rural development. State legislatures decide extent of devolution.",
+          "examTip": "73rd Amendment 1992 added 11th Schedule. 29 subjects for panchayats (e.g., agriculture, education, health). 3-tier system."
+        }
+      },
+      {
+        "id": "schedule-12",
+        "part": "**Twelfth Schedule**",
+        "title": "Powers of Municipalities",
+        "articles": "18 subjects for Municipal Bodies",
+        "category": "schedules",
+        "keyPoints": "• Added by 74th Amendment 1992\n• 18 subjects devolved to Municipalities\n• Includes: Urban planning, water supply, public health, slum improvement, fire services, urban forestry, safeguarding POW, regulation of slaughterhouses",
+        "details": {
+          "significance": "Empowers urban local bodies. State legislatures decide extent of devolution.",
+          "examTip": "74th Amendment 1992 added 12th Schedule. 18 subjects for municipalities (e.g., water supply, urban planning, health). 3 types: Nagar Panchayat, Municipal Council, Municipal Corporation."
+        }
+      }
+    ],
+    "summary": "Indian Constitution has **25 Parts** and **12 Schedules**. **Most important**: Part III (FRs), Part IV (DPSPs), Part V (Union), Part VI (States), Part IVA (FDs - 42nd Amendment), Part IX (Panchayats - 73rd Amendment), Part IXA (Municipalities - 74th Amendment), Part XX (Amendment Art 368). **Key Schedules**: 7th (Union, State, Concurrent Lists), 8th (22 languages), 9th (Land reforms), 10th (Anti-defection - 52nd Amendment), 11th (Panchayats - 73rd Amendment), 12th (Municipalities - 74th Amendment). **Originally**: 395 Articles, 22 Parts, 8 Schedules. **Now**: 470 Articles (after 105 Amendments), 25 Parts, 12 Schedules."
+  }
+}
+
