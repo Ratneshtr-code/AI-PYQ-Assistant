@@ -48,21 +48,8 @@ export default function TopicNavBar({
     };
 
     return (
-        <div className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-30">
-            <div className="max-w-full px-4 md:px-6">
-                <div className="flex items-center justify-between py-3">
-                    {/* Topic Title (Mobile) */}
-                    {currentTopic && (
-                        <div className="flex-1 md:hidden mr-3">
-                            <h2 className="text-sm font-semibold text-gray-800 truncate">
-                                {currentTopic.title}
-                            </h2>
-                        </div>
-                    )}
-
-                    {/* Tab Navigation */}
-                    <div className="flex items-center gap-1 md:gap-2 ml-auto">
-                        {tabs.map((tab) => {
+        <div className="flex items-center gap-1 md:gap-2">
+            {tabs.map((tab) => {
                             const isActive = activeTab === tab.id;
                             const isLearningPath = tab.id === "learning-path";
                             
@@ -118,10 +105,7 @@ export default function TopicNavBar({
                                     </AnimatePresence>
                                 </div>
                             );
-                        })}
-                    </div>
-                </div>
-            </div>
+            })}
         </div>
     );
 }

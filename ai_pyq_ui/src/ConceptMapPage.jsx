@@ -7,6 +7,7 @@ import SubjectSelector from "./components/conceptmap/SubjectSelector";
 import TopicList from "./components/conceptmap/TopicList";
 import ContentRenderer from "./components/conceptmap/ContentRenderer";
 import LearningPath from "./components/conceptmap/LearningPath";
+import TopicNavBar from "./components/conceptmap/TopicNavBar";
 import UserMenuDropdown from "./components/UserMenuDropdown";
 import FeedbackModal from "./components/FeedbackModal";
 import { useMobileDetection } from "./utils/useMobileDetection";
@@ -72,10 +73,60 @@ export default function ConceptMapPage() {
     const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
     const userMenuButtonRef = useRef(null);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
+    const [activeTab, setActiveTab] = useState("content");
 
     // Check if we're on a learning-path route
     const isLearningPathRoute = location.pathname.includes('/learning-path');
     const currentSubjectId = subjectId || selectedSubject;
+
+    // Load topic from URL when topicId is present
+    useEffect(() => {
+        if (topicId && selectedSubject && topics.length > 0) {
+            const topic = topics.find(t => t.id === topicId);
+            if (topic) {
+                // Fetch full topic details
+                const fetchTopicDetails = async () => {
+                    try {
+                        const url = buildApiUrl(`conceptmap/topic/${topic.id}?subject=${selectedSubject}`);
+                        const res = await fetch(url, {
+                            credentials: "include",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Accept": "application/json",
+                            },
+                        });
+
+                        if (res.ok) {
+                            const fullTopic = await res.json();
+                            setSelectedTopic(fullTopic);
+                        } else {
+                            setSelectedTopic(topic); // Fallback to basic topic info
+                        }
+                    } catch (err) {
+                        console.error("Error fetching topic details:", err);
+                        setSelectedTopic(topic); // Fallback to basic topic info
+                    }
+                };
+                fetchTopicDetails();
+            }
+        } else if (!topicId) {
+            // No topicId in URL - clear selected topic
+            setSelectedTopic(null);
+        }
+    }, [topicId, selectedSubject, topics]);
+
+    // Update activeTab based on route
+    useEffect(() => {
+        if (isLearningPathRoute) {
+            setActiveTab("learning-path");
+        } else if (topicId && selectedTopic) {
+            // Topic is selected from URL - show content
+            setActiveTab("content");
+        } else if (!topicId && !isLearningPathRoute && selectedSubject) {
+            // Coming from subject page - show learning path
+            setActiveTab("learning-path");
+        }
+    }, [isLearningPathRoute, topicId, selectedTopic, selectedSubject]);
 
     // Check if roadmap exists for the subject
     useEffect(() => {
@@ -141,6 +192,10 @@ export default function ConceptMapPage() {
                 const subject = subjects.find(sub => sub.id === subjectId);
                 if (subject) {
                     setSelectedSubject(subject.id);
+                    // If coming from subject page (no topicId, no learning-path), redirect to learning-path
+                    if (!topicId && !isLearningPathRoute) {
+                        navigate(`/conceptmap/subjects/${subjectId}/learning-path`, { replace: true });
+                    }
                 }
             } else {
                 // Default to Geography
@@ -152,7 +207,7 @@ export default function ConceptMapPage() {
                 }
             }
         }
-    }, [subjects, selectedSubject, subjectId]);
+    }, [subjects, selectedSubject, subjectId, topicId, isLearningPathRoute, navigate]);
 
     // Fetch roadmap and topics when subject is selected
     useEffect(() => {
@@ -404,35 +459,9 @@ export default function ConceptMapPage() {
     };
 
     const handleTopicSelect = async (topic) => {
-        // Topic already has path from topics list, but fetch full details for consistency
-        // If topic already has path, use it directly
-        if (topic.path) {
-            setSelectedTopic(topic);
-            return;
-        }
-
-        // Otherwise fetch topic details to get path for static content
-        try {
-            const url = buildApiUrl(`conceptmap/topic/${topic.id}?subject=${selectedSubject}`);
-            const res = await fetch(url, {
-                credentials: "include",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                },
-            });
-
-            if (!res.ok) {
-                console.error("Failed to fetch topic details");
-                setSelectedTopic(topic); // Fallback to basic topic info
-                return;
-            }
-
-            const fullTopic = await res.json();
-            setSelectedTopic(fullTopic);
-        } catch (err) {
-            console.error("Error fetching topic details:", err);
-            setSelectedTopic(topic); // Fallback to basic topic info
+        // Navigate to topic route - this will trigger content view
+        if (selectedSubject) {
+            navigate(`/conceptmap/subjects/${selectedSubject}/topics/${topic.id}`);
         }
     };
 
@@ -476,6 +505,28 @@ export default function ConceptMapPage() {
                         </p>
                     </motion.button>
 
+                    {/* Right Side: Topic Navigation Bar (Desktop) or Mobile Menu Toggle */}
+                    <div className="hidden md:flex items-center min-w-[180px] justify-end">
+                        {selectedSubject && (
+                            <TopicNavBar
+                                activeTab={activeTab}
+                                onTabChange={(tab) => {
+                                    if (tab === "learning-path") {
+                                        navigate(`/conceptmap/subjects/${selectedSubject}/learning-path`);
+                                    } else if (tab === "content" && selectedTopic) {
+                                        // Navigate to topic content
+                                        navigate(`/conceptmap/subjects/${selectedSubject}/topics/${selectedTopic.id}`);
+                                    }
+                                }}
+                                onLearningPathClick={() => {
+                                    navigate(`/conceptmap/subjects/${selectedSubject}/learning-path`);
+                                }}
+                                showLearningPath={roadmapExists}
+                                currentTopic={selectedTopic}
+                            />
+                        )}
+                    </div>
+
                     {/* Mobile Menu Toggle */}
                     <button
                         onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
@@ -486,11 +537,32 @@ export default function ConceptMapPage() {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </button>
-
-                    {/* Desktop Spacer for balance */}
-                    <div className="hidden md:block w-[180px]"></div>
                 </div>
             </div>
+
+            {/* Mobile Topic Navigation Bar - Below Header */}
+            {selectedSubject && (
+                <div className="md:hidden bg-white border-b border-gray-200/50 shadow-sm">
+                    <div className="px-4 py-2">
+                        <TopicNavBar
+                            activeTab={activeTab}
+                            onTabChange={(tab) => {
+                                if (tab === "learning-path") {
+                                    navigate(`/conceptmap/subjects/${selectedSubject}/learning-path`);
+                                } else if (tab === "content" && selectedTopic) {
+                                    // Navigate to topic content
+                                    navigate(`/conceptmap/subjects/${selectedSubject}/topics/${selectedTopic.id}`);
+                                }
+                            }}
+                            onLearningPathClick={() => {
+                                navigate(`/conceptmap/subjects/${selectedSubject}/learning-path`);
+                            }}
+                            showLearningPath={roadmapExists}
+                            currentTopic={selectedTopic}
+                        />
+                    </div>
+                </div>
+            )}
 
             {/* Mobile Sidebar Backdrop */}
             {mobileSidebarOpen && (
@@ -678,8 +750,8 @@ export default function ConceptMapPage() {
 
                 {/* Main Content Area - Full Width */}
                 <div className="flex-1 flex flex-col overflow-y-auto bg-gradient-to-br from-blue-50/50 to-indigo-50/50">
-                    {/* Learning Path View - Only show if no topic is selected */}
-                    {isLearningPathRoute && currentSubjectId && !selectedTopic ? (
+                    {/* Learning Path View - Show when on learning-path route OR when no topic selected and coming from subject page */}
+                    {((isLearningPathRoute || (!topicId && !selectedTopic && selectedSubject)) && currentSubjectId) ? (
                         checkingRoadmap ? (
                             <div className="flex-1 flex items-center justify-center p-4 md:p-8 min-h-full">
                                 <div className="text-center">
@@ -736,6 +808,8 @@ export default function ConceptMapPage() {
                                     topic={selectedTopic} 
                                     selectedSubject={selectedSubject}
                                     onTopicSelect={handleTopicSelect}
+                                    activeTab={activeTab}
+                                    onTabChange={setActiveTab}
                                 />
                             </div>
                         </motion.div>

@@ -12,19 +12,14 @@ import ArticleCardsVisual from "./visuals/ArticleCardsVisual";
 import SplitPanelVisual from "./visuals/SplitPanelVisual";
 import PreambleVisual from "./visuals/PreambleVisual";
 import TabsVisual from "./visuals/TabsVisual";
-import TopicNavBar from "./TopicNavBar";
 import LearningPath from "./LearningPath";
 
-export default function ContentRenderer({ topic, selectedSubject, onTopicSelect }) {
+export default function ContentRenderer({ topic, selectedSubject, onTopicSelect, activeTab = "content", onTabChange }) {
     const [topicData, setTopicData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [activeTab, setActiveTab] = useState("content");
 
     useEffect(() => {
-        // Reset to content tab when topic changes
-        setActiveTab("content");
-        
         if (!topic) {
             setTopicData(null);
             setLoading(false);
@@ -72,25 +67,10 @@ export default function ContentRenderer({ topic, selectedSubject, onTopicSelect 
         fetchTopicData();
     }, [topic, selectedSubject]);
 
-    const handleLearningPathClick = () => {
-        setActiveTab("learning-path");
-    };
-
-    const handleTabChange = (tab) => {
-        setActiveTab(tab);
-    };
-
     // Show learning path
     if (activeTab === "learning-path") {
         return (
             <div className="w-full h-full flex flex-col">
-                <TopicNavBar
-                    activeTab="learning-path"
-                    onTabChange={handleTabChange}
-                    onLearningPathClick={handleLearningPathClick}
-                    showLearningPath={true}
-                    currentTopic={topic}
-                />
                 <div className="flex-1 overflow-auto">
                     <LearningPath
                         subject={selectedSubject}
@@ -107,19 +87,10 @@ export default function ContentRenderer({ topic, selectedSubject, onTopicSelect 
         // Loading state
         if (loading) {
             return (
-                <div className="w-full h-full flex flex-col">
-                    <TopicNavBar
-                        activeTab="content"
-                        onTabChange={handleTabChange}
-                        onLearningPathClick={handleLearningPathClick}
-                        showLearningPath={true}
-                        currentTopic={topic}
-                    />
-                    <div className="flex-1 flex items-center justify-center bg-gray-50">
-                        <div className="text-center">
-                            <div className="inline-block animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600 mb-3"></div>
-                            <p className="text-gray-600">Loading content...</p>
-                        </div>
+                <div className="w-full h-full flex items-center justify-center bg-gray-50">
+                    <div className="text-center">
+                        <div className="inline-block animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600 mb-3"></div>
+                        <p className="text-gray-600">Loading content...</p>
                     </div>
                 </div>
             );
@@ -128,20 +99,11 @@ export default function ContentRenderer({ topic, selectedSubject, onTopicSelect 
         // Error state
         if (error) {
             return (
-                <div className="w-full h-full flex flex-col">
-                    <TopicNavBar
-                        activeTab="content"
-                        onTabChange={handleTabChange}
-                        onLearningPathClick={handleLearningPathClick}
-                        showLearningPath={true}
-                        currentTopic={topic}
-                    />
-                    <div className="flex-1 flex items-center justify-center bg-gray-50">
-                        <div className="text-center">
-                            <div className="text-4xl mb-3">⚠️</div>
-                            <p className="text-gray-500 text-lg">Failed to load content</p>
-                            <p className="text-gray-400 text-sm mt-2">{error}</p>
-                        </div>
+                <div className="w-full h-full flex items-center justify-center bg-gray-50">
+                    <div className="text-center">
+                        <div className="text-4xl mb-3">⚠️</div>
+                        <p className="text-gray-500 text-lg">Failed to load content</p>
+                        <p className="text-gray-400 text-sm mt-2">{error}</p>
                     </div>
                 </div>
             );
@@ -222,13 +184,6 @@ export default function ContentRenderer({ topic, selectedSubject, onTopicSelect 
 
         return (
             <div className="w-full h-full flex flex-col">
-                <TopicNavBar
-                    activeTab="content"
-                    onTabChange={handleTabChange}
-                    onLearningPathClick={handleLearningPathClick}
-                    showLearningPath={true}
-                    currentTopic={topic}
-                />
                 <div className="flex-1 overflow-auto">
                     {content}
                 </div>
@@ -238,22 +193,13 @@ export default function ContentRenderer({ topic, selectedSubject, onTopicSelect 
 
     // Quiz tab (coming soon)
     return (
-        <div className="w-full h-full flex flex-col">
-            <TopicNavBar
-                activeTab={activeTab}
-                onTabChange={handleTabChange}
-                onLearningPathClick={handleLearningPathClick}
-                showLearningPath={true}
-                currentTopic={topic}
-            />
-            <div className="flex-1 flex items-center justify-center bg-gray-50">
-                <div className="text-center max-w-md">
-                    <div className="text-6xl mb-4">🎯</div>
-                    <h3 className="text-2xl font-bold text-gray-700 mb-2">Coming Soon!</h3>
-                    <p className="text-gray-600">
-                        Interactive quizzes will be available soon to test your knowledge.
-                    </p>
-                </div>
+        <div className="w-full h-full flex items-center justify-center bg-gray-50">
+            <div className="text-center max-w-md">
+                <div className="text-6xl mb-4">🎯</div>
+                <h3 className="text-2xl font-bold text-gray-700 mb-2">Coming Soon!</h3>
+                <p className="text-gray-600">
+                    Interactive quizzes will be available soon to test your knowledge.
+                </p>
             </div>
         </div>
     );
