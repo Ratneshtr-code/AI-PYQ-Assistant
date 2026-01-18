@@ -457,12 +457,16 @@ export default function ConceptMapPage() {
                         </span>
                     </motion.button>
 
-                    {/* Page Title */}
-                    <motion.div
+                    {/* Page Title - Clickable to go to Subject page */}
+                    <motion.button
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="flex-1 text-center"
+                        onClick={() => navigate("/conceptmap/subjects")}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="flex-1 text-center cursor-pointer hover:opacity-80 transition-opacity"
+                        title="Back to Subjects"
                     >
                         <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                             🗺️ ConceptMap
@@ -470,7 +474,7 @@ export default function ConceptMapPage() {
                         <p className="text-xs md:text-sm text-gray-600 hidden md:block">
                             Static content learning platform for concept exploration
                         </p>
-                    </motion.div>
+                    </motion.button>
 
                     {/* Mobile Menu Toggle */}
                     <button
