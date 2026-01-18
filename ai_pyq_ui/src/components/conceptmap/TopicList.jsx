@@ -72,7 +72,7 @@ export default function TopicList({ topics, organizedTopics, selectedTopic, onSe
                         {/* Chapter Header */}
                         {displayData.length > 1 && (
                             <div className="pt-2">
-                                <h3 className="text-xs font-bold text-gray-600 uppercase tracking-wider px-2 mb-2">
+                                <h3 className="text-xs font-bold text-violet-600 uppercase tracking-wider px-2 mb-2">
                                     {chapter.chapterTitle}
                                 </h3>
                             </div>
