@@ -12,13 +12,7 @@
       "path": "ramsar_site.png"
     }
   ],
-  "polity": [
-    {
-      "id": 1,
-      "topic": "Fundamental Rights",
-      "path": "fundamental-rights.png"
-    }
-  ],
+  "polity": [],
   "economy": [
     {
       "id": 1,

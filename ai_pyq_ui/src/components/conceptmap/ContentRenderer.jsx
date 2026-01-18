@@ -6,6 +6,10 @@ import TimelineVisual from "./visuals/TimelineVisual";
 import TableVisual from "./visuals/TableVisual";
 import FlowchartVisual from "./visuals/FlowchartVisual";
 import MindMapVisual from "./visuals/MindMapVisual";
+import ClockVisual from "./visuals/ClockVisual";
+import StaircaseVisual from "./visuals/StaircaseVisual";
+import ArticleCardsVisual from "./visuals/ArticleCardsVisual";
+import SplitPanelVisual from "./visuals/SplitPanelVisual";
 import TopicNavBar from "./TopicNavBar";
 import LearningPath from "./LearningPath";
 
@@ -176,6 +180,22 @@ export default function ContentRenderer({ topic, selectedSubject, onTopicSelect 
             
             case "mindmap":
                 content = <MindMapVisual topicData={topicData} />;
+                break;
+            
+            case "clock":
+                content = <ClockVisual topicData={topicData} />;
+                break;
+            
+            case "staircase":
+                content = <StaircaseVisual topicData={topicData} />;
+                break;
+            
+            case "articleCards":
+                content = <ArticleCardsVisual topicData={topicData} />;
+                break;
+            
+            case "splitPanel":
+                content = <SplitPanelVisual topicData={topicData} />;
                 break;
             
             default:

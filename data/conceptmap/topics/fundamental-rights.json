@@ -1,0 +1,638 @@
+{
+  "id": "fundamental-rights",
+  "subject": "polity",
+    "title": "Fundamental Rights (Part III, Articles 12-35)",
+    "description": "",
+    "visualType": "splitPanel",
+  "metadata": {
+    "examRelevance": "very-high",
+    "relatedTopics": ["dpsps", "fundamental-duties"],
+    "tags": ["Fundamental-Rights", "Constitution", "Part-III", "Articles-12-35"]
+  },
+  "data": {
+    "centerText": "Fundamental\nRights",
+    "categories": [
+      {"id": "definition", "label": "Definition & Scope", "color": "#6366F1"},
+      {"id": "equality", "label": "Right to Equality", "color": "#3B82F6"},
+      {"id": "freedom", "label": "Right to Freedom", "color": "#10B981"},
+      {"id": "exploitation", "label": "Against Exploitation", "color": "#F59E0B"},
+      {"id": "religion", "label": "Freedom of Religion", "color": "#8B5CF6"},
+      {"id": "cultural", "label": "Cultural & Educational", "color": "#EC4899"},
+      {"id": "remedies", "label": "Constitutional Remedies", "color": "#EF4444"}
+    ],
+    "articles": [
+      {
+        "id": "art-12",
+        "angle": 0,
+        "number": "Article 12",
+        "shortLabel": "12",
+        "title": "Definition of 'State'",
+        "category": "definition",
+        "color": "#6366F1",
+        "content": {
+          "scope": "Defines 'State' for the purpose of Part III (Fundamental Rights)",
+          "provisions": [
+            "**Government and Parliament of India** - Union executive and legislature",
+            "**Government and Legislature of States** - State executive and legislature",
+            "**All local authorities** - Municipalities, Panchayats, improvement trusts",
+            "**All other authorities** - Statutory bodies, public corporations (LIC, ONGC, etc.)"
+          ],
+          "significance": [
+            "Widens the scope of FR - enforceable against State only",
+            "Ensures government actions are subject to FR scrutiny",
+            "Includes government companies substantially controlled by State"
+          ],
+          "examTips": "**Key Point**: Only actions of 'State' can violate FRs. Private individuals cannot violate FRs (except Art 23-24).",
+          "keyCases": "**Pradeep Kumar Biswas v IIT Delhi (2008)** - IIT declared as 'State' under Art 12"
+        }
+      },
+      {
+        "id": "art-13",
+        "angle": 18,
+        "number": "Article 13",
+        "shortLabel": "13",
+        "title": "Laws Inconsistent with FRs",
+        "category": "definition",
+        "color": "#6366F1",
+        "content": {
+          "provisions": [
+            "**Pre-constitutional laws**: If inconsistent with FR, void to extent of inconsistency",
+            "**Post-constitutional laws**: State shall not make any law that takes away or abridges FRs",
+            "**'Law' includes**: Ordinance, order, bye-law, rule, regulation, notification, custom, usage having force of law"
+          ],
+          "significance": [
+            "Makes FR supreme - any law violating FR is void",
+            "Judicial review power derives from this article",
+            "Protects FRs from legislative encroachment"
+          ],
+          "exceptions": [
+            "**Art 31A, 31B, 31C** - Create immunity for certain laws (land reforms, DPSP implementation)",
+            "**Amendments to Constitution** - Not 'law' under Art 13 (Kesavananda Bharati case)"
+          ],
+          "examTips": "**Remember**: Art 13(2) makes FR superior to ordinary laws. Parliament cannot violate FRs through ordinary legislation.",
+          "keyCases": "**Kesavananda Bharati (1973)** - Constitutional amendments not covered under Art 13; Basic Structure doctrine established"
+        }
+      },
+      {
+        "id": "art-14",
+        "angle": 36,
+        "number": "Article 14",
+        "shortLabel": "14",
+        "title": "Equality Before Law",
+        "category": "equality",
+        "color": "#3B82F6",
+        "content": {
+          "provisions": [
+            "**Equality before law** - British concept (negative); no person above law",
+            "**Equal protection of laws** - American concept (positive); equals treated equally",
+            "Applies to both citizens and non-citizens"
+          ],
+          "scope": [
+            "Rule of law - no arbitrary discrimination",
+            "Reasonable classification permitted - must have rational nexus with object",
+            "Applies to all State actions - legislative, executive, judicial"
+          ],
+          "exceptions": [
+            "**President & Governors** - Art 361 grants immunity from criminal proceedings during office",
+            "**Foreign diplomats** - International law grants immunity",
+            "**Reasonable classification** - Permitted if based on intelligible differentia with rational nexus"
+          ],
+          "examTips": "**Most Important**: Art 14 is foundation of equality. Allows classification but not discrimination. Test: (1) Intelligible differentia (2) Rational nexus with object.",
+          "keyCases": "**Maneka Gandhi (1978)** - Art 14 pervades all FRs; procedure must be fair, just and reasonable"
+        }
+      },
+      {
+        "id": "art-15",
+        "angle": 54,
+        "number": "Article 15",
+        "shortLabel": "15",
+        "title": "Prohibition of Discrimination",
+        "category": "equality",
+        "color": "#3B82F6",
+        "content": {
+          "provisions": [
+            "**15(1)**: State shall not discriminate on grounds of religion, race, caste, sex, place of birth or any of them",
+            "**15(2)**: No citizen shall be discriminated in access to shops, restaurants, hotels, public entertainment, wells, tanks, roads (public use)",
+            "**15(3)**: State can make special provisions for **women and children**",
+            "**15(4)**: State can make special provisions for **socially and educationally backward classes** (SEBCs) and **SCs/STs** (added by 1st Amendment 1951)",
+            "**15(5)**: Private educational institutions can reserve seats for SEBCs/SCs/STs except minority institutions (added by 93rd Amendment 2005)"
+          ],
+          "exceptions": [
+            "Special provisions for women, children permitted",
+            "Reservation for SCs, STs, OBCs permitted",
+            "Minority educational institutions protected under Art 30"
+          ],
+          "examTips": "**Critical**: Art 15(4) and 15(5) are exceptions to 15(1). Enable affirmative action. 15(4) added by 1st Amendment; 15(5) by 93rd Amendment.",
+          "keyCases": "**Indra Sawhney (1992)** - Upheld OBC reservation; introduced creamy layer; 50% ceiling on reservation"
+        }
+      },
+      {
+        "id": "art-16",
+        "angle": 72,
+        "number": "Article 16",
+        "shortLabel": "16",
+        "title": "Equality in Public Employment",
+        "category": "equality",
+        "color": "#3B82F6",
+        "content": {
+          "provisions": [
+            "**16(1)**: Equal opportunity in matters of public employment",
+            "**16(2)**: No discrimination on grounds of religion, race, caste, sex, descent, place of birth, residence",
+            "**16(3)**: Parliament can prescribe residence requirement for certain state jobs",
+            "**16(4)**: Reservation for **backward classes** if inadequately represented (added 1st Amendment)",
+            "**16(4A)**: Reservation in **promotions** for SCs/STs (added 77th Amendment 1995)",
+            "**16(4B)**: Unfilled reserved vacancies can be carried forward (**consequential seniority** maintained) (added 81st Amendment 2000)",
+            "**16(5)**: Religious institutions can require employees of same religion"
+          ],
+          "examTips": "**Major Amendments**: 77th (reservation in promotion), 81st (consequential seniority), 85th (promotion with consequential seniority in SCs/STs)",
+          "keyCases": "**M Nagaraj (2006)** - Upheld Art 16(4A) and 16(4B); but reservation in promotion requires data on backwardness and inadequate representation"
+        }
+      },
+      {
+        "id": "art-17",
+        "angle": 90,
+        "number": "Article 17",
+        "shortLabel": "17",
+        "title": "Abolition of Untouchability",
+        "category": "equality",
+        "color": "#3B82F6",
+        "content": {
+          "provisions": [
+            "**Untouchability abolished** - practice in any form forbidden",
+            "Enforcement of disability arising from untouchability is an **offence punishable by law**",
+            "Both State and private individuals bound"
+          ],
+          "significance": [
+            "**Only FR enforceable against private individuals** (along with Art 23-24)",
+            "Social reform measure to eradicate caste-based discrimination",
+            "Implemented through **Protection of Civil Rights Act 1955** (earlier Untouchability Offences Act 1955)"
+          ],
+          "examTips": "**Unique Feature**: Art 17 is absolute - no exceptions. Enforceable against private persons also.",
+          "keyCases": "**State of Karnataka v Appa Balu Ingale (1993)** - Practice of untouchability in any form punishable under PCR Act 1955"
+        }
+      },
+      {
+        "id": "art-18",
+        "angle": 108,
+        "number": "Article 18",
+        "shortLabel": "18",
+        "title": "Abolition of Titles",
+        "category": "equality",
+        "color": "#3B82F6",
+        "content": {
+          "provisions": [
+            "**18(1)**: State shall not confer any title (except military and academic distinctions)",
+            "**18(2)**: No citizen shall accept any title from a foreign State",
+            "**18(3)**: Foreign titles not to be used by foreigners holding office of profit",
+            "**18(4)**: Foreign titles cannot be used without President's consent by citizens"
+          ],
+          "exceptions": [
+            "**Bharat Ratna, Padma awards** - Not titles; held constitutional in Balaji Raghavan case (1996)",
+            "**Military distinctions** - Param Vir Chakra, Maha Vir Chakra, etc.",
+            "**Academic distinctions** - D.Litt, D.Sc, etc."
+          ],
+          "notes": [
+            "Padma awards (Bharat Ratna, Padma Vibhushan, Padma Bhushan, Padma Shri) are **honours**, not titles",
+            "Cannot be used as prefix/suffix to name (though often violated in practice)"
+          ],
+          "examTips": "**Remember**: Padma awards are NOT titles under Art 18. They are honours and don't confer any privileges."
+        }
+      },
+      {
+        "id": "art-19",
+        "angle": 126,
+        "number": "Article 19",
+        "shortLabel": "19",
+        "title": "Six Freedoms",
+        "category": "freedom",
+        "color": "#10B981",
+        "content": {
+          "provisions": [
+            "**19(1)(a)**: Freedom of **speech and expression** (includes press, media)",
+            "**19(1)(b)**: Freedom to **assemble peacefully** without arms",
+            "**19(1)(c)**: Freedom to form **associations or unions** (includes right to strike - not absolute)",
+            "**19(1)(d)**: Freedom to **move freely** throughout India",
+            "**19(1)(e)**: Freedom to **reside and settle** in any part of India",
+            "**19(1)(g)**: Freedom to **practice any profession, occupation, trade or business**"
+          ],
+          "notes": [
+            "**Originally 7 freedoms** - 19(1)(f) right to property was deleted by 44th Amendment 1978",
+            "**Available to citizens only** (not to non-citizens or foreign companies)",
+            "**Not absolute** - each freedom subject to reasonable restrictions under Art 19(2) to 19(6)"
+          ],
+          "restrictions": [
+            "Restrictions must be **reasonable** (Judiciary decides)",
+            "Restrictions only on grounds specified in Art 19(2) to 19(6)",
+            "**Procedure established by law** requirement (Art 21 expanded this)"
+          ],
+          "examTips": "**Critical for Exams**: Originally 7 freedoms (19(1)(a) to (g)); 19(1)(f) property right deleted in 1978. Now only 6 freedoms. Each has specific grounds for restrictions.",
+          "keyCases": "**Romesh Thappar (1950)** - Freedom of press included in Art 19(1)(a)"
+        }
+      },
+      {
+        "id": "art-20",
+        "angle": 144,
+        "number": "Article 20",
+        "shortLabel": "20",
+        "title": "Protection in Conviction",
+        "category": "freedom",
+        "color": "#10B981",
+        "content": {
+          "provisions": [
+            "**20(1)**: No **ex-post-facto law** - cannot be convicted for act not offence when done",
+            "**20(2)**: No **double jeopardy** - cannot be prosecuted and punished twice for same offence",
+            "**20(3)**: No **self-incrimination** - accused cannot be compelled to be witness against himself"
+          ],
+          "scope": [
+            "Available to **both citizens and non-citizens**",
+            "Protection against conviction for criminal offences only (not civil matters)",
+            "Art 20(3) protection available at investigation, inquiry, trial stages"
+          ],
+          "exceptions": [
+            "Tax proceedings are civil - Art 20 doesn't apply",
+            "Departmental/disciplinary proceedings - Art 20 doesn't apply",
+            "Narco-analysis, brain-mapping violate Art 20(3) if forcibly conducted"
+          ],
+          "examTips": "**Remember 3 protections**: (1) Ex-post-facto law (2) Double jeopardy (3) Self-incrimination. All three available to citizens and non-citizens.",
+          "keyCases": "**Selvi v State of Karnataka (2010)** - Narco-analysis, polygraph, brain-mapping violate Art 20(3) if conducted without consent"
+        }
+      },
+      {
+        "id": "art-21",
+        "angle": 162,
+        "number": "Article 21",
+        "shortLabel": "21",
+        "title": "Right to Life & Personal Liberty",
+        "category": "freedom",
+        "color": "#10B981",
+        "content": {
+          "provisions": [
+            "No person shall be deprived of **life or personal liberty** except according to **procedure established by law**",
+            "**Most expansive FR** - includes right to live with dignity, livelihood, health, education, environment, privacy, etc."
+          ],
+          "judicialExpansion": [
+            "**Maneka Gandhi (1978)**: Procedure must be fair, just, reasonable (not arbitrary)",
+            "**Right to livelihood** - Francis Coralie (1981)",
+            "**Right to education** - Mohini Jain (1992); later made explicit through Art 21A",
+            "**Right to health** - CESCA v Union (1995)",
+            "**Right to clean environment** - MC Mehta v Union (1987)",
+            "**Right to privacy** - KS Puttaswamy (2017) - 9-judge bench",
+            "**Right to speedy trial** - Hussainara Khatoon (1979)",
+            "**Right against solitary confinement** - Sunil Batra (1978)",
+            "**Right to legal aid** - M.H. Hoskot (1978)"
+          ],
+          "significance": "**Most litigated article** - judicial creativity expanded scope tremendously through PIL",
+          "examTips": "**Most Important FR**: Art 21 heart of FRs. Remember key cases: Maneka Gandhi (procedure must be fair), Puttaswamy (privacy). Art 21A (education) added via 86th Amendment.",
+          "keyCases": "**Maneka Gandhi (1978)** - Revolutionary case; expanded Art 21; procedure must be fair, just, reasonable"
+        }
+      },
+      {
+        "id": "art-21a",
+        "angle": 180,
+        "number": "Article 21A",
+        "shortLabel": "21A",
+        "title": "Right to Education",
+        "category": "freedom",
+        "color": "#10B981",
+        "content": {
+          "provisions": [
+            "State shall provide **free and compulsory education** to all children aged **6 to 14 years**",
+            "Inserted by **86th Constitutional Amendment Act 2002**",
+            "Implemented through **Right to Education Act 2009** (RTE Act)"
+          ],
+          "significance": [
+            "Converted DPSP (Art 45) into Fundamental Right",
+            "Makes education justiciable - can be enforced through courts",
+            "India one of few countries with education as FR"
+          ],
+          "notes": [
+            "**Age 6-14 years** - elementary education only (not pre-primary or higher education)",
+            "Art 51A(k) imposes **Fundamental Duty** on parents to provide education to children 6-14 years",
+            "Private schools must admit 25% children from EWS/disadvantaged (RTE Act provision)"
+          ],
+          "examTips": "**Added 2002, Implemented 2010**: 86th Amendment inserted Art 21A making education FR for age 6-14. RTE Act 2009 implements it.",
+          "keyCases": "**Society for Unaided Schools v Union (2012)** - Upheld 25% EWS reservation in private schools under RTE Act"
+        }
+      },
+      {
+        "id": "art-22",
+        "angle": 198,
+        "number": "Article 22",
+        "shortLabel": "22",
+        "title": "Protection Against Arrest",
+        "category": "freedom",
+        "color": "#10B981",
+        "content": {
+          "provisions": [
+            "**22(1)**: Right to be informed of **grounds of arrest**",
+            "**22(2)**: Right to consult and be defended by **legal practitioner of choice**",
+            "**22(3)**: Arrested person must be produced before **magistrate within 24 hours**",
+            "**22(4-7)**: Safeguards against **preventive detention** (can be detained without trial max 3 months; beyond 3 months requires Advisory Board approval)"
+          ],
+          "preventiveDetention": [
+            "Detention to prevent future offence (not punishment for past act)",
+            "Art 22(4-7) provide safeguards but less stringent than 22(1-3)",
+            "Grounds of detention must be communicated; detenu can make representation",
+            "Advisory Board (with judges) must review within 3 months"
+          ],
+          "exceptions": [
+            "**Enemy aliens** - Art 22 doesn't apply",
+            "**Preventive detention laws**: NSA, UAPA, etc. can bypass some safeguards",
+            "Art 22(3) doesn't apply to preventive detention"
+          ],
+          "examTips": "**Two parts**: 22(1-3) protection against arrest; 22(4-7) safeguards in preventive detention. Remember 24-hour rule and Advisory Board (3 months).",
+          "keyCases": "**AK Gopalan (1950)** - Narrow interpretation of Art 22; later overruled by Maneka Gandhi"
+        }
+      },
+      {
+        "id": "art-23",
+        "angle": 216,
+        "number": "Article 23",
+        "shortLabel": "23",
+        "title": "Prohibition of Traffic in Human Beings",
+        "category": "exploitation",
+        "color": "#F59E0B",
+        "content": {
+          "provisions": [
+            "**23(1)**: Traffic in human beings, **begar (forced labour)**, and other forms of **forced labour** prohibited",
+            "**23(2)**: State can impose **compulsory service for public purposes** (e.g., military conscription)",
+            "Prohibition includes slavery, bonded labour, child labour"
+          ],
+          "significance": [
+            "**Enforceable against State and private individuals** (one of few FRs)",
+            "Absolute prohibition - no restrictions permitted",
+            "Social reform measure"
+          ],
+          "implementation": [
+            "**Bonded Labour Abolition Act 1976**",
+            "**Child Labour Prohibition Act 1986** (amended 2016)",
+            "**Immoral Traffic Prevention Act 1956**"
+          ],
+          "examTips": "**Art 23 & 24 enforce against private persons** (like Art 17). Remember 'begar' means forced labour without payment.",
+          "keyCases": "**Bandhua Mukti Morcha (1984)** - Bonded labour violates Art 23; expanded Art 21 to include right to live with dignity"
+        }
+      },
+      {
+        "id": "art-24",
+        "angle": 234,
+        "number": "Article 24",
+        "shortLabel": "24",
+        "title": "Prohibition of Child Labour",
+        "category": "exploitation",
+        "color": "#F59E0B",
+        "content": {
+          "provisions": [
+            "No child below age of **14 years** employed in **factory, mine** or other **hazardous employment**",
+            "Enforceable against State and private employers"
+          ],
+          "scope": [
+            "Applies to factory, mine, hazardous work only (not all child labour)",
+            "Age limit: 14 years",
+            "Absolute prohibition - no exceptions for hazardous work"
+          ],
+          "implementation": [
+            "**Child Labour (Prohibition & Regulation) Act 1986** - prohibits child labour in hazardous occupations",
+            "**Child Labour Amendment Act 2016** - complete prohibition below 14 in all occupations (except family business and entertainment)"
+          ],
+          "notes": [
+            "Art 21A provides free education 6-14 years",
+            "Art 24 prohibits hazardous employment below 14 years",
+            "Together they aim to eliminate child labour and promote education"
+          ],
+          "examTips": "**Age 14 years, Hazardous work**: Art 24 prohibits employment below 14 in factory/mine/hazardous work. 2016 Amendment expanded to all work except family business.",
+          "keyCases": "**MC Mehta v State of Tamil Nadu (1996)** - Directed States to identify and rehabilitate child labour; emphasized Art 21A importance"
+        }
+      },
+      {
+        "id": "art-25",
+        "angle": 252,
+        "number": "Article 25",
+        "shortLabel": "25",
+        "title": "Freedom of Conscience & Religion",
+        "category": "religion",
+        "color": "#8B5CF6",
+        "content": {
+          "provisions": [
+            "**25(1)**: Right to **freedom of conscience** and right to freely **profess, practice and propagate religion**",
+            "**25(2)**: Subject to public order, morality, health and **other FRs**",
+            "State can regulate economic, financial, political, secular activities associated with religion"
+          ],
+          "scope": [
+            "Freedom of conscience: Right to follow any religion or be atheist/agnostic",
+            "Profess: Right to declare religious belief",
+            "Practice: Right to perform religious acts, rituals",
+            "Propagate: Right to spread religious ideas (but NOT right to convert by force/fraud)"
+          ],
+          "restrictions": [
+            "Subject to public order, morality, health",
+            "State can regulate secular activities of religion",
+            "Cannot violate other fundamental rights",
+            "Essential religious practices protected; non-essential can be regulated"
+          ],
+          "examTips": "**3Ps**: Profess, Practice, Propagate. Available to individuals. Art 26 gives rights to religious denominations (groups). Remember 'essential religious practices' test.",
+          "keyCases": "**Commissioner, Hindu Religious Endowments v Shirur Mutt (1954)** - Established 'essential religious practices' test"
+        }
+      },
+      {
+        "id": "art-26",
+        "angle": 270,
+        "number": "Article 26",
+        "shortLabel": "26",
+        "title": "Freedom to Manage Religious Affairs",
+        "category": "religion",
+        "color": "#8B5CF6",
+        "content": {
+          "provisions": [
+            "Every religious denomination has right to:",
+            "**26(a)**: Establish and maintain institutions for religious and charitable purposes",
+            "**26(b)**: Manage its own affairs in matters of religion",
+            "**26(c)**: Own and acquire movable and immovable property",
+            "**26(d)**: Administer such property in accordance with law"
+          ],
+          "scope": [
+            "Right of **religious denominations/groups** (not individuals - Art 25 for individuals)",
+            "Protects autonomy of religious institutions",
+            "State can regulate secular/administrative aspects"
+          ],
+          "restrictions": [
+            "Subject to public order, morality, health",
+            "Property administration subject to law",
+            "Only essential religious practices protected"
+          ],
+          "examTips": "**Religious denomination rights**: Art 26 for groups/denominations vs Art 25 for individuals. Both subject to public order, morality, health.",
+          "keyCases": "**Sardar Syedna Taher Saifuddin v State of Bombay (1962)** - Excommunication is religious practice; State cannot interfere"
+        }
+      },
+      {
+        "id": "art-27",
+        "angle": 288,
+        "number": "Article 27",
+        "shortLabel": "27",
+        "title": "Freedom from Religious Taxes",
+        "category": "religion",
+        "color": "#8B5CF6",
+        "content": {
+          "provisions": [
+            "No person shall be compelled to pay taxes for **promotion or maintenance of any particular religion**",
+            "Ensures State does not use tax money to promote any religion"
+          ],
+          "scope": [
+            "Protects individual liberty from religious tax burden",
+            "State neutrality in religious matters",
+            "Available to all persons (citizens and non-citizens)"
+          ],
+          "notes": [
+            "General taxes can be used for religious purposes if serving broader public purpose (e.g., managing Kumbh Mela for crowd control)",
+            "Specific taxes earmarked for one religion violate Art 27"
+          ],
+          "examTips": "**No religious taxes**: Cannot force anyone to pay tax specifically for promoting a religion. Ensures State's religious neutrality."
+        }
+      },
+      {
+        "id": "art-28",
+        "angle": 306,
+        "number": "Article 28",
+        "shortLabel": "28",
+        "title": "Freedom from Religious Instruction",
+        "category": "religion",
+        "color": "#8B5CF6",
+        "content": {
+          "provisions": [
+            "**28(1)**: No religious instruction in State-funded educational institutions",
+            "**28(2)**: Exception for institutions administered by State but established under endowment/trust requiring religious instruction",
+            "**28(3)**: No compulsion for students in State-recognized private institutions to attend religious instruction without consent"
+          ],
+          "scope": [
+            "Protects students from forced religious instruction",
+            "Applies to State-funded and State-recognized institutions",
+            "Voluntary participation permitted in private institutions with consent"
+          ],
+          "notes": [
+            "Fully State-funded institutions: No religious instruction at all",
+            "State-administered but privately endowed: Religious instruction permitted",
+            "Private aided/recognized: Voluntary participation with consent"
+          ],
+          "examTips": "**3 categories of institutions**: (1) Fully State-funded - no religious instruction (2) State-administered but endowed - permitted (3) Private recognized - voluntary with consent."
+        }
+      },
+      {
+        "id": "art-29",
+        "angle": 324,
+        "number": "Article 29",
+        "shortLabel": "29",
+        "title": "Protection of Minorities' Interests",
+        "category": "cultural",
+        "color": "#EC4899",
+        "content": {
+          "provisions": [
+            "**29(1)**: Citizens having distinct language, script, culture have right to **conserve** the same",
+            "**29(2)**: No citizen denied admission to State-aided/State-maintained institution on grounds of religion, race, caste, language"
+          ],
+          "scope": [
+            "Protects cultural rights of minorities (linguistic, religious)",
+            "Right to conserve (not develop) language, script, culture",
+            "Applies to citizens only"
+          ],
+          "significance": [
+            "Ensures cultural diversity protection",
+            "Prevents discrimination in educational admissions",
+            "Minority rights safeguarded"
+          ],
+          "examTips": "**Right to conserve**: Art 29 protects minority's right to conserve their language/script/culture. Art 29(2) prevents admission discrimination in State institutions.",
+          "keyCases": "**T.M.A. Pai Foundation (2002)** - Minorities have right to establish and administer educational institutions under Art 30"
+        }
+      },
+      {
+        "id": "art-30",
+        "angle": 342,
+        "number": "Article 30",
+        "shortLabel": "30",
+        "title": "Right to Establish Educational Institutions",
+        "category": "cultural",
+        "color": "#EC4899",
+        "content": {
+          "provisions": [
+            "**30(1)**: All religious and linguistic minorities have right to **establish and administer** educational institutions of their choice",
+            "**30(1A)**: Compensation for compulsory acquisition of minority institution property must not restrict Art 30(1) right",
+            "**30(2)**: State shall not discriminate in granting aid to minority institutions"
+          ],
+          "scope": [
+            "Right to establish: Right to found institutions",
+            "Right to administer: Right to manage without State interference",
+            "Protects autonomy of minority institutions"
+          ],
+          "restrictions": [
+            "Must maintain educational standards",
+            "Cannot violate general laws (labor laws, etc.)",
+            "Cannot claim absolute immunity from regulation"
+          ],
+          "notes": [
+            "Minority institutions exempt from Art 15(5) reservation for SCs/STs/OBCs",
+            "Minority status determined by unit of State (not all-India)",
+            "Linguistic/religious minorities both covered"
+          ],
+          "examTips": "**Minority institutions special rights**: Art 30 strongest minority protection. Can establish & administer institutions. Exempt from many regulations including RTE 25% EWS quota.",
+          "keyCases": "**T.M.A. Pai (2002)** - Landmark case on minority institutions; State determines minority status; Right to admit students part of Art 30"
+        }
+      },
+      {
+        "id": "art-32",
+        "angle": 30,
+        "number": "Article 32",
+        "shortLabel": "32",
+        "title": "Constitutional Remedies",
+        "category": "remedies",
+        "color": "#EF4444",
+        "content": {
+          "provisions": [
+            "Right to move **Supreme Court** for enforcement of Fundamental Rights",
+            "SC empowered to issue **writs** (Habeas Corpus, Mandamus, Prohibition, Quo Warranto, Certiorari)",
+            "**Art 32 itself a Fundamental Right** - cannot be suspended except during Emergency (Art 359)"
+          ],
+          "significance": [
+            "**'Soul and heart of Constitution'** - Dr. B.R. Ambedkar",
+            "Makes FRs justiciable and enforceable",
+            "Direct access to Supreme Court (no need to approach lower courts first)",
+            "Guaranteed remedy for FR violations"
+          ],
+          "writs": [
+            "**Habeas Corpus**: Produce person detained illegally before court",
+            "**Mandamus**: Command public authority to perform legal duty",
+            "**Prohibition**: Prevent lower court from exceeding jurisdiction",
+            "**Certiorari**: Quash order of lower court/tribunal exceeding jurisdiction",
+            "**Quo Warranto**: Inquiry into legality of person's claim to public office"
+          ],
+          "notes": [
+            "Art 226 gives HCs power to issue writs for FRs AND other legal rights (wider than Art 32)",
+            "Art 32 cannot be suspended even during Emergency except by Presidential order under Art 359"
+          ],
+          "examTips": "**Most Important FR**: Ambedkar called Art 32 'heart of Constitution'. Guarantees remedy for FR violations. Remember 5 writs. Art 32 (SC) only for FRs; Art 226 (HC) for FRs + other rights.",
+          "keyCases": "**Romesh Thappar (1950)** - First case where SC used Art 32 to strike down law violating FR"
+        }
+      },
+      {
+        "id": "art-35",
+        "angle": 12,
+        "number": "Article 35",
+        "shortLabel": "35",
+        "title": "Legislation to Give Effect to FRs",
+        "category": "definition",
+        "color": "#6366F1",
+        "content": {
+          "provisions": [
+            "Parliament (not State Legislatures) has exclusive power to make laws to give effect to certain FRs",
+            "Covers laws relating to Art 16(3), 32, 33, 34 and Part III generally"
+          ],
+          "scope": [
+            "Ensures uniform implementation of FRs across India",
+            "Parliament's exclusive domain (States cannot legislate)",
+            "Covers laws for residence requirement (Art 16(3)), writs (Art 32), armed forces (Art 33), martial law (Art 34)"
+          ],
+          "examTips": "**Parliament's exclusive power**: Art 35 gives Parliament exclusive power to implement certain FRs. Ensures uniformity across States."
+        }
+      }
+    ],
+    "summary": "**Fundamental Rights (Part III, Art 12-35)** are justiciable rights enforceable through courts. They protect individual liberty against State action. **6 categories**: (1) Right to Equality (14-18), (2) Right to Freedom (19-22), (3) Against Exploitation (23-24), (4) Freedom of Religion (25-28), (5) Cultural & Educational Rights (29-30), (6) Constitutional Remedies (32). **Most important articles for exams**: Art 14 (Equality), Art 19 (6 freedoms), Art 21 (Life & Liberty - most expansive), Art 32 (Remedies - 'heart of Constitution'). **Remember**: FRs not absolute; subject to reasonable restrictions. Art 13 makes them supreme over ordinary laws."
+  }
+}
+

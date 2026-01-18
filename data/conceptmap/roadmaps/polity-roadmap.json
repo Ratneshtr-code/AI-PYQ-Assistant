@@ -1,0 +1,198 @@
+{
+  "id": "polity-roadmap",
+  "subject": "polity",
+  "title": "Indian Polity - Complete Learning Path",
+  "description": "Comprehensive strategic roadmap for studying Indian Polity for government exams (SSC, UPSC, State PCS). Master Constitutional provisions with innovative visual models.",
+  "version": "1.0",
+  "lastUpdated": "2026-01-18",
+  "learningPath": {
+    "overview": "This learning path covers fundamental aspects of Indian Polity and Constitution. Follow topics in order for comprehensive understanding and excellent exam preparation. We use innovative visual models (Split-Panel, Staircase) to help you retain concepts permanently.",
+    "estimatedTime": "80-100 hours for complete mastery of current topics",
+    "difficulty": "Medium to High",
+    "examImportance": "Very High - Core topic for all government exams (SSC, UPSC, UPPCS, other PCS)"
+  },
+  "topics": [
+    {
+      "id": "fundamental-rights-chapter",
+      "order": 1,
+      "mainTopic": "Fundamental Rights (Part III)",
+      "category": "Constitutional Framework",
+      "status": "available",
+      "estimatedTime": "20-25 hours",
+      "importance": "Critical",
+      "description": "Complete coverage of all Fundamental Rights (Articles 12-35) using innovative Split-Panel interface with organized content boxes for provisions, scope, significance, exam tips, and key cases",
+      "prerequisites": [],
+      "subTopics": [
+        {
+          "id": "fundamental-rights",
+          "title": "Fundamental Rights - Split Panel View",
+          "visualType": "splitPanel",
+          "order": 1,
+          "description": "Navigate all major FR articles (Art 12-35) with master-detail interface showing organized content boxes for each article"
+        }
+      ],
+      "keyTakeaways": [
+        "Part III (Art 12-35) contains all Fundamental Rights",
+        "6 main categories: Equality, Freedom, Against Exploitation, Religion, Cultural-Educational, Constitutional Remedies",
+        "Art 14 (Equality) and Art 21 (Life & Liberty) most expansive and litigated",
+        "Art 19 originally had 7 freedoms; now 6 (property removed in 1978)",
+        "Art 32 (Constitutional Remedies) called 'heart and soul of Constitution' by Dr. Ambedkar",
+        "FRs not absolute - subject to reasonable restrictions",
+        "Art 13 makes FRs supreme over ordinary laws"
+      ],
+      "connections": ["dpsps-chapter"]
+    },
+    {
+      "id": "dpsps-chapter",
+      "order": 2,
+      "mainTopic": "Directive Principles of State Policy (Part IV)",
+      "category": "Constitutional Framework",
+      "status": "available",
+      "estimatedTime": "15-18 hours",
+      "importance": "Critical",
+      "description": "Master all DPSPs (Articles 36-51) through ascending Staircase Model showing logical groupings",
+      "prerequisites": ["fundamental-rights-chapter"],
+      "subTopics": [
+        {
+          "id": "dpsps",
+          "title": "DPSPs - Interactive Staircase Model",
+          "visualType": "staircase",
+          "order": 1,
+          "description": "Climb through DPSP categories from foundation to international relations with exam-smart notes"
+        }
+      ],
+      "keyTakeaways": [
+        "Part IV (Art 36-51) contains Directive Principles - non-justiciable but fundamental in governance",
+        "7 categories: Foundation, Social Justice, Economic, Gandhian, Administrative, Environmental, International",
+        "Art 37 declares DPSPs non-justiciable (unlike FRs) but fundamental",
+        "Art 39 has 6 crucial clauses (a-f) - frequently asked",
+        "Art 44 (UCC) most debated - only Goa has implemented",
+        "Art 48A (Environment) and Art 43A (Worker participation) added by 42nd Amendment 1976",
+        "DPSPs complement FRs: FRs are means, DPSPs are ends"
+      ],
+      "connections": []
+    }
+  ],
+  "studyTips": [
+    "Use visual models (Split-Panel, Staircase) to permanently retain concepts - master-detail interface for efficient learning",
+    "Article numbers are CRITICAL - Art 14, 19, 21, 32 for FRs; Art 37, 39, 44 for DPSPs",
+    "Understand FR vs DPSP distinction: FRs negative/justiciable/individual-centric vs DPSPs positive/non-justiciable/society-centric",
+    "Constitutional Amendments important: 1st (Art 15(4), 16(4)), 42nd (Art 48A, 43A), 44th (Property right removed), 86th (Art 21A education)",
+    "Landmark cases crucial: Maneka Gandhi (Art 21 expansion), Kesavananda Bharati (Basic Structure), Indra Sawhney (Reservation)",
+    "Art 19 originally 7 freedoms (a-g); Art 19(1)(f) property deleted by 44th Amendment 1978",
+    "Remember the 6 freedoms under Art 19: Speech, Assembly, Association, Movement, Residence, Profession",
+    "Art 21 most expansive - judicial creativity expanded to include privacy, livelihood, health, education, environment",
+    "Art 32 gives direct access to Supreme Court for FR violations - called 'heart of Constitution'",
+    "DPSPs implemented through laws: MGNREGA (Art 41), Maternity Act (Art 42), Minimum Wages (Art 43), 73rd Amendment (Art 40)",
+    "Gandhian DPSPs: Art 40 (Panchayats), Art 43 (Cottage industries), Art 47 (Prohibition), Art 48 (Cow protection)",
+    "Practice comparison questions: FR vs DPSP, different articles under same category"
+  ],
+  "examStrategy": {
+    "frequentTopics": [
+      "Art 14: Equality before law - Rule of law, reasonable classification",
+      "Art 15: Prohibition of discrimination - Reservations (15(4), 15(5))",
+      "Art 16: Equality in public employment - Reservation in jobs and promotions",
+      "Art 19: Six freedoms - Originally seven, property removed",
+      "Art 21: Life and personal liberty - Most expansive FR, includes right to privacy",
+      "Art 21A: Right to education - 86th Amendment, age 6-14",
+      "Art 32: Constitutional remedies - Five writs, 'heart of Constitution'",
+      "Art 14 vs Art 16: General equality vs Equality in employment",
+      "Art 19 vs Art 21: Specific freedoms vs Broad liberty",
+      "Art 25 vs Art 26: Individual religious freedom vs Institutional religious freedom",
+      "Art 29 vs Art 30: Minority cultural rights vs Educational institution rights",
+      "Art 37: DPSPs non-justiciable but fundamental in governance",
+      "Art 39: Six clauses (a-f) - Livelihood, common good, equal pay, etc.",
+      "Art 44: Uniform Civil Code - Only Goa implemented, Shah Bano case",
+      "Art 48A: Environment protection - 42nd Amendment",
+      "FR vs DPSP: Justiciability, positive vs negative, individual vs society",
+      "Constitutional Amendments: 1st, 42nd, 44th, 73rd, 86th",
+      "Landmark cases: Maneka Gandhi, Kesavananda, Indra Sawhney, Minerva Mills"
+    ],
+    "mustKnowDates": [
+      "1950 - Constitution came into effect (26 January)",
+      "1951 - 1st Amendment (Art 15(4), 16(4) reservation provisions)",
+      "1976 - 42nd Amendment ('Mini Constitution' - Art 48A, 43A added)",
+      "1978 - 44th Amendment (Property right removed from FRs)",
+      "1992 - 73rd Amendment (Panchayati Raj - Art 40 implementation)",
+      "1995 - 77th Amendment (Reservation in promotions - Art 16(4A))",
+      "2002 - 86th Amendment (Art 21A right to education added)",
+      "2009 - RTE Act (Implementation of Art 21A)",
+      "2017 - Right to Privacy declared Fundamental Right (Puttaswamy case)"
+    ],
+    "mustKnowCases": [
+      "AK Gopalan (1950) - Narrow interpretation of Art 21; later overruled",
+      "Romesh Thappar (1950) - Freedom of press part of Art 19(1)(a)",
+      "Kesavananda Bharati (1973) - Basic Structure doctrine; Parliament cannot destroy Constitution's basic features",
+      "Maneka Gandhi (1978) - Revolutionary; Art 21 expanded; procedure must be fair, just, reasonable",
+      "Minerva Mills (1980) - Balance between FRs and DPSPs; neither absolute supremacy",
+      "MC Mehta cases (1980s-90s) - Environmental PIL; right to clean environment under Art 21",
+      "Indra Sawhney (1992) - OBC reservation valid; creamy layer concept; 50% ceiling",
+      "Mohini Jain (1992) - Right to education part of Art 21",
+      "TMA Pai (2002) - Minority institutions' rights under Art 30",
+      "KS Puttaswamy (2017) - Right to privacy part of Art 21; 9-judge bench"
+    ],
+    "importantAspects": [
+      "Article numbers with provisions - numerical accuracy crucial",
+      "Constitutional Amendments - know amendment number, year, and key changes",
+      "Landmark judgments - case name, year, key principle established",
+      "Comparison tables - FR vs DPSP, different articles, different categories",
+      "Visual models - Use Clock model for FRs, Staircase for DPSPs",
+      "Exceptions and limitations - When FRs can be restricted, DPSP implementation challenges",
+      "Mnemonic devices - Remember article groupings (12-13 Definition, 14-18 Equality, etc.)",
+      "Current affairs link - Recent judgments, new laws implementing DPSPs",
+      "Difference between similar articles - Art 14 vs 16, Art 25 vs 26, Art 29 vs 30"
+    ],
+    "comparisonTables": [
+      "Fundamental Rights vs Directive Principles (10+ points of distinction)",
+      "Art 14 (General Equality) vs Art 16 (Employment Equality)",
+      "Art 15 (Social Discrimination) vs Art 16 (Employment Discrimination)",
+      "Art 19 (Six Freedoms) vs Art 21 (Life & Liberty)",
+      "Art 25 (Individual Religious Freedom) vs Art 26 (Institutional Religious Freedom)",
+      "Art 29 (Cultural Rights) vs Art 30 (Educational Institution Rights)",
+      "Art 32 (SC for FR violations) vs Art 226 (HC for all rights)",
+      "Pre-Maneka (Narrow Art 21) vs Post-Maneka (Expanded Art 21)",
+      "Social Justice DPSPs vs Gandhian DPSPs vs Economic DPSPs"
+    ],
+    "connections": [
+      "Art 12 defines 'State' → All FRs enforceable against 'State' → Art 13 makes laws void if violating FRs",
+      "Art 14 Equality → Art 15 specific to social discrimination → Art 16 specific to employment",
+      "Art 19 specific freedoms → Art 21 broad liberty → Maneka Gandhi merged both (procedure for Art 19 must also be fair)",
+      "Art 21 Right to Life → Judicial expansion → Includes education → Led to Art 21A (86th Amendment)",
+      "Part III (FRs) → Individual rights → Part IV (DPSPs) → Social goals → Minerva Mills balanced both",
+      "Art 37 DPSPs non-justiciable → BUT courts use DPSPs to interpret FRs → Harmonious construction",
+      "Art 44 UCC directive → Shah Bano case → Political controversy → Muslim Women Act → UCC debate continues",
+      "Gandhian DPSPs (40, 43, 47, 48) → Rural focus → 73rd Amendment implemented Art 40 → Panchayati Raj"
+    ]
+  },
+  "revisionStrategy": {
+    "week1": "Fundamental Rights Part 1: Art 12-18 (Definition, Equality)",
+    "week2": "Fundamental Rights Part 2: Art 19-22 (Freedom) - Focus on Art 19 and 21",
+    "week3": "Fundamental Rights Part 3: Art 23-30 (Exploitation, Religion, Cultural) and Art 32 (Remedies)",
+    "week4": "DPSPs Complete: Art 36-51 all categories using Staircase model",
+    "week5": "Comparison and Integration: FR vs DPSP, Landmark cases, Constitutional Amendments",
+    "week6": "Practice: MCQs, previous year questions, case-based questions",
+    "week7": "Revision: Visual models (Clock for FRs, Staircase for DPSPs), article numbers, key cases",
+    "week8": "Mock tests and weak area focus"
+  },
+  "futureTopics": {
+    "planned": [
+      "Fundamental Duties (Art 51A)",
+      "Union Executive (President, PM, Council of Ministers)",
+      "State Executive (Governor, CM, Council of Ministers)",
+      "Parliament (Lok Sabha, Rajya Sabha, Sessions, Legislative Process)",
+      "State Legislature",
+      "Judiciary (Supreme Court, High Courts, Subordinate Courts)",
+      "Constitutional Amendment Procedure (Art 368)",
+      "Emergency Provisions (National, State, Financial)",
+      "Centre-State Relations",
+      "Panchayati Raj (73rd Amendment)",
+      "Municipalities (74th Amendment)",
+      "Scheduled and Tribal Areas",
+      "Official Language",
+      "Special Provisions for certain states",
+      "Important Constitutional Bodies (Election Commission, CAG, UPSC, etc.)"
+    ]
+  },
+  "completionNote": "Initial polity roadmap created with 2 foundational topics using innovative visual models. Fundamental Rights use Clock Model for article-by-article navigation. DPSPs use Staircase Model for category-wise learning. Both designed for permanent retention and exam success."
+}
+
