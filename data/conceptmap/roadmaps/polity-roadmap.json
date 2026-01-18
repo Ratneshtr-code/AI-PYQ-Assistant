@@ -6,7 +6,7 @@
   "version": "1.0",
   "lastUpdated": "2026-01-18",
   "learningPath": {
-    "overview": "This learning path covers fundamental aspects of Indian Polity and Constitution. Follow topics in order for comprehensive understanding and excellent exam preparation. We use innovative visual models (Split-Panel, Staircase) to help you retain concepts permanently.",
+    "overview": "This learning path covers fundamental aspects of Indian Polity and Constitution. Follow topics in order for comprehensive understanding and excellent exam preparation. We use innovative Split-Panel visual model to help you navigate and retain complex constitutional provisions permanently.",
     "estimatedTime": "80-100 hours for complete mastery of current topics",
     "difficulty": "Medium to High",
     "examImportance": "Very High - Core topic for all government exams (SSC, UPSC, UPPCS, other PCS)"
@@ -50,15 +50,15 @@
       "status": "available",
       "estimatedTime": "15-18 hours",
       "importance": "Critical",
-      "description": "Master all DPSPs (Articles 36-51) through ascending Staircase Model showing logical groupings",
+      "description": "Master all DPSPs (Articles 36-51) through Split-Panel interface with organized content boxes for each article",
       "prerequisites": ["fundamental-rights-chapter"],
       "subTopics": [
         {
           "id": "dpsps",
-          "title": "DPSPs - Interactive Staircase Model",
-          "visualType": "staircase",
+          "title": "DPSPs - Split Panel View",
+          "visualType": "splitPanel",
           "order": 1,
-          "description": "Climb through DPSP categories from foundation to international relations with exam-smart notes"
+          "description": "Navigate all major DPSP articles (Art 36-51) with master-detail interface showing organized content for each directive principle"
         }
       ],
       "keyTakeaways": [
@@ -74,7 +74,7 @@
     }
   ],
   "studyTips": [
-    "Use visual models (Split-Panel, Staircase) to permanently retain concepts - master-detail interface for efficient learning",
+    "Use Split-Panel visual model to permanently retain concepts - master-detail interface allows quick navigation and deep content exploration",
     "Article numbers are CRITICAL - Art 14, 19, 21, 32 for FRs; Art 37, 39, 44 for DPSPs",
     "Understand FR vs DPSP distinction: FRs negative/justiciable/individual-centric vs DPSPs positive/non-justiciable/society-centric",
     "Constitutional Amendments important: 1st (Art 15(4), 16(4)), 42nd (Art 48A, 43A), 44th (Property right removed), 86th (Art 21A education)",

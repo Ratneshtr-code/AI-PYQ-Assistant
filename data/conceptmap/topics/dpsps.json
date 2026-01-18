@@ -1,246 +1,580 @@
 {
   "id": "dpsps",
   "subject": "polity",
-  "title": "Directive Principles of State Policy - Staircase Model",
-  "description": "Climb through the categories of DPSPs using an interactive staircase. Each step represents a category of directive principles that guide State policy-making.",
-  "visualType": "staircase",
+  "title": "Directive Principles of State Policy (Part IV, Articles 36-51)",
+  "description": "",
+  "visualType": "splitPanel",
   "metadata": {
     "examRelevance": "very-high",
     "relatedTopics": ["fundamental-rights", "fundamental-duties"],
     "tags": ["DPSPs", "Constitution", "Part-IV", "Articles-36-51"]
   },
   "data": {
-    "steps": [
+    "categories": [
+      {"id": "foundation", "label": "Foundation & Definition", "color": "#6366F1"},
+      {"id": "social-justice", "label": "Social Justice", "color": "#3B82F6"},
+      {"id": "economic", "label": "Economic & Livelihood", "color": "#10B981"},
+      {"id": "gandhian", "label": "Gandhian Principles", "color": "#F59E0B"},
+      {"id": "administrative", "label": "Administrative & Legal", "color": "#8B5CF6"},
+      {"id": "environmental", "label": "Environmental", "color": "#059669"},
+      {"id": "international", "label": "International Relations", "color": "#DC2626"}
+    ],
+    "articles": [
       {
-        "id": "foundation",
-        "order": 1,
-        "title": "Foundation & Definition",
-        "subtitle": "What are DPSPs?",
-        "articles": ["Art 36", "Art 37"],
+        "id": "art-36",
+        "number": "Article 36",
+        "shortLabel": "36",
+        "title": "Definition of 'State'",
+        "category": "foundation",
         "color": "#6366F1",
-        "colorLight": "#818CF8",
-        "gradient": "linear-gradient(135deg, #6366F1, #818CF8)",
         "content": {
-          "keyPoints": [
-            "**Art 36**: 'State' has same meaning as in Art 12 (for Part III - FRs)",
-            "**Art 37**: DPSPs are **not justiciable** (cannot be enforced through courts) BUT **fundamental in governance**",
-            "DPSPs are **positive obligations** on State to achieve socio-economic democracy",
-            "Guide State in making laws and policies"
+          "provisions": [
+            "'State' has the same meaning as in **Article 12** (for Part III - Fundamental Rights)",
+            "Ensures consistency in interpretation across Parts III and IV"
+          ],
+          "scope": [
+            "Applies to Government and Parliament of India",
+            "Government and Legislature of States",
+            "All local authorities (Municipalities, Panchayats)",
+            "All other authorities under control of Government of India"
+          ],
+          "significance": [
+            "Establishes uniform definition of 'State' for DPSPs",
+            "Same entities bound by FRs are guided by DPSPs"
+          ],
+          "examTips": "**Simple but important**: Art 36 ensures 'State' in Part IV (DPSPs) = 'State' in Part III (FRs). Same definition as Art 12."
+        }
+      },
+      {
+        "id": "art-37",
+        "number": "Article 37",
+        "shortLabel": "37",
+        "title": "Application of DPSPs",
+        "category": "foundation",
+        "color": "#6366F1",
+        "content": {
+          "provisions": [
+            "DPSPs are **not justiciable** - cannot be enforced through courts",
+            "BUT they are **fundamental in governance** of the country",
+            "Courts cannot compel State to implement DPSPs",
+            "Duty of State to apply these principles in making laws"
+          ],
+          "significance": [
+            "**Most important article** of Part IV - defines nature of DPSPs",
+            "DPSPs are **positive obligations** on State (unlike FRs which are negative)",
+            "Non-justiciable nature allows State flexibility in implementation",
+            "'Fundamental in governance' gives moral force to DPSPs"
           ],
           "distinction": [
-            "**FRs are negative** (State shall NOT do); **DPSPs are positive** (State shall do)",
-            "**FRs are justiciable** (enforceable in court); **DPSPs are non-justiciable** (not enforceable)",
-            "**FRs impose limitations** on State; **DPSPs give directions** to State",
-            "**FRs individual-centric**; **DPSPs society-centric**"
+            "**FRs (Part III)**: Justiciable (enforceable in courts) + Negative (State shall NOT do) + Individual-centric",
+            "**DPSPs (Part IV)**: Non-justiciable (not enforceable) + Positive (State SHALL do) + Society-centric",
+            "**Both complementary**: FRs are means; DPSPs are ends",
+            "Dr. Ambedkar: '*DPSPs are novel feature of Indian Constitution*'"
           ],
-          "significance": [
-            "Borrowed from **Irish Constitution**",
-            "Represent socio-economic goals of Constitution",
-            "Balance individual liberty (FRs) with social welfare (DPSPs)",
-            "Dr. Ambedkar: '*Novel feature of Indian Constitution*'"
-          ],
-          "examTips": "**Art 37 most important**: DPSPs non-justiciable but fundamental in governance. Remember distinction from FRs: FRs negative & justiciable; DPSPs positive & non-justiciable."
+          "examTips": "**MOST CRITICAL for exams**: Art 37 declares DPSPs non-justiciable BUT fundamental in governance. Remember: FRs negative & justiciable; DPSPs positive & non-justiciable. Both complement each other.",
+          "keyCases": "**Minerva Mills (1980)** - Harmony between FRs and DPSPs; both equally important. **State of Madras v Champakam (1951)** - FRs prevail over DPSPs in case of conflict."
         }
       },
       {
-        "id": "social-justice",
-        "order": 2,
-        "title": "Social Justice DPSPs",
-        "subtitle": "Promoting Welfare & Equality",
-        "articles": ["Art 38", "Art 39", "Art 46", "Art 47"],
+        "id": "art-38",
+        "number": "Article 38",
+        "shortLabel": "38",
+        "title": "Social Order for Welfare",
+        "category": "social-justice",
         "color": "#3B82F6",
-        "colorLight": "#60A5FA",
-        "gradient": "linear-gradient(135deg, #3B82F6, #60A5FA)",
         "content": {
-          "keyPoints": [
-            "**Art 38(1)**: State to promote welfare through **social order** ensuring justice (social, economic, political)",
-            "**Art 38(2)**: Minimize inequalities in income, status, facilities, opportunities",
-            "**Art 39**: Principles of policy including:",
-            "• **39(a)**: Adequate livelihood for men and women",
-            "• **39(b)**: Ownership & control of material resources for common good (socialism)",
-            "• **39(c)**: Prevent concentration of wealth",
-            "• **39(d)**: Equal pay for equal work for both men and women",
-            "• **39(e)**: Protection of health and strength of workers, children not abused",
-            "• **39(f)**: Childhood and youth protected against exploitation",
-            "**Art 46**: Promote educational and economic interests of **SCs, STs, and weaker sections**; protect from social injustice and exploitation",
-            "**Art 47**: Raise **level of nutrition, standard of living**, improve **public health**; prohibit intoxicating drinks and harmful drugs (except medicinal)"
+          "provisions": [
+            "**38(1)**: State shall strive to promote welfare of people by securing **social order** with justice (social, economic, political)",
+            "**38(2)**: State shall minimize **inequalities** in income, status, facilities, opportunities among individuals and groups"
           ],
-          "examTips": "**Most important cluster**: Art 39 has 6 sub-clauses (a-f) - frequently asked in exams. 39(b) basis for nationalization. 39(d) equal pay principle. Art 46 protects SCs/STs.",
+          "scope": [
+            "Broad framework for socio-economic justice",
+            "Covers all three types of justice: Social + Economic + Political",
+            "Aims to reduce disparities in Indian society"
+          ],
+          "significance": [
+            "Foundation for **welfare state** concept in India",
+            "Basis for poverty alleviation and redistribution policies",
+            "Guides affirmative action and reservation policies"
+          ],
           "implementation": [
-            "**MGNREGA** (Art 39(a) - livelihood)",
-            "**Bank Nationalization** (Art 39(b))",
-            "**Equal Remuneration Act 1976** (Art 39(d))",
-            "**Reservation policies** (Art 46)",
-            "**Mid-day Meal Scheme** (Art 47)",
-            "**Prohibition in some states** (Art 47)"
+            "Poverty alleviation programs (MGNREGA, PMAY, etc.)",
+            "Progressive taxation to reduce income inequality",
+            "Reservation in education and employment",
+            "Subsidies for weaker sections"
           ],
-          "mnemonic": "**Remember LENIN**: **L**ivelihood(39a), **E**qual pay(39d), **N**utrition(47), **I**nequality minimize(38), **N**utrition again(47)"
+          "examTips": "**Art 38**: Welfare through social order + minimize inequalities. Forms theoretical basis for all welfare schemes. Remember 3 types of justice: Social, Economic, Political."
         }
       },
       {
-        "id": "economic-dpsps",
-        "order": 3,
-        "title": "Economic & Livelihood DPSPs",
-        "subtitle": "Work, Wages & Welfare",
-        "articles": ["Art 39", "Art 41", "Art 42", "Art 43", "Art 43A"],
+        "id": "art-39",
+        "number": "Article 39",
+        "shortLabel": "39",
+        "title": "Principles of Policy (6 Clauses)",
+        "category": "social-justice",
+        "color": "#3B82F6",
+        "content": {
+          "provisions": [
+            "**39(a)**: Men and women have right to **adequate means of livelihood**",
+            "**39(b)**: Ownership and control of **material resources** distributed for **common good** (socialism)",
+            "**39(c)**: Economic system does not result in **concentration of wealth** and means of production",
+            "**39(d)**: **Equal pay for equal work** for both men and women",
+            "**39(e)**: Health and strength of workers, men and women, and children not abused; citizens not forced by economic necessity to unsuitable vocations",
+            "**39(f)**: Children given opportunities to develop in **healthy manner** and in conditions of **freedom and dignity**; childhood and youth protected against exploitation"
+          ],
+          "significance": [
+            "**Most comprehensive DPSP** - 6 sub-clauses covering wide range",
+            "Reflects socialist philosophy of Constitution",
+            "**39(b)** - Basis for nationalization of banks, coal mines, etc.",
+            "**39(d)** - Constitutional mandate for gender pay equality"
+          ],
+          "implementation": [
+            "**MGNREGA 2005** (39(a) - livelihood)",
+            "**Bank Nationalization 1969** (39(b) - common good)",
+            "**Equal Remuneration Act 1976** (39(d) - equal pay)",
+            "**Child Labour Acts** (39(e) and 39(f))",
+            "**Competition Act 2002** (39(c) - prevent concentration)"
+          ],
+          "examTips": "**MOST ASKED**: Art 39 has **6 clauses (a-f)** - memorize all! 39(b) basis for nationalization. 39(d) equal pay for men-women. 39(a) livelihood (MGNREGA). 39(c) prevent wealth concentration.",
+          "mnemonic": "**Remember LECC**: **L**ivelihood(39a), **E**qual pay(39d), **C**ommon good(39b), **C**oncentration prevent(39c)",
+          "keyCases": "**Kesavananda Bharati (1973)** - 39(b) and (c) not part of basic structure. **Minerva Mills (1980)** - Balanced approach needed between 39(b) and property rights."
+        }
+      },
+      {
+        "id": "art-39a",
+        "number": "Article 39A",
+        "shortLabel": "39A",
+        "title": "Equal Justice & Free Legal Aid",
+        "category": "social-justice",
+        "color": "#3B82F6",
+        "content": {
+          "provisions": [
+            "State shall ensure **equal justice** for all",
+            "Provide **free legal aid** through suitable legislation, schemes, etc.",
+            "Ensure opportunities for justice are not denied to any citizen due to **economic or other disabilities**"
+          ],
+          "significance": [
+            "Added by **42nd Amendment 1976**",
+            "Access to justice made a DPSP",
+            "Complements Art 14 (equality before law) and Art 21 (right to life)"
+          ],
+          "implementation": [
+            "**Legal Services Authorities Act 1987** - NALSA, SLSAs, DLSAs",
+            "**Lok Adalats** - Alternative Dispute Resolution",
+            "**Free legal aid** to poor, women, children, SCs/STs, disabled",
+            "**Public Interest Litigation (PIL)** - Locus standi relaxed"
+          ],
+          "examTips": "**Added by 42nd Amendment 1976**. Implemented through NALSA and Lok Adalats. Remember: Art 39A makes legal aid a DPSP (not FR).",
+          "keyCases": "**Hussainara Khatoon (1979)** - Right to speedy trial and legal aid part of Art 21. **M.H. Hoskot (1978)** - Free legal aid to poor accused is constitutional right."
+        }
+      },
+      {
+        "id": "art-41",
+        "number": "Article 41",
+        "shortLabel": "41",
+        "title": "Right to Work, Education & Public Assistance",
+        "category": "economic",
         "color": "#10B981",
-        "colorLight": "#34D399",
-        "gradient": "linear-gradient(135deg, #10B981, #34D399)",
         "content": {
-          "keyPoints": [
-            "**Art 39** (already covered in Step 2, but crucial for economic policy)",
-            "**Art 41**: Right to work, education, and public assistance in cases of unemployment, old age, sickness, disablement",
-            "**Art 42**: Provision for **just and humane conditions of work** and **maternity relief**",
-            "**Art 43**: Secure **living wage**, decent standard of life, social and cultural opportunities for workers; promote **cottage industries** in rural areas",
-            "**Art 43A**: **Participation of workers in management** of industries (added by 42nd Amendment 1976)"
+          "provisions": [
+            "State shall secure **right to work** (within economic capacity)",
+            "Right to **education**",
+            "Right to **public assistance** in cases of unemployment, old age, sickness, disablement, undeserved want"
           ],
           "significance": [
-            "Welfare state provisions",
-            "Protect worker rights and dignity",
-            "Promote full employment and social security",
-            "Industrial democracy through worker participation"
+            "Welfare state obligations",
+            "Right to work - not a FR (unlike in some countries)",
+            "Right to education later became FR for age 6-14 (Art 21A via 86th Amendment)"
           ],
           "implementation": [
-            "**MGNREGA 2005** (Art 41 - right to work)",
-            "**Maternity Benefit Act 1961** (Art 42)",
-            "**Minimum Wages Act 1948** (Art 43)",
-            "**Khadi & Village Industries Commission** (Art 43)",
-            "**Worker participation schemes in PSUs** (Art 43A)"
+            "**MGNREGA 2005** - Guaranteed 100 days employment (Art 41 right to work)",
+            "**Old Age Pension Schemes** (Art 41 old age assistance)",
+            "**PM-KISAN, PM-KISAN Pension** (Art 41 public assistance)",
+            "**National Social Assistance Programme** (Art 41)",
+            "Education for 6-14 made FR (Art 21A via 86th Amendment 2002)"
           ],
-          "examTips": "**Art 43A added by 42nd Amendment 1976** - workers in management. Art 41 right to work implemented through MGNREGA. Art 42 maternity relief is now FR for organized sector (Maternity Benefit Act)."
+          "examTips": "**Art 41**: Right to work + education + public assistance. MGNREGA operationalizes 'right to work'. Education (6-14) graduated from DPSP (Art 41, 45) to FR (Art 21A).",
+          "notes": [
+            "Right to work is DPSP, not FR (unlike France, South Africa)",
+            "Subject to 'limits of economic capacity' - State not absolutely bound"
+          ]
         }
       },
       {
-        "id": "gandhian-principles",
-        "order": 4,
-        "title": "Gandhian Principles",
-        "subtitle": "Village Republic & Rural Focus",
-        "articles": ["Art 40", "Art 43", "Art 46", "Art 47", "Art 48"],
+        "id": "art-42",
+        "number": "Article 42",
+        "shortLabel": "42",
+        "title": "Just & Humane Working Conditions",
+        "category": "economic",
+        "color": "#10B981",
+        "content": {
+          "provisions": [
+            "State shall make provisions for **just and humane conditions of work**",
+            "Provision for **maternity relief**"
+          ],
+          "significance": [
+            "Worker welfare and dignity",
+            "Gender-sensitive provision (maternity relief)",
+            "Basis for labor welfare legislation"
+          ],
+          "implementation": [
+            "**Maternity Benefit Act 1961** (amended 2017 - 26 weeks paid leave)",
+            "**Factories Act 1948** (working hours, safety, welfare)",
+            "**Minimum Wages Act 1948**",
+            "**Payment of Wages Act 1936**",
+            "**Employees' State Insurance Act 1948**"
+          ],
+          "examTips": "**Art 42**: Just working conditions + maternity relief. Maternity Benefit Act (1961, amended 2017 to 26 weeks) implements this. Now effectively a right for organized sector.",
+          "notes": [
+            "Maternity relief now 26 weeks (increased from 12 weeks in 2017)",
+            "Applies to establishments with 10+ employees"
+          ]
+        }
+      },
+      {
+        "id": "art-43",
+        "number": "Article 43",
+        "shortLabel": "43",
+        "title": "Living Wage & Cottage Industries",
+        "category": "economic",
+        "color": "#10B981",
+        "content": {
+          "provisions": [
+            "State shall secure **living wage**, decent standard of life, full enjoyment of leisure, social and cultural opportunities for workers",
+            "Promote **cottage industries** on individual or cooperative basis in rural areas"
+          ],
+          "significance": [
+            "Economic well-being of workers",
+            "**Gandhian principle** - cottage industries for rural self-reliance",
+            "Balance between industrialization and rural economy"
+          ],
+          "implementation": [
+            "**Minimum Wages Act 1948** (Art 43 living wage)",
+            "**Khadi and Village Industries Commission (KVIC)**",
+            "**Prime Minister's Employment Generation Programme (PMEGP)**",
+            "**Coir Board, Handloom Board**",
+            "**National Rural Livelihoods Mission**"
+          ],
+          "examTips": "**Art 43**: Living wage (Minimum Wages Act) + cottage industries (KVIC, PMEGP). Reflects Gandhi's vision of self-reliant villages. Has both economic (wage) and Gandhian (cottage) elements."
+        }
+      },
+      {
+        "id": "art-43a",
+        "number": "Article 43A",
+        "shortLabel": "43A",
+        "title": "Workers' Participation in Management",
+        "category": "economic",
+        "color": "#10B981",
+        "content": {
+          "provisions": [
+            "State shall take steps to secure **participation of workers in management** of undertakings, establishments, or other organizations"
+          ],
+          "significance": [
+            "Added by **42nd Amendment 1976** (Swaran Singh Committee)",
+            "**Industrial democracy** - workers have say in management",
+            "Socialist principle",
+            "Improves labor-management relations"
+          ],
+          "implementation": [
+            "**Worker participation schemes in PSUs** (BHEL, SAIL, etc.)",
+            "**Joint Management Councils** in public sector",
+            "**Works Committees** under Industrial Disputes Act",
+            "Limited implementation in private sector"
+          ],
+          "examTips": "**Added by 42nd Amendment 1976** along with Art 39A, 48A. Workers in management = industrial democracy. Implemented mainly in public sector undertakings (PSUs), not widely in private.",
+          "challenges": [
+            "Limited implementation in practice",
+            "More symbolic than substantive in most organizations",
+            "Private sector resistance"
+          ]
+        }
+      },
+      {
+        "id": "art-40",
+        "number": "Article 40",
+        "shortLabel": "40",
+        "title": "Organization of Village Panchayats",
+        "category": "gandhian",
         "color": "#F59E0B",
-        "colorLight": "#FCD34D",
-        "gradient": "linear-gradient(135deg, #F59E0B, #FCD34D)",
         "content": {
-          "keyPoints": [
-            "**Art 40**: Organize **village panchayats** and give them powers to function as units of self-government",
-            "**Art 43**: Promote **cottage industries** on individual or cooperative basis in rural areas (already in Step 3)",
-            "**Art 46**: Promote interests of weaker sections, especially **SCs and STs** (social justice aspect)",
-            "**Art 47**: Raise nutrition, standard of living; improve public health; **prohibit intoxicating drinks** (prohibition is Gandhian ideal)",
-            "**Art 48**: Organize agriculture and animal husbandry on modern lines; **prohibit slaughter of cows, calves, and other milch/draught cattle**"
+          "provisions": [
+            "State shall organize **village panchayats**",
+            "Endow them with necessary powers and authority to function as **units of self-government**"
           ],
           "significance": [
-            "Reflect Gandhi's vision of **Gram Swaraj** (village self-rule)",
-            "Rural development and decentralization",
-            "Cottage industries for self-reliance",
-            "Protection of cattle (cultural and agricultural importance)"
+            "**Core Gandhian principle** - Gram Swaraj (village self-rule)",
+            "Decentralization of power to grassroots",
+            "Local self-governance and participatory democracy"
           ],
           "implementation": [
-            "**73rd Amendment 1992** - Constitutional status to Panchayati Raj (Art 40)",
-            "**KVIC, PMEGP** - Cottage industry promotion (Art 43)",
-            "**Cow slaughter bans** in many states (Art 48)",
-            "**Prohibition** in Gujarat, Bihar (Art 47)"
+            "**73rd Constitutional Amendment 1992** - Gave constitutional status to Panchayati Raj Institutions (PRIs)",
+            "**Part IX** added to Constitution",
+            "**Three-tier structure**: Gram Panchayat, Panchayat Samiti, Zila Parishad",
+            "**Eleventh Schedule** - 29 subjects devolved to panchayats",
+            "Elections every 5 years; one-third seats reserved for women"
           ],
-          "examTips": "**Gandhian DPSPs**: Art 40 (Panchayats - implemented via 73rd Amendment), Art 43 (cottage industries), Art 47 (prohibition), Art 48 (cow protection). Reflect Gandhi's rural focus.",
-          "caDebates": "Constituent Assembly debated cow slaughter extensively. Dr. Ambedkar clarified it's for **economic reasons** (draught/milch cattle), not religious. Article carefully worded to include scientific breeding."
+          "examTips": "**Art 40 most successfully implemented DPSP!** 73rd Amendment 1992 operationalized it. Remember: Part IX added, Eleventh Schedule (29 subjects), 3-tier structure, 1/3 women reservation.",
+          "keyCases": "**Balwant Rai Mehta Committee (1957)** - Recommended 3-tier Panchayati Raj. **Ashok Mehta Committee (1978)** - Recommended 2-tier. Finally 3-tier adopted in 73rd Amendment."
         }
       },
       {
-        "id": "administrative-legal",
-        "order": 5,
-        "title": "Administrative & Legal DPSPs",
-        "subtitle": "Governance & Justice",
-        "articles": ["Art 44", "Art 49", "Art 50"],
-        "color": "#8B5CF6",
-        "colorLight": "#A78BFA",
-        "gradient": "linear-gradient(135deg, #8B5CF6, #A78BFA)",
+        "id": "art-46",
+        "number": "Article 46",
+        "shortLabel": "46",
+        "title": "Promotion of Interests of SCs, STs & Weaker Sections",
+        "category": "gandhian",
+        "color": "#F59E0B",
         "content": {
-          "keyPoints": [
-            "**Art 44**: State shall secure **Uniform Civil Code (UCC)** for citizens throughout India",
-            "**Art 49**: Protect **monuments, places, objects of national importance** (historical, artistic)",
-            "**Art 50**: Separate **judiciary from executive** in public services of State"
+          "provisions": [
+            "State shall promote **educational and economic interests** of weaker sections of people, particularly **Scheduled Castes and Scheduled Tribes**",
+            "Protect them from **social injustice and all forms of exploitation**"
           ],
           "significance": [
-            "**UCC (Art 44)** - Most debated DPSP; aims to replace personal laws with common civil code",
-            "**Art 49** - Heritage protection (ASI implements)",
-            "**Art 50** - Judicial independence at grassroots (separation of powers)"
+            "Social justice and affirmative action",
+            "Complements Art 15(4), 16(4) (reservation provisions in FRs)",
+            "Addresses historical discrimination"
           ],
           "implementation": [
-            "**Goa** has UCC (inherited from Portuguese Civil Code) - only Indian state with UCC",
-            "**Ancient Monuments Act 1958** (Art 49)",
-            "**Separation of judiciary-executive** mostly achieved in states through judicial orders"
+            "**Reservation in education** (Art 15(4), 15(5))",
+            "**Reservation in jobs** (Art 16(4), 16(4A), 16(4B))",
+            "**SC/ST scholarships and fellowships**",
+            "**National Commission for SCs, STs**",
+            "**Prevention of Atrocities Act 1989** (Art 46 protection from exploitation)",
+            "**Special Component Plans, Tribal Sub-Plans**"
+          ],
+          "examTips": "**Art 46**: Educational + economic promotion of SCs/STs/weaker sections. Implemented through reservations (Art 15(4), 16(4)) and SC/ST Atrocities Act. Both social justice and Gandhian DPSP."
+        }
+      },
+      {
+        "id": "art-47",
+        "number": "Article 47",
+        "shortLabel": "47",
+        "title": "Nutrition, Health & Prohibition",
+        "category": "gandhian",
+        "color": "#F59E0B",
+        "content": {
+          "provisions": [
+            "State shall raise **level of nutrition** and **standard of living** of people",
+            "Improve **public health**",
+            "**Prohibit consumption of intoxicating drinks** and drugs (except for medicinal purposes)"
+          ],
+          "significance": [
+            "Public health and nutrition goals",
+            "**Prohibition of alcohol** is Gandhian ideal (he advocated temperance)",
+            "Tackles malnutrition and lifestyle diseases"
+          ],
+          "implementation": [
+            "**Mid-Day Meal Scheme** (Art 47 nutrition)",
+            "**Integrated Child Development Services (ICDS)** (Art 47 nutrition)",
+            "**National Health Mission**",
+            "**Ayushman Bharat, PM-JAY** (Art 47 public health)",
+            "**Prohibition enforced** in Gujarat, Bihar, Nagaland, Mizoram (partially in some others)",
+            "Most states opted for revenue over prohibition (alcohol taxation lucrative)"
+          ],
+          "examTips": "**Art 47**: Nutrition + health + prohibition. Prohibition is **Gandhian ideal** but mostly unimplemented (only Gujarat, Bihar fully). Mid-Day Meal, ICDS implement nutrition aspect.",
+          "challenges": [
+            "Prohibition difficult to enforce; often leads to bootlegging",
+            "Loss of state revenue from alcohol taxation",
+            "Most states prefer regulation over prohibition"
+          ]
+        }
+      },
+      {
+        "id": "art-48",
+        "number": "Article 48",
+        "shortLabel": "48",
+        "title": "Agriculture & Animal Husbandry",
+        "category": "gandhian",
+        "color": "#F59E0B",
+        "content": {
+          "provisions": [
+            "State shall organize **agriculture and animal husbandry on modern and scientific lines**",
+            "Preserve and improve **breeds of cattle**",
+            "**Prohibit slaughter of cows, calves**, and other **milch and draught cattle**"
+          ],
+          "significance": [
+            "**Cow protection is Gandhian ideal** (economic + cultural)",
+            "Dr. Ambedkar clarified: Cow protection for **economic reasons** (draught/milch cattle useful for agriculture), not religious",
+            "Balances traditional values with scientific agriculture"
+          ],
+          "implementation": [
+            "**Cow slaughter bans** in most Indian states (24+ states have bans with varying degrees)",
+            "**National Dairy Development Board** (cattle breeding)",
+            "**Rashtriya Gokul Mission** (indigenous cow breeds)",
+            "**Agricultural modernization** programs",
+            "Scientific cattle breeding programs"
+          ],
+          "examTips": "**Art 48**: Modern agriculture + cattle improvement + **cow slaughter prohibition**. Cow protection is Gandhian + economic (not religious). Dr. Ambedkar emphasized economic utility. Most states have cow slaughter bans.",
+          "caDebates": "**Constituent Assembly extensively debated** cow slaughter. Dr. Ambedkar: It's for **economic reasons** (useful draught/milch cattle), not religious sentiments. Article carefully worded: 'cows, calves, milch and draught cattle'."
+        }
+      },
+      {
+        "id": "art-44",
+        "number": "Article 44",
+        "shortLabel": "44",
+        "title": "Uniform Civil Code (UCC)",
+        "category": "administrative",
+        "color": "#8B5CF6",
+        "content": {
+          "provisions": [
+            "State shall endeavor to secure **Uniform Civil Code (UCC)** for citizens throughout territory of India"
+          ],
+          "significance": [
+            "**Most controversial and debated DPSP**",
+            "Aims to replace personal laws (Hindu, Muslim, Christian, Parsi) with common civil code",
+            "Promotes national integration and gender justice",
+            "Balance between secularism and religious freedom"
+          ],
+          "implementation": [
+            "**Only Goa has UCC** (inherited from Portuguese Civil Code of 1867)",
+            "Goa Civil Code applies to all religions equally (marriage, divorce, succession)",
+            "Rest of India: Personal laws based on religion still apply"
           ],
           "challenges": [
-            "**UCC remains unimplemented** at national level - politically sensitive (personal laws of different religions)",
-            "**Shah Bano case (1985)** highlighted need for UCC; but political backlash led to Muslim Women Act 1986",
-            "Art 44 non-justiciable - courts cannot force implementation"
+            "**Politically sensitive** - seen as interference in religious practices",
+            "**Shah Bano case (1985)** - SC granted maintenance to divorced Muslim woman; political backlash led to Muslim Women Act 1986 overriding SC judgment",
+            "Article 44 is non-justiciable - courts cannot force implementation",
+            "**Triple Talaq abolished 2019** but comprehensive UCC still pending",
+            "Needs political will and broad consensus"
           ],
-          "examTips": "**Art 44 UCC** - Most controversial DPSP. Only Goa has UCC. Remember Shah Bano case. **Art 50 separation** - Tamilnadu implemented first. Art 49 for heritage protection (ASI role)."
+          "examTips": "**MOST ASKED DPSP**: Art 44 UCC. Remember: Only **Goa has UCC** (Portuguese legacy). Shah Bano case (1985) highlighted need but led to backlash. Triple Talaq banned (2019) but full UCC not implemented. Non-justiciable - courts can't enforce.",
+          "keyCases": "**Shah Bano (1985)** - SC said UCC needed for national integration. **Sarla Mudgal (1995)** - SC repeated call for UCC. **Jordan Diengdeh (1985)** - SC on desirability of UCC."
         }
       },
       {
-        "id": "environmental",
-        "order": 6,
-        "title": "Environmental DPSPs",
-        "subtitle": "Environment & Wildlife",
-        "articles": ["Art 48A"],
-        "color": "#059669",
-        "colorLight": "#10B981",
-        "gradient": "linear-gradient(135deg, #059669, #10B981)",
+        "id": "art-49",
+        "number": "Article 49",
+        "shortLabel": "49",
+        "title": "Protection of Monuments",
+        "category": "administrative",
+        "color": "#8B5CF6",
         "content": {
-          "keyPoints": [
-            "**Art 48A**: State shall protect and improve **environment** and safeguard **forests and wildlife** (added by 42nd Amendment 1976)",
-            "Added along with Art 51A(g) which makes environment protection a **Fundamental Duty**"
+          "provisions": [
+            "State shall protect **monuments, places and objects** of national importance",
+            "Covers monuments of artistic or historic interest"
           ],
           "significance": [
+            "Heritage conservation and cultural preservation",
+            "Protects India's rich historical legacy",
+            "National pride and tourism promotion"
+          ],
+          "implementation": [
+            "**Ancient Monuments and Archaeological Sites and Remains Act 1958**",
+            "**Archaeological Survey of India (ASI)** - Main implementing agency",
+            "**3,650+ centrally protected monuments** as of 2020",
+            "**Prohibited zone** (100m) and **Regulated zone** (200m) around protected monuments",
+            "**UNESCO World Heritage Sites** in India (40+)"
+          ],
+          "examTips": "**Art 49**: Protect monuments. Implemented by ASI through Ancient Monuments Act 1958. Prohibited zone (100m) + Regulated zone (200m) around monuments. India has 40+ UNESCO World Heritage Sites."
+        }
+      },
+      {
+        "id": "art-50",
+        "number": "Article 50",
+        "shortLabel": "50",
+        "title": "Separation of Judiciary from Executive",
+        "category": "administrative",
+        "color": "#8B5CF6",
+        "content": {
+          "provisions": [
+            "State shall separate **judiciary from executive** in public services of State"
+          ],
+          "significance": [
+            "**Separation of powers** at district/state level",
+            "Ensures judicial independence from executive control",
+            "Prevents executive interference in justice delivery",
+            "Complements Art 50 which deals with High Courts and Supreme Court"
+          ],
+          "implementation": [
+            "**Largely achieved** in most states through court directions",
+            "**District Judges** appointed separately from executive",
+            "**Judicial Magistrates** separate from Executive Magistrates",
+            "**Tamil Nadu** was first state to implement (1976)",
+            "Some states still have combined roles in remote areas"
+          ],
+          "examTips": "**Art 50**: Separate judiciary from executive in states. Mostly implemented. Tamil Nadu first (1976). Ensures judges not influenced by executive. Part of separation of powers doctrine."
+        }
+      },
+      {
+        "id": "art-48a",
+        "number": "Article 48A",
+        "shortLabel": "48A",
+        "title": "Protection of Environment & Wildlife",
+        "category": "environmental",
+        "color": "#059669",
+        "content": {
+          "provisions": [
+            "State shall protect and improve **environment**",
+            "Safeguard **forests and wildlife** of the country"
+          ],
+          "significance": [
+            "Added by **42nd Constitutional Amendment 1976**",
             "Recognition of environmental concerns in Constitution",
             "Balance between development and ecology",
-            "Judicial activism made environment part of Art 21 (right to healthy environment)"
+            "Added along with **Art 51A(g)** (Fundamental Duty to protect environment)"
           ],
           "implementation": [
-            "**Environment Protection Act 1986**",
+            "**Environment Protection Act 1986** - Umbrella legislation",
             "**Wildlife Protection Act 1972**",
             "**Forest Conservation Act 1980**",
-            "**National Green Tribunal Act 2010**",
-            "**Judicial pronouncements** - MC Mehta cases on Ganga pollution, vehicular pollution, etc."
+            "**Air and Water Pollution Acts**",
+            "**National Green Tribunal Act 2010** - Specialized court for environmental disputes",
+            "**Compensatory Afforestation** for forest diversion"
           ],
-          "examTips": "**Added by 42nd Amendment 1976** along with Art 51A(g) (Fundamental Duty). Judiciary linked environment to Art 21. NGT (2010) adjudicates environmental disputes."
+          "judicialExpansion": [
+            "**Judiciary made environment part of Art 21** (right to healthy environment)",
+            "**MC Mehta cases** - Ganga pollution, vehicular pollution, Taj Trapezium, Delhi air quality",
+            "**T.N. Godavarman case (1996-ongoing)** - Longest running case on forest conservation",
+            "Public Interest Litigation (PIL) extensively used for environmental protection"
+          ],
+          "examTips": "**Added by 42nd Amendment 1976** along with Art 51A(g) (FD). Environment Protection Act 1986 + National Green Tribunal 2010 key implementations. Judiciary linked environment to Art 21. MC Mehta = environmental PIL pioneer.",
+          "keyCases": "**MC Mehta v Union (1987, 1988, multiple)** - Ganga pollution, Taj pollution, vehicular pollution. **Indian Council for Enviro-Legal Action (1996)** - Bichhri village chemical pollution. **Vellore Citizens (1996)** - Polluter pays, precautionary principles."
         }
       },
       {
-        "id": "international",
-        "order": 7,
-        "title": "International Relations DPSPs",
-        "subtitle": "Peace & Cooperation",
-        "articles": ["Art 51"],
+        "id": "art-51",
+        "number": "Article 51",
+        "shortLabel": "51",
+        "title": "International Peace & Security",
+        "category": "international",
         "color": "#DC2626",
-        "colorLight": "#EF4444",
-        "gradient": "linear-gradient(135deg, #DC2626, #EF4444)",
         "content": {
-          "keyPoints": [
-            "**Art 51**: State shall endeavor to:",
-            "• **51(a)**: Promote **international peace and security**",
-            "• **51(b)**: Maintain **just and honorable relations** between nations",
-            "• **51(c)**: Foster respect for **international law** and treaty obligations",
-            "• **51(d)**: Encourage settlement of international disputes by **arbitration**"
+          "provisions": [
+            "**51(a)**: State shall promote **international peace and security**",
+            "**51(b)**: Maintain **just and honorable relations** between nations",
+            "**51(c)**: Foster respect for **international law and treaty obligations** in dealings of organized people with one another",
+            "**51(d)**: Encourage settlement of international disputes by **arbitration**"
           ],
           "significance": [
-            "India's commitment to peaceful coexistence",
-            "**Panchsheel principles** reflect Art 51 values",
-            "**Non-Aligned Movement (NAM)** aligned with Art 51",
-            "Guides India's foreign policy"
+            "Guides India's **foreign policy**",
+            "Reflects commitment to peaceful coexistence",
+            "**Panchsheel principles** (1954) operationalize Art 51",
+            "Founding member of **Non-Aligned Movement (NAM)** - aligned with Art 51 values"
           ],
           "implementation": [
-            "India's active role in **UN peacekeeping**",
-            "**Panchsheel Agreement 1954** with China",
-            "Support for **nuclear disarmament**",
-            "Membership in **ICJ, WTO, WHO, ILO** etc.",
-            "Settlement of disputes through dialogue (e.g., India-Bangladesh maritime boundary via arbitration)"
+            "India's active role in **UN peacekeeping** (one of largest troop contributors)",
+            "**Panchsheel Agreement 1954** with China - 5 principles of peaceful coexistence",
+            "Support for **nuclear disarmament** and CTBT",
+            "Membership in **International Court of Justice (ICJ), WTO, WHO, ILO**",
+            "Settlement of disputes through dialogue: India-Bangladesh maritime boundary via UNCLOS arbitration (2014)",
+            "Support for UN reforms and multilateralism"
           ],
-          "examTips": "**Art 51** guides foreign policy. Remember 4 sub-clauses: peace, honorable relations, international law, arbitration. Panchsheel principles operationalize Art 51."
+          "panchsheel": [
+            "**1. Mutual respect** for territorial integrity and sovereignty",
+            "**2. Non-aggression**",
+            "**3. Non-interference** in internal affairs",
+            "**4. Equality and mutual benefit**",
+            "**5. Peaceful coexistence**"
+          ],
+          "examTips": "**Art 51**: 4 clauses - Peace, honorable relations, international law, arbitration. **Panchsheel principles (1954)** operationalize Art 51. India = major UN peacekeeper. NAM aligned with Art 51. Remember 5 Panchsheel principles.",
+          "notes": [
+            "India has not signed NPT but supports nuclear disarmament",
+            "India-Pakistan disputes show limits of arbitration clause",
+            "Art 51 guides but doesn't bind foreign policy decisions"
+          ]
         }
       }
     ],
-    "legend": true,
-    "summary": "**DPSPs (Part IV, Art 36-51)** are non-justiciable directives to State for socio-economic governance. **7 categories**: (1) Foundation (36-37), (2) Social Justice (38-39, 46-47), (3) Economic (39, 41-43, 43A), (4) Gandhian (40, 43, 46-48), (5) Administrative (44, 49-50), (6) Environmental (48A), (7) International (51). **Key exam points**: Art 37 (non-justiciable), Art 39 (6 clauses), Art 44 (UCC - unimplemented except Goa), Art 48A (42nd Amendment), Art 43A (42nd Amendment). **DPSP vs FR**: DPSPs positive obligations, non-justiciable, society-centric vs FRs negative rights, justiciable, individual-centric. Both complementary - FRs means, DPSPs ends."
+    "summary": "**DPSPs (Part IV, Art 36-51)** are non-justiciable directives to State for socio-economic governance. **Key articles**: Art 37 (non-justiciable but fundamental), Art 39 (6 clauses - most comprehensive), Art 40 (Panchayats - 73rd Amendment), Art 44 (UCC - only Goa), Art 48A (Environment - 42nd Amendment), Art 43A (Worker participation - 42nd Amendment). **7 categories**: Foundation, Social Justice, Economic, Gandhian, Administrative, Environmental, International. **DPSP vs FR**: DPSPs are positive obligations (State SHALL do), non-justiciable, society-centric; FRs are negative rights (State shall NOT do), justiciable, individual-centric. Both complementary - FRs are means, DPSPs are ends."
   }
 }
-
